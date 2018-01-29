@@ -1,0 +1,7 @@
+\\VBOXSVR\raywang\Dropbox (MIT)\CTFs\eCTF\2018-ectf-insecure-example\SECURITY_MODULE.cydsn\SECURITY_MODULE.cyprj|61214981-ffc1-40b8-bee8-14ab2654377f
+C:\Program Files (x86)\Cypress\PSoC Creator\4.1\PSoC Creator\psoc\content\default\CyAnnotationLibrary\CyAnnotationLibrary.cylib\CyAnnotationLibrary.cyprj|17ded83f-f1a6-46ff-9739-f74aa0f02345
+C:\Users\Ray\Documents\PSoC Creator\4.1\Downloads ( 4.1).cylib\Downloads ( 4.1).cyprj|ab52bf4f-09a6-4c7c-ae18-c210a286be4f
+C:\Program Files (x86)\Cypress\PSoC Creator\4.1\PSoC Creator\psoc\content\cycomponentlibraryupdates\CyComponentLibraryUpdates.cylib\CyComponentLibraryUpdates.cyprj|4a46ef93-9902-4bf4-b0cd-6357191bb46c
+C:\Program Files (x86)\Cypress\PSoC Creator\4.1\PSoC Creator\psoc\content\cycomponentlibrary\CyComponentLibrary.cylib\CyComponentLibrary.cyprj|c4044d7a-267f-4d2d-a611-1835f5bfbeab
+C:\Program Files (x86)\Cypress\PSoC Creator\4.1\PSoC Creator\psoc\content\cyprimitives\CyPrimitives.cylib\CyPrimitives.cyprj|4f56fb82-ac6a-4e99-8cdb-dc64c0074d93
+\\VBOXSVR\raywang\Dropbox (MIT)\CTFs\eCTF\2018-ectf-insecure-example\CARD.cydsn\CARD.cyprj|f034942d-defc-4c2a-bbe3-09c7d40c9ef7
