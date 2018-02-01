@@ -1113,4 +1113,4 @@ END GROUP
 
 /DISCARD/
  *(.note.GNU-stack)
-OUTPUT(\\VBOXSVR\raywang\Dropbox (MIT)\CTFs\eCTF\2018-ectf-insecure-example\CARD.cydsn\CortexM0\ARM_GCC_541\Debug\CARD.elf elf32-littlearm)
+OUTPUT(\\VBOXSVR\raywang\Dropbox (MIT)\CTFs\eCTF\ectf-2018-techsec\CARD.cydsn\CortexM0\ARM_GCC_541\Debug\CARD.elf elf32-littlearm)

@@ -1,5 +1,5 @@
--- Project:   \\VBOXSVR\raywang\Dropbox (MIT)\CTFs\eCTF\2018-ectf-insecure-example\CARD.cydsn\CARD.cyprj
--- Generated: 01/26/2018 10:55:15
+-- Project:   \\VBOXSVR\raywang\Dropbox (MIT)\CTFs\eCTF\ectf-2018-techsec\CARD.cydsn\CARD.cyprj
+-- Generated: 01/29/2018 12:54:31
 -- PSoC Creator  4.1 Update 1
 
 ENTITY CARD IS

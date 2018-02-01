@@ -128,13 +128,13 @@ class DB(object):
                             values (?, ?, ?);', (account_name, card_id, amount,))
 
     @lock_db
-    def admin_create_atm(self, atm_id):
+    def admin_create_atm(self, atm_id, aes_key, nonce):
         """create atm with atm_id
 
         Returns:
             (bool): Returns True on Success. False otherwise.
         """
-        return self.modify('INSERT INTO atms(atm_id, num_bills) values (?,?);', (atm_id, 128, ))
+        return self.modify('INSERT INTO atms(atm_id, num_bills, bank_aes_key, nonce) values (?,?,?,?);', (atm_id, 128, aes_key, nonce,))
 
     @lock_db
     def admin_get_balance(self, account_name):

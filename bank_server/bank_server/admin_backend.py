@@ -60,6 +60,10 @@ import uuid
 import logging
 from SimpleXMLRPCServer import SimpleXMLRPCServer
 from . import DB
+import os
+import Crypto
+import struct
+import binascii
 
 
 class AdminBackend(object):
@@ -165,8 +169,14 @@ class AdminBackend(object):
                     False on Failure.
         """
         atm_id = str(uuid.uuid4())
-        if self.db_obj.admin_create_atm(atm_id):
+        aes_key = binascii.hexlify(os.urandom(16))
+        nonce = os.urandom(4)
+        if self.db_obj.admin_create_atm(atm_id, aes_key, struct.unpack(">I", nonce)[0]):
             logging.info('admin create_atm success')
-            return atm_id
+            logging.info(aes_key)
+            logging.info(binascii.hexlify(nonce))
+            logging.info(atm_id)
+
+            return aes_key + binascii.hexlify(nonce) + atm_id
         logging.info('admin create_atm failure')
         return False

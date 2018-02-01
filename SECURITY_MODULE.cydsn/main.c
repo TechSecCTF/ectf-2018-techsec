@@ -45,6 +45,8 @@
 static const uint8 MONEY[MAX_BILLS][BILL_LEN] = {EMPTY_BILL};
 static const uint8 UUID[UUID_LEN + 1] = {'b', 'l', 'a', 'n', 'k', ' ', 
                                         'u', 'u', 'i', 'd', '!', 0x00 };
+static const uint8 BANK_AES_KEY[16] = "";
+static uint32 NONCE =0;
 static const uint8 BILLS_LEFT[1] = {0x00};
 
 
@@ -61,7 +63,7 @@ CY_ISR(Reset_ISR)
 void provision()
 {
     int i;
-    uint8 message[64], numbills;
+    uint8 message[77], numbills;
     
     for(i = 0; i < 128; i++) {
         PIGGY_BANK_Write((uint8*)EMPTY_BILL, MONEY[i], BILL_LEN);
@@ -70,13 +72,20 @@ void provision()
     // synchronize with atm
     syncConnection(SYNC_PROV);
  
-    memset(message, 0u, 64);
+    memset(message, 0u, 77);
     strcpy((char*)message, PROV_MSG);
     pushMessage(message, (uint8)strlen(PROV_MSG));
+    
         
-    // Set UUID
+    // Set blob
     pullMessage(message);
-    PIGGY_BANK_Write(message, UUID, strlen((char*)message) + 1);
+
+//    PIGGY_BANK_Write(message, BANK_AES_KEY,32);
+//    pushMessage(BANK_AES_KEY, 32);
+//    PIGGY_BANK_Write(message+32, (uint8*)NONCE, 8);
+//    pushMessage((uint8*)NONCE, 8);
+//    PIGGY_BANK_Write(message+40, UUID, UUID_LEN);
+//    pushMessage(UUID, UUID_LEN);
     pushMessage((uint8*)RECV_OK, strlen(RECV_OK));
     
     // Get numbills
@@ -140,6 +149,10 @@ int main(void)
     
     PIGGY_BANK_Start();
     DB_UART_Start();
+
+//    while (1) {
+//	DB_UART_UartPutString("Welcome to Frequency Measurement Using PSoC 4 BLE\n");
+//    }
     
     // provision security module on first boot
     if(*ptr == 0x00)

@@ -13,7 +13,7 @@
 <v>Output</v>
 </TreeKeys>
 <TreeStates>
-<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="ectf-workspace\SECURITY_MODULE\Source Files\usbserialprotocol.c">
+<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="ectf-workspace\CARD">
 <ExpandedNodeIds>
 <v>ectf-workspace</v>
 <v>ectf-workspace\CARD\TopDesign</v>
@@ -59,7 +59,6 @@
 <v>ectf-workspace\SECURITY_MODULE\Generated_Source\PSoC4\SW1</v>
 </ExpandedNodeIds>
 <VisibleNodeIds>
-<v>ectf-workspace</v>
 <v>ectf-workspace\CARD</v>
 <v>ectf-workspace\SECURITY_MODULE</v>
 <v>ectf-workspace\SECURITY_MODULE\TopDesign</v>
@@ -121,6 +120,7 @@
 <v>ectf-workspace\SECURITY_MODULE\Generated_Source\PSoC4\SW1\SW1.c</v>
 <v>ectf-workspace\SECURITY_MODULE\Generated_Source\PSoC4\SW1\SW1.h</v>
 <v>ectf-workspace\SECURITY_MODULE\Generated_Source\PSoC4\SW1\SW1_aliases.h</v>
+<v>ectf-workspace\SECURITY_MODULE\Generated_Source\PSoC4\SW1\SW1_PM.c</v>
 </VisibleNodeIds>
 </CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
 <CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="">
@@ -375,18 +375,13 @@
 </CyGuid_fdba8dfd-b15b-4469-9bbb-9e40c3e70997>
 <Unloaded />
 <OpenDocs>
-<name v=".\CARD.cydsn\main.c" />
 <name v=".\SECURITY_MODULE.cydsn\main.c" />
-<name v=".\SECURITY_MODULE.cydsn\usbserialprotocol.c" />
-<name v=".\CARD.cydsn\usbserialprotocol.c" />
-<name v=".\CARD.cydsn\usbserialprotocol.h" />
-<name v=".\CARD.cydsn\cyapicallbacks.h" />
-<name v=".\CARD.cydsn\CARD.cydwr" />
-<name v=".\CARD.cydsn\TopDesign\TopDesign.cysch" />
-<name v=".\SECURITY_MODULE.cydsn\TopDesign\TopDesign.cysch" />
-<name v=".\SECURITY_MODULE.cydsn\Generated_Source\PSoC4\SW1.h" />
 <name v=".\SECURITY_MODULE.cydsn\Generated_Source\PSoC4\PIGGY_BANK.c" />
-<name v=".\SECURITY_MODULE.cydsn\Generated_Source\PSoC4\PIGGY_BANK.h" />
+<name v=".\SECURITY_MODULE.cydsn\usbserialprotocol.c" />
+<name v=".\SECURITY_MODULE.cydsn\usbserialprotocol.h" />
+<name v=".\SECURITY_MODULE.cydsn\cyapicallbacks.h" />
+<name v=".\SECURITY_MODULE.cydsn\TopDesign\TopDesign.cysch" />
+<name v=".\SECURITY_MODULE.cydsn\Generated_Source\PSoC4\DB_UART.c" />
 </OpenDocs>
 <OpenDocsLayout><![CDATA[<?xml version="1.0"?><!--
 
@@ -394,7 +389,7 @@
   Copyright (c) 2001-2016 Actipro Software LLC.  All rights reserved.
   http://www.actiprosoftware.com
 
---><DocumentLayout Version="1.0"><LayoutData><TabbedMdiRootContainer Orientation="Horizontal"><TabbedMdiContainer Size="1107, 426" SelectedTabbedMdiWindow="28b6e263-2b00-48a4-aa8c-6de3de01e5c0"><DocumentWindow Key="\\VBOXSVR\raywang\Dropbox (MIT)\CTFs\eCTF\2018-ectf-insecure-example\CARD.cydsn\main.c" Guid="849ede84-22b9-447b-918d-0ac18509f289" /><DocumentWindow Key="\\VBOXSVR\raywang\Dropbox (MIT)\CTFs\eCTF\2018-ectf-insecure-example\SECURITY_MODULE.cydsn\main.c" Guid="28b6e263-2b00-48a4-aa8c-6de3de01e5c0" /><DocumentWindow Key="\\VBOXSVR\raywang\Dropbox (MIT)\CTFs\eCTF\2018-ectf-insecure-example\SECURITY_MODULE.cydsn\usbserialprotocol.c" Guid="06f76f9f-56da-48fb-972c-0b2a6f211ebc" /><DocumentWindow Key="\\VBOXSVR\raywang\Dropbox (MIT)\CTFs\eCTF\2018-ectf-insecure-example\CARD.cydsn\usbserialprotocol.c" Guid="9f333764-3a22-4878-abaf-331c8d1ab7f6" /><DocumentWindow Key="\\VBOXSVR\raywang\Dropbox (MIT)\CTFs\eCTF\2018-ectf-insecure-example\CARD.cydsn\usbserialprotocol.h" Guid="c4735f55-47ce-4199-a867-03000c24d54a" /><DocumentWindow Key="\\VBOXSVR\raywang\Dropbox (MIT)\CTFs\eCTF\2018-ectf-insecure-example\CARD.cydsn\cyapicallbacks.h" Guid="8f73d6cb-658a-4e20-9b9a-d7204217321c" /><DocumentWindow Key="\\VBOXSVR\raywang\Dropbox (MIT)\CTFs\eCTF\2018-ectf-insecure-example\CARD.cydsn\CARD.cydwr" Guid="ad5cf432-72fb-4c1a-a3ee-0f3872ec4330" /><DocumentWindow Key="\\VBOXSVR\raywang\Dropbox (MIT)\CTFs\eCTF\2018-ectf-insecure-example\CARD.cydsn\TopDesign\TopDesign.cysch" Guid="c825e483-c9cf-4ac5-90bb-2fefaa9d6f94" /><DocumentWindow Key="\\VBOXSVR\raywang\Dropbox (MIT)\CTFs\eCTF\2018-ectf-insecure-example\SECURITY_MODULE.cydsn\TopDesign\TopDesign.cysch" Guid="2fe1a975-bd92-4363-be0d-1c0e511a2ab6" /><DocumentWindow Key="\\VBOXSVR\raywang\Dropbox (MIT)\CTFs\eCTF\2018-ectf-insecure-example\SECURITY_MODULE.cydsn\Generated_Source\PSoC4\SW1.h" Guid="30c63013-7c12-4064-9db9-3627ca1e370b" /><DocumentWindow Key="\\VBOXSVR\raywang\Dropbox (MIT)\CTFs\eCTF\2018-ectf-insecure-example\SECURITY_MODULE.cydsn\Generated_Source\PSoC4\PIGGY_BANK.c" Guid="ce4fb5b9-ae6e-49f6-9b09-6951844b3fc0" /><DocumentWindow Key="\\VBOXSVR\raywang\Dropbox (MIT)\CTFs\eCTF\2018-ectf-insecure-example\SECURITY_MODULE.cydsn\Generated_Source\PSoC4\PIGGY_BANK.h" Guid="3975f9bb-6982-4f44-8370-ec1b22bc796c" /><ToolWindow Key="Start Page:bd4649ab-da6b-4d04-a663-c722b8bf99db:Start Page" Guid="b2494341-534a-4b93-856d-1142788c8f64" /></TabbedMdiContainer></TabbedMdiRootContainer><FloatingContainers /></LayoutData></DocumentLayout>]]></OpenDocsLayout>
+--><DocumentLayout Version="1.0"><LayoutData><TabbedMdiRootContainer Orientation="Horizontal"><TabbedMdiContainer Size="2159, 966" SelectedTabbedMdiWindow="7c3aa258-e3e6-49b8-bda8-a97b7a3fe8d9"><ToolWindow Key="Start Page:bd4649ab-da6b-4d04-a663-c722b8bf99db:Start Page" Guid="b2494341-534a-4b93-856d-1142788c8f64" /><DocumentWindow Key="\\VBOXSVR\raywang\Dropbox (MIT)\CTFs\eCTF\ectf-2018-techsec\SECURITY_MODULE.cydsn\main.c" Guid="7c3aa258-e3e6-49b8-bda8-a97b7a3fe8d9" /><DocumentWindow Key="\\VBOXSVR\raywang\Dropbox (MIT)\CTFs\eCTF\ectf-2018-techsec\SECURITY_MODULE.cydsn\Generated_Source\PSoC4\PIGGY_BANK.c" Guid="09decd45-3ba3-404e-8fb7-253e53cdcc3f" /><DocumentWindow Key="\\VBOXSVR\raywang\Dropbox (MIT)\CTFs\eCTF\ectf-2018-techsec\SECURITY_MODULE.cydsn\usbserialprotocol.c" Guid="f5200ecb-5ac6-49c9-acb0-ee28d360c74e" /><DocumentWindow Key="\\VBOXSVR\raywang\Dropbox (MIT)\CTFs\eCTF\ectf-2018-techsec\SECURITY_MODULE.cydsn\usbserialprotocol.h" Guid="62e85c23-0657-4366-8439-777c92bf6a10" /><DocumentWindow Key="\\VBOXSVR\raywang\Dropbox (MIT)\CTFs\eCTF\ectf-2018-techsec\SECURITY_MODULE.cydsn\cyapicallbacks.h" Guid="d4656f67-194e-4676-8399-fd6e7fc6b571" /><DocumentWindow Key="\\VBOXSVR\raywang\Dropbox (MIT)\CTFs\eCTF\ectf-2018-techsec\SECURITY_MODULE.cydsn\TopDesign\TopDesign.cysch" Guid="2c8661ba-99cb-4437-a0c9-3d7f2e93a3d0" /><DocumentWindow Key="\\VBOXSVR\raywang\Dropbox (MIT)\CTFs\eCTF\ectf-2018-techsec\SECURITY_MODULE.cydsn\Generated_Source\PSoC4\DB_UART.c" Guid="f6ec8daa-84f8-435e-9867-12e0be8988a3" /></TabbedMdiContainer></TabbedMdiRootContainer><FloatingContainers /></LayoutData></DocumentLayout>]]></OpenDocsLayout>
 <config v="" />
 <AutoUpdate v="true" />
 </CyGuid_843a90a4-0c4b-4e44-991d-05e7fb117a21>

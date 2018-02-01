@@ -91,11 +91,11 @@ class HSM(Psoc):
 
         return bills
 
-    def provision(self, uuid, bills):
+    def provision(self, blob, bills):
         """Attempts to provision HSM
 
         Args:
-            uuid (str): UUID for HSM
+            blob (str): blob for HSM
             bills (list of str): List of bills to store in HSM
 
         Returns:
@@ -109,10 +109,15 @@ class HSM(Psoc):
             return False
         self._vp('HSM sent provisioning message')
 
-        self._push_msg('%s\00' % uuid)
-        while self._pull_msg() != 'K':
-            self._vp('HSM hasn\'t accepted UUID \'%s\'' % uuid, logging.error)
-        self._vp('HSM accepted UUID \'%s\'' % uuid)
+        self._push_msg('%s\00' % blob)
+        msg = self._pull_msg()
+        self._vp("RECEIVED MSG1 %s" % msg)
+
+        while msg != 'K':
+            self._vp("RECEIVED MSG %s" % repr(msg))
+            self._vp('HSM hasn\'t accepted blob \'%s\'' % blob, logging.error)
+            msg = self._pull_msg()
+        self._vp('HSM accepted blob \'%s\'' % blob)
 
         self._push_msg(struct.pack('B', len(bills)))
         while self._pull_msg() != 'K':
