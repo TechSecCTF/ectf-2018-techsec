@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CyXmlSerializer>
+<!--This file is machine generated and read. It is not intended to be edited by hand.-->
+<!--Due to this, there is no schema for this file.-->
+<CyGuid_7a7929f8-5e3b-4f86-a093-2d4ee6513111 type_name="CyDesigner.Common.ProjMgmt.Model.CyPrjMgmtProjectCustomData" version="1">
+<CyGuid_fdba8dfd-b15b-4469-9bbb-9e40c3e70997 type_name="CyDesigner.Common.Base.CyCustomData" version="2">
+<userData>
+<dataGuid v="47ec7058-2f43-4a2f-ae73-172624e235df">
+<CyGuid_47ec7058-2f43-4a2f-ae73-172624e235df type_name="CyDesigner.Common.ProjMgmt.Model.CyConfDepList" version="1">
+<name v="cmpl_deps">
+<CyGuid_f44455c5-3770-4452-b988-0a7a7ff46256 type_name="CyDesigner.Common.ProjMgmt.Model.CyConfigDependencies" version="1">
+<dependency_info name="c9323d49-d323-40b8-9b59-cc008d68a989@Debug@CortexM0" xml_contents_version="2">
+<CyGuid_1173175f-1b9b-4ad4-a065-754a48a27021 type_name="CyDesigner.Common.Base.CyFileDeps" version="1">
+<file name=".\CortexM0\ARM_GCC_541\Debug\aes256.o">
+<dep name=".\strong-arm\include\strong-arm\aes.h" />
+<dep name=".\strong-arm\src\aes\aes256.c" />
+<dep name=".\strong-arm\src\aes\aes256_tables.h" />
+</file>
+<file name=".\strong-arm\include\strong-arm\aes.h" />
+<file name=".\strong-arm\src\aes\aes256.c" />
+<file name=".\strong-arm\src\aes\aes256_tables.h" />
+<file name=".\CortexM0\ARM_GCC_541\Debug\der.o">
+<dep name=".\strong-arm\include\strong-arm\asn1.h" />
+<dep name=".\strong-arm\include\strong-arm\finite_field.h" />
+<dep name=".\strong-arm\src\asn1\der.c" />
+</file>
+<file name=".\strong-arm\include\strong-arm\asn1.h" />
+<file name=".\strong-arm\include\strong-arm\finite_field.h" />
+<file name=".\strong-arm\src\asn1\der.c" />
+<file name=".\CortexM0\ARM_GCC_541\Debug\base58.o">
+<dep name=".\strong-arm\include\strong-arm\base58.h" />
+<dep name=".\strong-arm\include\strong-arm\finite_field.h" />
+<dep name=".\strong-arm\include\strong-arm\sha256.h" />
+<dep name=".\strong-arm\src\base58\base58.c" />
+</file>
+<file name=".\strong-arm\include\strong-arm\base58.h" />
+<file name=".\strong-arm\include\strong-arm\sha256.h" />
+<file name=".\strong-arm\src\base58\base58.c" />
+<file name=".\CortexM0\ARM_GCC_541\Debug\ecdsa.o">
+<dep name=".\strong-arm\include\strong-arm\ecdsa.h" />
+<dep name=".\strong-arm\include\strong-arm\finite_field.h" />
+<dep name=".\strong-arm\src\ecdsa\ecdsa.c" />
+</file>
+<file name=".\strong-arm\include\strong-arm\ecdsa.h" />
+<file name=".\strong-arm\src\ecdsa\ecdsa.c" />
+<file name=".\CortexM0\ARM_GCC_541\Debug\hmac.o">
+<dep name=".\strong-arm\include\strong-arm\hmac.h" />
+<dep name=".\strong-arm\include\strong-arm\sha256.h" />
+<dep name=".\strong-arm\src\hmac\hmac.c" />
+</file>
+<file name=".\strong-arm\include\strong-arm\hmac.h" />
+<file name=".\strong-arm\src\hmac\hmac.c" />
+<file name=".\CortexM0\ARM_GCC_541\Debug\pbkdf2.o">
+<dep name=".\strong-arm\include\strong-arm\hmac.h" />
+<dep name=".\strong-arm\include\strong-arm\pbkdf2.h" />
+<dep name=".\strong-arm\include\strong-arm\sha256.h" />
+<dep name=".\strong-arm\src\pbkdf2\pbkdf2.c" />
+</file>
+<file name=".\strong-arm\include\strong-arm\pbkdf2.h" />
+<file name=".\strong-arm\src\pbkdf2\pbkdf2.c" />
+<file name=".\CortexM0\ARM_GCC_541\Debug\util.o">
+<dep name=".\strong-arm\src\private\util.c" />
+<dep name=".\strong-arm\src\private\util.h" />
+</file>
+<file name=".\strong-arm\src\private\util.c" />
+<file name=".\strong-arm\src\private\util.h" />
+<file name=".\CortexM0\ARM_GCC_541\Debug\ripemd160.o">
+<dep name=".\strong-arm\include\strong-arm\ripemd160.h" />
+<dep name=".\strong-arm\src\ripemd160\ripemd160.c" />
+</file>
+<file name=".\strong-arm\include\strong-arm\ripemd160.h" />
+<file name=".\strong-arm\src\ripemd160\ripemd160.c" />
+<file name=".\CortexM0\ARM_GCC_541\Debug\sha256.o">
+<dep name=".\strong-arm\include\strong-arm\sha256.h" />
+<dep name=".\strong-arm\src\sha256\sha256.c" />
+</file>
+<file name=".\strong-arm\src\sha256\sha256.c" />
+<file name=".\CortexM0\ARM_GCC_541\Debug\strong-arm.o">
+<dep name=".\strong-arm\include\strong-arm\random.h" />
+<dep name=".\strong-arm\include\strong-arm\strong-arm.h" />
+<dep name=".\strong-arm\src\strong-arm.c" />
+</file>
+<file name=".\strong-arm\include\strong-arm\random.h" />
+<file name=".\strong-arm\include\strong-arm\strong-arm.h" />
+<file name=".\strong-arm\src\strong-arm.c" />
+<file name=".\CortexM0\ARM_GCC_541\Debug\threefish.o">
+<dep name=".\strong-arm\include\strong-arm\threefish.h" />
+<dep name=".\strong-arm\src\threefish\threefish.c" />
+</file>
+<file name=".\strong-arm\include\strong-arm\threefish.h" />
+<file name=".\strong-arm\src\threefish\threefish.c" />
+<file name=".\CortexM0\ARM_GCC_541\Debug\utils.o">
+<dep name=".\strong-arm\include\strong-arm\utils.h" />
+<dep name=".\strong-arm\src\utils.c" />
+</file>
+<file name=".\strong-arm\include\strong-arm\utils.h" />
+<file name=".\strong-arm\src\utils.c" />
+</CyGuid_1173175f-1b9b-4ad4-a065-754a48a27021>
+</dependency_info>
+</CyGuid_f44455c5-3770-4452-b988-0a7a7ff46256>
+</name>
+<name v="lbry_deps">
+<CyGuid_f44455c5-3770-4452-b988-0a7a7ff46256 type_name="CyDesigner.Common.ProjMgmt.Model.CyConfigDependencies" version="1">
+<dependency_info name="c9323d49-d323-40b8-9b59-cc008d68a989@Debug@CortexM0" xml_contents_version="2">
+<CyGuid_1173175f-1b9b-4ad4-a065-754a48a27021 type_name="CyDesigner.Common.Base.CyFileDeps" version="1">
+<file name="C:\VBOXSVR\raywang\Dropbox (MIT)\CTFs\eCTF\2018-ectf-milestones-demo\Milestones Demo Workspace\strong-arm.cylib\CortexM0\ARM_GCC_541\Debug\strong-arm.a">
+<dep name="C:\VBOXSVR\raywang\Dropbox" />
+<dep name=".\(MIT)\CTFs\eCTF\2018-ectf-milestones-demo\Milestones" />
+<dep name=".\Demo" />
+<dep name=".\Workspace\strong-arm.cylib\CortexM0\ARM_GCC_541\Debug\utils.o" />
+<dep name="C:\VBOXSVR\raywang\Dropbox" />
+<dep name=".\(MIT)\CTFs\eCTF\2018-ectf-milestones-demo\Milestones" />
+<dep name=".\Demo" />
+<dep name=".\Workspace\strong-arm.cylib\CortexM0\ARM_GCC_541\Debug\strong-arm.o" />
+<dep name="C:\VBOXSVR\raywang\Dropbox" />
+<dep name=".\(MIT)\CTFs\eCTF\2018-ectf-milestones-demo\Milestones" />
+<dep name=".\Demo" />
+<dep name=".\Workspace\strong-arm.cylib\CortexM0\ARM_GCC_541\Debug\threefish.o" />
+<dep name="C:\VBOXSVR\raywang\Dropbox" />
+<dep name=".\(MIT)\CTFs\eCTF\2018-ectf-milestones-demo\Milestones" />
+<dep name=".\Demo" />
+<dep name=".\Workspace\strong-arm.cylib\CortexM0\ARM_GCC_541\Debug\sha256.o" />
+<dep name="C:\VBOXSVR\raywang\Dropbox" />
+<dep name=".\(MIT)\CTFs\eCTF\2018-ectf-milestones-demo\Milestones" />
+<dep name=".\Demo" />
+<dep name=".\Workspace\strong-arm.cylib\CortexM0\ARM_GCC_541\Debug\ripemd160.o" />
+<dep name="C:\VBOXSVR\raywang\Dropbox" />
+<dep name=".\(MIT)\CTFs\eCTF\2018-ectf-milestones-demo\Milestones" />
+<dep name=".\Demo" />
+<dep name=".\Workspace\strong-arm.cylib\CortexM0\ARM_GCC_541\Debug\util.o" />
+<dep name="C:\VBOXSVR\raywang\Dropbox" />
+<dep name=".\(MIT)\CTFs\eCTF\2018-ectf-milestones-demo\Milestones" />
+<dep name=".\Demo" />
+<dep name=".\Workspace\strong-arm.cylib\CortexM0\ARM_GCC_541\Debug\pbkdf2.o" />
+<dep name="C:\VBOXSVR\raywang\Dropbox" />
+<dep name=".\(MIT)\CTFs\eCTF\2018-ectf-milestones-demo\Milestones" />
+<dep name=".\Demo" />
+<dep name=".\Workspace\strong-arm.cylib\CortexM0\ARM_GCC_541\Debug\hmac.o" />
+<dep name="C:\VBOXSVR\raywang\Dropbox" />
+<dep name=".\(MIT)\CTFs\eCTF\2018-ectf-milestones-demo\Milestones" />
+<dep name=".\Demo" />
+<dep name=".\Workspace\strong-arm.cylib\CortexM0\ARM_GCC_541\Debug\ecdsa.o" />
+<dep name="C:\VBOXSVR\raywang\Dropbox" />
+<dep name=".\(MIT)\CTFs\eCTF\2018-ectf-milestones-demo\Milestones" />
+<dep name=".\Demo" />
+<dep name=".\Workspace\strong-arm.cylib\CortexM0\ARM_GCC_541\Debug\base58.o" />
+<dep name="C:\VBOXSVR\raywang\Dropbox" />
+<dep name=".\(MIT)\CTFs\eCTF\2018-ectf-milestones-demo\Milestones" />
+<dep name=".\Demo" />
+<dep name=".\Workspace\strong-arm.cylib\CortexM0\ARM_GCC_541\Debug\der.o" />
+<dep name="C:\VBOXSVR\raywang\Dropbox" />
+<dep name=".\(MIT)\CTFs\eCTF\2018-ectf-milestones-demo\Milestones" />
+<dep name=".\Demo" />
+<dep name=".\Workspace\strong-arm.cylib\CortexM0\ARM_GCC_541\Debug\aes256.o" />
+</file>
+</CyGuid_1173175f-1b9b-4ad4-a065-754a48a27021>
+</dependency_info>
+</CyGuid_f44455c5-3770-4452-b988-0a7a7ff46256>
+</name>
+</CyGuid_47ec7058-2f43-4a2f-ae73-172624e235df>
+</dataGuid>
+<dataGuid v="b0374e30-ce3a-47f2-ad85-821643292c68">
+<CyGuid_b0374e30-ce3a-47f2-ad85-821643292c68 type_name="CyDesigner.Common.ProjMgmt.Common.CyCmdLineData" version="2">
+<genericCmdLineData>
+<name v="c9323d49-d323-40b8-9b59-cc008d68a989@Debug@CortexM0">
+<name_val_pair name="strong-arm\src\utils.c" v="-mcpu=cortex-m0 -mthumb -I.\strong-arm\include -I. -Wa,-alh=${OutputDir}/${CompileFile}.lst -g -D DEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -Og" />
+<name_val_pair name="strong-arm\src\strong-arm.c" v="-mcpu=cortex-m0 -mthumb -I.\strong-arm\include -I. -Wa,-alh=${OutputDir}/${CompileFile}.lst -g -D DEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -Og" />
+<name_val_pair name="strong-arm\src\threefish\threefish.c" v="-mcpu=cortex-m0 -mthumb -I.\strong-arm\include -I. -Wa,-alh=${OutputDir}/${CompileFile}.lst -g -D DEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -Og" />
+<name_val_pair name="strong-arm\src\sha256\sha256.c" v="-mcpu=cortex-m0 -mthumb -I.\strong-arm\include -I. -Wa,-alh=${OutputDir}/${CompileFile}.lst -g -D DEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -Og" />
+<name_val_pair name="strong-arm\src\ripemd160\ripemd160.c" v="-mcpu=cortex-m0 -mthumb -I.\strong-arm\include -I. -Wa,-alh=${OutputDir}/${CompileFile}.lst -g -D DEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -Og" />
+<name_val_pair name="strong-arm\src\private\util.c" v="-mcpu=cortex-m0 -mthumb -I.\strong-arm\include -I. -Wa,-alh=${OutputDir}/${CompileFile}.lst -g -D DEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -Og" />
+<name_val_pair name="strong-arm\src\pbkdf2\pbkdf2.c" v="-mcpu=cortex-m0 -mthumb -I.\strong-arm\include -I. -Wa,-alh=${OutputDir}/${CompileFile}.lst -g -D DEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -Og" />
+<name_val_pair name="strong-arm\src\hmac\hmac.c" v="-mcpu=cortex-m0 -mthumb -I.\strong-arm\include -I. -Wa,-alh=${OutputDir}/${CompileFile}.lst -g -D DEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -Og" />
+<name_val_pair name="strong-arm\src\ecdsa\ecdsa.c" v="-mcpu=cortex-m0 -mthumb -I.\strong-arm\include -I. -Wa,-alh=${OutputDir}/${CompileFile}.lst -g -D DEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -Og" />
+<name_val_pair name="strong-arm\src\base58\base58.c" v="-mcpu=cortex-m0 -mthumb -I.\strong-arm\include -I. -Wa,-alh=${OutputDir}/${CompileFile}.lst -g -D DEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -Og" />
+<name_val_pair name="strong-arm\src\asn1\der.c" v="-mcpu=cortex-m0 -mthumb -I.\strong-arm\include -I. -Wa,-alh=${OutputDir}/${CompileFile}.lst -g -D DEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -Og" />
+<name_val_pair name="strong-arm\src\aes\aes256.c" v="-mcpu=cortex-m0 -mthumb -I.\strong-arm\include -I. -Wa,-alh=${OutputDir}/${CompileFile}.lst -g -D DEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -Og" />
+<name_val_pair name="\\VBOXSVR\raywang\Dropbox (MIT)\CTFs\eCTF\2018-ectf-milestones-demo\Milestones Demo Workspace\strong-arm.cylib\CortexM0\ARM_GCC_541\Debug\strong-arm.a" v="-rs .\CortexM0\ARM_GCC_541\Debug\strong-arm.a &quot;\\VBOXSVR\raywang\Dropbox (MIT)\CTFs\eCTF\2018-ectf-milestones-demo\Milestones Demo Workspace\strong-arm.cylib\CortexM0\ARM_GCC_541\Debug\utils.o&quot; &quot;\\VBOXSVR\raywang\Dropbox (MIT)\CTFs\eCTF\2018-ectf-milestones-demo\Milestones Demo Workspace\strong-arm.cylib\CortexM0\ARM_GCC_541\Debug\strong-arm.o&quot; &quot;\\VBOXSVR\raywang\Dropbox (MIT)\CTFs\eCTF\2018-ectf-milestones-demo\Milestones Demo Workspace\strong-arm.cylib\CortexM0\ARM_GCC_541\Debug\threefish.o&quot; &quot;\\VBOXSVR\raywang\Dropbox (MIT)\CTFs\eCTF\2018-ectf-milestones-demo\Milestones Demo Workspace\strong-arm.cylib\CortexM0\ARM_GCC_541\Debug\sha256.o&quot; &quot;\\VBOXSVR\raywang\Dropbox (MIT)\CTFs\eCTF\2018-ectf-milestones-demo\Milestones Demo Workspace\strong-arm.cylib\CortexM0\ARM_GCC_541\Debug\ripemd160.o&quot; &quot;\\VBOXSVR\raywang\Dropbox (MIT)\CTFs\eCTF\2018-ectf-milestones-demo\Milestones Demo Workspace\strong-arm.cylib\CortexM0\ARM_GCC_541\Debug\util.o&quot; &quot;\\VBOXSVR\raywang\Dropbox (MIT)\CTFs\eCTF\2018-ectf-milestones-demo\Milestones Demo Workspace\strong-arm.cylib\CortexM0\ARM_GCC_541\Debug\pbkdf2.o&quot; &quot;\\VBOXSVR\raywang\Dropbox (MIT)\CTFs\eCTF\2018-ectf-milestones-demo\Milestones Demo Workspace\strong-arm.cylib\CortexM0\ARM_GCC_541\Debug\hmac.o&quot; &quot;\\VBOXSVR\raywang\Dropbox (MIT)\CTFs\eCTF\2018-ectf-milestones-demo\Milestones Demo Workspace\strong-arm.cylib\CortexM0\ARM_GCC_541\Debug\ecdsa.o&quot; &quot;\\VBOXSVR\raywang\Dropbox (MIT)\CTFs\eCTF\2018-ectf-milestones-demo\Milestones Demo Workspace\strong-arm.cylib\CortexM0\ARM_GCC_541\Debug\base58.o&quot; &quot;\\VBOXSVR\raywang\Dropbox (MIT)\CTFs\eCTF\2018-ectf-milestones-demo\Milestones Demo Workspace\strong-arm.cylib\CortexM0\ARM_GCC_541\Debug\der.o&quot; &quot;\\VBOXSVR\raywang\Dropbox (MIT)\CTFs\eCTF\2018-ectf-milestones-demo\Milestones Demo Workspace\strong-arm.cylib\CortexM0\ARM_GCC_541\Debug\aes256.o&quot;" />
+</name>
+</genericCmdLineData>
+<codeGenCmdLineTag v="" />
+</CyGuid_b0374e30-ce3a-47f2-ad85-821643292c68>
+</dataGuid>
+</userData>
+</CyGuid_fdba8dfd-b15b-4469-9bbb-9e40c3e70997>
+<properties />
+</CyGuid_7a7929f8-5e3b-4f86-a093-2d4ee6513111>
+</CyXmlSerializer>

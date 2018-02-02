@@ -37,12 +37,12 @@ class ATM(object):
 
         try:
             logging.info('check_balance: Requesting card_id using inputted pin')
-            card_id = self.card.check_balance(pin)
+            card_id, aes_iv, card_hmac = self.card.check_balance(pin)
 
             # get balance from bank if card accepted PIN
             if card_id:
                 logging.info('check_balance: Requesting balance from Bank')
-                res = self.bank.check_balance(card_id)
+                res = self.bank.check_balance(card_id, aes_iv, card_hmac)
                 if res:
                     return res
             logging.info('check_balance failed')

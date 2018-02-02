@@ -1,0 +1,5319 @@
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqCnWHK.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m0
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 0
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"ecdsa.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.ec_double,"ax",%progbits
+  20              		.align	2
+  21              		.global	ec_double
+  22              		.code	16
+  23              		.thumb_func
+  24              		.type	ec_double, %function
+  25              	ec_double:
+  26              	.LFB1:
+  27              		.file 1 "strong-arm\\src\\ecdsa\\ecdsa.c"
+   1:strong-arm\src\ecdsa/ecdsa.c **** #include <strong-arm/ecdsa.h>
+   2:strong-arm\src\ecdsa/ecdsa.c **** 
+   3:strong-arm\src\ecdsa/ecdsa.c **** 
+   4:strong-arm\src\ecdsa/ecdsa.c **** const EC_POINT ec_G = {
+   5:strong-arm\src\ecdsa/ecdsa.c **** 	{{0x16F81798, 0x59F2815B, 0x2DCE28D9, 0x029BFCDB, 0xCE870B07, 0x55A06295, 0xF9DCBBAC, 0x79BE667E}}
+   6:strong-arm\src\ecdsa/ecdsa.c **** 	{{0XFB10D4B8, 0X9C47D08F, 0XA6855419, 0XFD17B448, 0X0E1108A8, 0X5DA4FBFC, 0X26A3C465, 0X483ADA77}}
+   7:strong-arm\src\ecdsa/ecdsa.c **** };
+   8:strong-arm\src\ecdsa/ecdsa.c **** 
+   9:strong-arm\src\ecdsa/ecdsa.c **** const FF_NUM ec_n = {{0xD0364141, 0xBFD25E8C, 0xAF48A03B, 0xBAAEDCE6, 0xFFFFFFFE, 0xFFFFFFFF, 0xFFF
+  10:strong-arm\src\ecdsa/ecdsa.c **** 
+  11:strong-arm\src\ecdsa/ecdsa.c **** const FF_NUM ec_p = {{0xFFFFFC2F, 0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFF
+  12:strong-arm\src\ecdsa/ecdsa.c **** 
+  13:strong-arm\src\ecdsa/ecdsa.c **** const FF_NUM ec_b = {{0x00000007, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x000
+  14:strong-arm\src\ecdsa/ecdsa.c **** 
+  15:strong-arm\src\ecdsa/ecdsa.c **** 
+  16:strong-arm\src\ecdsa/ecdsa.c **** 
+  17:strong-arm\src\ecdsa/ecdsa.c **** 
+  18:strong-arm\src\ecdsa/ecdsa.c **** void ec_add (EC_POINT *const out, EC_POINT const *const A, EC_POINT const *const B)
+  19:strong-arm\src\ecdsa/ecdsa.c **** {
+  20:strong-arm\src\ecdsa/ecdsa.c **** 	FF_NUM slope, tmp, tmp1;
+  21:strong-arm\src\ecdsa/ecdsa.c **** 	FF_NUM x3, y3;
+  22:strong-arm\src\ecdsa/ecdsa.c **** 	
+  23:strong-arm\src\ecdsa/ecdsa.c **** 	if ((ff_is_zero (&(A->x))) && (ff_is_zero (&(A->y))))
+  24:strong-arm\src\ecdsa/ecdsa.c **** 	{
+  25:strong-arm\src\ecdsa/ecdsa.c **** 		ff_copy (&(out->x), &(B->x));
+  26:strong-arm\src\ecdsa/ecdsa.c **** 		ff_copy (&(out->y), &(B->y));
+  27:strong-arm\src\ecdsa/ecdsa.c **** 		return;
+  28:strong-arm\src\ecdsa/ecdsa.c **** 	}
+  29:strong-arm\src\ecdsa/ecdsa.c **** 	
+  30:strong-arm\src\ecdsa/ecdsa.c **** 	if ((ff_is_zero (&(B->x))) && (ff_is_zero (&(B->y))))
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqCnWHK.s 			page 2
+
+
+  31:strong-arm\src\ecdsa/ecdsa.c **** 	{
+  32:strong-arm\src\ecdsa/ecdsa.c **** 		ff_copy (&(out->x), &(A->x));
+  33:strong-arm\src\ecdsa/ecdsa.c **** 		ff_copy (&(out->y), &(A->y));
+  34:strong-arm\src\ecdsa/ecdsa.c **** 		return;
+  35:strong-arm\src\ecdsa/ecdsa.c **** 	}
+  36:strong-arm\src\ecdsa/ecdsa.c **** 
+  37:strong-arm\src\ecdsa/ecdsa.c **** 	if (ff_compare (&(A->x), &(B->x)) == 0)
+  38:strong-arm\src\ecdsa/ecdsa.c **** 	{
+  39:strong-arm\src\ecdsa/ecdsa.c **** 		ff_add (&tmp, &(A->y), &(B->y), &ec_p);
+  40:strong-arm\src\ecdsa/ecdsa.c **** 
+  41:strong-arm\src\ecdsa/ecdsa.c **** 		if (ff_is_zero (&tmp))
+  42:strong-arm\src\ecdsa/ecdsa.c **** 		{
+  43:strong-arm\src\ecdsa/ecdsa.c **** 			// Infinity
+  44:strong-arm\src\ecdsa/ecdsa.c **** 			ff_zero (&(out->x));
+  45:strong-arm\src\ecdsa/ecdsa.c **** 			ff_zero (&(out->y));
+  46:strong-arm\src\ecdsa/ecdsa.c **** 			return;
+  47:strong-arm\src\ecdsa/ecdsa.c **** 		}
+  48:strong-arm\src\ecdsa/ecdsa.c **** 		else
+  49:strong-arm\src\ecdsa/ecdsa.c **** 		{
+  50:strong-arm\src\ecdsa/ecdsa.c **** 			ec_double (out, out);
+  51:strong-arm\src\ecdsa/ecdsa.c **** 			return;
+  52:strong-arm\src\ecdsa/ecdsa.c **** 		}
+  53:strong-arm\src\ecdsa/ecdsa.c **** 	}
+  54:strong-arm\src\ecdsa/ecdsa.c **** 
+  55:strong-arm\src\ecdsa/ecdsa.c **** 	// Slope
+  56:strong-arm\src\ecdsa/ecdsa.c **** 	ff_sub (&tmp, &(B->y), &(A->y), &ec_p);
+  57:strong-arm\src\ecdsa/ecdsa.c **** 	ff_sub (&tmp1, &(B->x), &(A->x), &ec_p);
+  58:strong-arm\src\ecdsa/ecdsa.c **** 	ff_inv (&tmp1, &tmp1, &ec_p);
+  59:strong-arm\src\ecdsa/ecdsa.c **** 	ff_mul (&slope, &tmp, &tmp1, &ec_p);		// slope = (y2 - y1) / (x2 - x1)
+  60:strong-arm\src\ecdsa/ecdsa.c **** 
+  61:strong-arm\src\ecdsa/ecdsa.c **** 	// x
+  62:strong-arm\src\ecdsa/ecdsa.c **** 	ff_mul (&tmp, &slope, &slope, &ec_p);
+  63:strong-arm\src\ecdsa/ecdsa.c **** 	ff_sub (&x3, &tmp, &(A->x), &ec_p);
+  64:strong-arm\src\ecdsa/ecdsa.c **** 	ff_sub (&x3, &x3, &(B->x), &ec_p);	// out.x = slope^2 - x1 - x2
+  65:strong-arm\src\ecdsa/ecdsa.c **** 
+  66:strong-arm\src\ecdsa/ecdsa.c **** 	// y
+  67:strong-arm\src\ecdsa/ecdsa.c **** 	ff_sub (&tmp, &(A->x), &x3, &ec_p);
+  68:strong-arm\src\ecdsa/ecdsa.c **** 	ff_mul (&tmp, &slope, &tmp, &ec_p);
+  69:strong-arm\src\ecdsa/ecdsa.c **** 	ff_sub (&y3, &tmp, &(A->y), &ec_p);	// out.y = slope * (x1 - out.x) - y1
+  70:strong-arm\src\ecdsa/ecdsa.c **** 
+  71:strong-arm\src\ecdsa/ecdsa.c **** 	ff_copy (&(out->x), &x3);
+  72:strong-arm\src\ecdsa/ecdsa.c **** 	ff_copy (&(out->y), &y3);
+  73:strong-arm\src\ecdsa/ecdsa.c **** }
+  74:strong-arm\src\ecdsa/ecdsa.c **** 
+  75:strong-arm\src\ecdsa/ecdsa.c **** 
+  76:strong-arm\src\ecdsa/ecdsa.c **** void ec_double (EC_POINT *const out, EC_POINT const *const P)
+  77:strong-arm\src\ecdsa/ecdsa.c **** {
+  28              		.loc 1 77 0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 160
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32              	.LVL0:
+  33 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+  34              		.cfi_def_cfa_offset 20
+  35              		.cfi_offset 4, -20
+  36              		.cfi_offset 5, -16
+  37              		.cfi_offset 6, -12
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqCnWHK.s 			page 3
+
+
+  38              		.cfi_offset 7, -8
+  39              		.cfi_offset 14, -4
+  40 0002 A9B0     		sub	sp, sp, #164
+  41              		.cfi_def_cfa_offset 184
+  42 0004 0600     		movs	r6, r0
+  43 0006 0D00     		movs	r5, r1
+  78:strong-arm\src\ecdsa/ecdsa.c **** 	FF_NUM slope, tmp, tmp1;
+  79:strong-arm\src\ecdsa/ecdsa.c **** 	FF_NUM x3, y3;
+  80:strong-arm\src\ecdsa/ecdsa.c **** 
+  81:strong-arm\src\ecdsa/ecdsa.c **** 	if ((ff_is_zero (&(P->x))) && (ff_is_zero (&(P->y))))
+  44              		.loc 1 81 0
+  45 0008 0800     		movs	r0, r1
+  46              	.LVL1:
+  47 000a FFF7FEFF 		bl	ff_is_zero
+  48              	.LVL2:
+  49 000e 0028     		cmp	r0, #0
+  50 0010 0DD0     		beq	.L2
+  51              		.loc 1 81 0 is_stmt 0 discriminator 1
+  52 0012 2800     		movs	r0, r5
+  53 0014 2030     		adds	r0, r0, #32
+  54 0016 FFF7FEFF 		bl	ff_is_zero
+  55              	.LVL3:
+  56 001a 0028     		cmp	r0, #0
+  57 001c 07D0     		beq	.L2
+  82:strong-arm\src\ecdsa/ecdsa.c **** 	{
+  83:strong-arm\src\ecdsa/ecdsa.c **** 		ff_zero (&(out->x));
+  58              		.loc 1 83 0 is_stmt 1
+  59 001e 3000     		movs	r0, r6
+  60 0020 FFF7FEFF 		bl	ff_zero
+  61              	.LVL4:
+  84:strong-arm\src\ecdsa/ecdsa.c **** 		ff_zero (&(out->y));
+  62              		.loc 1 84 0
+  63 0024 3000     		movs	r0, r6
+  64 0026 2030     		adds	r0, r0, #32
+  65 0028 FFF7FEFF 		bl	ff_zero
+  66              	.LVL5:
+  67 002c 52E0     		b	.L1
+  68              	.L2:
+  85:strong-arm\src\ecdsa/ecdsa.c **** 		return;
+  86:strong-arm\src\ecdsa/ecdsa.c **** 	}
+  87:strong-arm\src\ecdsa/ecdsa.c **** 
+  88:strong-arm\src\ecdsa/ecdsa.c **** 	ff_mul (&tmp, &(P->x), &(P->x), &ec_p);	// tmp = x^2
+  69              		.loc 1 88 0
+  70 002e 2A4C     		ldr	r4, .L4
+  71 0030 2300     		movs	r3, r4
+  72 0032 2A00     		movs	r2, r5
+  73 0034 2900     		movs	r1, r5
+  74 0036 18A8     		add	r0, sp, #96
+  75 0038 FFF7FEFF 		bl	ff_mul
+  76              	.LVL6:
+  89:strong-arm\src\ecdsa/ecdsa.c **** 	ff_add (&tmp1, &tmp, &tmp, &ec_p);	// tmp1 = 2 * x^2
+  77              		.loc 1 89 0
+  78 003c 2300     		movs	r3, r4
+  79 003e 18AA     		add	r2, sp, #96
+  80 0040 1100     		movs	r1, r2
+  81 0042 10A8     		add	r0, sp, #64
+  82 0044 FFF7FEFF 		bl	ff_add
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqCnWHK.s 			page 4
+
+
+  83              	.LVL7:
+  90:strong-arm\src\ecdsa/ecdsa.c **** 	ff_add (&tmp, &tmp1, &tmp, &ec_p);	// tmp = 3 * x^2
+  84              		.loc 1 90 0
+  85 0048 2300     		movs	r3, r4
+  86 004a 18AA     		add	r2, sp, #96
+  87 004c 10A9     		add	r1, sp, #64
+  88 004e 1000     		movs	r0, r2
+  89 0050 FFF7FEFF 		bl	ff_add
+  90              	.LVL8:
+  91:strong-arm\src\ecdsa/ecdsa.c **** 	//ff_add (&tmp, &tmp, a);		// tmp = 3x^2 + a	// a == 0 for our curve
+  92:strong-arm\src\ecdsa/ecdsa.c **** 	ff_add (&tmp1, &(P->y), &(P->y), &ec_p);	// tmp1 = 2 * y
+  91              		.loc 1 92 0
+  92 0054 2F00     		movs	r7, r5
+  93 0056 2037     		adds	r7, r7, #32
+  94 0058 2300     		movs	r3, r4
+  95 005a 3A00     		movs	r2, r7
+  96 005c 3900     		movs	r1, r7
+  97 005e 10A8     		add	r0, sp, #64
+  98 0060 FFF7FEFF 		bl	ff_add
+  99              	.LVL9:
+  93:strong-arm\src\ecdsa/ecdsa.c **** 	ff_inv (&tmp1, &tmp1, &ec_p);			// tmp1 = 1 / (2y)
+ 100              		.loc 1 93 0
+ 101 0064 2200     		movs	r2, r4
+ 102 0066 10A9     		add	r1, sp, #64
+ 103 0068 0800     		movs	r0, r1
+ 104 006a FFF7FEFF 		bl	ff_inv
+ 105              	.LVL10:
+  94:strong-arm\src\ecdsa/ecdsa.c **** 	ff_mul (&slope, &tmp, &tmp1, &ec_p);	// slope = (3x^2 + a) / (2y)
+ 106              		.loc 1 94 0
+ 107 006e 2300     		movs	r3, r4
+ 108 0070 10AA     		add	r2, sp, #64
+ 109 0072 18A9     		add	r1, sp, #96
+ 110 0074 20A8     		add	r0, sp, #128
+ 111 0076 FFF7FEFF 		bl	ff_mul
+ 112              	.LVL11:
+  95:strong-arm\src\ecdsa/ecdsa.c **** 	ff_mul (&tmp, &slope, &slope, &ec_p);	// tmp = slope^2
+ 113              		.loc 1 95 0
+ 114 007a 2300     		movs	r3, r4
+ 115 007c 20AA     		add	r2, sp, #128
+ 116 007e 1100     		movs	r1, r2
+ 117 0080 18A8     		add	r0, sp, #96
+ 118 0082 FFF7FEFF 		bl	ff_mul
+ 119              	.LVL12:
+  96:strong-arm\src\ecdsa/ecdsa.c **** 	ff_sub (&x3, &tmp, &(P->x), &ec_p);
+ 120              		.loc 1 96 0
+ 121 0086 2300     		movs	r3, r4
+ 122 0088 2A00     		movs	r2, r5
+ 123 008a 18A9     		add	r1, sp, #96
+ 124 008c 08A8     		add	r0, sp, #32
+ 125 008e FFF7FEFF 		bl	ff_sub
+ 126              	.LVL13:
+  97:strong-arm\src\ecdsa/ecdsa.c **** 	ff_sub (&x3, &x3, &(P->x), &ec_p);	// x3 = slope^2 - 2x
+ 127              		.loc 1 97 0
+ 128 0092 2300     		movs	r3, r4
+ 129 0094 2A00     		movs	r2, r5
+ 130 0096 08A9     		add	r1, sp, #32
+ 131 0098 0800     		movs	r0, r1
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqCnWHK.s 			page 5
+
+
+ 132 009a FFF7FEFF 		bl	ff_sub
+ 133              	.LVL14:
+  98:strong-arm\src\ecdsa/ecdsa.c **** 
+  99:strong-arm\src\ecdsa/ecdsa.c **** 	ff_sub (&tmp, &(P->x), &x3, &ec_p);	// tmp = x - x3
+ 134              		.loc 1 99 0
+ 135 009e 2300     		movs	r3, r4
+ 136 00a0 08AA     		add	r2, sp, #32
+ 137 00a2 2900     		movs	r1, r5
+ 138 00a4 18A8     		add	r0, sp, #96
+ 139 00a6 FFF7FEFF 		bl	ff_sub
+ 140              	.LVL15:
+ 100:strong-arm\src\ecdsa/ecdsa.c **** 	ff_mul (&y3, &slope, &tmp, &ec_p);
+ 141              		.loc 1 100 0
+ 142 00aa 2300     		movs	r3, r4
+ 143 00ac 18AA     		add	r2, sp, #96
+ 144 00ae 20A9     		add	r1, sp, #128
+ 145 00b0 6846     		mov	r0, sp
+ 146 00b2 FFF7FEFF 		bl	ff_mul
+ 147              	.LVL16:
+ 101:strong-arm\src\ecdsa/ecdsa.c **** 	ff_sub (&y3, &y3, &(P->y), &ec_p);	// y3 = slope * (x - x3) - y
+ 148              		.loc 1 101 0
+ 149 00b6 2300     		movs	r3, r4
+ 150 00b8 3A00     		movs	r2, r7
+ 151 00ba 6946     		mov	r1, sp
+ 152 00bc 6846     		mov	r0, sp
+ 153 00be FFF7FEFF 		bl	ff_sub
+ 154              	.LVL17:
+ 102:strong-arm\src\ecdsa/ecdsa.c **** 
+ 103:strong-arm\src\ecdsa/ecdsa.c **** 	ff_copy (&(out->x), &x3);
+ 155              		.loc 1 103 0
+ 156 00c2 08A9     		add	r1, sp, #32
+ 157 00c4 3000     		movs	r0, r6
+ 158 00c6 FFF7FEFF 		bl	ff_copy
+ 159              	.LVL18:
+ 104:strong-arm\src\ecdsa/ecdsa.c **** 	ff_copy (&(out->y), &y3);
+ 160              		.loc 1 104 0
+ 161 00ca 3000     		movs	r0, r6
+ 162 00cc 2030     		adds	r0, r0, #32
+ 163 00ce 6946     		mov	r1, sp
+ 164 00d0 FFF7FEFF 		bl	ff_copy
+ 165              	.LVL19:
+ 166              	.L1:
+ 105:strong-arm\src\ecdsa/ecdsa.c **** }
+ 167              		.loc 1 105 0
+ 168 00d4 29B0     		add	sp, sp, #164
+ 169              		@ sp needed
+ 170              	.LVL20:
+ 171              	.LVL21:
+ 172 00d6 F0BD     		pop	{r4, r5, r6, r7, pc}
+ 173              	.L5:
+ 174              		.align	2
+ 175              	.L4:
+ 176 00d8 00000000 		.word	.LANCHOR0
+ 177              		.cfi_endproc
+ 178              	.LFE1:
+ 179              		.size	ec_double, .-ec_double
+ 180              		.section	.text.ec_add,"ax",%progbits
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqCnWHK.s 			page 6
+
+
+ 181              		.align	2
+ 182              		.global	ec_add
+ 183              		.code	16
+ 184              		.thumb_func
+ 185              		.type	ec_add, %function
+ 186              	ec_add:
+ 187              	.LFB0:
+  19:strong-arm\src\ecdsa/ecdsa.c **** 	FF_NUM slope, tmp, tmp1;
+ 188              		.loc 1 19 0
+ 189              		.cfi_startproc
+ 190              		@ args = 0, pretend = 0, frame = 168
+ 191              		@ frame_needed = 0, uses_anonymous_args = 0
+ 192              	.LVL22:
+ 193 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 194              		.cfi_def_cfa_offset 20
+ 195              		.cfi_offset 4, -20
+ 196              		.cfi_offset 5, -16
+ 197              		.cfi_offset 6, -12
+ 198              		.cfi_offset 7, -8
+ 199              		.cfi_offset 14, -4
+ 200 0002 ABB0     		sub	sp, sp, #172
+ 201              		.cfi_def_cfa_offset 192
+ 202 0004 0600     		movs	r6, r0
+ 203 0006 0C00     		movs	r4, r1
+ 204 0008 1500     		movs	r5, r2
+  23:strong-arm\src\ecdsa/ecdsa.c **** 	{
+ 205              		.loc 1 23 0
+ 206 000a 0800     		movs	r0, r1
+ 207              	.LVL23:
+ 208 000c FFF7FEFF 		bl	ff_is_zero
+ 209              	.LVL24:
+ 210 0010 0028     		cmp	r0, #0
+ 211 0012 10D0     		beq	.L7
+  23:strong-arm\src\ecdsa/ecdsa.c **** 	{
+ 212              		.loc 1 23 0 is_stmt 0 discriminator 1
+ 213 0014 2000     		movs	r0, r4
+ 214 0016 2030     		adds	r0, r0, #32
+ 215 0018 FFF7FEFF 		bl	ff_is_zero
+ 216              	.LVL25:
+ 217 001c 0028     		cmp	r0, #0
+ 218 001e 0AD0     		beq	.L7
+  25:strong-arm\src\ecdsa/ecdsa.c **** 		ff_copy (&(out->y), &(B->y));
+ 219              		.loc 1 25 0 is_stmt 1
+ 220 0020 2900     		movs	r1, r5
+ 221 0022 3000     		movs	r0, r6
+ 222 0024 FFF7FEFF 		bl	ff_copy
+ 223              	.LVL26:
+  26:strong-arm\src\ecdsa/ecdsa.c **** 		return;
+ 224              		.loc 1 26 0
+ 225 0028 2900     		movs	r1, r5
+ 226 002a 2031     		adds	r1, r1, #32
+ 227 002c 3000     		movs	r0, r6
+ 228 002e 2030     		adds	r0, r0, #32
+ 229 0030 FFF7FEFF 		bl	ff_copy
+ 230              	.LVL27:
+  27:strong-arm\src\ecdsa/ecdsa.c **** 	}
+ 231              		.loc 1 27 0
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqCnWHK.s 			page 7
+
+
+ 232 0034 82E0     		b	.L6
+ 233              	.L7:
+  30:strong-arm\src\ecdsa/ecdsa.c **** 	{
+ 234              		.loc 1 30 0
+ 235 0036 2800     		movs	r0, r5
+ 236 0038 FFF7FEFF 		bl	ff_is_zero
+ 237              	.LVL28:
+ 238 003c 0028     		cmp	r0, #0
+ 239 003e 10D0     		beq	.L9
+  30:strong-arm\src\ecdsa/ecdsa.c **** 	{
+ 240              		.loc 1 30 0 is_stmt 0 discriminator 1
+ 241 0040 2800     		movs	r0, r5
+ 242 0042 2030     		adds	r0, r0, #32
+ 243 0044 FFF7FEFF 		bl	ff_is_zero
+ 244              	.LVL29:
+ 245 0048 0028     		cmp	r0, #0
+ 246 004a 0AD0     		beq	.L9
+  32:strong-arm\src\ecdsa/ecdsa.c **** 		ff_copy (&(out->y), &(A->y));
+ 247              		.loc 1 32 0 is_stmt 1
+ 248 004c 2100     		movs	r1, r4
+ 249 004e 3000     		movs	r0, r6
+ 250 0050 FFF7FEFF 		bl	ff_copy
+ 251              	.LVL30:
+  33:strong-arm\src\ecdsa/ecdsa.c **** 		return;
+ 252              		.loc 1 33 0
+ 253 0054 2100     		movs	r1, r4
+ 254 0056 2031     		adds	r1, r1, #32
+ 255 0058 3000     		movs	r0, r6
+ 256 005a 2030     		adds	r0, r0, #32
+ 257 005c FFF7FEFF 		bl	ff_copy
+ 258              	.LVL31:
+  34:strong-arm\src\ecdsa/ecdsa.c **** 	}
+ 259              		.loc 1 34 0
+ 260 0060 6CE0     		b	.L6
+ 261              	.L9:
+  37:strong-arm\src\ecdsa/ecdsa.c **** 	{
+ 262              		.loc 1 37 0
+ 263 0062 2900     		movs	r1, r5
+ 264 0064 2000     		movs	r0, r4
+ 265 0066 FFF7FEFF 		bl	ff_compare
+ 266              	.LVL32:
+ 267 006a 0028     		cmp	r0, #0
+ 268 006c 19D1     		bne	.L10
+  39:strong-arm\src\ecdsa/ecdsa.c **** 
+ 269              		.loc 1 39 0
+ 270 006e 2A00     		movs	r2, r5
+ 271 0070 2032     		adds	r2, r2, #32
+ 272 0072 2100     		movs	r1, r4
+ 273 0074 2031     		adds	r1, r1, #32
+ 274 0076 324B     		ldr	r3, .L13
+ 275 0078 1AA8     		add	r0, sp, #104
+ 276 007a FFF7FEFF 		bl	ff_add
+ 277              	.LVL33:
+  41:strong-arm\src\ecdsa/ecdsa.c **** 		{
+ 278              		.loc 1 41 0
+ 279 007e 1AA8     		add	r0, sp, #104
+ 280 0080 FFF7FEFF 		bl	ff_is_zero
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqCnWHK.s 			page 8
+
+
+ 281              	.LVL34:
+ 282 0084 0028     		cmp	r0, #0
+ 283 0086 07D0     		beq	.L11
+  44:strong-arm\src\ecdsa/ecdsa.c **** 			ff_zero (&(out->y));
+ 284              		.loc 1 44 0
+ 285 0088 3000     		movs	r0, r6
+ 286 008a FFF7FEFF 		bl	ff_zero
+ 287              	.LVL35:
+  45:strong-arm\src\ecdsa/ecdsa.c **** 			return;
+ 288              		.loc 1 45 0
+ 289 008e 3000     		movs	r0, r6
+ 290 0090 2030     		adds	r0, r0, #32
+ 291 0092 FFF7FEFF 		bl	ff_zero
+ 292              	.LVL36:
+  46:strong-arm\src\ecdsa/ecdsa.c **** 		}
+ 293              		.loc 1 46 0
+ 294 0096 51E0     		b	.L6
+ 295              	.L11:
+  50:strong-arm\src\ecdsa/ecdsa.c **** 			return;
+ 296              		.loc 1 50 0
+ 297 0098 3100     		movs	r1, r6
+ 298 009a 3000     		movs	r0, r6
+ 299 009c FFF7FEFF 		bl	ec_double
+ 300              	.LVL37:
+  51:strong-arm\src\ecdsa/ecdsa.c **** 		}
+ 301              		.loc 1 51 0
+ 302 00a0 4CE0     		b	.L6
+ 303              	.L10:
+  56:strong-arm\src\ecdsa/ecdsa.c **** 	ff_sub (&tmp1, &(B->x), &(A->x), &ec_p);
+ 304              		.loc 1 56 0
+ 305 00a2 2023     		movs	r3, #32
+ 306 00a4 9C46     		mov	ip, r3
+ 307 00a6 A444     		add	ip, ip, r4
+ 308 00a8 6246     		mov	r2, ip
+ 309 00aa 254F     		ldr	r7, .L13
+ 310 00ac 2900     		movs	r1, r5
+ 311 00ae 2031     		adds	r1, r1, #32
+ 312 00b0 3B00     		movs	r3, r7
+ 313 00b2 0192     		str	r2, [sp, #4]
+ 314 00b4 1AA8     		add	r0, sp, #104
+ 315 00b6 FFF7FEFF 		bl	ff_sub
+ 316              	.LVL38:
+  57:strong-arm\src\ecdsa/ecdsa.c **** 	ff_inv (&tmp1, &tmp1, &ec_p);
+ 317              		.loc 1 57 0
+ 318 00ba 3B00     		movs	r3, r7
+ 319 00bc 2200     		movs	r2, r4
+ 320 00be 2900     		movs	r1, r5
+ 321 00c0 12A8     		add	r0, sp, #72
+ 322 00c2 FFF7FEFF 		bl	ff_sub
+ 323              	.LVL39:
+  58:strong-arm\src\ecdsa/ecdsa.c **** 	ff_mul (&slope, &tmp, &tmp1, &ec_p);		// slope = (y2 - y1) / (x2 - x1)
+ 324              		.loc 1 58 0
+ 325 00c6 3A00     		movs	r2, r7
+ 326 00c8 12A9     		add	r1, sp, #72
+ 327 00ca 0800     		movs	r0, r1
+ 328 00cc FFF7FEFF 		bl	ff_inv
+ 329              	.LVL40:
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqCnWHK.s 			page 9
+
+
+  59:strong-arm\src\ecdsa/ecdsa.c **** 
+ 330              		.loc 1 59 0
+ 331 00d0 3B00     		movs	r3, r7
+ 332 00d2 12A9     		add	r1, sp, #72
+ 333 00d4 0A00     		movs	r2, r1
+ 334 00d6 1AA9     		add	r1, sp, #104
+ 335 00d8 22A8     		add	r0, sp, #136
+ 336 00da FFF7FEFF 		bl	ff_mul
+ 337              	.LVL41:
+  62:strong-arm\src\ecdsa/ecdsa.c **** 	ff_sub (&x3, &tmp, &(A->x), &ec_p);
+ 338              		.loc 1 62 0
+ 339 00de 3B00     		movs	r3, r7
+ 340 00e0 22A9     		add	r1, sp, #136
+ 341 00e2 0A00     		movs	r2, r1
+ 342 00e4 1AA8     		add	r0, sp, #104
+ 343 00e6 FFF7FEFF 		bl	ff_mul
+ 344              	.LVL42:
+  63:strong-arm\src\ecdsa/ecdsa.c **** 	ff_sub (&x3, &x3, &(B->x), &ec_p);	// out.x = slope^2 - x1 - x2
+ 345              		.loc 1 63 0
+ 346 00ea 3B00     		movs	r3, r7
+ 347 00ec 2200     		movs	r2, r4
+ 348 00ee 1AA9     		add	r1, sp, #104
+ 349 00f0 0AA8     		add	r0, sp, #40
+ 350 00f2 FFF7FEFF 		bl	ff_sub
+ 351              	.LVL43:
+  64:strong-arm\src\ecdsa/ecdsa.c **** 
+ 352              		.loc 1 64 0
+ 353 00f6 3B00     		movs	r3, r7
+ 354 00f8 2A00     		movs	r2, r5
+ 355 00fa 0AA9     		add	r1, sp, #40
+ 356 00fc 0800     		movs	r0, r1
+ 357 00fe FFF7FEFF 		bl	ff_sub
+ 358              	.LVL44:
+  67:strong-arm\src\ecdsa/ecdsa.c **** 	ff_mul (&tmp, &slope, &tmp, &ec_p);
+ 359              		.loc 1 67 0
+ 360 0102 3B00     		movs	r3, r7
+ 361 0104 0AA9     		add	r1, sp, #40
+ 362 0106 0A00     		movs	r2, r1
+ 363 0108 2100     		movs	r1, r4
+ 364 010a 1AA8     		add	r0, sp, #104
+ 365 010c FFF7FEFF 		bl	ff_sub
+ 366              	.LVL45:
+  68:strong-arm\src\ecdsa/ecdsa.c **** 	ff_sub (&y3, &tmp, &(A->y), &ec_p);	// out.y = slope * (x1 - out.x) - y1
+ 367              		.loc 1 68 0
+ 368 0110 3B00     		movs	r3, r7
+ 369 0112 1AA9     		add	r1, sp, #104
+ 370 0114 0A00     		movs	r2, r1
+ 371 0116 22A9     		add	r1, sp, #136
+ 372 0118 1000     		movs	r0, r2
+ 373 011a FFF7FEFF 		bl	ff_mul
+ 374              	.LVL46:
+  69:strong-arm\src\ecdsa/ecdsa.c **** 
+ 375              		.loc 1 69 0
+ 376 011e 3B00     		movs	r3, r7
+ 377 0120 019A     		ldr	r2, [sp, #4]
+ 378 0122 1AA9     		add	r1, sp, #104
+ 379 0124 02A8     		add	r0, sp, #8
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqCnWHK.s 			page 10
+
+
+ 380 0126 FFF7FEFF 		bl	ff_sub
+ 381              	.LVL47:
+  71:strong-arm\src\ecdsa/ecdsa.c **** 	ff_copy (&(out->y), &y3);
+ 382              		.loc 1 71 0
+ 383 012a 0AA9     		add	r1, sp, #40
+ 384 012c 3000     		movs	r0, r6
+ 385 012e FFF7FEFF 		bl	ff_copy
+ 386              	.LVL48:
+  72:strong-arm\src\ecdsa/ecdsa.c **** }
+ 387              		.loc 1 72 0
+ 388 0132 3000     		movs	r0, r6
+ 389 0134 2030     		adds	r0, r0, #32
+ 390 0136 02A9     		add	r1, sp, #8
+ 391 0138 FFF7FEFF 		bl	ff_copy
+ 392              	.LVL49:
+ 393              	.L6:
+  73:strong-arm\src\ecdsa/ecdsa.c **** 
+ 394              		.loc 1 73 0
+ 395 013c 2BB0     		add	sp, sp, #172
+ 396              		@ sp needed
+ 397              	.LVL50:
+ 398              	.LVL51:
+ 399              	.LVL52:
+ 400 013e F0BD     		pop	{r4, r5, r6, r7, pc}
+ 401              	.L14:
+ 402              		.align	2
+ 403              	.L13:
+ 404 0140 00000000 		.word	.LANCHOR0
+ 405              		.cfi_endproc
+ 406              	.LFE0:
+ 407              		.size	ec_add, .-ec_add
+ 408              		.section	.text.ec_mul,"ax",%progbits
+ 409              		.align	2
+ 410              		.global	ec_mul
+ 411              		.code	16
+ 412              		.thumb_func
+ 413              		.type	ec_mul, %function
+ 414              	ec_mul:
+ 415              	.LFB2:
+ 106:strong-arm\src\ecdsa/ecdsa.c **** 
+ 107:strong-arm\src\ecdsa/ecdsa.c **** 
+ 108:strong-arm\src\ecdsa/ecdsa.c **** void ec_mul (EC_POINT *const out, FF_NUM const *const k, EC_POINT const *const P)
+ 109:strong-arm\src\ecdsa/ecdsa.c **** {
+ 416              		.loc 1 109 0
+ 417              		.cfi_startproc
+ 418              		@ args = 0, pretend = 0, frame = 64
+ 419              		@ frame_needed = 0, uses_anonymous_args = 0
+ 420              	.LVL53:
+ 421 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 422              		.cfi_def_cfa_offset 20
+ 423              		.cfi_offset 4, -20
+ 424              		.cfi_offset 5, -16
+ 425              		.cfi_offset 6, -12
+ 426              		.cfi_offset 7, -8
+ 427              		.cfi_offset 14, -4
+ 428 0002 91B0     		sub	sp, sp, #68
+ 429              		.cfi_def_cfa_offset 88
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqCnWHK.s 			page 11
+
+
+ 430 0004 0600     		movs	r6, r0
+ 431 0006 0F00     		movs	r7, r1
+ 432 0008 1500     		movs	r5, r2
+ 110:strong-arm\src\ecdsa/ecdsa.c **** 	EC_POINT Q;
+ 111:strong-arm\src\ecdsa/ecdsa.c **** 
+ 112:strong-arm\src\ecdsa/ecdsa.c **** 	ff_zero (&(Q.x));
+ 433              		.loc 1 112 0
+ 434 000a 6846     		mov	r0, sp
+ 435              	.LVL54:
+ 436 000c FFF7FEFF 		bl	ff_zero
+ 437              	.LVL55:
+ 113:strong-arm\src\ecdsa/ecdsa.c **** 	ff_zero (&(Q.y));
+ 438              		.loc 1 113 0
+ 439 0010 08A8     		add	r0, sp, #32
+ 440 0012 FFF7FEFF 		bl	ff_zero
+ 441              	.LVL56:
+ 442              	.LBB2:
+ 114:strong-arm\src\ecdsa/ecdsa.c **** 
+ 115:strong-arm\src\ecdsa/ecdsa.c **** 	for (uint32_t i = 255; true; --i)
+ 443              		.loc 1 115 0
+ 444 0016 FF24     		movs	r4, #255
+ 445              	.LVL57:
+ 446              	.L18:
+ 116:strong-arm\src\ecdsa/ecdsa.c **** 	{
+ 117:strong-arm\src\ecdsa/ecdsa.c **** 		ec_double (&Q, &Q);
+ 447              		.loc 1 117 0
+ 448 0018 6946     		mov	r1, sp
+ 449 001a 6846     		mov	r0, sp
+ 450 001c FFF7FEFF 		bl	ec_double
+ 451              	.LVL58:
+ 118:strong-arm\src\ecdsa/ecdsa.c **** 
+ 119:strong-arm\src\ecdsa/ecdsa.c **** 		if ((k->z[i>>5] >> (i&31)) & 1)
+ 452              		.loc 1 119 0
+ 453 0020 6309     		lsrs	r3, r4, #5
+ 454 0022 9B00     		lsls	r3, r3, #2
+ 455 0024 DB59     		ldr	r3, [r3, r7]
+ 456 0026 1F22     		movs	r2, #31
+ 457 0028 2240     		ands	r2, r4
+ 458 002a D340     		lsrs	r3, r3, r2
+ 459 002c DB07     		lsls	r3, r3, #31
+ 460 002e 04D5     		bpl	.L16
+ 120:strong-arm\src\ecdsa/ecdsa.c **** 			ec_add (&Q, &Q, P);
+ 461              		.loc 1 120 0
+ 462 0030 2A00     		movs	r2, r5
+ 463 0032 6946     		mov	r1, sp
+ 464 0034 6846     		mov	r0, sp
+ 465 0036 FFF7FEFF 		bl	ec_add
+ 466              	.LVL59:
+ 467              	.L16:
+ 121:strong-arm\src\ecdsa/ecdsa.c **** 		
+ 122:strong-arm\src\ecdsa/ecdsa.c **** 		if (i == 0)
+ 468              		.loc 1 122 0
+ 469 003a 002C     		cmp	r4, #0
+ 470 003c 01D0     		beq	.L17
+ 115:strong-arm\src\ecdsa/ecdsa.c **** 	{
+ 471              		.loc 1 115 0
+ 472 003e 013C     		subs	r4, r4, #1
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqCnWHK.s 			page 12
+
+
+ 473              	.LVL60:
+ 123:strong-arm\src\ecdsa/ecdsa.c **** 			break;
+ 124:strong-arm\src\ecdsa/ecdsa.c **** 	}
+ 474              		.loc 1 124 0
+ 475 0040 EAE7     		b	.L18
+ 476              	.L17:
+ 477              	.LBE2:
+ 125:strong-arm\src\ecdsa/ecdsa.c **** 	
+ 126:strong-arm\src\ecdsa/ecdsa.c **** 	ff_copy (&(out->x), &(Q.x));
+ 478              		.loc 1 126 0
+ 479 0042 6946     		mov	r1, sp
+ 480 0044 3000     		movs	r0, r6
+ 481 0046 FFF7FEFF 		bl	ff_copy
+ 482              	.LVL61:
+ 127:strong-arm\src\ecdsa/ecdsa.c **** 	ff_copy (&(out->y), &(Q.y));
+ 483              		.loc 1 127 0
+ 484 004a 3000     		movs	r0, r6
+ 485 004c 2030     		adds	r0, r0, #32
+ 486 004e 08A9     		add	r1, sp, #32
+ 487 0050 FFF7FEFF 		bl	ff_copy
+ 488              	.LVL62:
+ 128:strong-arm\src\ecdsa/ecdsa.c **** }
+ 489              		.loc 1 128 0
+ 490 0054 11B0     		add	sp, sp, #68
+ 491              		@ sp needed
+ 492              	.LVL63:
+ 493              	.LVL64:
+ 494              	.LVL65:
+ 495              	.LVL66:
+ 496 0056 F0BD     		pop	{r4, r5, r6, r7, pc}
+ 497              		.cfi_endproc
+ 498              	.LFE2:
+ 499              		.size	ec_mul, .-ec_mul
+ 500              		.section	.text.ec_create_key,"ax",%progbits
+ 501              		.align	2
+ 502              		.global	ec_create_key
+ 503              		.code	16
+ 504              		.thumb_func
+ 505              		.type	ec_create_key, %function
+ 506              	ec_create_key:
+ 507              	.LFB3:
+ 129:strong-arm\src\ecdsa/ecdsa.c **** 
+ 130:strong-arm\src\ecdsa/ecdsa.c **** 
+ 131:strong-arm\src\ecdsa/ecdsa.c **** void ec_create_key (FF_NUM *const ret_privkey, EC_POINT *const ret_pubkey)
+ 132:strong-arm\src\ecdsa/ecdsa.c **** {
+ 508              		.loc 1 132 0
+ 509              		.cfi_startproc
+ 510              		@ args = 0, pretend = 0, frame = 0
+ 511              		@ frame_needed = 0, uses_anonymous_args = 0
+ 512              	.LVL67:
+ 513 0000 70B5     		push	{r4, r5, r6, lr}
+ 514              		.cfi_def_cfa_offset 16
+ 515              		.cfi_offset 4, -16
+ 516              		.cfi_offset 5, -12
+ 517              		.cfi_offset 6, -8
+ 518              		.cfi_offset 14, -4
+ 519 0002 0500     		movs	r5, r0
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqCnWHK.s 			page 13
+
+
+ 520 0004 0E00     		movs	r6, r1
+ 133:strong-arm\src\ecdsa/ecdsa.c **** 	ff_rand (ret_privkey, &ec_n);
+ 521              		.loc 1 133 0
+ 522 0006 064C     		ldr	r4, .L20
+ 523 0008 2100     		movs	r1, r4
+ 524              	.LVL68:
+ 525 000a 2031     		adds	r1, r1, #32
+ 526 000c FFF7FEFF 		bl	ff_rand
+ 527              	.LVL69:
+ 134:strong-arm\src\ecdsa/ecdsa.c **** 	ec_mul (ret_pubkey, ret_privkey, &ec_G);
+ 528              		.loc 1 134 0
+ 529 0010 2200     		movs	r2, r4
+ 530 0012 4032     		adds	r2, r2, #64
+ 531 0014 2900     		movs	r1, r5
+ 532 0016 3000     		movs	r0, r6
+ 533 0018 FFF7FEFF 		bl	ec_mul
+ 534              	.LVL70:
+ 135:strong-arm\src\ecdsa/ecdsa.c **** }
+ 535              		.loc 1 135 0
+ 536              		@ sp needed
+ 537              	.LVL71:
+ 538              	.LVL72:
+ 539 001c 70BD     		pop	{r4, r5, r6, pc}
+ 540              	.L21:
+ 541 001e C046     		.align	2
+ 542              	.L20:
+ 543 0020 00000000 		.word	.LANCHOR0
+ 544              		.cfi_endproc
+ 545              	.LFE3:
+ 546              		.size	ec_create_key, .-ec_create_key
+ 547              		.section	.text.ec_sign,"ax",%progbits
+ 548              		.align	2
+ 549              		.global	ec_sign
+ 550              		.code	16
+ 551              		.thumb_func
+ 552              		.type	ec_sign, %function
+ 553              	ec_sign:
+ 554              	.LFB4:
+ 136:strong-arm\src\ecdsa/ecdsa.c **** 
+ 137:strong-arm\src\ecdsa/ecdsa.c **** 
+ 138:strong-arm\src\ecdsa/ecdsa.c **** // Sign z, the 256-bit HASH of a message m, with d, the private key.
+ 139:strong-arm\src\ecdsa/ecdsa.c **** // Returns a pair (r,s), which is the signature.
+ 140:strong-arm\src\ecdsa/ecdsa.c **** bool ec_sign (FF_NUM *const out_r, FF_NUM *const out_s, FF_NUM const *const z, FF_NUM const *const 
+ 141:strong-arm\src\ecdsa/ecdsa.c **** {
+ 555              		.loc 1 141 0
+ 556              		.cfi_startproc
+ 557              		@ args = 0, pretend = 0, frame = 168
+ 558              		@ frame_needed = 0, uses_anonymous_args = 0
+ 559              	.LVL73:
+ 560 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 561              		.cfi_def_cfa_offset 20
+ 562              		.cfi_offset 4, -20
+ 563              		.cfi_offset 5, -16
+ 564              		.cfi_offset 6, -12
+ 565              		.cfi_offset 7, -8
+ 566              		.cfi_offset 14, -4
+ 567 0002 ABB0     		sub	sp, sp, #172
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqCnWHK.s 			page 14
+
+
+ 568              		.cfi_def_cfa_offset 192
+ 569 0004 0090     		str	r0, [sp]
+ 570 0006 0191     		str	r1, [sp, #4]
+ 571 0008 1600     		movs	r6, r2
+ 572 000a 1D00     		movs	r5, r3
+ 142:strong-arm\src\ecdsa/ecdsa.c **** 	FF_NUM k, r, s;
+ 143:strong-arm\src\ecdsa/ecdsa.c **** 	EC_POINT kG;
+ 144:strong-arm\src\ecdsa/ecdsa.c **** 
+ 145:strong-arm\src\ecdsa/ecdsa.c **** 	// Private key must be within range [1, n - 1]
+ 146:strong-arm\src\ecdsa/ecdsa.c **** 	if ((ff_is_zero (d)) || (ff_compare (d, &ec_n) >= 0))
+ 573              		.loc 1 146 0
+ 574 000c 1800     		movs	r0, r3
+ 575              	.LVL74:
+ 576 000e FFF7FEFF 		bl	ff_is_zero
+ 577              	.LVL75:
+ 578 0012 041E     		subs	r4, r0, #0
+ 579 0014 49D1     		bne	.L26
+ 580              		.loc 1 146 0 is_stmt 0 discriminator 1
+ 581 0016 2749     		ldr	r1, .L27
+ 582 0018 2031     		adds	r1, r1, #32
+ 583 001a 2800     		movs	r0, r5
+ 584 001c FFF7FEFF 		bl	ff_compare
+ 585              	.LVL76:
+ 586 0020 0028     		cmp	r0, #0
+ 587 0022 43DA     		bge	.L23
+ 588              	.L24:
+ 147:strong-arm\src\ecdsa/ecdsa.c **** 		return false;
+ 148:strong-arm\src\ecdsa/ecdsa.c **** 	
+ 149:strong-arm\src\ecdsa/ecdsa.c **** 	while (1)
+ 150:strong-arm\src\ecdsa/ecdsa.c **** 	{
+ 151:strong-arm\src\ecdsa/ecdsa.c **** 		ff_rand (&k, &ec_n);
+ 589              		.loc 1 151 0 is_stmt 1
+ 590 0024 234F     		ldr	r7, .L27
+ 591 0026 3C00     		movs	r4, r7
+ 592 0028 2034     		adds	r4, r4, #32
+ 593 002a 2100     		movs	r1, r4
+ 594 002c 22A8     		add	r0, sp, #136
+ 595 002e FFF7FEFF 		bl	ff_rand
+ 596              	.LVL77:
+ 152:strong-arm\src\ecdsa/ecdsa.c **** 		ec_mul (&kG, &k, &ec_G);
+ 597              		.loc 1 152 0
+ 598 0032 3A00     		movs	r2, r7
+ 599 0034 4032     		adds	r2, r2, #64
+ 600 0036 22A9     		add	r1, sp, #136
+ 601 0038 02A8     		add	r0, sp, #8
+ 602 003a FFF7FEFF 		bl	ec_mul
+ 603              	.LVL78:
+ 153:strong-arm\src\ecdsa/ecdsa.c **** 		ff_zero (&r);
+ 604              		.loc 1 153 0
+ 605 003e 1AA8     		add	r0, sp, #104
+ 606 0040 FFF7FEFF 		bl	ff_zero
+ 607              	.LVL79:
+ 154:strong-arm\src\ecdsa/ecdsa.c **** 		ff_add (&r, &r, &(kG.x), &ec_n);	// r = kG.x (mod n)
+ 608              		.loc 1 154 0
+ 609 0044 2300     		movs	r3, r4
+ 610 0046 02AA     		add	r2, sp, #8
+ 611 0048 1AA9     		add	r1, sp, #104
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqCnWHK.s 			page 15
+
+
+ 612 004a 0800     		movs	r0, r1
+ 613 004c FFF7FEFF 		bl	ff_add
+ 614              	.LVL80:
+ 155:strong-arm\src\ecdsa/ecdsa.c **** 		
+ 156:strong-arm\src\ecdsa/ecdsa.c **** 		if (ff_is_zero (&r))
+ 615              		.loc 1 156 0
+ 616 0050 1AA8     		add	r0, sp, #104
+ 617 0052 FFF7FEFF 		bl	ff_is_zero
+ 618              	.LVL81:
+ 619 0056 0028     		cmp	r0, #0
+ 620 0058 E4D1     		bne	.L24
+ 157:strong-arm\src\ecdsa/ecdsa.c **** 			continue;
+ 158:strong-arm\src\ecdsa/ecdsa.c **** 		
+ 159:strong-arm\src\ecdsa/ecdsa.c **** 		ff_inv (&k, &k, &ec_n);
+ 621              		.loc 1 159 0
+ 622 005a 164C     		ldr	r4, .L27
+ 623 005c 2034     		adds	r4, r4, #32
+ 624 005e 2200     		movs	r2, r4
+ 625 0060 22A9     		add	r1, sp, #136
+ 626 0062 0800     		movs	r0, r1
+ 627 0064 FFF7FEFF 		bl	ff_inv
+ 628              	.LVL82:
+ 160:strong-arm\src\ecdsa/ecdsa.c **** 		ff_mul (&s, &r, d, &ec_n);
+ 629              		.loc 1 160 0
+ 630 0068 2300     		movs	r3, r4
+ 631 006a 2A00     		movs	r2, r5
+ 632 006c 1AA9     		add	r1, sp, #104
+ 633 006e 12A8     		add	r0, sp, #72
+ 634 0070 FFF7FEFF 		bl	ff_mul
+ 635              	.LVL83:
+ 161:strong-arm\src\ecdsa/ecdsa.c **** 		ff_add (&s, z, &s, &ec_n);
+ 636              		.loc 1 161 0
+ 637 0074 2300     		movs	r3, r4
+ 638 0076 12AA     		add	r2, sp, #72
+ 639 0078 3100     		movs	r1, r6
+ 640 007a 1000     		movs	r0, r2
+ 641 007c FFF7FEFF 		bl	ff_add
+ 642              	.LVL84:
+ 162:strong-arm\src\ecdsa/ecdsa.c **** 		ff_mul (&s, &k, &s, &ec_n);
+ 643              		.loc 1 162 0
+ 644 0080 2300     		movs	r3, r4
+ 645 0082 12AA     		add	r2, sp, #72
+ 646 0084 22A9     		add	r1, sp, #136
+ 647 0086 1000     		movs	r0, r2
+ 648 0088 FFF7FEFF 		bl	ff_mul
+ 649              	.LVL85:
+ 163:strong-arm\src\ecdsa/ecdsa.c **** 		
+ 164:strong-arm\src\ecdsa/ecdsa.c **** 		if (ff_is_zero (&s))
+ 650              		.loc 1 164 0
+ 651 008c 12A8     		add	r0, sp, #72
+ 652 008e FFF7FEFF 		bl	ff_is_zero
+ 653              	.LVL86:
+ 654 0092 0028     		cmp	r0, #0
+ 655 0094 C6D1     		bne	.L24
+ 165:strong-arm\src\ecdsa/ecdsa.c **** 			continue;
+ 166:strong-arm\src\ecdsa/ecdsa.c **** 		
+ 167:strong-arm\src\ecdsa/ecdsa.c **** 		break;
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqCnWHK.s 			page 16
+
+
+ 168:strong-arm\src\ecdsa/ecdsa.c **** 	}
+ 169:strong-arm\src\ecdsa/ecdsa.c **** 
+ 170:strong-arm\src\ecdsa/ecdsa.c **** 	ff_copy (out_r, &r);
+ 656              		.loc 1 170 0
+ 657 0096 1AA9     		add	r1, sp, #104
+ 658 0098 0098     		ldr	r0, [sp]
+ 659 009a FFF7FEFF 		bl	ff_copy
+ 660              	.LVL87:
+ 171:strong-arm\src\ecdsa/ecdsa.c **** 	ff_copy (out_s, &s);
+ 661              		.loc 1 171 0
+ 662 009e 12A9     		add	r1, sp, #72
+ 663 00a0 0198     		ldr	r0, [sp, #4]
+ 664 00a2 FFF7FEFF 		bl	ff_copy
+ 665              	.LVL88:
+ 172:strong-arm\src\ecdsa/ecdsa.c **** 
+ 173:strong-arm\src\ecdsa/ecdsa.c **** 	return true;
+ 666              		.loc 1 173 0
+ 667 00a6 0124     		movs	r4, #1
+ 668 00a8 00E0     		b	.L23
+ 669              	.L26:
+ 147:strong-arm\src\ecdsa/ecdsa.c **** 	
+ 670              		.loc 1 147 0
+ 671 00aa 0024     		movs	r4, #0
+ 672              	.L23:
+ 174:strong-arm\src\ecdsa/ecdsa.c **** }
+ 673              		.loc 1 174 0
+ 674 00ac 2000     		movs	r0, r4
+ 675 00ae 2BB0     		add	sp, sp, #172
+ 676              	.LVL89:
+ 677              		@ sp needed
+ 678              	.LVL90:
+ 679              	.LVL91:
+ 680 00b0 F0BD     		pop	{r4, r5, r6, r7, pc}
+ 681              	.L28:
+ 682 00b2 C046     		.align	2
+ 683              	.L27:
+ 684 00b4 00000000 		.word	.LANCHOR0
+ 685              		.cfi_endproc
+ 686              	.LFE4:
+ 687              		.size	ec_sign, .-ec_sign
+ 688              		.section	.text.ec_on_curve,"ax",%progbits
+ 689              		.align	2
+ 690              		.global	ec_on_curve
+ 691              		.code	16
+ 692              		.thumb_func
+ 693              		.type	ec_on_curve, %function
+ 694              	ec_on_curve:
+ 695              	.LFB5:
+ 175:strong-arm\src\ecdsa/ecdsa.c **** 
+ 176:strong-arm\src\ecdsa/ecdsa.c **** bool ec_on_curve (EC_POINT const *const P)
+ 177:strong-arm\src\ecdsa/ecdsa.c **** {
+ 696              		.loc 1 177 0
+ 697              		.cfi_startproc
+ 698              		@ args = 0, pretend = 0, frame = 64
+ 699              		@ frame_needed = 0, uses_anonymous_args = 0
+ 700              	.LVL92:
+ 701 0000 70B5     		push	{r4, r5, r6, lr}
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqCnWHK.s 			page 17
+
+
+ 702              		.cfi_def_cfa_offset 16
+ 703              		.cfi_offset 4, -16
+ 704              		.cfi_offset 5, -12
+ 705              		.cfi_offset 6, -8
+ 706              		.cfi_offset 14, -4
+ 707 0002 90B0     		sub	sp, sp, #64
+ 708              		.cfi_def_cfa_offset 80
+ 709 0004 0400     		movs	r4, r0
+ 178:strong-arm\src\ecdsa/ecdsa.c **** 	// y^2 = x^3 + a * x + b (mod p)
+ 179:strong-arm\src\ecdsa/ecdsa.c **** 	FF_NUM tmp, y2;
+ 180:strong-arm\src\ecdsa/ecdsa.c **** 
+ 181:strong-arm\src\ecdsa/ecdsa.c **** 	if (ff_compare (&(P->x), &ec_p) >= 0)
+ 710              		.loc 1 181 0
+ 711 0006 1A49     		ldr	r1, .L34
+ 712 0008 FFF7FEFF 		bl	ff_compare
+ 713              	.LVL93:
+ 714 000c 0028     		cmp	r0, #0
+ 715 000e 28DA     		bge	.L31
+ 182:strong-arm\src\ecdsa/ecdsa.c **** 		return false;
+ 183:strong-arm\src\ecdsa/ecdsa.c **** 
+ 184:strong-arm\src\ecdsa/ecdsa.c **** 	if (ff_compare (&(P->y), &ec_p) >= 0)
+ 716              		.loc 1 184 0
+ 717 0010 2500     		movs	r5, r4
+ 718 0012 2035     		adds	r5, r5, #32
+ 719 0014 1649     		ldr	r1, .L34
+ 720 0016 2800     		movs	r0, r5
+ 721 0018 FFF7FEFF 		bl	ff_compare
+ 722              	.LVL94:
+ 723 001c 0028     		cmp	r0, #0
+ 724 001e 22DA     		bge	.L32
+ 185:strong-arm\src\ecdsa/ecdsa.c **** 		return false;
+ 186:strong-arm\src\ecdsa/ecdsa.c **** 
+ 187:strong-arm\src\ecdsa/ecdsa.c **** 	ff_mul (&tmp, &(P->x), &(P->x), &ec_p);
+ 725              		.loc 1 187 0
+ 726 0020 134E     		ldr	r6, .L34
+ 727 0022 3300     		movs	r3, r6
+ 728 0024 2200     		movs	r2, r4
+ 729 0026 2100     		movs	r1, r4
+ 730 0028 08A8     		add	r0, sp, #32
+ 731 002a FFF7FEFF 		bl	ff_mul
+ 732              	.LVL95:
+ 188:strong-arm\src\ecdsa/ecdsa.c **** 	ff_mul (&tmp, &tmp, &(P->x), &ec_p);	// tmp = x^3
+ 733              		.loc 1 188 0
+ 734 002e 3300     		movs	r3, r6
+ 735 0030 2200     		movs	r2, r4
+ 736 0032 08A9     		add	r1, sp, #32
+ 737 0034 0800     		movs	r0, r1
+ 738 0036 FFF7FEFF 		bl	ff_mul
+ 739              	.LVL96:
+ 189:strong-arm\src\ecdsa/ecdsa.c **** 	ff_add (&tmp, &tmp, &ec_b, &ec_p);	// tmp = x^3 + b
+ 740              		.loc 1 189 0
+ 741 003a 3300     		movs	r3, r6
+ 742 003c 0D4A     		ldr	r2, .L34+4
+ 743 003e 08A9     		add	r1, sp, #32
+ 744 0040 0800     		movs	r0, r1
+ 745 0042 FFF7FEFF 		bl	ff_add
+ 746              	.LVL97:
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqCnWHK.s 			page 18
+
+
+ 190:strong-arm\src\ecdsa/ecdsa.c **** 	ff_mul (&y2, &(P->y), &(P->y), &ec_p);	// y2 = y^2
+ 747              		.loc 1 190 0
+ 748 0046 3300     		movs	r3, r6
+ 749 0048 2A00     		movs	r2, r5
+ 750 004a 2900     		movs	r1, r5
+ 751 004c 6846     		mov	r0, sp
+ 752 004e FFF7FEFF 		bl	ff_mul
+ 753              	.LVL98:
+ 191:strong-arm\src\ecdsa/ecdsa.c **** 	
+ 192:strong-arm\src\ecdsa/ecdsa.c **** 	if (ff_compare (&y2, &tmp) != 0)
+ 754              		.loc 1 192 0
+ 755 0052 08A9     		add	r1, sp, #32
+ 756 0054 6846     		mov	r0, sp
+ 757 0056 FFF7FEFF 		bl	ff_compare
+ 758              	.LVL99:
+ 759 005a 0028     		cmp	r0, #0
+ 760 005c 05D0     		beq	.L33
+ 193:strong-arm\src\ecdsa/ecdsa.c **** 		return false;
+ 761              		.loc 1 193 0
+ 762 005e 0020     		movs	r0, #0
+ 763 0060 04E0     		b	.L30
+ 764              	.L31:
+ 182:strong-arm\src\ecdsa/ecdsa.c **** 
+ 765              		.loc 1 182 0
+ 766 0062 0020     		movs	r0, #0
+ 767 0064 02E0     		b	.L30
+ 768              	.L32:
+ 185:strong-arm\src\ecdsa/ecdsa.c **** 
+ 769              		.loc 1 185 0
+ 770 0066 0020     		movs	r0, #0
+ 771 0068 00E0     		b	.L30
+ 772              	.L33:
+ 194:strong-arm\src\ecdsa/ecdsa.c **** 
+ 195:strong-arm\src\ecdsa/ecdsa.c **** 	return true;
+ 773              		.loc 1 195 0
+ 774 006a 0120     		movs	r0, #1
+ 775              	.L30:
+ 196:strong-arm\src\ecdsa/ecdsa.c **** }
+ 776              		.loc 1 196 0
+ 777 006c 10B0     		add	sp, sp, #64
+ 778              		@ sp needed
+ 779              	.LVL100:
+ 780 006e 70BD     		pop	{r4, r5, r6, pc}
+ 781              	.L35:
+ 782              		.align	2
+ 783              	.L34:
+ 784 0070 00000000 		.word	.LANCHOR0
+ 785 0074 80000000 		.word	.LANCHOR1
+ 786              		.cfi_endproc
+ 787              	.LFE5:
+ 788              		.size	ec_on_curve, .-ec_on_curve
+ 789              		.section	.text.ec_verify,"ax",%progbits
+ 790              		.align	2
+ 791              		.global	ec_verify
+ 792              		.code	16
+ 793              		.thumb_func
+ 794              		.type	ec_verify, %function
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqCnWHK.s 			page 19
+
+
+ 795              	ec_verify:
+ 796              	.LFB6:
+ 197:strong-arm\src\ecdsa/ecdsa.c **** 
+ 198:strong-arm\src\ecdsa/ecdsa.c **** bool ec_verify (FF_NUM const *const z, EC_POINT const *const Q, FF_NUM const *const r, FF_NUM const
+ 199:strong-arm\src\ecdsa/ecdsa.c **** {
+ 797              		.loc 1 199 0
+ 798              		.cfi_startproc
+ 799              		@ args = 0, pretend = 0, frame = 264
+ 800              		@ frame_needed = 0, uses_anonymous_args = 0
+ 801              	.LVL101:
+ 802 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 803              		.cfi_def_cfa_offset 20
+ 804              		.cfi_offset 4, -20
+ 805              		.cfi_offset 5, -16
+ 806              		.cfi_offset 6, -12
+ 807              		.cfi_offset 7, -8
+ 808              		.cfi_offset 14, -4
+ 809 0002 4746     		mov	r7, r8
+ 810 0004 80B4     		push	{r7}
+ 811              		.cfi_def_cfa_offset 24
+ 812              		.cfi_offset 8, -24
+ 813 0006 C2B0     		sub	sp, sp, #264
+ 814              		.cfi_def_cfa_offset 288
+ 815 0008 0090     		str	r0, [sp]
+ 816 000a 0D00     		movs	r5, r1
+ 817 000c 1600     		movs	r6, r2
+ 818 000e 1F00     		movs	r7, r3
+ 200:strong-arm\src\ecdsa/ecdsa.c **** 	FF_NUM w, u1, u2, x1;
+ 201:strong-arm\src\ecdsa/ecdsa.c **** 	EC_POINT tmp, tmp2;
+ 202:strong-arm\src\ecdsa/ecdsa.c **** 
+ 203:strong-arm\src\ecdsa/ecdsa.c **** 	// Check that the public key Q is not Infinity
+ 204:strong-arm\src\ecdsa/ecdsa.c **** 	if ((ff_is_zero (&(Q->x))) && (ff_is_zero (&(Q->y))))
+ 819              		.loc 1 204 0
+ 820 0010 0800     		movs	r0, r1
+ 821              	.LVL102:
+ 822 0012 FFF7FEFF 		bl	ff_is_zero
+ 823              	.LVL103:
+ 824 0016 0028     		cmp	r0, #0
+ 825 0018 05D0     		beq	.L37
+ 826              		.loc 1 204 0 is_stmt 0 discriminator 1
+ 827 001a 2800     		movs	r0, r5
+ 828 001c 2030     		adds	r0, r0, #32
+ 829 001e FFF7FEFF 		bl	ff_is_zero
+ 830              	.LVL104:
+ 831 0022 0028     		cmp	r0, #0
+ 832 0024 62D1     		bne	.L39
+ 833              	.L37:
+ 205:strong-arm\src\ecdsa/ecdsa.c **** 		return false;
+ 206:strong-arm\src\ecdsa/ecdsa.c **** 
+ 207:strong-arm\src\ecdsa/ecdsa.c **** 	// Check that the public key Q is on the curve
+ 208:strong-arm\src\ecdsa/ecdsa.c **** 	if ((!ec_on_curve (Q)))
+ 834              		.loc 1 208 0 is_stmt 1
+ 835 0026 2800     		movs	r0, r5
+ 836 0028 FFF7FEFF 		bl	ec_on_curve
+ 837              	.LVL105:
+ 838 002c 041E     		subs	r4, r0, #0
+ 839 002e 66D0     		beq	.L38
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqCnWHK.s 			page 20
+
+
+ 209:strong-arm\src\ecdsa/ecdsa.c **** 		return false;
+ 210:strong-arm\src\ecdsa/ecdsa.c **** 
+ 211:strong-arm\src\ecdsa/ecdsa.c **** 	// Check that nQ == Infinity
+ 212:strong-arm\src\ecdsa/ecdsa.c **** 	ec_mul (&tmp, &ec_n, Q);
+ 840              		.loc 1 212 0
+ 841 0030 2A00     		movs	r2, r5
+ 842 0032 3549     		ldr	r1, .L44
+ 843 0034 2031     		adds	r1, r1, #32
+ 844 0036 12A8     		add	r0, sp, #72
+ 845 0038 FFF7FEFF 		bl	ec_mul
+ 846              	.LVL106:
+ 213:strong-arm\src\ecdsa/ecdsa.c **** 	if ((!ff_is_zero (&(tmp.x))) || (!ff_is_zero (&(tmp.y))))
+ 847              		.loc 1 213 0
+ 848 003c 12A8     		add	r0, sp, #72
+ 849 003e FFF7FEFF 		bl	ff_is_zero
+ 850              	.LVL107:
+ 851 0042 041E     		subs	r4, r0, #0
+ 852 0044 5BD0     		beq	.L38
+ 853              		.loc 1 213 0 is_stmt 0 discriminator 1
+ 854 0046 1AA8     		add	r0, sp, #104
+ 855 0048 FFF7FEFF 		bl	ff_is_zero
+ 856              	.LVL108:
+ 857 004c 041E     		subs	r4, r0, #0
+ 858 004e 56D0     		beq	.L38
+ 214:strong-arm\src\ecdsa/ecdsa.c **** 		return false;
+ 215:strong-arm\src\ecdsa/ecdsa.c **** 
+ 216:strong-arm\src\ecdsa/ecdsa.c **** 	// Check that r and s are in the range [1, n - 1]
+ 217:strong-arm\src\ecdsa/ecdsa.c **** 	if ((ff_is_zero (r)) || (ff_is_zero (s)))
+ 859              		.loc 1 217 0 is_stmt 1
+ 860 0050 3000     		movs	r0, r6
+ 861 0052 FFF7FEFF 		bl	ff_is_zero
+ 862              	.LVL109:
+ 863 0056 8046     		mov	r8, r0
+ 864 0058 0028     		cmp	r0, #0
+ 865 005a 49D1     		bne	.L40
+ 866              		.loc 1 217 0 is_stmt 0 discriminator 1
+ 867 005c 3800     		movs	r0, r7
+ 868 005e FFF7FEFF 		bl	ff_is_zero
+ 869              	.LVL110:
+ 870 0062 0190     		str	r0, [sp, #4]
+ 871 0064 0028     		cmp	r0, #0
+ 872 0066 45D1     		bne	.L41
+ 218:strong-arm\src\ecdsa/ecdsa.c **** 		return false;
+ 219:strong-arm\src\ecdsa/ecdsa.c **** 
+ 220:strong-arm\src\ecdsa/ecdsa.c **** 	if ((ff_compare (r, &ec_n) >= 0) || (ff_compare (s, &ec_n) >= 0))
+ 873              		.loc 1 220 0 is_stmt 1
+ 874 0068 2749     		ldr	r1, .L44
+ 875 006a 2031     		adds	r1, r1, #32
+ 876 006c 3000     		movs	r0, r6
+ 877 006e FFF7FEFF 		bl	ff_compare
+ 878              	.LVL111:
+ 879 0072 0028     		cmp	r0, #0
+ 880 0074 40DA     		bge	.L42
+ 881              		.loc 1 220 0 is_stmt 0 discriminator 1
+ 882 0076 2449     		ldr	r1, .L44
+ 883 0078 2031     		adds	r1, r1, #32
+ 884 007a 3800     		movs	r0, r7
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqCnWHK.s 			page 21
+
+
+ 885 007c FFF7FEFF 		bl	ff_compare
+ 886              	.LVL112:
+ 887 0080 0028     		cmp	r0, #0
+ 888 0082 3BDA     		bge	.L43
+ 221:strong-arm\src\ecdsa/ecdsa.c **** 		return false;
+ 222:strong-arm\src\ecdsa/ecdsa.c **** 
+ 223:strong-arm\src\ecdsa/ecdsa.c **** 	// Verify the signature
+ 224:strong-arm\src\ecdsa/ecdsa.c **** 	ff_inv (&w, s, &ec_n);	// w = s^-1
+ 889              		.loc 1 224 0 is_stmt 1
+ 890 0084 204B     		ldr	r3, .L44
+ 891 0086 9846     		mov	r8, r3
+ 892 0088 204A     		ldr	r2, .L44+4
+ 893 008a 3900     		movs	r1, r7
+ 894 008c 3AA8     		add	r0, sp, #232
+ 895 008e FFF7FEFF 		bl	ff_inv
+ 896              	.LVL113:
+ 225:strong-arm\src\ecdsa/ecdsa.c **** 	ff_mul (&u1, z, &w, &ec_n);	// u1 = z * w
+ 897              		.loc 1 225 0
+ 898 0092 1E4B     		ldr	r3, .L44+4
+ 899 0094 3AAA     		add	r2, sp, #232
+ 900 0096 0099     		ldr	r1, [sp]
+ 901 0098 32A8     		add	r0, sp, #200
+ 902 009a FFF7FEFF 		bl	ff_mul
+ 903              	.LVL114:
+ 226:strong-arm\src\ecdsa/ecdsa.c **** 	ff_mul (&u2, r, &w, &ec_n);	// u2 = r * w
+ 904              		.loc 1 226 0
+ 905 009e 1B4B     		ldr	r3, .L44+4
+ 906 00a0 3AAA     		add	r2, sp, #232
+ 907 00a2 3100     		movs	r1, r6
+ 908 00a4 2AA8     		add	r0, sp, #168
+ 909 00a6 FFF7FEFF 		bl	ff_mul
+ 910              	.LVL115:
+ 227:strong-arm\src\ecdsa/ecdsa.c **** 	ec_mul (&tmp, &u1, &ec_G);
+ 911              		.loc 1 227 0
+ 912 00aa 4246     		mov	r2, r8
+ 913 00ac 4032     		adds	r2, r2, #64
+ 914 00ae 32A9     		add	r1, sp, #200
+ 915 00b0 12A8     		add	r0, sp, #72
+ 916 00b2 FFF7FEFF 		bl	ec_mul
+ 917              	.LVL116:
+ 228:strong-arm\src\ecdsa/ecdsa.c **** 	ec_mul (&tmp2, &u2, Q);
+ 918              		.loc 1 228 0
+ 919 00b6 2A00     		movs	r2, r5
+ 920 00b8 2AA9     		add	r1, sp, #168
+ 921 00ba 02A8     		add	r0, sp, #8
+ 922 00bc FFF7FEFF 		bl	ec_mul
+ 923              	.LVL117:
+ 229:strong-arm\src\ecdsa/ecdsa.c **** 	ec_add (&tmp, &tmp, &tmp2);	// tmp = u1 * G + u2 * Q
+ 924              		.loc 1 229 0
+ 925 00c0 02AA     		add	r2, sp, #8
+ 926 00c2 12A9     		add	r1, sp, #72
+ 927 00c4 0800     		movs	r0, r1
+ 928 00c6 FFF7FEFF 		bl	ec_add
+ 929              	.LVL118:
+ 230:strong-arm\src\ecdsa/ecdsa.c **** 	ff_zero (&x1);
+ 930              		.loc 1 230 0
+ 931 00ca 22A8     		add	r0, sp, #136
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqCnWHK.s 			page 22
+
+
+ 932 00cc FFF7FEFF 		bl	ff_zero
+ 933              	.LVL119:
+ 231:strong-arm\src\ecdsa/ecdsa.c **** 	ff_add (&x1, &x1, &(tmp.x), &ec_n);	// x1 = tmp.x (mod n)
+ 934              		.loc 1 231 0
+ 935 00d0 0E4B     		ldr	r3, .L44+4
+ 936 00d2 12AA     		add	r2, sp, #72
+ 937 00d4 22A9     		add	r1, sp, #136
+ 938 00d6 0800     		movs	r0, r1
+ 939 00d8 FFF7FEFF 		bl	ff_add
+ 940              	.LVL120:
+ 232:strong-arm\src\ecdsa/ecdsa.c **** 
+ 233:strong-arm\src\ecdsa/ecdsa.c **** 	if (ff_compare (&x1, r) != 0)
+ 941              		.loc 1 233 0
+ 942 00dc 3100     		movs	r1, r6
+ 943 00de 22A8     		add	r0, sp, #136
+ 944 00e0 FFF7FEFF 		bl	ff_compare
+ 945              	.LVL121:
+ 946 00e4 0028     		cmp	r0, #0
+ 947 00e6 0AD0     		beq	.L38
+ 234:strong-arm\src\ecdsa/ecdsa.c **** 		return false;
+ 948              		.loc 1 234 0
+ 949 00e8 019C     		ldr	r4, [sp, #4]
+ 950 00ea 08E0     		b	.L38
+ 951              	.L39:
+ 205:strong-arm\src\ecdsa/ecdsa.c **** 
+ 952              		.loc 1 205 0
+ 953 00ec 0024     		movs	r4, #0
+ 954 00ee 06E0     		b	.L38
+ 955              	.L40:
+ 218:strong-arm\src\ecdsa/ecdsa.c **** 
+ 956              		.loc 1 218 0
+ 957 00f0 0024     		movs	r4, #0
+ 958 00f2 04E0     		b	.L38
+ 959              	.L41:
+ 960 00f4 4446     		mov	r4, r8
+ 961 00f6 02E0     		b	.L38
+ 962              	.L42:
+ 221:strong-arm\src\ecdsa/ecdsa.c **** 
+ 963              		.loc 1 221 0
+ 964 00f8 019C     		ldr	r4, [sp, #4]
+ 965 00fa 00E0     		b	.L38
+ 966              	.L43:
+ 967 00fc 019C     		ldr	r4, [sp, #4]
+ 968              	.L38:
+ 235:strong-arm\src\ecdsa/ecdsa.c **** 	
+ 236:strong-arm\src\ecdsa/ecdsa.c **** 	return true;
+ 237:strong-arm\src\ecdsa/ecdsa.c **** }
+ 969              		.loc 1 237 0
+ 970 00fe 2000     		movs	r0, r4
+ 971 0100 42B0     		add	sp, sp, #264
+ 972              	.LVL122:
+ 973              		@ sp needed
+ 974              	.LVL123:
+ 975              	.LVL124:
+ 976              	.LVL125:
+ 977 0102 04BC     		pop	{r2}
+ 978 0104 9046     		mov	r8, r2
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqCnWHK.s 			page 23
+
+
+ 979 0106 F0BD     		pop	{r4, r5, r6, r7, pc}
+ 980              	.L45:
+ 981              		.align	2
+ 982              	.L44:
+ 983 0108 00000000 		.word	.LANCHOR0
+ 984 010c 20000000 		.word	.LANCHOR0+32
+ 985              		.cfi_endproc
+ 986              	.LFE6:
+ 987              		.size	ec_verify, .-ec_verify
+ 988              		.section	.text.ec_serialize,"ax",%progbits
+ 989              		.align	2
+ 990              		.global	ec_serialize
+ 991              		.code	16
+ 992              		.thumb_func
+ 993              		.type	ec_serialize, %function
+ 994              	ec_serialize:
+ 995              	.LFB7:
+ 238:strong-arm\src\ecdsa/ecdsa.c **** 
+ 239:strong-arm\src\ecdsa/ecdsa.c **** uint32_t ec_serialize (uint8_t *out, EC_POINT const *const P, bool compressed)
+ 240:strong-arm\src\ecdsa/ecdsa.c **** {
+ 996              		.loc 1 240 0
+ 997              		.cfi_startproc
+ 998              		@ args = 0, pretend = 0, frame = 0
+ 999              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1000              	.LVL126:
+ 1001 0000 70B5     		push	{r4, r5, r6, lr}
+ 1002              		.cfi_def_cfa_offset 16
+ 1003              		.cfi_offset 4, -16
+ 1004              		.cfi_offset 5, -12
+ 1005              		.cfi_offset 6, -8
+ 1006              		.cfi_offset 14, -4
+ 1007 0002 0400     		movs	r4, r0
+ 1008 0004 0D00     		movs	r5, r1
+ 241:strong-arm\src\ecdsa/ecdsa.c **** 	if (!compressed) {
+ 1009              		.loc 1 241 0
+ 1010 0006 002A     		cmp	r2, #0
+ 1011 0008 0ED1     		bne	.L47
+ 242:strong-arm\src\ecdsa/ecdsa.c **** 		if (out) {
+ 1012              		.loc 1 242 0
+ 1013 000a 0028     		cmp	r0, #0
+ 1014 000c 1BD0     		beq	.L50
+ 243:strong-arm\src\ecdsa/ecdsa.c **** 			out[0] = 0x04;
+ 1015              		.loc 1 243 0
+ 1016 000e 0423     		movs	r3, #4
+ 1017 0010 0370     		strb	r3, [r0]
+ 244:strong-arm\src\ecdsa/ecdsa.c **** 			ff_serialize (out+1, &(P->x));
+ 1018              		.loc 1 244 0
+ 1019 0012 0130     		adds	r0, r0, #1
+ 1020              	.LVL127:
+ 1021 0014 FFF7FEFF 		bl	ff_serialize
+ 1022              	.LVL128:
+ 245:strong-arm\src\ecdsa/ecdsa.c **** 			ff_serialize (out+1+32, &(P->y));
+ 1023              		.loc 1 245 0
+ 1024 0018 2900     		movs	r1, r5
+ 1025 001a 2031     		adds	r1, r1, #32
+ 1026 001c 2000     		movs	r0, r4
+ 1027 001e 2130     		adds	r0, r0, #33
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqCnWHK.s 			page 24
+
+
+ 1028 0020 FFF7FEFF 		bl	ff_serialize
+ 1029              	.LVL129:
+ 246:strong-arm\src\ecdsa/ecdsa.c **** 		}
+ 247:strong-arm\src\ecdsa/ecdsa.c **** 		return 65;
+ 1030              		.loc 1 247 0
+ 1031 0024 4120     		movs	r0, #65
+ 1032 0026 11E0     		b	.L48
+ 1033              	.LVL130:
+ 1034              	.L47:
+ 248:strong-arm\src\ecdsa/ecdsa.c **** 	}
+ 249:strong-arm\src\ecdsa/ecdsa.c **** 	else {
+ 250:strong-arm\src\ecdsa/ecdsa.c **** 		if (out) {
+ 1035              		.loc 1 250 0
+ 1036 0028 0028     		cmp	r0, #0
+ 1037 002a 0ED0     		beq	.L51
+ 251:strong-arm\src\ecdsa/ecdsa.c **** 			out[0] = (P->y.z[0] & 1) ? 0x03 : 0x02;	// odd/even?
+ 1038              		.loc 1 251 0
+ 1039 002c 0B6A     		ldr	r3, [r1, #32]
+ 1040 002e DB07     		lsls	r3, r3, #31
+ 1041 0030 01D5     		bpl	.L52
+ 1042 0032 0323     		movs	r3, #3
+ 1043 0034 00E0     		b	.L49
+ 1044              	.L52:
+ 1045 0036 0223     		movs	r3, #2
+ 1046              	.L49:
+ 1047              		.loc 1 251 0 is_stmt 0 discriminator 4
+ 1048 0038 2370     		strb	r3, [r4]
+ 252:strong-arm\src\ecdsa/ecdsa.c **** 			ff_serialize (out+1, &(P->x));
+ 1049              		.loc 1 252 0 is_stmt 1 discriminator 4
+ 1050 003a 601C     		adds	r0, r4, #1
+ 1051              	.LVL131:
+ 1052 003c 2900     		movs	r1, r5
+ 1053              	.LVL132:
+ 1054 003e FFF7FEFF 		bl	ff_serialize
+ 1055              	.LVL133:
+ 253:strong-arm\src\ecdsa/ecdsa.c **** 		}
+ 254:strong-arm\src\ecdsa/ecdsa.c **** 		return 33;
+ 1056              		.loc 1 254 0 discriminator 4
+ 1057 0042 2120     		movs	r0, #33
+ 1058 0044 02E0     		b	.L48
+ 1059              	.LVL134:
+ 1060              	.L50:
+ 247:strong-arm\src\ecdsa/ecdsa.c **** 	}
+ 1061              		.loc 1 247 0
+ 1062 0046 4120     		movs	r0, #65
+ 1063              	.LVL135:
+ 1064 0048 00E0     		b	.L48
+ 1065              	.LVL136:
+ 1066              	.L51:
+ 1067              		.loc 1 254 0
+ 1068 004a 2120     		movs	r0, #33
+ 1069              	.LVL137:
+ 1070              	.L48:
+ 255:strong-arm\src\ecdsa/ecdsa.c **** 	}
+ 256:strong-arm\src\ecdsa/ecdsa.c **** }
+ 1071              		.loc 1 256 0
+ 1072              		@ sp needed
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqCnWHK.s 			page 25
+
+
+ 1073              	.LVL138:
+ 1074              	.LVL139:
+ 1075 004c 70BD     		pop	{r4, r5, r6, pc}
+ 1076              		.cfi_endproc
+ 1077              	.LFE7:
+ 1078              		.size	ec_serialize, .-ec_serialize
+ 1079              		.global	ec_b
+ 1080              		.global	ec_p
+ 1081              		.global	ec_n
+ 1082              		.global	ec_G
+ 1083 004e C046     		.section	.rodata
+ 1084              		.align	2
+ 1085              		.set	.LANCHOR0,. + 0
+ 1086              		.set	.LANCHOR1,. + 128
+ 1087              		.type	ec_p, %object
+ 1088              		.size	ec_p, 32
+ 1089              	ec_p:
+ 1090 0000 2FFCFFFF 		.word	-977
+ 1091 0004 FEFFFFFF 		.word	-2
+ 1092 0008 FFFFFFFF 		.word	-1
+ 1093 000c FFFFFFFF 		.word	-1
+ 1094 0010 FFFFFFFF 		.word	-1
+ 1095 0014 FFFFFFFF 		.word	-1
+ 1096 0018 FFFFFFFF 		.word	-1
+ 1097 001c FFFFFFFF 		.word	-1
+ 1098              		.type	ec_n, %object
+ 1099              		.size	ec_n, 32
+ 1100              	ec_n:
+ 1101 0020 414136D0 		.word	-801750719
+ 1102 0024 8C5ED2BF 		.word	-1076732276
+ 1103 0028 3BA048AF 		.word	-1354194885
+ 1104 002c E6DCAEBA 		.word	-1162945306
+ 1105 0030 FEFFFFFF 		.word	-2
+ 1106 0034 FFFFFFFF 		.word	-1
+ 1107 0038 FFFFFFFF 		.word	-1
+ 1108 003c FFFFFFFF 		.word	-1
+ 1109              		.type	ec_G, %object
+ 1110              		.size	ec_G, 64
+ 1111              	ec_G:
+ 1112 0040 9817F816 		.word	385357720
+ 1113 0044 5B81F259 		.word	1509065051
+ 1114 0048 D928CE2D 		.word	768485593
+ 1115 004c DBFC9B02 		.word	43777243
+ 1116 0050 070B87CE 		.word	-830010617
+ 1117 0054 9562A055 		.word	1436574357
+ 1118 0058 ACBBDCF9 		.word	-102974548
+ 1119 005c 7E66BE79 		.word	2042521214
+ 1120 0060 B8D410FB 		.word	-82783048
+ 1121 0064 8FD0479C 		.word	-1673015153
+ 1122 0068 195485A6 		.word	-1501211623
+ 1123 006c 48B417FD 		.word	-48778168
+ 1124 0070 A808110E 		.word	235997352
+ 1125 0074 FCFBA45D 		.word	1571093500
+ 1126 0078 65C4A326 		.word	648266853
+ 1127 007c 77DA3A48 		.word	1211816567
+ 1128              		.type	ec_b, %object
+ 1129              		.size	ec_b, 32
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqCnWHK.s 			page 26
+
+
+ 1130              	ec_b:
+ 1131 0080 07000000 		.word	7
+ 1132 0084 00000000 		.word	0
+ 1133 0088 00000000 		.word	0
+ 1134 008c 00000000 		.word	0
+ 1135 0090 00000000 		.word	0
+ 1136 0094 00000000 		.word	0
+ 1137 0098 00000000 		.word	0
+ 1138 009c 00000000 		.word	0
+ 1139              		.text
+ 1140              	.Letext0:
+ 1141              		.file 2 "c:\\program files (x86)\\cypress\\psoc creator\\4.1\\psoc creator\\import\\gnu\\arm\\5.4.
+ 1142              		.file 3 "c:\\program files (x86)\\cypress\\psoc creator\\4.1\\psoc creator\\import\\gnu\\arm\\5.4.
+ 1143              		.file 4 ".\\strong-arm\\include/strong-arm/finite_field.h"
+ 1144              		.file 5 ".\\strong-arm\\include/strong-arm/ecdsa.h"
+ 1145              		.section	.debug_info,"",%progbits
+ 1146              	.Ldebug_info0:
+ 1147 0000 59100000 		.4byte	0x1059
+ 1148 0004 0400     		.2byte	0x4
+ 1149 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 1150 000a 04       		.byte	0x4
+ 1151 000b 01       		.uleb128 0x1
+ 1152 000c 78000000 		.4byte	.LASF47
+ 1153 0010 0C       		.byte	0xc
+ 1154 0011 07000000 		.4byte	.LASF48
+ 1155 0015 2B010000 		.4byte	.LASF49
+ 1156 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 1157 001d 00000000 		.4byte	0
+ 1158 0021 00000000 		.4byte	.Ldebug_line0
+ 1159 0025 02       		.uleb128 0x2
+ 1160 0026 01       		.byte	0x1
+ 1161 0027 06       		.byte	0x6
+ 1162 0028 02020000 		.4byte	.LASF0
+ 1163 002c 03       		.uleb128 0x3
+ 1164 002d B8010000 		.4byte	.LASF5
+ 1165 0031 02       		.byte	0x2
+ 1166 0032 1D       		.byte	0x1d
+ 1167 0033 37000000 		.4byte	0x37
+ 1168 0037 02       		.uleb128 0x2
+ 1169 0038 01       		.byte	0x1
+ 1170 0039 08       		.byte	0x8
+ 1171 003a DD010000 		.4byte	.LASF1
+ 1172 003e 02       		.uleb128 0x2
+ 1173 003f 02       		.byte	0x2
+ 1174 0040 05       		.byte	0x5
+ 1175 0041 2C000000 		.4byte	.LASF2
+ 1176 0045 02       		.uleb128 0x2
+ 1177 0046 02       		.byte	0x2
+ 1178 0047 07       		.byte	0x7
+ 1179 0048 4A020000 		.4byte	.LASF3
+ 1180 004c 02       		.uleb128 0x2
+ 1181 004d 04       		.byte	0x4
+ 1182 004e 05       		.byte	0x5
+ 1183 004f 22010000 		.4byte	.LASF4
+ 1184 0053 03       		.uleb128 0x3
+ 1185 0054 5C000000 		.4byte	.LASF6
+ 1186 0058 02       		.byte	0x2
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqCnWHK.s 			page 27
+
+
+ 1187 0059 41       		.byte	0x41
+ 1188 005a 5E000000 		.4byte	0x5e
+ 1189 005e 02       		.uleb128 0x2
+ 1190 005f 04       		.byte	0x4
+ 1191 0060 07       		.byte	0x7
+ 1192 0061 97020000 		.4byte	.LASF7
+ 1193 0065 02       		.uleb128 0x2
+ 1194 0066 08       		.byte	0x8
+ 1195 0067 05       		.byte	0x5
+ 1196 0068 14010000 		.4byte	.LASF8
+ 1197 006c 02       		.uleb128 0x2
+ 1198 006d 08       		.byte	0x8
+ 1199 006e 07       		.byte	0x7
+ 1200 006f 0E020000 		.4byte	.LASF9
+ 1201 0073 04       		.uleb128 0x4
+ 1202 0074 04       		.byte	0x4
+ 1203 0075 05       		.byte	0x5
+ 1204 0076 696E7400 		.ascii	"int\000"
+ 1205 007a 02       		.uleb128 0x2
+ 1206 007b 04       		.byte	0x4
+ 1207 007c 07       		.byte	0x7
+ 1208 007d 2E020000 		.4byte	.LASF10
+ 1209 0081 03       		.uleb128 0x3
+ 1210 0082 06010000 		.4byte	.LASF11
+ 1211 0086 03       		.byte	0x3
+ 1212 0087 18       		.byte	0x18
+ 1213 0088 2C000000 		.4byte	0x2c
+ 1214 008c 03       		.uleb128 0x3
+ 1215 008d 25020000 		.4byte	.LASF12
+ 1216 0091 03       		.byte	0x3
+ 1217 0092 30       		.byte	0x30
+ 1218 0093 53000000 		.4byte	0x53
+ 1219 0097 05       		.uleb128 0x5
+ 1220 0098 20       		.byte	0x20
+ 1221 0099 04       		.byte	0x4
+ 1222 009a 12       		.byte	0x12
+ 1223 009b AA000000 		.4byte	0xaa
+ 1224 009f 06       		.uleb128 0x6
+ 1225 00a0 7A00     		.ascii	"z\000"
+ 1226 00a2 04       		.byte	0x4
+ 1227 00a3 13       		.byte	0x13
+ 1228 00a4 AA000000 		.4byte	0xaa
+ 1229 00a8 00       		.byte	0
+ 1230 00a9 00       		.byte	0
+ 1231 00aa 07       		.uleb128 0x7
+ 1232 00ab 8C000000 		.4byte	0x8c
+ 1233 00af BA000000 		.4byte	0xba
+ 1234 00b3 08       		.uleb128 0x8
+ 1235 00b4 BA000000 		.4byte	0xba
+ 1236 00b8 07       		.byte	0x7
+ 1237 00b9 00       		.byte	0
+ 1238 00ba 02       		.uleb128 0x2
+ 1239 00bb 04       		.byte	0x4
+ 1240 00bc 07       		.byte	0x7
+ 1241 00bd 41000000 		.4byte	.LASF13
+ 1242 00c1 03       		.uleb128 0x3
+ 1243 00c2 D6010000 		.4byte	.LASF14
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqCnWHK.s 			page 28
+
+
+ 1244 00c6 04       		.byte	0x4
+ 1245 00c7 14       		.byte	0x14
+ 1246 00c8 97000000 		.4byte	0x97
+ 1247 00cc 05       		.uleb128 0x5
+ 1248 00cd 40       		.byte	0x40
+ 1249 00ce 05       		.byte	0x5
+ 1250 00cf 12       		.byte	0x12
+ 1251 00d0 E9000000 		.4byte	0xe9
+ 1252 00d4 06       		.uleb128 0x6
+ 1253 00d5 7800     		.ascii	"x\000"
+ 1254 00d7 05       		.byte	0x5
+ 1255 00d8 13       		.byte	0x13
+ 1256 00d9 C1000000 		.4byte	0xc1
+ 1257 00dd 00       		.byte	0
+ 1258 00de 06       		.uleb128 0x6
+ 1259 00df 7900     		.ascii	"y\000"
+ 1260 00e1 05       		.byte	0x5
+ 1261 00e2 13       		.byte	0x13
+ 1262 00e3 C1000000 		.4byte	0xc1
+ 1263 00e7 20       		.byte	0x20
+ 1264 00e8 00       		.byte	0
+ 1265 00e9 03       		.uleb128 0x3
+ 1266 00ea BE020000 		.4byte	.LASF15
+ 1267 00ee 05       		.byte	0x5
+ 1268 00ef 14       		.byte	0x14
+ 1269 00f0 CC000000 		.4byte	0xcc
+ 1270 00f4 09       		.uleb128 0x9
+ 1271 00f5 A9020000 		.4byte	.LASF18
+ 1272 00f9 01       		.byte	0x1
+ 1273 00fa 4C       		.byte	0x4c
+ 1274 00fb 00000000 		.4byte	.LFB1
+ 1275 00ff DC000000 		.4byte	.LFE1-.LFB1
+ 1276 0103 01       		.uleb128 0x1
+ 1277 0104 9C       		.byte	0x9c
+ 1278 0105 C5030000 		.4byte	0x3c5
+ 1279 0109 0A       		.uleb128 0xa
+ 1280 010a 6F757400 		.ascii	"out\000"
+ 1281 010e 01       		.byte	0x1
+ 1282 010f 4C       		.byte	0x4c
+ 1283 0110 CB030000 		.4byte	0x3cb
+ 1284 0114 00000000 		.4byte	.LLST0
+ 1285 0118 0A       		.uleb128 0xa
+ 1286 0119 5000     		.ascii	"P\000"
+ 1287 011b 01       		.byte	0x1
+ 1288 011c 4C       		.byte	0x4c
+ 1289 011d DB030000 		.4byte	0x3db
+ 1290 0121 2C000000 		.4byte	.LLST1
+ 1291 0125 0B       		.uleb128 0xb
+ 1292 0126 0E010000 		.4byte	.LASF16
+ 1293 012a 01       		.byte	0x1
+ 1294 012b 4E       		.byte	0x4e
+ 1295 012c C1000000 		.4byte	0xc1
+ 1296 0130 02       		.uleb128 0x2
+ 1297 0131 91       		.byte	0x91
+ 1298 0132 48       		.sleb128 -56
+ 1299 0133 0C       		.uleb128 0xc
+ 1300 0134 746D7000 		.ascii	"tmp\000"
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqCnWHK.s 			page 29
+
+
+ 1301 0138 01       		.byte	0x1
+ 1302 0139 4E       		.byte	0x4e
+ 1303 013a C1000000 		.4byte	0xc1
+ 1304 013e 03       		.uleb128 0x3
+ 1305 013f 91       		.byte	0x91
+ 1306 0140 A87F     		.sleb128 -88
+ 1307 0142 0B       		.uleb128 0xb
+ 1308 0143 8D020000 		.4byte	.LASF17
+ 1309 0147 01       		.byte	0x1
+ 1310 0148 4E       		.byte	0x4e
+ 1311 0149 C1000000 		.4byte	0xc1
+ 1312 014d 03       		.uleb128 0x3
+ 1313 014e 91       		.byte	0x91
+ 1314 014f 887F     		.sleb128 -120
+ 1315 0151 0C       		.uleb128 0xc
+ 1316 0152 783300   		.ascii	"x3\000"
+ 1317 0155 01       		.byte	0x1
+ 1318 0156 4F       		.byte	0x4f
+ 1319 0157 C1000000 		.4byte	0xc1
+ 1320 015b 03       		.uleb128 0x3
+ 1321 015c 91       		.byte	0x91
+ 1322 015d E87E     		.sleb128 -152
+ 1323 015f 0C       		.uleb128 0xc
+ 1324 0160 793300   		.ascii	"y3\000"
+ 1325 0163 01       		.byte	0x1
+ 1326 0164 4F       		.byte	0x4f
+ 1327 0165 C1000000 		.4byte	0xc1
+ 1328 0169 03       		.uleb128 0x3
+ 1329 016a 91       		.byte	0x91
+ 1330 016b C87E     		.sleb128 -184
+ 1331 016d 0D       		.uleb128 0xd
+ 1332 016e 0E000000 		.4byte	.LVL2
+ 1333 0172 EE0F0000 		.4byte	0xfee
+ 1334 0176 81010000 		.4byte	0x181
+ 1335 017a 0E       		.uleb128 0xe
+ 1336 017b 01       		.uleb128 0x1
+ 1337 017c 50       		.byte	0x50
+ 1338 017d 02       		.uleb128 0x2
+ 1339 017e 75       		.byte	0x75
+ 1340 017f 00       		.sleb128 0
+ 1341 0180 00       		.byte	0
+ 1342 0181 0D       		.uleb128 0xd
+ 1343 0182 1A000000 		.4byte	.LVL3
+ 1344 0186 EE0F0000 		.4byte	0xfee
+ 1345 018a 95010000 		.4byte	0x195
+ 1346 018e 0E       		.uleb128 0xe
+ 1347 018f 01       		.uleb128 0x1
+ 1348 0190 50       		.byte	0x50
+ 1349 0191 02       		.uleb128 0x2
+ 1350 0192 75       		.byte	0x75
+ 1351 0193 20       		.sleb128 32
+ 1352 0194 00       		.byte	0
+ 1353 0195 0D       		.uleb128 0xd
+ 1354 0196 24000000 		.4byte	.LVL4
+ 1355 019a F90F0000 		.4byte	0xff9
+ 1356 019e A9010000 		.4byte	0x1a9
+ 1357 01a2 0E       		.uleb128 0xe
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqCnWHK.s 			page 30
+
+
+ 1358 01a3 01       		.uleb128 0x1
+ 1359 01a4 50       		.byte	0x50
+ 1360 01a5 02       		.uleb128 0x2
+ 1361 01a6 76       		.byte	0x76
+ 1362 01a7 00       		.sleb128 0
+ 1363 01a8 00       		.byte	0
+ 1364 01a9 0D       		.uleb128 0xd
+ 1365 01aa 2C000000 		.4byte	.LVL5
+ 1366 01ae F90F0000 		.4byte	0xff9
+ 1367 01b2 BD010000 		.4byte	0x1bd
+ 1368 01b6 0E       		.uleb128 0xe
+ 1369 01b7 01       		.uleb128 0x1
+ 1370 01b8 50       		.byte	0x50
+ 1371 01b9 02       		.uleb128 0x2
+ 1372 01ba 76       		.byte	0x76
+ 1373 01bb 20       		.sleb128 32
+ 1374 01bc 00       		.byte	0
+ 1375 01bd 0D       		.uleb128 0xd
+ 1376 01be 3C000000 		.4byte	.LVL6
+ 1377 01c2 04100000 		.4byte	0x1004
+ 1378 01c6 E4010000 		.4byte	0x1e4
+ 1379 01ca 0E       		.uleb128 0xe
+ 1380 01cb 01       		.uleb128 0x1
+ 1381 01cc 50       		.byte	0x50
+ 1382 01cd 03       		.uleb128 0x3
+ 1383 01ce 91       		.byte	0x91
+ 1384 01cf A87F     		.sleb128 -88
+ 1385 01d1 0E       		.uleb128 0xe
+ 1386 01d2 01       		.uleb128 0x1
+ 1387 01d3 51       		.byte	0x51
+ 1388 01d4 02       		.uleb128 0x2
+ 1389 01d5 75       		.byte	0x75
+ 1390 01d6 00       		.sleb128 0
+ 1391 01d7 0E       		.uleb128 0xe
+ 1392 01d8 01       		.uleb128 0x1
+ 1393 01d9 52       		.byte	0x52
+ 1394 01da 02       		.uleb128 0x2
+ 1395 01db 75       		.byte	0x75
+ 1396 01dc 00       		.sleb128 0
+ 1397 01dd 0E       		.uleb128 0xe
+ 1398 01de 01       		.uleb128 0x1
+ 1399 01df 53       		.byte	0x53
+ 1400 01e0 02       		.uleb128 0x2
+ 1401 01e1 74       		.byte	0x74
+ 1402 01e2 00       		.sleb128 0
+ 1403 01e3 00       		.byte	0
+ 1404 01e4 0D       		.uleb128 0xd
+ 1405 01e5 48000000 		.4byte	.LVL7
+ 1406 01e9 0F100000 		.4byte	0x100f
+ 1407 01ed 0D020000 		.4byte	0x20d
+ 1408 01f1 0E       		.uleb128 0xe
+ 1409 01f2 01       		.uleb128 0x1
+ 1410 01f3 50       		.byte	0x50
+ 1411 01f4 03       		.uleb128 0x3
+ 1412 01f5 91       		.byte	0x91
+ 1413 01f6 887F     		.sleb128 -120
+ 1414 01f8 0E       		.uleb128 0xe
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqCnWHK.s 			page 31
+
+
+ 1415 01f9 01       		.uleb128 0x1
+ 1416 01fa 51       		.byte	0x51
+ 1417 01fb 03       		.uleb128 0x3
+ 1418 01fc 91       		.byte	0x91
+ 1419 01fd A87F     		.sleb128 -88
+ 1420 01ff 0E       		.uleb128 0xe
+ 1421 0200 01       		.uleb128 0x1
+ 1422 0201 52       		.byte	0x52
+ 1423 0202 03       		.uleb128 0x3
+ 1424 0203 91       		.byte	0x91
+ 1425 0204 A87F     		.sleb128 -88
+ 1426 0206 0E       		.uleb128 0xe
+ 1427 0207 01       		.uleb128 0x1
+ 1428 0208 53       		.byte	0x53
+ 1429 0209 02       		.uleb128 0x2
+ 1430 020a 74       		.byte	0x74
+ 1431 020b 00       		.sleb128 0
+ 1432 020c 00       		.byte	0
+ 1433 020d 0D       		.uleb128 0xd
+ 1434 020e 54000000 		.4byte	.LVL8
+ 1435 0212 0F100000 		.4byte	0x100f
+ 1436 0216 36020000 		.4byte	0x236
+ 1437 021a 0E       		.uleb128 0xe
+ 1438 021b 01       		.uleb128 0x1
+ 1439 021c 50       		.byte	0x50
+ 1440 021d 03       		.uleb128 0x3
+ 1441 021e 91       		.byte	0x91
+ 1442 021f A87F     		.sleb128 -88
+ 1443 0221 0E       		.uleb128 0xe
+ 1444 0222 01       		.uleb128 0x1
+ 1445 0223 51       		.byte	0x51
+ 1446 0224 03       		.uleb128 0x3
+ 1447 0225 91       		.byte	0x91
+ 1448 0226 887F     		.sleb128 -120
+ 1449 0228 0E       		.uleb128 0xe
+ 1450 0229 01       		.uleb128 0x1
+ 1451 022a 52       		.byte	0x52
+ 1452 022b 03       		.uleb128 0x3
+ 1453 022c 91       		.byte	0x91
+ 1454 022d A87F     		.sleb128 -88
+ 1455 022f 0E       		.uleb128 0xe
+ 1456 0230 01       		.uleb128 0x1
+ 1457 0231 53       		.byte	0x53
+ 1458 0232 02       		.uleb128 0x2
+ 1459 0233 74       		.byte	0x74
+ 1460 0234 00       		.sleb128 0
+ 1461 0235 00       		.byte	0
+ 1462 0236 0D       		.uleb128 0xd
+ 1463 0237 64000000 		.4byte	.LVL9
+ 1464 023b 0F100000 		.4byte	0x100f
+ 1465 023f 5D020000 		.4byte	0x25d
+ 1466 0243 0E       		.uleb128 0xe
+ 1467 0244 01       		.uleb128 0x1
+ 1468 0245 50       		.byte	0x50
+ 1469 0246 03       		.uleb128 0x3
+ 1470 0247 91       		.byte	0x91
+ 1471 0248 887F     		.sleb128 -120
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqCnWHK.s 			page 32
+
+
+ 1472 024a 0E       		.uleb128 0xe
+ 1473 024b 01       		.uleb128 0x1
+ 1474 024c 51       		.byte	0x51
+ 1475 024d 02       		.uleb128 0x2
+ 1476 024e 77       		.byte	0x77
+ 1477 024f 00       		.sleb128 0
+ 1478 0250 0E       		.uleb128 0xe
+ 1479 0251 01       		.uleb128 0x1
+ 1480 0252 52       		.byte	0x52
+ 1481 0253 02       		.uleb128 0x2
+ 1482 0254 77       		.byte	0x77
+ 1483 0255 00       		.sleb128 0
+ 1484 0256 0E       		.uleb128 0xe
+ 1485 0257 01       		.uleb128 0x1
+ 1486 0258 53       		.byte	0x53
+ 1487 0259 02       		.uleb128 0x2
+ 1488 025a 74       		.byte	0x74
+ 1489 025b 00       		.sleb128 0
+ 1490 025c 00       		.byte	0
+ 1491 025d 0D       		.uleb128 0xd
+ 1492 025e 6E000000 		.4byte	.LVL10
+ 1493 0262 1A100000 		.4byte	0x101a
+ 1494 0266 7F020000 		.4byte	0x27f
+ 1495 026a 0E       		.uleb128 0xe
+ 1496 026b 01       		.uleb128 0x1
+ 1497 026c 50       		.byte	0x50
+ 1498 026d 03       		.uleb128 0x3
+ 1499 026e 91       		.byte	0x91
+ 1500 026f 887F     		.sleb128 -120
+ 1501 0271 0E       		.uleb128 0xe
+ 1502 0272 01       		.uleb128 0x1
+ 1503 0273 51       		.byte	0x51
+ 1504 0274 03       		.uleb128 0x3
+ 1505 0275 91       		.byte	0x91
+ 1506 0276 887F     		.sleb128 -120
+ 1507 0278 0E       		.uleb128 0xe
+ 1508 0279 01       		.uleb128 0x1
+ 1509 027a 52       		.byte	0x52
+ 1510 027b 02       		.uleb128 0x2
+ 1511 027c 74       		.byte	0x74
+ 1512 027d 00       		.sleb128 0
+ 1513 027e 00       		.byte	0
+ 1514 027f 0D       		.uleb128 0xd
+ 1515 0280 7A000000 		.4byte	.LVL11
+ 1516 0284 04100000 		.4byte	0x1004
+ 1517 0288 A7020000 		.4byte	0x2a7
+ 1518 028c 0E       		.uleb128 0xe
+ 1519 028d 01       		.uleb128 0x1
+ 1520 028e 50       		.byte	0x50
+ 1521 028f 02       		.uleb128 0x2
+ 1522 0290 91       		.byte	0x91
+ 1523 0291 48       		.sleb128 -56
+ 1524 0292 0E       		.uleb128 0xe
+ 1525 0293 01       		.uleb128 0x1
+ 1526 0294 51       		.byte	0x51
+ 1527 0295 03       		.uleb128 0x3
+ 1528 0296 91       		.byte	0x91
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqCnWHK.s 			page 33
+
+
+ 1529 0297 A87F     		.sleb128 -88
+ 1530 0299 0E       		.uleb128 0xe
+ 1531 029a 01       		.uleb128 0x1
+ 1532 029b 52       		.byte	0x52
+ 1533 029c 03       		.uleb128 0x3
+ 1534 029d 91       		.byte	0x91
+ 1535 029e 887F     		.sleb128 -120
+ 1536 02a0 0E       		.uleb128 0xe
+ 1537 02a1 01       		.uleb128 0x1
+ 1538 02a2 53       		.byte	0x53
+ 1539 02a3 02       		.uleb128 0x2
+ 1540 02a4 74       		.byte	0x74
+ 1541 02a5 00       		.sleb128 0
+ 1542 02a6 00       		.byte	0
+ 1543 02a7 0D       		.uleb128 0xd
+ 1544 02a8 86000000 		.4byte	.LVL12
+ 1545 02ac 04100000 		.4byte	0x1004
+ 1546 02b0 CE020000 		.4byte	0x2ce
+ 1547 02b4 0E       		.uleb128 0xe
+ 1548 02b5 01       		.uleb128 0x1
+ 1549 02b6 50       		.byte	0x50
+ 1550 02b7 03       		.uleb128 0x3
+ 1551 02b8 91       		.byte	0x91
+ 1552 02b9 A87F     		.sleb128 -88
+ 1553 02bb 0E       		.uleb128 0xe
+ 1554 02bc 01       		.uleb128 0x1
+ 1555 02bd 51       		.byte	0x51
+ 1556 02be 02       		.uleb128 0x2
+ 1557 02bf 91       		.byte	0x91
+ 1558 02c0 48       		.sleb128 -56
+ 1559 02c1 0E       		.uleb128 0xe
+ 1560 02c2 01       		.uleb128 0x1
+ 1561 02c3 52       		.byte	0x52
+ 1562 02c4 02       		.uleb128 0x2
+ 1563 02c5 91       		.byte	0x91
+ 1564 02c6 48       		.sleb128 -56
+ 1565 02c7 0E       		.uleb128 0xe
+ 1566 02c8 01       		.uleb128 0x1
+ 1567 02c9 53       		.byte	0x53
+ 1568 02ca 02       		.uleb128 0x2
+ 1569 02cb 74       		.byte	0x74
+ 1570 02cc 00       		.sleb128 0
+ 1571 02cd 00       		.byte	0
+ 1572 02ce 0D       		.uleb128 0xd
+ 1573 02cf 92000000 		.4byte	.LVL13
+ 1574 02d3 25100000 		.4byte	0x1025
+ 1575 02d7 F6020000 		.4byte	0x2f6
+ 1576 02db 0E       		.uleb128 0xe
+ 1577 02dc 01       		.uleb128 0x1
+ 1578 02dd 50       		.byte	0x50
+ 1579 02de 03       		.uleb128 0x3
+ 1580 02df 91       		.byte	0x91
+ 1581 02e0 E87E     		.sleb128 -152
+ 1582 02e2 0E       		.uleb128 0xe
+ 1583 02e3 01       		.uleb128 0x1
+ 1584 02e4 51       		.byte	0x51
+ 1585 02e5 03       		.uleb128 0x3
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqCnWHK.s 			page 34
+
+
+ 1586 02e6 91       		.byte	0x91
+ 1587 02e7 A87F     		.sleb128 -88
+ 1588 02e9 0E       		.uleb128 0xe
+ 1589 02ea 01       		.uleb128 0x1
+ 1590 02eb 52       		.byte	0x52
+ 1591 02ec 02       		.uleb128 0x2
+ 1592 02ed 75       		.byte	0x75
+ 1593 02ee 00       		.sleb128 0
+ 1594 02ef 0E       		.uleb128 0xe
+ 1595 02f0 01       		.uleb128 0x1
+ 1596 02f1 53       		.byte	0x53
+ 1597 02f2 02       		.uleb128 0x2
+ 1598 02f3 74       		.byte	0x74
+ 1599 02f4 00       		.sleb128 0
+ 1600 02f5 00       		.byte	0
+ 1601 02f6 0D       		.uleb128 0xd
+ 1602 02f7 9E000000 		.4byte	.LVL14
+ 1603 02fb 25100000 		.4byte	0x1025
+ 1604 02ff 1E030000 		.4byte	0x31e
+ 1605 0303 0E       		.uleb128 0xe
+ 1606 0304 01       		.uleb128 0x1
+ 1607 0305 50       		.byte	0x50
+ 1608 0306 03       		.uleb128 0x3
+ 1609 0307 91       		.byte	0x91
+ 1610 0308 E87E     		.sleb128 -152
+ 1611 030a 0E       		.uleb128 0xe
+ 1612 030b 01       		.uleb128 0x1
+ 1613 030c 51       		.byte	0x51
+ 1614 030d 03       		.uleb128 0x3
+ 1615 030e 91       		.byte	0x91
+ 1616 030f E87E     		.sleb128 -152
+ 1617 0311 0E       		.uleb128 0xe
+ 1618 0312 01       		.uleb128 0x1
+ 1619 0313 52       		.byte	0x52
+ 1620 0314 02       		.uleb128 0x2
+ 1621 0315 75       		.byte	0x75
+ 1622 0316 00       		.sleb128 0
+ 1623 0317 0E       		.uleb128 0xe
+ 1624 0318 01       		.uleb128 0x1
+ 1625 0319 53       		.byte	0x53
+ 1626 031a 02       		.uleb128 0x2
+ 1627 031b 74       		.byte	0x74
+ 1628 031c 00       		.sleb128 0
+ 1629 031d 00       		.byte	0
+ 1630 031e 0D       		.uleb128 0xd
+ 1631 031f AA000000 		.4byte	.LVL15
+ 1632 0323 25100000 		.4byte	0x1025
+ 1633 0327 46030000 		.4byte	0x346
+ 1634 032b 0E       		.uleb128 0xe
+ 1635 032c 01       		.uleb128 0x1
+ 1636 032d 50       		.byte	0x50
+ 1637 032e 03       		.uleb128 0x3
+ 1638 032f 91       		.byte	0x91
+ 1639 0330 A87F     		.sleb128 -88
+ 1640 0332 0E       		.uleb128 0xe
+ 1641 0333 01       		.uleb128 0x1
+ 1642 0334 51       		.byte	0x51
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqCnWHK.s 			page 35
+
+
+ 1643 0335 02       		.uleb128 0x2
+ 1644 0336 75       		.byte	0x75
+ 1645 0337 00       		.sleb128 0
+ 1646 0338 0E       		.uleb128 0xe
+ 1647 0339 01       		.uleb128 0x1
+ 1648 033a 52       		.byte	0x52
+ 1649 033b 03       		.uleb128 0x3
+ 1650 033c 91       		.byte	0x91
+ 1651 033d E87E     		.sleb128 -152
+ 1652 033f 0E       		.uleb128 0xe
+ 1653 0340 01       		.uleb128 0x1
+ 1654 0341 53       		.byte	0x53
+ 1655 0342 02       		.uleb128 0x2
+ 1656 0343 74       		.byte	0x74
+ 1657 0344 00       		.sleb128 0
+ 1658 0345 00       		.byte	0
+ 1659 0346 0D       		.uleb128 0xd
+ 1660 0347 B6000000 		.4byte	.LVL16
+ 1661 034b 04100000 		.4byte	0x1004
+ 1662 034f 6D030000 		.4byte	0x36d
+ 1663 0353 0E       		.uleb128 0xe
+ 1664 0354 01       		.uleb128 0x1
+ 1665 0355 50       		.byte	0x50
+ 1666 0356 02       		.uleb128 0x2
+ 1667 0357 7D       		.byte	0x7d
+ 1668 0358 00       		.sleb128 0
+ 1669 0359 0E       		.uleb128 0xe
+ 1670 035a 01       		.uleb128 0x1
+ 1671 035b 51       		.byte	0x51
+ 1672 035c 02       		.uleb128 0x2
+ 1673 035d 91       		.byte	0x91
+ 1674 035e 48       		.sleb128 -56
+ 1675 035f 0E       		.uleb128 0xe
+ 1676 0360 01       		.uleb128 0x1
+ 1677 0361 52       		.byte	0x52
+ 1678 0362 03       		.uleb128 0x3
+ 1679 0363 91       		.byte	0x91
+ 1680 0364 A87F     		.sleb128 -88
+ 1681 0366 0E       		.uleb128 0xe
+ 1682 0367 01       		.uleb128 0x1
+ 1683 0368 53       		.byte	0x53
+ 1684 0369 02       		.uleb128 0x2
+ 1685 036a 74       		.byte	0x74
+ 1686 036b 00       		.sleb128 0
+ 1687 036c 00       		.byte	0
+ 1688 036d 0D       		.uleb128 0xd
+ 1689 036e C2000000 		.4byte	.LVL17
+ 1690 0372 25100000 		.4byte	0x1025
+ 1691 0376 93030000 		.4byte	0x393
+ 1692 037a 0E       		.uleb128 0xe
+ 1693 037b 01       		.uleb128 0x1
+ 1694 037c 50       		.byte	0x50
+ 1695 037d 02       		.uleb128 0x2
+ 1696 037e 7D       		.byte	0x7d
+ 1697 037f 00       		.sleb128 0
+ 1698 0380 0E       		.uleb128 0xe
+ 1699 0381 01       		.uleb128 0x1
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqCnWHK.s 			page 36
+
+
+ 1700 0382 51       		.byte	0x51
+ 1701 0383 02       		.uleb128 0x2
+ 1702 0384 7D       		.byte	0x7d
+ 1703 0385 00       		.sleb128 0
+ 1704 0386 0E       		.uleb128 0xe
+ 1705 0387 01       		.uleb128 0x1
+ 1706 0388 52       		.byte	0x52
+ 1707 0389 02       		.uleb128 0x2
+ 1708 038a 77       		.byte	0x77
+ 1709 038b 00       		.sleb128 0
+ 1710 038c 0E       		.uleb128 0xe
+ 1711 038d 01       		.uleb128 0x1
+ 1712 038e 53       		.byte	0x53
+ 1713 038f 02       		.uleb128 0x2
+ 1714 0390 74       		.byte	0x74
+ 1715 0391 00       		.sleb128 0
+ 1716 0392 00       		.byte	0
+ 1717 0393 0D       		.uleb128 0xd
+ 1718 0394 CA000000 		.4byte	.LVL18
+ 1719 0398 30100000 		.4byte	0x1030
+ 1720 039c AE030000 		.4byte	0x3ae
+ 1721 03a0 0E       		.uleb128 0xe
+ 1722 03a1 01       		.uleb128 0x1
+ 1723 03a2 50       		.byte	0x50
+ 1724 03a3 02       		.uleb128 0x2
+ 1725 03a4 76       		.byte	0x76
+ 1726 03a5 00       		.sleb128 0
+ 1727 03a6 0E       		.uleb128 0xe
+ 1728 03a7 01       		.uleb128 0x1
+ 1729 03a8 51       		.byte	0x51
+ 1730 03a9 03       		.uleb128 0x3
+ 1731 03aa 91       		.byte	0x91
+ 1732 03ab E87E     		.sleb128 -152
+ 1733 03ad 00       		.byte	0
+ 1734 03ae 0F       		.uleb128 0xf
+ 1735 03af D4000000 		.4byte	.LVL19
+ 1736 03b3 30100000 		.4byte	0x1030
+ 1737 03b7 0E       		.uleb128 0xe
+ 1738 03b8 01       		.uleb128 0x1
+ 1739 03b9 50       		.byte	0x50
+ 1740 03ba 02       		.uleb128 0x2
+ 1741 03bb 76       		.byte	0x76
+ 1742 03bc 20       		.sleb128 32
+ 1743 03bd 0E       		.uleb128 0xe
+ 1744 03be 01       		.uleb128 0x1
+ 1745 03bf 51       		.byte	0x51
+ 1746 03c0 02       		.uleb128 0x2
+ 1747 03c1 7D       		.byte	0x7d
+ 1748 03c2 00       		.sleb128 0
+ 1749 03c3 00       		.byte	0
+ 1750 03c4 00       		.byte	0
+ 1751 03c5 10       		.uleb128 0x10
+ 1752 03c6 04       		.byte	0x4
+ 1753 03c7 E9000000 		.4byte	0xe9
+ 1754 03cb 11       		.uleb128 0x11
+ 1755 03cc C5030000 		.4byte	0x3c5
+ 1756 03d0 10       		.uleb128 0x10
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqCnWHK.s 			page 37
+
+
+ 1757 03d1 04       		.byte	0x4
+ 1758 03d2 D6030000 		.4byte	0x3d6
+ 1759 03d6 11       		.uleb128 0x11
+ 1760 03d7 E9000000 		.4byte	0xe9
+ 1761 03db 11       		.uleb128 0x11
+ 1762 03dc D0030000 		.4byte	0x3d0
+ 1763 03e0 09       		.uleb128 0x9
+ 1764 03e1 C7020000 		.4byte	.LASF19
+ 1765 03e5 01       		.byte	0x1
+ 1766 03e6 12       		.byte	0x12
+ 1767 03e7 00000000 		.4byte	.LFB0
+ 1768 03eb 44010000 		.4byte	.LFE0-.LFB0
+ 1769 03ef 01       		.uleb128 0x1
+ 1770 03f0 9C       		.byte	0x9c
+ 1771 03f1 77070000 		.4byte	0x777
+ 1772 03f5 0A       		.uleb128 0xa
+ 1773 03f6 6F757400 		.ascii	"out\000"
+ 1774 03fa 01       		.byte	0x1
+ 1775 03fb 12       		.byte	0x12
+ 1776 03fc CB030000 		.4byte	0x3cb
+ 1777 0400 58000000 		.4byte	.LLST2
+ 1778 0404 0A       		.uleb128 0xa
+ 1779 0405 4100     		.ascii	"A\000"
+ 1780 0407 01       		.byte	0x1
+ 1781 0408 12       		.byte	0x12
+ 1782 0409 DB030000 		.4byte	0x3db
+ 1783 040d 84000000 		.4byte	.LLST3
+ 1784 0411 0A       		.uleb128 0xa
+ 1785 0412 4200     		.ascii	"B\000"
+ 1786 0414 01       		.byte	0x1
+ 1787 0415 12       		.byte	0x12
+ 1788 0416 DB030000 		.4byte	0x3db
+ 1789 041a B0000000 		.4byte	.LLST4
+ 1790 041e 0B       		.uleb128 0xb
+ 1791 041f 0E010000 		.4byte	.LASF16
+ 1792 0423 01       		.byte	0x1
+ 1793 0424 14       		.byte	0x14
+ 1794 0425 C1000000 		.4byte	0xc1
+ 1795 0429 02       		.uleb128 0x2
+ 1796 042a 91       		.byte	0x91
+ 1797 042b 48       		.sleb128 -56
+ 1798 042c 0C       		.uleb128 0xc
+ 1799 042d 746D7000 		.ascii	"tmp\000"
+ 1800 0431 01       		.byte	0x1
+ 1801 0432 14       		.byte	0x14
+ 1802 0433 C1000000 		.4byte	0xc1
+ 1803 0437 03       		.uleb128 0x3
+ 1804 0438 91       		.byte	0x91
+ 1805 0439 A87F     		.sleb128 -88
+ 1806 043b 0B       		.uleb128 0xb
+ 1807 043c 8D020000 		.4byte	.LASF17
+ 1808 0440 01       		.byte	0x1
+ 1809 0441 14       		.byte	0x14
+ 1810 0442 C1000000 		.4byte	0xc1
+ 1811 0446 03       		.uleb128 0x3
+ 1812 0447 91       		.byte	0x91
+ 1813 0448 887F     		.sleb128 -120
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqCnWHK.s 			page 38
+
+
+ 1814 044a 0C       		.uleb128 0xc
+ 1815 044b 783300   		.ascii	"x3\000"
+ 1816 044e 01       		.byte	0x1
+ 1817 044f 15       		.byte	0x15
+ 1818 0450 C1000000 		.4byte	0xc1
+ 1819 0454 03       		.uleb128 0x3
+ 1820 0455 91       		.byte	0x91
+ 1821 0456 E87E     		.sleb128 -152
+ 1822 0458 0C       		.uleb128 0xc
+ 1823 0459 793300   		.ascii	"y3\000"
+ 1824 045c 01       		.byte	0x1
+ 1825 045d 15       		.byte	0x15
+ 1826 045e C1000000 		.4byte	0xc1
+ 1827 0462 03       		.uleb128 0x3
+ 1828 0463 91       		.byte	0x91
+ 1829 0464 C87E     		.sleb128 -184
+ 1830 0466 0D       		.uleb128 0xd
+ 1831 0467 10000000 		.4byte	.LVL24
+ 1832 046b EE0F0000 		.4byte	0xfee
+ 1833 046f 7A040000 		.4byte	0x47a
+ 1834 0473 0E       		.uleb128 0xe
+ 1835 0474 01       		.uleb128 0x1
+ 1836 0475 50       		.byte	0x50
+ 1837 0476 02       		.uleb128 0x2
+ 1838 0477 74       		.byte	0x74
+ 1839 0478 00       		.sleb128 0
+ 1840 0479 00       		.byte	0
+ 1841 047a 0D       		.uleb128 0xd
+ 1842 047b 1C000000 		.4byte	.LVL25
+ 1843 047f EE0F0000 		.4byte	0xfee
+ 1844 0483 8E040000 		.4byte	0x48e
+ 1845 0487 0E       		.uleb128 0xe
+ 1846 0488 01       		.uleb128 0x1
+ 1847 0489 50       		.byte	0x50
+ 1848 048a 02       		.uleb128 0x2
+ 1849 048b 74       		.byte	0x74
+ 1850 048c 20       		.sleb128 32
+ 1851 048d 00       		.byte	0
+ 1852 048e 0D       		.uleb128 0xd
+ 1853 048f 28000000 		.4byte	.LVL26
+ 1854 0493 30100000 		.4byte	0x1030
+ 1855 0497 A8040000 		.4byte	0x4a8
+ 1856 049b 0E       		.uleb128 0xe
+ 1857 049c 01       		.uleb128 0x1
+ 1858 049d 50       		.byte	0x50
+ 1859 049e 02       		.uleb128 0x2
+ 1860 049f 76       		.byte	0x76
+ 1861 04a0 00       		.sleb128 0
+ 1862 04a1 0E       		.uleb128 0xe
+ 1863 04a2 01       		.uleb128 0x1
+ 1864 04a3 51       		.byte	0x51
+ 1865 04a4 02       		.uleb128 0x2
+ 1866 04a5 75       		.byte	0x75
+ 1867 04a6 00       		.sleb128 0
+ 1868 04a7 00       		.byte	0
+ 1869 04a8 0D       		.uleb128 0xd
+ 1870 04a9 34000000 		.4byte	.LVL27
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqCnWHK.s 			page 39
+
+
+ 1871 04ad 30100000 		.4byte	0x1030
+ 1872 04b1 C2040000 		.4byte	0x4c2
+ 1873 04b5 0E       		.uleb128 0xe
+ 1874 04b6 01       		.uleb128 0x1
+ 1875 04b7 50       		.byte	0x50
+ 1876 04b8 02       		.uleb128 0x2
+ 1877 04b9 76       		.byte	0x76
+ 1878 04ba 20       		.sleb128 32
+ 1879 04bb 0E       		.uleb128 0xe
+ 1880 04bc 01       		.uleb128 0x1
+ 1881 04bd 51       		.byte	0x51
+ 1882 04be 02       		.uleb128 0x2
+ 1883 04bf 75       		.byte	0x75
+ 1884 04c0 20       		.sleb128 32
+ 1885 04c1 00       		.byte	0
+ 1886 04c2 0D       		.uleb128 0xd
+ 1887 04c3 3C000000 		.4byte	.LVL28
+ 1888 04c7 EE0F0000 		.4byte	0xfee
+ 1889 04cb D6040000 		.4byte	0x4d6
+ 1890 04cf 0E       		.uleb128 0xe
+ 1891 04d0 01       		.uleb128 0x1
+ 1892 04d1 50       		.byte	0x50
+ 1893 04d2 02       		.uleb128 0x2
+ 1894 04d3 75       		.byte	0x75
+ 1895 04d4 00       		.sleb128 0
+ 1896 04d5 00       		.byte	0
+ 1897 04d6 0D       		.uleb128 0xd
+ 1898 04d7 48000000 		.4byte	.LVL29
+ 1899 04db EE0F0000 		.4byte	0xfee
+ 1900 04df EA040000 		.4byte	0x4ea
+ 1901 04e3 0E       		.uleb128 0xe
+ 1902 04e4 01       		.uleb128 0x1
+ 1903 04e5 50       		.byte	0x50
+ 1904 04e6 02       		.uleb128 0x2
+ 1905 04e7 75       		.byte	0x75
+ 1906 04e8 20       		.sleb128 32
+ 1907 04e9 00       		.byte	0
+ 1908 04ea 0D       		.uleb128 0xd
+ 1909 04eb 54000000 		.4byte	.LVL30
+ 1910 04ef 30100000 		.4byte	0x1030
+ 1911 04f3 04050000 		.4byte	0x504
+ 1912 04f7 0E       		.uleb128 0xe
+ 1913 04f8 01       		.uleb128 0x1
+ 1914 04f9 50       		.byte	0x50
+ 1915 04fa 02       		.uleb128 0x2
+ 1916 04fb 76       		.byte	0x76
+ 1917 04fc 00       		.sleb128 0
+ 1918 04fd 0E       		.uleb128 0xe
+ 1919 04fe 01       		.uleb128 0x1
+ 1920 04ff 51       		.byte	0x51
+ 1921 0500 02       		.uleb128 0x2
+ 1922 0501 74       		.byte	0x74
+ 1923 0502 00       		.sleb128 0
+ 1924 0503 00       		.byte	0
+ 1925 0504 0D       		.uleb128 0xd
+ 1926 0505 60000000 		.4byte	.LVL31
+ 1927 0509 30100000 		.4byte	0x1030
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqCnWHK.s 			page 40
+
+
+ 1928 050d 1E050000 		.4byte	0x51e
+ 1929 0511 0E       		.uleb128 0xe
+ 1930 0512 01       		.uleb128 0x1
+ 1931 0513 50       		.byte	0x50
+ 1932 0514 02       		.uleb128 0x2
+ 1933 0515 76       		.byte	0x76
+ 1934 0516 20       		.sleb128 32
+ 1935 0517 0E       		.uleb128 0xe
+ 1936 0518 01       		.uleb128 0x1
+ 1937 0519 51       		.byte	0x51
+ 1938 051a 02       		.uleb128 0x2
+ 1939 051b 74       		.byte	0x74
+ 1940 051c 20       		.sleb128 32
+ 1941 051d 00       		.byte	0
+ 1942 051e 0D       		.uleb128 0xd
+ 1943 051f 6A000000 		.4byte	.LVL32
+ 1944 0523 3B100000 		.4byte	0x103b
+ 1945 0527 38050000 		.4byte	0x538
+ 1946 052b 0E       		.uleb128 0xe
+ 1947 052c 01       		.uleb128 0x1
+ 1948 052d 50       		.byte	0x50
+ 1949 052e 02       		.uleb128 0x2
+ 1950 052f 74       		.byte	0x74
+ 1951 0530 00       		.sleb128 0
+ 1952 0531 0E       		.uleb128 0xe
+ 1953 0532 01       		.uleb128 0x1
+ 1954 0533 51       		.byte	0x51
+ 1955 0534 02       		.uleb128 0x2
+ 1956 0535 75       		.byte	0x75
+ 1957 0536 00       		.sleb128 0
+ 1958 0537 00       		.byte	0
+ 1959 0538 0D       		.uleb128 0xd
+ 1960 0539 7E000000 		.4byte	.LVL33
+ 1961 053d 0F100000 		.4byte	0x100f
+ 1962 0541 62050000 		.4byte	0x562
+ 1963 0545 0E       		.uleb128 0xe
+ 1964 0546 01       		.uleb128 0x1
+ 1965 0547 50       		.byte	0x50
+ 1966 0548 03       		.uleb128 0x3
+ 1967 0549 91       		.byte	0x91
+ 1968 054a A87F     		.sleb128 -88
+ 1969 054c 0E       		.uleb128 0xe
+ 1970 054d 01       		.uleb128 0x1
+ 1971 054e 51       		.byte	0x51
+ 1972 054f 02       		.uleb128 0x2
+ 1973 0550 74       		.byte	0x74
+ 1974 0551 20       		.sleb128 32
+ 1975 0552 0E       		.uleb128 0xe
+ 1976 0553 01       		.uleb128 0x1
+ 1977 0554 52       		.byte	0x52
+ 1978 0555 02       		.uleb128 0x2
+ 1979 0556 75       		.byte	0x75
+ 1980 0557 20       		.sleb128 32
+ 1981 0558 0E       		.uleb128 0xe
+ 1982 0559 01       		.uleb128 0x1
+ 1983 055a 53       		.byte	0x53
+ 1984 055b 05       		.uleb128 0x5
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqCnWHK.s 			page 41
+
+
+ 1985 055c 03       		.byte	0x3
+ 1986 055d 00000000 		.4byte	.LANCHOR0
+ 1987 0561 00       		.byte	0
+ 1988 0562 0D       		.uleb128 0xd
+ 1989 0563 84000000 		.4byte	.LVL34
+ 1990 0567 EE0F0000 		.4byte	0xfee
+ 1991 056b 77050000 		.4byte	0x577
+ 1992 056f 0E       		.uleb128 0xe
+ 1993 0570 01       		.uleb128 0x1
+ 1994 0571 50       		.byte	0x50
+ 1995 0572 03       		.uleb128 0x3
+ 1996 0573 91       		.byte	0x91
+ 1997 0574 A87F     		.sleb128 -88
+ 1998 0576 00       		.byte	0
+ 1999 0577 0D       		.uleb128 0xd
+ 2000 0578 8E000000 		.4byte	.LVL35
+ 2001 057c F90F0000 		.4byte	0xff9
+ 2002 0580 8B050000 		.4byte	0x58b
+ 2003 0584 0E       		.uleb128 0xe
+ 2004 0585 01       		.uleb128 0x1
+ 2005 0586 50       		.byte	0x50
+ 2006 0587 02       		.uleb128 0x2
+ 2007 0588 76       		.byte	0x76
+ 2008 0589 00       		.sleb128 0
+ 2009 058a 00       		.byte	0
+ 2010 058b 0D       		.uleb128 0xd
+ 2011 058c 96000000 		.4byte	.LVL36
+ 2012 0590 F90F0000 		.4byte	0xff9
+ 2013 0594 9F050000 		.4byte	0x59f
+ 2014 0598 0E       		.uleb128 0xe
+ 2015 0599 01       		.uleb128 0x1
+ 2016 059a 50       		.byte	0x50
+ 2017 059b 02       		.uleb128 0x2
+ 2018 059c 76       		.byte	0x76
+ 2019 059d 20       		.sleb128 32
+ 2020 059e 00       		.byte	0
+ 2021 059f 0D       		.uleb128 0xd
+ 2022 05a0 A0000000 		.4byte	.LVL37
+ 2023 05a4 F4000000 		.4byte	0xf4
+ 2024 05a8 B9050000 		.4byte	0x5b9
+ 2025 05ac 0E       		.uleb128 0xe
+ 2026 05ad 01       		.uleb128 0x1
+ 2027 05ae 50       		.byte	0x50
+ 2028 05af 02       		.uleb128 0x2
+ 2029 05b0 76       		.byte	0x76
+ 2030 05b1 00       		.sleb128 0
+ 2031 05b2 0E       		.uleb128 0xe
+ 2032 05b3 01       		.uleb128 0x1
+ 2033 05b4 51       		.byte	0x51
+ 2034 05b5 02       		.uleb128 0x2
+ 2035 05b6 76       		.byte	0x76
+ 2036 05b7 00       		.sleb128 0
+ 2037 05b8 00       		.byte	0
+ 2038 05b9 0D       		.uleb128 0xd
+ 2039 05ba BA000000 		.4byte	.LVL38
+ 2040 05be 25100000 		.4byte	0x1025
+ 2041 05c2 E2050000 		.4byte	0x5e2
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqCnWHK.s 			page 42
+
+
+ 2042 05c6 0E       		.uleb128 0xe
+ 2043 05c7 01       		.uleb128 0x1
+ 2044 05c8 50       		.byte	0x50
+ 2045 05c9 03       		.uleb128 0x3
+ 2046 05ca 91       		.byte	0x91
+ 2047 05cb A87F     		.sleb128 -88
+ 2048 05cd 0E       		.uleb128 0xe
+ 2049 05ce 01       		.uleb128 0x1
+ 2050 05cf 51       		.byte	0x51
+ 2051 05d0 02       		.uleb128 0x2
+ 2052 05d1 75       		.byte	0x75
+ 2053 05d2 20       		.sleb128 32
+ 2054 05d3 0E       		.uleb128 0xe
+ 2055 05d4 01       		.uleb128 0x1
+ 2056 05d5 52       		.byte	0x52
+ 2057 05d6 04       		.uleb128 0x4
+ 2058 05d7 91       		.byte	0x91
+ 2059 05d8 C47E     		.sleb128 -188
+ 2060 05da 06       		.byte	0x6
+ 2061 05db 0E       		.uleb128 0xe
+ 2062 05dc 01       		.uleb128 0x1
+ 2063 05dd 53       		.byte	0x53
+ 2064 05de 02       		.uleb128 0x2
+ 2065 05df 77       		.byte	0x77
+ 2066 05e0 00       		.sleb128 0
+ 2067 05e1 00       		.byte	0
+ 2068 05e2 0D       		.uleb128 0xd
+ 2069 05e3 C6000000 		.4byte	.LVL39
+ 2070 05e7 25100000 		.4byte	0x1025
+ 2071 05eb 09060000 		.4byte	0x609
+ 2072 05ef 0E       		.uleb128 0xe
+ 2073 05f0 01       		.uleb128 0x1
+ 2074 05f1 50       		.byte	0x50
+ 2075 05f2 03       		.uleb128 0x3
+ 2076 05f3 91       		.byte	0x91
+ 2077 05f4 887F     		.sleb128 -120
+ 2078 05f6 0E       		.uleb128 0xe
+ 2079 05f7 01       		.uleb128 0x1
+ 2080 05f8 51       		.byte	0x51
+ 2081 05f9 02       		.uleb128 0x2
+ 2082 05fa 75       		.byte	0x75
+ 2083 05fb 00       		.sleb128 0
+ 2084 05fc 0E       		.uleb128 0xe
+ 2085 05fd 01       		.uleb128 0x1
+ 2086 05fe 52       		.byte	0x52
+ 2087 05ff 02       		.uleb128 0x2
+ 2088 0600 74       		.byte	0x74
+ 2089 0601 00       		.sleb128 0
+ 2090 0602 0E       		.uleb128 0xe
+ 2091 0603 01       		.uleb128 0x1
+ 2092 0604 53       		.byte	0x53
+ 2093 0605 02       		.uleb128 0x2
+ 2094 0606 77       		.byte	0x77
+ 2095 0607 00       		.sleb128 0
+ 2096 0608 00       		.byte	0
+ 2097 0609 0D       		.uleb128 0xd
+ 2098 060a D0000000 		.4byte	.LVL40
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqCnWHK.s 			page 43
+
+
+ 2099 060e 1A100000 		.4byte	0x101a
+ 2100 0612 2B060000 		.4byte	0x62b
+ 2101 0616 0E       		.uleb128 0xe
+ 2102 0617 01       		.uleb128 0x1
+ 2103 0618 50       		.byte	0x50
+ 2104 0619 03       		.uleb128 0x3
+ 2105 061a 91       		.byte	0x91
+ 2106 061b 887F     		.sleb128 -120
+ 2107 061d 0E       		.uleb128 0xe
+ 2108 061e 01       		.uleb128 0x1
+ 2109 061f 51       		.byte	0x51
+ 2110 0620 03       		.uleb128 0x3
+ 2111 0621 91       		.byte	0x91
+ 2112 0622 887F     		.sleb128 -120
+ 2113 0624 0E       		.uleb128 0xe
+ 2114 0625 01       		.uleb128 0x1
+ 2115 0626 52       		.byte	0x52
+ 2116 0627 02       		.uleb128 0x2
+ 2117 0628 77       		.byte	0x77
+ 2118 0629 00       		.sleb128 0
+ 2119 062a 00       		.byte	0
+ 2120 062b 0D       		.uleb128 0xd
+ 2121 062c DE000000 		.4byte	.LVL41
+ 2122 0630 04100000 		.4byte	0x1004
+ 2123 0634 53060000 		.4byte	0x653
+ 2124 0638 0E       		.uleb128 0xe
+ 2125 0639 01       		.uleb128 0x1
+ 2126 063a 50       		.byte	0x50
+ 2127 063b 02       		.uleb128 0x2
+ 2128 063c 91       		.byte	0x91
+ 2129 063d 48       		.sleb128 -56
+ 2130 063e 0E       		.uleb128 0xe
+ 2131 063f 01       		.uleb128 0x1
+ 2132 0640 51       		.byte	0x51
+ 2133 0641 03       		.uleb128 0x3
+ 2134 0642 91       		.byte	0x91
+ 2135 0643 A87F     		.sleb128 -88
+ 2136 0645 0E       		.uleb128 0xe
+ 2137 0646 01       		.uleb128 0x1
+ 2138 0647 52       		.byte	0x52
+ 2139 0648 03       		.uleb128 0x3
+ 2140 0649 91       		.byte	0x91
+ 2141 064a 887F     		.sleb128 -120
+ 2142 064c 0E       		.uleb128 0xe
+ 2143 064d 01       		.uleb128 0x1
+ 2144 064e 53       		.byte	0x53
+ 2145 064f 02       		.uleb128 0x2
+ 2146 0650 77       		.byte	0x77
+ 2147 0651 00       		.sleb128 0
+ 2148 0652 00       		.byte	0
+ 2149 0653 0D       		.uleb128 0xd
+ 2150 0654 EA000000 		.4byte	.LVL42
+ 2151 0658 04100000 		.4byte	0x1004
+ 2152 065c 7A060000 		.4byte	0x67a
+ 2153 0660 0E       		.uleb128 0xe
+ 2154 0661 01       		.uleb128 0x1
+ 2155 0662 50       		.byte	0x50
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqCnWHK.s 			page 44
+
+
+ 2156 0663 03       		.uleb128 0x3
+ 2157 0664 91       		.byte	0x91
+ 2158 0665 A87F     		.sleb128 -88
+ 2159 0667 0E       		.uleb128 0xe
+ 2160 0668 01       		.uleb128 0x1
+ 2161 0669 51       		.byte	0x51
+ 2162 066a 02       		.uleb128 0x2
+ 2163 066b 91       		.byte	0x91
+ 2164 066c 48       		.sleb128 -56
+ 2165 066d 0E       		.uleb128 0xe
+ 2166 066e 01       		.uleb128 0x1
+ 2167 066f 52       		.byte	0x52
+ 2168 0670 02       		.uleb128 0x2
+ 2169 0671 91       		.byte	0x91
+ 2170 0672 48       		.sleb128 -56
+ 2171 0673 0E       		.uleb128 0xe
+ 2172 0674 01       		.uleb128 0x1
+ 2173 0675 53       		.byte	0x53
+ 2174 0676 02       		.uleb128 0x2
+ 2175 0677 77       		.byte	0x77
+ 2176 0678 00       		.sleb128 0
+ 2177 0679 00       		.byte	0
+ 2178 067a 0D       		.uleb128 0xd
+ 2179 067b F6000000 		.4byte	.LVL43
+ 2180 067f 25100000 		.4byte	0x1025
+ 2181 0683 A2060000 		.4byte	0x6a2
+ 2182 0687 0E       		.uleb128 0xe
+ 2183 0688 01       		.uleb128 0x1
+ 2184 0689 50       		.byte	0x50
+ 2185 068a 03       		.uleb128 0x3
+ 2186 068b 91       		.byte	0x91
+ 2187 068c E87E     		.sleb128 -152
+ 2188 068e 0E       		.uleb128 0xe
+ 2189 068f 01       		.uleb128 0x1
+ 2190 0690 51       		.byte	0x51
+ 2191 0691 03       		.uleb128 0x3
+ 2192 0692 91       		.byte	0x91
+ 2193 0693 A87F     		.sleb128 -88
+ 2194 0695 0E       		.uleb128 0xe
+ 2195 0696 01       		.uleb128 0x1
+ 2196 0697 52       		.byte	0x52
+ 2197 0698 02       		.uleb128 0x2
+ 2198 0699 74       		.byte	0x74
+ 2199 069a 00       		.sleb128 0
+ 2200 069b 0E       		.uleb128 0xe
+ 2201 069c 01       		.uleb128 0x1
+ 2202 069d 53       		.byte	0x53
+ 2203 069e 02       		.uleb128 0x2
+ 2204 069f 77       		.byte	0x77
+ 2205 06a0 00       		.sleb128 0
+ 2206 06a1 00       		.byte	0
+ 2207 06a2 0D       		.uleb128 0xd
+ 2208 06a3 02010000 		.4byte	.LVL44
+ 2209 06a7 25100000 		.4byte	0x1025
+ 2210 06ab CA060000 		.4byte	0x6ca
+ 2211 06af 0E       		.uleb128 0xe
+ 2212 06b0 01       		.uleb128 0x1
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqCnWHK.s 			page 45
+
+
+ 2213 06b1 50       		.byte	0x50
+ 2214 06b2 03       		.uleb128 0x3
+ 2215 06b3 91       		.byte	0x91
+ 2216 06b4 E87E     		.sleb128 -152
+ 2217 06b6 0E       		.uleb128 0xe
+ 2218 06b7 01       		.uleb128 0x1
+ 2219 06b8 51       		.byte	0x51
+ 2220 06b9 03       		.uleb128 0x3
+ 2221 06ba 91       		.byte	0x91
+ 2222 06bb E87E     		.sleb128 -152
+ 2223 06bd 0E       		.uleb128 0xe
+ 2224 06be 01       		.uleb128 0x1
+ 2225 06bf 52       		.byte	0x52
+ 2226 06c0 02       		.uleb128 0x2
+ 2227 06c1 75       		.byte	0x75
+ 2228 06c2 00       		.sleb128 0
+ 2229 06c3 0E       		.uleb128 0xe
+ 2230 06c4 01       		.uleb128 0x1
+ 2231 06c5 53       		.byte	0x53
+ 2232 06c6 02       		.uleb128 0x2
+ 2233 06c7 77       		.byte	0x77
+ 2234 06c8 00       		.sleb128 0
+ 2235 06c9 00       		.byte	0
+ 2236 06ca 0D       		.uleb128 0xd
+ 2237 06cb 10010000 		.4byte	.LVL45
+ 2238 06cf 25100000 		.4byte	0x1025
+ 2239 06d3 F2060000 		.4byte	0x6f2
+ 2240 06d7 0E       		.uleb128 0xe
+ 2241 06d8 01       		.uleb128 0x1
+ 2242 06d9 50       		.byte	0x50
+ 2243 06da 03       		.uleb128 0x3
+ 2244 06db 91       		.byte	0x91
+ 2245 06dc A87F     		.sleb128 -88
+ 2246 06de 0E       		.uleb128 0xe
+ 2247 06df 01       		.uleb128 0x1
+ 2248 06e0 51       		.byte	0x51
+ 2249 06e1 02       		.uleb128 0x2
+ 2250 06e2 74       		.byte	0x74
+ 2251 06e3 00       		.sleb128 0
+ 2252 06e4 0E       		.uleb128 0xe
+ 2253 06e5 01       		.uleb128 0x1
+ 2254 06e6 52       		.byte	0x52
+ 2255 06e7 03       		.uleb128 0x3
+ 2256 06e8 91       		.byte	0x91
+ 2257 06e9 E87E     		.sleb128 -152
+ 2258 06eb 0E       		.uleb128 0xe
+ 2259 06ec 01       		.uleb128 0x1
+ 2260 06ed 53       		.byte	0x53
+ 2261 06ee 02       		.uleb128 0x2
+ 2262 06ef 77       		.byte	0x77
+ 2263 06f0 00       		.sleb128 0
+ 2264 06f1 00       		.byte	0
+ 2265 06f2 0D       		.uleb128 0xd
+ 2266 06f3 1E010000 		.4byte	.LVL46
+ 2267 06f7 04100000 		.4byte	0x1004
+ 2268 06fb 1A070000 		.4byte	0x71a
+ 2269 06ff 0E       		.uleb128 0xe
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqCnWHK.s 			page 46
+
+
+ 2270 0700 01       		.uleb128 0x1
+ 2271 0701 50       		.byte	0x50
+ 2272 0702 03       		.uleb128 0x3
+ 2273 0703 91       		.byte	0x91
+ 2274 0704 A87F     		.sleb128 -88
+ 2275 0706 0E       		.uleb128 0xe
+ 2276 0707 01       		.uleb128 0x1
+ 2277 0708 51       		.byte	0x51
+ 2278 0709 02       		.uleb128 0x2
+ 2279 070a 91       		.byte	0x91
+ 2280 070b 48       		.sleb128 -56
+ 2281 070c 0E       		.uleb128 0xe
+ 2282 070d 01       		.uleb128 0x1
+ 2283 070e 52       		.byte	0x52
+ 2284 070f 03       		.uleb128 0x3
+ 2285 0710 91       		.byte	0x91
+ 2286 0711 A87F     		.sleb128 -88
+ 2287 0713 0E       		.uleb128 0xe
+ 2288 0714 01       		.uleb128 0x1
+ 2289 0715 53       		.byte	0x53
+ 2290 0716 02       		.uleb128 0x2
+ 2291 0717 77       		.byte	0x77
+ 2292 0718 00       		.sleb128 0
+ 2293 0719 00       		.byte	0
+ 2294 071a 0D       		.uleb128 0xd
+ 2295 071b 2A010000 		.4byte	.LVL47
+ 2296 071f 25100000 		.4byte	0x1025
+ 2297 0723 44070000 		.4byte	0x744
+ 2298 0727 0E       		.uleb128 0xe
+ 2299 0728 01       		.uleb128 0x1
+ 2300 0729 50       		.byte	0x50
+ 2301 072a 03       		.uleb128 0x3
+ 2302 072b 91       		.byte	0x91
+ 2303 072c C87E     		.sleb128 -184
+ 2304 072e 0E       		.uleb128 0xe
+ 2305 072f 01       		.uleb128 0x1
+ 2306 0730 51       		.byte	0x51
+ 2307 0731 03       		.uleb128 0x3
+ 2308 0732 91       		.byte	0x91
+ 2309 0733 A87F     		.sleb128 -88
+ 2310 0735 0E       		.uleb128 0xe
+ 2311 0736 01       		.uleb128 0x1
+ 2312 0737 52       		.byte	0x52
+ 2313 0738 04       		.uleb128 0x4
+ 2314 0739 91       		.byte	0x91
+ 2315 073a C47E     		.sleb128 -188
+ 2316 073c 06       		.byte	0x6
+ 2317 073d 0E       		.uleb128 0xe
+ 2318 073e 01       		.uleb128 0x1
+ 2319 073f 53       		.byte	0x53
+ 2320 0740 02       		.uleb128 0x2
+ 2321 0741 77       		.byte	0x77
+ 2322 0742 00       		.sleb128 0
+ 2323 0743 00       		.byte	0
+ 2324 0744 0D       		.uleb128 0xd
+ 2325 0745 32010000 		.4byte	.LVL48
+ 2326 0749 30100000 		.4byte	0x1030
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqCnWHK.s 			page 47
+
+
+ 2327 074d 5F070000 		.4byte	0x75f
+ 2328 0751 0E       		.uleb128 0xe
+ 2329 0752 01       		.uleb128 0x1
+ 2330 0753 50       		.byte	0x50
+ 2331 0754 02       		.uleb128 0x2
+ 2332 0755 76       		.byte	0x76
+ 2333 0756 00       		.sleb128 0
+ 2334 0757 0E       		.uleb128 0xe
+ 2335 0758 01       		.uleb128 0x1
+ 2336 0759 51       		.byte	0x51
+ 2337 075a 03       		.uleb128 0x3
+ 2338 075b 91       		.byte	0x91
+ 2339 075c E87E     		.sleb128 -152
+ 2340 075e 00       		.byte	0
+ 2341 075f 0F       		.uleb128 0xf
+ 2342 0760 3C010000 		.4byte	.LVL49
+ 2343 0764 30100000 		.4byte	0x1030
+ 2344 0768 0E       		.uleb128 0xe
+ 2345 0769 01       		.uleb128 0x1
+ 2346 076a 50       		.byte	0x50
+ 2347 076b 02       		.uleb128 0x2
+ 2348 076c 76       		.byte	0x76
+ 2349 076d 20       		.sleb128 32
+ 2350 076e 0E       		.uleb128 0xe
+ 2351 076f 01       		.uleb128 0x1
+ 2352 0770 51       		.byte	0x51
+ 2353 0771 03       		.uleb128 0x3
+ 2354 0772 91       		.byte	0x91
+ 2355 0773 C87E     		.sleb128 -184
+ 2356 0775 00       		.byte	0
+ 2357 0776 00       		.byte	0
+ 2358 0777 09       		.uleb128 0x9
+ 2359 0778 00000000 		.4byte	.LASF20
+ 2360 077c 01       		.byte	0x1
+ 2361 077d 6C       		.byte	0x6c
+ 2362 077e 00000000 		.4byte	.LFB2
+ 2363 0782 58000000 		.4byte	.LFE2-.LFB2
+ 2364 0786 01       		.uleb128 0x1
+ 2365 0787 9C       		.byte	0x9c
+ 2366 0788 6C080000 		.4byte	0x86c
+ 2367 078c 0A       		.uleb128 0xa
+ 2368 078d 6F757400 		.ascii	"out\000"
+ 2369 0791 01       		.byte	0x1
+ 2370 0792 6C       		.byte	0x6c
+ 2371 0793 CB030000 		.4byte	0x3cb
+ 2372 0797 DC000000 		.4byte	.LLST5
+ 2373 079b 0A       		.uleb128 0xa
+ 2374 079c 6B00     		.ascii	"k\000"
+ 2375 079e 01       		.byte	0x1
+ 2376 079f 6C       		.byte	0x6c
+ 2377 07a0 77080000 		.4byte	0x877
+ 2378 07a4 08010000 		.4byte	.LLST6
+ 2379 07a8 0A       		.uleb128 0xa
+ 2380 07a9 5000     		.ascii	"P\000"
+ 2381 07ab 01       		.byte	0x1
+ 2382 07ac 6C       		.byte	0x6c
+ 2383 07ad DB030000 		.4byte	0x3db
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqCnWHK.s 			page 48
+
+
+ 2384 07b1 34010000 		.4byte	.LLST7
+ 2385 07b5 0C       		.uleb128 0xc
+ 2386 07b6 5100     		.ascii	"Q\000"
+ 2387 07b8 01       		.byte	0x1
+ 2388 07b9 6E       		.byte	0x6e
+ 2389 07ba E9000000 		.4byte	0xe9
+ 2390 07be 03       		.uleb128 0x3
+ 2391 07bf 91       		.byte	0x91
+ 2392 07c0 A87F     		.sleb128 -88
+ 2393 07c2 12       		.uleb128 0x12
+ 2394 07c3 16000000 		.4byte	.LBB2
+ 2395 07c7 2C000000 		.4byte	.LBE2-.LBB2
+ 2396 07cb 13080000 		.4byte	0x813
+ 2397 07cf 13       		.uleb128 0x13
+ 2398 07d0 6900     		.ascii	"i\000"
+ 2399 07d2 01       		.byte	0x1
+ 2400 07d3 73       		.byte	0x73
+ 2401 07d4 8C000000 		.4byte	0x8c
+ 2402 07d8 60010000 		.4byte	.LLST8
+ 2403 07dc 0D       		.uleb128 0xd
+ 2404 07dd 20000000 		.4byte	.LVL58
+ 2405 07e1 F4000000 		.4byte	0xf4
+ 2406 07e5 F6070000 		.4byte	0x7f6
+ 2407 07e9 0E       		.uleb128 0xe
+ 2408 07ea 01       		.uleb128 0x1
+ 2409 07eb 50       		.byte	0x50
+ 2410 07ec 02       		.uleb128 0x2
+ 2411 07ed 7D       		.byte	0x7d
+ 2412 07ee 00       		.sleb128 0
+ 2413 07ef 0E       		.uleb128 0xe
+ 2414 07f0 01       		.uleb128 0x1
+ 2415 07f1 51       		.byte	0x51
+ 2416 07f2 02       		.uleb128 0x2
+ 2417 07f3 7D       		.byte	0x7d
+ 2418 07f4 00       		.sleb128 0
+ 2419 07f5 00       		.byte	0
+ 2420 07f6 0F       		.uleb128 0xf
+ 2421 07f7 3A000000 		.4byte	.LVL59
+ 2422 07fb E0030000 		.4byte	0x3e0
+ 2423 07ff 0E       		.uleb128 0xe
+ 2424 0800 01       		.uleb128 0x1
+ 2425 0801 50       		.byte	0x50
+ 2426 0802 02       		.uleb128 0x2
+ 2427 0803 7D       		.byte	0x7d
+ 2428 0804 00       		.sleb128 0
+ 2429 0805 0E       		.uleb128 0xe
+ 2430 0806 01       		.uleb128 0x1
+ 2431 0807 51       		.byte	0x51
+ 2432 0808 02       		.uleb128 0x2
+ 2433 0809 7D       		.byte	0x7d
+ 2434 080a 00       		.sleb128 0
+ 2435 080b 0E       		.uleb128 0xe
+ 2436 080c 01       		.uleb128 0x1
+ 2437 080d 52       		.byte	0x52
+ 2438 080e 02       		.uleb128 0x2
+ 2439 080f 75       		.byte	0x75
+ 2440 0810 00       		.sleb128 0
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqCnWHK.s 			page 49
+
+
+ 2441 0811 00       		.byte	0
+ 2442 0812 00       		.byte	0
+ 2443 0813 0D       		.uleb128 0xd
+ 2444 0814 10000000 		.4byte	.LVL55
+ 2445 0818 F90F0000 		.4byte	0xff9
+ 2446 081c 27080000 		.4byte	0x827
+ 2447 0820 0E       		.uleb128 0xe
+ 2448 0821 01       		.uleb128 0x1
+ 2449 0822 50       		.byte	0x50
+ 2450 0823 02       		.uleb128 0x2
+ 2451 0824 7D       		.byte	0x7d
+ 2452 0825 00       		.sleb128 0
+ 2453 0826 00       		.byte	0
+ 2454 0827 0D       		.uleb128 0xd
+ 2455 0828 16000000 		.4byte	.LVL56
+ 2456 082c F90F0000 		.4byte	0xff9
+ 2457 0830 3B080000 		.4byte	0x83b
+ 2458 0834 0E       		.uleb128 0xe
+ 2459 0835 01       		.uleb128 0x1
+ 2460 0836 50       		.byte	0x50
+ 2461 0837 02       		.uleb128 0x2
+ 2462 0838 91       		.byte	0x91
+ 2463 0839 48       		.sleb128 -56
+ 2464 083a 00       		.byte	0
+ 2465 083b 0D       		.uleb128 0xd
+ 2466 083c 4A000000 		.4byte	.LVL61
+ 2467 0840 30100000 		.4byte	0x1030
+ 2468 0844 55080000 		.4byte	0x855
+ 2469 0848 0E       		.uleb128 0xe
+ 2470 0849 01       		.uleb128 0x1
+ 2471 084a 50       		.byte	0x50
+ 2472 084b 02       		.uleb128 0x2
+ 2473 084c 76       		.byte	0x76
+ 2474 084d 00       		.sleb128 0
+ 2475 084e 0E       		.uleb128 0xe
+ 2476 084f 01       		.uleb128 0x1
+ 2477 0850 51       		.byte	0x51
+ 2478 0851 02       		.uleb128 0x2
+ 2479 0852 7D       		.byte	0x7d
+ 2480 0853 00       		.sleb128 0
+ 2481 0854 00       		.byte	0
+ 2482 0855 0F       		.uleb128 0xf
+ 2483 0856 54000000 		.4byte	.LVL62
+ 2484 085a 30100000 		.4byte	0x1030
+ 2485 085e 0E       		.uleb128 0xe
+ 2486 085f 01       		.uleb128 0x1
+ 2487 0860 50       		.byte	0x50
+ 2488 0861 02       		.uleb128 0x2
+ 2489 0862 76       		.byte	0x76
+ 2490 0863 20       		.sleb128 32
+ 2491 0864 0E       		.uleb128 0xe
+ 2492 0865 01       		.uleb128 0x1
+ 2493 0866 51       		.byte	0x51
+ 2494 0867 02       		.uleb128 0x2
+ 2495 0868 91       		.byte	0x91
+ 2496 0869 48       		.sleb128 -56
+ 2497 086a 00       		.byte	0
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqCnWHK.s 			page 50
+
+
+ 2498 086b 00       		.byte	0
+ 2499 086c 10       		.uleb128 0x10
+ 2500 086d 04       		.byte	0x4
+ 2501 086e 72080000 		.4byte	0x872
+ 2502 0872 11       		.uleb128 0x11
+ 2503 0873 C1000000 		.4byte	0xc1
+ 2504 0877 11       		.uleb128 0x11
+ 2505 0878 6C080000 		.4byte	0x86c
+ 2506 087c 09       		.uleb128 0x9
+ 2507 087d 74020000 		.4byte	.LASF21
+ 2508 0881 01       		.byte	0x1
+ 2509 0882 83       		.byte	0x83
+ 2510 0883 00000000 		.4byte	.LFB3
+ 2511 0887 24000000 		.4byte	.LFE3-.LFB3
+ 2512 088b 01       		.uleb128 0x1
+ 2513 088c 9C       		.byte	0x9c
+ 2514 088d E7080000 		.4byte	0x8e7
+ 2515 0891 14       		.uleb128 0x14
+ 2516 0892 CA010000 		.4byte	.LASF22
+ 2517 0896 01       		.byte	0x1
+ 2518 0897 83       		.byte	0x83
+ 2519 0898 ED080000 		.4byte	0x8ed
+ 2520 089c 80010000 		.4byte	.LLST9
+ 2521 08a0 14       		.uleb128 0x14
+ 2522 08a1 B3020000 		.4byte	.LASF23
+ 2523 08a5 01       		.byte	0x1
+ 2524 08a6 83       		.byte	0x83
+ 2525 08a7 CB030000 		.4byte	0x3cb
+ 2526 08ab AC010000 		.4byte	.LLST10
+ 2527 08af 0D       		.uleb128 0xd
+ 2528 08b0 10000000 		.4byte	.LVL69
+ 2529 08b4 46100000 		.4byte	0x1046
+ 2530 08b8 C9080000 		.4byte	0x8c9
+ 2531 08bc 0E       		.uleb128 0xe
+ 2532 08bd 01       		.uleb128 0x1
+ 2533 08be 50       		.byte	0x50
+ 2534 08bf 02       		.uleb128 0x2
+ 2535 08c0 75       		.byte	0x75
+ 2536 08c1 00       		.sleb128 0
+ 2537 08c2 0E       		.uleb128 0xe
+ 2538 08c3 01       		.uleb128 0x1
+ 2539 08c4 51       		.byte	0x51
+ 2540 08c5 02       		.uleb128 0x2
+ 2541 08c6 74       		.byte	0x74
+ 2542 08c7 20       		.sleb128 32
+ 2543 08c8 00       		.byte	0
+ 2544 08c9 0F       		.uleb128 0xf
+ 2545 08ca 1C000000 		.4byte	.LVL70
+ 2546 08ce 77070000 		.4byte	0x777
+ 2547 08d2 0E       		.uleb128 0xe
+ 2548 08d3 01       		.uleb128 0x1
+ 2549 08d4 50       		.byte	0x50
+ 2550 08d5 02       		.uleb128 0x2
+ 2551 08d6 76       		.byte	0x76
+ 2552 08d7 00       		.sleb128 0
+ 2553 08d8 0E       		.uleb128 0xe
+ 2554 08d9 01       		.uleb128 0x1
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqCnWHK.s 			page 51
+
+
+ 2555 08da 51       		.byte	0x51
+ 2556 08db 02       		.uleb128 0x2
+ 2557 08dc 75       		.byte	0x75
+ 2558 08dd 00       		.sleb128 0
+ 2559 08de 0E       		.uleb128 0xe
+ 2560 08df 01       		.uleb128 0x1
+ 2561 08e0 52       		.byte	0x52
+ 2562 08e1 03       		.uleb128 0x3
+ 2563 08e2 74       		.byte	0x74
+ 2564 08e3 C000     		.sleb128 64
+ 2565 08e5 00       		.byte	0
+ 2566 08e6 00       		.byte	0
+ 2567 08e7 10       		.uleb128 0x10
+ 2568 08e8 04       		.byte	0x4
+ 2569 08e9 C1000000 		.4byte	0xc1
+ 2570 08ed 11       		.uleb128 0x11
+ 2571 08ee E7080000 		.4byte	0x8e7
+ 2572 08f2 15       		.uleb128 0x15
+ 2573 08f3 D5020000 		.4byte	.LASF27
+ 2574 08f7 01       		.byte	0x1
+ 2575 08f8 8C       		.byte	0x8c
+ 2576 08f9 1A0B0000 		.4byte	0xb1a
+ 2577 08fd 00000000 		.4byte	.LFB4
+ 2578 0901 B8000000 		.4byte	.LFE4-.LFB4
+ 2579 0905 01       		.uleb128 0x1
+ 2580 0906 9C       		.byte	0x9c
+ 2581 0907 1A0B0000 		.4byte	0xb1a
+ 2582 090b 14       		.uleb128 0x14
+ 2583 090c 62020000 		.4byte	.LASF24
+ 2584 0910 01       		.byte	0x1
+ 2585 0911 8C       		.byte	0x8c
+ 2586 0912 ED080000 		.4byte	0x8ed
+ 2587 0916 D8010000 		.4byte	.LLST11
+ 2588 091a 14       		.uleb128 0x14
+ 2589 091b 68020000 		.4byte	.LASF25
+ 2590 091f 01       		.byte	0x1
+ 2591 0920 8C       		.byte	0x8c
+ 2592 0921 ED080000 		.4byte	0x8ed
+ 2593 0925 04020000 		.4byte	.LLST12
+ 2594 0929 0A       		.uleb128 0xa
+ 2595 092a 7A00     		.ascii	"z\000"
+ 2596 092c 01       		.byte	0x1
+ 2597 092d 8C       		.byte	0x8c
+ 2598 092e 77080000 		.4byte	0x877
+ 2599 0932 24020000 		.4byte	.LLST13
+ 2600 0936 0A       		.uleb128 0xa
+ 2601 0937 6400     		.ascii	"d\000"
+ 2602 0939 01       		.byte	0x1
+ 2603 093a 8C       		.byte	0x8c
+ 2604 093b 77080000 		.4byte	0x877
+ 2605 093f 50020000 		.4byte	.LLST14
+ 2606 0943 0C       		.uleb128 0xc
+ 2607 0944 6B00     		.ascii	"k\000"
+ 2608 0946 01       		.byte	0x1
+ 2609 0947 8E       		.byte	0x8e
+ 2610 0948 C1000000 		.4byte	0xc1
+ 2611 094c 02       		.uleb128 0x2
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqCnWHK.s 			page 52
+
+
+ 2612 094d 91       		.byte	0x91
+ 2613 094e 48       		.sleb128 -56
+ 2614 094f 0C       		.uleb128 0xc
+ 2615 0950 7200     		.ascii	"r\000"
+ 2616 0952 01       		.byte	0x1
+ 2617 0953 8E       		.byte	0x8e
+ 2618 0954 C1000000 		.4byte	0xc1
+ 2619 0958 03       		.uleb128 0x3
+ 2620 0959 91       		.byte	0x91
+ 2621 095a A87F     		.sleb128 -88
+ 2622 095c 0C       		.uleb128 0xc
+ 2623 095d 7300     		.ascii	"s\000"
+ 2624 095f 01       		.byte	0x1
+ 2625 0960 8E       		.byte	0x8e
+ 2626 0961 C1000000 		.4byte	0xc1
+ 2627 0965 03       		.uleb128 0x3
+ 2628 0966 91       		.byte	0x91
+ 2629 0967 887F     		.sleb128 -120
+ 2630 0969 0C       		.uleb128 0xc
+ 2631 096a 6B4700   		.ascii	"kG\000"
+ 2632 096d 01       		.byte	0x1
+ 2633 096e 8F       		.byte	0x8f
+ 2634 096f E9000000 		.4byte	0xe9
+ 2635 0973 03       		.uleb128 0x3
+ 2636 0974 91       		.byte	0x91
+ 2637 0975 C87E     		.sleb128 -184
+ 2638 0977 0D       		.uleb128 0xd
+ 2639 0978 12000000 		.4byte	.LVL75
+ 2640 097c EE0F0000 		.4byte	0xfee
+ 2641 0980 8B090000 		.4byte	0x98b
+ 2642 0984 0E       		.uleb128 0xe
+ 2643 0985 01       		.uleb128 0x1
+ 2644 0986 50       		.byte	0x50
+ 2645 0987 02       		.uleb128 0x2
+ 2646 0988 75       		.byte	0x75
+ 2647 0989 00       		.sleb128 0
+ 2648 098a 00       		.byte	0
+ 2649 098b 0D       		.uleb128 0xd
+ 2650 098c 20000000 		.4byte	.LVL76
+ 2651 0990 3B100000 		.4byte	0x103b
+ 2652 0994 A8090000 		.4byte	0x9a8
+ 2653 0998 0E       		.uleb128 0xe
+ 2654 0999 01       		.uleb128 0x1
+ 2655 099a 50       		.byte	0x50
+ 2656 099b 02       		.uleb128 0x2
+ 2657 099c 75       		.byte	0x75
+ 2658 099d 00       		.sleb128 0
+ 2659 099e 0E       		.uleb128 0xe
+ 2660 099f 01       		.uleb128 0x1
+ 2661 09a0 51       		.byte	0x51
+ 2662 09a1 05       		.uleb128 0x5
+ 2663 09a2 03       		.byte	0x3
+ 2664 09a3 20000000 		.4byte	.LANCHOR0+32
+ 2665 09a7 00       		.byte	0
+ 2666 09a8 0D       		.uleb128 0xd
+ 2667 09a9 32000000 		.4byte	.LVL77
+ 2668 09ad 46100000 		.4byte	0x1046
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqCnWHK.s 			page 53
+
+
+ 2669 09b1 C2090000 		.4byte	0x9c2
+ 2670 09b5 0E       		.uleb128 0xe
+ 2671 09b6 01       		.uleb128 0x1
+ 2672 09b7 50       		.byte	0x50
+ 2673 09b8 02       		.uleb128 0x2
+ 2674 09b9 91       		.byte	0x91
+ 2675 09ba 48       		.sleb128 -56
+ 2676 09bb 0E       		.uleb128 0xe
+ 2677 09bc 01       		.uleb128 0x1
+ 2678 09bd 51       		.byte	0x51
+ 2679 09be 02       		.uleb128 0x2
+ 2680 09bf 74       		.byte	0x74
+ 2681 09c0 00       		.sleb128 0
+ 2682 09c1 00       		.byte	0
+ 2683 09c2 0D       		.uleb128 0xd
+ 2684 09c3 3E000000 		.4byte	.LVL78
+ 2685 09c7 77070000 		.4byte	0x777
+ 2686 09cb E4090000 		.4byte	0x9e4
+ 2687 09cf 0E       		.uleb128 0xe
+ 2688 09d0 01       		.uleb128 0x1
+ 2689 09d1 50       		.byte	0x50
+ 2690 09d2 03       		.uleb128 0x3
+ 2691 09d3 91       		.byte	0x91
+ 2692 09d4 C87E     		.sleb128 -184
+ 2693 09d6 0E       		.uleb128 0xe
+ 2694 09d7 01       		.uleb128 0x1
+ 2695 09d8 51       		.byte	0x51
+ 2696 09d9 02       		.uleb128 0x2
+ 2697 09da 91       		.byte	0x91
+ 2698 09db 48       		.sleb128 -56
+ 2699 09dc 0E       		.uleb128 0xe
+ 2700 09dd 01       		.uleb128 0x1
+ 2701 09de 52       		.byte	0x52
+ 2702 09df 03       		.uleb128 0x3
+ 2703 09e0 77       		.byte	0x77
+ 2704 09e1 C000     		.sleb128 64
+ 2705 09e3 00       		.byte	0
+ 2706 09e4 0D       		.uleb128 0xd
+ 2707 09e5 44000000 		.4byte	.LVL79
+ 2708 09e9 F90F0000 		.4byte	0xff9
+ 2709 09ed F9090000 		.4byte	0x9f9
+ 2710 09f1 0E       		.uleb128 0xe
+ 2711 09f2 01       		.uleb128 0x1
+ 2712 09f3 50       		.byte	0x50
+ 2713 09f4 03       		.uleb128 0x3
+ 2714 09f5 91       		.byte	0x91
+ 2715 09f6 A87F     		.sleb128 -88
+ 2716 09f8 00       		.byte	0
+ 2717 09f9 0D       		.uleb128 0xd
+ 2718 09fa 50000000 		.4byte	.LVL80
+ 2719 09fe 0F100000 		.4byte	0x100f
+ 2720 0a02 220A0000 		.4byte	0xa22
+ 2721 0a06 0E       		.uleb128 0xe
+ 2722 0a07 01       		.uleb128 0x1
+ 2723 0a08 50       		.byte	0x50
+ 2724 0a09 03       		.uleb128 0x3
+ 2725 0a0a 91       		.byte	0x91
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqCnWHK.s 			page 54
+
+
+ 2726 0a0b A87F     		.sleb128 -88
+ 2727 0a0d 0E       		.uleb128 0xe
+ 2728 0a0e 01       		.uleb128 0x1
+ 2729 0a0f 51       		.byte	0x51
+ 2730 0a10 03       		.uleb128 0x3
+ 2731 0a11 91       		.byte	0x91
+ 2732 0a12 A87F     		.sleb128 -88
+ 2733 0a14 0E       		.uleb128 0xe
+ 2734 0a15 01       		.uleb128 0x1
+ 2735 0a16 52       		.byte	0x52
+ 2736 0a17 03       		.uleb128 0x3
+ 2737 0a18 91       		.byte	0x91
+ 2738 0a19 C87E     		.sleb128 -184
+ 2739 0a1b 0E       		.uleb128 0xe
+ 2740 0a1c 01       		.uleb128 0x1
+ 2741 0a1d 53       		.byte	0x53
+ 2742 0a1e 02       		.uleb128 0x2
+ 2743 0a1f 74       		.byte	0x74
+ 2744 0a20 00       		.sleb128 0
+ 2745 0a21 00       		.byte	0
+ 2746 0a22 0D       		.uleb128 0xd
+ 2747 0a23 56000000 		.4byte	.LVL81
+ 2748 0a27 EE0F0000 		.4byte	0xfee
+ 2749 0a2b 370A0000 		.4byte	0xa37
+ 2750 0a2f 0E       		.uleb128 0xe
+ 2751 0a30 01       		.uleb128 0x1
+ 2752 0a31 50       		.byte	0x50
+ 2753 0a32 03       		.uleb128 0x3
+ 2754 0a33 91       		.byte	0x91
+ 2755 0a34 A87F     		.sleb128 -88
+ 2756 0a36 00       		.byte	0
+ 2757 0a37 0D       		.uleb128 0xd
+ 2758 0a38 68000000 		.4byte	.LVL82
+ 2759 0a3c 1A100000 		.4byte	0x101a
+ 2760 0a40 570A0000 		.4byte	0xa57
+ 2761 0a44 0E       		.uleb128 0xe
+ 2762 0a45 01       		.uleb128 0x1
+ 2763 0a46 50       		.byte	0x50
+ 2764 0a47 02       		.uleb128 0x2
+ 2765 0a48 91       		.byte	0x91
+ 2766 0a49 48       		.sleb128 -56
+ 2767 0a4a 0E       		.uleb128 0xe
+ 2768 0a4b 01       		.uleb128 0x1
+ 2769 0a4c 51       		.byte	0x51
+ 2770 0a4d 02       		.uleb128 0x2
+ 2771 0a4e 91       		.byte	0x91
+ 2772 0a4f 48       		.sleb128 -56
+ 2773 0a50 0E       		.uleb128 0xe
+ 2774 0a51 01       		.uleb128 0x1
+ 2775 0a52 52       		.byte	0x52
+ 2776 0a53 02       		.uleb128 0x2
+ 2777 0a54 74       		.byte	0x74
+ 2778 0a55 00       		.sleb128 0
+ 2779 0a56 00       		.byte	0
+ 2780 0a57 0D       		.uleb128 0xd
+ 2781 0a58 74000000 		.4byte	.LVL83
+ 2782 0a5c 04100000 		.4byte	0x1004
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqCnWHK.s 			page 55
+
+
+ 2783 0a60 7F0A0000 		.4byte	0xa7f
+ 2784 0a64 0E       		.uleb128 0xe
+ 2785 0a65 01       		.uleb128 0x1
+ 2786 0a66 50       		.byte	0x50
+ 2787 0a67 03       		.uleb128 0x3
+ 2788 0a68 91       		.byte	0x91
+ 2789 0a69 887F     		.sleb128 -120
+ 2790 0a6b 0E       		.uleb128 0xe
+ 2791 0a6c 01       		.uleb128 0x1
+ 2792 0a6d 51       		.byte	0x51
+ 2793 0a6e 03       		.uleb128 0x3
+ 2794 0a6f 91       		.byte	0x91
+ 2795 0a70 A87F     		.sleb128 -88
+ 2796 0a72 0E       		.uleb128 0xe
+ 2797 0a73 01       		.uleb128 0x1
+ 2798 0a74 52       		.byte	0x52
+ 2799 0a75 02       		.uleb128 0x2
+ 2800 0a76 75       		.byte	0x75
+ 2801 0a77 00       		.sleb128 0
+ 2802 0a78 0E       		.uleb128 0xe
+ 2803 0a79 01       		.uleb128 0x1
+ 2804 0a7a 53       		.byte	0x53
+ 2805 0a7b 02       		.uleb128 0x2
+ 2806 0a7c 74       		.byte	0x74
+ 2807 0a7d 00       		.sleb128 0
+ 2808 0a7e 00       		.byte	0
+ 2809 0a7f 0D       		.uleb128 0xd
+ 2810 0a80 80000000 		.4byte	.LVL84
+ 2811 0a84 0F100000 		.4byte	0x100f
+ 2812 0a88 A70A0000 		.4byte	0xaa7
+ 2813 0a8c 0E       		.uleb128 0xe
+ 2814 0a8d 01       		.uleb128 0x1
+ 2815 0a8e 50       		.byte	0x50
+ 2816 0a8f 03       		.uleb128 0x3
+ 2817 0a90 91       		.byte	0x91
+ 2818 0a91 887F     		.sleb128 -120
+ 2819 0a93 0E       		.uleb128 0xe
+ 2820 0a94 01       		.uleb128 0x1
+ 2821 0a95 51       		.byte	0x51
+ 2822 0a96 02       		.uleb128 0x2
+ 2823 0a97 76       		.byte	0x76
+ 2824 0a98 00       		.sleb128 0
+ 2825 0a99 0E       		.uleb128 0xe
+ 2826 0a9a 01       		.uleb128 0x1
+ 2827 0a9b 52       		.byte	0x52
+ 2828 0a9c 03       		.uleb128 0x3
+ 2829 0a9d 91       		.byte	0x91
+ 2830 0a9e 887F     		.sleb128 -120
+ 2831 0aa0 0E       		.uleb128 0xe
+ 2832 0aa1 01       		.uleb128 0x1
+ 2833 0aa2 53       		.byte	0x53
+ 2834 0aa3 02       		.uleb128 0x2
+ 2835 0aa4 74       		.byte	0x74
+ 2836 0aa5 00       		.sleb128 0
+ 2837 0aa6 00       		.byte	0
+ 2838 0aa7 0D       		.uleb128 0xd
+ 2839 0aa8 8C000000 		.4byte	.LVL85
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqCnWHK.s 			page 56
+
+
+ 2840 0aac 04100000 		.4byte	0x1004
+ 2841 0ab0 CF0A0000 		.4byte	0xacf
+ 2842 0ab4 0E       		.uleb128 0xe
+ 2843 0ab5 01       		.uleb128 0x1
+ 2844 0ab6 50       		.byte	0x50
+ 2845 0ab7 03       		.uleb128 0x3
+ 2846 0ab8 91       		.byte	0x91
+ 2847 0ab9 887F     		.sleb128 -120
+ 2848 0abb 0E       		.uleb128 0xe
+ 2849 0abc 01       		.uleb128 0x1
+ 2850 0abd 51       		.byte	0x51
+ 2851 0abe 02       		.uleb128 0x2
+ 2852 0abf 91       		.byte	0x91
+ 2853 0ac0 48       		.sleb128 -56
+ 2854 0ac1 0E       		.uleb128 0xe
+ 2855 0ac2 01       		.uleb128 0x1
+ 2856 0ac3 52       		.byte	0x52
+ 2857 0ac4 03       		.uleb128 0x3
+ 2858 0ac5 91       		.byte	0x91
+ 2859 0ac6 887F     		.sleb128 -120
+ 2860 0ac8 0E       		.uleb128 0xe
+ 2861 0ac9 01       		.uleb128 0x1
+ 2862 0aca 53       		.byte	0x53
+ 2863 0acb 02       		.uleb128 0x2
+ 2864 0acc 74       		.byte	0x74
+ 2865 0acd 00       		.sleb128 0
+ 2866 0ace 00       		.byte	0
+ 2867 0acf 0D       		.uleb128 0xd
+ 2868 0ad0 92000000 		.4byte	.LVL86
+ 2869 0ad4 EE0F0000 		.4byte	0xfee
+ 2870 0ad8 E40A0000 		.4byte	0xae4
+ 2871 0adc 0E       		.uleb128 0xe
+ 2872 0add 01       		.uleb128 0x1
+ 2873 0ade 50       		.byte	0x50
+ 2874 0adf 03       		.uleb128 0x3
+ 2875 0ae0 91       		.byte	0x91
+ 2876 0ae1 887F     		.sleb128 -120
+ 2877 0ae3 00       		.byte	0
+ 2878 0ae4 0D       		.uleb128 0xd
+ 2879 0ae5 9E000000 		.4byte	.LVL87
+ 2880 0ae9 30100000 		.4byte	0x1030
+ 2881 0aed 000B0000 		.4byte	0xb00
+ 2882 0af1 0E       		.uleb128 0xe
+ 2883 0af2 01       		.uleb128 0x1
+ 2884 0af3 50       		.byte	0x50
+ 2885 0af4 03       		.uleb128 0x3
+ 2886 0af5 7D       		.byte	0x7d
+ 2887 0af6 00       		.sleb128 0
+ 2888 0af7 06       		.byte	0x6
+ 2889 0af8 0E       		.uleb128 0xe
+ 2890 0af9 01       		.uleb128 0x1
+ 2891 0afa 51       		.byte	0x51
+ 2892 0afb 03       		.uleb128 0x3
+ 2893 0afc 91       		.byte	0x91
+ 2894 0afd A87F     		.sleb128 -88
+ 2895 0aff 00       		.byte	0
+ 2896 0b00 0F       		.uleb128 0xf
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqCnWHK.s 			page 57
+
+
+ 2897 0b01 A6000000 		.4byte	.LVL88
+ 2898 0b05 30100000 		.4byte	0x1030
+ 2899 0b09 0E       		.uleb128 0xe
+ 2900 0b0a 01       		.uleb128 0x1
+ 2901 0b0b 50       		.byte	0x50
+ 2902 0b0c 04       		.uleb128 0x4
+ 2903 0b0d 91       		.byte	0x91
+ 2904 0b0e C47E     		.sleb128 -188
+ 2905 0b10 06       		.byte	0x6
+ 2906 0b11 0E       		.uleb128 0xe
+ 2907 0b12 01       		.uleb128 0x1
+ 2908 0b13 51       		.byte	0x51
+ 2909 0b14 03       		.uleb128 0x3
+ 2910 0b15 91       		.byte	0x91
+ 2911 0b16 887F     		.sleb128 -120
+ 2912 0b18 00       		.byte	0
+ 2913 0b19 00       		.byte	0
+ 2914 0b1a 02       		.uleb128 0x2
+ 2915 0b1b 01       		.byte	0x1
+ 2916 0b1c 02       		.byte	0x2
+ 2917 0b1d 6E020000 		.4byte	.LASF26
+ 2918 0b21 15       		.uleb128 0x15
+ 2919 0b22 EB010000 		.4byte	.LASF28
+ 2920 0b26 01       		.byte	0x1
+ 2921 0b27 B0       		.byte	0xb0
+ 2922 0b28 1A0B0000 		.4byte	0xb1a
+ 2923 0b2c 00000000 		.4byte	.LFB5
+ 2924 0b30 78000000 		.4byte	.LFE5-.LFB5
+ 2925 0b34 01       		.uleb128 0x1
+ 2926 0b35 9C       		.byte	0x9c
+ 2927 0b36 4F0C0000 		.4byte	0xc4f
+ 2928 0b3a 0A       		.uleb128 0xa
+ 2929 0b3b 5000     		.ascii	"P\000"
+ 2930 0b3d 01       		.byte	0x1
+ 2931 0b3e B0       		.byte	0xb0
+ 2932 0b3f DB030000 		.4byte	0x3db
+ 2933 0b43 7C020000 		.4byte	.LLST15
+ 2934 0b47 0C       		.uleb128 0xc
+ 2935 0b48 746D7000 		.ascii	"tmp\000"
+ 2936 0b4c 01       		.byte	0x1
+ 2937 0b4d B3       		.byte	0xb3
+ 2938 0b4e C1000000 		.4byte	0xc1
+ 2939 0b52 02       		.uleb128 0x2
+ 2940 0b53 91       		.byte	0x91
+ 2941 0b54 50       		.sleb128 -48
+ 2942 0b55 0C       		.uleb128 0xc
+ 2943 0b56 793200   		.ascii	"y2\000"
+ 2944 0b59 01       		.byte	0x1
+ 2945 0b5a B3       		.byte	0xb3
+ 2946 0b5b C1000000 		.4byte	0xc1
+ 2947 0b5f 03       		.uleb128 0x3
+ 2948 0b60 91       		.byte	0x91
+ 2949 0b61 B07F     		.sleb128 -80
+ 2950 0b63 0D       		.uleb128 0xd
+ 2951 0b64 0C000000 		.4byte	.LVL93
+ 2952 0b68 3B100000 		.4byte	0x103b
+ 2953 0b6c 800B0000 		.4byte	0xb80
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqCnWHK.s 			page 58
+
+
+ 2954 0b70 0E       		.uleb128 0xe
+ 2955 0b71 01       		.uleb128 0x1
+ 2956 0b72 50       		.byte	0x50
+ 2957 0b73 02       		.uleb128 0x2
+ 2958 0b74 74       		.byte	0x74
+ 2959 0b75 00       		.sleb128 0
+ 2960 0b76 0E       		.uleb128 0xe
+ 2961 0b77 01       		.uleb128 0x1
+ 2962 0b78 51       		.byte	0x51
+ 2963 0b79 05       		.uleb128 0x5
+ 2964 0b7a 03       		.byte	0x3
+ 2965 0b7b 00000000 		.4byte	.LANCHOR0
+ 2966 0b7f 00       		.byte	0
+ 2967 0b80 0D       		.uleb128 0xd
+ 2968 0b81 1C000000 		.4byte	.LVL94
+ 2969 0b85 3B100000 		.4byte	0x103b
+ 2970 0b89 9D0B0000 		.4byte	0xb9d
+ 2971 0b8d 0E       		.uleb128 0xe
+ 2972 0b8e 01       		.uleb128 0x1
+ 2973 0b8f 50       		.byte	0x50
+ 2974 0b90 02       		.uleb128 0x2
+ 2975 0b91 75       		.byte	0x75
+ 2976 0b92 00       		.sleb128 0
+ 2977 0b93 0E       		.uleb128 0xe
+ 2978 0b94 01       		.uleb128 0x1
+ 2979 0b95 51       		.byte	0x51
+ 2980 0b96 05       		.uleb128 0x5
+ 2981 0b97 03       		.byte	0x3
+ 2982 0b98 00000000 		.4byte	.LANCHOR0
+ 2983 0b9c 00       		.byte	0
+ 2984 0b9d 0D       		.uleb128 0xd
+ 2985 0b9e 2E000000 		.4byte	.LVL95
+ 2986 0ba2 04100000 		.4byte	0x1004
+ 2987 0ba6 C30B0000 		.4byte	0xbc3
+ 2988 0baa 0E       		.uleb128 0xe
+ 2989 0bab 01       		.uleb128 0x1
+ 2990 0bac 50       		.byte	0x50
+ 2991 0bad 02       		.uleb128 0x2
+ 2992 0bae 91       		.byte	0x91
+ 2993 0baf 50       		.sleb128 -48
+ 2994 0bb0 0E       		.uleb128 0xe
+ 2995 0bb1 01       		.uleb128 0x1
+ 2996 0bb2 51       		.byte	0x51
+ 2997 0bb3 02       		.uleb128 0x2
+ 2998 0bb4 74       		.byte	0x74
+ 2999 0bb5 00       		.sleb128 0
+ 3000 0bb6 0E       		.uleb128 0xe
+ 3001 0bb7 01       		.uleb128 0x1
+ 3002 0bb8 52       		.byte	0x52
+ 3003 0bb9 02       		.uleb128 0x2
+ 3004 0bba 74       		.byte	0x74
+ 3005 0bbb 00       		.sleb128 0
+ 3006 0bbc 0E       		.uleb128 0xe
+ 3007 0bbd 01       		.uleb128 0x1
+ 3008 0bbe 53       		.byte	0x53
+ 3009 0bbf 02       		.uleb128 0x2
+ 3010 0bc0 76       		.byte	0x76
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqCnWHK.s 			page 59
+
+
+ 3011 0bc1 00       		.sleb128 0
+ 3012 0bc2 00       		.byte	0
+ 3013 0bc3 0D       		.uleb128 0xd
+ 3014 0bc4 3A000000 		.4byte	.LVL96
+ 3015 0bc8 04100000 		.4byte	0x1004
+ 3016 0bcc E90B0000 		.4byte	0xbe9
+ 3017 0bd0 0E       		.uleb128 0xe
+ 3018 0bd1 01       		.uleb128 0x1
+ 3019 0bd2 50       		.byte	0x50
+ 3020 0bd3 02       		.uleb128 0x2
+ 3021 0bd4 91       		.byte	0x91
+ 3022 0bd5 50       		.sleb128 -48
+ 3023 0bd6 0E       		.uleb128 0xe
+ 3024 0bd7 01       		.uleb128 0x1
+ 3025 0bd8 51       		.byte	0x51
+ 3026 0bd9 02       		.uleb128 0x2
+ 3027 0bda 91       		.byte	0x91
+ 3028 0bdb 50       		.sleb128 -48
+ 3029 0bdc 0E       		.uleb128 0xe
+ 3030 0bdd 01       		.uleb128 0x1
+ 3031 0bde 52       		.byte	0x52
+ 3032 0bdf 02       		.uleb128 0x2
+ 3033 0be0 74       		.byte	0x74
+ 3034 0be1 00       		.sleb128 0
+ 3035 0be2 0E       		.uleb128 0xe
+ 3036 0be3 01       		.uleb128 0x1
+ 3037 0be4 53       		.byte	0x53
+ 3038 0be5 02       		.uleb128 0x2
+ 3039 0be6 76       		.byte	0x76
+ 3040 0be7 00       		.sleb128 0
+ 3041 0be8 00       		.byte	0
+ 3042 0be9 0D       		.uleb128 0xd
+ 3043 0bea 46000000 		.4byte	.LVL97
+ 3044 0bee 0F100000 		.4byte	0x100f
+ 3045 0bf2 120C0000 		.4byte	0xc12
+ 3046 0bf6 0E       		.uleb128 0xe
+ 3047 0bf7 01       		.uleb128 0x1
+ 3048 0bf8 50       		.byte	0x50
+ 3049 0bf9 02       		.uleb128 0x2
+ 3050 0bfa 91       		.byte	0x91
+ 3051 0bfb 50       		.sleb128 -48
+ 3052 0bfc 0E       		.uleb128 0xe
+ 3053 0bfd 01       		.uleb128 0x1
+ 3054 0bfe 51       		.byte	0x51
+ 3055 0bff 02       		.uleb128 0x2
+ 3056 0c00 91       		.byte	0x91
+ 3057 0c01 50       		.sleb128 -48
+ 3058 0c02 0E       		.uleb128 0xe
+ 3059 0c03 01       		.uleb128 0x1
+ 3060 0c04 52       		.byte	0x52
+ 3061 0c05 05       		.uleb128 0x5
+ 3062 0c06 03       		.byte	0x3
+ 3063 0c07 80000000 		.4byte	.LANCHOR1
+ 3064 0c0b 0E       		.uleb128 0xe
+ 3065 0c0c 01       		.uleb128 0x1
+ 3066 0c0d 53       		.byte	0x53
+ 3067 0c0e 02       		.uleb128 0x2
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqCnWHK.s 			page 60
+
+
+ 3068 0c0f 76       		.byte	0x76
+ 3069 0c10 00       		.sleb128 0
+ 3070 0c11 00       		.byte	0
+ 3071 0c12 0D       		.uleb128 0xd
+ 3072 0c13 52000000 		.4byte	.LVL98
+ 3073 0c17 04100000 		.4byte	0x1004
+ 3074 0c1b 380C0000 		.4byte	0xc38
+ 3075 0c1f 0E       		.uleb128 0xe
+ 3076 0c20 01       		.uleb128 0x1
+ 3077 0c21 50       		.byte	0x50
+ 3078 0c22 02       		.uleb128 0x2
+ 3079 0c23 7D       		.byte	0x7d
+ 3080 0c24 00       		.sleb128 0
+ 3081 0c25 0E       		.uleb128 0xe
+ 3082 0c26 01       		.uleb128 0x1
+ 3083 0c27 51       		.byte	0x51
+ 3084 0c28 02       		.uleb128 0x2
+ 3085 0c29 75       		.byte	0x75
+ 3086 0c2a 00       		.sleb128 0
+ 3087 0c2b 0E       		.uleb128 0xe
+ 3088 0c2c 01       		.uleb128 0x1
+ 3089 0c2d 52       		.byte	0x52
+ 3090 0c2e 02       		.uleb128 0x2
+ 3091 0c2f 75       		.byte	0x75
+ 3092 0c30 00       		.sleb128 0
+ 3093 0c31 0E       		.uleb128 0xe
+ 3094 0c32 01       		.uleb128 0x1
+ 3095 0c33 53       		.byte	0x53
+ 3096 0c34 02       		.uleb128 0x2
+ 3097 0c35 76       		.byte	0x76
+ 3098 0c36 00       		.sleb128 0
+ 3099 0c37 00       		.byte	0
+ 3100 0c38 0F       		.uleb128 0xf
+ 3101 0c39 5A000000 		.4byte	.LVL99
+ 3102 0c3d 3B100000 		.4byte	0x103b
+ 3103 0c41 0E       		.uleb128 0xe
+ 3104 0c42 01       		.uleb128 0x1
+ 3105 0c43 50       		.byte	0x50
+ 3106 0c44 02       		.uleb128 0x2
+ 3107 0c45 7D       		.byte	0x7d
+ 3108 0c46 00       		.sleb128 0
+ 3109 0c47 0E       		.uleb128 0xe
+ 3110 0c48 01       		.uleb128 0x1
+ 3111 0c49 51       		.byte	0x51
+ 3112 0c4a 02       		.uleb128 0x2
+ 3113 0c4b 91       		.byte	0x91
+ 3114 0c4c 50       		.sleb128 -48
+ 3115 0c4d 00       		.byte	0
+ 3116 0c4e 00       		.byte	0
+ 3117 0c4f 15       		.uleb128 0x15
+ 3118 0c50 AE010000 		.4byte	.LASF29
+ 3119 0c54 01       		.byte	0x1
+ 3120 0c55 C6       		.byte	0xc6
+ 3121 0c56 1A0B0000 		.4byte	0xb1a
+ 3122 0c5a 00000000 		.4byte	.LFB6
+ 3123 0c5e 10010000 		.4byte	.LFE6-.LFB6
+ 3124 0c62 01       		.uleb128 0x1
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqCnWHK.s 			page 61
+
+
+ 3125 0c63 9C       		.byte	0x9c
+ 3126 0c64 150F0000 		.4byte	0xf15
+ 3127 0c68 0A       		.uleb128 0xa
+ 3128 0c69 7A00     		.ascii	"z\000"
+ 3129 0c6b 01       		.byte	0x1
+ 3130 0c6c C6       		.byte	0xc6
+ 3131 0c6d 77080000 		.4byte	0x877
+ 3132 0c71 A8020000 		.4byte	.LLST16
+ 3133 0c75 0A       		.uleb128 0xa
+ 3134 0c76 5100     		.ascii	"Q\000"
+ 3135 0c78 01       		.byte	0x1
+ 3136 0c79 C6       		.byte	0xc6
+ 3137 0c7a DB030000 		.4byte	0x3db
+ 3138 0c7e D4020000 		.4byte	.LLST17
+ 3139 0c82 0A       		.uleb128 0xa
+ 3140 0c83 7200     		.ascii	"r\000"
+ 3141 0c85 01       		.byte	0x1
+ 3142 0c86 C6       		.byte	0xc6
+ 3143 0c87 77080000 		.4byte	0x877
+ 3144 0c8b 00030000 		.4byte	.LLST18
+ 3145 0c8f 0A       		.uleb128 0xa
+ 3146 0c90 7300     		.ascii	"s\000"
+ 3147 0c92 01       		.byte	0x1
+ 3148 0c93 C6       		.byte	0xc6
+ 3149 0c94 77080000 		.4byte	0x877
+ 3150 0c98 2C030000 		.4byte	.LLST19
+ 3151 0c9c 0C       		.uleb128 0xc
+ 3152 0c9d 7700     		.ascii	"w\000"
+ 3153 0c9f 01       		.byte	0x1
+ 3154 0ca0 C8       		.byte	0xc8
+ 3155 0ca1 C1000000 		.4byte	0xc1
+ 3156 0ca5 02       		.uleb128 0x2
+ 3157 0ca6 91       		.byte	0x91
+ 3158 0ca7 48       		.sleb128 -56
+ 3159 0ca8 0C       		.uleb128 0xc
+ 3160 0ca9 753100   		.ascii	"u1\000"
+ 3161 0cac 01       		.byte	0x1
+ 3162 0cad C8       		.byte	0xc8
+ 3163 0cae C1000000 		.4byte	0xc1
+ 3164 0cb2 03       		.uleb128 0x3
+ 3165 0cb3 91       		.byte	0x91
+ 3166 0cb4 A87F     		.sleb128 -88
+ 3167 0cb6 0C       		.uleb128 0xc
+ 3168 0cb7 753200   		.ascii	"u2\000"
+ 3169 0cba 01       		.byte	0x1
+ 3170 0cbb C8       		.byte	0xc8
+ 3171 0cbc C1000000 		.4byte	0xc1
+ 3172 0cc0 03       		.uleb128 0x3
+ 3173 0cc1 91       		.byte	0x91
+ 3174 0cc2 887F     		.sleb128 -120
+ 3175 0cc4 0C       		.uleb128 0xc
+ 3176 0cc5 783100   		.ascii	"x1\000"
+ 3177 0cc8 01       		.byte	0x1
+ 3178 0cc9 C8       		.byte	0xc8
+ 3179 0cca C1000000 		.4byte	0xc1
+ 3180 0cce 03       		.uleb128 0x3
+ 3181 0ccf 91       		.byte	0x91
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqCnWHK.s 			page 62
+
+
+ 3182 0cd0 E87E     		.sleb128 -152
+ 3183 0cd2 0C       		.uleb128 0xc
+ 3184 0cd3 746D7000 		.ascii	"tmp\000"
+ 3185 0cd7 01       		.byte	0x1
+ 3186 0cd8 C9       		.byte	0xc9
+ 3187 0cd9 E9000000 		.4byte	0xe9
+ 3188 0cdd 03       		.uleb128 0x3
+ 3189 0cde 91       		.byte	0x91
+ 3190 0cdf A87E     		.sleb128 -216
+ 3191 0ce1 0B       		.uleb128 0xb
+ 3192 0ce2 92020000 		.4byte	.LASF30
+ 3193 0ce6 01       		.byte	0x1
+ 3194 0ce7 C9       		.byte	0xc9
+ 3195 0ce8 E9000000 		.4byte	0xe9
+ 3196 0cec 03       		.uleb128 0x3
+ 3197 0ced 91       		.byte	0x91
+ 3198 0cee E87D     		.sleb128 -280
+ 3199 0cf0 0D       		.uleb128 0xd
+ 3200 0cf1 16000000 		.4byte	.LVL103
+ 3201 0cf5 EE0F0000 		.4byte	0xfee
+ 3202 0cf9 040D0000 		.4byte	0xd04
+ 3203 0cfd 0E       		.uleb128 0xe
+ 3204 0cfe 01       		.uleb128 0x1
+ 3205 0cff 50       		.byte	0x50
+ 3206 0d00 02       		.uleb128 0x2
+ 3207 0d01 75       		.byte	0x75
+ 3208 0d02 00       		.sleb128 0
+ 3209 0d03 00       		.byte	0
+ 3210 0d04 0D       		.uleb128 0xd
+ 3211 0d05 22000000 		.4byte	.LVL104
+ 3212 0d09 EE0F0000 		.4byte	0xfee
+ 3213 0d0d 180D0000 		.4byte	0xd18
+ 3214 0d11 0E       		.uleb128 0xe
+ 3215 0d12 01       		.uleb128 0x1
+ 3216 0d13 50       		.byte	0x50
+ 3217 0d14 02       		.uleb128 0x2
+ 3218 0d15 75       		.byte	0x75
+ 3219 0d16 20       		.sleb128 32
+ 3220 0d17 00       		.byte	0
+ 3221 0d18 0D       		.uleb128 0xd
+ 3222 0d19 2C000000 		.4byte	.LVL105
+ 3223 0d1d 210B0000 		.4byte	0xb21
+ 3224 0d21 2C0D0000 		.4byte	0xd2c
+ 3225 0d25 0E       		.uleb128 0xe
+ 3226 0d26 01       		.uleb128 0x1
+ 3227 0d27 50       		.byte	0x50
+ 3228 0d28 02       		.uleb128 0x2
+ 3229 0d29 75       		.byte	0x75
+ 3230 0d2a 00       		.sleb128 0
+ 3231 0d2b 00       		.byte	0
+ 3232 0d2c 0D       		.uleb128 0xd
+ 3233 0d2d 3C000000 		.4byte	.LVL106
+ 3234 0d31 77070000 		.4byte	0x777
+ 3235 0d35 500D0000 		.4byte	0xd50
+ 3236 0d39 0E       		.uleb128 0xe
+ 3237 0d3a 01       		.uleb128 0x1
+ 3238 0d3b 50       		.byte	0x50
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqCnWHK.s 			page 63
+
+
+ 3239 0d3c 03       		.uleb128 0x3
+ 3240 0d3d 91       		.byte	0x91
+ 3241 0d3e A87E     		.sleb128 -216
+ 3242 0d40 0E       		.uleb128 0xe
+ 3243 0d41 01       		.uleb128 0x1
+ 3244 0d42 51       		.byte	0x51
+ 3245 0d43 05       		.uleb128 0x5
+ 3246 0d44 03       		.byte	0x3
+ 3247 0d45 20000000 		.4byte	.LANCHOR0+32
+ 3248 0d49 0E       		.uleb128 0xe
+ 3249 0d4a 01       		.uleb128 0x1
+ 3250 0d4b 52       		.byte	0x52
+ 3251 0d4c 02       		.uleb128 0x2
+ 3252 0d4d 75       		.byte	0x75
+ 3253 0d4e 00       		.sleb128 0
+ 3254 0d4f 00       		.byte	0
+ 3255 0d50 0D       		.uleb128 0xd
+ 3256 0d51 42000000 		.4byte	.LVL107
+ 3257 0d55 EE0F0000 		.4byte	0xfee
+ 3258 0d59 650D0000 		.4byte	0xd65
+ 3259 0d5d 0E       		.uleb128 0xe
+ 3260 0d5e 01       		.uleb128 0x1
+ 3261 0d5f 50       		.byte	0x50
+ 3262 0d60 03       		.uleb128 0x3
+ 3263 0d61 91       		.byte	0x91
+ 3264 0d62 A87E     		.sleb128 -216
+ 3265 0d64 00       		.byte	0
+ 3266 0d65 0D       		.uleb128 0xd
+ 3267 0d66 4C000000 		.4byte	.LVL108
+ 3268 0d6a EE0F0000 		.4byte	0xfee
+ 3269 0d6e 7A0D0000 		.4byte	0xd7a
+ 3270 0d72 0E       		.uleb128 0xe
+ 3271 0d73 01       		.uleb128 0x1
+ 3272 0d74 50       		.byte	0x50
+ 3273 0d75 03       		.uleb128 0x3
+ 3274 0d76 91       		.byte	0x91
+ 3275 0d77 C87E     		.sleb128 -184
+ 3276 0d79 00       		.byte	0
+ 3277 0d7a 0D       		.uleb128 0xd
+ 3278 0d7b 56000000 		.4byte	.LVL109
+ 3279 0d7f EE0F0000 		.4byte	0xfee
+ 3280 0d83 8E0D0000 		.4byte	0xd8e
+ 3281 0d87 0E       		.uleb128 0xe
+ 3282 0d88 01       		.uleb128 0x1
+ 3283 0d89 50       		.byte	0x50
+ 3284 0d8a 02       		.uleb128 0x2
+ 3285 0d8b 76       		.byte	0x76
+ 3286 0d8c 00       		.sleb128 0
+ 3287 0d8d 00       		.byte	0
+ 3288 0d8e 0D       		.uleb128 0xd
+ 3289 0d8f 62000000 		.4byte	.LVL110
+ 3290 0d93 EE0F0000 		.4byte	0xfee
+ 3291 0d97 A20D0000 		.4byte	0xda2
+ 3292 0d9b 0E       		.uleb128 0xe
+ 3293 0d9c 01       		.uleb128 0x1
+ 3294 0d9d 50       		.byte	0x50
+ 3295 0d9e 02       		.uleb128 0x2
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqCnWHK.s 			page 64
+
+
+ 3296 0d9f 77       		.byte	0x77
+ 3297 0da0 00       		.sleb128 0
+ 3298 0da1 00       		.byte	0
+ 3299 0da2 0D       		.uleb128 0xd
+ 3300 0da3 72000000 		.4byte	.LVL111
+ 3301 0da7 3B100000 		.4byte	0x103b
+ 3302 0dab BF0D0000 		.4byte	0xdbf
+ 3303 0daf 0E       		.uleb128 0xe
+ 3304 0db0 01       		.uleb128 0x1
+ 3305 0db1 50       		.byte	0x50
+ 3306 0db2 02       		.uleb128 0x2
+ 3307 0db3 76       		.byte	0x76
+ 3308 0db4 00       		.sleb128 0
+ 3309 0db5 0E       		.uleb128 0xe
+ 3310 0db6 01       		.uleb128 0x1
+ 3311 0db7 51       		.byte	0x51
+ 3312 0db8 05       		.uleb128 0x5
+ 3313 0db9 03       		.byte	0x3
+ 3314 0dba 20000000 		.4byte	.LANCHOR0+32
+ 3315 0dbe 00       		.byte	0
+ 3316 0dbf 0D       		.uleb128 0xd
+ 3317 0dc0 80000000 		.4byte	.LVL112
+ 3318 0dc4 3B100000 		.4byte	0x103b
+ 3319 0dc8 DC0D0000 		.4byte	0xddc
+ 3320 0dcc 0E       		.uleb128 0xe
+ 3321 0dcd 01       		.uleb128 0x1
+ 3322 0dce 50       		.byte	0x50
+ 3323 0dcf 02       		.uleb128 0x2
+ 3324 0dd0 77       		.byte	0x77
+ 3325 0dd1 00       		.sleb128 0
+ 3326 0dd2 0E       		.uleb128 0xe
+ 3327 0dd3 01       		.uleb128 0x1
+ 3328 0dd4 51       		.byte	0x51
+ 3329 0dd5 05       		.uleb128 0x5
+ 3330 0dd6 03       		.byte	0x3
+ 3331 0dd7 20000000 		.4byte	.LANCHOR0+32
+ 3332 0ddb 00       		.byte	0
+ 3333 0ddc 0D       		.uleb128 0xd
+ 3334 0ddd 92000000 		.4byte	.LVL113
+ 3335 0de1 1A100000 		.4byte	0x101a
+ 3336 0de5 FF0D0000 		.4byte	0xdff
+ 3337 0de9 0E       		.uleb128 0xe
+ 3338 0dea 01       		.uleb128 0x1
+ 3339 0deb 50       		.byte	0x50
+ 3340 0dec 02       		.uleb128 0x2
+ 3341 0ded 91       		.byte	0x91
+ 3342 0dee 48       		.sleb128 -56
+ 3343 0def 0E       		.uleb128 0xe
+ 3344 0df0 01       		.uleb128 0x1
+ 3345 0df1 51       		.byte	0x51
+ 3346 0df2 02       		.uleb128 0x2
+ 3347 0df3 77       		.byte	0x77
+ 3348 0df4 00       		.sleb128 0
+ 3349 0df5 0E       		.uleb128 0xe
+ 3350 0df6 01       		.uleb128 0x1
+ 3351 0df7 52       		.byte	0x52
+ 3352 0df8 05       		.uleb128 0x5
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqCnWHK.s 			page 65
+
+
+ 3353 0df9 03       		.byte	0x3
+ 3354 0dfa 20000000 		.4byte	.LANCHOR0+32
+ 3355 0dfe 00       		.byte	0
+ 3356 0dff 0D       		.uleb128 0xd
+ 3357 0e00 9E000000 		.4byte	.LVL114
+ 3358 0e04 04100000 		.4byte	0x1004
+ 3359 0e08 2A0E0000 		.4byte	0xe2a
+ 3360 0e0c 0E       		.uleb128 0xe
+ 3361 0e0d 01       		.uleb128 0x1
+ 3362 0e0e 50       		.byte	0x50
+ 3363 0e0f 03       		.uleb128 0x3
+ 3364 0e10 91       		.byte	0x91
+ 3365 0e11 A87F     		.sleb128 -88
+ 3366 0e13 0E       		.uleb128 0xe
+ 3367 0e14 01       		.uleb128 0x1
+ 3368 0e15 51       		.byte	0x51
+ 3369 0e16 03       		.uleb128 0x3
+ 3370 0e17 7D       		.byte	0x7d
+ 3371 0e18 00       		.sleb128 0
+ 3372 0e19 06       		.byte	0x6
+ 3373 0e1a 0E       		.uleb128 0xe
+ 3374 0e1b 01       		.uleb128 0x1
+ 3375 0e1c 52       		.byte	0x52
+ 3376 0e1d 02       		.uleb128 0x2
+ 3377 0e1e 91       		.byte	0x91
+ 3378 0e1f 48       		.sleb128 -56
+ 3379 0e20 0E       		.uleb128 0xe
+ 3380 0e21 01       		.uleb128 0x1
+ 3381 0e22 53       		.byte	0x53
+ 3382 0e23 05       		.uleb128 0x5
+ 3383 0e24 03       		.byte	0x3
+ 3384 0e25 20000000 		.4byte	.LANCHOR0+32
+ 3385 0e29 00       		.byte	0
+ 3386 0e2a 0D       		.uleb128 0xd
+ 3387 0e2b AA000000 		.4byte	.LVL115
+ 3388 0e2f 04100000 		.4byte	0x1004
+ 3389 0e33 540E0000 		.4byte	0xe54
+ 3390 0e37 0E       		.uleb128 0xe
+ 3391 0e38 01       		.uleb128 0x1
+ 3392 0e39 50       		.byte	0x50
+ 3393 0e3a 03       		.uleb128 0x3
+ 3394 0e3b 91       		.byte	0x91
+ 3395 0e3c 887F     		.sleb128 -120
+ 3396 0e3e 0E       		.uleb128 0xe
+ 3397 0e3f 01       		.uleb128 0x1
+ 3398 0e40 51       		.byte	0x51
+ 3399 0e41 02       		.uleb128 0x2
+ 3400 0e42 76       		.byte	0x76
+ 3401 0e43 00       		.sleb128 0
+ 3402 0e44 0E       		.uleb128 0xe
+ 3403 0e45 01       		.uleb128 0x1
+ 3404 0e46 52       		.byte	0x52
+ 3405 0e47 02       		.uleb128 0x2
+ 3406 0e48 91       		.byte	0x91
+ 3407 0e49 48       		.sleb128 -56
+ 3408 0e4a 0E       		.uleb128 0xe
+ 3409 0e4b 01       		.uleb128 0x1
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqCnWHK.s 			page 66
+
+
+ 3410 0e4c 53       		.byte	0x53
+ 3411 0e4d 05       		.uleb128 0x5
+ 3412 0e4e 03       		.byte	0x3
+ 3413 0e4f 20000000 		.4byte	.LANCHOR0+32
+ 3414 0e53 00       		.byte	0
+ 3415 0e54 0D       		.uleb128 0xd
+ 3416 0e55 B6000000 		.4byte	.LVL116
+ 3417 0e59 77070000 		.4byte	0x777
+ 3418 0e5d 770E0000 		.4byte	0xe77
+ 3419 0e61 0E       		.uleb128 0xe
+ 3420 0e62 01       		.uleb128 0x1
+ 3421 0e63 50       		.byte	0x50
+ 3422 0e64 03       		.uleb128 0x3
+ 3423 0e65 91       		.byte	0x91
+ 3424 0e66 A87E     		.sleb128 -216
+ 3425 0e68 0E       		.uleb128 0xe
+ 3426 0e69 01       		.uleb128 0x1
+ 3427 0e6a 51       		.byte	0x51
+ 3428 0e6b 03       		.uleb128 0x3
+ 3429 0e6c 91       		.byte	0x91
+ 3430 0e6d A87F     		.sleb128 -88
+ 3431 0e6f 0E       		.uleb128 0xe
+ 3432 0e70 01       		.uleb128 0x1
+ 3433 0e71 52       		.byte	0x52
+ 3434 0e72 03       		.uleb128 0x3
+ 3435 0e73 78       		.byte	0x78
+ 3436 0e74 C000     		.sleb128 64
+ 3437 0e76 00       		.byte	0
+ 3438 0e77 0D       		.uleb128 0xd
+ 3439 0e78 C0000000 		.4byte	.LVL117
+ 3440 0e7c 77070000 		.4byte	0x777
+ 3441 0e80 990E0000 		.4byte	0xe99
+ 3442 0e84 0E       		.uleb128 0xe
+ 3443 0e85 01       		.uleb128 0x1
+ 3444 0e86 50       		.byte	0x50
+ 3445 0e87 03       		.uleb128 0x3
+ 3446 0e88 91       		.byte	0x91
+ 3447 0e89 E87D     		.sleb128 -280
+ 3448 0e8b 0E       		.uleb128 0xe
+ 3449 0e8c 01       		.uleb128 0x1
+ 3450 0e8d 51       		.byte	0x51
+ 3451 0e8e 03       		.uleb128 0x3
+ 3452 0e8f 91       		.byte	0x91
+ 3453 0e90 887F     		.sleb128 -120
+ 3454 0e92 0E       		.uleb128 0xe
+ 3455 0e93 01       		.uleb128 0x1
+ 3456 0e94 52       		.byte	0x52
+ 3457 0e95 02       		.uleb128 0x2
+ 3458 0e96 75       		.byte	0x75
+ 3459 0e97 00       		.sleb128 0
+ 3460 0e98 00       		.byte	0
+ 3461 0e99 0D       		.uleb128 0xd
+ 3462 0e9a CA000000 		.4byte	.LVL118
+ 3463 0e9e E0030000 		.4byte	0x3e0
+ 3464 0ea2 BC0E0000 		.4byte	0xebc
+ 3465 0ea6 0E       		.uleb128 0xe
+ 3466 0ea7 01       		.uleb128 0x1
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqCnWHK.s 			page 67
+
+
+ 3467 0ea8 50       		.byte	0x50
+ 3468 0ea9 03       		.uleb128 0x3
+ 3469 0eaa 91       		.byte	0x91
+ 3470 0eab A87E     		.sleb128 -216
+ 3471 0ead 0E       		.uleb128 0xe
+ 3472 0eae 01       		.uleb128 0x1
+ 3473 0eaf 51       		.byte	0x51
+ 3474 0eb0 03       		.uleb128 0x3
+ 3475 0eb1 91       		.byte	0x91
+ 3476 0eb2 A87E     		.sleb128 -216
+ 3477 0eb4 0E       		.uleb128 0xe
+ 3478 0eb5 01       		.uleb128 0x1
+ 3479 0eb6 52       		.byte	0x52
+ 3480 0eb7 03       		.uleb128 0x3
+ 3481 0eb8 91       		.byte	0x91
+ 3482 0eb9 E87D     		.sleb128 -280
+ 3483 0ebb 00       		.byte	0
+ 3484 0ebc 0D       		.uleb128 0xd
+ 3485 0ebd D0000000 		.4byte	.LVL119
+ 3486 0ec1 F90F0000 		.4byte	0xff9
+ 3487 0ec5 D10E0000 		.4byte	0xed1
+ 3488 0ec9 0E       		.uleb128 0xe
+ 3489 0eca 01       		.uleb128 0x1
+ 3490 0ecb 50       		.byte	0x50
+ 3491 0ecc 03       		.uleb128 0x3
+ 3492 0ecd 91       		.byte	0x91
+ 3493 0ece E87E     		.sleb128 -152
+ 3494 0ed0 00       		.byte	0
+ 3495 0ed1 0D       		.uleb128 0xd
+ 3496 0ed2 DC000000 		.4byte	.LVL120
+ 3497 0ed6 0F100000 		.4byte	0x100f
+ 3498 0eda FD0E0000 		.4byte	0xefd
+ 3499 0ede 0E       		.uleb128 0xe
+ 3500 0edf 01       		.uleb128 0x1
+ 3501 0ee0 50       		.byte	0x50
+ 3502 0ee1 03       		.uleb128 0x3
+ 3503 0ee2 91       		.byte	0x91
+ 3504 0ee3 E87E     		.sleb128 -152
+ 3505 0ee5 0E       		.uleb128 0xe
+ 3506 0ee6 01       		.uleb128 0x1
+ 3507 0ee7 51       		.byte	0x51
+ 3508 0ee8 03       		.uleb128 0x3
+ 3509 0ee9 91       		.byte	0x91
+ 3510 0eea E87E     		.sleb128 -152
+ 3511 0eec 0E       		.uleb128 0xe
+ 3512 0eed 01       		.uleb128 0x1
+ 3513 0eee 52       		.byte	0x52
+ 3514 0eef 03       		.uleb128 0x3
+ 3515 0ef0 91       		.byte	0x91
+ 3516 0ef1 A87E     		.sleb128 -216
+ 3517 0ef3 0E       		.uleb128 0xe
+ 3518 0ef4 01       		.uleb128 0x1
+ 3519 0ef5 53       		.byte	0x53
+ 3520 0ef6 05       		.uleb128 0x5
+ 3521 0ef7 03       		.byte	0x3
+ 3522 0ef8 20000000 		.4byte	.LANCHOR0+32
+ 3523 0efc 00       		.byte	0
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqCnWHK.s 			page 68
+
+
+ 3524 0efd 0F       		.uleb128 0xf
+ 3525 0efe E4000000 		.4byte	.LVL121
+ 3526 0f02 3B100000 		.4byte	0x103b
+ 3527 0f06 0E       		.uleb128 0xe
+ 3528 0f07 01       		.uleb128 0x1
+ 3529 0f08 50       		.byte	0x50
+ 3530 0f09 03       		.uleb128 0x3
+ 3531 0f0a 91       		.byte	0x91
+ 3532 0f0b E87E     		.sleb128 -152
+ 3533 0f0d 0E       		.uleb128 0xe
+ 3534 0f0e 01       		.uleb128 0x1
+ 3535 0f0f 51       		.byte	0x51
+ 3536 0f10 02       		.uleb128 0x2
+ 3537 0f11 76       		.byte	0x76
+ 3538 0f12 00       		.sleb128 0
+ 3539 0f13 00       		.byte	0
+ 3540 0f14 00       		.byte	0
+ 3541 0f15 15       		.uleb128 0x15
+ 3542 0f16 4A000000 		.4byte	.LASF31
+ 3543 0f1a 01       		.byte	0x1
+ 3544 0f1b EF       		.byte	0xef
+ 3545 0f1c 8C000000 		.4byte	0x8c
+ 3546 0f20 00000000 		.4byte	.LFB7
+ 3547 0f24 4E000000 		.4byte	.LFE7-.LFB7
+ 3548 0f28 01       		.uleb128 0x1
+ 3549 0f29 9C       		.byte	0x9c
+ 3550 0f2a A40F0000 		.4byte	0xfa4
+ 3551 0f2e 0A       		.uleb128 0xa
+ 3552 0f2f 6F757400 		.ascii	"out\000"
+ 3553 0f33 01       		.byte	0x1
+ 3554 0f34 EF       		.byte	0xef
+ 3555 0f35 A40F0000 		.4byte	0xfa4
+ 3556 0f39 58030000 		.4byte	.LLST20
+ 3557 0f3d 0A       		.uleb128 0xa
+ 3558 0f3e 5000     		.ascii	"P\000"
+ 3559 0f40 01       		.byte	0x1
+ 3560 0f41 EF       		.byte	0xef
+ 3561 0f42 DB030000 		.4byte	0x3db
+ 3562 0f46 C6030000 		.4byte	.LLST21
+ 3563 0f4a 14       		.uleb128 0x14
+ 3564 0f4b 82020000 		.4byte	.LASF32
+ 3565 0f4f 01       		.byte	0x1
+ 3566 0f50 EF       		.byte	0xef
+ 3567 0f51 1A0B0000 		.4byte	0xb1a
+ 3568 0f55 1E040000 		.4byte	.LLST22
+ 3569 0f59 0D       		.uleb128 0xd
+ 3570 0f5a 18000000 		.4byte	.LVL128
+ 3571 0f5e 51100000 		.4byte	0x1051
+ 3572 0f62 730F0000 		.4byte	0xf73
+ 3573 0f66 0E       		.uleb128 0xe
+ 3574 0f67 01       		.uleb128 0x1
+ 3575 0f68 50       		.byte	0x50
+ 3576 0f69 02       		.uleb128 0x2
+ 3577 0f6a 74       		.byte	0x74
+ 3578 0f6b 01       		.sleb128 1
+ 3579 0f6c 0E       		.uleb128 0xe
+ 3580 0f6d 01       		.uleb128 0x1
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqCnWHK.s 			page 69
+
+
+ 3581 0f6e 51       		.byte	0x51
+ 3582 0f6f 02       		.uleb128 0x2
+ 3583 0f70 75       		.byte	0x75
+ 3584 0f71 00       		.sleb128 0
+ 3585 0f72 00       		.byte	0
+ 3586 0f73 0D       		.uleb128 0xd
+ 3587 0f74 24000000 		.4byte	.LVL129
+ 3588 0f78 51100000 		.4byte	0x1051
+ 3589 0f7c 8D0F0000 		.4byte	0xf8d
+ 3590 0f80 0E       		.uleb128 0xe
+ 3591 0f81 01       		.uleb128 0x1
+ 3592 0f82 50       		.byte	0x50
+ 3593 0f83 02       		.uleb128 0x2
+ 3594 0f84 74       		.byte	0x74
+ 3595 0f85 21       		.sleb128 33
+ 3596 0f86 0E       		.uleb128 0xe
+ 3597 0f87 01       		.uleb128 0x1
+ 3598 0f88 51       		.byte	0x51
+ 3599 0f89 02       		.uleb128 0x2
+ 3600 0f8a 75       		.byte	0x75
+ 3601 0f8b 20       		.sleb128 32
+ 3602 0f8c 00       		.byte	0
+ 3603 0f8d 0F       		.uleb128 0xf
+ 3604 0f8e 42000000 		.4byte	.LVL133
+ 3605 0f92 51100000 		.4byte	0x1051
+ 3606 0f96 0E       		.uleb128 0xe
+ 3607 0f97 01       		.uleb128 0x1
+ 3608 0f98 50       		.byte	0x50
+ 3609 0f99 02       		.uleb128 0x2
+ 3610 0f9a 74       		.byte	0x74
+ 3611 0f9b 01       		.sleb128 1
+ 3612 0f9c 0E       		.uleb128 0xe
+ 3613 0f9d 01       		.uleb128 0x1
+ 3614 0f9e 51       		.byte	0x51
+ 3615 0f9f 02       		.uleb128 0x2
+ 3616 0fa0 75       		.byte	0x75
+ 3617 0fa1 00       		.sleb128 0
+ 3618 0fa2 00       		.byte	0
+ 3619 0fa3 00       		.byte	0
+ 3620 0fa4 10       		.uleb128 0x10
+ 3621 0fa5 04       		.byte	0x4
+ 3622 0fa6 81000000 		.4byte	0x81
+ 3623 0faa 16       		.uleb128 0x16
+ 3624 0fab 5D020000 		.4byte	.LASF33
+ 3625 0faf 01       		.byte	0x1
+ 3626 0fb0 04       		.byte	0x4
+ 3627 0fb1 D6030000 		.4byte	0x3d6
+ 3628 0fb5 05       		.uleb128 0x5
+ 3629 0fb6 03       		.byte	0x3
+ 3630 0fb7 00000000 		.4byte	ec_G
+ 3631 0fbb 16       		.uleb128 0x16
+ 3632 0fbc 67000000 		.4byte	.LASF34
+ 3633 0fc0 01       		.byte	0x1
+ 3634 0fc1 09       		.byte	0x9
+ 3635 0fc2 72080000 		.4byte	0x872
+ 3636 0fc6 05       		.uleb128 0x5
+ 3637 0fc7 03       		.byte	0x3
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqCnWHK.s 			page 70
+
+
+ 3638 0fc8 00000000 		.4byte	ec_n
+ 3639 0fcc 16       		.uleb128 0x16
+ 3640 0fcd 6C000000 		.4byte	.LASF35
+ 3641 0fd1 01       		.byte	0x1
+ 3642 0fd2 0B       		.byte	0xb
+ 3643 0fd3 72080000 		.4byte	0x872
+ 3644 0fd7 05       		.uleb128 0x5
+ 3645 0fd8 03       		.byte	0x3
+ 3646 0fd9 00000000 		.4byte	ec_p
+ 3647 0fdd 16       		.uleb128 0x16
+ 3648 0fde 57000000 		.4byte	.LASF36
+ 3649 0fe2 01       		.byte	0x1
+ 3650 0fe3 0D       		.byte	0xd
+ 3651 0fe4 72080000 		.4byte	0x872
+ 3652 0fe8 05       		.uleb128 0x5
+ 3653 0fe9 03       		.byte	0x3
+ 3654 0fea 00000000 		.4byte	ec_b
+ 3655 0fee 17       		.uleb128 0x17
+ 3656 0fef 36000000 		.4byte	.LASF37
+ 3657 0ff3 36000000 		.4byte	.LASF37
+ 3658 0ff7 04       		.byte	0x4
+ 3659 0ff8 1E       		.byte	0x1e
+ 3660 0ff9 17       		.uleb128 0x17
+ 3661 0ffa 3B020000 		.4byte	.LASF38
+ 3662 0ffe 3B020000 		.4byte	.LASF38
+ 3663 1002 04       		.byte	0x4
+ 3664 1003 1B       		.byte	0x1b
+ 3665 1004 17       		.uleb128 0x17
+ 3666 1005 43020000 		.4byte	.LASF39
+ 3667 1009 43020000 		.4byte	.LASF39
+ 3668 100d 04       		.byte	0x4
+ 3669 100e 2F       		.byte	0x2f
+ 3670 100f 17       		.uleb128 0x17
+ 3671 1010 A7010000 		.4byte	.LASF40
+ 3672 1014 A7010000 		.4byte	.LASF40
+ 3673 1018 04       		.byte	0x4
+ 3674 1019 29       		.byte	0x29
+ 3675 101a 17       		.uleb128 0x17
+ 3676 101b 71000000 		.4byte	.LASF41
+ 3677 101f 71000000 		.4byte	.LASF41
+ 3678 1023 04       		.byte	0x4
+ 3679 1024 33       		.byte	0x33
+ 3680 1025 17       		.uleb128 0x17
+ 3681 1026 CE020000 		.4byte	.LASF42
+ 3682 102a CE020000 		.4byte	.LASF42
+ 3683 102e 04       		.byte	0x4
+ 3684 102f 2C       		.byte	0x2c
+ 3685 1030 17       		.uleb128 0x17
+ 3686 1031 C2010000 		.4byte	.LASF43
+ 3687 1035 C2010000 		.4byte	.LASF43
+ 3688 1039 04       		.byte	0x4
+ 3689 103a 18       		.byte	0x18
+ 3690 103b 17       		.uleb128 0x17
+ 3691 103c F7010000 		.4byte	.LASF44
+ 3692 1040 F7010000 		.4byte	.LASF44
+ 3693 1044 04       		.byte	0x4
+ 3694 1045 26       		.byte	0x26
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqCnWHK.s 			page 71
+
+
+ 3695 1046 17       		.uleb128 0x17
+ 3696 1047 24000000 		.4byte	.LASF45
+ 3697 104b 24000000 		.4byte	.LASF45
+ 3698 104f 04       		.byte	0x4
+ 3699 1050 40       		.byte	0x40
+ 3700 1051 17       		.uleb128 0x17
+ 3701 1052 9A010000 		.4byte	.LASF46
+ 3702 1056 9A010000 		.4byte	.LASF46
+ 3703 105a 04       		.byte	0x4
+ 3704 105b 45       		.byte	0x45
+ 3705 105c 00       		.byte	0
+ 3706              		.section	.debug_abbrev,"",%progbits
+ 3707              	.Ldebug_abbrev0:
+ 3708 0000 01       		.uleb128 0x1
+ 3709 0001 11       		.uleb128 0x11
+ 3710 0002 01       		.byte	0x1
+ 3711 0003 25       		.uleb128 0x25
+ 3712 0004 0E       		.uleb128 0xe
+ 3713 0005 13       		.uleb128 0x13
+ 3714 0006 0B       		.uleb128 0xb
+ 3715 0007 03       		.uleb128 0x3
+ 3716 0008 0E       		.uleb128 0xe
+ 3717 0009 1B       		.uleb128 0x1b
+ 3718 000a 0E       		.uleb128 0xe
+ 3719 000b 55       		.uleb128 0x55
+ 3720 000c 17       		.uleb128 0x17
+ 3721 000d 11       		.uleb128 0x11
+ 3722 000e 01       		.uleb128 0x1
+ 3723 000f 10       		.uleb128 0x10
+ 3724 0010 17       		.uleb128 0x17
+ 3725 0011 00       		.byte	0
+ 3726 0012 00       		.byte	0
+ 3727 0013 02       		.uleb128 0x2
+ 3728 0014 24       		.uleb128 0x24
+ 3729 0015 00       		.byte	0
+ 3730 0016 0B       		.uleb128 0xb
+ 3731 0017 0B       		.uleb128 0xb
+ 3732 0018 3E       		.uleb128 0x3e
+ 3733 0019 0B       		.uleb128 0xb
+ 3734 001a 03       		.uleb128 0x3
+ 3735 001b 0E       		.uleb128 0xe
+ 3736 001c 00       		.byte	0
+ 3737 001d 00       		.byte	0
+ 3738 001e 03       		.uleb128 0x3
+ 3739 001f 16       		.uleb128 0x16
+ 3740 0020 00       		.byte	0
+ 3741 0021 03       		.uleb128 0x3
+ 3742 0022 0E       		.uleb128 0xe
+ 3743 0023 3A       		.uleb128 0x3a
+ 3744 0024 0B       		.uleb128 0xb
+ 3745 0025 3B       		.uleb128 0x3b
+ 3746 0026 0B       		.uleb128 0xb
+ 3747 0027 49       		.uleb128 0x49
+ 3748 0028 13       		.uleb128 0x13
+ 3749 0029 00       		.byte	0
+ 3750 002a 00       		.byte	0
+ 3751 002b 04       		.uleb128 0x4
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqCnWHK.s 			page 72
+
+
+ 3752 002c 24       		.uleb128 0x24
+ 3753 002d 00       		.byte	0
+ 3754 002e 0B       		.uleb128 0xb
+ 3755 002f 0B       		.uleb128 0xb
+ 3756 0030 3E       		.uleb128 0x3e
+ 3757 0031 0B       		.uleb128 0xb
+ 3758 0032 03       		.uleb128 0x3
+ 3759 0033 08       		.uleb128 0x8
+ 3760 0034 00       		.byte	0
+ 3761 0035 00       		.byte	0
+ 3762 0036 05       		.uleb128 0x5
+ 3763 0037 13       		.uleb128 0x13
+ 3764 0038 01       		.byte	0x1
+ 3765 0039 0B       		.uleb128 0xb
+ 3766 003a 0B       		.uleb128 0xb
+ 3767 003b 3A       		.uleb128 0x3a
+ 3768 003c 0B       		.uleb128 0xb
+ 3769 003d 3B       		.uleb128 0x3b
+ 3770 003e 0B       		.uleb128 0xb
+ 3771 003f 01       		.uleb128 0x1
+ 3772 0040 13       		.uleb128 0x13
+ 3773 0041 00       		.byte	0
+ 3774 0042 00       		.byte	0
+ 3775 0043 06       		.uleb128 0x6
+ 3776 0044 0D       		.uleb128 0xd
+ 3777 0045 00       		.byte	0
+ 3778 0046 03       		.uleb128 0x3
+ 3779 0047 08       		.uleb128 0x8
+ 3780 0048 3A       		.uleb128 0x3a
+ 3781 0049 0B       		.uleb128 0xb
+ 3782 004a 3B       		.uleb128 0x3b
+ 3783 004b 0B       		.uleb128 0xb
+ 3784 004c 49       		.uleb128 0x49
+ 3785 004d 13       		.uleb128 0x13
+ 3786 004e 38       		.uleb128 0x38
+ 3787 004f 0B       		.uleb128 0xb
+ 3788 0050 00       		.byte	0
+ 3789 0051 00       		.byte	0
+ 3790 0052 07       		.uleb128 0x7
+ 3791 0053 01       		.uleb128 0x1
+ 3792 0054 01       		.byte	0x1
+ 3793 0055 49       		.uleb128 0x49
+ 3794 0056 13       		.uleb128 0x13
+ 3795 0057 01       		.uleb128 0x1
+ 3796 0058 13       		.uleb128 0x13
+ 3797 0059 00       		.byte	0
+ 3798 005a 00       		.byte	0
+ 3799 005b 08       		.uleb128 0x8
+ 3800 005c 21       		.uleb128 0x21
+ 3801 005d 00       		.byte	0
+ 3802 005e 49       		.uleb128 0x49
+ 3803 005f 13       		.uleb128 0x13
+ 3804 0060 2F       		.uleb128 0x2f
+ 3805 0061 0B       		.uleb128 0xb
+ 3806 0062 00       		.byte	0
+ 3807 0063 00       		.byte	0
+ 3808 0064 09       		.uleb128 0x9
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqCnWHK.s 			page 73
+
+
+ 3809 0065 2E       		.uleb128 0x2e
+ 3810 0066 01       		.byte	0x1
+ 3811 0067 3F       		.uleb128 0x3f
+ 3812 0068 19       		.uleb128 0x19
+ 3813 0069 03       		.uleb128 0x3
+ 3814 006a 0E       		.uleb128 0xe
+ 3815 006b 3A       		.uleb128 0x3a
+ 3816 006c 0B       		.uleb128 0xb
+ 3817 006d 3B       		.uleb128 0x3b
+ 3818 006e 0B       		.uleb128 0xb
+ 3819 006f 27       		.uleb128 0x27
+ 3820 0070 19       		.uleb128 0x19
+ 3821 0071 11       		.uleb128 0x11
+ 3822 0072 01       		.uleb128 0x1
+ 3823 0073 12       		.uleb128 0x12
+ 3824 0074 06       		.uleb128 0x6
+ 3825 0075 40       		.uleb128 0x40
+ 3826 0076 18       		.uleb128 0x18
+ 3827 0077 9742     		.uleb128 0x2117
+ 3828 0079 19       		.uleb128 0x19
+ 3829 007a 01       		.uleb128 0x1
+ 3830 007b 13       		.uleb128 0x13
+ 3831 007c 00       		.byte	0
+ 3832 007d 00       		.byte	0
+ 3833 007e 0A       		.uleb128 0xa
+ 3834 007f 05       		.uleb128 0x5
+ 3835 0080 00       		.byte	0
+ 3836 0081 03       		.uleb128 0x3
+ 3837 0082 08       		.uleb128 0x8
+ 3838 0083 3A       		.uleb128 0x3a
+ 3839 0084 0B       		.uleb128 0xb
+ 3840 0085 3B       		.uleb128 0x3b
+ 3841 0086 0B       		.uleb128 0xb
+ 3842 0087 49       		.uleb128 0x49
+ 3843 0088 13       		.uleb128 0x13
+ 3844 0089 02       		.uleb128 0x2
+ 3845 008a 17       		.uleb128 0x17
+ 3846 008b 00       		.byte	0
+ 3847 008c 00       		.byte	0
+ 3848 008d 0B       		.uleb128 0xb
+ 3849 008e 34       		.uleb128 0x34
+ 3850 008f 00       		.byte	0
+ 3851 0090 03       		.uleb128 0x3
+ 3852 0091 0E       		.uleb128 0xe
+ 3853 0092 3A       		.uleb128 0x3a
+ 3854 0093 0B       		.uleb128 0xb
+ 3855 0094 3B       		.uleb128 0x3b
+ 3856 0095 0B       		.uleb128 0xb
+ 3857 0096 49       		.uleb128 0x49
+ 3858 0097 13       		.uleb128 0x13
+ 3859 0098 02       		.uleb128 0x2
+ 3860 0099 18       		.uleb128 0x18
+ 3861 009a 00       		.byte	0
+ 3862 009b 00       		.byte	0
+ 3863 009c 0C       		.uleb128 0xc
+ 3864 009d 34       		.uleb128 0x34
+ 3865 009e 00       		.byte	0
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqCnWHK.s 			page 74
+
+
+ 3866 009f 03       		.uleb128 0x3
+ 3867 00a0 08       		.uleb128 0x8
+ 3868 00a1 3A       		.uleb128 0x3a
+ 3869 00a2 0B       		.uleb128 0xb
+ 3870 00a3 3B       		.uleb128 0x3b
+ 3871 00a4 0B       		.uleb128 0xb
+ 3872 00a5 49       		.uleb128 0x49
+ 3873 00a6 13       		.uleb128 0x13
+ 3874 00a7 02       		.uleb128 0x2
+ 3875 00a8 18       		.uleb128 0x18
+ 3876 00a9 00       		.byte	0
+ 3877 00aa 00       		.byte	0
+ 3878 00ab 0D       		.uleb128 0xd
+ 3879 00ac 898201   		.uleb128 0x4109
+ 3880 00af 01       		.byte	0x1
+ 3881 00b0 11       		.uleb128 0x11
+ 3882 00b1 01       		.uleb128 0x1
+ 3883 00b2 31       		.uleb128 0x31
+ 3884 00b3 13       		.uleb128 0x13
+ 3885 00b4 01       		.uleb128 0x1
+ 3886 00b5 13       		.uleb128 0x13
+ 3887 00b6 00       		.byte	0
+ 3888 00b7 00       		.byte	0
+ 3889 00b8 0E       		.uleb128 0xe
+ 3890 00b9 8A8201   		.uleb128 0x410a
+ 3891 00bc 00       		.byte	0
+ 3892 00bd 02       		.uleb128 0x2
+ 3893 00be 18       		.uleb128 0x18
+ 3894 00bf 9142     		.uleb128 0x2111
+ 3895 00c1 18       		.uleb128 0x18
+ 3896 00c2 00       		.byte	0
+ 3897 00c3 00       		.byte	0
+ 3898 00c4 0F       		.uleb128 0xf
+ 3899 00c5 898201   		.uleb128 0x4109
+ 3900 00c8 01       		.byte	0x1
+ 3901 00c9 11       		.uleb128 0x11
+ 3902 00ca 01       		.uleb128 0x1
+ 3903 00cb 31       		.uleb128 0x31
+ 3904 00cc 13       		.uleb128 0x13
+ 3905 00cd 00       		.byte	0
+ 3906 00ce 00       		.byte	0
+ 3907 00cf 10       		.uleb128 0x10
+ 3908 00d0 0F       		.uleb128 0xf
+ 3909 00d1 00       		.byte	0
+ 3910 00d2 0B       		.uleb128 0xb
+ 3911 00d3 0B       		.uleb128 0xb
+ 3912 00d4 49       		.uleb128 0x49
+ 3913 00d5 13       		.uleb128 0x13
+ 3914 00d6 00       		.byte	0
+ 3915 00d7 00       		.byte	0
+ 3916 00d8 11       		.uleb128 0x11
+ 3917 00d9 26       		.uleb128 0x26
+ 3918 00da 00       		.byte	0
+ 3919 00db 49       		.uleb128 0x49
+ 3920 00dc 13       		.uleb128 0x13
+ 3921 00dd 00       		.byte	0
+ 3922 00de 00       		.byte	0
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqCnWHK.s 			page 75
+
+
+ 3923 00df 12       		.uleb128 0x12
+ 3924 00e0 0B       		.uleb128 0xb
+ 3925 00e1 01       		.byte	0x1
+ 3926 00e2 11       		.uleb128 0x11
+ 3927 00e3 01       		.uleb128 0x1
+ 3928 00e4 12       		.uleb128 0x12
+ 3929 00e5 06       		.uleb128 0x6
+ 3930 00e6 01       		.uleb128 0x1
+ 3931 00e7 13       		.uleb128 0x13
+ 3932 00e8 00       		.byte	0
+ 3933 00e9 00       		.byte	0
+ 3934 00ea 13       		.uleb128 0x13
+ 3935 00eb 34       		.uleb128 0x34
+ 3936 00ec 00       		.byte	0
+ 3937 00ed 03       		.uleb128 0x3
+ 3938 00ee 08       		.uleb128 0x8
+ 3939 00ef 3A       		.uleb128 0x3a
+ 3940 00f0 0B       		.uleb128 0xb
+ 3941 00f1 3B       		.uleb128 0x3b
+ 3942 00f2 0B       		.uleb128 0xb
+ 3943 00f3 49       		.uleb128 0x49
+ 3944 00f4 13       		.uleb128 0x13
+ 3945 00f5 02       		.uleb128 0x2
+ 3946 00f6 17       		.uleb128 0x17
+ 3947 00f7 00       		.byte	0
+ 3948 00f8 00       		.byte	0
+ 3949 00f9 14       		.uleb128 0x14
+ 3950 00fa 05       		.uleb128 0x5
+ 3951 00fb 00       		.byte	0
+ 3952 00fc 03       		.uleb128 0x3
+ 3953 00fd 0E       		.uleb128 0xe
+ 3954 00fe 3A       		.uleb128 0x3a
+ 3955 00ff 0B       		.uleb128 0xb
+ 3956 0100 3B       		.uleb128 0x3b
+ 3957 0101 0B       		.uleb128 0xb
+ 3958 0102 49       		.uleb128 0x49
+ 3959 0103 13       		.uleb128 0x13
+ 3960 0104 02       		.uleb128 0x2
+ 3961 0105 17       		.uleb128 0x17
+ 3962 0106 00       		.byte	0
+ 3963 0107 00       		.byte	0
+ 3964 0108 15       		.uleb128 0x15
+ 3965 0109 2E       		.uleb128 0x2e
+ 3966 010a 01       		.byte	0x1
+ 3967 010b 3F       		.uleb128 0x3f
+ 3968 010c 19       		.uleb128 0x19
+ 3969 010d 03       		.uleb128 0x3
+ 3970 010e 0E       		.uleb128 0xe
+ 3971 010f 3A       		.uleb128 0x3a
+ 3972 0110 0B       		.uleb128 0xb
+ 3973 0111 3B       		.uleb128 0x3b
+ 3974 0112 0B       		.uleb128 0xb
+ 3975 0113 27       		.uleb128 0x27
+ 3976 0114 19       		.uleb128 0x19
+ 3977 0115 49       		.uleb128 0x49
+ 3978 0116 13       		.uleb128 0x13
+ 3979 0117 11       		.uleb128 0x11
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqCnWHK.s 			page 76
+
+
+ 3980 0118 01       		.uleb128 0x1
+ 3981 0119 12       		.uleb128 0x12
+ 3982 011a 06       		.uleb128 0x6
+ 3983 011b 40       		.uleb128 0x40
+ 3984 011c 18       		.uleb128 0x18
+ 3985 011d 9742     		.uleb128 0x2117
+ 3986 011f 19       		.uleb128 0x19
+ 3987 0120 01       		.uleb128 0x1
+ 3988 0121 13       		.uleb128 0x13
+ 3989 0122 00       		.byte	0
+ 3990 0123 00       		.byte	0
+ 3991 0124 16       		.uleb128 0x16
+ 3992 0125 34       		.uleb128 0x34
+ 3993 0126 00       		.byte	0
+ 3994 0127 03       		.uleb128 0x3
+ 3995 0128 0E       		.uleb128 0xe
+ 3996 0129 3A       		.uleb128 0x3a
+ 3997 012a 0B       		.uleb128 0xb
+ 3998 012b 3B       		.uleb128 0x3b
+ 3999 012c 0B       		.uleb128 0xb
+ 4000 012d 49       		.uleb128 0x49
+ 4001 012e 13       		.uleb128 0x13
+ 4002 012f 3F       		.uleb128 0x3f
+ 4003 0130 19       		.uleb128 0x19
+ 4004 0131 02       		.uleb128 0x2
+ 4005 0132 18       		.uleb128 0x18
+ 4006 0133 00       		.byte	0
+ 4007 0134 00       		.byte	0
+ 4008 0135 17       		.uleb128 0x17
+ 4009 0136 2E       		.uleb128 0x2e
+ 4010 0137 00       		.byte	0
+ 4011 0138 3F       		.uleb128 0x3f
+ 4012 0139 19       		.uleb128 0x19
+ 4013 013a 3C       		.uleb128 0x3c
+ 4014 013b 19       		.uleb128 0x19
+ 4015 013c 6E       		.uleb128 0x6e
+ 4016 013d 0E       		.uleb128 0xe
+ 4017 013e 03       		.uleb128 0x3
+ 4018 013f 0E       		.uleb128 0xe
+ 4019 0140 3A       		.uleb128 0x3a
+ 4020 0141 0B       		.uleb128 0xb
+ 4021 0142 3B       		.uleb128 0x3b
+ 4022 0143 0B       		.uleb128 0xb
+ 4023 0144 00       		.byte	0
+ 4024 0145 00       		.byte	0
+ 4025 0146 00       		.byte	0
+ 4026              		.section	.debug_loc,"",%progbits
+ 4027              	.Ldebug_loc0:
+ 4028              	.LLST0:
+ 4029 0000 00000000 		.4byte	.LVL0
+ 4030 0004 0A000000 		.4byte	.LVL1
+ 4031 0008 0100     		.2byte	0x1
+ 4032 000a 50       		.byte	0x50
+ 4033 000b 0A000000 		.4byte	.LVL1
+ 4034 000f D6000000 		.4byte	.LVL21
+ 4035 0013 0100     		.2byte	0x1
+ 4036 0015 56       		.byte	0x56
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqCnWHK.s 			page 77
+
+
+ 4037 0016 D6000000 		.4byte	.LVL21
+ 4038 001a DC000000 		.4byte	.LFE1
+ 4039 001e 0400     		.2byte	0x4
+ 4040 0020 F3       		.byte	0xf3
+ 4041 0021 01       		.uleb128 0x1
+ 4042 0022 50       		.byte	0x50
+ 4043 0023 9F       		.byte	0x9f
+ 4044 0024 00000000 		.4byte	0
+ 4045 0028 00000000 		.4byte	0
+ 4046              	.LLST1:
+ 4047 002c 00000000 		.4byte	.LVL0
+ 4048 0030 0D000000 		.4byte	.LVL2-1
+ 4049 0034 0100     		.2byte	0x1
+ 4050 0036 51       		.byte	0x51
+ 4051 0037 0D000000 		.4byte	.LVL2-1
+ 4052 003b D6000000 		.4byte	.LVL20
+ 4053 003f 0100     		.2byte	0x1
+ 4054 0041 55       		.byte	0x55
+ 4055 0042 D6000000 		.4byte	.LVL20
+ 4056 0046 DC000000 		.4byte	.LFE1
+ 4057 004a 0400     		.2byte	0x4
+ 4058 004c F3       		.byte	0xf3
+ 4059 004d 01       		.uleb128 0x1
+ 4060 004e 51       		.byte	0x51
+ 4061 004f 9F       		.byte	0x9f
+ 4062 0050 00000000 		.4byte	0
+ 4063 0054 00000000 		.4byte	0
+ 4064              	.LLST2:
+ 4065 0058 00000000 		.4byte	.LVL22
+ 4066 005c 0C000000 		.4byte	.LVL23
+ 4067 0060 0100     		.2byte	0x1
+ 4068 0062 50       		.byte	0x50
+ 4069 0063 0C000000 		.4byte	.LVL23
+ 4070 0067 3E010000 		.4byte	.LVL52
+ 4071 006b 0100     		.2byte	0x1
+ 4072 006d 56       		.byte	0x56
+ 4073 006e 3E010000 		.4byte	.LVL52
+ 4074 0072 44010000 		.4byte	.LFE0
+ 4075 0076 0400     		.2byte	0x4
+ 4076 0078 F3       		.byte	0xf3
+ 4077 0079 01       		.uleb128 0x1
+ 4078 007a 50       		.byte	0x50
+ 4079 007b 9F       		.byte	0x9f
+ 4080 007c 00000000 		.4byte	0
+ 4081 0080 00000000 		.4byte	0
+ 4082              	.LLST3:
+ 4083 0084 00000000 		.4byte	.LVL22
+ 4084 0088 0F000000 		.4byte	.LVL24-1
+ 4085 008c 0100     		.2byte	0x1
+ 4086 008e 51       		.byte	0x51
+ 4087 008f 0F000000 		.4byte	.LVL24-1
+ 4088 0093 3E010000 		.4byte	.LVL50
+ 4089 0097 0100     		.2byte	0x1
+ 4090 0099 54       		.byte	0x54
+ 4091 009a 3E010000 		.4byte	.LVL50
+ 4092 009e 44010000 		.4byte	.LFE0
+ 4093 00a2 0400     		.2byte	0x4
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqCnWHK.s 			page 78
+
+
+ 4094 00a4 F3       		.byte	0xf3
+ 4095 00a5 01       		.uleb128 0x1
+ 4096 00a6 51       		.byte	0x51
+ 4097 00a7 9F       		.byte	0x9f
+ 4098 00a8 00000000 		.4byte	0
+ 4099 00ac 00000000 		.4byte	0
+ 4100              	.LLST4:
+ 4101 00b0 00000000 		.4byte	.LVL22
+ 4102 00b4 0F000000 		.4byte	.LVL24-1
+ 4103 00b8 0100     		.2byte	0x1
+ 4104 00ba 52       		.byte	0x52
+ 4105 00bb 0F000000 		.4byte	.LVL24-1
+ 4106 00bf 3E010000 		.4byte	.LVL51
+ 4107 00c3 0100     		.2byte	0x1
+ 4108 00c5 55       		.byte	0x55
+ 4109 00c6 3E010000 		.4byte	.LVL51
+ 4110 00ca 44010000 		.4byte	.LFE0
+ 4111 00ce 0400     		.2byte	0x4
+ 4112 00d0 F3       		.byte	0xf3
+ 4113 00d1 01       		.uleb128 0x1
+ 4114 00d2 52       		.byte	0x52
+ 4115 00d3 9F       		.byte	0x9f
+ 4116 00d4 00000000 		.4byte	0
+ 4117 00d8 00000000 		.4byte	0
+ 4118              	.LLST5:
+ 4119 00dc 00000000 		.4byte	.LVL53
+ 4120 00e0 0C000000 		.4byte	.LVL54
+ 4121 00e4 0100     		.2byte	0x1
+ 4122 00e6 50       		.byte	0x50
+ 4123 00e7 0C000000 		.4byte	.LVL54
+ 4124 00eb 56000000 		.4byte	.LVL65
+ 4125 00ef 0100     		.2byte	0x1
+ 4126 00f1 56       		.byte	0x56
+ 4127 00f2 56000000 		.4byte	.LVL65
+ 4128 00f6 58000000 		.4byte	.LFE2
+ 4129 00fa 0400     		.2byte	0x4
+ 4130 00fc F3       		.byte	0xf3
+ 4131 00fd 01       		.uleb128 0x1
+ 4132 00fe 50       		.byte	0x50
+ 4133 00ff 9F       		.byte	0x9f
+ 4134 0100 00000000 		.4byte	0
+ 4135 0104 00000000 		.4byte	0
+ 4136              	.LLST6:
+ 4137 0108 00000000 		.4byte	.LVL53
+ 4138 010c 0F000000 		.4byte	.LVL55-1
+ 4139 0110 0100     		.2byte	0x1
+ 4140 0112 51       		.byte	0x51
+ 4141 0113 0F000000 		.4byte	.LVL55-1
+ 4142 0117 56000000 		.4byte	.LVL66
+ 4143 011b 0100     		.2byte	0x1
+ 4144 011d 57       		.byte	0x57
+ 4145 011e 56000000 		.4byte	.LVL66
+ 4146 0122 58000000 		.4byte	.LFE2
+ 4147 0126 0400     		.2byte	0x4
+ 4148 0128 F3       		.byte	0xf3
+ 4149 0129 01       		.uleb128 0x1
+ 4150 012a 51       		.byte	0x51
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqCnWHK.s 			page 79
+
+
+ 4151 012b 9F       		.byte	0x9f
+ 4152 012c 00000000 		.4byte	0
+ 4153 0130 00000000 		.4byte	0
+ 4154              	.LLST7:
+ 4155 0134 00000000 		.4byte	.LVL53
+ 4156 0138 0F000000 		.4byte	.LVL55-1
+ 4157 013c 0100     		.2byte	0x1
+ 4158 013e 52       		.byte	0x52
+ 4159 013f 0F000000 		.4byte	.LVL55-1
+ 4160 0143 56000000 		.4byte	.LVL64
+ 4161 0147 0100     		.2byte	0x1
+ 4162 0149 55       		.byte	0x55
+ 4163 014a 56000000 		.4byte	.LVL64
+ 4164 014e 58000000 		.4byte	.LFE2
+ 4165 0152 0400     		.2byte	0x4
+ 4166 0154 F3       		.byte	0xf3
+ 4167 0155 01       		.uleb128 0x1
+ 4168 0156 52       		.byte	0x52
+ 4169 0157 9F       		.byte	0x9f
+ 4170 0158 00000000 		.4byte	0
+ 4171 015c 00000000 		.4byte	0
+ 4172              	.LLST8:
+ 4173 0160 16000000 		.4byte	.LVL56
+ 4174 0164 18000000 		.4byte	.LVL57
+ 4175 0168 0300     		.2byte	0x3
+ 4176 016a 08       		.byte	0x8
+ 4177 016b FF       		.byte	0xff
+ 4178 016c 9F       		.byte	0x9f
+ 4179 016d 18000000 		.4byte	.LVL57
+ 4180 0171 56000000 		.4byte	.LVL63
+ 4181 0175 0100     		.2byte	0x1
+ 4182 0177 54       		.byte	0x54
+ 4183 0178 00000000 		.4byte	0
+ 4184 017c 00000000 		.4byte	0
+ 4185              	.LLST9:
+ 4186 0180 00000000 		.4byte	.LVL67
+ 4187 0184 0F000000 		.4byte	.LVL69-1
+ 4188 0188 0100     		.2byte	0x1
+ 4189 018a 50       		.byte	0x50
+ 4190 018b 0F000000 		.4byte	.LVL69-1
+ 4191 018f 1C000000 		.4byte	.LVL71
+ 4192 0193 0100     		.2byte	0x1
+ 4193 0195 55       		.byte	0x55
+ 4194 0196 1C000000 		.4byte	.LVL71
+ 4195 019a 24000000 		.4byte	.LFE3
+ 4196 019e 0400     		.2byte	0x4
+ 4197 01a0 F3       		.byte	0xf3
+ 4198 01a1 01       		.uleb128 0x1
+ 4199 01a2 50       		.byte	0x50
+ 4200 01a3 9F       		.byte	0x9f
+ 4201 01a4 00000000 		.4byte	0
+ 4202 01a8 00000000 		.4byte	0
+ 4203              	.LLST10:
+ 4204 01ac 00000000 		.4byte	.LVL67
+ 4205 01b0 0A000000 		.4byte	.LVL68
+ 4206 01b4 0100     		.2byte	0x1
+ 4207 01b6 51       		.byte	0x51
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqCnWHK.s 			page 80
+
+
+ 4208 01b7 0A000000 		.4byte	.LVL68
+ 4209 01bb 1C000000 		.4byte	.LVL72
+ 4210 01bf 0100     		.2byte	0x1
+ 4211 01c1 56       		.byte	0x56
+ 4212 01c2 1C000000 		.4byte	.LVL72
+ 4213 01c6 24000000 		.4byte	.LFE3
+ 4214 01ca 0400     		.2byte	0x4
+ 4215 01cc F3       		.byte	0xf3
+ 4216 01cd 01       		.uleb128 0x1
+ 4217 01ce 51       		.byte	0x51
+ 4218 01cf 9F       		.byte	0x9f
+ 4219 01d0 00000000 		.4byte	0
+ 4220 01d4 00000000 		.4byte	0
+ 4221              	.LLST11:
+ 4222 01d8 00000000 		.4byte	.LVL73
+ 4223 01dc 0E000000 		.4byte	.LVL74
+ 4224 01e0 0100     		.2byte	0x1
+ 4225 01e2 50       		.byte	0x50
+ 4226 01e3 0E000000 		.4byte	.LVL74
+ 4227 01e7 B0000000 		.4byte	.LVL89
+ 4228 01eb 0200     		.2byte	0x2
+ 4229 01ed 7D       		.byte	0x7d
+ 4230 01ee 00       		.sleb128 0
+ 4231 01ef B0000000 		.4byte	.LVL89
+ 4232 01f3 B8000000 		.4byte	.LFE4
+ 4233 01f7 0300     		.2byte	0x3
+ 4234 01f9 91       		.byte	0x91
+ 4235 01fa C07E     		.sleb128 -192
+ 4236 01fc 00000000 		.4byte	0
+ 4237 0200 00000000 		.4byte	0
+ 4238              	.LLST12:
+ 4239 0204 00000000 		.4byte	.LVL73
+ 4240 0208 11000000 		.4byte	.LVL75-1
+ 4241 020c 0100     		.2byte	0x1
+ 4242 020e 51       		.byte	0x51
+ 4243 020f 11000000 		.4byte	.LVL75-1
+ 4244 0213 B8000000 		.4byte	.LFE4
+ 4245 0217 0300     		.2byte	0x3
+ 4246 0219 91       		.byte	0x91
+ 4247 021a C47E     		.sleb128 -188
+ 4248 021c 00000000 		.4byte	0
+ 4249 0220 00000000 		.4byte	0
+ 4250              	.LLST13:
+ 4251 0224 00000000 		.4byte	.LVL73
+ 4252 0228 11000000 		.4byte	.LVL75-1
+ 4253 022c 0100     		.2byte	0x1
+ 4254 022e 52       		.byte	0x52
+ 4255 022f 11000000 		.4byte	.LVL75-1
+ 4256 0233 B0000000 		.4byte	.LVL91
+ 4257 0237 0100     		.2byte	0x1
+ 4258 0239 56       		.byte	0x56
+ 4259 023a B0000000 		.4byte	.LVL91
+ 4260 023e B8000000 		.4byte	.LFE4
+ 4261 0242 0400     		.2byte	0x4
+ 4262 0244 F3       		.byte	0xf3
+ 4263 0245 01       		.uleb128 0x1
+ 4264 0246 52       		.byte	0x52
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqCnWHK.s 			page 81
+
+
+ 4265 0247 9F       		.byte	0x9f
+ 4266 0248 00000000 		.4byte	0
+ 4267 024c 00000000 		.4byte	0
+ 4268              	.LLST14:
+ 4269 0250 00000000 		.4byte	.LVL73
+ 4270 0254 11000000 		.4byte	.LVL75-1
+ 4271 0258 0100     		.2byte	0x1
+ 4272 025a 53       		.byte	0x53
+ 4273 025b 11000000 		.4byte	.LVL75-1
+ 4274 025f B0000000 		.4byte	.LVL90
+ 4275 0263 0100     		.2byte	0x1
+ 4276 0265 55       		.byte	0x55
+ 4277 0266 B0000000 		.4byte	.LVL90
+ 4278 026a B8000000 		.4byte	.LFE4
+ 4279 026e 0400     		.2byte	0x4
+ 4280 0270 F3       		.byte	0xf3
+ 4281 0271 01       		.uleb128 0x1
+ 4282 0272 53       		.byte	0x53
+ 4283 0273 9F       		.byte	0x9f
+ 4284 0274 00000000 		.4byte	0
+ 4285 0278 00000000 		.4byte	0
+ 4286              	.LLST15:
+ 4287 027c 00000000 		.4byte	.LVL92
+ 4288 0280 0B000000 		.4byte	.LVL93-1
+ 4289 0284 0100     		.2byte	0x1
+ 4290 0286 50       		.byte	0x50
+ 4291 0287 0B000000 		.4byte	.LVL93-1
+ 4292 028b 6E000000 		.4byte	.LVL100
+ 4293 028f 0100     		.2byte	0x1
+ 4294 0291 54       		.byte	0x54
+ 4295 0292 6E000000 		.4byte	.LVL100
+ 4296 0296 78000000 		.4byte	.LFE5
+ 4297 029a 0400     		.2byte	0x4
+ 4298 029c F3       		.byte	0xf3
+ 4299 029d 01       		.uleb128 0x1
+ 4300 029e 50       		.byte	0x50
+ 4301 029f 9F       		.byte	0x9f
+ 4302 02a0 00000000 		.4byte	0
+ 4303 02a4 00000000 		.4byte	0
+ 4304              	.LLST16:
+ 4305 02a8 00000000 		.4byte	.LVL101
+ 4306 02ac 12000000 		.4byte	.LVL102
+ 4307 02b0 0100     		.2byte	0x1
+ 4308 02b2 50       		.byte	0x50
+ 4309 02b3 12000000 		.4byte	.LVL102
+ 4310 02b7 02010000 		.4byte	.LVL122
+ 4311 02bb 0200     		.2byte	0x2
+ 4312 02bd 7D       		.byte	0x7d
+ 4313 02be 00       		.sleb128 0
+ 4314 02bf 02010000 		.4byte	.LVL122
+ 4315 02c3 10010000 		.4byte	.LFE6
+ 4316 02c7 0300     		.2byte	0x3
+ 4317 02c9 91       		.byte	0x91
+ 4318 02ca E07D     		.sleb128 -288
+ 4319 02cc 00000000 		.4byte	0
+ 4320 02d0 00000000 		.4byte	0
+ 4321              	.LLST17:
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqCnWHK.s 			page 82
+
+
+ 4322 02d4 00000000 		.4byte	.LVL101
+ 4323 02d8 15000000 		.4byte	.LVL103-1
+ 4324 02dc 0100     		.2byte	0x1
+ 4325 02de 51       		.byte	0x51
+ 4326 02df 15000000 		.4byte	.LVL103-1
+ 4327 02e3 02010000 		.4byte	.LVL123
+ 4328 02e7 0100     		.2byte	0x1
+ 4329 02e9 55       		.byte	0x55
+ 4330 02ea 02010000 		.4byte	.LVL123
+ 4331 02ee 10010000 		.4byte	.LFE6
+ 4332 02f2 0400     		.2byte	0x4
+ 4333 02f4 F3       		.byte	0xf3
+ 4334 02f5 01       		.uleb128 0x1
+ 4335 02f6 51       		.byte	0x51
+ 4336 02f7 9F       		.byte	0x9f
+ 4337 02f8 00000000 		.4byte	0
+ 4338 02fc 00000000 		.4byte	0
+ 4339              	.LLST18:
+ 4340 0300 00000000 		.4byte	.LVL101
+ 4341 0304 15000000 		.4byte	.LVL103-1
+ 4342 0308 0100     		.2byte	0x1
+ 4343 030a 52       		.byte	0x52
+ 4344 030b 15000000 		.4byte	.LVL103-1
+ 4345 030f 02010000 		.4byte	.LVL124
+ 4346 0313 0100     		.2byte	0x1
+ 4347 0315 56       		.byte	0x56
+ 4348 0316 02010000 		.4byte	.LVL124
+ 4349 031a 10010000 		.4byte	.LFE6
+ 4350 031e 0400     		.2byte	0x4
+ 4351 0320 F3       		.byte	0xf3
+ 4352 0321 01       		.uleb128 0x1
+ 4353 0322 52       		.byte	0x52
+ 4354 0323 9F       		.byte	0x9f
+ 4355 0324 00000000 		.4byte	0
+ 4356 0328 00000000 		.4byte	0
+ 4357              	.LLST19:
+ 4358 032c 00000000 		.4byte	.LVL101
+ 4359 0330 15000000 		.4byte	.LVL103-1
+ 4360 0334 0100     		.2byte	0x1
+ 4361 0336 53       		.byte	0x53
+ 4362 0337 15000000 		.4byte	.LVL103-1
+ 4363 033b 02010000 		.4byte	.LVL125
+ 4364 033f 0100     		.2byte	0x1
+ 4365 0341 57       		.byte	0x57
+ 4366 0342 02010000 		.4byte	.LVL125
+ 4367 0346 10010000 		.4byte	.LFE6
+ 4368 034a 0400     		.2byte	0x4
+ 4369 034c F3       		.byte	0xf3
+ 4370 034d 01       		.uleb128 0x1
+ 4371 034e 53       		.byte	0x53
+ 4372 034f 9F       		.byte	0x9f
+ 4373 0350 00000000 		.4byte	0
+ 4374 0354 00000000 		.4byte	0
+ 4375              	.LLST20:
+ 4376 0358 00000000 		.4byte	.LVL126
+ 4377 035c 14000000 		.4byte	.LVL127
+ 4378 0360 0100     		.2byte	0x1
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqCnWHK.s 			page 83
+
+
+ 4379 0362 50       		.byte	0x50
+ 4380 0363 14000000 		.4byte	.LVL127
+ 4381 0367 28000000 		.4byte	.LVL130
+ 4382 036b 0100     		.2byte	0x1
+ 4383 036d 54       		.byte	0x54
+ 4384 036e 28000000 		.4byte	.LVL130
+ 4385 0372 3C000000 		.4byte	.LVL131
+ 4386 0376 0100     		.2byte	0x1
+ 4387 0378 50       		.byte	0x50
+ 4388 0379 3C000000 		.4byte	.LVL131
+ 4389 037d 46000000 		.4byte	.LVL134
+ 4390 0381 0100     		.2byte	0x1
+ 4391 0383 54       		.byte	0x54
+ 4392 0384 46000000 		.4byte	.LVL134
+ 4393 0388 48000000 		.4byte	.LVL135
+ 4394 038c 0100     		.2byte	0x1
+ 4395 038e 50       		.byte	0x50
+ 4396 038f 48000000 		.4byte	.LVL135
+ 4397 0393 4A000000 		.4byte	.LVL136
+ 4398 0397 0100     		.2byte	0x1
+ 4399 0399 54       		.byte	0x54
+ 4400 039a 4A000000 		.4byte	.LVL136
+ 4401 039e 4C000000 		.4byte	.LVL137
+ 4402 03a2 0100     		.2byte	0x1
+ 4403 03a4 50       		.byte	0x50
+ 4404 03a5 4C000000 		.4byte	.LVL137
+ 4405 03a9 4C000000 		.4byte	.LVL138
+ 4406 03ad 0100     		.2byte	0x1
+ 4407 03af 54       		.byte	0x54
+ 4408 03b0 4C000000 		.4byte	.LVL138
+ 4409 03b4 4E000000 		.4byte	.LFE7
+ 4410 03b8 0400     		.2byte	0x4
+ 4411 03ba F3       		.byte	0xf3
+ 4412 03bb 01       		.uleb128 0x1
+ 4413 03bc 50       		.byte	0x50
+ 4414 03bd 9F       		.byte	0x9f
+ 4415 03be 00000000 		.4byte	0
+ 4416 03c2 00000000 		.4byte	0
+ 4417              	.LLST21:
+ 4418 03c6 00000000 		.4byte	.LVL126
+ 4419 03ca 17000000 		.4byte	.LVL128-1
+ 4420 03ce 0100     		.2byte	0x1
+ 4421 03d0 51       		.byte	0x51
+ 4422 03d1 17000000 		.4byte	.LVL128-1
+ 4423 03d5 28000000 		.4byte	.LVL130
+ 4424 03d9 0100     		.2byte	0x1
+ 4425 03db 55       		.byte	0x55
+ 4426 03dc 28000000 		.4byte	.LVL130
+ 4427 03e0 3E000000 		.4byte	.LVL132
+ 4428 03e4 0100     		.2byte	0x1
+ 4429 03e6 51       		.byte	0x51
+ 4430 03e7 3E000000 		.4byte	.LVL132
+ 4431 03eb 46000000 		.4byte	.LVL134
+ 4432 03ef 0100     		.2byte	0x1
+ 4433 03f1 55       		.byte	0x55
+ 4434 03f2 46000000 		.4byte	.LVL134
+ 4435 03f6 4C000000 		.4byte	.LVL137
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqCnWHK.s 			page 84
+
+
+ 4436 03fa 0100     		.2byte	0x1
+ 4437 03fc 51       		.byte	0x51
+ 4438 03fd 4C000000 		.4byte	.LVL137
+ 4439 0401 4C000000 		.4byte	.LVL139
+ 4440 0405 0100     		.2byte	0x1
+ 4441 0407 55       		.byte	0x55
+ 4442 0408 4C000000 		.4byte	.LVL139
+ 4443 040c 4E000000 		.4byte	.LFE7
+ 4444 0410 0400     		.2byte	0x4
+ 4445 0412 F3       		.byte	0xf3
+ 4446 0413 01       		.uleb128 0x1
+ 4447 0414 51       		.byte	0x51
+ 4448 0415 9F       		.byte	0x9f
+ 4449 0416 00000000 		.4byte	0
+ 4450 041a 00000000 		.4byte	0
+ 4451              	.LLST22:
+ 4452 041e 00000000 		.4byte	.LVL126
+ 4453 0422 17000000 		.4byte	.LVL128-1
+ 4454 0426 0100     		.2byte	0x1
+ 4455 0428 52       		.byte	0x52
+ 4456 0429 17000000 		.4byte	.LVL128-1
+ 4457 042d 28000000 		.4byte	.LVL130
+ 4458 0431 0400     		.2byte	0x4
+ 4459 0433 F3       		.byte	0xf3
+ 4460 0434 01       		.uleb128 0x1
+ 4461 0435 52       		.byte	0x52
+ 4462 0436 9F       		.byte	0x9f
+ 4463 0437 28000000 		.4byte	.LVL130
+ 4464 043b 41000000 		.4byte	.LVL133-1
+ 4465 043f 0100     		.2byte	0x1
+ 4466 0441 52       		.byte	0x52
+ 4467 0442 41000000 		.4byte	.LVL133-1
+ 4468 0446 46000000 		.4byte	.LVL134
+ 4469 044a 0400     		.2byte	0x4
+ 4470 044c F3       		.byte	0xf3
+ 4471 044d 01       		.uleb128 0x1
+ 4472 044e 52       		.byte	0x52
+ 4473 044f 9F       		.byte	0x9f
+ 4474 0450 46000000 		.4byte	.LVL134
+ 4475 0454 4C000000 		.4byte	.LVL137
+ 4476 0458 0100     		.2byte	0x1
+ 4477 045a 52       		.byte	0x52
+ 4478 045b 4C000000 		.4byte	.LVL137
+ 4479 045f 4E000000 		.4byte	.LFE7
+ 4480 0463 0400     		.2byte	0x4
+ 4481 0465 F3       		.byte	0xf3
+ 4482 0466 01       		.uleb128 0x1
+ 4483 0467 52       		.byte	0x52
+ 4484 0468 9F       		.byte	0x9f
+ 4485 0469 00000000 		.4byte	0
+ 4486 046d 00000000 		.4byte	0
+ 4487              		.section	.debug_aranges,"",%progbits
+ 4488 0000 54000000 		.4byte	0x54
+ 4489 0004 0200     		.2byte	0x2
+ 4490 0006 00000000 		.4byte	.Ldebug_info0
+ 4491 000a 04       		.byte	0x4
+ 4492 000b 00       		.byte	0
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqCnWHK.s 			page 85
+
+
+ 4493 000c 0000     		.2byte	0
+ 4494 000e 0000     		.2byte	0
+ 4495 0010 00000000 		.4byte	.LFB1
+ 4496 0014 DC000000 		.4byte	.LFE1-.LFB1
+ 4497 0018 00000000 		.4byte	.LFB0
+ 4498 001c 44010000 		.4byte	.LFE0-.LFB0
+ 4499 0020 00000000 		.4byte	.LFB2
+ 4500 0024 58000000 		.4byte	.LFE2-.LFB2
+ 4501 0028 00000000 		.4byte	.LFB3
+ 4502 002c 24000000 		.4byte	.LFE3-.LFB3
+ 4503 0030 00000000 		.4byte	.LFB4
+ 4504 0034 B8000000 		.4byte	.LFE4-.LFB4
+ 4505 0038 00000000 		.4byte	.LFB5
+ 4506 003c 78000000 		.4byte	.LFE5-.LFB5
+ 4507 0040 00000000 		.4byte	.LFB6
+ 4508 0044 10010000 		.4byte	.LFE6-.LFB6
+ 4509 0048 00000000 		.4byte	.LFB7
+ 4510 004c 4E000000 		.4byte	.LFE7-.LFB7
+ 4511 0050 00000000 		.4byte	0
+ 4512 0054 00000000 		.4byte	0
+ 4513              		.section	.debug_ranges,"",%progbits
+ 4514              	.Ldebug_ranges0:
+ 4515 0000 00000000 		.4byte	.LFB1
+ 4516 0004 DC000000 		.4byte	.LFE1
+ 4517 0008 00000000 		.4byte	.LFB0
+ 4518 000c 44010000 		.4byte	.LFE0
+ 4519 0010 00000000 		.4byte	.LFB2
+ 4520 0014 58000000 		.4byte	.LFE2
+ 4521 0018 00000000 		.4byte	.LFB3
+ 4522 001c 24000000 		.4byte	.LFE3
+ 4523 0020 00000000 		.4byte	.LFB4
+ 4524 0024 B8000000 		.4byte	.LFE4
+ 4525 0028 00000000 		.4byte	.LFB5
+ 4526 002c 78000000 		.4byte	.LFE5
+ 4527 0030 00000000 		.4byte	.LFB6
+ 4528 0034 10010000 		.4byte	.LFE6
+ 4529 0038 00000000 		.4byte	.LFB7
+ 4530 003c 4E000000 		.4byte	.LFE7
+ 4531 0040 00000000 		.4byte	0
+ 4532 0044 00000000 		.4byte	0
+ 4533              		.section	.debug_line,"",%progbits
+ 4534              	.Ldebug_line0:
+ 4535 0000 C8020000 		.section	.debug_str,"MS",%progbits,1
+ 4535      02006D01 
+ 4535      00000201 
+ 4535      FB0E0D00 
+ 4535      01010101 
+ 4536              	.LASF20:
+ 4537 0000 65635F6D 		.ascii	"ec_mul\000"
+ 4537      756C00
+ 4538              	.LASF48:
+ 4539 0007 7374726F 		.ascii	"strong-arm\\src\\ecdsa\\ecdsa.c\000"
+ 4539      6E672D61 
+ 4539      726D5C73 
+ 4539      72635C65 
+ 4539      63647361 
+ 4540              	.LASF45:
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqCnWHK.s 			page 86
+
+
+ 4541 0024 66665F72 		.ascii	"ff_rand\000"
+ 4541      616E6400 
+ 4542              	.LASF2:
+ 4543 002c 73686F72 		.ascii	"short int\000"
+ 4543      7420696E 
+ 4543      7400
+ 4544              	.LASF37:
+ 4545 0036 66665F69 		.ascii	"ff_is_zero\000"
+ 4545      735F7A65 
+ 4545      726F00
+ 4546              	.LASF13:
+ 4547 0041 73697A65 		.ascii	"sizetype\000"
+ 4547      74797065 
+ 4547      00
+ 4548              	.LASF31:
+ 4549 004a 65635F73 		.ascii	"ec_serialize\000"
+ 4549      65726961 
+ 4549      6C697A65 
+ 4549      00
+ 4550              	.LASF36:
+ 4551 0057 65635F62 		.ascii	"ec_b\000"
+ 4551      00
+ 4552              	.LASF6:
+ 4553 005c 5F5F7569 		.ascii	"__uint32_t\000"
+ 4553      6E743332 
+ 4553      5F7400
+ 4554              	.LASF34:
+ 4555 0067 65635F6E 		.ascii	"ec_n\000"
+ 4555      00
+ 4556              	.LASF35:
+ 4557 006c 65635F70 		.ascii	"ec_p\000"
+ 4557      00
+ 4558              	.LASF41:
+ 4559 0071 66665F69 		.ascii	"ff_inv\000"
+ 4559      6E7600
+ 4560              	.LASF47:
+ 4561 0078 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 4561      43313120 
+ 4561      352E342E 
+ 4561      31203230 
+ 4561      31363036 
+ 4562 00ab 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m0 -mthumb -g -O"
+ 4562      20726576 
+ 4562      6973696F 
+ 4562      6E203233 
+ 4562      37373135 
+ 4563 00de 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
+ 4563      66756E63 
+ 4563      74696F6E 
+ 4563      2D736563 
+ 4563      74696F6E 
+ 4564              	.LASF11:
+ 4565 0106 75696E74 		.ascii	"uint8_t\000"
+ 4565      385F7400 
+ 4566              	.LASF16:
+ 4567 010e 736C6F70 		.ascii	"slope\000"
+ 4567      6500
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqCnWHK.s 			page 87
+
+
+ 4568              	.LASF8:
+ 4569 0114 6C6F6E67 		.ascii	"long long int\000"
+ 4569      206C6F6E 
+ 4569      6720696E 
+ 4569      7400
+ 4570              	.LASF4:
+ 4571 0122 6C6F6E67 		.ascii	"long int\000"
+ 4571      20696E74 
+ 4571      00
+ 4572              	.LASF49:
+ 4573 012b 5C5C5642 		.ascii	"\\\\VBOXSVR\\raywang\\Dropbox (MIT)\\CTFs\\eCTF\\20"
+ 4573      4F585356 
+ 4573      525C7261 
+ 4573      7977616E 
+ 4573      675C4472 
+ 4574 0157 31382D65 		.ascii	"18-ectf-milestones-demo\\Milestones Demo Workspace\\"
+ 4574      6374662D 
+ 4574      6D696C65 
+ 4574      73746F6E 
+ 4574      65732D64 
+ 4575 0189 7374726F 		.ascii	"strong-arm.cylib\000"
+ 4575      6E672D61 
+ 4575      726D2E63 
+ 4575      796C6962 
+ 4575      00
+ 4576              	.LASF46:
+ 4577 019a 66665F73 		.ascii	"ff_serialize\000"
+ 4577      65726961 
+ 4577      6C697A65 
+ 4577      00
+ 4578              	.LASF40:
+ 4579 01a7 66665F61 		.ascii	"ff_add\000"
+ 4579      646400
+ 4580              	.LASF29:
+ 4581 01ae 65635F76 		.ascii	"ec_verify\000"
+ 4581      65726966 
+ 4581      7900
+ 4582              	.LASF5:
+ 4583 01b8 5F5F7569 		.ascii	"__uint8_t\000"
+ 4583      6E74385F 
+ 4583      7400
+ 4584              	.LASF43:
+ 4585 01c2 66665F63 		.ascii	"ff_copy\000"
+ 4585      6F707900 
+ 4586              	.LASF22:
+ 4587 01ca 7265745F 		.ascii	"ret_privkey\000"
+ 4587      70726976 
+ 4587      6B657900 
+ 4588              	.LASF14:
+ 4589 01d6 46465F4E 		.ascii	"FF_NUM\000"
+ 4589      554D00
+ 4590              	.LASF1:
+ 4591 01dd 756E7369 		.ascii	"unsigned char\000"
+ 4591      676E6564 
+ 4591      20636861 
+ 4591      7200
+ 4592              	.LASF28:
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqCnWHK.s 			page 88
+
+
+ 4593 01eb 65635F6F 		.ascii	"ec_on_curve\000"
+ 4593      6E5F6375 
+ 4593      72766500 
+ 4594              	.LASF44:
+ 4595 01f7 66665F63 		.ascii	"ff_compare\000"
+ 4595      6F6D7061 
+ 4595      726500
+ 4596              	.LASF0:
+ 4597 0202 7369676E 		.ascii	"signed char\000"
+ 4597      65642063 
+ 4597      68617200 
+ 4598              	.LASF9:
+ 4599 020e 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 4599      206C6F6E 
+ 4599      6720756E 
+ 4599      7369676E 
+ 4599      65642069 
+ 4600              	.LASF12:
+ 4601 0225 75696E74 		.ascii	"uint32_t\000"
+ 4601      33325F74 
+ 4601      00
+ 4602              	.LASF10:
+ 4603 022e 756E7369 		.ascii	"unsigned int\000"
+ 4603      676E6564 
+ 4603      20696E74 
+ 4603      00
+ 4604              	.LASF38:
+ 4605 023b 66665F7A 		.ascii	"ff_zero\000"
+ 4605      65726F00 
+ 4606              	.LASF39:
+ 4607 0243 66665F6D 		.ascii	"ff_mul\000"
+ 4607      756C00
+ 4608              	.LASF3:
+ 4609 024a 73686F72 		.ascii	"short unsigned int\000"
+ 4609      7420756E 
+ 4609      7369676E 
+ 4609      65642069 
+ 4609      6E7400
+ 4610              	.LASF33:
+ 4611 025d 65635F47 		.ascii	"ec_G\000"
+ 4611      00
+ 4612              	.LASF24:
+ 4613 0262 6F75745F 		.ascii	"out_r\000"
+ 4613      7200
+ 4614              	.LASF25:
+ 4615 0268 6F75745F 		.ascii	"out_s\000"
+ 4615      7300
+ 4616              	.LASF26:
+ 4617 026e 5F426F6F 		.ascii	"_Bool\000"
+ 4617      6C00
+ 4618              	.LASF21:
+ 4619 0274 65635F63 		.ascii	"ec_create_key\000"
+ 4619      72656174 
+ 4619      655F6B65 
+ 4619      7900
+ 4620              	.LASF32:
+ 4621 0282 636F6D70 		.ascii	"compressed\000"
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqCnWHK.s 			page 89
+
+
+ 4621      72657373 
+ 4621      656400
+ 4622              	.LASF17:
+ 4623 028d 746D7031 		.ascii	"tmp1\000"
+ 4623      00
+ 4624              	.LASF30:
+ 4625 0292 746D7032 		.ascii	"tmp2\000"
+ 4625      00
+ 4626              	.LASF7:
+ 4627 0297 6C6F6E67 		.ascii	"long unsigned int\000"
+ 4627      20756E73 
+ 4627      69676E65 
+ 4627      6420696E 
+ 4627      7400
+ 4628              	.LASF18:
+ 4629 02a9 65635F64 		.ascii	"ec_double\000"
+ 4629      6F75626C 
+ 4629      6500
+ 4630              	.LASF23:
+ 4631 02b3 7265745F 		.ascii	"ret_pubkey\000"
+ 4631      7075626B 
+ 4631      657900
+ 4632              	.LASF15:
+ 4633 02be 45435F50 		.ascii	"EC_POINT\000"
+ 4633      4F494E54 
+ 4633      00
+ 4634              	.LASF19:
+ 4635 02c7 65635F61 		.ascii	"ec_add\000"
+ 4635      646400
+ 4636              	.LASF42:
+ 4637 02ce 66665F73 		.ascii	"ff_sub\000"
+ 4637      756200
+ 4638              	.LASF27:
+ 4639 02d5 65635F73 		.ascii	"ec_sign\000"
+ 4639      69676E00 
+ 4640              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

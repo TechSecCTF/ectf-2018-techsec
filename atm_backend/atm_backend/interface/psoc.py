@@ -65,6 +65,7 @@ class Psoc(object):
             msg (str): message to be sent to the PSoC
         """
         pkt = struct.pack("B%ds" % (len(msg)), len(msg), msg)
+        logging.info("Pushing " + msg)
         self.write(pkt)
         time.sleep(0.1)
 
@@ -136,13 +137,28 @@ class Psoc(object):
         connecting = []
 
         # Has a new device connected?
-        while len(connecting) == 0:
-            new_ports = [port_info.device for port_info in list_ports()]
-            connecting = list(set(new_ports) - set(self.old_ports))
-            self.old_ports = new_ports
+        # while len(connecting) == 0:
+        #     new_ports = [port_info.device for port_info in list_ports()]
+        #     connecting = list(set(new_ports) - set(self.old_ports))
+        #     self.old_ports = new_ports
+        #     time.sleep(.25)
+        # self.port = connecting[0]
+
+        # For testing purposes, immediately connect to USB modem 1421 for HSM and 1411 for card
+        while True:
+            if self.name == 'HSM' and any([port.device == '/dev/cu.usbmodem1421' for port in list_ports()]):
+                self.port = '/dev/cu.usbmodem1421'
+                logging.info("DYNAMIC SERIAL: Found new serial device HSM")
+                break
+            elif self.name == 'CARD' and any([port.device == '/dev/cu.usbmodem1411' for port in list_ports()]):
+                self.port = '/dev/cu.usbmodem1411'
+                logging.info("DYNAMIC SERIAL: Found new serial device CARD")
+                break
+
             time.sleep(.25)
-        self.port = connecting[0]
-        logging.info("DYNAMIC SERIAL: Found new serial device")
+
+
+        logging.info("DYNAMIC SERIAL: Opening new serial device")
         self.open()
         if self.name == 'CARD':
             self.start_disconnect_watcher()

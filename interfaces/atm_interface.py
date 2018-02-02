@@ -124,25 +124,26 @@ class ATMInterface(cmd.Cmd):
 
     def do_change_pin(self, args):
         """change_pin <old_pin> <new_pin>"""
-        try:
-            old_pin = args.split(' ')[0]
-            new_pin = args.split(' ')[1]
-            assert len(old_pin) == REQUIRED_PIN_LENGTH and old_pin.isdigit()
-            assert len(new_pin) == REQUIRED_PIN_LENGTH and new_pin.isdigit()
-            res = self.atm.change_pin(old_pin, new_pin)
-            if not res:
-                print 'change_pin failed'
-            else:
-                print res
-        except socket.error:
-            print 'Error connecting to ATM'
-        except IndexError:
-            print 'Usage: change_pin <old_pin> <new_pin>'
-        except AssertionError:
-            print 'Invalid pin'
-        except:
-            print '**** RECEIVED ERROR ****'
-            print traceback.format_exc()
+        # try:
+        #     old_pin = args.split(' ')[0]
+        #     new_pin = args.split(' ')[1]
+        #     assert len(old_pin) == REQUIRED_PIN_LENGTH and old_pin.isdigit()
+        #     assert len(new_pin) == REQUIRED_PIN_LENGTH and new_pin.isdigit()
+        #     res = self.atm.change_pin(old_pin, new_pin)
+        #     if not res:
+        #         print 'change_pin failed'
+        #     else:
+        #         print res
+        # except socket.error:
+        #     print 'Error connecting to ATM'
+        # except IndexError:
+        #     print 'Usage: change_pin <old_pin> <new_pin>'
+        # except AssertionError:
+        #     print 'Invalid pin'
+        # except:
+        #     print '**** RECEIVED ERROR ****'
+        #     print traceback.format_exc()
+        raise NotImplementedError
 
     def emptyline(self):
         pass

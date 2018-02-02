@@ -5,6 +5,7 @@ need access to database. (sqlite3 does not gurantee concurrent operations)"""
 
 import sqlite3
 import os
+import hashlib
 
 class DB(object):
     """Implements a Database interface for the bank server and admin interface"""
@@ -77,6 +78,18 @@ class DB(object):
         return result[0]
 
     @lock_db
+    def get_card_aes_key(self, card_id):
+        '''Gets the aes key for a certain card_id
+
+        '''
+        self.cur.execute("SELECT bank_aes_key FROM cards WHERE card_id = (?);", (card_id,))    
+        result = self.cur.fetchone()
+        if result is None:
+            return None
+        return result[0] 
+
+
+    @lock_db
     def get_atm(self, atm_id):
         """get atm_id of atm: atm_id
         this is an obviously dumb function but maybe it can be expanded...
@@ -113,19 +126,41 @@ class DB(object):
         return self.modify("UPDATE atms SET num_bills = (?) WHERE \
                                     atm_id = (?);", (num_bills, atm_id,))
 
+    @lock_db
+    def get_atm_aes_key(self, atm_id):
+        '''Gets the aes key for a certain card_id
+
+        '''
+        self.cur.execute("SELECT bank_aes_key FROM atms WHERE atm_id = (?);", (atm_id,))    
+        result = self.cur.fetchone()
+        if result is None:
+            return None
+        return result[0] 
+
+
+    @lock_db
+    def update_pin(self, card_id, pin_hash, salt):
+        """set number of bills in atm: atm_id
+
+        Returns:
+            (bool): Returns True on Success. False otherwise.
+        """
+        return self.modify("UPDATE cards SET pin_hash = (?), salt = (?) WHERE \
+                                    card_id = (?);", (pin_hash, salt, card_id,))
+
     #############################
     # ADMIN INTERFACE FUNCTIONS #
     #############################
 
     @lock_db
-    def admin_create_account(self, account_name, card_id, amount):
+    def admin_create_account(self, account_name, card_id, amount, aes_key, nonce):
         """create account with account_name, card_id, and amount
 
         Returns:
             (bool): Returns True on Success. False otherwise.
         """
-        return self.modify('INSERT INTO cards(account_name, card_id, balance) \
-                            values (?, ?, ?);', (account_name, card_id, amount,))
+        return self.modify('INSERT INTO cards(account_name, card_id, balance, bank_aes_key, nonce, pin_hash, salt) \
+                            values (?, ?, ?, ?, ?, ?, ?);', (account_name, card_id, amount, aes_key, nonce, "", ""))
 
     @lock_db
     def admin_create_atm(self, atm_id, aes_key, nonce):

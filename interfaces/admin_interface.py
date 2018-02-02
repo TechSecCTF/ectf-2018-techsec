@@ -110,7 +110,7 @@ class AdminInterface(cmd.Cmd):
             amount = int(args.split(' ')[1])
             print self.bank_admin.update_balance(account_name, amount)
         except socket.error:
-            print 'Error connecting to Bank'
+            print 'Error conneconfting to Bank'
         except IndexError:
             print 'Usage: update_balance <account_name> <amount>'
         except ValueError:

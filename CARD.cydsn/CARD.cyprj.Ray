@@ -301,9 +301,9 @@
 <v>C:\Program Files (x86)\Cypress\PSoC Creator\4.1\PSoC Creator\warp\lib\common\stdlogic\rtlpkg.vif</v>
 <v>C:\Program Files (x86)\Cypress\PSoC Creator\4.1\PSoC Creator\warp\lib\common\stdlogic\cy_psoc3.vif</v>
 </warp_dep>
-<deps_time v="131617328805567610" />
+<deps_time v="131620738156896790" />
 <top_block v="TopDesign" />
-<last_generation v="5" />
+<last_generation v="6" />
 <pdl_path v="" />
 <sw_packages />
 </CyGuid_925cc1e1-309e-4e08-b0a1-09a83c35b157>
@@ -717,6 +717,8 @@
 <dep name=".\Generated_Source\PSoC4\core_cmInstr.h" />
 <dep name=".\Generated_Source\PSoC4\cydisabledsheets.h" />
 <dep name=".\Generated_Source\PSoC4\project.h" />
+<dep name="..\strong-arm.cylib\strong-arm\include\strong-arm\aes.h" />
+<dep name="..\strong-arm.cylib\strong-arm\include\strong-arm\sha256.h" />
 <dep name=".\Generated_Source\PSoC4\ATM_UART.h" />
 <dep name=".\Generated_Source\PSoC4\ATM_UART_IntClock.h" />
 <dep name=".\Generated_Source\PSoC4\CyFlash.h" />
@@ -755,6 +757,8 @@
 <file name=".\Generated_Source\PSoC4\core_cmInstr.h" />
 <file name=".\Generated_Source\PSoC4\cydisabledsheets.h" />
 <file name=".\Generated_Source\PSoC4\project.h" />
+<file name="..\strong-arm.cylib\strong-arm\include\strong-arm\aes.h" />
+<file name="..\strong-arm.cylib\strong-arm\include\strong-arm\sha256.h" />
 <file name=".\main.c" />
 <file name=".\usbserialprotocol.h" />
 <file name=".\CortexM0\ARM_GCC_541\Debug\usbserialprotocol.o">
@@ -848,6 +852,7 @@
 <dep name=".\CortexM0\ARM_GCC_541\Debug\cyutils.o" />
 <dep name=".\CortexM0\ARM_GCC_541\Debug\CyLFClk.o" />
 <dep name=".\CortexM0\ARM_GCC_541\Debug\CARD.a" />
+<dep name="..\..\2018-ectf-milestones-demo\Milestones Demo Workspace\strong-arm.cylib\CortexM0\ARM_GCC_541\Debug\strong-arm.a" />
 <dep name="${CyRoot}\psoc\content\cycomponentlibrary\CyComponentLibrary.cylib\CortexM0\ARM_GCC_541\Debug\CyComponentLibrary.a" />
 </file>
 </CyGuid_1173175f-1b9b-4ad4-a065-754a48a27021>
@@ -860,39 +865,39 @@
 <CyGuid_b0374e30-ce3a-47f2-ad85-821643292c68 type_name="CyDesigner.Common.ProjMgmt.Common.CyCmdLineData" version="2">
 <genericCmdLineData>
 <name v="c9323d49-d323-40b8-9b59-cc008d68a989@Debug@CortexM0">
-<name_val_pair name="main.c" v="-mcpu=cortex-m0 -mthumb -I. -IGenerated_Source\PSoC4 -Wa,-alh=${OutputDir}/${CompileFile}.lst -g -D DEBUG -Wall -ffunction-sections -ffat-lto-objects -Og" />
-<name_val_pair name="usbserialprotocol.c" v="-mcpu=cortex-m0 -mthumb -I. -IGenerated_Source\PSoC4 -Wa,-alh=${OutputDir}/${CompileFile}.lst -g -D DEBUG -Wall -ffunction-sections -ffat-lto-objects -Og" />
-<name_val_pair name="Generated_Source\PSoC4\cyfitter_cfg.c" v="-mcpu=cortex-m0 -mthumb -I. -IGenerated_Source\PSoC4 -Wa,-alh=${OutputDir}/${CompileFile}.lst -g -D DEBUG -Wall -ffunction-sections -ffat-lto-objects -Og" />
-<name_val_pair name="Generated_Source\PSoC4\cymetadata.c" v="-mcpu=cortex-m0 -mthumb -I. -IGenerated_Source\PSoC4 -Wa,-alh=${OutputDir}/${CompileFile}.lst -g -D DEBUG -Wall -ffunction-sections -ffat-lto-objects -Og" />
-<name_val_pair name="Generated_Source\PSoC4\ATM_UART.c" v="-mcpu=cortex-m0 -mthumb -I. -IGenerated_Source\PSoC4 -Wa,-alh=${OutputDir}/${CompileFile}.lst -g -D DEBUG -Wall -ffunction-sections -ffat-lto-objects -Og" />
-<name_val_pair name="Generated_Source\PSoC4\ATM_UART_PM.c" v="-mcpu=cortex-m0 -mthumb -I. -IGenerated_Source\PSoC4 -Wa,-alh=${OutputDir}/${CompileFile}.lst -g -D DEBUG -Wall -ffunction-sections -ffat-lto-objects -Og" />
-<name_val_pair name="Generated_Source\PSoC4\ATM_UART_INT.c" v="-mcpu=cortex-m0 -mthumb -I. -IGenerated_Source\PSoC4 -Wa,-alh=${OutputDir}/${CompileFile}.lst -g -D DEBUG -Wall -ffunction-sections -ffat-lto-objects -Og" />
-<name_val_pair name="Generated_Source\PSoC4\ATM_UART_BOOT.c" v="-mcpu=cortex-m0 -mthumb -I. -IGenerated_Source\PSoC4 -Wa,-alh=${OutputDir}/${CompileFile}.lst -g -D DEBUG -Wall -ffunction-sections -ffat-lto-objects -Og" />
-<name_val_pair name="Generated_Source\PSoC4\USER_INFO.c" v="-mcpu=cortex-m0 -mthumb -I. -IGenerated_Source\PSoC4 -Wa,-alh=${OutputDir}/${CompileFile}.lst -g -D DEBUG -Wall -ffunction-sections -ffat-lto-objects -Og" />
-<name_val_pair name="Generated_Source\PSoC4\USB_UART.c" v="-mcpu=cortex-m0 -mthumb -I. -IGenerated_Source\PSoC4 -Wa,-alh=${OutputDir}/${CompileFile}.lst -g -D DEBUG -Wall -ffunction-sections -ffat-lto-objects -Og" />
-<name_val_pair name="Generated_Source\PSoC4\USB_UART_SPI_UART.c" v="-mcpu=cortex-m0 -mthumb -I. -IGenerated_Source\PSoC4 -Wa,-alh=${OutputDir}/${CompileFile}.lst -g -D DEBUG -Wall -ffunction-sections -ffat-lto-objects -Og" />
-<name_val_pair name="Generated_Source\PSoC4\USB_UART_SPI_UART_INT.c" v="-mcpu=cortex-m0 -mthumb -I. -IGenerated_Source\PSoC4 -Wa,-alh=${OutputDir}/${CompileFile}.lst -g -D DEBUG -Wall -ffunction-sections -ffat-lto-objects -Og" />
-<name_val_pair name="Generated_Source\PSoC4\USB_UART_PM.c" v="-mcpu=cortex-m0 -mthumb -I. -IGenerated_Source\PSoC4 -Wa,-alh=${OutputDir}/${CompileFile}.lst -g -D DEBUG -Wall -ffunction-sections -ffat-lto-objects -Og" />
-<name_val_pair name="Generated_Source\PSoC4\USB_UART_UART.c" v="-mcpu=cortex-m0 -mthumb -I. -IGenerated_Source\PSoC4 -Wa,-alh=${OutputDir}/${CompileFile}.lst -g -D DEBUG -Wall -ffunction-sections -ffat-lto-objects -Og" />
-<name_val_pair name="Generated_Source\PSoC4\USB_UART_BOOT.c" v="-mcpu=cortex-m0 -mthumb -I. -IGenerated_Source\PSoC4 -Wa,-alh=${OutputDir}/${CompileFile}.lst -g -D DEBUG -Wall -ffunction-sections -ffat-lto-objects -Og" />
-<name_val_pair name="Generated_Source\PSoC4\USB_UART_UART_BOOT.c" v="-mcpu=cortex-m0 -mthumb -I. -IGenerated_Source\PSoC4 -Wa,-alh=${OutputDir}/${CompileFile}.lst -g -D DEBUG -Wall -ffunction-sections -ffat-lto-objects -Og" />
-<name_val_pair name="Generated_Source\PSoC4\Reset_isr.c" v="-mcpu=cortex-m0 -mthumb -I. -IGenerated_Source\PSoC4 -Wa,-alh=${OutputDir}/${CompileFile}.lst -g -D DEBUG -Wall -ffunction-sections -ffat-lto-objects -Og" />
-<name_val_pair name="Generated_Source\PSoC4\SW1.c" v="-mcpu=cortex-m0 -mthumb -I. -IGenerated_Source\PSoC4 -Wa,-alh=${OutputDir}/${CompileFile}.lst -g -D DEBUG -Wall -ffunction-sections -ffat-lto-objects -Og" />
-<name_val_pair name="Generated_Source\PSoC4\SW1_PM.c" v="-mcpu=cortex-m0 -mthumb -I. -IGenerated_Source\PSoC4 -Wa,-alh=${OutputDir}/${CompileFile}.lst -g -D DEBUG -Wall -ffunction-sections -ffat-lto-objects -Og" />
-<name_val_pair name="Generated_Source\PSoC4\ATM_UART_IntClock.c" v="-mcpu=cortex-m0 -mthumb -I. -IGenerated_Source\PSoC4 -Wa,-alh=${OutputDir}/${CompileFile}.lst -g -D DEBUG -Wall -ffunction-sections -ffat-lto-objects -Og" />
-<name_val_pair name="Generated_Source\PSoC4\USB_UART_SCBCLK.c" v="-mcpu=cortex-m0 -mthumb -I. -IGenerated_Source\PSoC4 -Wa,-alh=${OutputDir}/${CompileFile}.lst -g -D DEBUG -Wall -ffunction-sections -ffat-lto-objects -Og" />
-<name_val_pair name="Generated_Source\PSoC4\USB_UART_tx.c" v="-mcpu=cortex-m0 -mthumb -I. -IGenerated_Source\PSoC4 -Wa,-alh=${OutputDir}/${CompileFile}.lst -g -D DEBUG -Wall -ffunction-sections -ffat-lto-objects -Og" />
-<name_val_pair name="Generated_Source\PSoC4\USB_UART_tx_PM.c" v="-mcpu=cortex-m0 -mthumb -I. -IGenerated_Source\PSoC4 -Wa,-alh=${OutputDir}/${CompileFile}.lst -g -D DEBUG -Wall -ffunction-sections -ffat-lto-objects -Og" />
-<name_val_pair name="Generated_Source\PSoC4\USB_UART_SCB_IRQ.c" v="-mcpu=cortex-m0 -mthumb -I. -IGenerated_Source\PSoC4 -Wa,-alh=${OutputDir}/${CompileFile}.lst -g -D DEBUG -Wall -ffunction-sections -ffat-lto-objects -Og" />
-<name_val_pair name="Generated_Source\PSoC4\USB_UART_rx.c" v="-mcpu=cortex-m0 -mthumb -I. -IGenerated_Source\PSoC4 -Wa,-alh=${OutputDir}/${CompileFile}.lst -g -D DEBUG -Wall -ffunction-sections -ffat-lto-objects -Og" />
-<name_val_pair name="Generated_Source\PSoC4\USB_UART_rx_PM.c" v="-mcpu=cortex-m0 -mthumb -I. -IGenerated_Source\PSoC4 -Wa,-alh=${OutputDir}/${CompileFile}.lst -g -D DEBUG -Wall -ffunction-sections -ffat-lto-objects -Og" />
-<name_val_pair name="Generated_Source\PSoC4\Cm0Start.c" v="-mcpu=cortex-m0 -mthumb -I. -IGenerated_Source\PSoC4 -Wa,-alh=${OutputDir}/${CompileFile}.lst -g -D DEBUG -Wall -ffunction-sections -ffat-lto-objects -Og" />
+<name_val_pair name="main.c" v="-mcpu=cortex-m0 -mthumb -I..\strong-arm.cylib\strong-arm\include -I. -IGenerated_Source\PSoC4 -Wa,-alh=${OutputDir}/${CompileFile}.lst -g -D DEBUG -Wall -ffunction-sections -ffat-lto-objects -Og" />
+<name_val_pair name="usbserialprotocol.c" v="-mcpu=cortex-m0 -mthumb -I..\strong-arm.cylib\strong-arm\include -I. -IGenerated_Source\PSoC4 -Wa,-alh=${OutputDir}/${CompileFile}.lst -g -D DEBUG -Wall -ffunction-sections -ffat-lto-objects -Og" />
+<name_val_pair name="Generated_Source\PSoC4\cyfitter_cfg.c" v="-mcpu=cortex-m0 -mthumb -I..\strong-arm.cylib\strong-arm\include -I. -IGenerated_Source\PSoC4 -Wa,-alh=${OutputDir}/${CompileFile}.lst -g -D DEBUG -Wall -ffunction-sections -ffat-lto-objects -Og" />
+<name_val_pair name="Generated_Source\PSoC4\cymetadata.c" v="-mcpu=cortex-m0 -mthumb -I..\strong-arm.cylib\strong-arm\include -I. -IGenerated_Source\PSoC4 -Wa,-alh=${OutputDir}/${CompileFile}.lst -g -D DEBUG -Wall -ffunction-sections -ffat-lto-objects -Og" />
+<name_val_pair name="Generated_Source\PSoC4\ATM_UART.c" v="-mcpu=cortex-m0 -mthumb -I..\strong-arm.cylib\strong-arm\include -I. -IGenerated_Source\PSoC4 -Wa,-alh=${OutputDir}/${CompileFile}.lst -g -D DEBUG -Wall -ffunction-sections -ffat-lto-objects -Og" />
+<name_val_pair name="Generated_Source\PSoC4\ATM_UART_PM.c" v="-mcpu=cortex-m0 -mthumb -I..\strong-arm.cylib\strong-arm\include -I. -IGenerated_Source\PSoC4 -Wa,-alh=${OutputDir}/${CompileFile}.lst -g -D DEBUG -Wall -ffunction-sections -ffat-lto-objects -Og" />
+<name_val_pair name="Generated_Source\PSoC4\ATM_UART_INT.c" v="-mcpu=cortex-m0 -mthumb -I..\strong-arm.cylib\strong-arm\include -I. -IGenerated_Source\PSoC4 -Wa,-alh=${OutputDir}/${CompileFile}.lst -g -D DEBUG -Wall -ffunction-sections -ffat-lto-objects -Og" />
+<name_val_pair name="Generated_Source\PSoC4\ATM_UART_BOOT.c" v="-mcpu=cortex-m0 -mthumb -I..\strong-arm.cylib\strong-arm\include -I. -IGenerated_Source\PSoC4 -Wa,-alh=${OutputDir}/${CompileFile}.lst -g -D DEBUG -Wall -ffunction-sections -ffat-lto-objects -Og" />
+<name_val_pair name="Generated_Source\PSoC4\USER_INFO.c" v="-mcpu=cortex-m0 -mthumb -I..\strong-arm.cylib\strong-arm\include -I. -IGenerated_Source\PSoC4 -Wa,-alh=${OutputDir}/${CompileFile}.lst -g -D DEBUG -Wall -ffunction-sections -ffat-lto-objects -Og" />
+<name_val_pair name="Generated_Source\PSoC4\USB_UART.c" v="-mcpu=cortex-m0 -mthumb -I..\strong-arm.cylib\strong-arm\include -I. -IGenerated_Source\PSoC4 -Wa,-alh=${OutputDir}/${CompileFile}.lst -g -D DEBUG -Wall -ffunction-sections -ffat-lto-objects -Og" />
+<name_val_pair name="Generated_Source\PSoC4\USB_UART_SPI_UART.c" v="-mcpu=cortex-m0 -mthumb -I..\strong-arm.cylib\strong-arm\include -I. -IGenerated_Source\PSoC4 -Wa,-alh=${OutputDir}/${CompileFile}.lst -g -D DEBUG -Wall -ffunction-sections -ffat-lto-objects -Og" />
+<name_val_pair name="Generated_Source\PSoC4\USB_UART_SPI_UART_INT.c" v="-mcpu=cortex-m0 -mthumb -I..\strong-arm.cylib\strong-arm\include -I. -IGenerated_Source\PSoC4 -Wa,-alh=${OutputDir}/${CompileFile}.lst -g -D DEBUG -Wall -ffunction-sections -ffat-lto-objects -Og" />
+<name_val_pair name="Generated_Source\PSoC4\USB_UART_PM.c" v="-mcpu=cortex-m0 -mthumb -I..\strong-arm.cylib\strong-arm\include -I. -IGenerated_Source\PSoC4 -Wa,-alh=${OutputDir}/${CompileFile}.lst -g -D DEBUG -Wall -ffunction-sections -ffat-lto-objects -Og" />
+<name_val_pair name="Generated_Source\PSoC4\USB_UART_UART.c" v="-mcpu=cortex-m0 -mthumb -I..\strong-arm.cylib\strong-arm\include -I. -IGenerated_Source\PSoC4 -Wa,-alh=${OutputDir}/${CompileFile}.lst -g -D DEBUG -Wall -ffunction-sections -ffat-lto-objects -Og" />
+<name_val_pair name="Generated_Source\PSoC4\USB_UART_BOOT.c" v="-mcpu=cortex-m0 -mthumb -I..\strong-arm.cylib\strong-arm\include -I. -IGenerated_Source\PSoC4 -Wa,-alh=${OutputDir}/${CompileFile}.lst -g -D DEBUG -Wall -ffunction-sections -ffat-lto-objects -Og" />
+<name_val_pair name="Generated_Source\PSoC4\USB_UART_UART_BOOT.c" v="-mcpu=cortex-m0 -mthumb -I..\strong-arm.cylib\strong-arm\include -I. -IGenerated_Source\PSoC4 -Wa,-alh=${OutputDir}/${CompileFile}.lst -g -D DEBUG -Wall -ffunction-sections -ffat-lto-objects -Og" />
+<name_val_pair name="Generated_Source\PSoC4\Reset_isr.c" v="-mcpu=cortex-m0 -mthumb -I..\strong-arm.cylib\strong-arm\include -I. -IGenerated_Source\PSoC4 -Wa,-alh=${OutputDir}/${CompileFile}.lst -g -D DEBUG -Wall -ffunction-sections -ffat-lto-objects -Og" />
+<name_val_pair name="Generated_Source\PSoC4\SW1.c" v="-mcpu=cortex-m0 -mthumb -I..\strong-arm.cylib\strong-arm\include -I. -IGenerated_Source\PSoC4 -Wa,-alh=${OutputDir}/${CompileFile}.lst -g -D DEBUG -Wall -ffunction-sections -ffat-lto-objects -Og" />
+<name_val_pair name="Generated_Source\PSoC4\SW1_PM.c" v="-mcpu=cortex-m0 -mthumb -I..\strong-arm.cylib\strong-arm\include -I. -IGenerated_Source\PSoC4 -Wa,-alh=${OutputDir}/${CompileFile}.lst -g -D DEBUG -Wall -ffunction-sections -ffat-lto-objects -Og" />
+<name_val_pair name="Generated_Source\PSoC4\ATM_UART_IntClock.c" v="-mcpu=cortex-m0 -mthumb -I..\strong-arm.cylib\strong-arm\include -I. -IGenerated_Source\PSoC4 -Wa,-alh=${OutputDir}/${CompileFile}.lst -g -D DEBUG -Wall -ffunction-sections -ffat-lto-objects -Og" />
+<name_val_pair name="Generated_Source\PSoC4\USB_UART_SCBCLK.c" v="-mcpu=cortex-m0 -mthumb -I..\strong-arm.cylib\strong-arm\include -I. -IGenerated_Source\PSoC4 -Wa,-alh=${OutputDir}/${CompileFile}.lst -g -D DEBUG -Wall -ffunction-sections -ffat-lto-objects -Og" />
+<name_val_pair name="Generated_Source\PSoC4\USB_UART_tx.c" v="-mcpu=cortex-m0 -mthumb -I..\strong-arm.cylib\strong-arm\include -I. -IGenerated_Source\PSoC4 -Wa,-alh=${OutputDir}/${CompileFile}.lst -g -D DEBUG -Wall -ffunction-sections -ffat-lto-objects -Og" />
+<name_val_pair name="Generated_Source\PSoC4\USB_UART_tx_PM.c" v="-mcpu=cortex-m0 -mthumb -I..\strong-arm.cylib\strong-arm\include -I. -IGenerated_Source\PSoC4 -Wa,-alh=${OutputDir}/${CompileFile}.lst -g -D DEBUG -Wall -ffunction-sections -ffat-lto-objects -Og" />
+<name_val_pair name="Generated_Source\PSoC4\USB_UART_SCB_IRQ.c" v="-mcpu=cortex-m0 -mthumb -I..\strong-arm.cylib\strong-arm\include -I. -IGenerated_Source\PSoC4 -Wa,-alh=${OutputDir}/${CompileFile}.lst -g -D DEBUG -Wall -ffunction-sections -ffat-lto-objects -Og" />
+<name_val_pair name="Generated_Source\PSoC4\USB_UART_rx.c" v="-mcpu=cortex-m0 -mthumb -I..\strong-arm.cylib\strong-arm\include -I. -IGenerated_Source\PSoC4 -Wa,-alh=${OutputDir}/${CompileFile}.lst -g -D DEBUG -Wall -ffunction-sections -ffat-lto-objects -Og" />
+<name_val_pair name="Generated_Source\PSoC4\USB_UART_rx_PM.c" v="-mcpu=cortex-m0 -mthumb -I..\strong-arm.cylib\strong-arm\include -I. -IGenerated_Source\PSoC4 -Wa,-alh=${OutputDir}/${CompileFile}.lst -g -D DEBUG -Wall -ffunction-sections -ffat-lto-objects -Og" />
+<name_val_pair name="Generated_Source\PSoC4\Cm0Start.c" v="-mcpu=cortex-m0 -mthumb -I..\strong-arm.cylib\strong-arm\include -I. -IGenerated_Source\PSoC4 -Wa,-alh=${OutputDir}/${CompileFile}.lst -g -D DEBUG -Wall -ffunction-sections -ffat-lto-objects -Og" />
 <name_val_pair name="Generated_Source\PSoC4\CyBootAsmGnu.s" v="-mcpu=cortex-m0 -mthumb -I. -IGenerated_Source\PSoC4 -alh=${OutputDir}/${CompileFile}.lst -g -W" />
-<name_val_pair name="Generated_Source\PSoC4\CyFlash.c" v="-mcpu=cortex-m0 -mthumb -I. -IGenerated_Source\PSoC4 -Wa,-alh=${OutputDir}/${CompileFile}.lst -g -D DEBUG -Wall -ffunction-sections -ffat-lto-objects -Og" />
-<name_val_pair name="Generated_Source\PSoC4\CyLib.c" v="-mcpu=cortex-m0 -mthumb -I. -IGenerated_Source\PSoC4 -Wa,-alh=${OutputDir}/${CompileFile}.lst -g -D DEBUG -Wall -ffunction-sections -ffat-lto-objects -Og" />
-<name_val_pair name="Generated_Source\PSoC4\cyPm.c" v="-mcpu=cortex-m0 -mthumb -I. -IGenerated_Source\PSoC4 -Wa,-alh=${OutputDir}/${CompileFile}.lst -g -D DEBUG -Wall -ffunction-sections -ffat-lto-objects -Og" />
-<name_val_pair name="Generated_Source\PSoC4\cyutils.c" v="-mcpu=cortex-m0 -mthumb -I. -IGenerated_Source\PSoC4 -Wa,-alh=${OutputDir}/${CompileFile}.lst -g -D DEBUG -Wall -ffunction-sections -ffat-lto-objects -Og" />
-<name_val_pair name="Generated_Source\PSoC4\CyLFClk.c" v="-mcpu=cortex-m0 -mthumb -I. -IGenerated_Source\PSoC4 -Wa,-alh=${OutputDir}/${CompileFile}.lst -g -D DEBUG -Wall -ffunction-sections -ffat-lto-objects -Og" />
+<name_val_pair name="Generated_Source\PSoC4\CyFlash.c" v="-mcpu=cortex-m0 -mthumb -I..\strong-arm.cylib\strong-arm\include -I. -IGenerated_Source\PSoC4 -Wa,-alh=${OutputDir}/${CompileFile}.lst -g -D DEBUG -Wall -ffunction-sections -ffat-lto-objects -Og" />
+<name_val_pair name="Generated_Source\PSoC4\CyLib.c" v="-mcpu=cortex-m0 -mthumb -I..\strong-arm.cylib\strong-arm\include -I. -IGenerated_Source\PSoC4 -Wa,-alh=${OutputDir}/${CompileFile}.lst -g -D DEBUG -Wall -ffunction-sections -ffat-lto-objects -Og" />
+<name_val_pair name="Generated_Source\PSoC4\cyPm.c" v="-mcpu=cortex-m0 -mthumb -I..\strong-arm.cylib\strong-arm\include -I. -IGenerated_Source\PSoC4 -Wa,-alh=${OutputDir}/${CompileFile}.lst -g -D DEBUG -Wall -ffunction-sections -ffat-lto-objects -Og" />
+<name_val_pair name="Generated_Source\PSoC4\cyutils.c" v="-mcpu=cortex-m0 -mthumb -I..\strong-arm.cylib\strong-arm\include -I. -IGenerated_Source\PSoC4 -Wa,-alh=${OutputDir}/${CompileFile}.lst -g -D DEBUG -Wall -ffunction-sections -ffat-lto-objects -Og" />
+<name_val_pair name="Generated_Source\PSoC4\CyLFClk.c" v="-mcpu=cortex-m0 -mthumb -I..\strong-arm.cylib\strong-arm\include -I. -IGenerated_Source\PSoC4 -Wa,-alh=${OutputDir}/${CompileFile}.lst -g -D DEBUG -Wall -ffunction-sections -ffat-lto-objects -Og" />
 <name_val_pair name="\\VBOXSVR\raywang\Dropbox (MIT)\CTFs\eCTF\2018-ectf-insecure-example\CARD.cydsn\CortexM0\ARM_GCC_541\Debug\CARD.hex" v="-mcpu=cortex-m0 -mthumb -L Generated_Source\PSoC4 -Wl,-Map,${OutputDir}/${ProjectShortName}.map -T Generated_Source\PSoC4\cm0gcc.ld -specs=nano.specs -Wl,--gc-sections -g -ffunction-sections -Og -ffat-lto-objects" />
 <name_val_pair name="\\VBOXSVR\raywang\Dropbox (MIT)\CTFs\eCTF\ectf-2018-techsec\CARD.cydsn\CortexM0\ARM_GCC_541\Debug\CARD.hex" v="-mcpu=cortex-m0 -mthumb -L Generated_Source\PSoC4 -Wl,-Map,${OutputDir}/${ProjectShortName}.map -T Generated_Source\PSoC4\cm0gcc.ld -specs=nano.specs -Wl,--gc-sections -g -ffunction-sections -Og -ffat-lto-objects" />
 </name>
@@ -903,7 +908,7 @@
 <dataGuid v="769d31ea-68b1-4f0c-b90a-7c10a43ee563">
 <CyGuid_769d31ea-68b1-4f0c-b90a-7c10a43ee563 type_name="CyDesigner.Common.ProjMgmt.Model.CyLinkCustomData" version="1">
 <link_deps_times>
-<name_val_pair name="c9323d49-d323-40b8-9b59-cc008d68a989@Debug@CortexM0" v="131617328852496068" />
+<name_val_pair name="c9323d49-d323-40b8-9b59-cc008d68a989@Debug@CortexM0" v="131620745264511610" />
 </link_deps_times>
 </CyGuid_769d31ea-68b1-4f0c-b90a-7c10a43ee563>
 </dataGuid>

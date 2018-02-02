@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccreTOQv.s 			page 1
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccpx2xVm.s 			page 1
 
 
    1              		.syntax unified
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccreTOQv.s 			page 1
   28:Generated_Source\PSoC4/USB_UART_rx_PM.c **** *  deep-sleep/hibernate modes. This function applies only to SIO and USBIO pins.
   29:Generated_Source\PSoC4/USB_UART_rx_PM.c **** *  It should not be called for GPIO or GPIO_OVT pins.
   30:Generated_Source\PSoC4/USB_UART_rx_PM.c **** *
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccreTOQv.s 			page 2
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccpx2xVm.s 			page 2
 
 
   31:Generated_Source\PSoC4/USB_UART_rx_PM.c **** * <b>Note</b> This function is available in PSoC 4 only.
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccreTOQv.s 			page 1
   51              		.global	USB_UART_rx_Wakeup
   52              		.code	16
   53              		.thumb_func
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccreTOQv.s 			page 3
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccpx2xVm.s 			page 3
 
 
   54              		.type	USB_UART_rx_Wakeup, %function
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccreTOQv.s 			page 1
   72              	.L5:
   73 000c 00000000 		.word	.LANCHOR0
   74 0010 08040440 		.word	1074005000
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccreTOQv.s 			page 4
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccpx2xVm.s 			page 4
 
 
   75              		.cfi_endproc
@@ -204,7 +204,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccreTOQv.s 			page 1
   93 0006 00000000 		.4byte	.Ldebug_abbrev0
   94 000a 04       		.byte	0x4
   95 000b 01       		.uleb128 0x1
-  96 000c 32010000 		.4byte	.LASF20
+  96 000c 29010000 		.4byte	.LASF20
   97 0010 0C       		.byte	0xc
   98 0011 22000000 		.4byte	.LASF21
   99 0015 E2000000 		.4byte	.LASF22
@@ -214,7 +214,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccreTOQv.s 			page 1
  103 0025 02       		.uleb128 0x2
  104 0026 01       		.byte	0x1
  105 0027 06       		.byte	0x6
- 106 0028 09020000 		.4byte	.LASF0
+ 106 0028 00020000 		.4byte	.LASF0
  107 002c 02       		.uleb128 0x2
  108 002d 01       		.byte	0x1
  109 002e 08       		.byte	0x8
@@ -222,7 +222,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccreTOQv.s 			page 1
  111 0033 02       		.uleb128 0x2
  112 0034 02       		.byte	0x2
  113 0035 05       		.byte	0x5
- 114 0036 DC010000 		.4byte	.LASF2
+ 114 0036 D3010000 		.4byte	.LASF2
  115 003a 02       		.uleb128 0x2
  116 003b 02       		.byte	0x2
  117 003c 07       		.byte	0x7
@@ -230,7 +230,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccreTOQv.s 			page 1
  119 0041 02       		.uleb128 0x2
  120 0042 04       		.byte	0x4
  121 0043 05       		.byte	0x5
- 122 0044 EE010000 		.4byte	.LASF4
+ 122 0044 E5010000 		.4byte	.LASF4
  123 0048 02       		.uleb128 0x2
  124 0049 04       		.byte	0x4
  125 004a 07       		.byte	0x7
@@ -238,10 +238,10 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccreTOQv.s 			page 1
  127 004f 02       		.uleb128 0x2
  128 0050 08       		.byte	0x8
  129 0051 05       		.byte	0x5
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccreTOQv.s 			page 5
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccpx2xVm.s 			page 5
 
 
- 130 0052 C9010000 		.4byte	.LASF6
+ 130 0052 C0010000 		.4byte	.LASF6
  131 0056 02       		.uleb128 0x2
  132 0057 08       		.byte	0x8
  133 0058 07       		.byte	0x7
@@ -270,7 +270,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccreTOQv.s 			page 1
  156 0085 02       		.uleb128 0x2
  157 0086 01       		.byte	0x1
  158 0087 08       		.byte	0x8
- 159 0088 D7010000 		.4byte	.LASF11
+ 159 0088 CE010000 		.4byte	.LASF11
  160 008c 04       		.uleb128 0x4
  161 008d 13000000 		.4byte	.LASF13
  162 0091 02       		.byte	0x2
@@ -284,13 +284,13 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccreTOQv.s 			page 1
  170 00a0 21       		.byte	0x21
  171 00a1 CA000000 		.4byte	0xca
  172 00a5 07       		.uleb128 0x7
- 173 00a6 E6010000 		.4byte	.LASF14
+ 173 00a6 DD010000 		.4byte	.LASF14
  174 00aa 03       		.byte	0x3
  175 00ab 23       		.byte	0x23
  176 00ac 6B000000 		.4byte	0x6b
  177 00b0 00       		.byte	0
  178 00b1 07       		.uleb128 0x7
- 179 00b2 C0010000 		.4byte	.LASF15
+ 179 00b2 B7010000 		.4byte	.LASF15
  180 00b6 03       		.byte	0x3
  181 00b7 24       		.byte	0x24
  182 00b8 6B000000 		.4byte	0x6b
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccreTOQv.s 			page 1
  184 00bd 07       		.uleb128 0x7
  185 00be 19000000 		.4byte	.LASF16
  186 00c2 03       		.byte	0x3
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccreTOQv.s 			page 6
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccpx2xVm.s 			page 6
 
 
  187 00c3 25       		.byte	0x25
@@ -311,7 +311,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccreTOQv.s 			page 1
  194 00d0 26       		.byte	0x26
  195 00d1 9D000000 		.4byte	0x9d
  196 00d5 09       		.uleb128 0x9
- 197 00d6 F7010000 		.4byte	.LASF18
+ 197 00d6 EE010000 		.4byte	.LASF18
  198 00da 01       		.byte	0x1
  199 00db 2C       		.byte	0x2c
  200 00dc 00000000 		.4byte	.LFB0
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccreTOQv.s 			page 1
  241 0012 00       		.byte	0
  242 0013 02       		.uleb128 0x2
  243 0014 24       		.uleb128 0x24
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccreTOQv.s 			page 7
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccpx2xVm.s 			page 7
 
 
  244 0015 00       		.byte	0
@@ -418,7 +418,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccreTOQv.s 			page 1
  298 004b 0D       		.uleb128 0xd
  299 004c 00       		.byte	0
  300 004d 03       		.uleb128 0x3
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccreTOQv.s 			page 8
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccpx2xVm.s 			page 8
 
 
  301 004e 0E       		.uleb128 0xe
@@ -478,7 +478,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccreTOQv.s 			page 1
  355 0085 3B       		.uleb128 0x3b
  356 0086 0B       		.uleb128 0xb
  357 0087 49       		.uleb128 0x49
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccreTOQv.s 			page 9
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccpx2xVm.s 			page 9
 
 
  358 0088 13       		.uleb128 0x13
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccreTOQv.s 			page 1
  397              	.LASF19:
  398 004a 5553425F 		.ascii	"USB_UART_rx_Wakeup\000"
  398      55415254 
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccreTOQv.s 			page 10
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccpx2xVm.s 			page 10
 
 
  398      5F72785F 
@@ -588,66 +588,66 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccreTOQv.s 			page 1
  416      7369676E 
  416      65642069 
  417              	.LASF22:
- 418 00e2 5C5C5642 		.ascii	"\\\\VBOXSVR\\raywang\\Dropbox (MIT)\\CTFs\\eCTF\\20"
+ 418 00e2 5C5C5642 		.ascii	"\\\\VBOXSVR\\raywang\\Dropbox (MIT)\\CTFs\\eCTF\\ec"
  418      4F585356 
  418      525C7261 
  418      7977616E 
  418      675C4472 
- 419 010e 31382D65 		.ascii	"18-ectf-insecure-example\\CARD.cydsn\000"
- 419      6374662D 
- 419      696E7365 
- 419      63757265 
- 419      2D657861 
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccreTOQv.s 			page 11
+ 419 010e 74662D32 		.ascii	"tf-2018-techsec\\CARD.cydsn\000"
+ 419      3031382D 
+ 419      74656368 
+ 419      7365635C 
+ 419      43415244 
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccpx2xVm.s 			page 11
 
 
  420              	.LASF20:
- 421 0132 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 421 0129 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
  421      43313120 
  421      352E342E 
  421      31203230 
  421      31363036 
- 422 0165 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m0 -mthumb -g -O"
+ 422 015c 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m0 -mthumb -g -O"
  422      20726576 
  422      6973696F 
  422      6E203233 
  422      37373135 
- 423 0198 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
+ 423 018f 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
  423      66756E63 
  423      74696F6E 
  423      2D736563 
  423      74696F6E 
  424              	.LASF15:
- 425 01c0 73696F53 		.ascii	"sioState\000"
+ 425 01b7 73696F53 		.ascii	"sioState\000"
  425      74617465 
  425      00
  426              	.LASF6:
- 427 01c9 6C6F6E67 		.ascii	"long long int\000"
+ 427 01c0 6C6F6E67 		.ascii	"long long int\000"
  427      206C6F6E 
  427      6720696E 
  427      7400
  428              	.LASF11:
- 429 01d7 63686172 		.ascii	"char\000"
+ 429 01ce 63686172 		.ascii	"char\000"
  429      00
  430              	.LASF2:
- 431 01dc 73686F72 		.ascii	"short int\000"
+ 431 01d3 73686F72 		.ascii	"short int\000"
  431      7420696E 
  431      7400
  432              	.LASF14:
- 433 01e6 70635374 		.ascii	"pcState\000"
+ 433 01dd 70635374 		.ascii	"pcState\000"
  433      61746500 
  434              	.LASF4:
- 435 01ee 6C6F6E67 		.ascii	"long int\000"
+ 435 01e5 6C6F6E67 		.ascii	"long int\000"
  435      20696E74 
  435      00
  436              	.LASF18:
- 437 01f7 5553425F 		.ascii	"USB_UART_rx_Sleep\000"
+ 437 01ee 5553425F 		.ascii	"USB_UART_rx_Sleep\000"
  437      55415254 
  437      5F72785F 
  437      536C6565 
  437      7000
  438              	.LASF0:
- 439 0209 7369676E 		.ascii	"signed char\000"
+ 439 0200 7369676E 		.ascii	"signed char\000"
  439      65642063 
  439      68617200 
  440              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

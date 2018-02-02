@@ -30,6 +30,8 @@ class ProvisionTool(object):
         Returns:
             bool: True on Success, False on Failure
         """
+
+        # First, update card
         self.card.wait_for_insert()
         if not self.card.inserted():
             logging.error('provision_card: no card was inserted!')
@@ -37,10 +39,12 @@ class ProvisionTool(object):
 
         try:
             logging.info('provision_card: generating card id')
-            card_id = card_blob
+            card_id = card_blob[-36:]
             logging.info('provision_card: sending info to card')
-            if self.card.provision(card_id, pin):
-                return True
+            if self.card.provision(card_blob):
+                # Now, send this data to the bank so it can update its db
+                if self.bank.set_initial_pin(card_id, pin):
+                    return True
             logging.error('provision_card: provision card failed!')
             return False
         except DeviceRemoved:

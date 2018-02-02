@@ -22,7 +22,7 @@ class Bank:
             sys.exit(1)
         logging.info('Connected to Bank at %s:%s' % (address, str(port)))
 
-    def check_balance(self, card_id):
+    def check_balance(self, card_id, aes_iv, card_hmac):
         """Requests the balance of the account associated with the card_id
 
         Args:
@@ -33,8 +33,7 @@ class Bank:
             bool: False on failure
         """
         logging.info('check_balance: Sending request to Bank')
-        print card_id
-        res = self.bank_rpc.check_balance(card_id)
+        res = self.bank_rpc.check_balance(card_id, aes_iv, card_hmac)
         if res[:4] == 'OKAY':
             return int(res[5:])
         logging.info('check_balance: Bank request failed %s', res)
@@ -56,7 +55,23 @@ class Bank:
         res = self.bank_rpc.withdraw(hsm_id, card_id, amount)
         if res[:4] == 'OKAY':
             return res[5:]
-        logging.info('check_balance: Bank request failed %s', res)
+        logging.info('withdraw: Bank request failed %s', res)
+        return False
+
+    def set_initial_pin(self, card_id, pin):
+        """Sends initial pin for new card to bank
+
+        Returns:
+            str: card_id on success
+            bool: False on failure
+        """
+
+        logging.info('set_initial_pin: Sending request to Bank')
+        logging.info("card blob %s" % card_id)
+        res = self.bank_rpc.set_initial_pin(card_id, pin)
+        if res[:4] == 'OKAY':
+            return res[5:]
+        logging.info('set_initial_pin: Bank request failed %s', res)
         return False
 
 
@@ -89,3 +104,8 @@ class DummyBank:
             int: Balance of 2018
         """
         return 2018
+
+    def set_initial_pin(self, card_id, pin):
+        return card_id
+
+

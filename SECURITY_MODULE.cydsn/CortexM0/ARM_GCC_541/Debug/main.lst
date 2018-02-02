@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccMctTlL.s 			page 1
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccVut814.s 			page 1
 
 
    1              		.syntax unified
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccMctTlL.s 			page 1
   28:main.c        **** #define EMPTY "EMPTY"
   29:main.c        **** #define EMPTY_BILL "*****EMPTY*****"
   30:main.c        **** 
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccMctTlL.s 			page 2
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccVut814.s 			page 2
 
 
   31:main.c        **** /* 
@@ -78,15 +78,16 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccMctTlL.s 			page 1
   45:main.c        **** static const uint8 MONEY[MAX_BILLS][BILL_LEN] = {EMPTY_BILL};
   46:main.c        **** static const uint8 UUID[UUID_LEN + 1] = {'b', 'l', 'a', 'n', 'k', ' ', 
   47:main.c        ****                                         'u', 'u', 'i', 'd', '!', 0x00 };
-  48:main.c        **** static const uint8 BANK_AES_KEY[16] = "";
-  49:main.c        **** static uint32 NONCE =0;
-  50:main.c        **** static const uint8 BILLS_LEFT[1] = {0x00};
-  51:main.c        **** 
+  48:main.c        **** static const uint8 BANK_AES_KEY[17] = {'b', 'l', 'a', 'n', 'k', ' ', 
+  49:main.c        ****                                         'k', 'e', 'y', '!', '!','!','!','!','!','!', 0x00 };
+  50:main.c        **** static const uint8 NONCE[5] = {'b', 'l', 'a', 'n', 0x00};
+  51:main.c        **** static const uint8 BILLS_LEFT[1] = {0x00};
   52:main.c        **** 
-  53:main.c        **** // reset interrupt on button press
-  54:main.c        **** CY_ISR(Reset_ISR)
-  55:main.c        **** {
-  28              		.loc 1 55 0
+  53:main.c        **** 
+  54:main.c        **** // reset interrupt on button press
+  55:main.c        **** CY_ISR(Reset_ISR)
+  56:main.c        **** {
+  28              		.loc 1 56 0
   29              		.cfi_startproc
   30              		@ args = 0, pretend = 0, frame = 0
   31              		@ frame_needed = 0, uses_anonymous_args = 0
@@ -94,22 +95,22 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccMctTlL.s 			page 1
   33              		.cfi_def_cfa_offset 8
   34              		.cfi_offset 4, -8
   35              		.cfi_offset 14, -4
-  56:main.c        ****     pushMessage((uint8*)"In interrupt\n", strlen("In interrupt\n"));
-  36              		.loc 1 56 0
+  57:main.c        ****     pushMessage((uint8*)"In interrupt\n", strlen("In interrupt\n"));
+  36              		.loc 1 57 0
   37 0002 0D21     		movs	r1, #13
   38 0004 0348     		ldr	r0, .L2
   39 0006 FFF7FEFF 		bl	pushMessage
   40              	.LVL0:
-  57:main.c        ****     SW1_ClearInterrupt();
-  41              		.loc 1 57 0
+  58:main.c        ****     SW1_ClearInterrupt();
+  41              		.loc 1 58 0
   42 000a FFF7FEFF 		bl	SW1_ClearInterrupt
   43              	.LVL1:
-  58:main.c        ****     CySoftwareReset();
-  44              		.loc 1 58 0
+  59:main.c        ****     CySoftwareReset();
+  44              		.loc 1 59 0
   45 000e FFF7FEFF 		bl	CySoftwareReset
   46              	.LVL2:
-  59:main.c        **** }
-  47              		.loc 1 59 0
+  60:main.c        **** }
+  47              		.loc 1 60 0
   48              		@ sp needed
   49 0012 10BD     		pop	{r4, pc}
   50              	.L3:
@@ -117,10 +118,10 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccMctTlL.s 			page 1
   52              	.L2:
   53 0014 00000000 		.word	.LC0
   54              		.cfi_endproc
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccVut814.s 			page 3
+
+
   55              	.LFE34:
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccMctTlL.s 			page 3
-
-
   56              		.size	Reset_ISR, .-Reset_ISR
   57              		.section	.text.provision,"ax",%progbits
   58              		.align	2
@@ -130,2204 +131,2290 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccMctTlL.s 			page 1
   62              		.type	provision, %function
   63              	provision:
   64              	.LFB35:
-  60:main.c        **** 
   61:main.c        **** 
-  62:main.c        **** // provisions HSM (should only ever be called once)
-  63:main.c        **** void provision()
-  64:main.c        **** {
-  65              		.loc 1 64 0
+  62:main.c        **** 
+  63:main.c        **** // provisions HSM (should only ever be called once)
+  64:main.c        **** void provision()
+  65:main.c        **** {
+  65              		.loc 1 65 0
   66              		.cfi_startproc
   67              		@ args = 0, pretend = 0, frame = 88
   68              		@ frame_needed = 0, uses_anonymous_args = 0
-  69 0000 30B5     		push	{r4, r5, lr}
-  70              		.cfi_def_cfa_offset 12
-  71              		.cfi_offset 4, -12
-  72              		.cfi_offset 5, -8
-  73              		.cfi_offset 14, -4
-  74 0002 97B0     		sub	sp, sp, #92
-  75              		.cfi_def_cfa_offset 104
-  76              	.LVL3:
-  65:main.c        ****     int i;
-  66:main.c        ****     uint8 message[77], numbills;
-  67:main.c        ****     
-  68:main.c        ****     for(i = 0; i < 128; i++) {
-  77              		.loc 1 68 0
-  78 0004 0024     		movs	r4, #0
-  79 0006 07E0     		b	.L5
-  80              	.LVL4:
-  81              	.L6:
+  69 0000 70B5     		push	{r4, r5, r6, lr}
+  70              		.cfi_def_cfa_offset 16
+  71              		.cfi_offset 4, -16
+  72              		.cfi_offset 5, -12
+  73              		.cfi_offset 6, -8
+  74              		.cfi_offset 14, -4
+  75 0002 96B0     		sub	sp, sp, #88
+  76              		.cfi_def_cfa_offset 104
+  77              	.LVL3:
+  66:main.c        ****     int i;
+  67:main.c        ****     uint8 message[77], numbills;
+  68:main.c        ****     
+  69:main.c        ****     for(i = 0; i < 128; i++) {
+  78              		.loc 1 69 0
+  79 0004 0024     		movs	r4, #0
+  80 0006 07E0     		b	.L5
+  81              	.LVL4:
+  82              	.L6:
+  70:main.c        ****         PIGGY_BANK_Write((uint8*)EMPTY_BILL, MONEY[i], BILL_LEN);
+  83              		.loc 1 70 0 discriminator 3
+  84 0008 2301     		lsls	r3, r4, #4
+  85 000a 2D49     		ldr	r1, .L9
+  86 000c C918     		adds	r1, r1, r3
+  87 000e 1022     		movs	r2, #16
+  88 0010 2C48     		ldr	r0, .L9+4
+  89 0012 FFF7FEFF 		bl	PIGGY_BANK_Write
+  90              	.LVL5:
   69:main.c        ****         PIGGY_BANK_Write((uint8*)EMPTY_BILL, MONEY[i], BILL_LEN);
-  82              		.loc 1 69 0 discriminator 3
-  83 0008 2301     		lsls	r3, r4, #4
-  84 000a 2349     		ldr	r1, .L9
-  85 000c C918     		adds	r1, r1, r3
-  86 000e 1022     		movs	r2, #16
-  87 0010 2248     		ldr	r0, .L9+4
-  88 0012 FFF7FEFF 		bl	PIGGY_BANK_Write
-  89              	.LVL5:
-  68:main.c        ****         PIGGY_BANK_Write((uint8*)EMPTY_BILL, MONEY[i], BILL_LEN);
-  90              		.loc 1 68 0 discriminator 3
-  91 0016 0134     		adds	r4, r4, #1
-  92              	.LVL6:
-  93              	.L5:
-  68:main.c        ****         PIGGY_BANK_Write((uint8*)EMPTY_BILL, MONEY[i], BILL_LEN);
-  94              		.loc 1 68 0 is_stmt 0 discriminator 1
-  95 0018 7F2C     		cmp	r4, #127
-  96 001a F5DD     		ble	.L6
-  70:main.c        ****     }
-  71:main.c        ****     
-  72:main.c        ****     // synchronize with atm
-  73:main.c        ****     syncConnection(SYNC_PROV);
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccMctTlL.s 			page 4
+  91              		.loc 1 69 0 discriminator 3
+  92 0016 0134     		adds	r4, r4, #1
+  93              	.LVL6:
+  94              	.L5:
+  69:main.c        ****         PIGGY_BANK_Write((uint8*)EMPTY_BILL, MONEY[i], BILL_LEN);
+  95              		.loc 1 69 0 is_stmt 0 discriminator 1
+  96 0018 7F2C     		cmp	r4, #127
+  97 001a F5DD     		ble	.L6
+  71:main.c        ****     }
+  72:main.c        ****     
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccVut814.s 			page 4
 
 
-  97              		.loc 1 73 0 is_stmt 1
-  98 001c 0120     		movs	r0, #1
-  99 001e FFF7FEFF 		bl	syncConnection
- 100              	.LVL7:
-  74:main.c        ****  
-  75:main.c        ****     memset(message, 0u, 77);
- 101              		.loc 1 75 0
- 102 0022 02AC     		add	r4, sp, #8
- 103              	.LVL8:
- 104 0024 4D22     		movs	r2, #77
- 105 0026 0021     		movs	r1, #0
- 106 0028 2000     		movs	r0, r4
- 107 002a FFF7FEFF 		bl	memset
- 108              	.LVL9:
-  76:main.c        ****     strcpy((char*)message, PROV_MSG);
- 109              		.loc 1 76 0
- 110 002e 5023     		movs	r3, #80
- 111 0030 2380     		strh	r3, [r4]
-  77:main.c        ****     pushMessage(message, (uint8)strlen(PROV_MSG));
- 112              		.loc 1 77 0
- 113 0032 0121     		movs	r1, #1
- 114 0034 2000     		movs	r0, r4
- 115 0036 FFF7FEFF 		bl	pushMessage
- 116              	.LVL10:
-  78:main.c        ****     
-  79:main.c        ****         
-  80:main.c        ****     // Set blob
-  81:main.c        ****     pullMessage(message);
- 117              		.loc 1 81 0
- 118 003a 2000     		movs	r0, r4
- 119 003c FFF7FEFF 		bl	pullMessage
- 120              	.LVL11:
-  82:main.c        **** 
-  83:main.c        **** //    PIGGY_BANK_Write(message, BANK_AES_KEY,32);
-  84:main.c        **** //    pushMessage(BANK_AES_KEY, 32);
-  85:main.c        **** //    PIGGY_BANK_Write(message+32, (uint8*)NONCE, 8);
-  86:main.c        **** //    pushMessage((uint8*)NONCE, 8);
-  87:main.c        **** //    PIGGY_BANK_Write(message+40, UUID, UUID_LEN);
-  88:main.c        **** //    pushMessage(UUID, UUID_LEN);
-  89:main.c        ****     pushMessage((uint8*)RECV_OK, strlen(RECV_OK));
- 121              		.loc 1 89 0
- 122 0040 174D     		ldr	r5, .L9+8
- 123 0042 0121     		movs	r1, #1
- 124 0044 2800     		movs	r0, r5
- 125 0046 FFF7FEFF 		bl	pushMessage
- 126              	.LVL12:
-  90:main.c        ****     
-  91:main.c        ****     // Get numbills
-  92:main.c        ****     pullMessage(message);
- 127              		.loc 1 92 0
- 128 004a 2000     		movs	r0, r4
- 129 004c FFF7FEFF 		bl	pullMessage
- 130              	.LVL13:
-  93:main.c        ****     numbills = message[0];
- 131              		.loc 1 93 0
- 132 0050 2378     		ldrb	r3, [r4]
- 133 0052 6A46     		mov	r2, sp
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccMctTlL.s 			page 5
+  73:main.c        ****     // synchronize with atm
+  74:main.c        ****     syncConnection(SYNC_PROV);
+  98              		.loc 1 74 0 is_stmt 1
+  99 001c 0120     		movs	r0, #1
+ 100 001e FFF7FEFF 		bl	syncConnection
+ 101              	.LVL7:
+  75:main.c        ****  
+  76:main.c        ****     memset(message, 0u, 77);
+ 102              		.loc 1 76 0
+ 103 0022 02AC     		add	r4, sp, #8
+ 104              	.LVL8:
+ 105 0024 4D22     		movs	r2, #77
+ 106 0026 0021     		movs	r1, #0
+ 107 0028 2000     		movs	r0, r4
+ 108 002a FFF7FEFF 		bl	memset
+ 109              	.LVL9:
+  77:main.c        ****     strcpy((char*)message, PROV_MSG);
+ 110              		.loc 1 77 0
+ 111 002e 5023     		movs	r3, #80
+ 112 0030 2380     		strh	r3, [r4]
+  78:main.c        ****     pushMessage(message, (uint8)strlen(PROV_MSG));
+ 113              		.loc 1 78 0
+ 114 0032 0121     		movs	r1, #1
+ 115 0034 2000     		movs	r0, r4
+ 116 0036 FFF7FEFF 		bl	pushMessage
+ 117              	.LVL10:
+  79:main.c        ****     
+  80:main.c        ****         
+  81:main.c        ****     // Set blob
+  82:main.c        ****     pullMessage(message);
+ 118              		.loc 1 82 0
+ 119 003a 2000     		movs	r0, r4
+ 120 003c FFF7FEFF 		bl	pullMessage
+ 121              	.LVL11:
+  83:main.c        **** 
+  84:main.c        ****     PIGGY_BANK_Write(message, BANK_AES_KEY,32);
+ 122              		.loc 1 84 0
+ 123 0040 214D     		ldr	r5, .L9+8
+ 124 0042 2022     		movs	r2, #32
+ 125 0044 2900     		movs	r1, r5
+ 126 0046 2000     		movs	r0, r4
+ 127 0048 FFF7FEFF 		bl	PIGGY_BANK_Write
+ 128              	.LVL12:
+  85:main.c        **** //    pushMessage((uint8*)BANK_AES_KEY ,32);
+  86:main.c        ****     PIGGY_BANK_Write(message+32, (uint8*)NONCE, 8);
+ 129              		.loc 1 86 0
+ 130 004c 2900     		movs	r1, r5
+ 131 004e 1431     		adds	r1, r1, #20
+ 132 0050 0822     		movs	r2, #8
+ 133 0052 0AA8     		add	r0, sp, #40
+ 134 0054 FFF7FEFF 		bl	PIGGY_BANK_Write
+ 135              	.LVL13:
+  87:main.c        **** //    pushMessage((uint8*)NONCE, 8);
+  88:main.c        ****     PIGGY_BANK_Write(message+40, UUID, UUID_LEN);
+ 136              		.loc 1 88 0
+ 137 0058 2900     		movs	r1, r5
+ 138 005a 1C31     		adds	r1, r1, #28
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccVut814.s 			page 5
 
 
- 134 0054 D01D     		adds	r0, r2, #7
- 135 0056 0370     		strb	r3, [r0]
-  94:main.c        ****     PIGGY_BANK_Write(&numbills, BILLS_LEFT, 1u);
- 136              		.loc 1 94 0
- 137 0058 0122     		movs	r2, #1
- 138 005a 1249     		ldr	r1, .L9+12
- 139 005c FFF7FEFF 		bl	PIGGY_BANK_Write
- 140              	.LVL14:
-  95:main.c        ****     pushMessage((uint8*)RECV_OK, strlen(RECV_OK));
- 141              		.loc 1 95 0
- 142 0060 0121     		movs	r1, #1
- 143 0062 2800     		movs	r0, r5
- 144 0064 FFF7FEFF 		bl	pushMessage
- 145              	.LVL15:
-  96:main.c        ****     
-  97:main.c        ****     // Load bills
-  98:main.c        ****     for (i = 0; i < numbills; i++) {
- 146              		.loc 1 98 0
- 147 0068 0024     		movs	r4, #0
- 148 006a 0EE0     		b	.L7
- 149              	.LVL16:
- 150              	.L8:
+ 139 005c 2422     		movs	r2, #36
+ 140 005e 0CA8     		add	r0, sp, #48
+ 141 0060 FFF7FEFF 		bl	PIGGY_BANK_Write
+ 142              	.LVL14:
+  89:main.c        **** //    pushMessage(UUID, UUID_LEN);
+  90:main.c        ****     pushMessage((uint8*)RECV_OK, strlen(RECV_OK));
+ 143              		.loc 1 90 0
+ 144 0064 194E     		ldr	r6, .L9+12
+ 145 0066 0121     		movs	r1, #1
+ 146 0068 3000     		movs	r0, r6
+ 147 006a FFF7FEFF 		bl	pushMessage
+ 148              	.LVL15:
+  91:main.c        ****     
+  92:main.c        ****     // Get numbills
+  93:main.c        ****     pullMessage(message);
+ 149              		.loc 1 93 0
+ 150 006e 2000     		movs	r0, r4
+ 151 0070 FFF7FEFF 		bl	pullMessage
+ 152              	.LVL16:
+  94:main.c        ****     numbills = message[0];
+ 153              		.loc 1 94 0
+ 154 0074 2378     		ldrb	r3, [r4]
+ 155 0076 6A46     		mov	r2, sp
+ 156 0078 D01D     		adds	r0, r2, #7
+ 157 007a 0370     		strb	r3, [r0]
+  95:main.c        ****     PIGGY_BANK_Write(&numbills, BILLS_LEFT, 1u);
+ 158              		.loc 1 95 0
+ 159 007c 2900     		movs	r1, r5
+ 160 007e 4431     		adds	r1, r1, #68
+ 161 0080 0122     		movs	r2, #1
+ 162 0082 FFF7FEFF 		bl	PIGGY_BANK_Write
+ 163              	.LVL17:
+  96:main.c        ****     pushMessage((uint8*)RECV_OK, strlen(RECV_OK));
+ 164              		.loc 1 96 0
+ 165 0086 0121     		movs	r1, #1
+ 166 0088 3000     		movs	r0, r6
+ 167 008a FFF7FEFF 		bl	pushMessage
+ 168              	.LVL18:
+  97:main.c        ****     
+  98:main.c        ****     // Load bills
+  99:main.c        ****     for (i = 0; i < numbills; i++) {
+ 169              		.loc 1 99 0
+ 170 008e 0024     		movs	r4, #0
+ 171 0090 0EE0     		b	.L7
+ 172              	.LVL19:
+ 173              	.L8:
+ 100:main.c        ****         pullMessage(message);
+ 174              		.loc 1 100 0 discriminator 3
+ 175 0092 02A8     		add	r0, sp, #8
+ 176 0094 FFF7FEFF 		bl	pullMessage
+ 177              	.LVL20:
+ 101:main.c        ****         PIGGY_BANK_Write(message, MONEY[i], BILL_LEN);
+ 178              		.loc 1 101 0 discriminator 3
+ 179 0098 2301     		lsls	r3, r4, #4
+ 180 009a 0949     		ldr	r1, .L9
+ 181 009c C918     		adds	r1, r1, r3
+ 182 009e 1022     		movs	r2, #16
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccVut814.s 			page 6
+
+
+ 183 00a0 02A8     		add	r0, sp, #8
+ 184 00a2 FFF7FEFF 		bl	PIGGY_BANK_Write
+ 185              	.LVL21:
+ 102:main.c        ****         pushMessage((uint8*)RECV_OK, strlen(RECV_OK));
+ 186              		.loc 1 102 0 discriminator 3
+ 187 00a6 0121     		movs	r1, #1
+ 188 00a8 0848     		ldr	r0, .L9+12
+ 189 00aa FFF7FEFF 		bl	pushMessage
+ 190              	.LVL22:
   99:main.c        ****         pullMessage(message);
- 151              		.loc 1 99 0 discriminator 3
- 152 006c 02A8     		add	r0, sp, #8
- 153 006e FFF7FEFF 		bl	pullMessage
- 154              	.LVL17:
- 100:main.c        ****         PIGGY_BANK_Write(message, MONEY[i], BILL_LEN);
- 155              		.loc 1 100 0 discriminator 3
- 156 0072 2301     		lsls	r3, r4, #4
- 157 0074 0849     		ldr	r1, .L9
- 158 0076 C918     		adds	r1, r1, r3
- 159 0078 1022     		movs	r2, #16
- 160 007a 02A8     		add	r0, sp, #8
- 161 007c FFF7FEFF 		bl	PIGGY_BANK_Write
- 162              	.LVL18:
- 101:main.c        ****         pushMessage((uint8*)RECV_OK, strlen(RECV_OK));
- 163              		.loc 1 101 0 discriminator 3
- 164 0080 0121     		movs	r1, #1
- 165 0082 0748     		ldr	r0, .L9+8
- 166 0084 FFF7FEFF 		bl	pushMessage
- 167              	.LVL19:
-  98:main.c        ****         pullMessage(message);
- 168              		.loc 1 98 0 discriminator 3
- 169 0088 0134     		adds	r4, r4, #1
- 170              	.LVL20:
- 171              	.L7:
-  98:main.c        ****         pullMessage(message);
- 172              		.loc 1 98 0 is_stmt 0 discriminator 1
- 173 008a 6B46     		mov	r3, sp
- 174 008c 0733     		adds	r3, r3, #7
- 175 008e 1B78     		ldrb	r3, [r3]
- 176 0090 9C42     		cmp	r4, r3
- 177 0092 EBDB     		blt	.L8
- 102:main.c        ****     }
- 103:main.c        **** }
- 178              		.loc 1 103 0 is_stmt 1
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccMctTlL.s 			page 6
-
-
- 179 0094 17B0     		add	sp, sp, #92
- 180              		@ sp needed
- 181              	.LVL21:
- 182 0096 30BD     		pop	{r4, r5, pc}
- 183              	.L10:
- 184              		.align	2
- 185              	.L9:
- 186 0098 00000000 		.word	.LANCHOR0
- 187 009c 10000000 		.word	.LC3
- 188 00a0 20000000 		.word	.LC5
- 189 00a4 00080000 		.word	.LANCHOR1
- 190              		.cfi_endproc
- 191              	.LFE35:
- 192              		.size	provision, .-provision
- 193              		.section	.text.dispenseBill,"ax",%progbits
- 194              		.align	2
- 195              		.global	dispenseBill
- 196              		.code	16
- 197              		.thumb_func
- 198              		.type	dispenseBill, %function
- 199              	dispenseBill:
- 200              	.LFB36:
- 104:main.c        **** 
+ 191              		.loc 1 99 0 discriminator 3
+ 192 00ae 0134     		adds	r4, r4, #1
+ 193              	.LVL23:
+ 194              	.L7:
+  99:main.c        ****         pullMessage(message);
+ 195              		.loc 1 99 0 is_stmt 0 discriminator 1
+ 196 00b0 6B46     		mov	r3, sp
+ 197 00b2 0733     		adds	r3, r3, #7
+ 198 00b4 1B78     		ldrb	r3, [r3]
+ 199 00b6 9C42     		cmp	r4, r3
+ 200 00b8 EBDB     		blt	.L8
+ 103:main.c        ****     }
+ 104:main.c        **** }
+ 201              		.loc 1 104 0 is_stmt 1
+ 202 00ba 16B0     		add	sp, sp, #88
+ 203              		@ sp needed
+ 204              	.LVL24:
+ 205 00bc 70BD     		pop	{r4, r5, r6, pc}
+ 206              	.L10:
+ 207 00be C046     		.align	2
+ 208              	.L9:
+ 209 00c0 00000000 		.word	.LANCHOR0
+ 210 00c4 10000000 		.word	.LC3
+ 211 00c8 00080000 		.word	.LANCHOR1
+ 212 00cc 20000000 		.word	.LC6
+ 213              		.cfi_endproc
+ 214              	.LFE35:
+ 215              		.size	provision, .-provision
+ 216              		.section	.text.dispenseBill,"ax",%progbits
+ 217              		.align	2
+ 218              		.global	dispenseBill
+ 219              		.code	16
+ 220              		.thumb_func
+ 221              		.type	dispenseBill, %function
+ 222              	dispenseBill:
+ 223              	.LFB36:
  105:main.c        **** 
- 106:main.c        **** void dispenseBill()
- 107:main.c        **** {
- 201              		.loc 1 107 0
- 202              		.cfi_startproc
- 203              		@ args = 0, pretend = 0, frame = 16
- 204              		@ frame_needed = 0, uses_anonymous_args = 0
- 205 0000 F0B5     		push	{r4, r5, r6, r7, lr}
- 206              		.cfi_def_cfa_offset 20
- 207              		.cfi_offset 4, -20
- 208              		.cfi_offset 5, -16
- 209              		.cfi_offset 6, -12
- 210              		.cfi_offset 7, -8
- 211              		.cfi_offset 14, -4
- 212 0002 85B0     		sub	sp, sp, #20
- 213              		.cfi_def_cfa_offset 40
- 108:main.c        ****     static uint8 stackloc = 0;
- 109:main.c        ****     uint8 message[16];
- 110:main.c        ****     volatile const uint8* ptr; 
- 111:main.c        ****     
- 112:main.c        ****     ptr = MONEY[stackloc];
- 214              		.loc 1 112 0
- 215 0004 124D     		ldr	r5, .L12
- 216 0006 2C78     		ldrb	r4, [r5]
- 217              	.LVL22:
- 113:main.c        ****     
- 114:main.c        ****     memset(message, 0u, 16);
- 218              		.loc 1 114 0
- 219 0008 1022     		movs	r2, #16
- 220 000a 0021     		movs	r1, #0
- 221 000c 6846     		mov	r0, sp
- 222 000e FFF7FEFF 		bl	memset
- 223              	.LVL23:
- 115:main.c        ****     memcpy(message, (void*)ptr, BILL_LEN);
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccMctTlL.s 			page 7
+ 106:main.c        **** 
+ 107:main.c        **** void dispenseBill()
+ 108:main.c        **** {
+ 224              		.loc 1 108 0
+ 225              		.cfi_startproc
+ 226              		@ args = 0, pretend = 0, frame = 16
+ 227              		@ frame_needed = 0, uses_anonymous_args = 0
+ 228 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 229              		.cfi_def_cfa_offset 20
+ 230              		.cfi_offset 4, -20
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccVut814.s 			page 7
 
 
- 224              		.loc 1 115 0
- 225 0012 104F     		ldr	r7, .L12+4
- 226 0014 2301     		lsls	r3, r4, #4
- 227 0016 6A46     		mov	r2, sp
- 228 0018 FB18     		adds	r3, r7, r3
- 229 001a 13CB     		ldmia	r3!, {r0, r1, r4}
- 230 001c 13C2     		stmia	r2!, {r0, r1, r4}
- 231              	.LVL24:
- 232 001e 1B68     		ldr	r3, [r3]
- 233 0020 1360     		str	r3, [r2]
- 116:main.c        **** 
- 117:main.c        ****     pushMessage(message, BILL_LEN);
- 234              		.loc 1 117 0
- 235 0022 1021     		movs	r1, #16
- 236 0024 6846     		mov	r0, sp
- 237 0026 FFF7FEFF 		bl	pushMessage
- 238              	.LVL25:
- 118:main.c        ****     
- 119:main.c        ****     PIGGY_BANK_Write((uint8*)EMPTY_BILL, MONEY[stackloc], 16);
- 239              		.loc 1 119 0
- 240 002a 2978     		ldrb	r1, [r5]
- 241 002c 0901     		lsls	r1, r1, #4
- 242 002e 7918     		adds	r1, r7, r1
- 243 0030 1022     		movs	r2, #16
- 244 0032 0948     		ldr	r0, .L12+8
- 245 0034 FFF7FEFF 		bl	PIGGY_BANK_Write
+ 231              		.cfi_offset 5, -16
+ 232              		.cfi_offset 6, -12
+ 233              		.cfi_offset 7, -8
+ 234              		.cfi_offset 14, -4
+ 235 0002 85B0     		sub	sp, sp, #20
+ 236              		.cfi_def_cfa_offset 40
+ 109:main.c        ****     static uint8 stackloc = 0;
+ 110:main.c        ****     uint8 message[16];
+ 111:main.c        ****     volatile const uint8* ptr; 
+ 112:main.c        ****     
+ 113:main.c        ****     ptr = MONEY[stackloc];
+ 237              		.loc 1 113 0
+ 238 0004 124D     		ldr	r5, .L12
+ 239 0006 2C78     		ldrb	r4, [r5]
+ 240              	.LVL25:
+ 114:main.c        ****     
+ 115:main.c        ****     memset(message, 0u, 16);
+ 241              		.loc 1 115 0
+ 242 0008 1022     		movs	r2, #16
+ 243 000a 0021     		movs	r1, #0
+ 244 000c 6846     		mov	r0, sp
+ 245 000e FFF7FEFF 		bl	memset
  246              	.LVL26:
- 120:main.c        ****     stackloc = (stackloc + 1) % 128;
- 247              		.loc 1 120 0
- 248 0038 2B78     		ldrb	r3, [r5]
- 249 003a 0133     		adds	r3, r3, #1
- 250 003c DA17     		asrs	r2, r3, #31
- 251 003e 520E     		lsrs	r2, r2, #25
- 252 0040 9B18     		adds	r3, r3, r2
- 253 0042 7F21     		movs	r1, #127
- 254 0044 0B40     		ands	r3, r1
- 255 0046 9B1A     		subs	r3, r3, r2
- 256 0048 2B70     		strb	r3, [r5]
- 121:main.c        **** }
- 257              		.loc 1 121 0
- 258 004a 05B0     		add	sp, sp, #20
- 259              		@ sp needed
- 260 004c F0BD     		pop	{r4, r5, r6, r7, pc}
- 261              	.L13:
- 262 004e C046     		.align	2
- 263              	.L12:
- 264 0050 00000000 		.word	.LANCHOR2
- 265 0054 00000000 		.word	.LANCHOR0
- 266 0058 10000000 		.word	.LC3
- 267              		.cfi_endproc
- 268              	.LFE36:
- 269              		.size	dispenseBill, .-dispenseBill
- 270              		.section	.text.main,"ax",%progbits
- 271              		.align	2
- 272              		.global	main
- 273              		.code	16
- 274              		.thumb_func
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccMctTlL.s 			page 8
+ 116:main.c        ****     memcpy(message, (void*)ptr, BILL_LEN);
+ 247              		.loc 1 116 0
+ 248 0012 104F     		ldr	r7, .L12+4
+ 249 0014 2301     		lsls	r3, r4, #4
+ 250 0016 6A46     		mov	r2, sp
+ 251 0018 FB18     		adds	r3, r7, r3
+ 252 001a 13CB     		ldmia	r3!, {r0, r1, r4}
+ 253 001c 13C2     		stmia	r2!, {r0, r1, r4}
+ 254              	.LVL27:
+ 255 001e 1B68     		ldr	r3, [r3]
+ 256 0020 1360     		str	r3, [r2]
+ 117:main.c        **** 
+ 118:main.c        ****     pushMessage(message, BILL_LEN);
+ 257              		.loc 1 118 0
+ 258 0022 1021     		movs	r1, #16
+ 259 0024 6846     		mov	r0, sp
+ 260 0026 FFF7FEFF 		bl	pushMessage
+ 261              	.LVL28:
+ 119:main.c        ****     
+ 120:main.c        ****     PIGGY_BANK_Write((uint8*)EMPTY_BILL, MONEY[stackloc], 16);
+ 262              		.loc 1 120 0
+ 263 002a 2978     		ldrb	r1, [r5]
+ 264 002c 0901     		lsls	r1, r1, #4
+ 265 002e 7918     		adds	r1, r7, r1
+ 266 0030 1022     		movs	r2, #16
+ 267 0032 0948     		ldr	r0, .L12+8
+ 268 0034 FFF7FEFF 		bl	PIGGY_BANK_Write
+ 269              	.LVL29:
+ 121:main.c        ****     stackloc = (stackloc + 1) % 128;
+ 270              		.loc 1 121 0
+ 271 0038 2B78     		ldrb	r3, [r5]
+ 272 003a 0133     		adds	r3, r3, #1
+ 273 003c DA17     		asrs	r2, r3, #31
+ 274 003e 520E     		lsrs	r2, r2, #25
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccVut814.s 			page 8
 
 
- 275              		.type	main, %function
- 276              	main:
- 277              	.LFB37:
- 122:main.c        **** 
+ 275 0040 9B18     		adds	r3, r3, r2
+ 276 0042 7F21     		movs	r1, #127
+ 277 0044 0B40     		ands	r3, r1
+ 278 0046 9B1A     		subs	r3, r3, r2
+ 279 0048 2B70     		strb	r3, [r5]
+ 122:main.c        **** }
+ 280              		.loc 1 122 0
+ 281 004a 05B0     		add	sp, sp, #20
+ 282              		@ sp needed
+ 283 004c F0BD     		pop	{r4, r5, r6, r7, pc}
+ 284              	.L13:
+ 285 004e C046     		.align	2
+ 286              	.L12:
+ 287 0050 00000000 		.word	.LANCHOR2
+ 288 0054 00000000 		.word	.LANCHOR0
+ 289 0058 10000000 		.word	.LC3
+ 290              		.cfi_endproc
+ 291              	.LFE36:
+ 292              		.size	dispenseBill, .-dispenseBill
+ 293              		.section	.text.main,"ax",%progbits
+ 294              		.align	2
+ 295              		.global	main
+ 296              		.code	16
+ 297              		.thumb_func
+ 298              		.type	main, %function
+ 299              	main:
+ 300              	.LFB37:
  123:main.c        **** 
- 124:main.c        **** int main(void)
- 125:main.c        **** {
- 278              		.loc 1 125 0
- 279              		.cfi_startproc
- 280              		@ args = 0, pretend = 0, frame = 72
- 281              		@ frame_needed = 0, uses_anonymous_args = 0
- 282 0000 10B5     		push	{r4, lr}
- 283              		.cfi_def_cfa_offset 8
- 284              		.cfi_offset 4, -8
- 285              		.cfi_offset 14, -4
- 286 0002 92B0     		sub	sp, sp, #72
- 287              		.cfi_def_cfa_offset 80
- 126:main.c        ****     CyGlobalIntEnable; /* Enable global interrupts. */
- 288              		.loc 1 126 0
- 289              		.syntax divided
- 290              	@ 126 "main.c" 1
- 291 0004 62B6     		CPSIE   i
- 292              	@ 0 "" 2
- 127:main.c        ****     
- 128:main.c        ****     // start reset button
- 129:main.c        ****     Reset_isr_StartEx(Reset_ISR);
- 293              		.loc 1 129 0
- 294              		.thumb
- 295              		.syntax unified
- 296 0006 3148     		ldr	r0, .L22
- 297 0008 FFF7FEFF 		bl	Reset_isr_StartEx
- 298              	.LVL27:
- 130:main.c        ****     
- 131:main.c        ****     /* Declare vairables here */
- 132:main.c        ****     
- 133:main.c        ****     uint8 numbills, i, bills_left;
- 134:main.c        ****     uint8 message[64];
- 135:main.c        ****     
- 136:main.c        ****     /*
- 137:main.c        ****      * Note:
- 138:main.c        ****      *  To write to EEPROM, write to static const uint8 []
- 139:main.c        ****      *  To read from EEPROM, read from volatile const uint8 * 
- 140:main.c        ****      *      set to write variable
- 141:main.c        ****      *
- 142:main.c        ****      * PSoC EEPROM is very finnicky if this format is not followed
- 143:main.c        ****      */
- 144:main.c        ****     static const uint8 PROVISIONED[1] = {0x00}; // write variable
- 145:main.c        ****     volatile const uint8* ptr = PROVISIONED;    // read variable
- 146:main.c        ****     
+ 124:main.c        **** 
+ 125:main.c        **** int main(void)
+ 126:main.c        **** {
+ 301              		.loc 1 126 0
+ 302              		.cfi_startproc
+ 303              		@ args = 0, pretend = 0, frame = 72
+ 304              		@ frame_needed = 0, uses_anonymous_args = 0
+ 305 0000 10B5     		push	{r4, lr}
+ 306              		.cfi_def_cfa_offset 8
+ 307              		.cfi_offset 4, -8
+ 308              		.cfi_offset 14, -4
+ 309 0002 92B0     		sub	sp, sp, #72
+ 310              		.cfi_def_cfa_offset 80
+ 127:main.c        ****     CyGlobalIntEnable; /* Enable global interrupts. */
+ 311              		.loc 1 127 0
+ 312              		.syntax divided
+ 313              	@ 127 "main.c" 1
+ 314 0004 62B6     		CPSIE   i
+ 315              	@ 0 "" 2
+ 128:main.c        ****     
+ 129:main.c        ****     // start reset button
+ 130:main.c        ****     Reset_isr_StartEx(Reset_ISR);
+ 316              		.loc 1 130 0
+ 317              		.thumb
+ 318              		.syntax unified
+ 319 0006 3348     		ldr	r0, .L22
+ 320 0008 FFF7FEFF 		bl	Reset_isr_StartEx
+ 321              	.LVL30:
+ 131:main.c        ****     
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccVut814.s 			page 9
+
+
+ 132:main.c        ****     /* Declare vairables here */
+ 133:main.c        ****     
+ 134:main.c        ****     uint8 numbills, i, bills_left;
+ 135:main.c        ****     uint8 message[64];
+ 136:main.c        ****     
+ 137:main.c        ****     /*
+ 138:main.c        ****      * Note:
+ 139:main.c        ****      *  To write to EEPROM, write to static const uint8 []
+ 140:main.c        ****      *  To read from EEPROM, read from volatile const uint8 * 
+ 141:main.c        ****      *      set to write variable
+ 142:main.c        ****      *
+ 143:main.c        ****      * PSoC EEPROM is very finnicky if this format is not followed
+ 144:main.c        ****      */
+ 145:main.c        ****     static const uint8 PROVISIONED[1] = {0x00}; // write variable
+ 146:main.c        ****     volatile const uint8* ptr = PROVISIONED;    // read variable
  147:main.c        ****     
- 148:main.c        ****     /* Place your initialization/startup code here (e.g. MyInst_Start()) */
- 149:main.c        ****     
- 150:main.c        ****     PIGGY_BANK_Start();
- 299              		.loc 1 150 0
- 300 000c FFF7FEFF 		bl	PIGGY_BANK_Start
- 301              	.LVL28:
- 151:main.c        ****     DB_UART_Start();
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccMctTlL.s 			page 9
+ 148:main.c        ****     
+ 149:main.c        ****     /* Place your initialization/startup code here (e.g. MyInst_Start()) */
+ 150:main.c        ****     
+ 151:main.c        ****     PIGGY_BANK_Start();
+ 322              		.loc 1 151 0
+ 323 000c FFF7FEFF 		bl	PIGGY_BANK_Start
+ 324              	.LVL31:
+ 152:main.c        ****     DB_UART_Start();
+ 325              		.loc 1 152 0
+ 326 0010 FFF7FEFF 		bl	DB_UART_Start
+ 327              	.LVL32:
+ 153:main.c        ****     
+ 154:main.c        ****     // provision security module on first boot
+ 155:main.c        ****     if(*ptr == 0x00)
+ 328              		.loc 1 155 0
+ 329 0014 4823     		movs	r3, #72
+ 330 0016 304A     		ldr	r2, .L22+4
+ 331 0018 D35C     		ldrb	r3, [r2, r3]
+ 332 001a 002B     		cmp	r3, #0
+ 333 001c 0AD1     		bne	.L16
+ 156:main.c        ****     {
+ 157:main.c        ****         provision();
+ 334              		.loc 1 157 0
+ 335 001e FFF7FEFF 		bl	provision
+ 336              	.LVL33:
+ 158:main.c        ****         
+ 159:main.c        ****         // Mark as provisioned
+ 160:main.c        ****         i = 0x01;
+ 337              		.loc 1 160 0
+ 338 0022 4720     		movs	r0, #71
+ 339 0024 6844     		add	r0, r0, sp
+ 340 0026 0123     		movs	r3, #1
+ 341 0028 0370     		strb	r3, [r0]
+ 161:main.c        ****         PIGGY_BANK_Write(&i, PROVISIONED,1u);
+ 342              		.loc 1 161 0
+ 343 002a 0122     		movs	r2, #1
+ 344 002c 2A49     		ldr	r1, .L22+4
+ 345 002e 4831     		adds	r1, r1, #72
+ 346 0030 FFF7FEFF 		bl	PIGGY_BANK_Write
+ 347              	.LVL34:
+ 348              	.L16:
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccVut814.s 			page 10
 
 
- 302              		.loc 1 151 0
- 303 0010 FFF7FEFF 		bl	DB_UART_Start
- 304              	.LVL29:
- 152:main.c        **** 
- 153:main.c        **** //    while (1) {
- 154:main.c        **** //	DB_UART_UartPutString("Welcome to Frequency Measurement Using PSoC 4 BLE\n");
- 155:main.c        **** //    }
- 156:main.c        ****     
- 157:main.c        ****     // provision security module on first boot
- 158:main.c        ****     if(*ptr == 0x00)
- 305              		.loc 1 158 0
- 306 0014 2E4B     		ldr	r3, .L22+4
- 307 0016 1B79     		ldrb	r3, [r3, #4]
- 308 0018 002B     		cmp	r3, #0
- 309 001a 0AD1     		bne	.L16
- 159:main.c        ****     {
- 160:main.c        ****         provision();
- 310              		.loc 1 160 0
- 311 001c FFF7FEFF 		bl	provision
- 312              	.LVL30:
- 161:main.c        ****         
- 162:main.c        ****         // Mark as provisioned
- 163:main.c        ****         i = 0x01;
- 313              		.loc 1 163 0
- 314 0020 4720     		movs	r0, #71
- 315 0022 6844     		add	r0, r0, sp
- 316 0024 0123     		movs	r3, #1
- 317 0026 0370     		strb	r3, [r0]
- 164:main.c        ****         PIGGY_BANK_Write(&i, PROVISIONED,1u);
- 318              		.loc 1 164 0
- 319 0028 0122     		movs	r2, #1
- 320 002a 2949     		ldr	r1, .L22+4
- 321 002c 0431     		adds	r1, r1, #4
- 322 002e FFF7FEFF 		bl	PIGGY_BANK_Write
- 323              	.LVL31:
- 324              	.L16:
- 165:main.c        ****     }
- 166:main.c        ****     
- 167:main.c        ****     // Go into infinite loop
- 168:main.c        ****     while (1) {
- 169:main.c        ****         /* Place your application code here. */
- 170:main.c        **** 
- 171:main.c        ****         // synchronize with bank
- 172:main.c        ****         syncConnection(SYNC_NORM);
- 325              		.loc 1 172 0
- 326 0032 0020     		movs	r0, #0
- 327 0034 FFF7FEFF 		bl	syncConnection
- 328              	.LVL32:
- 173:main.c        ****             
- 174:main.c        ****         // send UUID
- 175:main.c        ****         ptr = UUID;
- 176:main.c        ****         pushMessage((uint8*)ptr, strlen((char*)ptr));
- 329              		.loc 1 176 0
- 330 0038 254C     		ldr	r4, .L22+4
- 331 003a 0834     		adds	r4, r4, #8
- 332 003c 2000     		movs	r0, r4
- 333 003e FFF7FEFF 		bl	strlen
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccMctTlL.s 			page 10
-
-
- 334              	.LVL33:
- 335 0042 C1B2     		uxtb	r1, r0
- 336 0044 2000     		movs	r0, r4
- 337 0046 FFF7FEFF 		bl	pushMessage
- 338              	.LVL34:
+ 162:main.c        ****     }
+ 163:main.c        ****     
+ 164:main.c        ****     // Go into infinite loop
+ 165:main.c        ****     while (1) {
+ 166:main.c        ****         /* Place your application code here. */
+ 167:main.c        **** 
+ 168:main.c        ****         // synchronize with bank
+ 169:main.c        ****         syncConnection(SYNC_NORM);
+ 349              		.loc 1 169 0
+ 350 0034 0020     		movs	r0, #0
+ 351 0036 FFF7FEFF 		bl	syncConnection
+ 352              	.LVL35:
+ 170:main.c        ****             
+ 171:main.c        ****         // send UUID
+ 172:main.c        ****         ptr = UUID;
+ 173:main.c        ****         pushMessage((uint8*)ptr, strlen((char*)ptr));
+ 353              		.loc 1 173 0
+ 354 003a 274C     		ldr	r4, .L22+4
+ 355 003c 1C34     		adds	r4, r4, #28
+ 356 003e 2000     		movs	r0, r4
+ 357 0040 FFF7FEFF 		bl	strlen
+ 358              	.LVL36:
+ 359 0044 C1B2     		uxtb	r1, r0
+ 360 0046 2000     		movs	r0, r4
+ 361 0048 FFF7FEFF 		bl	pushMessage
+ 362              	.LVL37:
+ 174:main.c        ****         
+ 175:main.c        ****         // get returned UUID
+ 176:main.c        ****         pullMessage(message);
+ 363              		.loc 1 176 0
+ 364 004c 01A8     		add	r0, sp, #4
+ 365 004e FFF7FEFF 		bl	pullMessage
+ 366              	.LVL38:
  177:main.c        ****         
- 178:main.c        ****         // get returned UUID
- 179:main.c        ****         pullMessage(message);
- 339              		.loc 1 179 0
- 340 004a 01A8     		add	r0, sp, #4
- 341 004c FFF7FEFF 		bl	pullMessage
- 342              	.LVL35:
- 180:main.c        ****         
- 181:main.c        ****         // compare UUID with stored UUID
- 182:main.c        ****         if (strcmp((char*)message, (char*)UUID)) {
- 343              		.loc 1 182 0
- 344 0050 2100     		movs	r1, r4
- 345 0052 01A8     		add	r0, sp, #4
- 346 0054 FFF7FEFF 		bl	strcmp
- 347              	.LVL36:
- 348 0058 0028     		cmp	r0, #0
- 349 005a 04D0     		beq	.L17
- 183:main.c        ****             pushMessage((uint8*)WITH_BAD, strlen(WITH_BAD));
- 350              		.loc 1 183 0
- 351 005c 0321     		movs	r1, #3
- 352 005e 1D48     		ldr	r0, .L22+8
- 353 0060 FFF7FEFF 		bl	pushMessage
- 354              	.LVL37:
- 355 0064 E5E7     		b	.L16
- 356              	.L17:
- 184:main.c        ****         } else {
- 185:main.c        ****             pushMessage((uint8*)WITH_OK, strlen(WITH_OK));
- 357              		.loc 1 185 0
- 358 0066 0121     		movs	r1, #1
- 359 0068 1B48     		ldr	r0, .L22+12
- 360 006a FFF7FEFF 		bl	pushMessage
- 361              	.LVL38:
- 186:main.c        ****             
- 187:main.c        ****             // get number of bills
- 188:main.c        ****             pullMessage(message);
- 362              		.loc 1 188 0
- 363 006e 01AC     		add	r4, sp, #4
- 364 0070 2000     		movs	r0, r4
- 365 0072 FFF7FEFF 		bl	pullMessage
- 366              	.LVL39:
- 189:main.c        ****             numbills = message[0];
- 367              		.loc 1 189 0
- 368 0076 2478     		ldrb	r4, [r4]
- 369              	.LVL40:
- 190:main.c        ****             
- 191:main.c        ****             ptr = BILLS_LEFT;
- 192:main.c        ****             if (*ptr < numbills) {
- 370              		.loc 1 192 0
- 371 0078 154B     		ldr	r3, .L22+4
- 372 007a 1B78     		ldrb	r3, [r3]
- 373 007c DBB2     		uxtb	r3, r3
- 374 007e 9C42     		cmp	r4, r3
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccMctTlL.s 			page 11
+ 178:main.c        ****         // compare UUID with stored UUID
+ 179:main.c        ****         if (strcmp((char*)message, (char*)UUID)) {
+ 367              		.loc 1 179 0
+ 368 0052 2100     		movs	r1, r4
+ 369 0054 01A8     		add	r0, sp, #4
+ 370 0056 FFF7FEFF 		bl	strcmp
+ 371              	.LVL39:
+ 372 005a 0028     		cmp	r0, #0
+ 373 005c 04D0     		beq	.L17
+ 180:main.c        ****             pushMessage((uint8*)WITH_BAD, strlen(WITH_BAD));
+ 374              		.loc 1 180 0
+ 375 005e 0321     		movs	r1, #3
+ 376 0060 1E48     		ldr	r0, .L22+8
+ 377 0062 FFF7FEFF 		bl	pushMessage
+ 378              	.LVL40:
+ 379 0066 E5E7     		b	.L16
+ 380              	.L17:
+ 181:main.c        ****         } else {
+ 182:main.c        ****             pushMessage((uint8*)WITH_OK, strlen(WITH_OK));
+ 381              		.loc 1 182 0
+ 382 0068 0121     		movs	r1, #1
+ 383 006a 1D48     		ldr	r0, .L22+12
+ 384 006c FFF7FEFF 		bl	pushMessage
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccVut814.s 			page 11
 
 
- 375 0080 04D9     		bls	.L19
- 193:main.c        ****                 pushMessage((uint8*)WITH_BAD, strlen(WITH_BAD));
- 376              		.loc 1 193 0
- 377 0082 0321     		movs	r1, #3
- 378 0084 1348     		ldr	r0, .L22+8
- 379 0086 FFF7FEFF 		bl	pushMessage
- 380              	.LVL41:
- 194:main.c        ****                 continue;
- 381              		.loc 1 194 0
- 382 008a D2E7     		b	.L16
- 383              	.L19:
- 195:main.c        ****             } else {
- 196:main.c        ****                 pushMessage((uint8*)WITH_OK, strlen(WITH_OK));
- 384              		.loc 1 196 0
- 385 008c 0121     		movs	r1, #1
- 386 008e 1248     		ldr	r0, .L22+12
- 387 0090 FFF7FEFF 		bl	pushMessage
- 388              	.LVL42:
- 197:main.c        ****                 bills_left = *ptr - numbills;
- 389              		.loc 1 197 0
- 390 0094 0E49     		ldr	r1, .L22+4
- 391 0096 0B78     		ldrb	r3, [r1]
- 392 0098 4620     		movs	r0, #70
- 393 009a 6844     		add	r0, r0, sp
- 394 009c 1B1B     		subs	r3, r3, r4
- 395 009e 0370     		strb	r3, [r0]
- 198:main.c        ****                 PIGGY_BANK_Write(&bills_left, BILLS_LEFT, 0x01);
- 396              		.loc 1 198 0
- 397 00a0 0122     		movs	r2, #1
- 398 00a2 FFF7FEFF 		bl	PIGGY_BANK_Write
- 399              	.LVL43:
- 199:main.c        ****             }
- 200:main.c        ****             
- 201:main.c        ****             for (i = 0; i < numbills; i++) {
- 400              		.loc 1 201 0
- 401 00a6 0022     		movs	r2, #0
- 402 00a8 4723     		movs	r3, #71
- 403 00aa 6B44     		add	r3, r3, sp
- 404 00ac 1A70     		strb	r2, [r3]
- 405 00ae 06E0     		b	.L20
- 406              	.L21:
- 202:main.c        ****                 dispenseBill();
- 407              		.loc 1 202 0 discriminator 3
- 408 00b0 FFF7FEFF 		bl	dispenseBill
- 409              	.LVL44:
- 201:main.c        ****                 dispenseBill();
- 410              		.loc 1 201 0 discriminator 3
- 411 00b4 4722     		movs	r2, #71
- 412 00b6 6A44     		add	r2, r2, sp
- 413 00b8 1378     		ldrb	r3, [r2]
- 414 00ba 0133     		adds	r3, r3, #1
- 415 00bc 1370     		strb	r3, [r2]
- 416              	.L20:
- 201:main.c        ****                 dispenseBill();
- 417              		.loc 1 201 0 is_stmt 0 discriminator 1
- 418 00be 4723     		movs	r3, #71
- 419 00c0 6B44     		add	r3, r3, sp
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccMctTlL.s 			page 12
+ 385              	.LVL41:
+ 183:main.c        ****             
+ 184:main.c        ****             // get number of bills
+ 185:main.c        ****             pullMessage(message);
+ 386              		.loc 1 185 0
+ 387 0070 01AC     		add	r4, sp, #4
+ 388 0072 2000     		movs	r0, r4
+ 389 0074 FFF7FEFF 		bl	pullMessage
+ 390              	.LVL42:
+ 186:main.c        ****             numbills = message[0];
+ 391              		.loc 1 186 0
+ 392 0078 2478     		ldrb	r4, [r4]
+ 393              	.LVL43:
+ 187:main.c        ****             
+ 188:main.c        ****             ptr = BILLS_LEFT;
+ 189:main.c        ****             if (*ptr < numbills) {
+ 394              		.loc 1 189 0
+ 395 007a 4423     		movs	r3, #68
+ 396 007c 164A     		ldr	r2, .L22+4
+ 397 007e D35C     		ldrb	r3, [r2, r3]
+ 398 0080 DBB2     		uxtb	r3, r3
+ 399 0082 9C42     		cmp	r4, r3
+ 400 0084 04D9     		bls	.L19
+ 190:main.c        ****                 pushMessage((uint8*)WITH_BAD, strlen(WITH_BAD));
+ 401              		.loc 1 190 0
+ 402 0086 0321     		movs	r1, #3
+ 403 0088 1448     		ldr	r0, .L22+8
+ 404 008a FFF7FEFF 		bl	pushMessage
+ 405              	.LVL44:
+ 191:main.c        ****                 continue;
+ 406              		.loc 1 191 0
+ 407 008e D1E7     		b	.L16
+ 408              	.L19:
+ 192:main.c        ****             } else {
+ 193:main.c        ****                 pushMessage((uint8*)WITH_OK, strlen(WITH_OK));
+ 409              		.loc 1 193 0
+ 410 0090 0121     		movs	r1, #1
+ 411 0092 1348     		ldr	r0, .L22+12
+ 412 0094 FFF7FEFF 		bl	pushMessage
+ 413              	.LVL45:
+ 194:main.c        ****                 bills_left = *ptr - numbills;
+ 414              		.loc 1 194 0
+ 415 0098 0F49     		ldr	r1, .L22+4
+ 416 009a 4423     		movs	r3, #68
+ 417 009c CB5C     		ldrb	r3, [r1, r3]
+ 418 009e 4620     		movs	r0, #70
+ 419 00a0 6844     		add	r0, r0, sp
+ 420 00a2 1B1B     		subs	r3, r3, r4
+ 421 00a4 0370     		strb	r3, [r0]
+ 195:main.c        ****                 PIGGY_BANK_Write(&bills_left, BILLS_LEFT, 0x01);
+ 422              		.loc 1 195 0
+ 423 00a6 4431     		adds	r1, r1, #68
+ 424 00a8 0122     		movs	r2, #1
+ 425 00aa FFF7FEFF 		bl	PIGGY_BANK_Write
+ 426              	.LVL46:
+ 196:main.c        ****             }
+ 197:main.c        ****             
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccVut814.s 			page 12
 
 
- 420 00c2 1B78     		ldrb	r3, [r3]
- 421 00c4 9C42     		cmp	r4, r3
- 422 00c6 F3D8     		bhi	.L21
- 423 00c8 B3E7     		b	.L16
- 424              	.L23:
- 425 00ca C046     		.align	2
- 426              	.L22:
- 427 00cc 00000000 		.word	Reset_ISR
- 428 00d0 00080000 		.word	.LANCHOR1
- 429 00d4 24000000 		.word	.LC13
- 430 00d8 20000000 		.word	.LC5
- 431              		.cfi_endproc
- 432              	.LFE37:
- 433              		.size	main, .-main
- 434              		.section	.rodata
- 435              		.align	2
- 436              		.set	.LANCHOR0,. + 0
- 437              		.set	.LANCHOR1,. + 2048
- 438              		.type	MONEY, %object
- 439              		.size	MONEY, 2048
- 440              	MONEY:
- 441 0000 2A2A2A2A 		.ascii	"*****EMPTY*****\000"
- 441      2A454D50 
- 441      54592A2A 
- 441      2A2A2A00 
- 442 0010 00000000 		.space	2032
- 442      00000000 
- 442      00000000 
- 442      00000000 
- 442      00000000 
- 443              		.type	BILLS_LEFT, %object
- 444              		.size	BILLS_LEFT, 1
- 445              	BILLS_LEFT:
- 446 0800 00       		.space	1
- 447 0801 000000   		.space	3
- 448              		.type	PROVISIONED.5838, %object
- 449              		.size	PROVISIONED.5838, 1
- 450              	PROVISIONED.5838:
- 451 0804 00       		.space	1
- 452 0805 000000   		.space	3
- 453              		.type	UUID, %object
- 454              		.size	UUID, 37
- 455              	UUID:
- 456 0808 62       		.byte	98
- 457 0809 6C       		.byte	108
- 458 080a 61       		.byte	97
- 459 080b 6E       		.byte	110
- 460 080c 6B       		.byte	107
- 461 080d 20       		.byte	32
- 462 080e 75       		.byte	117
- 463 080f 75       		.byte	117
- 464 0810 69       		.byte	105
- 465 0811 64       		.byte	100
- 466 0812 21       		.byte	33
- 467 0813 00       		.byte	0
- 468 0814 00000000 		.space	25
- 468      00000000 
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccMctTlL.s 			page 13
+ 198:main.c        ****             for (i = 0; i < numbills; i++) {
+ 427              		.loc 1 198 0
+ 428 00ae 0022     		movs	r2, #0
+ 429 00b0 4723     		movs	r3, #71
+ 430 00b2 6B44     		add	r3, r3, sp
+ 431 00b4 1A70     		strb	r2, [r3]
+ 432 00b6 06E0     		b	.L20
+ 433              	.L21:
+ 199:main.c        ****                 dispenseBill();
+ 434              		.loc 1 199 0 discriminator 3
+ 435 00b8 FFF7FEFF 		bl	dispenseBill
+ 436              	.LVL47:
+ 198:main.c        ****                 dispenseBill();
+ 437              		.loc 1 198 0 discriminator 3
+ 438 00bc 4722     		movs	r2, #71
+ 439 00be 6A44     		add	r2, r2, sp
+ 440 00c0 1378     		ldrb	r3, [r2]
+ 441 00c2 0133     		adds	r3, r3, #1
+ 442 00c4 1370     		strb	r3, [r2]
+ 443              	.L20:
+ 198:main.c        ****                 dispenseBill();
+ 444              		.loc 1 198 0 is_stmt 0 discriminator 1
+ 445 00c6 4723     		movs	r3, #71
+ 446 00c8 6B44     		add	r3, r3, sp
+ 447 00ca 1B78     		ldrb	r3, [r3]
+ 448 00cc 9C42     		cmp	r4, r3
+ 449 00ce F3D8     		bhi	.L21
+ 450 00d0 B0E7     		b	.L16
+ 451              	.L23:
+ 452 00d2 C046     		.align	2
+ 453              	.L22:
+ 454 00d4 00000000 		.word	Reset_ISR
+ 455 00d8 00080000 		.word	.LANCHOR1
+ 456 00dc 24000000 		.word	.LC16
+ 457 00e0 20000000 		.word	.LC6
+ 458              		.cfi_endproc
+ 459              	.LFE37:
+ 460              		.size	main, .-main
+ 461              		.section	.rodata
+ 462              		.align	2
+ 463              		.set	.LANCHOR0,. + 0
+ 464              		.set	.LANCHOR1,. + 2048
+ 465              		.type	MONEY, %object
+ 466              		.size	MONEY, 2048
+ 467              	MONEY:
+ 468 0000 2A2A2A2A 		.ascii	"*****EMPTY*****\000"
+ 468      2A454D50 
+ 468      54592A2A 
+ 468      2A2A2A00 
+ 469 0010 00000000 		.space	2032
+ 469      00000000 
+ 469      00000000 
+ 469      00000000 
+ 469      00000000 
+ 470              		.type	BANK_AES_KEY, %object
+ 471              		.size	BANK_AES_KEY, 17
+ 472              	BANK_AES_KEY:
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccVut814.s 			page 13
 
 
- 468      00000000 
- 468      00000000 
- 468      00000000 
- 469              		.section	.rodata.str1.4,"aMS",%progbits,1
- 470              		.align	2
- 471              	.LC0:
- 472 0000 496E2069 		.ascii	"In interrupt\012\000"
- 472      6E746572 
- 472      72757074 
- 472      0A00
- 473 000e 0000     		.space	2
- 474              	.LC3:
- 475 0010 2A2A2A2A 		.ascii	"*****EMPTY*****\000"
- 475      2A454D50 
- 475      54592A2A 
- 475      2A2A2A00 
- 476              	.LC5:
- 477 0020 4B00     		.ascii	"K\000"
- 478 0022 0000     		.space	2
- 479              	.LC13:
- 480 0024 42414400 		.ascii	"BAD\000"
- 481              		.bss
- 482              		.set	.LANCHOR2,. + 0
- 483              		.type	stackloc.5828, %object
- 484              		.size	stackloc.5828, 1
- 485              	stackloc.5828:
- 486 0000 00       		.space	1
- 487              		.text
- 488              	.Letext0:
- 489              		.file 2 "Generated_Source\\PSoC4/cytypes.h"
- 490              		.file 3 "usbserialprotocol.h"
- 491              		.file 4 "Generated_Source\\PSoC4/SW1.h"
- 492              		.file 5 "Generated_Source\\PSoC4/CyLib.h"
- 493              		.file 6 "Generated_Source\\PSoC4/PIGGY_BANK.h"
- 494              		.file 7 "Generated_Source\\PSoC4/Reset_isr.h"
- 495              		.file 8 "Generated_Source\\PSoC4/DB_UART.h"
- 496              		.file 9 "c:\\program files (x86)\\cypress\\psoc creator\\4.1\\psoc creator\\import\\gnu\\arm\\5.4.
- 497              		.section	.debug_info,"",%progbits
- 498              	.Ldebug_info0:
- 499 0000 58060000 		.4byte	0x658
- 500 0004 0400     		.2byte	0x4
- 501 0006 00000000 		.4byte	.Ldebug_abbrev0
- 502 000a 04       		.byte	0x4
- 503 000b 01       		.uleb128 0x1
- 504 000c 87010000 		.4byte	.LASF39
- 505 0010 0C       		.byte	0xc
- 506 0011 3F020000 		.4byte	.LASF40
- 507 0015 7D000000 		.4byte	.LASF41
- 508 0019 00000000 		.4byte	.Ldebug_ranges0+0
- 509 001d 00000000 		.4byte	0
- 510 0021 00000000 		.4byte	.Ldebug_line0
- 511 0025 02       		.uleb128 0x2
- 512 0026 01       		.byte	0x1
- 513 0027 06       		.byte	0x6
- 514 0028 A8020000 		.4byte	.LASF0
- 515 002c 02       		.uleb128 0x2
- 516 002d 01       		.byte	0x1
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccMctTlL.s 			page 14
+ 473 0800 62       		.byte	98
+ 474 0801 6C       		.byte	108
+ 475 0802 61       		.byte	97
+ 476 0803 6E       		.byte	110
+ 477 0804 6B       		.byte	107
+ 478 0805 20       		.byte	32
+ 479 0806 6B       		.byte	107
+ 480 0807 65       		.byte	101
+ 481 0808 79       		.byte	121
+ 482 0809 21       		.byte	33
+ 483 080a 21       		.byte	33
+ 484 080b 21       		.byte	33
+ 485 080c 21       		.byte	33
+ 486 080d 21       		.byte	33
+ 487 080e 21       		.byte	33
+ 488 080f 21       		.byte	33
+ 489 0810 00       		.byte	0
+ 490 0811 000000   		.space	3
+ 491              		.type	NONCE, %object
+ 492              		.size	NONCE, 5
+ 493              	NONCE:
+ 494 0814 62       		.byte	98
+ 495 0815 6C       		.byte	108
+ 496 0816 61       		.byte	97
+ 497 0817 6E       		.byte	110
+ 498 0818 00       		.byte	0
+ 499 0819 000000   		.space	3
+ 500              		.type	UUID, %object
+ 501              		.size	UUID, 37
+ 502              	UUID:
+ 503 081c 62       		.byte	98
+ 504 081d 6C       		.byte	108
+ 505 081e 61       		.byte	97
+ 506 081f 6E       		.byte	110
+ 507 0820 6B       		.byte	107
+ 508 0821 20       		.byte	32
+ 509 0822 75       		.byte	117
+ 510 0823 75       		.byte	117
+ 511 0824 69       		.byte	105
+ 512 0825 64       		.byte	100
+ 513 0826 21       		.byte	33
+ 514 0827 00       		.byte	0
+ 515 0828 00000000 		.space	25
+ 515      00000000 
+ 515      00000000 
+ 515      00000000 
+ 515      00000000 
+ 516 0841 000000   		.space	3
+ 517              		.type	BILLS_LEFT, %object
+ 518              		.size	BILLS_LEFT, 1
+ 519              	BILLS_LEFT:
+ 520 0844 00       		.space	1
+ 521 0845 000000   		.space	3
+ 522              		.type	PROVISIONED.5838, %object
+ 523              		.size	PROVISIONED.5838, 1
+ 524              	PROVISIONED.5838:
+ 525 0848 00       		.space	1
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccVut814.s 			page 14
 
 
- 517 002e 08       		.byte	0x8
- 518 002f DF000000 		.4byte	.LASF1
- 519 0033 02       		.uleb128 0x2
- 520 0034 02       		.byte	0x2
- 521 0035 05       		.byte	0x5
- 522 0036 55020000 		.4byte	.LASF2
- 523 003a 02       		.uleb128 0x2
- 524 003b 02       		.byte	0x2
- 525 003c 07       		.byte	0x7
- 526 003d 59000000 		.4byte	.LASF3
- 527 0041 02       		.uleb128 0x2
- 528 0042 04       		.byte	0x4
- 529 0043 05       		.byte	0x5
- 530 0044 93020000 		.4byte	.LASF4
- 531 0048 02       		.uleb128 0x2
- 532 0049 04       		.byte	0x4
- 533 004a 07       		.byte	0x7
- 534 004b 00010000 		.4byte	.LASF5
- 535 004f 02       		.uleb128 0x2
- 536 0050 08       		.byte	0x8
- 537 0051 05       		.byte	0x5
- 538 0052 31020000 		.4byte	.LASF6
- 539 0056 02       		.uleb128 0x2
- 540 0057 08       		.byte	0x8
- 541 0058 07       		.byte	0x7
- 542 0059 6A010000 		.4byte	.LASF7
- 543 005d 03       		.uleb128 0x3
- 544 005e 04       		.byte	0x4
- 545 005f 05       		.byte	0x5
- 546 0060 696E7400 		.ascii	"int\000"
- 547 0064 02       		.uleb128 0x2
- 548 0065 04       		.byte	0x4
- 549 0066 07       		.byte	0x7
- 550 0067 57010000 		.4byte	.LASF8
- 551 006b 04       		.uleb128 0x4
- 552 006c 12010000 		.4byte	.LASF9
- 553 0070 02       		.byte	0x2
- 554 0071 B901     		.2byte	0x1b9
- 555 0073 2C000000 		.4byte	0x2c
- 556 0077 04       		.uleb128 0x4
- 557 0078 50010000 		.4byte	.LASF10
- 558 007c 02       		.byte	0x2
- 559 007d BB01     		.2byte	0x1bb
- 560 007f 48000000 		.4byte	0x48
- 561 0083 02       		.uleb128 0x2
- 562 0084 04       		.byte	0x4
- 563 0085 04       		.byte	0x4
- 564 0086 37000000 		.4byte	.LASF11
- 565 008a 02       		.uleb128 0x2
- 566 008b 08       		.byte	0x8
- 567 008c 04       		.byte	0x4
- 568 008d 2C010000 		.4byte	.LASF12
- 569 0091 02       		.uleb128 0x2
- 570 0092 01       		.byte	0x1
- 571 0093 08       		.byte	0x8
- 572 0094 46020000 		.4byte	.LASF13
- 573 0098 02       		.uleb128 0x2
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccMctTlL.s 			page 15
+ 526              		.section	.rodata.str1.4,"aMS",%progbits,1
+ 527              		.align	2
+ 528              	.LC0:
+ 529 0000 496E2069 		.ascii	"In interrupt\012\000"
+ 529      6E746572 
+ 529      72757074 
+ 529      0A00
+ 530 000e 0000     		.space	2
+ 531              	.LC3:
+ 532 0010 2A2A2A2A 		.ascii	"*****EMPTY*****\000"
+ 532      2A454D50 
+ 532      54592A2A 
+ 532      2A2A2A00 
+ 533              	.LC6:
+ 534 0020 4B00     		.ascii	"K\000"
+ 535 0022 0000     		.space	2
+ 536              	.LC16:
+ 537 0024 42414400 		.ascii	"BAD\000"
+ 538              		.bss
+ 539              		.set	.LANCHOR2,. + 0
+ 540              		.type	stackloc.5828, %object
+ 541              		.size	stackloc.5828, 1
+ 542              	stackloc.5828:
+ 543 0000 00       		.space	1
+ 544              		.text
+ 545              	.Letext0:
+ 546              		.file 2 "usbserialprotocol.h"
+ 547              		.file 3 "Generated_Source\\PSoC4/SW1.h"
+ 548              		.file 4 "Generated_Source\\PSoC4/CyLib.h"
+ 549              		.file 5 "Generated_Source\\PSoC4/PIGGY_BANK.h"
+ 550              		.file 6 "Generated_Source\\PSoC4/Reset_isr.h"
+ 551              		.file 7 "Generated_Source\\PSoC4/DB_UART.h"
+ 552              		.file 8 "c:\\program files (x86)\\cypress\\psoc creator\\4.1\\psoc creator\\import\\gnu\\arm\\5.4.
+ 553              		.file 9 "Generated_Source\\PSoC4/cytypes.h"
+ 554              		.section	.debug_info,"",%progbits
+ 555              	.Ldebug_info0:
+ 556 0000 B8060000 		.4byte	0x6b8
+ 557 0004 0400     		.2byte	0x4
+ 558 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 559 000a 04       		.byte	0x4
+ 560 000b 01       		.uleb128 0x1
+ 561 000c 80010000 		.4byte	.LASF37
+ 562 0010 0C       		.byte	0xc
+ 563 0011 38020000 		.4byte	.LASF38
+ 564 0015 7D000000 		.4byte	.LASF39
+ 565 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 566 001d 00000000 		.4byte	0
+ 567 0021 00000000 		.4byte	.Ldebug_line0
+ 568 0025 02       		.uleb128 0x2
+ 569 0026 01       		.byte	0x1
+ 570 0027 06       		.byte	0x6
+ 571 0028 A1020000 		.4byte	.LASF0
+ 572 002c 02       		.uleb128 0x2
+ 573 002d 01       		.byte	0x1
+ 574 002e 08       		.byte	0x8
+ 575 002f DF000000 		.4byte	.LASF1
+ 576 0033 02       		.uleb128 0x2
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccVut814.s 			page 15
 
 
- 574 0099 08       		.byte	0x8
- 575 009a 04       		.byte	0x4
- 576 009b 9C020000 		.4byte	.LASF14
- 577 009f 02       		.uleb128 0x2
- 578 00a0 04       		.byte	0x4
- 579 00a1 07       		.byte	0x7
- 580 00a2 1C020000 		.4byte	.LASF15
- 581 00a6 05       		.uleb128 0x5
- 582 00a7 4B020000 		.4byte	.LASF42
- 583 00ab 01       		.byte	0x1
- 584 00ac 36       		.byte	0x36
- 585 00ad 00000000 		.4byte	.LFB34
- 586 00b1 18000000 		.4byte	.LFE34-.LFB34
- 587 00b5 01       		.uleb128 0x1
- 588 00b6 9C       		.byte	0x9c
- 589 00b7 EA000000 		.4byte	0xea
- 590 00bb 06       		.uleb128 0x6
- 591 00bc 0A000000 		.4byte	.LVL0
- 592 00c0 D9050000 		.4byte	0x5d9
- 593 00c4 D7000000 		.4byte	0xd7
- 594 00c8 07       		.uleb128 0x7
- 595 00c9 01       		.uleb128 0x1
- 596 00ca 50       		.byte	0x50
- 597 00cb 05       		.uleb128 0x5
- 598 00cc 03       		.byte	0x3
- 599 00cd 00000000 		.4byte	.LC0
- 600 00d1 07       		.uleb128 0x7
- 601 00d2 01       		.uleb128 0x1
- 602 00d3 51       		.byte	0x51
- 603 00d4 01       		.uleb128 0x1
- 604 00d5 3D       		.byte	0x3d
- 605 00d6 00       		.byte	0
- 606 00d7 08       		.uleb128 0x8
- 607 00d8 0E000000 		.4byte	.LVL1
- 608 00dc E4050000 		.4byte	0x5e4
- 609 00e0 08       		.uleb128 0x8
- 610 00e1 12000000 		.4byte	.LVL2
- 611 00e5 EF050000 		.4byte	0x5ef
- 612 00e9 00       		.byte	0
- 613 00ea 09       		.uleb128 0x9
- 614 00eb 46010000 		.4byte	.LASF18
- 615 00ef 01       		.byte	0x1
- 616 00f0 3F       		.byte	0x3f
- 617 00f1 00000000 		.4byte	.LFB35
- 618 00f5 A8000000 		.4byte	.LFE35-.LFB35
- 619 00f9 01       		.uleb128 0x1
- 620 00fa 9C       		.byte	0x9c
- 621 00fb 6E020000 		.4byte	0x26e
- 622 00ff 0A       		.uleb128 0xa
- 623 0100 6900     		.ascii	"i\000"
- 624 0102 01       		.byte	0x1
- 625 0103 41       		.byte	0x41
- 626 0104 5D000000 		.4byte	0x5d
- 627 0108 00000000 		.4byte	.LLST0
- 628 010c 0B       		.uleb128 0xb
- 629 010d 00000000 		.4byte	.LASF16
- 630 0111 01       		.byte	0x1
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccMctTlL.s 			page 16
+ 577 0034 02       		.byte	0x2
+ 578 0035 05       		.byte	0x5
+ 579 0036 4E020000 		.4byte	.LASF2
+ 580 003a 02       		.uleb128 0x2
+ 581 003b 02       		.byte	0x2
+ 582 003c 07       		.byte	0x7
+ 583 003d 59000000 		.4byte	.LASF3
+ 584 0041 02       		.uleb128 0x2
+ 585 0042 04       		.byte	0x4
+ 586 0043 05       		.byte	0x5
+ 587 0044 8C020000 		.4byte	.LASF4
+ 588 0048 02       		.uleb128 0x2
+ 589 0049 04       		.byte	0x4
+ 590 004a 07       		.byte	0x7
+ 591 004b 00010000 		.4byte	.LASF5
+ 592 004f 02       		.uleb128 0x2
+ 593 0050 08       		.byte	0x8
+ 594 0051 05       		.byte	0x5
+ 595 0052 2A020000 		.4byte	.LASF6
+ 596 0056 02       		.uleb128 0x2
+ 597 0057 08       		.byte	0x8
+ 598 0058 07       		.byte	0x7
+ 599 0059 63010000 		.4byte	.LASF7
+ 600 005d 03       		.uleb128 0x3
+ 601 005e 04       		.byte	0x4
+ 602 005f 05       		.byte	0x5
+ 603 0060 696E7400 		.ascii	"int\000"
+ 604 0064 02       		.uleb128 0x2
+ 605 0065 04       		.byte	0x4
+ 606 0066 07       		.byte	0x7
+ 607 0067 50010000 		.4byte	.LASF8
+ 608 006b 04       		.uleb128 0x4
+ 609 006c 12010000 		.4byte	.LASF40
+ 610 0070 09       		.byte	0x9
+ 611 0071 B901     		.2byte	0x1b9
+ 612 0073 2C000000 		.4byte	0x2c
+ 613 0077 02       		.uleb128 0x2
+ 614 0078 04       		.byte	0x4
+ 615 0079 04       		.byte	0x4
+ 616 007a 37000000 		.4byte	.LASF9
+ 617 007e 02       		.uleb128 0x2
+ 618 007f 08       		.byte	0x8
+ 619 0080 04       		.byte	0x4
+ 620 0081 2C010000 		.4byte	.LASF10
+ 621 0085 02       		.uleb128 0x2
+ 622 0086 01       		.byte	0x1
+ 623 0087 08       		.byte	0x8
+ 624 0088 3F020000 		.4byte	.LASF11
+ 625 008c 02       		.uleb128 0x2
+ 626 008d 08       		.byte	0x8
+ 627 008e 04       		.byte	0x4
+ 628 008f 95020000 		.4byte	.LASF12
+ 629 0093 02       		.uleb128 0x2
+ 630 0094 04       		.byte	0x4
+ 631 0095 07       		.byte	0x7
+ 632 0096 15020000 		.4byte	.LASF13
+ 633 009a 05       		.uleb128 0x5
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccVut814.s 			page 16
 
 
- 631 0112 42       		.byte	0x42
- 632 0113 6E020000 		.4byte	0x26e
- 633 0117 03       		.uleb128 0x3
- 634 0118 91       		.byte	0x91
- 635 0119 A07F     		.sleb128 -96
- 636 011b 0B       		.uleb128 0xb
- 637 011c CF000000 		.4byte	.LASF17
- 638 0120 01       		.byte	0x1
- 639 0121 42       		.byte	0x42
- 640 0122 6B000000 		.4byte	0x6b
- 641 0126 03       		.uleb128 0x3
- 642 0127 91       		.byte	0x91
- 643 0128 9F7F     		.sleb128 -97
- 644 012a 06       		.uleb128 0x6
- 645 012b 16000000 		.4byte	.LVL5
- 646 012f FA050000 		.4byte	0x5fa
- 647 0133 54010000 		.4byte	0x154
- 648 0137 07       		.uleb128 0x7
- 649 0138 01       		.uleb128 0x1
- 650 0139 50       		.byte	0x50
- 651 013a 05       		.uleb128 0x5
- 652 013b 03       		.byte	0x3
- 653 013c 10000000 		.4byte	.LC3
- 654 0140 07       		.uleb128 0x7
- 655 0141 01       		.uleb128 0x1
- 656 0142 51       		.byte	0x51
- 657 0143 0A       		.uleb128 0xa
- 658 0144 74       		.byte	0x74
- 659 0145 00       		.sleb128 0
- 660 0146 34       		.byte	0x34
- 661 0147 24       		.byte	0x24
- 662 0148 03       		.byte	0x3
- 663 0149 00000000 		.4byte	.LANCHOR0
- 664 014d 22       		.byte	0x22
- 665 014e 07       		.uleb128 0x7
- 666 014f 01       		.uleb128 0x1
- 667 0150 52       		.byte	0x52
- 668 0151 01       		.uleb128 0x1
- 669 0152 40       		.byte	0x40
- 670 0153 00       		.byte	0
- 671 0154 06       		.uleb128 0x6
- 672 0155 22000000 		.4byte	.LVL7
- 673 0159 05060000 		.4byte	0x605
- 674 015d 67010000 		.4byte	0x167
- 675 0161 07       		.uleb128 0x7
- 676 0162 01       		.uleb128 0x1
- 677 0163 50       		.byte	0x50
- 678 0164 01       		.uleb128 0x1
- 679 0165 31       		.byte	0x31
- 680 0166 00       		.byte	0
- 681 0167 06       		.uleb128 0x6
- 682 0168 2E000000 		.4byte	.LVL9
- 683 016c 10060000 		.4byte	0x610
- 684 0170 86010000 		.4byte	0x186
- 685 0174 07       		.uleb128 0x7
- 686 0175 01       		.uleb128 0x1
- 687 0176 50       		.byte	0x50
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccMctTlL.s 			page 17
+ 634 009b 44020000 		.4byte	.LASF41
+ 635 009f 01       		.byte	0x1
+ 636 00a0 37       		.byte	0x37
+ 637 00a1 00000000 		.4byte	.LFB34
+ 638 00a5 18000000 		.4byte	.LFE34-.LFB34
+ 639 00a9 01       		.uleb128 0x1
+ 640 00aa 9C       		.byte	0x9c
+ 641 00ab DE000000 		.4byte	0xde
+ 642 00af 06       		.uleb128 0x6
+ 643 00b0 0A000000 		.4byte	.LVL0
+ 644 00b4 39060000 		.4byte	0x639
+ 645 00b8 CB000000 		.4byte	0xcb
+ 646 00bc 07       		.uleb128 0x7
+ 647 00bd 01       		.uleb128 0x1
+ 648 00be 50       		.byte	0x50
+ 649 00bf 05       		.uleb128 0x5
+ 650 00c0 03       		.byte	0x3
+ 651 00c1 00000000 		.4byte	.LC0
+ 652 00c5 07       		.uleb128 0x7
+ 653 00c6 01       		.uleb128 0x1
+ 654 00c7 51       		.byte	0x51
+ 655 00c8 01       		.uleb128 0x1
+ 656 00c9 3D       		.byte	0x3d
+ 657 00ca 00       		.byte	0
+ 658 00cb 08       		.uleb128 0x8
+ 659 00cc 0E000000 		.4byte	.LVL1
+ 660 00d0 44060000 		.4byte	0x644
+ 661 00d4 08       		.uleb128 0x8
+ 662 00d5 12000000 		.4byte	.LVL2
+ 663 00d9 4F060000 		.4byte	0x64f
+ 664 00dd 00       		.byte	0
+ 665 00de 09       		.uleb128 0x9
+ 666 00df 46010000 		.4byte	.LASF16
+ 667 00e3 01       		.byte	0x1
+ 668 00e4 40       		.byte	0x40
+ 669 00e5 00000000 		.4byte	.LFB35
+ 670 00e9 D0000000 		.4byte	.LFE35-.LFB35
+ 671 00ed 01       		.uleb128 0x1
+ 672 00ee 9C       		.byte	0x9c
+ 673 00ef BF020000 		.4byte	0x2bf
+ 674 00f3 0A       		.uleb128 0xa
+ 675 00f4 6900     		.ascii	"i\000"
+ 676 00f6 01       		.byte	0x1
+ 677 00f7 42       		.byte	0x42
+ 678 00f8 5D000000 		.4byte	0x5d
+ 679 00fc 00000000 		.4byte	.LLST0
+ 680 0100 0B       		.uleb128 0xb
+ 681 0101 00000000 		.4byte	.LASF14
+ 682 0105 01       		.byte	0x1
+ 683 0106 43       		.byte	0x43
+ 684 0107 BF020000 		.4byte	0x2bf
+ 685 010b 03       		.uleb128 0x3
+ 686 010c 91       		.byte	0x91
+ 687 010d A07F     		.sleb128 -96
+ 688 010f 0B       		.uleb128 0xb
+ 689 0110 CF000000 		.4byte	.LASF15
+ 690 0114 01       		.byte	0x1
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccVut814.s 			page 17
 
 
- 688 0177 02       		.uleb128 0x2
- 689 0178 74       		.byte	0x74
- 690 0179 00       		.sleb128 0
- 691 017a 07       		.uleb128 0x7
- 692 017b 01       		.uleb128 0x1
- 693 017c 51       		.byte	0x51
- 694 017d 01       		.uleb128 0x1
- 695 017e 30       		.byte	0x30
- 696 017f 07       		.uleb128 0x7
- 697 0180 01       		.uleb128 0x1
- 698 0181 52       		.byte	0x52
- 699 0182 02       		.uleb128 0x2
- 700 0183 08       		.byte	0x8
- 701 0184 4D       		.byte	0x4d
- 702 0185 00       		.byte	0
- 703 0186 06       		.uleb128 0x6
- 704 0187 3A000000 		.4byte	.LVL10
- 705 018b D9050000 		.4byte	0x5d9
- 706 018f 9F010000 		.4byte	0x19f
- 707 0193 07       		.uleb128 0x7
- 708 0194 01       		.uleb128 0x1
- 709 0195 50       		.byte	0x50
- 710 0196 02       		.uleb128 0x2
- 711 0197 74       		.byte	0x74
- 712 0198 00       		.sleb128 0
- 713 0199 07       		.uleb128 0x7
- 714 019a 01       		.uleb128 0x1
- 715 019b 51       		.byte	0x51
- 716 019c 01       		.uleb128 0x1
- 717 019d 31       		.byte	0x31
- 718 019e 00       		.byte	0
- 719 019f 06       		.uleb128 0x6
- 720 01a0 40000000 		.4byte	.LVL11
- 721 01a4 19060000 		.4byte	0x619
- 722 01a8 B3010000 		.4byte	0x1b3
- 723 01ac 07       		.uleb128 0x7
- 724 01ad 01       		.uleb128 0x1
- 725 01ae 50       		.byte	0x50
- 726 01af 02       		.uleb128 0x2
- 727 01b0 74       		.byte	0x74
- 728 01b1 00       		.sleb128 0
- 729 01b2 00       		.byte	0
- 730 01b3 06       		.uleb128 0x6
- 731 01b4 4A000000 		.4byte	.LVL12
- 732 01b8 D9050000 		.4byte	0x5d9
- 733 01bc CC010000 		.4byte	0x1cc
- 734 01c0 07       		.uleb128 0x7
- 735 01c1 01       		.uleb128 0x1
- 736 01c2 50       		.byte	0x50
- 737 01c3 02       		.uleb128 0x2
- 738 01c4 75       		.byte	0x75
- 739 01c5 00       		.sleb128 0
- 740 01c6 07       		.uleb128 0x7
- 741 01c7 01       		.uleb128 0x1
- 742 01c8 51       		.byte	0x51
- 743 01c9 01       		.uleb128 0x1
- 744 01ca 31       		.byte	0x31
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccMctTlL.s 			page 18
+ 691 0115 43       		.byte	0x43
+ 692 0116 6B000000 		.4byte	0x6b
+ 693 011a 03       		.uleb128 0x3
+ 694 011b 91       		.byte	0x91
+ 695 011c 9F7F     		.sleb128 -97
+ 696 011e 06       		.uleb128 0x6
+ 697 011f 16000000 		.4byte	.LVL5
+ 698 0123 5A060000 		.4byte	0x65a
+ 699 0127 48010000 		.4byte	0x148
+ 700 012b 07       		.uleb128 0x7
+ 701 012c 01       		.uleb128 0x1
+ 702 012d 50       		.byte	0x50
+ 703 012e 05       		.uleb128 0x5
+ 704 012f 03       		.byte	0x3
+ 705 0130 10000000 		.4byte	.LC3
+ 706 0134 07       		.uleb128 0x7
+ 707 0135 01       		.uleb128 0x1
+ 708 0136 51       		.byte	0x51
+ 709 0137 0A       		.uleb128 0xa
+ 710 0138 74       		.byte	0x74
+ 711 0139 00       		.sleb128 0
+ 712 013a 34       		.byte	0x34
+ 713 013b 24       		.byte	0x24
+ 714 013c 03       		.byte	0x3
+ 715 013d 00000000 		.4byte	.LANCHOR0
+ 716 0141 22       		.byte	0x22
+ 717 0142 07       		.uleb128 0x7
+ 718 0143 01       		.uleb128 0x1
+ 719 0144 52       		.byte	0x52
+ 720 0145 01       		.uleb128 0x1
+ 721 0146 40       		.byte	0x40
+ 722 0147 00       		.byte	0
+ 723 0148 06       		.uleb128 0x6
+ 724 0149 22000000 		.4byte	.LVL7
+ 725 014d 65060000 		.4byte	0x665
+ 726 0151 5B010000 		.4byte	0x15b
+ 727 0155 07       		.uleb128 0x7
+ 728 0156 01       		.uleb128 0x1
+ 729 0157 50       		.byte	0x50
+ 730 0158 01       		.uleb128 0x1
+ 731 0159 31       		.byte	0x31
+ 732 015a 00       		.byte	0
+ 733 015b 06       		.uleb128 0x6
+ 734 015c 2E000000 		.4byte	.LVL9
+ 735 0160 70060000 		.4byte	0x670
+ 736 0164 7A010000 		.4byte	0x17a
+ 737 0168 07       		.uleb128 0x7
+ 738 0169 01       		.uleb128 0x1
+ 739 016a 50       		.byte	0x50
+ 740 016b 02       		.uleb128 0x2
+ 741 016c 74       		.byte	0x74
+ 742 016d 00       		.sleb128 0
+ 743 016e 07       		.uleb128 0x7
+ 744 016f 01       		.uleb128 0x1
+ 745 0170 51       		.byte	0x51
+ 746 0171 01       		.uleb128 0x1
+ 747 0172 30       		.byte	0x30
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccVut814.s 			page 18
 
 
- 745 01cb 00       		.byte	0
- 746 01cc 06       		.uleb128 0x6
- 747 01cd 50000000 		.4byte	.LVL13
- 748 01d1 19060000 		.4byte	0x619
- 749 01d5 E0010000 		.4byte	0x1e0
- 750 01d9 07       		.uleb128 0x7
- 751 01da 01       		.uleb128 0x1
- 752 01db 50       		.byte	0x50
- 753 01dc 02       		.uleb128 0x2
- 754 01dd 74       		.byte	0x74
- 755 01de 00       		.sleb128 0
- 756 01df 00       		.byte	0
- 757 01e0 06       		.uleb128 0x6
- 758 01e1 60000000 		.4byte	.LVL14
- 759 01e5 FA050000 		.4byte	0x5fa
- 760 01e9 02020000 		.4byte	0x202
- 761 01ed 07       		.uleb128 0x7
- 762 01ee 01       		.uleb128 0x1
- 763 01ef 50       		.byte	0x50
- 764 01f0 02       		.uleb128 0x2
- 765 01f1 7D       		.byte	0x7d
- 766 01f2 07       		.sleb128 7
- 767 01f3 07       		.uleb128 0x7
- 768 01f4 01       		.uleb128 0x1
- 769 01f5 51       		.byte	0x51
- 770 01f6 05       		.uleb128 0x5
- 771 01f7 03       		.byte	0x3
- 772 01f8 00080000 		.4byte	.LANCHOR1
- 773 01fc 07       		.uleb128 0x7
- 774 01fd 01       		.uleb128 0x1
- 775 01fe 52       		.byte	0x52
- 776 01ff 01       		.uleb128 0x1
- 777 0200 31       		.byte	0x31
- 778 0201 00       		.byte	0
- 779 0202 06       		.uleb128 0x6
- 780 0203 68000000 		.4byte	.LVL15
- 781 0207 D9050000 		.4byte	0x5d9
- 782 020b 1B020000 		.4byte	0x21b
- 783 020f 07       		.uleb128 0x7
- 784 0210 01       		.uleb128 0x1
- 785 0211 50       		.byte	0x50
- 786 0212 02       		.uleb128 0x2
- 787 0213 75       		.byte	0x75
- 788 0214 00       		.sleb128 0
- 789 0215 07       		.uleb128 0x7
- 790 0216 01       		.uleb128 0x1
- 791 0217 51       		.byte	0x51
- 792 0218 01       		.uleb128 0x1
- 793 0219 31       		.byte	0x31
- 794 021a 00       		.byte	0
- 795 021b 06       		.uleb128 0x6
- 796 021c 72000000 		.4byte	.LVL17
- 797 0220 19060000 		.4byte	0x619
- 798 0224 30020000 		.4byte	0x230
- 799 0228 07       		.uleb128 0x7
- 800 0229 01       		.uleb128 0x1
- 801 022a 50       		.byte	0x50
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccMctTlL.s 			page 19
+ 748 0173 07       		.uleb128 0x7
+ 749 0174 01       		.uleb128 0x1
+ 750 0175 52       		.byte	0x52
+ 751 0176 02       		.uleb128 0x2
+ 752 0177 08       		.byte	0x8
+ 753 0178 4D       		.byte	0x4d
+ 754 0179 00       		.byte	0
+ 755 017a 06       		.uleb128 0x6
+ 756 017b 3A000000 		.4byte	.LVL10
+ 757 017f 39060000 		.4byte	0x639
+ 758 0183 93010000 		.4byte	0x193
+ 759 0187 07       		.uleb128 0x7
+ 760 0188 01       		.uleb128 0x1
+ 761 0189 50       		.byte	0x50
+ 762 018a 02       		.uleb128 0x2
+ 763 018b 74       		.byte	0x74
+ 764 018c 00       		.sleb128 0
+ 765 018d 07       		.uleb128 0x7
+ 766 018e 01       		.uleb128 0x1
+ 767 018f 51       		.byte	0x51
+ 768 0190 01       		.uleb128 0x1
+ 769 0191 31       		.byte	0x31
+ 770 0192 00       		.byte	0
+ 771 0193 06       		.uleb128 0x6
+ 772 0194 40000000 		.4byte	.LVL11
+ 773 0198 79060000 		.4byte	0x679
+ 774 019c A7010000 		.4byte	0x1a7
+ 775 01a0 07       		.uleb128 0x7
+ 776 01a1 01       		.uleb128 0x1
+ 777 01a2 50       		.byte	0x50
+ 778 01a3 02       		.uleb128 0x2
+ 779 01a4 74       		.byte	0x74
+ 780 01a5 00       		.sleb128 0
+ 781 01a6 00       		.byte	0
+ 782 01a7 06       		.uleb128 0x6
+ 783 01a8 4C000000 		.4byte	.LVL12
+ 784 01ac 5A060000 		.4byte	0x65a
+ 785 01b0 C7010000 		.4byte	0x1c7
+ 786 01b4 07       		.uleb128 0x7
+ 787 01b5 01       		.uleb128 0x1
+ 788 01b6 50       		.byte	0x50
+ 789 01b7 02       		.uleb128 0x2
+ 790 01b8 74       		.byte	0x74
+ 791 01b9 00       		.sleb128 0
+ 792 01ba 07       		.uleb128 0x7
+ 793 01bb 01       		.uleb128 0x1
+ 794 01bc 51       		.byte	0x51
+ 795 01bd 02       		.uleb128 0x2
+ 796 01be 75       		.byte	0x75
+ 797 01bf 00       		.sleb128 0
+ 798 01c0 07       		.uleb128 0x7
+ 799 01c1 01       		.uleb128 0x1
+ 800 01c2 52       		.byte	0x52
+ 801 01c3 02       		.uleb128 0x2
+ 802 01c4 08       		.byte	0x8
+ 803 01c5 20       		.byte	0x20
+ 804 01c6 00       		.byte	0
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccVut814.s 			page 19
 
 
- 802 022b 03       		.uleb128 0x3
- 803 022c 91       		.byte	0x91
- 804 022d A07F     		.sleb128 -96
- 805 022f 00       		.byte	0
- 806 0230 06       		.uleb128 0x6
- 807 0231 80000000 		.4byte	.LVL18
- 808 0235 FA050000 		.4byte	0x5fa
- 809 0239 58020000 		.4byte	0x258
- 810 023d 07       		.uleb128 0x7
- 811 023e 01       		.uleb128 0x1
- 812 023f 50       		.byte	0x50
- 813 0240 03       		.uleb128 0x3
- 814 0241 91       		.byte	0x91
- 815 0242 A07F     		.sleb128 -96
- 816 0244 07       		.uleb128 0x7
- 817 0245 01       		.uleb128 0x1
- 818 0246 51       		.byte	0x51
- 819 0247 0A       		.uleb128 0xa
- 820 0248 74       		.byte	0x74
- 821 0249 00       		.sleb128 0
- 822 024a 34       		.byte	0x34
- 823 024b 24       		.byte	0x24
- 824 024c 03       		.byte	0x3
- 825 024d 00000000 		.4byte	.LANCHOR0
- 826 0251 22       		.byte	0x22
- 827 0252 07       		.uleb128 0x7
- 828 0253 01       		.uleb128 0x1
- 829 0254 52       		.byte	0x52
- 830 0255 01       		.uleb128 0x1
- 831 0256 40       		.byte	0x40
- 832 0257 00       		.byte	0
- 833 0258 0C       		.uleb128 0xc
- 834 0259 88000000 		.4byte	.LVL19
- 835 025d D9050000 		.4byte	0x5d9
- 836 0261 07       		.uleb128 0x7
- 837 0262 01       		.uleb128 0x1
- 838 0263 50       		.byte	0x50
- 839 0264 02       		.uleb128 0x2
- 840 0265 75       		.byte	0x75
- 841 0266 00       		.sleb128 0
- 842 0267 07       		.uleb128 0x7
- 843 0268 01       		.uleb128 0x1
- 844 0269 51       		.byte	0x51
- 845 026a 01       		.uleb128 0x1
- 846 026b 31       		.byte	0x31
- 847 026c 00       		.byte	0
- 848 026d 00       		.byte	0
- 849 026e 0D       		.uleb128 0xd
- 850 026f 6B000000 		.4byte	0x6b
- 851 0273 7E020000 		.4byte	0x27e
- 852 0277 0E       		.uleb128 0xe
- 853 0278 9F000000 		.4byte	0x9f
- 854 027c 4C       		.byte	0x4c
- 855 027d 00       		.byte	0
- 856 027e 09       		.uleb128 0x9
- 857 027f 18010000 		.4byte	.LASF19
- 858 0283 01       		.byte	0x1
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccMctTlL.s 			page 20
+ 805 01c7 06       		.uleb128 0x6
+ 806 01c8 58000000 		.4byte	.LVL13
+ 807 01cc 5A060000 		.4byte	0x65a
+ 808 01d0 E6010000 		.4byte	0x1e6
+ 809 01d4 07       		.uleb128 0x7
+ 810 01d5 01       		.uleb128 0x1
+ 811 01d6 50       		.byte	0x50
+ 812 01d7 02       		.uleb128 0x2
+ 813 01d8 91       		.byte	0x91
+ 814 01d9 40       		.sleb128 -64
+ 815 01da 07       		.uleb128 0x7
+ 816 01db 01       		.uleb128 0x1
+ 817 01dc 51       		.byte	0x51
+ 818 01dd 02       		.uleb128 0x2
+ 819 01de 75       		.byte	0x75
+ 820 01df 14       		.sleb128 20
+ 821 01e0 07       		.uleb128 0x7
+ 822 01e1 01       		.uleb128 0x1
+ 823 01e2 52       		.byte	0x52
+ 824 01e3 01       		.uleb128 0x1
+ 825 01e4 38       		.byte	0x38
+ 826 01e5 00       		.byte	0
+ 827 01e6 06       		.uleb128 0x6
+ 828 01e7 64000000 		.4byte	.LVL14
+ 829 01eb 5A060000 		.4byte	0x65a
+ 830 01ef 06020000 		.4byte	0x206
+ 831 01f3 07       		.uleb128 0x7
+ 832 01f4 01       		.uleb128 0x1
+ 833 01f5 50       		.byte	0x50
+ 834 01f6 02       		.uleb128 0x2
+ 835 01f7 91       		.byte	0x91
+ 836 01f8 48       		.sleb128 -56
+ 837 01f9 07       		.uleb128 0x7
+ 838 01fa 01       		.uleb128 0x1
+ 839 01fb 51       		.byte	0x51
+ 840 01fc 02       		.uleb128 0x2
+ 841 01fd 75       		.byte	0x75
+ 842 01fe 1C       		.sleb128 28
+ 843 01ff 07       		.uleb128 0x7
+ 844 0200 01       		.uleb128 0x1
+ 845 0201 52       		.byte	0x52
+ 846 0202 02       		.uleb128 0x2
+ 847 0203 08       		.byte	0x8
+ 848 0204 24       		.byte	0x24
+ 849 0205 00       		.byte	0
+ 850 0206 06       		.uleb128 0x6
+ 851 0207 6E000000 		.4byte	.LVL15
+ 852 020b 39060000 		.4byte	0x639
+ 853 020f 1F020000 		.4byte	0x21f
+ 854 0213 07       		.uleb128 0x7
+ 855 0214 01       		.uleb128 0x1
+ 856 0215 50       		.byte	0x50
+ 857 0216 02       		.uleb128 0x2
+ 858 0217 76       		.byte	0x76
+ 859 0218 00       		.sleb128 0
+ 860 0219 07       		.uleb128 0x7
+ 861 021a 01       		.uleb128 0x1
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccVut814.s 			page 20
 
 
- 859 0284 6A       		.byte	0x6a
- 860 0285 00000000 		.4byte	.LFB36
- 861 0289 5C000000 		.4byte	.LFE36-.LFB36
- 862 028d 01       		.uleb128 0x1
- 863 028e 9C       		.byte	0x9c
- 864 028f 11030000 		.4byte	0x311
- 865 0293 0B       		.uleb128 0xb
- 866 0294 2E000000 		.4byte	.LASF20
- 867 0298 01       		.byte	0x1
- 868 0299 6C       		.byte	0x6c
- 869 029a 6B000000 		.4byte	0x6b
- 870 029e 05       		.uleb128 0x5
- 871 029f 03       		.byte	0x3
- 872 02a0 00000000 		.4byte	stackloc.5828
- 873 02a4 0B       		.uleb128 0xb
- 874 02a5 00000000 		.4byte	.LASF16
- 875 02a9 01       		.byte	0x1
- 876 02aa 6D       		.byte	0x6d
- 877 02ab 11030000 		.4byte	0x311
- 878 02af 02       		.uleb128 0x2
- 879 02b0 91       		.byte	0x91
- 880 02b1 58       		.sleb128 -40
- 881 02b2 0A       		.uleb128 0xa
- 882 02b3 70747200 		.ascii	"ptr\000"
- 883 02b7 01       		.byte	0x1
- 884 02b8 6E       		.byte	0x6e
- 885 02b9 21030000 		.4byte	0x321
- 886 02bd 36000000 		.4byte	.LLST1
- 887 02c1 06       		.uleb128 0x6
- 888 02c2 12000000 		.4byte	.LVL23
- 889 02c6 10060000 		.4byte	0x610
- 890 02ca DF020000 		.4byte	0x2df
- 891 02ce 07       		.uleb128 0x7
- 892 02cf 01       		.uleb128 0x1
- 893 02d0 50       		.byte	0x50
- 894 02d1 02       		.uleb128 0x2
- 895 02d2 7D       		.byte	0x7d
- 896 02d3 00       		.sleb128 0
- 897 02d4 07       		.uleb128 0x7
- 898 02d5 01       		.uleb128 0x1
- 899 02d6 51       		.byte	0x51
- 900 02d7 01       		.uleb128 0x1
- 901 02d8 30       		.byte	0x30
- 902 02d9 07       		.uleb128 0x7
- 903 02da 01       		.uleb128 0x1
- 904 02db 52       		.byte	0x52
- 905 02dc 01       		.uleb128 0x1
- 906 02dd 40       		.byte	0x40
- 907 02de 00       		.byte	0
- 908 02df 06       		.uleb128 0x6
- 909 02e0 2A000000 		.4byte	.LVL25
- 910 02e4 D9050000 		.4byte	0x5d9
- 911 02e8 F8020000 		.4byte	0x2f8
- 912 02ec 07       		.uleb128 0x7
- 913 02ed 01       		.uleb128 0x1
- 914 02ee 50       		.byte	0x50
- 915 02ef 02       		.uleb128 0x2
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccMctTlL.s 			page 21
+ 862 021b 51       		.byte	0x51
+ 863 021c 01       		.uleb128 0x1
+ 864 021d 31       		.byte	0x31
+ 865 021e 00       		.byte	0
+ 866 021f 06       		.uleb128 0x6
+ 867 0220 74000000 		.4byte	.LVL16
+ 868 0224 79060000 		.4byte	0x679
+ 869 0228 33020000 		.4byte	0x233
+ 870 022c 07       		.uleb128 0x7
+ 871 022d 01       		.uleb128 0x1
+ 872 022e 50       		.byte	0x50
+ 873 022f 02       		.uleb128 0x2
+ 874 0230 74       		.byte	0x74
+ 875 0231 00       		.sleb128 0
+ 876 0232 00       		.byte	0
+ 877 0233 06       		.uleb128 0x6
+ 878 0234 86000000 		.4byte	.LVL17
+ 879 0238 5A060000 		.4byte	0x65a
+ 880 023c 53020000 		.4byte	0x253
+ 881 0240 07       		.uleb128 0x7
+ 882 0241 01       		.uleb128 0x1
+ 883 0242 50       		.byte	0x50
+ 884 0243 02       		.uleb128 0x2
+ 885 0244 7D       		.byte	0x7d
+ 886 0245 07       		.sleb128 7
+ 887 0246 07       		.uleb128 0x7
+ 888 0247 01       		.uleb128 0x1
+ 889 0248 51       		.byte	0x51
+ 890 0249 03       		.uleb128 0x3
+ 891 024a 75       		.byte	0x75
+ 892 024b C400     		.sleb128 68
+ 893 024d 07       		.uleb128 0x7
+ 894 024e 01       		.uleb128 0x1
+ 895 024f 52       		.byte	0x52
+ 896 0250 01       		.uleb128 0x1
+ 897 0251 31       		.byte	0x31
+ 898 0252 00       		.byte	0
+ 899 0253 06       		.uleb128 0x6
+ 900 0254 8E000000 		.4byte	.LVL18
+ 901 0258 39060000 		.4byte	0x639
+ 902 025c 6C020000 		.4byte	0x26c
+ 903 0260 07       		.uleb128 0x7
+ 904 0261 01       		.uleb128 0x1
+ 905 0262 50       		.byte	0x50
+ 906 0263 02       		.uleb128 0x2
+ 907 0264 76       		.byte	0x76
+ 908 0265 00       		.sleb128 0
+ 909 0266 07       		.uleb128 0x7
+ 910 0267 01       		.uleb128 0x1
+ 911 0268 51       		.byte	0x51
+ 912 0269 01       		.uleb128 0x1
+ 913 026a 31       		.byte	0x31
+ 914 026b 00       		.byte	0
+ 915 026c 06       		.uleb128 0x6
+ 916 026d 98000000 		.4byte	.LVL20
+ 917 0271 79060000 		.4byte	0x679
+ 918 0275 81020000 		.4byte	0x281
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccVut814.s 			page 21
 
 
- 916 02f0 7D       		.byte	0x7d
- 917 02f1 00       		.sleb128 0
- 918 02f2 07       		.uleb128 0x7
- 919 02f3 01       		.uleb128 0x1
- 920 02f4 51       		.byte	0x51
- 921 02f5 01       		.uleb128 0x1
- 922 02f6 40       		.byte	0x40
- 923 02f7 00       		.byte	0
- 924 02f8 0C       		.uleb128 0xc
- 925 02f9 38000000 		.4byte	.LVL26
- 926 02fd FA050000 		.4byte	0x5fa
- 927 0301 07       		.uleb128 0x7
- 928 0302 01       		.uleb128 0x1
- 929 0303 50       		.byte	0x50
- 930 0304 05       		.uleb128 0x5
- 931 0305 03       		.byte	0x3
- 932 0306 10000000 		.4byte	.LC3
- 933 030a 07       		.uleb128 0x7
- 934 030b 01       		.uleb128 0x1
- 935 030c 52       		.byte	0x52
- 936 030d 01       		.uleb128 0x1
- 937 030e 40       		.byte	0x40
- 938 030f 00       		.byte	0
- 939 0310 00       		.byte	0
- 940 0311 0D       		.uleb128 0xd
- 941 0312 6B000000 		.4byte	0x6b
- 942 0316 21030000 		.4byte	0x321
- 943 031a 0E       		.uleb128 0xe
- 944 031b 9F000000 		.4byte	0x9f
- 945 031f 0F       		.byte	0xf
- 946 0320 00       		.byte	0
- 947 0321 0F       		.uleb128 0xf
- 948 0322 04       		.byte	0x4
- 949 0323 2C030000 		.4byte	0x32c
- 950 0327 10       		.uleb128 0x10
- 951 0328 6B000000 		.4byte	0x6b
- 952 032c 11       		.uleb128 0x11
- 953 032d 27030000 		.4byte	0x327
- 954 0331 12       		.uleb128 0x12
- 955 0332 33010000 		.4byte	.LASF43
- 956 0336 01       		.byte	0x1
- 957 0337 7C       		.byte	0x7c
- 958 0338 5D000000 		.4byte	0x5d
- 959 033c 00000000 		.4byte	.LFB37
- 960 0340 DC000000 		.4byte	.LFE37-.LFB37
- 961 0344 01       		.uleb128 0x1
- 962 0345 9C       		.byte	0x9c
- 963 0346 0F050000 		.4byte	0x50f
- 964 034a 0B       		.uleb128 0xb
- 965 034b CF000000 		.4byte	.LASF17
- 966 034f 01       		.byte	0x1
- 967 0350 85       		.byte	0x85
- 968 0351 6B000000 		.4byte	0x6b
- 969 0355 01       		.uleb128 0x1
- 970 0356 54       		.byte	0x54
- 971 0357 13       		.uleb128 0x13
- 972 0358 6900     		.ascii	"i\000"
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccMctTlL.s 			page 22
+ 919 0279 07       		.uleb128 0x7
+ 920 027a 01       		.uleb128 0x1
+ 921 027b 50       		.byte	0x50
+ 922 027c 03       		.uleb128 0x3
+ 923 027d 91       		.byte	0x91
+ 924 027e A07F     		.sleb128 -96
+ 925 0280 00       		.byte	0
+ 926 0281 06       		.uleb128 0x6
+ 927 0282 A6000000 		.4byte	.LVL21
+ 928 0286 5A060000 		.4byte	0x65a
+ 929 028a A9020000 		.4byte	0x2a9
+ 930 028e 07       		.uleb128 0x7
+ 931 028f 01       		.uleb128 0x1
+ 932 0290 50       		.byte	0x50
+ 933 0291 03       		.uleb128 0x3
+ 934 0292 91       		.byte	0x91
+ 935 0293 A07F     		.sleb128 -96
+ 936 0295 07       		.uleb128 0x7
+ 937 0296 01       		.uleb128 0x1
+ 938 0297 51       		.byte	0x51
+ 939 0298 0A       		.uleb128 0xa
+ 940 0299 74       		.byte	0x74
+ 941 029a 00       		.sleb128 0
+ 942 029b 34       		.byte	0x34
+ 943 029c 24       		.byte	0x24
+ 944 029d 03       		.byte	0x3
+ 945 029e 00000000 		.4byte	.LANCHOR0
+ 946 02a2 22       		.byte	0x22
+ 947 02a3 07       		.uleb128 0x7
+ 948 02a4 01       		.uleb128 0x1
+ 949 02a5 52       		.byte	0x52
+ 950 02a6 01       		.uleb128 0x1
+ 951 02a7 40       		.byte	0x40
+ 952 02a8 00       		.byte	0
+ 953 02a9 0C       		.uleb128 0xc
+ 954 02aa AE000000 		.4byte	.LVL22
+ 955 02ae 39060000 		.4byte	0x639
+ 956 02b2 07       		.uleb128 0x7
+ 957 02b3 01       		.uleb128 0x1
+ 958 02b4 50       		.byte	0x50
+ 959 02b5 02       		.uleb128 0x2
+ 960 02b6 76       		.byte	0x76
+ 961 02b7 00       		.sleb128 0
+ 962 02b8 07       		.uleb128 0x7
+ 963 02b9 01       		.uleb128 0x1
+ 964 02ba 51       		.byte	0x51
+ 965 02bb 01       		.uleb128 0x1
+ 966 02bc 31       		.byte	0x31
+ 967 02bd 00       		.byte	0
+ 968 02be 00       		.byte	0
+ 969 02bf 0D       		.uleb128 0xd
+ 970 02c0 6B000000 		.4byte	0x6b
+ 971 02c4 CF020000 		.4byte	0x2cf
+ 972 02c8 0E       		.uleb128 0xe
+ 973 02c9 93000000 		.4byte	0x93
+ 974 02cd 4C       		.byte	0x4c
+ 975 02ce 00       		.byte	0
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccVut814.s 			page 22
 
 
- 973 035a 01       		.byte	0x1
- 974 035b 85       		.byte	0x85
- 975 035c 6B000000 		.4byte	0x6b
- 976 0360 02       		.uleb128 0x2
- 977 0361 91       		.byte	0x91
- 978 0362 77       		.sleb128 -9
- 979 0363 0B       		.uleb128 0xb
- 980 0364 88020000 		.4byte	.LASF21
- 981 0368 01       		.byte	0x1
- 982 0369 85       		.byte	0x85
- 983 036a 6B000000 		.4byte	0x6b
- 984 036e 02       		.uleb128 0x2
- 985 036f 91       		.byte	0x91
- 986 0370 76       		.sleb128 -10
- 987 0371 0B       		.uleb128 0xb
- 988 0372 00000000 		.4byte	.LASF16
- 989 0376 01       		.byte	0x1
- 990 0377 86       		.byte	0x86
- 991 0378 0F050000 		.4byte	0x50f
- 992 037c 03       		.uleb128 0x3
- 993 037d 91       		.byte	0x91
- 994 037e B47F     		.sleb128 -76
- 995 0380 0B       		.uleb128 0xb
- 996 0381 5F020000 		.4byte	.LASF22
- 997 0385 01       		.byte	0x1
- 998 0386 90       		.byte	0x90
- 999 0387 2F050000 		.4byte	0x52f
- 1000 038b 05       		.uleb128 0x5
- 1001 038c 03       		.byte	0x3
- 1002 038d 04080000 		.4byte	PROVISIONED.5838
- 1003 0391 0A       		.uleb128 0xa
- 1004 0392 70747200 		.ascii	"ptr\000"
- 1005 0396 01       		.byte	0x1
- 1006 0397 91       		.byte	0x91
- 1007 0398 21030000 		.4byte	0x321
- 1008 039c 53000000 		.4byte	.LLST2
- 1009 03a0 06       		.uleb128 0x6
- 1010 03a1 0C000000 		.4byte	.LVL27
- 1011 03a5 24060000 		.4byte	0x624
- 1012 03a9 B7030000 		.4byte	0x3b7
- 1013 03ad 07       		.uleb128 0x7
- 1014 03ae 01       		.uleb128 0x1
- 1015 03af 50       		.byte	0x50
- 1016 03b0 05       		.uleb128 0x5
- 1017 03b1 03       		.byte	0x3
- 1018 03b2 00000000 		.4byte	Reset_ISR
- 1019 03b6 00       		.byte	0
- 1020 03b7 08       		.uleb128 0x8
- 1021 03b8 10000000 		.4byte	.LVL28
- 1022 03bc 2F060000 		.4byte	0x62f
- 1023 03c0 08       		.uleb128 0x8
- 1024 03c1 14000000 		.4byte	.LVL29
- 1025 03c5 3A060000 		.4byte	0x63a
- 1026 03c9 08       		.uleb128 0x8
- 1027 03ca 20000000 		.4byte	.LVL30
- 1028 03ce EA000000 		.4byte	0xea
- 1029 03d2 06       		.uleb128 0x6
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccMctTlL.s 			page 23
+ 976 02cf 09       		.uleb128 0x9
+ 977 02d0 18010000 		.4byte	.LASF17
+ 978 02d4 01       		.byte	0x1
+ 979 02d5 6B       		.byte	0x6b
+ 980 02d6 00000000 		.4byte	.LFB36
+ 981 02da 5C000000 		.4byte	.LFE36-.LFB36
+ 982 02de 01       		.uleb128 0x1
+ 983 02df 9C       		.byte	0x9c
+ 984 02e0 62030000 		.4byte	0x362
+ 985 02e4 0B       		.uleb128 0xb
+ 986 02e5 2E000000 		.4byte	.LASF18
+ 987 02e9 01       		.byte	0x1
+ 988 02ea 6D       		.byte	0x6d
+ 989 02eb 6B000000 		.4byte	0x6b
+ 990 02ef 05       		.uleb128 0x5
+ 991 02f0 03       		.byte	0x3
+ 992 02f1 00000000 		.4byte	stackloc.5828
+ 993 02f5 0B       		.uleb128 0xb
+ 994 02f6 00000000 		.4byte	.LASF14
+ 995 02fa 01       		.byte	0x1
+ 996 02fb 6E       		.byte	0x6e
+ 997 02fc 62030000 		.4byte	0x362
+ 998 0300 02       		.uleb128 0x2
+ 999 0301 91       		.byte	0x91
+ 1000 0302 58       		.sleb128 -40
+ 1001 0303 0A       		.uleb128 0xa
+ 1002 0304 70747200 		.ascii	"ptr\000"
+ 1003 0308 01       		.byte	0x1
+ 1004 0309 6F       		.byte	0x6f
+ 1005 030a 72030000 		.4byte	0x372
+ 1006 030e 36000000 		.4byte	.LLST1
+ 1007 0312 06       		.uleb128 0x6
+ 1008 0313 12000000 		.4byte	.LVL26
+ 1009 0317 70060000 		.4byte	0x670
+ 1010 031b 30030000 		.4byte	0x330
+ 1011 031f 07       		.uleb128 0x7
+ 1012 0320 01       		.uleb128 0x1
+ 1013 0321 50       		.byte	0x50
+ 1014 0322 02       		.uleb128 0x2
+ 1015 0323 7D       		.byte	0x7d
+ 1016 0324 00       		.sleb128 0
+ 1017 0325 07       		.uleb128 0x7
+ 1018 0326 01       		.uleb128 0x1
+ 1019 0327 51       		.byte	0x51
+ 1020 0328 01       		.uleb128 0x1
+ 1021 0329 30       		.byte	0x30
+ 1022 032a 07       		.uleb128 0x7
+ 1023 032b 01       		.uleb128 0x1
+ 1024 032c 52       		.byte	0x52
+ 1025 032d 01       		.uleb128 0x1
+ 1026 032e 40       		.byte	0x40
+ 1027 032f 00       		.byte	0
+ 1028 0330 06       		.uleb128 0x6
+ 1029 0331 2A000000 		.4byte	.LVL28
+ 1030 0335 39060000 		.4byte	0x639
+ 1031 0339 49030000 		.4byte	0x349
+ 1032 033d 07       		.uleb128 0x7
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccVut814.s 			page 23
 
 
- 1030 03d3 32000000 		.4byte	.LVL31
- 1031 03d7 FA050000 		.4byte	0x5fa
- 1032 03db F4030000 		.4byte	0x3f4
- 1033 03df 07       		.uleb128 0x7
- 1034 03e0 01       		.uleb128 0x1
- 1035 03e1 50       		.byte	0x50
- 1036 03e2 02       		.uleb128 0x2
- 1037 03e3 91       		.byte	0x91
- 1038 03e4 77       		.sleb128 -9
- 1039 03e5 07       		.uleb128 0x7
- 1040 03e6 01       		.uleb128 0x1
- 1041 03e7 51       		.byte	0x51
- 1042 03e8 05       		.uleb128 0x5
- 1043 03e9 03       		.byte	0x3
- 1044 03ea 04080000 		.4byte	.LANCHOR1+4
- 1045 03ee 07       		.uleb128 0x7
- 1046 03ef 01       		.uleb128 0x1
- 1047 03f0 52       		.byte	0x52
- 1048 03f1 01       		.uleb128 0x1
- 1049 03f2 31       		.byte	0x31
- 1050 03f3 00       		.byte	0
- 1051 03f4 06       		.uleb128 0x6
- 1052 03f5 38000000 		.4byte	.LVL32
- 1053 03f9 05060000 		.4byte	0x605
- 1054 03fd 07040000 		.4byte	0x407
- 1055 0401 07       		.uleb128 0x7
- 1056 0402 01       		.uleb128 0x1
- 1057 0403 50       		.byte	0x50
- 1058 0404 01       		.uleb128 0x1
- 1059 0405 30       		.byte	0x30
- 1060 0406 00       		.byte	0
- 1061 0407 06       		.uleb128 0x6
- 1062 0408 42000000 		.4byte	.LVL33
- 1063 040c 45060000 		.4byte	0x645
- 1064 0410 1B040000 		.4byte	0x41b
- 1065 0414 07       		.uleb128 0x7
- 1066 0415 01       		.uleb128 0x1
- 1067 0416 50       		.byte	0x50
- 1068 0417 02       		.uleb128 0x2
- 1069 0418 74       		.byte	0x74
- 1070 0419 00       		.sleb128 0
- 1071 041a 00       		.byte	0
- 1072 041b 06       		.uleb128 0x6
- 1073 041c 4A000000 		.4byte	.LVL34
- 1074 0420 D9050000 		.4byte	0x5d9
- 1075 0424 2F040000 		.4byte	0x42f
- 1076 0428 07       		.uleb128 0x7
- 1077 0429 01       		.uleb128 0x1
- 1078 042a 50       		.byte	0x50
- 1079 042b 02       		.uleb128 0x2
- 1080 042c 74       		.byte	0x74
- 1081 042d 00       		.sleb128 0
- 1082 042e 00       		.byte	0
- 1083 042f 06       		.uleb128 0x6
- 1084 0430 50000000 		.4byte	.LVL35
- 1085 0434 19060000 		.4byte	0x619
- 1086 0438 44040000 		.4byte	0x444
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccMctTlL.s 			page 24
+ 1033 033e 01       		.uleb128 0x1
+ 1034 033f 50       		.byte	0x50
+ 1035 0340 02       		.uleb128 0x2
+ 1036 0341 7D       		.byte	0x7d
+ 1037 0342 00       		.sleb128 0
+ 1038 0343 07       		.uleb128 0x7
+ 1039 0344 01       		.uleb128 0x1
+ 1040 0345 51       		.byte	0x51
+ 1041 0346 01       		.uleb128 0x1
+ 1042 0347 40       		.byte	0x40
+ 1043 0348 00       		.byte	0
+ 1044 0349 0C       		.uleb128 0xc
+ 1045 034a 38000000 		.4byte	.LVL29
+ 1046 034e 5A060000 		.4byte	0x65a
+ 1047 0352 07       		.uleb128 0x7
+ 1048 0353 01       		.uleb128 0x1
+ 1049 0354 50       		.byte	0x50
+ 1050 0355 05       		.uleb128 0x5
+ 1051 0356 03       		.byte	0x3
+ 1052 0357 10000000 		.4byte	.LC3
+ 1053 035b 07       		.uleb128 0x7
+ 1054 035c 01       		.uleb128 0x1
+ 1055 035d 52       		.byte	0x52
+ 1056 035e 01       		.uleb128 0x1
+ 1057 035f 40       		.byte	0x40
+ 1058 0360 00       		.byte	0
+ 1059 0361 00       		.byte	0
+ 1060 0362 0D       		.uleb128 0xd
+ 1061 0363 6B000000 		.4byte	0x6b
+ 1062 0367 72030000 		.4byte	0x372
+ 1063 036b 0E       		.uleb128 0xe
+ 1064 036c 93000000 		.4byte	0x93
+ 1065 0370 0F       		.byte	0xf
+ 1066 0371 00       		.byte	0
+ 1067 0372 0F       		.uleb128 0xf
+ 1068 0373 04       		.byte	0x4
+ 1069 0374 7D030000 		.4byte	0x37d
+ 1070 0378 10       		.uleb128 0x10
+ 1071 0379 6B000000 		.4byte	0x6b
+ 1072 037d 11       		.uleb128 0x11
+ 1073 037e 78030000 		.4byte	0x378
+ 1074 0382 12       		.uleb128 0x12
+ 1075 0383 33010000 		.4byte	.LASF42
+ 1076 0387 01       		.byte	0x1
+ 1077 0388 7D       		.byte	0x7d
+ 1078 0389 5D000000 		.4byte	0x5d
+ 1079 038d 00000000 		.4byte	.LFB37
+ 1080 0391 E4000000 		.4byte	.LFE37-.LFB37
+ 1081 0395 01       		.uleb128 0x1
+ 1082 0396 9C       		.byte	0x9c
+ 1083 0397 60050000 		.4byte	0x560
+ 1084 039b 0B       		.uleb128 0xb
+ 1085 039c CF000000 		.4byte	.LASF15
+ 1086 03a0 01       		.byte	0x1
+ 1087 03a1 86       		.byte	0x86
+ 1088 03a2 6B000000 		.4byte	0x6b
+ 1089 03a6 01       		.uleb128 0x1
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccVut814.s 			page 24
 
 
- 1087 043c 07       		.uleb128 0x7
- 1088 043d 01       		.uleb128 0x1
- 1089 043e 50       		.byte	0x50
- 1090 043f 03       		.uleb128 0x3
- 1091 0440 91       		.byte	0x91
- 1092 0441 B47F     		.sleb128 -76
- 1093 0443 00       		.byte	0
- 1094 0444 06       		.uleb128 0x6
- 1095 0445 58000000 		.4byte	.LVL36
- 1096 0449 50060000 		.4byte	0x650
- 1097 044d 5F040000 		.4byte	0x45f
- 1098 0451 07       		.uleb128 0x7
- 1099 0452 01       		.uleb128 0x1
- 1100 0453 50       		.byte	0x50
- 1101 0454 03       		.uleb128 0x3
- 1102 0455 91       		.byte	0x91
- 1103 0456 B47F     		.sleb128 -76
- 1104 0458 07       		.uleb128 0x7
- 1105 0459 01       		.uleb128 0x1
- 1106 045a 51       		.byte	0x51
- 1107 045b 02       		.uleb128 0x2
- 1108 045c 74       		.byte	0x74
- 1109 045d 00       		.sleb128 0
- 1110 045e 00       		.byte	0
- 1111 045f 06       		.uleb128 0x6
- 1112 0460 64000000 		.4byte	.LVL37
- 1113 0464 D9050000 		.4byte	0x5d9
- 1114 0468 7B040000 		.4byte	0x47b
- 1115 046c 07       		.uleb128 0x7
- 1116 046d 01       		.uleb128 0x1
- 1117 046e 50       		.byte	0x50
- 1118 046f 05       		.uleb128 0x5
- 1119 0470 03       		.byte	0x3
- 1120 0471 24000000 		.4byte	.LC13
- 1121 0475 07       		.uleb128 0x7
- 1122 0476 01       		.uleb128 0x1
- 1123 0477 51       		.byte	0x51
- 1124 0478 01       		.uleb128 0x1
- 1125 0479 33       		.byte	0x33
- 1126 047a 00       		.byte	0
- 1127 047b 06       		.uleb128 0x6
- 1128 047c 6E000000 		.4byte	.LVL38
- 1129 0480 D9050000 		.4byte	0x5d9
- 1130 0484 97040000 		.4byte	0x497
- 1131 0488 07       		.uleb128 0x7
- 1132 0489 01       		.uleb128 0x1
- 1133 048a 50       		.byte	0x50
- 1134 048b 05       		.uleb128 0x5
- 1135 048c 03       		.byte	0x3
- 1136 048d 20000000 		.4byte	.LC5
- 1137 0491 07       		.uleb128 0x7
- 1138 0492 01       		.uleb128 0x1
- 1139 0493 51       		.byte	0x51
- 1140 0494 01       		.uleb128 0x1
- 1141 0495 31       		.byte	0x31
- 1142 0496 00       		.byte	0
- 1143 0497 06       		.uleb128 0x6
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccMctTlL.s 			page 25
+ 1090 03a7 54       		.byte	0x54
+ 1091 03a8 13       		.uleb128 0x13
+ 1092 03a9 6900     		.ascii	"i\000"
+ 1093 03ab 01       		.byte	0x1
+ 1094 03ac 86       		.byte	0x86
+ 1095 03ad 6B000000 		.4byte	0x6b
+ 1096 03b1 02       		.uleb128 0x2
+ 1097 03b2 91       		.byte	0x91
+ 1098 03b3 77       		.sleb128 -9
+ 1099 03b4 0B       		.uleb128 0xb
+ 1100 03b5 81020000 		.4byte	.LASF19
+ 1101 03b9 01       		.byte	0x1
+ 1102 03ba 86       		.byte	0x86
+ 1103 03bb 6B000000 		.4byte	0x6b
+ 1104 03bf 02       		.uleb128 0x2
+ 1105 03c0 91       		.byte	0x91
+ 1106 03c1 76       		.sleb128 -10
+ 1107 03c2 0B       		.uleb128 0xb
+ 1108 03c3 00000000 		.4byte	.LASF14
+ 1109 03c7 01       		.byte	0x1
+ 1110 03c8 87       		.byte	0x87
+ 1111 03c9 60050000 		.4byte	0x560
+ 1112 03cd 03       		.uleb128 0x3
+ 1113 03ce 91       		.byte	0x91
+ 1114 03cf B47F     		.sleb128 -76
+ 1115 03d1 0B       		.uleb128 0xb
+ 1116 03d2 58020000 		.4byte	.LASF20
+ 1117 03d6 01       		.byte	0x1
+ 1118 03d7 91       		.byte	0x91
+ 1119 03d8 80050000 		.4byte	0x580
+ 1120 03dc 05       		.uleb128 0x5
+ 1121 03dd 03       		.byte	0x3
+ 1122 03de 48080000 		.4byte	PROVISIONED.5838
+ 1123 03e2 0A       		.uleb128 0xa
+ 1124 03e3 70747200 		.ascii	"ptr\000"
+ 1125 03e7 01       		.byte	0x1
+ 1126 03e8 92       		.byte	0x92
+ 1127 03e9 72030000 		.4byte	0x372
+ 1128 03ed 53000000 		.4byte	.LLST2
+ 1129 03f1 06       		.uleb128 0x6
+ 1130 03f2 0C000000 		.4byte	.LVL30
+ 1131 03f6 84060000 		.4byte	0x684
+ 1132 03fa 08040000 		.4byte	0x408
+ 1133 03fe 07       		.uleb128 0x7
+ 1134 03ff 01       		.uleb128 0x1
+ 1135 0400 50       		.byte	0x50
+ 1136 0401 05       		.uleb128 0x5
+ 1137 0402 03       		.byte	0x3
+ 1138 0403 00000000 		.4byte	Reset_ISR
+ 1139 0407 00       		.byte	0
+ 1140 0408 08       		.uleb128 0x8
+ 1141 0409 10000000 		.4byte	.LVL31
+ 1142 040d 8F060000 		.4byte	0x68f
+ 1143 0411 08       		.uleb128 0x8
+ 1144 0412 14000000 		.4byte	.LVL32
+ 1145 0416 9A060000 		.4byte	0x69a
+ 1146 041a 08       		.uleb128 0x8
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccVut814.s 			page 25
 
 
- 1144 0498 76000000 		.4byte	.LVL39
- 1145 049c 19060000 		.4byte	0x619
- 1146 04a0 AB040000 		.4byte	0x4ab
- 1147 04a4 07       		.uleb128 0x7
- 1148 04a5 01       		.uleb128 0x1
- 1149 04a6 50       		.byte	0x50
- 1150 04a7 02       		.uleb128 0x2
- 1151 04a8 74       		.byte	0x74
- 1152 04a9 00       		.sleb128 0
- 1153 04aa 00       		.byte	0
- 1154 04ab 06       		.uleb128 0x6
- 1155 04ac 8A000000 		.4byte	.LVL41
- 1156 04b0 D9050000 		.4byte	0x5d9
- 1157 04b4 C7040000 		.4byte	0x4c7
- 1158 04b8 07       		.uleb128 0x7
- 1159 04b9 01       		.uleb128 0x1
- 1160 04ba 50       		.byte	0x50
- 1161 04bb 05       		.uleb128 0x5
- 1162 04bc 03       		.byte	0x3
- 1163 04bd 24000000 		.4byte	.LC13
- 1164 04c1 07       		.uleb128 0x7
- 1165 04c2 01       		.uleb128 0x1
- 1166 04c3 51       		.byte	0x51
- 1167 04c4 01       		.uleb128 0x1
- 1168 04c5 33       		.byte	0x33
- 1169 04c6 00       		.byte	0
- 1170 04c7 06       		.uleb128 0x6
- 1171 04c8 94000000 		.4byte	.LVL42
- 1172 04cc D9050000 		.4byte	0x5d9
- 1173 04d0 E3040000 		.4byte	0x4e3
- 1174 04d4 07       		.uleb128 0x7
- 1175 04d5 01       		.uleb128 0x1
- 1176 04d6 50       		.byte	0x50
- 1177 04d7 05       		.uleb128 0x5
- 1178 04d8 03       		.byte	0x3
- 1179 04d9 20000000 		.4byte	.LC5
- 1180 04dd 07       		.uleb128 0x7
- 1181 04de 01       		.uleb128 0x1
- 1182 04df 51       		.byte	0x51
- 1183 04e0 01       		.uleb128 0x1
- 1184 04e1 31       		.byte	0x31
- 1185 04e2 00       		.byte	0
- 1186 04e3 06       		.uleb128 0x6
- 1187 04e4 A6000000 		.4byte	.LVL43
- 1188 04e8 FA050000 		.4byte	0x5fa
- 1189 04ec 05050000 		.4byte	0x505
- 1190 04f0 07       		.uleb128 0x7
- 1191 04f1 01       		.uleb128 0x1
- 1192 04f2 50       		.byte	0x50
- 1193 04f3 02       		.uleb128 0x2
- 1194 04f4 91       		.byte	0x91
- 1195 04f5 76       		.sleb128 -10
- 1196 04f6 07       		.uleb128 0x7
- 1197 04f7 01       		.uleb128 0x1
- 1198 04f8 51       		.byte	0x51
- 1199 04f9 05       		.uleb128 0x5
- 1200 04fa 03       		.byte	0x3
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccMctTlL.s 			page 26
+ 1147 041b 22000000 		.4byte	.LVL33
+ 1148 041f DE000000 		.4byte	0xde
+ 1149 0423 06       		.uleb128 0x6
+ 1150 0424 34000000 		.4byte	.LVL34
+ 1151 0428 5A060000 		.4byte	0x65a
+ 1152 042c 45040000 		.4byte	0x445
+ 1153 0430 07       		.uleb128 0x7
+ 1154 0431 01       		.uleb128 0x1
+ 1155 0432 50       		.byte	0x50
+ 1156 0433 02       		.uleb128 0x2
+ 1157 0434 91       		.byte	0x91
+ 1158 0435 77       		.sleb128 -9
+ 1159 0436 07       		.uleb128 0x7
+ 1160 0437 01       		.uleb128 0x1
+ 1161 0438 51       		.byte	0x51
+ 1162 0439 05       		.uleb128 0x5
+ 1163 043a 03       		.byte	0x3
+ 1164 043b 48080000 		.4byte	.LANCHOR1+72
+ 1165 043f 07       		.uleb128 0x7
+ 1166 0440 01       		.uleb128 0x1
+ 1167 0441 52       		.byte	0x52
+ 1168 0442 01       		.uleb128 0x1
+ 1169 0443 31       		.byte	0x31
+ 1170 0444 00       		.byte	0
+ 1171 0445 06       		.uleb128 0x6
+ 1172 0446 3A000000 		.4byte	.LVL35
+ 1173 044a 65060000 		.4byte	0x665
+ 1174 044e 58040000 		.4byte	0x458
+ 1175 0452 07       		.uleb128 0x7
+ 1176 0453 01       		.uleb128 0x1
+ 1177 0454 50       		.byte	0x50
+ 1178 0455 01       		.uleb128 0x1
+ 1179 0456 30       		.byte	0x30
+ 1180 0457 00       		.byte	0
+ 1181 0458 06       		.uleb128 0x6
+ 1182 0459 44000000 		.4byte	.LVL36
+ 1183 045d A5060000 		.4byte	0x6a5
+ 1184 0461 6C040000 		.4byte	0x46c
+ 1185 0465 07       		.uleb128 0x7
+ 1186 0466 01       		.uleb128 0x1
+ 1187 0467 50       		.byte	0x50
+ 1188 0468 02       		.uleb128 0x2
+ 1189 0469 74       		.byte	0x74
+ 1190 046a 00       		.sleb128 0
+ 1191 046b 00       		.byte	0
+ 1192 046c 06       		.uleb128 0x6
+ 1193 046d 4C000000 		.4byte	.LVL37
+ 1194 0471 39060000 		.4byte	0x639
+ 1195 0475 80040000 		.4byte	0x480
+ 1196 0479 07       		.uleb128 0x7
+ 1197 047a 01       		.uleb128 0x1
+ 1198 047b 50       		.byte	0x50
+ 1199 047c 02       		.uleb128 0x2
+ 1200 047d 74       		.byte	0x74
+ 1201 047e 00       		.sleb128 0
+ 1202 047f 00       		.byte	0
+ 1203 0480 06       		.uleb128 0x6
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccVut814.s 			page 26
 
 
- 1201 04fb 00080000 		.4byte	.LANCHOR1
- 1202 04ff 07       		.uleb128 0x7
- 1203 0500 01       		.uleb128 0x1
- 1204 0501 52       		.byte	0x52
- 1205 0502 01       		.uleb128 0x1
- 1206 0503 31       		.byte	0x31
- 1207 0504 00       		.byte	0
- 1208 0505 08       		.uleb128 0x8
- 1209 0506 B4000000 		.4byte	.LVL44
- 1210 050a 7E020000 		.4byte	0x27e
- 1211 050e 00       		.byte	0
- 1212 050f 0D       		.uleb128 0xd
- 1213 0510 6B000000 		.4byte	0x6b
- 1214 0514 1F050000 		.4byte	0x51f
- 1215 0518 0E       		.uleb128 0xe
- 1216 0519 9F000000 		.4byte	0x9f
- 1217 051d 3F       		.byte	0x3f
- 1218 051e 00       		.byte	0
- 1219 051f 0D       		.uleb128 0xd
- 1220 0520 27030000 		.4byte	0x327
- 1221 0524 2F050000 		.4byte	0x52f
- 1222 0528 0E       		.uleb128 0xe
- 1223 0529 9F000000 		.4byte	0x9f
- 1224 052d 00       		.byte	0
- 1225 052e 00       		.byte	0
- 1226 052f 10       		.uleb128 0x10
- 1227 0530 1F050000 		.4byte	0x51f
- 1228 0534 0D       		.uleb128 0xd
- 1229 0535 27030000 		.4byte	0x327
- 1230 0539 4A050000 		.4byte	0x54a
- 1231 053d 0E       		.uleb128 0xe
- 1232 053e 9F000000 		.4byte	0x9f
- 1233 0542 7F       		.byte	0x7f
- 1234 0543 0E       		.uleb128 0xe
- 1235 0544 9F000000 		.4byte	0x9f
- 1236 0548 0F       		.byte	0xf
- 1237 0549 00       		.byte	0
- 1238 054a 0B       		.uleb128 0xb
- 1239 054b 64010000 		.4byte	.LASF23
- 1240 054f 01       		.byte	0x1
- 1241 0550 2D       		.byte	0x2d
- 1242 0551 5B050000 		.4byte	0x55b
- 1243 0555 05       		.uleb128 0x5
- 1244 0556 03       		.byte	0x3
- 1245 0557 00000000 		.4byte	MONEY
- 1246 055b 10       		.uleb128 0x10
- 1247 055c 34050000 		.4byte	0x534
- 1248 0560 0D       		.uleb128 0xd
- 1249 0561 27030000 		.4byte	0x327
- 1250 0565 70050000 		.4byte	0x570
- 1251 0569 0E       		.uleb128 0xe
- 1252 056a 9F000000 		.4byte	0x9f
- 1253 056e 24       		.byte	0x24
- 1254 056f 00       		.byte	0
- 1255 0570 0B       		.uleb128 0xb
- 1256 0571 08000000 		.4byte	.LASF24
- 1257 0575 01       		.byte	0x1
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccMctTlL.s 			page 27
+ 1204 0481 52000000 		.4byte	.LVL38
+ 1205 0485 79060000 		.4byte	0x679
+ 1206 0489 95040000 		.4byte	0x495
+ 1207 048d 07       		.uleb128 0x7
+ 1208 048e 01       		.uleb128 0x1
+ 1209 048f 50       		.byte	0x50
+ 1210 0490 03       		.uleb128 0x3
+ 1211 0491 91       		.byte	0x91
+ 1212 0492 B47F     		.sleb128 -76
+ 1213 0494 00       		.byte	0
+ 1214 0495 06       		.uleb128 0x6
+ 1215 0496 5A000000 		.4byte	.LVL39
+ 1216 049a B0060000 		.4byte	0x6b0
+ 1217 049e B0040000 		.4byte	0x4b0
+ 1218 04a2 07       		.uleb128 0x7
+ 1219 04a3 01       		.uleb128 0x1
+ 1220 04a4 50       		.byte	0x50
+ 1221 04a5 03       		.uleb128 0x3
+ 1222 04a6 91       		.byte	0x91
+ 1223 04a7 B47F     		.sleb128 -76
+ 1224 04a9 07       		.uleb128 0x7
+ 1225 04aa 01       		.uleb128 0x1
+ 1226 04ab 51       		.byte	0x51
+ 1227 04ac 02       		.uleb128 0x2
+ 1228 04ad 74       		.byte	0x74
+ 1229 04ae 00       		.sleb128 0
+ 1230 04af 00       		.byte	0
+ 1231 04b0 06       		.uleb128 0x6
+ 1232 04b1 66000000 		.4byte	.LVL40
+ 1233 04b5 39060000 		.4byte	0x639
+ 1234 04b9 CC040000 		.4byte	0x4cc
+ 1235 04bd 07       		.uleb128 0x7
+ 1236 04be 01       		.uleb128 0x1
+ 1237 04bf 50       		.byte	0x50
+ 1238 04c0 05       		.uleb128 0x5
+ 1239 04c1 03       		.byte	0x3
+ 1240 04c2 24000000 		.4byte	.LC16
+ 1241 04c6 07       		.uleb128 0x7
+ 1242 04c7 01       		.uleb128 0x1
+ 1243 04c8 51       		.byte	0x51
+ 1244 04c9 01       		.uleb128 0x1
+ 1245 04ca 33       		.byte	0x33
+ 1246 04cb 00       		.byte	0
+ 1247 04cc 06       		.uleb128 0x6
+ 1248 04cd 70000000 		.4byte	.LVL41
+ 1249 04d1 39060000 		.4byte	0x639
+ 1250 04d5 E8040000 		.4byte	0x4e8
+ 1251 04d9 07       		.uleb128 0x7
+ 1252 04da 01       		.uleb128 0x1
+ 1253 04db 50       		.byte	0x50
+ 1254 04dc 05       		.uleb128 0x5
+ 1255 04dd 03       		.byte	0x3
+ 1256 04de 20000000 		.4byte	.LC6
+ 1257 04e2 07       		.uleb128 0x7
+ 1258 04e3 01       		.uleb128 0x1
+ 1259 04e4 51       		.byte	0x51
+ 1260 04e5 01       		.uleb128 0x1
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccVut814.s 			page 27
 
 
- 1258 0576 2E       		.byte	0x2e
- 1259 0577 81050000 		.4byte	0x581
- 1260 057b 05       		.uleb128 0x5
- 1261 057c 03       		.byte	0x3
- 1262 057d 08080000 		.4byte	UUID
- 1263 0581 10       		.uleb128 0x10
- 1264 0582 60050000 		.4byte	0x560
- 1265 0586 0D       		.uleb128 0xd
- 1266 0587 27030000 		.4byte	0x327
- 1267 058b 96050000 		.4byte	0x596
- 1268 058f 0E       		.uleb128 0xe
- 1269 0590 9F000000 		.4byte	0x9f
- 1270 0594 0F       		.byte	0xf
- 1271 0595 00       		.byte	0
- 1272 0596 14       		.uleb128 0x14
- 1273 0597 7B020000 		.4byte	.LASF25
- 1274 059b 01       		.byte	0x1
- 1275 059c 30       		.byte	0x30
- 1276 059d B2050000 		.4byte	0x5b2
- 1277 05a1 10       		.byte	0x10
- 1278 05a2 00       		.byte	0
- 1279 05a3 00       		.byte	0
- 1280 05a4 00       		.byte	0
- 1281 05a5 00       		.byte	0
- 1282 05a6 00       		.byte	0
- 1283 05a7 00       		.byte	0
- 1284 05a8 00       		.byte	0
- 1285 05a9 00       		.byte	0
- 1286 05aa 00       		.byte	0
- 1287 05ab 00       		.byte	0
- 1288 05ac 00       		.byte	0
- 1289 05ad 00       		.byte	0
- 1290 05ae 00       		.byte	0
- 1291 05af 00       		.byte	0
- 1292 05b0 00       		.byte	0
- 1293 05b1 00       		.byte	0
- 1294 05b2 10       		.uleb128 0x10
- 1295 05b3 86050000 		.4byte	0x586
- 1296 05b7 15       		.uleb128 0x15
- 1297 05b8 81010000 		.4byte	.LASF26
- 1298 05bc 01       		.byte	0x1
- 1299 05bd 31       		.byte	0x31
- 1300 05be 77000000 		.4byte	0x77
- 1301 05c2 00       		.byte	0
- 1302 05c3 0B       		.uleb128 0xb
- 1303 05c4 4E000000 		.4byte	.LASF27
- 1304 05c8 01       		.byte	0x1
- 1305 05c9 32       		.byte	0x32
- 1306 05ca D4050000 		.4byte	0x5d4
- 1307 05ce 05       		.uleb128 0x5
- 1308 05cf 03       		.byte	0x3
- 1309 05d0 00080000 		.4byte	BILLS_LEFT
- 1310 05d4 10       		.uleb128 0x10
- 1311 05d5 1F050000 		.4byte	0x51f
- 1312 05d9 16       		.uleb128 0x16
- 1313 05da 25020000 		.4byte	.LASF28
- 1314 05de 25020000 		.4byte	.LASF28
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccMctTlL.s 			page 28
+ 1261 04e6 31       		.byte	0x31
+ 1262 04e7 00       		.byte	0
+ 1263 04e8 06       		.uleb128 0x6
+ 1264 04e9 78000000 		.4byte	.LVL42
+ 1265 04ed 79060000 		.4byte	0x679
+ 1266 04f1 FC040000 		.4byte	0x4fc
+ 1267 04f5 07       		.uleb128 0x7
+ 1268 04f6 01       		.uleb128 0x1
+ 1269 04f7 50       		.byte	0x50
+ 1270 04f8 02       		.uleb128 0x2
+ 1271 04f9 74       		.byte	0x74
+ 1272 04fa 00       		.sleb128 0
+ 1273 04fb 00       		.byte	0
+ 1274 04fc 06       		.uleb128 0x6
+ 1275 04fd 8E000000 		.4byte	.LVL44
+ 1276 0501 39060000 		.4byte	0x639
+ 1277 0505 18050000 		.4byte	0x518
+ 1278 0509 07       		.uleb128 0x7
+ 1279 050a 01       		.uleb128 0x1
+ 1280 050b 50       		.byte	0x50
+ 1281 050c 05       		.uleb128 0x5
+ 1282 050d 03       		.byte	0x3
+ 1283 050e 24000000 		.4byte	.LC16
+ 1284 0512 07       		.uleb128 0x7
+ 1285 0513 01       		.uleb128 0x1
+ 1286 0514 51       		.byte	0x51
+ 1287 0515 01       		.uleb128 0x1
+ 1288 0516 33       		.byte	0x33
+ 1289 0517 00       		.byte	0
+ 1290 0518 06       		.uleb128 0x6
+ 1291 0519 98000000 		.4byte	.LVL45
+ 1292 051d 39060000 		.4byte	0x639
+ 1293 0521 34050000 		.4byte	0x534
+ 1294 0525 07       		.uleb128 0x7
+ 1295 0526 01       		.uleb128 0x1
+ 1296 0527 50       		.byte	0x50
+ 1297 0528 05       		.uleb128 0x5
+ 1298 0529 03       		.byte	0x3
+ 1299 052a 20000000 		.4byte	.LC6
+ 1300 052e 07       		.uleb128 0x7
+ 1301 052f 01       		.uleb128 0x1
+ 1302 0530 51       		.byte	0x51
+ 1303 0531 01       		.uleb128 0x1
+ 1304 0532 31       		.byte	0x31
+ 1305 0533 00       		.byte	0
+ 1306 0534 06       		.uleb128 0x6
+ 1307 0535 AE000000 		.4byte	.LVL46
+ 1308 0539 5A060000 		.4byte	0x65a
+ 1309 053d 56050000 		.4byte	0x556
+ 1310 0541 07       		.uleb128 0x7
+ 1311 0542 01       		.uleb128 0x1
+ 1312 0543 50       		.byte	0x50
+ 1313 0544 02       		.uleb128 0x2
+ 1314 0545 91       		.byte	0x91
+ 1315 0546 76       		.sleb128 -10
+ 1316 0547 07       		.uleb128 0x7
+ 1317 0548 01       		.uleb128 0x1
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccVut814.s 			page 28
 
 
- 1315 05e2 03       		.byte	0x3
- 1316 05e3 1E       		.byte	0x1e
- 1317 05e4 16       		.uleb128 0x16
- 1318 05e5 ED000000 		.4byte	.LASF29
- 1319 05e9 ED000000 		.4byte	.LASF29
- 1320 05ed 04       		.byte	0x4
- 1321 05ee 39       		.byte	0x39
- 1322 05ef 16       		.uleb128 0x16
- 1323 05f0 6B020000 		.4byte	.LASF30
- 1324 05f4 6B020000 		.4byte	.LASF30
- 1325 05f8 05       		.byte	0x5
- 1326 05f9 E4       		.byte	0xe4
- 1327 05fa 16       		.uleb128 0x16
- 1328 05fb 6C000000 		.4byte	.LASF31
- 1329 05ff 6C000000 		.4byte	.LASF31
- 1330 0603 06       		.byte	0x6
- 1331 0604 2F       		.byte	0x2f
- 1332 0605 16       		.uleb128 0x16
- 1333 0606 0D000000 		.4byte	.LASF32
- 1334 060a 0D000000 		.4byte	.LASF32
- 1335 060e 03       		.byte	0x3
- 1336 060f 2B       		.byte	0x2b
- 1337 0610 17       		.uleb128 0x17
- 1338 0611 25010000 		.4byte	.LASF44
- 1339 0615 25010000 		.4byte	.LASF44
- 1340 0619 16       		.uleb128 0x16
- 1341 061a B4020000 		.4byte	.LASF33
- 1342 061e B4020000 		.4byte	.LASF33
- 1343 0622 03       		.byte	0x3
- 1344 0623 25       		.byte	0x25
- 1345 0624 16       		.uleb128 0x16
- 1346 0625 1C000000 		.4byte	.LASF34
- 1347 0629 1C000000 		.4byte	.LASF34
- 1348 062d 07       		.byte	0x7
- 1349 062e 18       		.byte	0x18
- 1350 062f 16       		.uleb128 0x16
- 1351 0630 3D000000 		.4byte	.LASF35
- 1352 0634 3D000000 		.4byte	.LASF35
- 1353 0638 06       		.byte	0x6
- 1354 0639 29       		.byte	0x29
- 1355 063a 16       		.uleb128 0x16
- 1356 063b 38010000 		.4byte	.LASF36
- 1357 063f 38010000 		.4byte	.LASF36
- 1358 0643 08       		.byte	0x8
- 1359 0644 6E       		.byte	0x6e
- 1360 0645 16       		.uleb128 0x16
- 1361 0646 D8000000 		.4byte	.LASF37
- 1362 064a D8000000 		.4byte	.LASF37
- 1363 064e 09       		.byte	0x9
- 1364 064f 21       		.byte	0x21
- 1365 0650 16       		.uleb128 0x16
- 1366 0651 15020000 		.4byte	.LASF38
- 1367 0655 15020000 		.4byte	.LASF38
- 1368 0659 09       		.byte	0x9
- 1369 065a 1C       		.byte	0x1c
- 1370 065b 00       		.byte	0
- 1371              		.section	.debug_abbrev,"",%progbits
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccMctTlL.s 			page 29
+ 1318 0549 51       		.byte	0x51
+ 1319 054a 05       		.uleb128 0x5
+ 1320 054b 03       		.byte	0x3
+ 1321 054c 44080000 		.4byte	.LANCHOR1+68
+ 1322 0550 07       		.uleb128 0x7
+ 1323 0551 01       		.uleb128 0x1
+ 1324 0552 52       		.byte	0x52
+ 1325 0553 01       		.uleb128 0x1
+ 1326 0554 31       		.byte	0x31
+ 1327 0555 00       		.byte	0
+ 1328 0556 08       		.uleb128 0x8
+ 1329 0557 BC000000 		.4byte	.LVL47
+ 1330 055b CF020000 		.4byte	0x2cf
+ 1331 055f 00       		.byte	0
+ 1332 0560 0D       		.uleb128 0xd
+ 1333 0561 6B000000 		.4byte	0x6b
+ 1334 0565 70050000 		.4byte	0x570
+ 1335 0569 0E       		.uleb128 0xe
+ 1336 056a 93000000 		.4byte	0x93
+ 1337 056e 3F       		.byte	0x3f
+ 1338 056f 00       		.byte	0
+ 1339 0570 0D       		.uleb128 0xd
+ 1340 0571 78030000 		.4byte	0x378
+ 1341 0575 80050000 		.4byte	0x580
+ 1342 0579 0E       		.uleb128 0xe
+ 1343 057a 93000000 		.4byte	0x93
+ 1344 057e 00       		.byte	0
+ 1345 057f 00       		.byte	0
+ 1346 0580 10       		.uleb128 0x10
+ 1347 0581 70050000 		.4byte	0x570
+ 1348 0585 0D       		.uleb128 0xd
+ 1349 0586 78030000 		.4byte	0x378
+ 1350 058a 9B050000 		.4byte	0x59b
+ 1351 058e 0E       		.uleb128 0xe
+ 1352 058f 93000000 		.4byte	0x93
+ 1353 0593 7F       		.byte	0x7f
+ 1354 0594 0E       		.uleb128 0xe
+ 1355 0595 93000000 		.4byte	0x93
+ 1356 0599 0F       		.byte	0xf
+ 1357 059a 00       		.byte	0
+ 1358 059b 0B       		.uleb128 0xb
+ 1359 059c 5D010000 		.4byte	.LASF21
+ 1360 05a0 01       		.byte	0x1
+ 1361 05a1 2D       		.byte	0x2d
+ 1362 05a2 AC050000 		.4byte	0x5ac
+ 1363 05a6 05       		.uleb128 0x5
+ 1364 05a7 03       		.byte	0x3
+ 1365 05a8 00000000 		.4byte	MONEY
+ 1366 05ac 10       		.uleb128 0x10
+ 1367 05ad 85050000 		.4byte	0x585
+ 1368 05b1 0D       		.uleb128 0xd
+ 1369 05b2 78030000 		.4byte	0x378
+ 1370 05b6 C1050000 		.4byte	0x5c1
+ 1371 05ba 0E       		.uleb128 0xe
+ 1372 05bb 93000000 		.4byte	0x93
+ 1373 05bf 24       		.byte	0x24
+ 1374 05c0 00       		.byte	0
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccVut814.s 			page 29
 
 
- 1372              	.Ldebug_abbrev0:
- 1373 0000 01       		.uleb128 0x1
- 1374 0001 11       		.uleb128 0x11
- 1375 0002 01       		.byte	0x1
- 1376 0003 25       		.uleb128 0x25
- 1377 0004 0E       		.uleb128 0xe
- 1378 0005 13       		.uleb128 0x13
- 1379 0006 0B       		.uleb128 0xb
- 1380 0007 03       		.uleb128 0x3
- 1381 0008 0E       		.uleb128 0xe
- 1382 0009 1B       		.uleb128 0x1b
- 1383 000a 0E       		.uleb128 0xe
- 1384 000b 55       		.uleb128 0x55
- 1385 000c 17       		.uleb128 0x17
- 1386 000d 11       		.uleb128 0x11
- 1387 000e 01       		.uleb128 0x1
- 1388 000f 10       		.uleb128 0x10
- 1389 0010 17       		.uleb128 0x17
- 1390 0011 00       		.byte	0
- 1391 0012 00       		.byte	0
- 1392 0013 02       		.uleb128 0x2
- 1393 0014 24       		.uleb128 0x24
- 1394 0015 00       		.byte	0
- 1395 0016 0B       		.uleb128 0xb
- 1396 0017 0B       		.uleb128 0xb
- 1397 0018 3E       		.uleb128 0x3e
- 1398 0019 0B       		.uleb128 0xb
- 1399 001a 03       		.uleb128 0x3
- 1400 001b 0E       		.uleb128 0xe
- 1401 001c 00       		.byte	0
- 1402 001d 00       		.byte	0
- 1403 001e 03       		.uleb128 0x3
- 1404 001f 24       		.uleb128 0x24
- 1405 0020 00       		.byte	0
- 1406 0021 0B       		.uleb128 0xb
- 1407 0022 0B       		.uleb128 0xb
- 1408 0023 3E       		.uleb128 0x3e
- 1409 0024 0B       		.uleb128 0xb
- 1410 0025 03       		.uleb128 0x3
- 1411 0026 08       		.uleb128 0x8
- 1412 0027 00       		.byte	0
- 1413 0028 00       		.byte	0
- 1414 0029 04       		.uleb128 0x4
- 1415 002a 16       		.uleb128 0x16
- 1416 002b 00       		.byte	0
- 1417 002c 03       		.uleb128 0x3
- 1418 002d 0E       		.uleb128 0xe
- 1419 002e 3A       		.uleb128 0x3a
- 1420 002f 0B       		.uleb128 0xb
- 1421 0030 3B       		.uleb128 0x3b
- 1422 0031 05       		.uleb128 0x5
- 1423 0032 49       		.uleb128 0x49
- 1424 0033 13       		.uleb128 0x13
- 1425 0034 00       		.byte	0
- 1426 0035 00       		.byte	0
- 1427 0036 05       		.uleb128 0x5
- 1428 0037 2E       		.uleb128 0x2e
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccMctTlL.s 			page 30
+ 1375 05c1 0B       		.uleb128 0xb
+ 1376 05c2 08000000 		.4byte	.LASF22
+ 1377 05c6 01       		.byte	0x1
+ 1378 05c7 2E       		.byte	0x2e
+ 1379 05c8 D2050000 		.4byte	0x5d2
+ 1380 05cc 05       		.uleb128 0x5
+ 1381 05cd 03       		.byte	0x3
+ 1382 05ce 1C080000 		.4byte	UUID
+ 1383 05d2 10       		.uleb128 0x10
+ 1384 05d3 B1050000 		.4byte	0x5b1
+ 1385 05d7 0D       		.uleb128 0xd
+ 1386 05d8 78030000 		.4byte	0x378
+ 1387 05dc E7050000 		.4byte	0x5e7
+ 1388 05e0 0E       		.uleb128 0xe
+ 1389 05e1 93000000 		.4byte	0x93
+ 1390 05e5 10       		.byte	0x10
+ 1391 05e6 00       		.byte	0
+ 1392 05e7 0B       		.uleb128 0xb
+ 1393 05e8 74020000 		.4byte	.LASF23
+ 1394 05ec 01       		.byte	0x1
+ 1395 05ed 30       		.byte	0x30
+ 1396 05ee F8050000 		.4byte	0x5f8
+ 1397 05f2 05       		.uleb128 0x5
+ 1398 05f3 03       		.byte	0x3
+ 1399 05f4 00080000 		.4byte	BANK_AES_KEY
+ 1400 05f8 10       		.uleb128 0x10
+ 1401 05f9 D7050000 		.4byte	0x5d7
+ 1402 05fd 0D       		.uleb128 0xd
+ 1403 05fe 78030000 		.4byte	0x378
+ 1404 0602 0D060000 		.4byte	0x60d
+ 1405 0606 0E       		.uleb128 0xe
+ 1406 0607 93000000 		.4byte	0x93
+ 1407 060b 04       		.byte	0x4
+ 1408 060c 00       		.byte	0
+ 1409 060d 0B       		.uleb128 0xb
+ 1410 060e 7A010000 		.4byte	.LASF24
+ 1411 0612 01       		.byte	0x1
+ 1412 0613 32       		.byte	0x32
+ 1413 0614 1E060000 		.4byte	0x61e
+ 1414 0618 05       		.uleb128 0x5
+ 1415 0619 03       		.byte	0x3
+ 1416 061a 14080000 		.4byte	NONCE
+ 1417 061e 10       		.uleb128 0x10
+ 1418 061f FD050000 		.4byte	0x5fd
+ 1419 0623 0B       		.uleb128 0xb
+ 1420 0624 4E000000 		.4byte	.LASF25
+ 1421 0628 01       		.byte	0x1
+ 1422 0629 33       		.byte	0x33
+ 1423 062a 34060000 		.4byte	0x634
+ 1424 062e 05       		.uleb128 0x5
+ 1425 062f 03       		.byte	0x3
+ 1426 0630 44080000 		.4byte	BILLS_LEFT
+ 1427 0634 10       		.uleb128 0x10
+ 1428 0635 70050000 		.4byte	0x570
+ 1429 0639 14       		.uleb128 0x14
+ 1430 063a 1E020000 		.4byte	.LASF26
+ 1431 063e 1E020000 		.4byte	.LASF26
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccVut814.s 			page 30
 
 
- 1429 0038 01       		.byte	0x1
- 1430 0039 3F       		.uleb128 0x3f
- 1431 003a 19       		.uleb128 0x19
- 1432 003b 03       		.uleb128 0x3
- 1433 003c 0E       		.uleb128 0xe
- 1434 003d 3A       		.uleb128 0x3a
- 1435 003e 0B       		.uleb128 0xb
- 1436 003f 3B       		.uleb128 0x3b
- 1437 0040 0B       		.uleb128 0xb
- 1438 0041 27       		.uleb128 0x27
- 1439 0042 19       		.uleb128 0x19
- 1440 0043 11       		.uleb128 0x11
- 1441 0044 01       		.uleb128 0x1
- 1442 0045 12       		.uleb128 0x12
- 1443 0046 06       		.uleb128 0x6
- 1444 0047 40       		.uleb128 0x40
- 1445 0048 18       		.uleb128 0x18
- 1446 0049 9742     		.uleb128 0x2117
- 1447 004b 19       		.uleb128 0x19
- 1448 004c 01       		.uleb128 0x1
- 1449 004d 13       		.uleb128 0x13
- 1450 004e 00       		.byte	0
- 1451 004f 00       		.byte	0
- 1452 0050 06       		.uleb128 0x6
- 1453 0051 898201   		.uleb128 0x4109
- 1454 0054 01       		.byte	0x1
- 1455 0055 11       		.uleb128 0x11
- 1456 0056 01       		.uleb128 0x1
- 1457 0057 31       		.uleb128 0x31
- 1458 0058 13       		.uleb128 0x13
- 1459 0059 01       		.uleb128 0x1
- 1460 005a 13       		.uleb128 0x13
- 1461 005b 00       		.byte	0
- 1462 005c 00       		.byte	0
- 1463 005d 07       		.uleb128 0x7
- 1464 005e 8A8201   		.uleb128 0x410a
- 1465 0061 00       		.byte	0
- 1466 0062 02       		.uleb128 0x2
- 1467 0063 18       		.uleb128 0x18
- 1468 0064 9142     		.uleb128 0x2111
- 1469 0066 18       		.uleb128 0x18
- 1470 0067 00       		.byte	0
- 1471 0068 00       		.byte	0
- 1472 0069 08       		.uleb128 0x8
- 1473 006a 898201   		.uleb128 0x4109
- 1474 006d 00       		.byte	0
- 1475 006e 11       		.uleb128 0x11
- 1476 006f 01       		.uleb128 0x1
- 1477 0070 31       		.uleb128 0x31
- 1478 0071 13       		.uleb128 0x13
- 1479 0072 00       		.byte	0
- 1480 0073 00       		.byte	0
- 1481 0074 09       		.uleb128 0x9
- 1482 0075 2E       		.uleb128 0x2e
- 1483 0076 01       		.byte	0x1
- 1484 0077 3F       		.uleb128 0x3f
- 1485 0078 19       		.uleb128 0x19
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccMctTlL.s 			page 31
+ 1432 0642 02       		.byte	0x2
+ 1433 0643 1E       		.byte	0x1e
+ 1434 0644 14       		.uleb128 0x14
+ 1435 0645 ED000000 		.4byte	.LASF27
+ 1436 0649 ED000000 		.4byte	.LASF27
+ 1437 064d 03       		.byte	0x3
+ 1438 064e 39       		.byte	0x39
+ 1439 064f 14       		.uleb128 0x14
+ 1440 0650 64020000 		.4byte	.LASF28
+ 1441 0654 64020000 		.4byte	.LASF28
+ 1442 0658 04       		.byte	0x4
+ 1443 0659 E4       		.byte	0xe4
+ 1444 065a 14       		.uleb128 0x14
+ 1445 065b 6C000000 		.4byte	.LASF29
+ 1446 065f 6C000000 		.4byte	.LASF29
+ 1447 0663 05       		.byte	0x5
+ 1448 0664 2F       		.byte	0x2f
+ 1449 0665 14       		.uleb128 0x14
+ 1450 0666 0D000000 		.4byte	.LASF30
+ 1451 066a 0D000000 		.4byte	.LASF30
+ 1452 066e 02       		.byte	0x2
+ 1453 066f 2B       		.byte	0x2b
+ 1454 0670 15       		.uleb128 0x15
+ 1455 0671 25010000 		.4byte	.LASF43
+ 1456 0675 25010000 		.4byte	.LASF43
+ 1457 0679 14       		.uleb128 0x14
+ 1458 067a AD020000 		.4byte	.LASF31
+ 1459 067e AD020000 		.4byte	.LASF31
+ 1460 0682 02       		.byte	0x2
+ 1461 0683 25       		.byte	0x25
+ 1462 0684 14       		.uleb128 0x14
+ 1463 0685 1C000000 		.4byte	.LASF32
+ 1464 0689 1C000000 		.4byte	.LASF32
+ 1465 068d 06       		.byte	0x6
+ 1466 068e 18       		.byte	0x18
+ 1467 068f 14       		.uleb128 0x14
+ 1468 0690 3D000000 		.4byte	.LASF33
+ 1469 0694 3D000000 		.4byte	.LASF33
+ 1470 0698 05       		.byte	0x5
+ 1471 0699 29       		.byte	0x29
+ 1472 069a 14       		.uleb128 0x14
+ 1473 069b 38010000 		.4byte	.LASF34
+ 1474 069f 38010000 		.4byte	.LASF34
+ 1475 06a3 07       		.byte	0x7
+ 1476 06a4 6E       		.byte	0x6e
+ 1477 06a5 14       		.uleb128 0x14
+ 1478 06a6 D8000000 		.4byte	.LASF35
+ 1479 06aa D8000000 		.4byte	.LASF35
+ 1480 06ae 08       		.byte	0x8
+ 1481 06af 21       		.byte	0x21
+ 1482 06b0 14       		.uleb128 0x14
+ 1483 06b1 0E020000 		.4byte	.LASF36
+ 1484 06b5 0E020000 		.4byte	.LASF36
+ 1485 06b9 08       		.byte	0x8
+ 1486 06ba 1C       		.byte	0x1c
+ 1487 06bb 00       		.byte	0
+ 1488              		.section	.debug_abbrev,"",%progbits
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccVut814.s 			page 31
 
 
- 1486 0079 03       		.uleb128 0x3
- 1487 007a 0E       		.uleb128 0xe
- 1488 007b 3A       		.uleb128 0x3a
- 1489 007c 0B       		.uleb128 0xb
- 1490 007d 3B       		.uleb128 0x3b
- 1491 007e 0B       		.uleb128 0xb
- 1492 007f 11       		.uleb128 0x11
- 1493 0080 01       		.uleb128 0x1
- 1494 0081 12       		.uleb128 0x12
- 1495 0082 06       		.uleb128 0x6
- 1496 0083 40       		.uleb128 0x40
- 1497 0084 18       		.uleb128 0x18
- 1498 0085 9742     		.uleb128 0x2117
- 1499 0087 19       		.uleb128 0x19
- 1500 0088 01       		.uleb128 0x1
- 1501 0089 13       		.uleb128 0x13
- 1502 008a 00       		.byte	0
- 1503 008b 00       		.byte	0
- 1504 008c 0A       		.uleb128 0xa
- 1505 008d 34       		.uleb128 0x34
- 1506 008e 00       		.byte	0
- 1507 008f 03       		.uleb128 0x3
- 1508 0090 08       		.uleb128 0x8
- 1509 0091 3A       		.uleb128 0x3a
- 1510 0092 0B       		.uleb128 0xb
- 1511 0093 3B       		.uleb128 0x3b
- 1512 0094 0B       		.uleb128 0xb
- 1513 0095 49       		.uleb128 0x49
- 1514 0096 13       		.uleb128 0x13
- 1515 0097 02       		.uleb128 0x2
- 1516 0098 17       		.uleb128 0x17
- 1517 0099 00       		.byte	0
- 1518 009a 00       		.byte	0
- 1519 009b 0B       		.uleb128 0xb
- 1520 009c 34       		.uleb128 0x34
- 1521 009d 00       		.byte	0
- 1522 009e 03       		.uleb128 0x3
- 1523 009f 0E       		.uleb128 0xe
- 1524 00a0 3A       		.uleb128 0x3a
- 1525 00a1 0B       		.uleb128 0xb
- 1526 00a2 3B       		.uleb128 0x3b
- 1527 00a3 0B       		.uleb128 0xb
- 1528 00a4 49       		.uleb128 0x49
- 1529 00a5 13       		.uleb128 0x13
- 1530 00a6 02       		.uleb128 0x2
- 1531 00a7 18       		.uleb128 0x18
- 1532 00a8 00       		.byte	0
- 1533 00a9 00       		.byte	0
- 1534 00aa 0C       		.uleb128 0xc
- 1535 00ab 898201   		.uleb128 0x4109
- 1536 00ae 01       		.byte	0x1
- 1537 00af 11       		.uleb128 0x11
- 1538 00b0 01       		.uleb128 0x1
- 1539 00b1 31       		.uleb128 0x31
- 1540 00b2 13       		.uleb128 0x13
- 1541 00b3 00       		.byte	0
- 1542 00b4 00       		.byte	0
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccMctTlL.s 			page 32
+ 1489              	.Ldebug_abbrev0:
+ 1490 0000 01       		.uleb128 0x1
+ 1491 0001 11       		.uleb128 0x11
+ 1492 0002 01       		.byte	0x1
+ 1493 0003 25       		.uleb128 0x25
+ 1494 0004 0E       		.uleb128 0xe
+ 1495 0005 13       		.uleb128 0x13
+ 1496 0006 0B       		.uleb128 0xb
+ 1497 0007 03       		.uleb128 0x3
+ 1498 0008 0E       		.uleb128 0xe
+ 1499 0009 1B       		.uleb128 0x1b
+ 1500 000a 0E       		.uleb128 0xe
+ 1501 000b 55       		.uleb128 0x55
+ 1502 000c 17       		.uleb128 0x17
+ 1503 000d 11       		.uleb128 0x11
+ 1504 000e 01       		.uleb128 0x1
+ 1505 000f 10       		.uleb128 0x10
+ 1506 0010 17       		.uleb128 0x17
+ 1507 0011 00       		.byte	0
+ 1508 0012 00       		.byte	0
+ 1509 0013 02       		.uleb128 0x2
+ 1510 0014 24       		.uleb128 0x24
+ 1511 0015 00       		.byte	0
+ 1512 0016 0B       		.uleb128 0xb
+ 1513 0017 0B       		.uleb128 0xb
+ 1514 0018 3E       		.uleb128 0x3e
+ 1515 0019 0B       		.uleb128 0xb
+ 1516 001a 03       		.uleb128 0x3
+ 1517 001b 0E       		.uleb128 0xe
+ 1518 001c 00       		.byte	0
+ 1519 001d 00       		.byte	0
+ 1520 001e 03       		.uleb128 0x3
+ 1521 001f 24       		.uleb128 0x24
+ 1522 0020 00       		.byte	0
+ 1523 0021 0B       		.uleb128 0xb
+ 1524 0022 0B       		.uleb128 0xb
+ 1525 0023 3E       		.uleb128 0x3e
+ 1526 0024 0B       		.uleb128 0xb
+ 1527 0025 03       		.uleb128 0x3
+ 1528 0026 08       		.uleb128 0x8
+ 1529 0027 00       		.byte	0
+ 1530 0028 00       		.byte	0
+ 1531 0029 04       		.uleb128 0x4
+ 1532 002a 16       		.uleb128 0x16
+ 1533 002b 00       		.byte	0
+ 1534 002c 03       		.uleb128 0x3
+ 1535 002d 0E       		.uleb128 0xe
+ 1536 002e 3A       		.uleb128 0x3a
+ 1537 002f 0B       		.uleb128 0xb
+ 1538 0030 3B       		.uleb128 0x3b
+ 1539 0031 05       		.uleb128 0x5
+ 1540 0032 49       		.uleb128 0x49
+ 1541 0033 13       		.uleb128 0x13
+ 1542 0034 00       		.byte	0
+ 1543 0035 00       		.byte	0
+ 1544 0036 05       		.uleb128 0x5
+ 1545 0037 2E       		.uleb128 0x2e
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccVut814.s 			page 32
 
 
- 1543 00b5 0D       		.uleb128 0xd
- 1544 00b6 01       		.uleb128 0x1
- 1545 00b7 01       		.byte	0x1
- 1546 00b8 49       		.uleb128 0x49
- 1547 00b9 13       		.uleb128 0x13
- 1548 00ba 01       		.uleb128 0x1
- 1549 00bb 13       		.uleb128 0x13
- 1550 00bc 00       		.byte	0
- 1551 00bd 00       		.byte	0
- 1552 00be 0E       		.uleb128 0xe
- 1553 00bf 21       		.uleb128 0x21
- 1554 00c0 00       		.byte	0
- 1555 00c1 49       		.uleb128 0x49
- 1556 00c2 13       		.uleb128 0x13
- 1557 00c3 2F       		.uleb128 0x2f
- 1558 00c4 0B       		.uleb128 0xb
- 1559 00c5 00       		.byte	0
- 1560 00c6 00       		.byte	0
- 1561 00c7 0F       		.uleb128 0xf
- 1562 00c8 0F       		.uleb128 0xf
- 1563 00c9 00       		.byte	0
- 1564 00ca 0B       		.uleb128 0xb
- 1565 00cb 0B       		.uleb128 0xb
- 1566 00cc 49       		.uleb128 0x49
- 1567 00cd 13       		.uleb128 0x13
- 1568 00ce 00       		.byte	0
- 1569 00cf 00       		.byte	0
- 1570 00d0 10       		.uleb128 0x10
- 1571 00d1 26       		.uleb128 0x26
- 1572 00d2 00       		.byte	0
- 1573 00d3 49       		.uleb128 0x49
- 1574 00d4 13       		.uleb128 0x13
- 1575 00d5 00       		.byte	0
- 1576 00d6 00       		.byte	0
- 1577 00d7 11       		.uleb128 0x11
- 1578 00d8 35       		.uleb128 0x35
- 1579 00d9 00       		.byte	0
- 1580 00da 49       		.uleb128 0x49
- 1581 00db 13       		.uleb128 0x13
- 1582 00dc 00       		.byte	0
- 1583 00dd 00       		.byte	0
- 1584 00de 12       		.uleb128 0x12
- 1585 00df 2E       		.uleb128 0x2e
- 1586 00e0 01       		.byte	0x1
- 1587 00e1 3F       		.uleb128 0x3f
- 1588 00e2 19       		.uleb128 0x19
- 1589 00e3 03       		.uleb128 0x3
- 1590 00e4 0E       		.uleb128 0xe
- 1591 00e5 3A       		.uleb128 0x3a
- 1592 00e6 0B       		.uleb128 0xb
- 1593 00e7 3B       		.uleb128 0x3b
- 1594 00e8 0B       		.uleb128 0xb
- 1595 00e9 27       		.uleb128 0x27
- 1596 00ea 19       		.uleb128 0x19
- 1597 00eb 49       		.uleb128 0x49
- 1598 00ec 13       		.uleb128 0x13
- 1599 00ed 8701     		.uleb128 0x87
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccMctTlL.s 			page 33
+ 1546 0038 01       		.byte	0x1
+ 1547 0039 3F       		.uleb128 0x3f
+ 1548 003a 19       		.uleb128 0x19
+ 1549 003b 03       		.uleb128 0x3
+ 1550 003c 0E       		.uleb128 0xe
+ 1551 003d 3A       		.uleb128 0x3a
+ 1552 003e 0B       		.uleb128 0xb
+ 1553 003f 3B       		.uleb128 0x3b
+ 1554 0040 0B       		.uleb128 0xb
+ 1555 0041 27       		.uleb128 0x27
+ 1556 0042 19       		.uleb128 0x19
+ 1557 0043 11       		.uleb128 0x11
+ 1558 0044 01       		.uleb128 0x1
+ 1559 0045 12       		.uleb128 0x12
+ 1560 0046 06       		.uleb128 0x6
+ 1561 0047 40       		.uleb128 0x40
+ 1562 0048 18       		.uleb128 0x18
+ 1563 0049 9742     		.uleb128 0x2117
+ 1564 004b 19       		.uleb128 0x19
+ 1565 004c 01       		.uleb128 0x1
+ 1566 004d 13       		.uleb128 0x13
+ 1567 004e 00       		.byte	0
+ 1568 004f 00       		.byte	0
+ 1569 0050 06       		.uleb128 0x6
+ 1570 0051 898201   		.uleb128 0x4109
+ 1571 0054 01       		.byte	0x1
+ 1572 0055 11       		.uleb128 0x11
+ 1573 0056 01       		.uleb128 0x1
+ 1574 0057 31       		.uleb128 0x31
+ 1575 0058 13       		.uleb128 0x13
+ 1576 0059 01       		.uleb128 0x1
+ 1577 005a 13       		.uleb128 0x13
+ 1578 005b 00       		.byte	0
+ 1579 005c 00       		.byte	0
+ 1580 005d 07       		.uleb128 0x7
+ 1581 005e 8A8201   		.uleb128 0x410a
+ 1582 0061 00       		.byte	0
+ 1583 0062 02       		.uleb128 0x2
+ 1584 0063 18       		.uleb128 0x18
+ 1585 0064 9142     		.uleb128 0x2111
+ 1586 0066 18       		.uleb128 0x18
+ 1587 0067 00       		.byte	0
+ 1588 0068 00       		.byte	0
+ 1589 0069 08       		.uleb128 0x8
+ 1590 006a 898201   		.uleb128 0x4109
+ 1591 006d 00       		.byte	0
+ 1592 006e 11       		.uleb128 0x11
+ 1593 006f 01       		.uleb128 0x1
+ 1594 0070 31       		.uleb128 0x31
+ 1595 0071 13       		.uleb128 0x13
+ 1596 0072 00       		.byte	0
+ 1597 0073 00       		.byte	0
+ 1598 0074 09       		.uleb128 0x9
+ 1599 0075 2E       		.uleb128 0x2e
+ 1600 0076 01       		.byte	0x1
+ 1601 0077 3F       		.uleb128 0x3f
+ 1602 0078 19       		.uleb128 0x19
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccVut814.s 			page 33
 
 
- 1600 00ef 19       		.uleb128 0x19
- 1601 00f0 11       		.uleb128 0x11
- 1602 00f1 01       		.uleb128 0x1
- 1603 00f2 12       		.uleb128 0x12
- 1604 00f3 06       		.uleb128 0x6
- 1605 00f4 40       		.uleb128 0x40
- 1606 00f5 18       		.uleb128 0x18
- 1607 00f6 9742     		.uleb128 0x2117
- 1608 00f8 19       		.uleb128 0x19
- 1609 00f9 01       		.uleb128 0x1
- 1610 00fa 13       		.uleb128 0x13
- 1611 00fb 00       		.byte	0
- 1612 00fc 00       		.byte	0
- 1613 00fd 13       		.uleb128 0x13
- 1614 00fe 34       		.uleb128 0x34
- 1615 00ff 00       		.byte	0
- 1616 0100 03       		.uleb128 0x3
- 1617 0101 08       		.uleb128 0x8
- 1618 0102 3A       		.uleb128 0x3a
- 1619 0103 0B       		.uleb128 0xb
- 1620 0104 3B       		.uleb128 0x3b
- 1621 0105 0B       		.uleb128 0xb
- 1622 0106 49       		.uleb128 0x49
- 1623 0107 13       		.uleb128 0x13
- 1624 0108 02       		.uleb128 0x2
- 1625 0109 18       		.uleb128 0x18
- 1626 010a 00       		.byte	0
- 1627 010b 00       		.byte	0
- 1628 010c 14       		.uleb128 0x14
- 1629 010d 34       		.uleb128 0x34
- 1630 010e 00       		.byte	0
- 1631 010f 03       		.uleb128 0x3
- 1632 0110 0E       		.uleb128 0xe
- 1633 0111 3A       		.uleb128 0x3a
- 1634 0112 0B       		.uleb128 0xb
- 1635 0113 3B       		.uleb128 0x3b
- 1636 0114 0B       		.uleb128 0xb
- 1637 0115 49       		.uleb128 0x49
- 1638 0116 13       		.uleb128 0x13
- 1639 0117 1C       		.uleb128 0x1c
- 1640 0118 0A       		.uleb128 0xa
- 1641 0119 00       		.byte	0
- 1642 011a 00       		.byte	0
- 1643 011b 15       		.uleb128 0x15
- 1644 011c 34       		.uleb128 0x34
- 1645 011d 00       		.byte	0
- 1646 011e 03       		.uleb128 0x3
- 1647 011f 0E       		.uleb128 0xe
- 1648 0120 3A       		.uleb128 0x3a
- 1649 0121 0B       		.uleb128 0xb
- 1650 0122 3B       		.uleb128 0x3b
- 1651 0123 0B       		.uleb128 0xb
- 1652 0124 49       		.uleb128 0x49
- 1653 0125 13       		.uleb128 0x13
- 1654 0126 1C       		.uleb128 0x1c
- 1655 0127 0B       		.uleb128 0xb
- 1656 0128 00       		.byte	0
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccMctTlL.s 			page 34
+ 1603 0079 03       		.uleb128 0x3
+ 1604 007a 0E       		.uleb128 0xe
+ 1605 007b 3A       		.uleb128 0x3a
+ 1606 007c 0B       		.uleb128 0xb
+ 1607 007d 3B       		.uleb128 0x3b
+ 1608 007e 0B       		.uleb128 0xb
+ 1609 007f 11       		.uleb128 0x11
+ 1610 0080 01       		.uleb128 0x1
+ 1611 0081 12       		.uleb128 0x12
+ 1612 0082 06       		.uleb128 0x6
+ 1613 0083 40       		.uleb128 0x40
+ 1614 0084 18       		.uleb128 0x18
+ 1615 0085 9742     		.uleb128 0x2117
+ 1616 0087 19       		.uleb128 0x19
+ 1617 0088 01       		.uleb128 0x1
+ 1618 0089 13       		.uleb128 0x13
+ 1619 008a 00       		.byte	0
+ 1620 008b 00       		.byte	0
+ 1621 008c 0A       		.uleb128 0xa
+ 1622 008d 34       		.uleb128 0x34
+ 1623 008e 00       		.byte	0
+ 1624 008f 03       		.uleb128 0x3
+ 1625 0090 08       		.uleb128 0x8
+ 1626 0091 3A       		.uleb128 0x3a
+ 1627 0092 0B       		.uleb128 0xb
+ 1628 0093 3B       		.uleb128 0x3b
+ 1629 0094 0B       		.uleb128 0xb
+ 1630 0095 49       		.uleb128 0x49
+ 1631 0096 13       		.uleb128 0x13
+ 1632 0097 02       		.uleb128 0x2
+ 1633 0098 17       		.uleb128 0x17
+ 1634 0099 00       		.byte	0
+ 1635 009a 00       		.byte	0
+ 1636 009b 0B       		.uleb128 0xb
+ 1637 009c 34       		.uleb128 0x34
+ 1638 009d 00       		.byte	0
+ 1639 009e 03       		.uleb128 0x3
+ 1640 009f 0E       		.uleb128 0xe
+ 1641 00a0 3A       		.uleb128 0x3a
+ 1642 00a1 0B       		.uleb128 0xb
+ 1643 00a2 3B       		.uleb128 0x3b
+ 1644 00a3 0B       		.uleb128 0xb
+ 1645 00a4 49       		.uleb128 0x49
+ 1646 00a5 13       		.uleb128 0x13
+ 1647 00a6 02       		.uleb128 0x2
+ 1648 00a7 18       		.uleb128 0x18
+ 1649 00a8 00       		.byte	0
+ 1650 00a9 00       		.byte	0
+ 1651 00aa 0C       		.uleb128 0xc
+ 1652 00ab 898201   		.uleb128 0x4109
+ 1653 00ae 01       		.byte	0x1
+ 1654 00af 11       		.uleb128 0x11
+ 1655 00b0 01       		.uleb128 0x1
+ 1656 00b1 31       		.uleb128 0x31
+ 1657 00b2 13       		.uleb128 0x13
+ 1658 00b3 00       		.byte	0
+ 1659 00b4 00       		.byte	0
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccVut814.s 			page 34
 
 
- 1657 0129 00       		.byte	0
- 1658 012a 16       		.uleb128 0x16
- 1659 012b 2E       		.uleb128 0x2e
- 1660 012c 00       		.byte	0
- 1661 012d 3F       		.uleb128 0x3f
- 1662 012e 19       		.uleb128 0x19
- 1663 012f 3C       		.uleb128 0x3c
- 1664 0130 19       		.uleb128 0x19
- 1665 0131 6E       		.uleb128 0x6e
- 1666 0132 0E       		.uleb128 0xe
- 1667 0133 03       		.uleb128 0x3
- 1668 0134 0E       		.uleb128 0xe
- 1669 0135 3A       		.uleb128 0x3a
- 1670 0136 0B       		.uleb128 0xb
- 1671 0137 3B       		.uleb128 0x3b
- 1672 0138 0B       		.uleb128 0xb
- 1673 0139 00       		.byte	0
- 1674 013a 00       		.byte	0
- 1675 013b 17       		.uleb128 0x17
- 1676 013c 2E       		.uleb128 0x2e
- 1677 013d 00       		.byte	0
- 1678 013e 3F       		.uleb128 0x3f
- 1679 013f 19       		.uleb128 0x19
- 1680 0140 3C       		.uleb128 0x3c
- 1681 0141 19       		.uleb128 0x19
- 1682 0142 6E       		.uleb128 0x6e
- 1683 0143 0E       		.uleb128 0xe
- 1684 0144 03       		.uleb128 0x3
- 1685 0145 0E       		.uleb128 0xe
- 1686 0146 00       		.byte	0
- 1687 0147 00       		.byte	0
- 1688 0148 00       		.byte	0
- 1689              		.section	.debug_loc,"",%progbits
- 1690              	.Ldebug_loc0:
- 1691              	.LLST0:
- 1692 0000 04000000 		.4byte	.LVL3
- 1693 0004 08000000 		.4byte	.LVL4
- 1694 0008 0200     		.2byte	0x2
- 1695 000a 30       		.byte	0x30
- 1696 000b 9F       		.byte	0x9f
- 1697 000c 08000000 		.4byte	.LVL4
- 1698 0010 24000000 		.4byte	.LVL8
- 1699 0014 0100     		.2byte	0x1
- 1700 0016 54       		.byte	0x54
- 1701 0017 68000000 		.4byte	.LVL15
- 1702 001b 6C000000 		.4byte	.LVL16
- 1703 001f 0200     		.2byte	0x2
- 1704 0021 30       		.byte	0x30
- 1705 0022 9F       		.byte	0x9f
- 1706 0023 6C000000 		.4byte	.LVL16
- 1707 0027 96000000 		.4byte	.LVL21
- 1708 002b 0100     		.2byte	0x1
- 1709 002d 54       		.byte	0x54
- 1710 002e 00000000 		.4byte	0
- 1711 0032 00000000 		.4byte	0
- 1712              	.LLST1:
- 1713 0036 08000000 		.4byte	.LVL22
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccMctTlL.s 			page 35
+ 1660 00b5 0D       		.uleb128 0xd
+ 1661 00b6 01       		.uleb128 0x1
+ 1662 00b7 01       		.byte	0x1
+ 1663 00b8 49       		.uleb128 0x49
+ 1664 00b9 13       		.uleb128 0x13
+ 1665 00ba 01       		.uleb128 0x1
+ 1666 00bb 13       		.uleb128 0x13
+ 1667 00bc 00       		.byte	0
+ 1668 00bd 00       		.byte	0
+ 1669 00be 0E       		.uleb128 0xe
+ 1670 00bf 21       		.uleb128 0x21
+ 1671 00c0 00       		.byte	0
+ 1672 00c1 49       		.uleb128 0x49
+ 1673 00c2 13       		.uleb128 0x13
+ 1674 00c3 2F       		.uleb128 0x2f
+ 1675 00c4 0B       		.uleb128 0xb
+ 1676 00c5 00       		.byte	0
+ 1677 00c6 00       		.byte	0
+ 1678 00c7 0F       		.uleb128 0xf
+ 1679 00c8 0F       		.uleb128 0xf
+ 1680 00c9 00       		.byte	0
+ 1681 00ca 0B       		.uleb128 0xb
+ 1682 00cb 0B       		.uleb128 0xb
+ 1683 00cc 49       		.uleb128 0x49
+ 1684 00cd 13       		.uleb128 0x13
+ 1685 00ce 00       		.byte	0
+ 1686 00cf 00       		.byte	0
+ 1687 00d0 10       		.uleb128 0x10
+ 1688 00d1 26       		.uleb128 0x26
+ 1689 00d2 00       		.byte	0
+ 1690 00d3 49       		.uleb128 0x49
+ 1691 00d4 13       		.uleb128 0x13
+ 1692 00d5 00       		.byte	0
+ 1693 00d6 00       		.byte	0
+ 1694 00d7 11       		.uleb128 0x11
+ 1695 00d8 35       		.uleb128 0x35
+ 1696 00d9 00       		.byte	0
+ 1697 00da 49       		.uleb128 0x49
+ 1698 00db 13       		.uleb128 0x13
+ 1699 00dc 00       		.byte	0
+ 1700 00dd 00       		.byte	0
+ 1701 00de 12       		.uleb128 0x12
+ 1702 00df 2E       		.uleb128 0x2e
+ 1703 00e0 01       		.byte	0x1
+ 1704 00e1 3F       		.uleb128 0x3f
+ 1705 00e2 19       		.uleb128 0x19
+ 1706 00e3 03       		.uleb128 0x3
+ 1707 00e4 0E       		.uleb128 0xe
+ 1708 00e5 3A       		.uleb128 0x3a
+ 1709 00e6 0B       		.uleb128 0xb
+ 1710 00e7 3B       		.uleb128 0x3b
+ 1711 00e8 0B       		.uleb128 0xb
+ 1712 00e9 27       		.uleb128 0x27
+ 1713 00ea 19       		.uleb128 0x19
+ 1714 00eb 49       		.uleb128 0x49
+ 1715 00ec 13       		.uleb128 0x13
+ 1716 00ed 8701     		.uleb128 0x87
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccVut814.s 			page 35
 
 
- 1714 003a 1E000000 		.4byte	.LVL24
- 1715 003e 0B00     		.2byte	0xb
- 1716 0040 74       		.byte	0x74
- 1717 0041 00       		.sleb128 0
- 1718 0042 34       		.byte	0x34
- 1719 0043 24       		.byte	0x24
- 1720 0044 03       		.byte	0x3
- 1721 0045 00000000 		.4byte	MONEY
- 1722 0049 22       		.byte	0x22
- 1723 004a 9F       		.byte	0x9f
- 1724 004b 00000000 		.4byte	0
- 1725 004f 00000000 		.4byte	0
- 1726              	.LLST2:
- 1727 0053 0C000000 		.4byte	.LVL27
- 1728 0057 32000000 		.4byte	.LVL31
- 1729 005b 0600     		.2byte	0x6
- 1730 005d 03       		.byte	0x3
- 1731 005e 04080000 		.4byte	PROVISIONED.5838
- 1732 0062 9F       		.byte	0x9f
- 1733 0063 38000000 		.4byte	.LVL32
- 1734 0067 78000000 		.4byte	.LVL40
- 1735 006b 0600     		.2byte	0x6
- 1736 006d 03       		.byte	0x3
- 1737 006e 08080000 		.4byte	UUID
- 1738 0072 9F       		.byte	0x9f
- 1739 0073 78000000 		.4byte	.LVL40
- 1740 0077 DC000000 		.4byte	.LFE37
- 1741 007b 0600     		.2byte	0x6
- 1742 007d 03       		.byte	0x3
- 1743 007e 00080000 		.4byte	BILLS_LEFT
- 1744 0082 9F       		.byte	0x9f
- 1745 0083 00000000 		.4byte	0
- 1746 0087 00000000 		.4byte	0
- 1747              		.section	.debug_aranges,"",%progbits
- 1748 0000 34000000 		.4byte	0x34
- 1749 0004 0200     		.2byte	0x2
- 1750 0006 00000000 		.4byte	.Ldebug_info0
- 1751 000a 04       		.byte	0x4
- 1752 000b 00       		.byte	0
- 1753 000c 0000     		.2byte	0
- 1754 000e 0000     		.2byte	0
- 1755 0010 00000000 		.4byte	.LFB34
- 1756 0014 18000000 		.4byte	.LFE34-.LFB34
- 1757 0018 00000000 		.4byte	.LFB35
- 1758 001c A8000000 		.4byte	.LFE35-.LFB35
- 1759 0020 00000000 		.4byte	.LFB36
- 1760 0024 5C000000 		.4byte	.LFE36-.LFB36
- 1761 0028 00000000 		.4byte	.LFB37
- 1762 002c DC000000 		.4byte	.LFE37-.LFB37
- 1763 0030 00000000 		.4byte	0
- 1764 0034 00000000 		.4byte	0
- 1765              		.section	.debug_ranges,"",%progbits
- 1766              	.Ldebug_ranges0:
- 1767 0000 00000000 		.4byte	.LFB34
- 1768 0004 18000000 		.4byte	.LFE34
- 1769 0008 00000000 		.4byte	.LFB35
- 1770 000c A8000000 		.4byte	.LFE35
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccMctTlL.s 			page 36
+ 1717 00ef 19       		.uleb128 0x19
+ 1718 00f0 11       		.uleb128 0x11
+ 1719 00f1 01       		.uleb128 0x1
+ 1720 00f2 12       		.uleb128 0x12
+ 1721 00f3 06       		.uleb128 0x6
+ 1722 00f4 40       		.uleb128 0x40
+ 1723 00f5 18       		.uleb128 0x18
+ 1724 00f6 9742     		.uleb128 0x2117
+ 1725 00f8 19       		.uleb128 0x19
+ 1726 00f9 01       		.uleb128 0x1
+ 1727 00fa 13       		.uleb128 0x13
+ 1728 00fb 00       		.byte	0
+ 1729 00fc 00       		.byte	0
+ 1730 00fd 13       		.uleb128 0x13
+ 1731 00fe 34       		.uleb128 0x34
+ 1732 00ff 00       		.byte	0
+ 1733 0100 03       		.uleb128 0x3
+ 1734 0101 08       		.uleb128 0x8
+ 1735 0102 3A       		.uleb128 0x3a
+ 1736 0103 0B       		.uleb128 0xb
+ 1737 0104 3B       		.uleb128 0x3b
+ 1738 0105 0B       		.uleb128 0xb
+ 1739 0106 49       		.uleb128 0x49
+ 1740 0107 13       		.uleb128 0x13
+ 1741 0108 02       		.uleb128 0x2
+ 1742 0109 18       		.uleb128 0x18
+ 1743 010a 00       		.byte	0
+ 1744 010b 00       		.byte	0
+ 1745 010c 14       		.uleb128 0x14
+ 1746 010d 2E       		.uleb128 0x2e
+ 1747 010e 00       		.byte	0
+ 1748 010f 3F       		.uleb128 0x3f
+ 1749 0110 19       		.uleb128 0x19
+ 1750 0111 3C       		.uleb128 0x3c
+ 1751 0112 19       		.uleb128 0x19
+ 1752 0113 6E       		.uleb128 0x6e
+ 1753 0114 0E       		.uleb128 0xe
+ 1754 0115 03       		.uleb128 0x3
+ 1755 0116 0E       		.uleb128 0xe
+ 1756 0117 3A       		.uleb128 0x3a
+ 1757 0118 0B       		.uleb128 0xb
+ 1758 0119 3B       		.uleb128 0x3b
+ 1759 011a 0B       		.uleb128 0xb
+ 1760 011b 00       		.byte	0
+ 1761 011c 00       		.byte	0
+ 1762 011d 15       		.uleb128 0x15
+ 1763 011e 2E       		.uleb128 0x2e
+ 1764 011f 00       		.byte	0
+ 1765 0120 3F       		.uleb128 0x3f
+ 1766 0121 19       		.uleb128 0x19
+ 1767 0122 3C       		.uleb128 0x3c
+ 1768 0123 19       		.uleb128 0x19
+ 1769 0124 6E       		.uleb128 0x6e
+ 1770 0125 0E       		.uleb128 0xe
+ 1771 0126 03       		.uleb128 0x3
+ 1772 0127 0E       		.uleb128 0xe
+ 1773 0128 00       		.byte	0
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccVut814.s 			page 36
 
 
- 1771 0010 00000000 		.4byte	.LFB36
- 1772 0014 5C000000 		.4byte	.LFE36
- 1773 0018 00000000 		.4byte	.LFB37
- 1774 001c DC000000 		.4byte	.LFE37
- 1775 0020 00000000 		.4byte	0
- 1776 0024 00000000 		.4byte	0
- 1777              		.section	.debug_line,"",%progbits
- 1778              	.Ldebug_line0:
- 1779 0000 BD010000 		.section	.debug_str,"MS",%progbits,1
- 1779      02000C01 
- 1779      00000201 
- 1779      FB0E0D00 
- 1779      01010101 
- 1780              	.LASF16:
- 1781 0000 6D657373 		.ascii	"message\000"
- 1781      61676500 
- 1782              	.LASF24:
- 1783 0008 55554944 		.ascii	"UUID\000"
- 1783      00
- 1784              	.LASF32:
- 1785 000d 73796E63 		.ascii	"syncConnection\000"
- 1785      436F6E6E 
- 1785      65637469 
- 1785      6F6E00
- 1786              	.LASF34:
- 1787 001c 52657365 		.ascii	"Reset_isr_StartEx\000"
- 1787      745F6973 
- 1787      725F5374 
- 1787      61727445 
- 1787      7800
- 1788              	.LASF20:
- 1789 002e 73746163 		.ascii	"stackloc\000"
- 1789      6B6C6F63 
- 1789      00
- 1790              	.LASF11:
- 1791 0037 666C6F61 		.ascii	"float\000"
- 1791      7400
- 1792              	.LASF35:
- 1793 003d 50494747 		.ascii	"PIGGY_BANK_Start\000"
- 1793      595F4241 
- 1793      4E4B5F53 
- 1793      74617274 
- 1793      00
- 1794              	.LASF27:
- 1795 004e 42494C4C 		.ascii	"BILLS_LEFT\000"
- 1795      535F4C45 
- 1795      465400
- 1796              	.LASF3:
- 1797 0059 73686F72 		.ascii	"short unsigned int\000"
- 1797      7420756E 
- 1797      7369676E 
- 1797      65642069 
- 1797      6E7400
- 1798              	.LASF31:
- 1799 006c 50494747 		.ascii	"PIGGY_BANK_Write\000"
- 1799      595F4241 
- 1799      4E4B5F57 
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccMctTlL.s 			page 37
+ 1774 0129 00       		.byte	0
+ 1775 012a 00       		.byte	0
+ 1776              		.section	.debug_loc,"",%progbits
+ 1777              	.Ldebug_loc0:
+ 1778              	.LLST0:
+ 1779 0000 04000000 		.4byte	.LVL3
+ 1780 0004 08000000 		.4byte	.LVL4
+ 1781 0008 0200     		.2byte	0x2
+ 1782 000a 30       		.byte	0x30
+ 1783 000b 9F       		.byte	0x9f
+ 1784 000c 08000000 		.4byte	.LVL4
+ 1785 0010 24000000 		.4byte	.LVL8
+ 1786 0014 0100     		.2byte	0x1
+ 1787 0016 54       		.byte	0x54
+ 1788 0017 8E000000 		.4byte	.LVL18
+ 1789 001b 92000000 		.4byte	.LVL19
+ 1790 001f 0200     		.2byte	0x2
+ 1791 0021 30       		.byte	0x30
+ 1792 0022 9F       		.byte	0x9f
+ 1793 0023 92000000 		.4byte	.LVL19
+ 1794 0027 BC000000 		.4byte	.LVL24
+ 1795 002b 0100     		.2byte	0x1
+ 1796 002d 54       		.byte	0x54
+ 1797 002e 00000000 		.4byte	0
+ 1798 0032 00000000 		.4byte	0
+ 1799              	.LLST1:
+ 1800 0036 08000000 		.4byte	.LVL25
+ 1801 003a 1E000000 		.4byte	.LVL27
+ 1802 003e 0B00     		.2byte	0xb
+ 1803 0040 74       		.byte	0x74
+ 1804 0041 00       		.sleb128 0
+ 1805 0042 34       		.byte	0x34
+ 1806 0043 24       		.byte	0x24
+ 1807 0044 03       		.byte	0x3
+ 1808 0045 00000000 		.4byte	MONEY
+ 1809 0049 22       		.byte	0x22
+ 1810 004a 9F       		.byte	0x9f
+ 1811 004b 00000000 		.4byte	0
+ 1812 004f 00000000 		.4byte	0
+ 1813              	.LLST2:
+ 1814 0053 0C000000 		.4byte	.LVL30
+ 1815 0057 34000000 		.4byte	.LVL34
+ 1816 005b 0600     		.2byte	0x6
+ 1817 005d 03       		.byte	0x3
+ 1818 005e 48080000 		.4byte	PROVISIONED.5838
+ 1819 0062 9F       		.byte	0x9f
+ 1820 0063 3A000000 		.4byte	.LVL35
+ 1821 0067 7A000000 		.4byte	.LVL43
+ 1822 006b 0600     		.2byte	0x6
+ 1823 006d 03       		.byte	0x3
+ 1824 006e 1C080000 		.4byte	UUID
+ 1825 0072 9F       		.byte	0x9f
+ 1826 0073 7A000000 		.4byte	.LVL43
+ 1827 0077 E4000000 		.4byte	.LFE37
+ 1828 007b 0600     		.2byte	0x6
+ 1829 007d 03       		.byte	0x3
+ 1830 007e 44080000 		.4byte	BILLS_LEFT
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccVut814.s 			page 37
 
 
- 1799      72697465 
- 1799      00
- 1800              	.LASF41:
- 1801 007d 5C5C5642 		.ascii	"\\\\VBOXSVR\\raywang\\Dropbox (MIT)\\CTFs\\eCTF\\ec"
- 1801      4F585356 
- 1801      525C7261 
- 1801      7977616E 
- 1801      675C4472 
- 1802 00a9 74662D32 		.ascii	"tf-2018-techsec\\SECURITY_MODULE.cydsn\000"
- 1802      3031382D 
- 1802      74656368 
- 1802      7365635C 
- 1802      53454355 
- 1803              	.LASF17:
- 1804 00cf 6E756D62 		.ascii	"numbills\000"
- 1804      696C6C73 
- 1804      00
- 1805              	.LASF37:
- 1806 00d8 7374726C 		.ascii	"strlen\000"
- 1806      656E00
- 1807              	.LASF1:
- 1808 00df 756E7369 		.ascii	"unsigned char\000"
- 1808      676E6564 
- 1808      20636861 
- 1808      7200
- 1809              	.LASF29:
- 1810 00ed 5357315F 		.ascii	"SW1_ClearInterrupt\000"
- 1810      436C6561 
- 1810      72496E74 
- 1810      65727275 
- 1810      707400
- 1811              	.LASF5:
- 1812 0100 6C6F6E67 		.ascii	"long unsigned int\000"
- 1812      20756E73 
- 1812      69676E65 
- 1812      6420696E 
- 1812      7400
- 1813              	.LASF9:
- 1814 0112 75696E74 		.ascii	"uint8\000"
- 1814      3800
- 1815              	.LASF19:
- 1816 0118 64697370 		.ascii	"dispenseBill\000"
- 1816      656E7365 
- 1816      42696C6C 
- 1816      00
- 1817              	.LASF44:
- 1818 0125 6D656D73 		.ascii	"memset\000"
- 1818      657400
- 1819              	.LASF12:
- 1820 012c 646F7562 		.ascii	"double\000"
- 1820      6C6500
- 1821              	.LASF43:
- 1822 0133 6D61696E 		.ascii	"main\000"
- 1822      00
- 1823              	.LASF36:
- 1824 0138 44425F55 		.ascii	"DB_UART_Start\000"
- 1824      4152545F 
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccMctTlL.s 			page 38
-
-
- 1824      53746172 
- 1824      7400
- 1825              	.LASF18:
- 1826 0146 70726F76 		.ascii	"provision\000"
- 1826      6973696F 
- 1826      6E00
- 1827              	.LASF10:
- 1828 0150 75696E74 		.ascii	"uint32\000"
- 1828      333200
- 1829              	.LASF8:
- 1830 0157 756E7369 		.ascii	"unsigned int\000"
- 1830      676E6564 
- 1830      20696E74 
- 1830      00
- 1831              	.LASF23:
- 1832 0164 4D4F4E45 		.ascii	"MONEY\000"
- 1832      5900
- 1833              	.LASF7:
- 1834 016a 6C6F6E67 		.ascii	"long long unsigned int\000"
- 1834      206C6F6E 
- 1834      6720756E 
- 1834      7369676E 
- 1834      65642069 
- 1835              	.LASF26:
- 1836 0181 4E4F4E43 		.ascii	"NONCE\000"
- 1836      4500
- 1837              	.LASF39:
- 1838 0187 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
- 1838      43313120 
- 1838      352E342E 
- 1838      31203230 
- 1838      31363036 
- 1839 01ba 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m0 -mthumb -g -O"
- 1839      20726576 
- 1839      6973696F 
- 1839      6E203233 
- 1839      37373135 
- 1840 01ed 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
- 1840      66756E63 
- 1840      74696F6E 
- 1840      2D736563 
- 1840      74696F6E 
- 1841              	.LASF38:
- 1842 0215 73747263 		.ascii	"strcmp\000"
- 1842      6D7000
- 1843              	.LASF15:
- 1844 021c 73697A65 		.ascii	"sizetype\000"
- 1844      74797065 
- 1844      00
- 1845              	.LASF28:
- 1846 0225 70757368 		.ascii	"pushMessage\000"
- 1846      4D657373 
- 1846      61676500 
- 1847              	.LASF6:
- 1848 0231 6C6F6E67 		.ascii	"long long int\000"
- 1848      206C6F6E 
- 1848      6720696E 
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccMctTlL.s 			page 39
-
-
- 1848      7400
- 1849              	.LASF40:
- 1850 023f 6D61696E 		.ascii	"main.c\000"
- 1850      2E6300
- 1851              	.LASF13:
- 1852 0246 63686172 		.ascii	"char\000"
- 1852      00
- 1853              	.LASF42:
- 1854 024b 52657365 		.ascii	"Reset_ISR\000"
- 1854      745F4953 
- 1854      5200
- 1855              	.LASF2:
- 1856 0255 73686F72 		.ascii	"short int\000"
- 1856      7420696E 
- 1856      7400
- 1857              	.LASF22:
- 1858 025f 50524F56 		.ascii	"PROVISIONED\000"
- 1858      4953494F 
- 1858      4E454400 
- 1859              	.LASF30:
- 1860 026b 4379536F 		.ascii	"CySoftwareReset\000"
- 1860      66747761 
- 1860      72655265 
- 1860      73657400 
- 1861              	.LASF25:
- 1862 027b 42414E4B 		.ascii	"BANK_AES_KEY\000"
- 1862      5F414553 
- 1862      5F4B4559 
- 1862      00
- 1863              	.LASF21:
- 1864 0288 62696C6C 		.ascii	"bills_left\000"
- 1864      735F6C65 
- 1864      667400
- 1865              	.LASF4:
- 1866 0293 6C6F6E67 		.ascii	"long int\000"
- 1866      20696E74 
- 1866      00
+ 1831 0082 9F       		.byte	0x9f
+ 1832 0083 00000000 		.4byte	0
+ 1833 0087 00000000 		.4byte	0
+ 1834              		.section	.debug_aranges,"",%progbits
+ 1835 0000 34000000 		.4byte	0x34
+ 1836 0004 0200     		.2byte	0x2
+ 1837 0006 00000000 		.4byte	.Ldebug_info0
+ 1838 000a 04       		.byte	0x4
+ 1839 000b 00       		.byte	0
+ 1840 000c 0000     		.2byte	0
+ 1841 000e 0000     		.2byte	0
+ 1842 0010 00000000 		.4byte	.LFB34
+ 1843 0014 18000000 		.4byte	.LFE34-.LFB34
+ 1844 0018 00000000 		.4byte	.LFB35
+ 1845 001c D0000000 		.4byte	.LFE35-.LFB35
+ 1846 0020 00000000 		.4byte	.LFB36
+ 1847 0024 5C000000 		.4byte	.LFE36-.LFB36
+ 1848 0028 00000000 		.4byte	.LFB37
+ 1849 002c E4000000 		.4byte	.LFE37-.LFB37
+ 1850 0030 00000000 		.4byte	0
+ 1851 0034 00000000 		.4byte	0
+ 1852              		.section	.debug_ranges,"",%progbits
+ 1853              	.Ldebug_ranges0:
+ 1854 0000 00000000 		.4byte	.LFB34
+ 1855 0004 18000000 		.4byte	.LFE34
+ 1856 0008 00000000 		.4byte	.LFB35
+ 1857 000c D0000000 		.4byte	.LFE35
+ 1858 0010 00000000 		.4byte	.LFB36
+ 1859 0014 5C000000 		.4byte	.LFE36
+ 1860 0018 00000000 		.4byte	.LFB37
+ 1861 001c E4000000 		.4byte	.LFE37
+ 1862 0020 00000000 		.4byte	0
+ 1863 0024 00000000 		.4byte	0
+ 1864              		.section	.debug_line,"",%progbits
+ 1865              	.Ldebug_line0:
+ 1866 0000 C1010000 		.section	.debug_str,"MS",%progbits,1
+ 1866      02000C01 
+ 1866      00000201 
+ 1866      FB0E0D00 
+ 1866      01010101 
  1867              	.LASF14:
- 1868 029c 6C6F6E67 		.ascii	"long double\000"
- 1868      20646F75 
- 1868      626C6500 
- 1869              	.LASF0:
- 1870 02a8 7369676E 		.ascii	"signed char\000"
- 1870      65642063 
- 1870      68617200 
- 1871              	.LASF33:
- 1872 02b4 70756C6C 		.ascii	"pullMessage\000"
- 1872      4D657373 
- 1872      61676500 
- 1873              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran
+ 1868 0000 6D657373 		.ascii	"message\000"
+ 1868      61676500 
+ 1869              	.LASF22:
+ 1870 0008 55554944 		.ascii	"UUID\000"
+ 1870      00
+ 1871              	.LASF30:
+ 1872 000d 73796E63 		.ascii	"syncConnection\000"
+ 1872      436F6E6E 
+ 1872      65637469 
+ 1872      6F6E00
+ 1873              	.LASF32:
+ 1874 001c 52657365 		.ascii	"Reset_isr_StartEx\000"
+ 1874      745F6973 
+ 1874      725F5374 
+ 1874      61727445 
+ 1874      7800
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccVut814.s 			page 38
+
+
+ 1875              	.LASF18:
+ 1876 002e 73746163 		.ascii	"stackloc\000"
+ 1876      6B6C6F63 
+ 1876      00
+ 1877              	.LASF9:
+ 1878 0037 666C6F61 		.ascii	"float\000"
+ 1878      7400
+ 1879              	.LASF33:
+ 1880 003d 50494747 		.ascii	"PIGGY_BANK_Start\000"
+ 1880      595F4241 
+ 1880      4E4B5F53 
+ 1880      74617274 
+ 1880      00
+ 1881              	.LASF25:
+ 1882 004e 42494C4C 		.ascii	"BILLS_LEFT\000"
+ 1882      535F4C45 
+ 1882      465400
+ 1883              	.LASF3:
+ 1884 0059 73686F72 		.ascii	"short unsigned int\000"
+ 1884      7420756E 
+ 1884      7369676E 
+ 1884      65642069 
+ 1884      6E7400
+ 1885              	.LASF29:
+ 1886 006c 50494747 		.ascii	"PIGGY_BANK_Write\000"
+ 1886      595F4241 
+ 1886      4E4B5F57 
+ 1886      72697465 
+ 1886      00
+ 1887              	.LASF39:
+ 1888 007d 5C5C5642 		.ascii	"\\\\VBOXSVR\\raywang\\Dropbox (MIT)\\CTFs\\eCTF\\ec"
+ 1888      4F585356 
+ 1888      525C7261 
+ 1888      7977616E 
+ 1888      675C4472 
+ 1889 00a9 74662D32 		.ascii	"tf-2018-techsec\\SECURITY_MODULE.cydsn\000"
+ 1889      3031382D 
+ 1889      74656368 
+ 1889      7365635C 
+ 1889      53454355 
+ 1890              	.LASF15:
+ 1891 00cf 6E756D62 		.ascii	"numbills\000"
+ 1891      696C6C73 
+ 1891      00
+ 1892              	.LASF35:
+ 1893 00d8 7374726C 		.ascii	"strlen\000"
+ 1893      656E00
+ 1894              	.LASF1:
+ 1895 00df 756E7369 		.ascii	"unsigned char\000"
+ 1895      676E6564 
+ 1895      20636861 
+ 1895      7200
+ 1896              	.LASF27:
+ 1897 00ed 5357315F 		.ascii	"SW1_ClearInterrupt\000"
+ 1897      436C6561 
+ 1897      72496E74 
+ 1897      65727275 
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccVut814.s 			page 39
+
+
+ 1897      707400
+ 1898              	.LASF5:
+ 1899 0100 6C6F6E67 		.ascii	"long unsigned int\000"
+ 1899      20756E73 
+ 1899      69676E65 
+ 1899      6420696E 
+ 1899      7400
+ 1900              	.LASF40:
+ 1901 0112 75696E74 		.ascii	"uint8\000"
+ 1901      3800
+ 1902              	.LASF17:
+ 1903 0118 64697370 		.ascii	"dispenseBill\000"
+ 1903      656E7365 
+ 1903      42696C6C 
+ 1903      00
+ 1904              	.LASF43:
+ 1905 0125 6D656D73 		.ascii	"memset\000"
+ 1905      657400
+ 1906              	.LASF10:
+ 1907 012c 646F7562 		.ascii	"double\000"
+ 1907      6C6500
+ 1908              	.LASF42:
+ 1909 0133 6D61696E 		.ascii	"main\000"
+ 1909      00
+ 1910              	.LASF34:
+ 1911 0138 44425F55 		.ascii	"DB_UART_Start\000"
+ 1911      4152545F 
+ 1911      53746172 
+ 1911      7400
+ 1912              	.LASF16:
+ 1913 0146 70726F76 		.ascii	"provision\000"
+ 1913      6973696F 
+ 1913      6E00
+ 1914              	.LASF8:
+ 1915 0150 756E7369 		.ascii	"unsigned int\000"
+ 1915      676E6564 
+ 1915      20696E74 
+ 1915      00
+ 1916              	.LASF21:
+ 1917 015d 4D4F4E45 		.ascii	"MONEY\000"
+ 1917      5900
+ 1918              	.LASF7:
+ 1919 0163 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 1919      206C6F6E 
+ 1919      6720756E 
+ 1919      7369676E 
+ 1919      65642069 
+ 1920              	.LASF24:
+ 1921 017a 4E4F4E43 		.ascii	"NONCE\000"
+ 1921      4500
+ 1922              	.LASF37:
+ 1923 0180 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 1923      43313120 
+ 1923      352E342E 
+ 1923      31203230 
+ 1923      31363036 
+ 1924 01b3 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m0 -mthumb -g -O"
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccVut814.s 			page 40
+
+
+ 1924      20726576 
+ 1924      6973696F 
+ 1924      6E203233 
+ 1924      37373135 
+ 1925 01e6 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
+ 1925      66756E63 
+ 1925      74696F6E 
+ 1925      2D736563 
+ 1925      74696F6E 
+ 1926              	.LASF36:
+ 1927 020e 73747263 		.ascii	"strcmp\000"
+ 1927      6D7000
+ 1928              	.LASF13:
+ 1929 0215 73697A65 		.ascii	"sizetype\000"
+ 1929      74797065 
+ 1929      00
+ 1930              	.LASF26:
+ 1931 021e 70757368 		.ascii	"pushMessage\000"
+ 1931      4D657373 
+ 1931      61676500 
+ 1932              	.LASF6:
+ 1933 022a 6C6F6E67 		.ascii	"long long int\000"
+ 1933      206C6F6E 
+ 1933      6720696E 
+ 1933      7400
+ 1934              	.LASF38:
+ 1935 0238 6D61696E 		.ascii	"main.c\000"
+ 1935      2E6300
+ 1936              	.LASF11:
+ 1937 023f 63686172 		.ascii	"char\000"
+ 1937      00
+ 1938              	.LASF41:
+ 1939 0244 52657365 		.ascii	"Reset_ISR\000"
+ 1939      745F4953 
+ 1939      5200
+ 1940              	.LASF2:
+ 1941 024e 73686F72 		.ascii	"short int\000"
+ 1941      7420696E 
+ 1941      7400
+ 1942              	.LASF20:
+ 1943 0258 50524F56 		.ascii	"PROVISIONED\000"
+ 1943      4953494F 
+ 1943      4E454400 
+ 1944              	.LASF28:
+ 1945 0264 4379536F 		.ascii	"CySoftwareReset\000"
+ 1945      66747761 
+ 1945      72655265 
+ 1945      73657400 
+ 1946              	.LASF23:
+ 1947 0274 42414E4B 		.ascii	"BANK_AES_KEY\000"
+ 1947      5F414553 
+ 1947      5F4B4559 
+ 1947      00
+ 1948              	.LASF19:
+ 1949 0281 62696C6C 		.ascii	"bills_left\000"
+ 1949      735F6C65 
+ 1949      667400
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccVut814.s 			page 41
+
+
+ 1950              	.LASF4:
+ 1951 028c 6C6F6E67 		.ascii	"long int\000"
+ 1951      20696E74 
+ 1951      00
+ 1952              	.LASF12:
+ 1953 0295 6C6F6E67 		.ascii	"long double\000"
+ 1953      20646F75 
+ 1953      626C6500 
+ 1954              	.LASF0:
+ 1955 02a1 7369676E 		.ascii	"signed char\000"
+ 1955      65642063 
+ 1955      68617200 
+ 1956              	.LASF31:
+ 1957 02ad 70756C6C 		.ascii	"pullMessage\000"
+ 1957      4D657373 
+ 1957      61676500 
+ 1958              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

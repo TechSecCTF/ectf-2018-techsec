@@ -29,6 +29,10 @@ returns:
 import uuid
 from SimpleXMLRPCServer import SimpleXMLRPCServer
 from bank_server import DB
+import binascii
+import hashlib
+import os
+from Crypto.Cipher import AES
 
 
 class Bank(object):
@@ -46,6 +50,7 @@ class Bank(object):
     "OKAY <amount>\n"
     "ERROR\n"
     """
+
     def __init__(self, config, db_mutex):
         super(Bank, self).__init__()
         self.bank_host = config['bank']['host']
@@ -53,10 +58,12 @@ class Bank(object):
         self.db_init = config['database']['db_init']
         self.db_path = config['database']['db_path']
         self.db_mutex = db_mutex
-        self.db_obj = DB(db_mutex=self.db_mutex, db_init=self.db_init, db_path=self.db_path)
+        self.db_obj = DB(
+            db_mutex=self.db_mutex, db_init=self.db_init, db_path=self.db_path)
         self.server = SimpleXMLRPCServer((self.bank_host, self.bank_port))
         self.server.register_function(self.withdraw)
         self.server.register_function(self.check_balance)
+        self.server.register_function(self.set_initial_pin)
         self.server.serve_forever()
 
     def withdraw(self, atm_id, card_id, amount):
@@ -88,13 +95,41 @@ class Bank(object):
         else:
             return 'ERROR insufficient funds'
 
-    def check_balance(self, card_id):
+    def check_balance(self, card_id, aes_iv, card_hmac):
+        aes_key = self.db_obj.get_card_aes_key(card_id)
+        if aes_key:
+            true_hmac = hmac.new(binascii.unhexlify(aes_key, enc_uuid + aes_iv, hashlib.sha256).hexdigest())
+
+            if not hmac.compare_digest(card_hmac, true_hmac):
+                # Decrypt UUID and return it
+                return 'ERROR check_balance: invalid hmac on message'
+        else:
+            return 'ERROR could not lookup account \'' + str(card_id) + '\''
+
+        # Now, try to decrypt card id
+        # assert len(aes_iv)
+        cipher = AES.new(aes_key, AES.MODE_CTR, counter = aes_iv)
+        card_id = cipher.decrypt(enc_uuid)
         try:
-            uuid.UUID(str('{'+card_id+'}'))
+            uuid.UUID(str('{' + card_id + '}'))
         except ValueError:
-            return 'ERROR check_balance command usage: balance <card_id>'
+            return 'ERROR card_id not present or formatted correctly'
+
         balance = self.db_obj.get_balance(card_id)
         if balance is None:
             return 'ERROR could not lookup account \'' + str(card_id) + '\''
         else:
             return 'OKAY ' + str(balance)
+
+    def set_initial_pin(self, card_id, pin):
+
+        try:
+            uuid.UUID(str('{' + card_id + '}'))
+        except ValueError:
+            return 'ERROR card_id not valid'
+
+        salt = binascii.hexlify(os.urandom(8))
+        pin_hash = hashlib.sha256(card_id + pin + salt).hexdigest()
+        self.db_obj.update_pin(card_id, pin_hash, salt)
+
+        return 'OKAY ' + card_id

@@ -115,15 +115,17 @@ class AdminBackend(object):
 
         """
         card_id = str(uuid.uuid4())
+        aes_key = binascii.hexlify(os.urandom(16))
+        nonce = os.urandom(4)
         try:
             amount = int(amount)
         except ValueError:
             logging.info('amount must be a integer')
             return False
 
-        if self.db_obj.admin_create_account(account_name, card_id, amount):
+        if self.db_obj.admin_create_account(account_name, card_id, amount, aes_key, struct.unpack(">I", nonce)[0]):
             logging.info('admin create account success')
-            return card_id
+            return aes_key + binascii.hexlify(nonce) + card_id
         logging.info('admin create account failed')
         return False
 

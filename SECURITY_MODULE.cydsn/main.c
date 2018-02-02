@@ -15,6 +15,9 @@
 //This is needed for the default communication between the BANK and DISPLAY over the USB-UART
 #include "usbserialprotocol.h"
 #include "SW1.h"
+#include <strong-arm/sha256.h>
+#include <strong-arm/aes.h>
+
 
 // SECURITY MODULE
 
@@ -45,9 +48,52 @@
 static const uint8 MONEY[MAX_BILLS][BILL_LEN] = {EMPTY_BILL};
 static const uint8 UUID[UUID_LEN + 1] = {'b', 'l', 'a', 'n', 'k', ' ', 
                                         'u', 'u', 'i', 'd', '!', 0x00 };
-static const uint8 BANK_AES_KEY[16] = "";
-static uint32 NONCE =0;
+static const uint8 BANK_AES_KEY[17] = {'b', 'l', 'a', 'n', 'k', ' ', 
+                                        'k', 'e', 'y', '!', '!','!','!','!','!','!', 0x00 };
+static const uint8 NONCE[5] = {'b', 'l', 'a', 'n', 0x00};
 static const uint8 BILLS_LEFT[1] = {0x00};
+
+
+uint8_t hex2byte(char upper_digit, char lower_digit)
+{
+    uint8_t value = 0;
+    
+    // Lower nybble.
+    if(lower_digit >= '0' && lower_digit <= '9')
+    {
+        value = lower_digit - '0';
+    }
+    else if(lower_digit >= 'a' && lower_digit <= 'f')
+    {
+        value = lower_digit - 'a' + 0xA;
+    }
+    else if(lower_digit >= 'A' && lower_digit <= 'F')
+    {
+        value = lower_digit - 'A' + 0xA;
+    }
+    
+    // Upper nybble.
+    if(upper_digit >= '0' && upper_digit <= '9')
+    {
+        value |= (upper_digit - '0') << 4;
+    }
+    else if(upper_digit >= 'a' && upper_digit <= 'f')
+    {
+        value |= (upper_digit - 'a' + 0xA) << 4;
+    }
+    else if(upper_digit >= 'A' && upper_digit <= 'F')
+    {
+        value |= (upper_digit - 'A' + 0xA) << 4;
+    }
+    
+    // Return result.
+    return value;
+}
+
+void bytes2hex(uint8_t byte, char* dest)
+{       
+    sprintf(dest, "%02X", byte);
+}
 
 
 // reset interrupt on button press
@@ -80,12 +126,28 @@ void provision()
     // Set blob
     pullMessage(message);
 
-//    PIGGY_BANK_Write(message, BANK_AES_KEY,32);
-//    pushMessage(BANK_AES_KEY, 32);
-//    PIGGY_BANK_Write(message+32, (uint8*)NONCE, 8);
-//    pushMessage((uint8*)NONCE, 8);
-//    PIGGY_BANK_Write(message+40, UUID, UUID_LEN);
-//    pushMessage(UUID, UUID_LEN);
+    char hex_bank_key[32];
+    char hex_nonce[8];
+    memcpy(hex_bank_key, message, 32);
+    memcpy(hex_nonce, message+32, 8);
+
+    uint8 bank_key[16];
+    uint8 nonce[4];
+
+    for(int i = 0; i < 16; ++i)
+    {
+        bank_key[i] = hex2byte(hex_bank_key[2*i], hex_bank_key[2*i + 1]);
+    }
+
+    for(int i = 0; i < 16; ++i)
+    {
+        nonce[i] = hex2byte(hex_nonce[2*i], hex_nonce[2*i + 1]);
+    }
+
+    USER_INFO_Write(bank_key, BANK_AES_KEY, 16);
+    USER_INFO_Write(nonce, NONCE, 4);
+    USER_INFO_Write(message+40, UUID, UUID_LEN);
+
     pushMessage((uint8*)RECV_OK, strlen(RECV_OK));
     
     // Get numbills
@@ -149,10 +211,6 @@ int main(void)
     
     PIGGY_BANK_Start();
     DB_UART_Start();
-
-//    while (1) {
-//	DB_UART_UartPutString("Welcome to Frequency Measurement Using PSoC 4 BLE\n");
-//    }
     
     // provision security module on first boot
     if(*ptr == 0x00)
