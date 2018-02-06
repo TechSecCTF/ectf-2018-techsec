@@ -29,7 +29,7 @@
       <Data key="c5249b6c-689b-4051-b3d0-0b1dfdd156c9" value="CompP_0" />
       <Data key="d4c22bef-e567-4825-8add-7ba4cf622d8c" value="PWM_2_Out" />
       <Data key="e68f69f0-a707-4d96-90ab-3c4a3bab231f" value="CompP_1" />
-      <Data key="e851a3b9-efb8-48be-bbb8-b303b216c393" value="Output_Pin_0" />
+      <Data key="e851a3b9-efb8-48be-bbb8-b303b216c393" value="Pin_Glitch" />
       <Data key="e5924194-c79e-4ebb-a2d7-2b74808be003" value="CompM_1" />
       <Data key="ebb3c832-cfbd-47e2-a7d9-4a882b0f6c94" value="ADC_2" />
       <Data key="ee20f661-94ec-4fe2-8ef9-e83bb8c07688" value="PWM_0_Out" />
@@ -1245,6 +1245,11 @@
     <Group key="a4066860-b632-439d-87d4-5be60954584e">
       <Group key="0">
         <Data key="Port Format" value="1,6" />
+      </Group>
+    </Group>
+    <Group key="e851a3b9-efb8-48be-bbb8-b303b216c393">
+      <Group key="0">
+        <Data key="Port Format" value="1,5" />
       </Group>
     </Group>
   </Group>

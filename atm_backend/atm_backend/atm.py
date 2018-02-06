@@ -96,7 +96,7 @@ class ATM(object):
             bool: False on failure
         """
         if not self.hsm.inserted():
-            logging.info('No card inserted')
+            logging.info('No hsm inserted')
             return False
 
         if not isinstance(amount, int):

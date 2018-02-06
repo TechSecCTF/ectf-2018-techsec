@@ -1,5 +1,5 @@
 /*******************************************************************************
-* File Name: Input_Pin_0.h  
+* File Name: Pin_Glitch.h  
 * Version 2.20
 *
 * Description:
@@ -15,8 +15,8 @@
 * the software package with which this file was provided.
 *******************************************************************************/
 
-#if !defined(CY_PINS_Input_Pin_0_ALIASES_H) /* Pins Input_Pin_0_ALIASES_H */
-#define CY_PINS_Input_Pin_0_ALIASES_H
+#if !defined(CY_PINS_Pin_Glitch_ALIASES_H) /* Pins Pin_Glitch_ALIASES_H */
+#define CY_PINS_Pin_Glitch_ALIASES_H
 
 #include "cytypes.h"
 #include "cyfitter.h"
@@ -26,17 +26,17 @@
 /***************************************
 *              Constants        
 ***************************************/
-#define Input_Pin_0_0			(Input_Pin_0__0__PC)
-#define Input_Pin_0_0_PS		(Input_Pin_0__0__PS)
-#define Input_Pin_0_0_PC		(Input_Pin_0__0__PC)
-#define Input_Pin_0_0_DR		(Input_Pin_0__0__DR)
-#define Input_Pin_0_0_SHIFT	(Input_Pin_0__0__SHIFT)
-#define Input_Pin_0_0_INTR	((uint16)((uint16)0x0003u << (Input_Pin_0__0__SHIFT*2u)))
+#define Pin_Glitch_0			(Pin_Glitch__0__PC)
+#define Pin_Glitch_0_PS		(Pin_Glitch__0__PS)
+#define Pin_Glitch_0_PC		(Pin_Glitch__0__PC)
+#define Pin_Glitch_0_DR		(Pin_Glitch__0__DR)
+#define Pin_Glitch_0_SHIFT	(Pin_Glitch__0__SHIFT)
+#define Pin_Glitch_0_INTR	((uint16)((uint16)0x0003u << (Pin_Glitch__0__SHIFT*2u)))
 
-#define Input_Pin_0_INTR_ALL	 ((uint16)(Input_Pin_0_0_INTR))
+#define Pin_Glitch_INTR_ALL	 ((uint16)(Pin_Glitch_0_INTR))
 
 
-#endif /* End Pins Input_Pin_0_ALIASES_H */
+#endif /* End Pins Pin_Glitch_ALIASES_H */
 
 
 /* [] END OF FILE */

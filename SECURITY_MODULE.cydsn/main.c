@@ -17,6 +17,7 @@
 #include "SW1.h"
 #include <strong-arm/sha256.h>
 #include <strong-arm/aes.h>
+#include <stdio.h>
 
 
 // SECURITY MODULE

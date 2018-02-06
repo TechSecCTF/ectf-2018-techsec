@@ -1,5 +1,5 @@
 -- Project:   \\VBOXSVR\raywang\Dropbox (MIT)\CTFs\eCTF\ectf-2018-techsec\SECURITY_MODULE.cydsn\SECURITY_MODULE.cyprj
--- Generated: 01/29/2018 12:55:19
+-- Generated: 02/06/2018 14:28:09
 -- PSoC Creator  4.1 Update 1
 
 ENTITY SECURITY_MODULE IS

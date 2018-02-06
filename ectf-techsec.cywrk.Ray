@@ -13,7 +13,7 @@
 <v>Output</v>
 </TreeKeys>
 <TreeStates>
-<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="ectf-techsec\AESTest">
+<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="ectf-techsec\CARD">
 <ExpandedNodeIds>
 <v>ectf-techsec</v>
 <v>ectf-techsec\AESTest</v>
@@ -114,32 +114,12 @@
 <v>ectf-techsec\strong-arm\Source Files\utils.c</v>
 </ExpandedNodeIds>
 <VisibleNodeIds>
-<v>ectf-techsec</v>
-<v>ectf-techsec\AESTest</v>
-<v>ectf-techsec\AESTest\TopDesign</v>
-<v>ectf-techsec\AESTest\AESTest.cydwr</v>
-<v>ectf-techsec\AESTest\AESTest.cydwr\Pins</v>
-<v>ectf-techsec\AESTest\AESTest.cydwr\Analog</v>
-<v>ectf-techsec\AESTest\AESTest.cydwr\Clocks</v>
-<v>ectf-techsec\AESTest\AESTest.cydwr\Interrupts</v>
-<v>ectf-techsec\AESTest\AESTest.cydwr\System</v>
-<v>ectf-techsec\AESTest\AESTest.cydwr\Directives</v>
-<v>ectf-techsec\AESTest\AESTest.cydwr\Flash Security</v>
-<v>ectf-techsec\AESTest\Header Files</v>
-<v>ectf-techsec\AESTest\Header Files\cyapicallbacks.h</v>
-<v>ectf-techsec\AESTest\Source Files</v>
-<v>ectf-techsec\AESTest\Source Files\main.c</v>
 <v>ectf-techsec\AESTest\Generated_Source</v>
 <v>ectf-techsec\AESTest\Generated_Source\PSoC4</v>
 <v>ectf-techsec\AESTest\Generated_Source\PSoC4\cy_boot</v>
 <v>ectf-techsec\AESTest\Generated_Source\PSoC4\cy_lfclk</v>
-<v>ectf-techsec\AESTest\Generated_Source\PSoC4\Input_0_Int</v>
-<v>ectf-techsec\AESTest\Generated_Source\PSoC4\Input_1_Int</v>
-<v>ectf-techsec\AESTest\Generated_Source\PSoC4\Input_Pin_0</v>
-<v>ectf-techsec\AESTest\Generated_Source\PSoC4\Input_Pin_1</v>
-<v>ectf-techsec\AESTest\Generated_Source\PSoC4\Output_Pin_0</v>
-<v>ectf-techsec\AESTest\Generated_Source\PSoC4\Output_Pin_1</v>
 <v>ectf-techsec\AESTest\Generated_Source\PSoC4\Pin_Blue</v>
+<v>ectf-techsec\AESTest\Generated_Source\PSoC4\Pin_Glitch</v>
 <v>ectf-techsec\AESTest\Generated_Source\PSoC4\USB_UART</v>
 <v>ectf-techsec\AESTest\Generated_Source\PSoC4\USB_UART_rx</v>
 <v>ectf-techsec\AESTest\Generated_Source\PSoC4\USB_UART_SCBCLK</v>
@@ -176,6 +156,26 @@
 <v>ectf-techsec\CARD\Source Files</v>
 <v>ectf-techsec\CARD\Source Files\main.c</v>
 <v>ectf-techsec\CARD\Source Files\usbserialprotocol.c</v>
+<v>ectf-techsec\CARD\Generated_Source</v>
+<v>ectf-techsec\SECURITY_MODULE</v>
+<v>ectf-techsec\SECURITY_MODULE\TopDesign</v>
+<v>ectf-techsec\SECURITY_MODULE\SECURITY_MODULE.cydwr</v>
+<v>ectf-techsec\SECURITY_MODULE\SECURITY_MODULE.cydwr\Pins</v>
+<v>ectf-techsec\SECURITY_MODULE\SECURITY_MODULE.cydwr\Analog</v>
+<v>ectf-techsec\SECURITY_MODULE\SECURITY_MODULE.cydwr\Clocks</v>
+<v>ectf-techsec\SECURITY_MODULE\SECURITY_MODULE.cydwr\Interrupts</v>
+<v>ectf-techsec\SECURITY_MODULE\SECURITY_MODULE.cydwr\System</v>
+<v>ectf-techsec\SECURITY_MODULE\SECURITY_MODULE.cydwr\Directives</v>
+<v>ectf-techsec\SECURITY_MODULE\SECURITY_MODULE.cydwr\Flash Security</v>
+<v>ectf-techsec\SECURITY_MODULE\Header Files</v>
+<v>ectf-techsec\SECURITY_MODULE\Header Files\cyapicallbacks.h</v>
+<v>ectf-techsec\SECURITY_MODULE\Header Files\usbserialprotocol.h</v>
+<v>ectf-techsec\SECURITY_MODULE\Source Files</v>
+<v>ectf-techsec\SECURITY_MODULE\Source Files\main.c</v>
+<v>ectf-techsec\SECURITY_MODULE\Source Files\usbserialprotocol.c</v>
+<v>ectf-techsec\SECURITY_MODULE\Generated_Source</v>
+<v>ectf-techsec\strong-arm</v>
+<v>ectf-techsec\strong-arm\Header Files</v>
 </VisibleNodeIds>
 </CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
 <CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="">
@@ -225,19 +225,11 @@
 <v>ectf-techsec\AESTest\CortexM0\ARM_GCC_541\Debug\Listing Files\cymetadata.lst</v>
 <v>ectf-techsec\AESTest\CortexM0\ARM_GCC_541\Debug\Listing Files\cyPm.lst</v>
 <v>ectf-techsec\AESTest\CortexM0\ARM_GCC_541\Debug\Listing Files\cyutils.lst</v>
-<v>ectf-techsec\AESTest\CortexM0\ARM_GCC_541\Debug\Listing Files\Input_0_Int.lst</v>
-<v>ectf-techsec\AESTest\CortexM0\ARM_GCC_541\Debug\Listing Files\Input_1_Int.lst</v>
-<v>ectf-techsec\AESTest\CortexM0\ARM_GCC_541\Debug\Listing Files\Input_Pin_0.lst</v>
-<v>ectf-techsec\AESTest\CortexM0\ARM_GCC_541\Debug\Listing Files\Input_Pin_0_PM.lst</v>
-<v>ectf-techsec\AESTest\CortexM0\ARM_GCC_541\Debug\Listing Files\Input_Pin_1.lst</v>
-<v>ectf-techsec\AESTest\CortexM0\ARM_GCC_541\Debug\Listing Files\Input_Pin_1_PM.lst</v>
 <v>ectf-techsec\AESTest\CortexM0\ARM_GCC_541\Debug\Listing Files\main.lst</v>
-<v>ectf-techsec\AESTest\CortexM0\ARM_GCC_541\Debug\Listing Files\Output_Pin_0.lst</v>
-<v>ectf-techsec\AESTest\CortexM0\ARM_GCC_541\Debug\Listing Files\Output_Pin_0_PM.lst</v>
-<v>ectf-techsec\AESTest\CortexM0\ARM_GCC_541\Debug\Listing Files\Output_Pin_1.lst</v>
-<v>ectf-techsec\AESTest\CortexM0\ARM_GCC_541\Debug\Listing Files\Output_Pin_1_PM.lst</v>
 <v>ectf-techsec\AESTest\CortexM0\ARM_GCC_541\Debug\Listing Files\Pin_Blue.lst</v>
 <v>ectf-techsec\AESTest\CortexM0\ARM_GCC_541\Debug\Listing Files\Pin_Blue_PM.lst</v>
+<v>ectf-techsec\AESTest\CortexM0\ARM_GCC_541\Debug\Listing Files\Pin_Glitch.lst</v>
+<v>ectf-techsec\AESTest\CortexM0\ARM_GCC_541\Debug\Listing Files\Pin_Glitch_PM.lst</v>
 <v>ectf-techsec\AESTest\CortexM0\ARM_GCC_541\Debug\Listing Files\USB_UART.lst</v>
 <v>ectf-techsec\AESTest\CortexM0\ARM_GCC_541\Debug\Listing Files\USB_UART_BOOT.lst</v>
 <v>ectf-techsec\AESTest\CortexM0\ARM_GCC_541\Debug\Listing Files\USB_UART_PM.lst</v>
@@ -385,7 +377,8 @@
 <v>ectf-techsec\AESTest\System Reference Guides</v>
 <v>ectf-techsec\AESTest\System Reference Guides\cy_boot_v5_60</v>
 <v>ectf-techsec\AESTest\System Reference Guides\cy_lfclk_v1_20</v>
-<v>ectf-techsec\AESTest\cy_pins_v2_20.pdf</v>
+<v>ectf-techsec\AESTest\cy_pins_v2_20</v>
+<v>ectf-techsec\AESTest\cy_pins_v2_20\cy_pins_v2_20.pdf</v>
 <v>ectf-techsec\AESTest\SCB_P4_v3_20.pdf</v>
 <v>ectf-techsec\CARD</v>
 <v>ectf-techsec\CARD\PSoC 4 Architecture TRM</v>
@@ -420,7 +413,8 @@
 <v>ectf-techsec\AESTest\System Reference Guides</v>
 <v>ectf-techsec\AESTest\System Reference Guides\cy_boot_v5_60</v>
 <v>ectf-techsec\AESTest\System Reference Guides\cy_lfclk_v1_20</v>
-<v>ectf-techsec\AESTest\cy_pins_v2_20.pdf</v>
+<v>ectf-techsec\AESTest\cy_pins_v2_20</v>
+<v>ectf-techsec\AESTest\cy_pins_v2_20\cy_pins_v2_20.pdf</v>
 <v>ectf-techsec\AESTest\SCB_P4_v3_20.pdf</v>
 <v>ectf-techsec\CARD</v>
 <v>ectf-techsec\CARD\PSoC 4 Architecture TRM</v>
@@ -465,6 +459,9 @@
 <listName />
 </dictName>
 <dictName v=".\CARD.cydsn\CARD.cyprj">
+<listName />
+</dictName>
+<dictName v=".\AESTest.cydsn\AESTest.cyprj">
 <listName />
 </dictName>
 </CyGuid_70084457-cd6a-4593-9ed0-7f6eeb432dc2>

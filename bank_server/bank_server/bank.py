@@ -101,7 +101,6 @@ class Bank(object):
             true_hmac = hmac.new(binascii.unhexlify(aes_key, enc_uuid + aes_iv, hashlib.sha256).hexdigest())
 
             if not hmac.compare_digest(card_hmac, true_hmac):
-                # Decrypt UUID and return it
                 return 'ERROR check_balance: invalid hmac on message'
         else:
             return 'ERROR could not lookup account \'' + str(card_id) + '\''

@@ -1,5 +1,5 @@
 /*******************************************************************************
-* File Name: Output_Pin_0.c  
+* File Name: Pin_Glitch.c  
 * Version 2.20
 *
 * Description:
@@ -13,35 +13,35 @@
 *******************************************************************************/
 
 #include "cytypes.h"
-#include "Output_Pin_0.h"
+#include "Pin_Glitch.h"
 
 
-#if defined(Output_Pin_0__PC)
-    #define Output_Pin_0_SetP4PinDriveMode(shift, mode)  \
+#if defined(Pin_Glitch__PC)
+    #define Pin_Glitch_SetP4PinDriveMode(shift, mode)  \
     do { \
-        Output_Pin_0_PC =   (Output_Pin_0_PC & \
-                                (uint32)(~(uint32)(Output_Pin_0_DRIVE_MODE_IND_MASK << \
-                                (Output_Pin_0_DRIVE_MODE_BITS * (shift))))) | \
+        Pin_Glitch_PC =   (Pin_Glitch_PC & \
+                                (uint32)(~(uint32)(Pin_Glitch_DRIVE_MODE_IND_MASK << \
+                                (Pin_Glitch_DRIVE_MODE_BITS * (shift))))) | \
                                 (uint32)((uint32)(mode) << \
-                                (Output_Pin_0_DRIVE_MODE_BITS * (shift))); \
+                                (Pin_Glitch_DRIVE_MODE_BITS * (shift))); \
     } while (0)
 #else
     #if (CY_PSOC4_4200L)
-        #define Output_Pin_0_SetP4PinDriveMode(shift, mode)  \
+        #define Pin_Glitch_SetP4PinDriveMode(shift, mode)  \
         do { \
-            Output_Pin_0_USBIO_CTRL_REG = (Output_Pin_0_USBIO_CTRL_REG & \
-                                    (uint32)(~(uint32)(Output_Pin_0_DRIVE_MODE_IND_MASK << \
-                                    (Output_Pin_0_DRIVE_MODE_BITS * (shift))))) | \
+            Pin_Glitch_USBIO_CTRL_REG = (Pin_Glitch_USBIO_CTRL_REG & \
+                                    (uint32)(~(uint32)(Pin_Glitch_DRIVE_MODE_IND_MASK << \
+                                    (Pin_Glitch_DRIVE_MODE_BITS * (shift))))) | \
                                     (uint32)((uint32)(mode) << \
-                                    (Output_Pin_0_DRIVE_MODE_BITS * (shift))); \
+                                    (Pin_Glitch_DRIVE_MODE_BITS * (shift))); \
         } while (0)
     #endif
 #endif
   
 
-#if defined(Output_Pin_0__PC) || (CY_PSOC4_4200L) 
+#if defined(Pin_Glitch__PC) || (CY_PSOC4_4200L) 
     /*******************************************************************************
-    * Function Name: Output_Pin_0_SetDriveMode
+    * Function Name: Pin_Glitch_SetDriveMode
     ****************************************************************************//**
     *
     * \brief Sets the drive mode for each of the Pins component's pins.
@@ -67,17 +67,17 @@
     *  APIs (primary method) or disable interrupts around this function.
     *
     * \funcusage
-    *  \snippet Output_Pin_0_SUT.c usage_Output_Pin_0_SetDriveMode
+    *  \snippet Pin_Glitch_SUT.c usage_Pin_Glitch_SetDriveMode
     *******************************************************************************/
-    void Output_Pin_0_SetDriveMode(uint8 mode)
+    void Pin_Glitch_SetDriveMode(uint8 mode)
     {
-		Output_Pin_0_SetP4PinDriveMode(Output_Pin_0__0__SHIFT, mode);
+		Pin_Glitch_SetP4PinDriveMode(Pin_Glitch__0__SHIFT, mode);
     }
 #endif
 
 
 /*******************************************************************************
-* Function Name: Output_Pin_0_Write
+* Function Name: Pin_Glitch_Write
 ****************************************************************************//**
 *
 * \brief Writes the value to the physical port (data output register), masking
@@ -106,18 +106,18 @@
 *  this function.
 *
 * \funcusage
-*  \snippet Output_Pin_0_SUT.c usage_Output_Pin_0_Write
+*  \snippet Pin_Glitch_SUT.c usage_Pin_Glitch_Write
 *******************************************************************************/
-void Output_Pin_0_Write(uint8 value)
+void Pin_Glitch_Write(uint8 value)
 {
-    uint8 drVal = (uint8)(Output_Pin_0_DR & (uint8)(~Output_Pin_0_MASK));
-    drVal = (drVal | ((uint8)(value << Output_Pin_0_SHIFT) & Output_Pin_0_MASK));
-    Output_Pin_0_DR = (uint32)drVal;
+    uint8 drVal = (uint8)(Pin_Glitch_DR & (uint8)(~Pin_Glitch_MASK));
+    drVal = (drVal | ((uint8)(value << Pin_Glitch_SHIFT) & Pin_Glitch_MASK));
+    Pin_Glitch_DR = (uint32)drVal;
 }
 
 
 /*******************************************************************************
-* Function Name: Output_Pin_0_Read
+* Function Name: Pin_Glitch_Read
 ****************************************************************************//**
 *
 * \brief Reads the associated physical port (pin status register) and masks 
@@ -131,16 +131,16 @@ void Output_Pin_0_Write(uint8 value)
 *  The current value for the pins in the component as a right justified number.
 *
 * \funcusage
-*  \snippet Output_Pin_0_SUT.c usage_Output_Pin_0_Read  
+*  \snippet Pin_Glitch_SUT.c usage_Pin_Glitch_Read  
 *******************************************************************************/
-uint8 Output_Pin_0_Read(void)
+uint8 Pin_Glitch_Read(void)
 {
-    return (uint8)((Output_Pin_0_PS & Output_Pin_0_MASK) >> Output_Pin_0_SHIFT);
+    return (uint8)((Pin_Glitch_PS & Pin_Glitch_MASK) >> Pin_Glitch_SHIFT);
 }
 
 
 /*******************************************************************************
-* Function Name: Output_Pin_0_ReadDataReg
+* Function Name: Pin_Glitch_ReadDataReg
 ****************************************************************************//**
 *
 * \brief Reads the associated physical port's data output register and masks 
@@ -149,8 +149,8 @@ uint8 Output_Pin_0_Read(void)
 *
 * The data output register controls the signal applied to the physical pin in 
 * conjunction with the drive mode parameter. This is not the same as the 
-* preferred Output_Pin_0_Read() API because the 
-* Output_Pin_0_ReadDataReg() reads the data register instead of the status 
+* preferred Pin_Glitch_Read() API because the 
+* Pin_Glitch_ReadDataReg() reads the data register instead of the status 
 * register. For output pins this is a useful function to determine the value 
 * just written to the pin.
 *
@@ -159,16 +159,16 @@ uint8 Output_Pin_0_Read(void)
 *  justified number for the component instance.
 *
 * \funcusage
-*  \snippet Output_Pin_0_SUT.c usage_Output_Pin_0_ReadDataReg 
+*  \snippet Pin_Glitch_SUT.c usage_Pin_Glitch_ReadDataReg 
 *******************************************************************************/
-uint8 Output_Pin_0_ReadDataReg(void)
+uint8 Pin_Glitch_ReadDataReg(void)
 {
-    return (uint8)((Output_Pin_0_DR & Output_Pin_0_MASK) >> Output_Pin_0_SHIFT);
+    return (uint8)((Pin_Glitch_DR & Pin_Glitch_MASK) >> Pin_Glitch_SHIFT);
 }
 
 
 /*******************************************************************************
-* Function Name: Output_Pin_0_SetInterruptMode
+* Function Name: Pin_Glitch_SetInterruptMode
 ****************************************************************************//**
 *
 * \brief Configures the interrupt mode for each of the Pins component's
@@ -181,12 +181,12 @@ uint8 Output_Pin_0_ReadDataReg(void)
 * \param position
 *  The pin position as listed in the Pins component. You may OR these to be 
 *  able to configure the interrupt mode of multiple pins within a Pins 
-*  component. Or you may use Output_Pin_0_INTR_ALL to configure the
+*  component. Or you may use Pin_Glitch_INTR_ALL to configure the
 *  interrupt mode of all the pins in the Pins component.       
-*  - Output_Pin_0_0_INTR       (First pin in the list)
-*  - Output_Pin_0_1_INTR       (Second pin in the list)
+*  - Pin_Glitch_0_INTR       (First pin in the list)
+*  - Pin_Glitch_1_INTR       (Second pin in the list)
 *  - ...
-*  - Output_Pin_0_INTR_ALL     (All pins in Pins component)
+*  - Pin_Glitch_INTR_ALL     (All pins in Pins component)
 *
 * \param mode
 *  Interrupt mode for the selected pins. Valid options are documented in
@@ -202,19 +202,19 @@ uint8 Output_Pin_0_ReadDataReg(void)
 *  port.
 *
 * \funcusage
-*  \snippet Output_Pin_0_SUT.c usage_Output_Pin_0_SetInterruptMode
+*  \snippet Pin_Glitch_SUT.c usage_Pin_Glitch_SetInterruptMode
 *******************************************************************************/
-void Output_Pin_0_SetInterruptMode(uint16 position, uint16 mode)
+void Pin_Glitch_SetInterruptMode(uint16 position, uint16 mode)
 {
     uint32 intrCfg;
     
-    intrCfg =  Output_Pin_0_INTCFG & (uint32)(~(uint32)position);
-    Output_Pin_0_INTCFG = intrCfg | ((uint32)position & (uint32)mode);
+    intrCfg =  Pin_Glitch_INTCFG & (uint32)(~(uint32)position);
+    Pin_Glitch_INTCFG = intrCfg | ((uint32)position & (uint32)mode);
 }
 
 
 /*******************************************************************************
-* Function Name: Output_Pin_0_ClearInterrupt
+* Function Name: Pin_Glitch_ClearInterrupt
 ****************************************************************************//**
 *
 * \brief Clears any active interrupts attached with the component and returns 
@@ -231,13 +231,13 @@ void Output_Pin_0_SetInterruptMode(uint16 position, uint16 mode)
 *  those associated with the Pins component.
 *
 * \funcusage
-*  \snippet Output_Pin_0_SUT.c usage_Output_Pin_0_ClearInterrupt
+*  \snippet Pin_Glitch_SUT.c usage_Pin_Glitch_ClearInterrupt
 *******************************************************************************/
-uint8 Output_Pin_0_ClearInterrupt(void)
+uint8 Pin_Glitch_ClearInterrupt(void)
 {
-	uint8 maskedStatus = (uint8)(Output_Pin_0_INTSTAT & Output_Pin_0_MASK);
-	Output_Pin_0_INTSTAT = maskedStatus;
-    return maskedStatus >> Output_Pin_0_SHIFT;
+	uint8 maskedStatus = (uint8)(Pin_Glitch_INTSTAT & Pin_Glitch_MASK);
+	Pin_Glitch_INTSTAT = maskedStatus;
+    return maskedStatus >> Pin_Glitch_SHIFT;
 }
 
 

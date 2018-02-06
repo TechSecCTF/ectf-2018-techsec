@@ -1,6 +1,6 @@
 (DELAYFILE
  (SDFVERSION "IEEE 1497 4.0")
- (DATE "2018-02-06T21:13:56Z")
+ (DATE "2018-02-06T21:40:42Z")
  (DESIGN "AESTest")
  (VENDOR "Cypress Semiconductor")
  (PROGRAM "PSoC Creator")
@@ -12,10 +12,6 @@
   (INSTANCE *)
   (DELAY
    (ABSOLUTE
-    (INTERCONNECT ClockBlock.hfclk Input_1_Int.clock (0.000:0.000:0.000))
-    (INTERCONNECT ClockBlock.hfclk Input_0_Int.clock (0.000:0.000:0.000))
-    (INTERCONNECT Input_Pin_0.interrupt Input_0_Int.interrupt (1.000:1.000:1.000))
-    (INTERCONNECT Input_Pin_1.interrupt Input_1_Int.interrupt (1.000:1.000:1.000))
     (INTERCONNECT ClockBlock.ff_div_2 \\USB_UART\:SCB\\.clock (0.000:0.000:0.000))
     (INTERCONNECT \\USB_UART\:rx\(0\)\\.fb \\USB_UART\:SCB\\.uart_rx (0.000:0.000:0.000))
     (INTERCONNECT \\USB_UART\:tx\(0\)\\.pad_out \\USB_UART\:tx\(0\)\\.pad_in (0.000:0.000:0.000))
@@ -24,10 +20,7 @@
     (INTERCONNECT \\USB_UART\:tx\(0\)_PAD\\ \\USB_UART\:tx\(0\)\\.pad_in (0.000:0.000:0.000))
     (INTERCONNECT \\USB_UART\:rx\(0\)_PAD\\ \\USB_UART\:rx\(0\)\\.pad_in (0.000:0.000:0.000))
     (INTERCONNECT Pin_Blue\(0\)_PAD Pin_Blue\(0\).pad_in (0.000:0.000:0.000))
-    (INTERCONNECT Input_Pin_1\(0\)_PAD Input_Pin_1\(0\).pad_in (0.000:0.000:0.000))
-    (INTERCONNECT Input_Pin_0\(0\)_PAD Input_Pin_0\(0\).pad_in (0.000:0.000:0.000))
-    (INTERCONNECT Output_Pin_0\(0\)_PAD Output_Pin_0\(0\).pad_in (0.000:0.000:0.000))
-    (INTERCONNECT Output_Pin_1\(0\)_PAD Output_Pin_1\(0\).pad_in (0.000:0.000:0.000))
+    (INTERCONNECT Pin_Glitch\(0\)_PAD Pin_Glitch\(0\).pad_in (0.000:0.000:0.000))
    )
   )
  )

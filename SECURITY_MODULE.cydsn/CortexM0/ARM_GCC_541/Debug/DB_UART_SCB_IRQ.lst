@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccciLiID.s 			page 1
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccW32Qxs.s 			page 1
 
 
    1              		.syntax unified
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccciLiID.s 			page 1
   28:Generated_Source\PSoC4/DB_UART_SCB_IRQ.c **** ********************************************************************************/
   29:Generated_Source\PSoC4/DB_UART_SCB_IRQ.c **** /* `#START DB_UART_SCB_IRQ_intc` */
   30:Generated_Source\PSoC4/DB_UART_SCB_IRQ.c **** 
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccciLiID.s 			page 2
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccW32Qxs.s 			page 2
 
 
   31:Generated_Source\PSoC4/DB_UART_SCB_IRQ.c **** /* `#END` */
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccciLiID.s 			page 1
   85:Generated_Source\PSoC4/DB_UART_SCB_IRQ.c **** *  Function definition example:
   86:Generated_Source\PSoC4/DB_UART_SCB_IRQ.c **** *   CY_ISR(MyISR)
   87:Generated_Source\PSoC4/DB_UART_SCB_IRQ.c **** *   {
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccciLiID.s 			page 3
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccW32Qxs.s 			page 3
 
 
   88:Generated_Source\PSoC4/DB_UART_SCB_IRQ.c **** *   }
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccciLiID.s 			page 1
  142:Generated_Source\PSoC4/DB_UART_SCB_IRQ.c **** *
  143:Generated_Source\PSoC4/DB_UART_SCB_IRQ.c **** * Summary:
  144:Generated_Source\PSoC4/DB_UART_SCB_IRQ.c **** *   The default Interrupt Service Routine for DB_UART_SCB_IRQ.
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccciLiID.s 			page 4
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccW32Qxs.s 			page 4
 
 
  145:Generated_Source\PSoC4/DB_UART_SCB_IRQ.c **** *
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccciLiID.s 			page 1
  180:Generated_Source\PSoC4/DB_UART_SCB_IRQ.c **** * 
  181:Generated_Source\PSoC4/DB_UART_SCB_IRQ.c **** *   When defining ISR functions, the CY_ISR and CY_ISR_PROTO macros should be 
  182:Generated_Source\PSoC4/DB_UART_SCB_IRQ.c **** *   used to provide consistent definition across compilers:
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccciLiID.s 			page 5
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccW32Qxs.s 			page 5
 
 
  183:Generated_Source\PSoC4/DB_UART_SCB_IRQ.c **** *
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccciLiID.s 			page 1
  210:Generated_Source\PSoC4/DB_UART_SCB_IRQ.c **** *   Gets the "address" of the current ISR vector for the Interrupt.
  211:Generated_Source\PSoC4/DB_UART_SCB_IRQ.c **** *
  212:Generated_Source\PSoC4/DB_UART_SCB_IRQ.c **** * Parameters:
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccciLiID.s 			page 6
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccW32Qxs.s 			page 6
 
 
  213:Generated_Source\PSoC4/DB_UART_SCB_IRQ.c **** *   None
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccciLiID.s 			page 1
  241:Generated_Source\PSoC4/DB_UART_SCB_IRQ.c **** *   priority: Priority of the interrupt, 0 being the highest priority
  242:Generated_Source\PSoC4/DB_UART_SCB_IRQ.c **** *             PSoC 3 and PSoC 5LP: Priority is from 0 to 7.
  243:Generated_Source\PSoC4/DB_UART_SCB_IRQ.c **** *             PSoC 4: Priority is from 0 to 3.
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccciLiID.s 			page 7
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccW32Qxs.s 			page 7
 
 
  244:Generated_Source\PSoC4/DB_UART_SCB_IRQ.c **** *
@@ -418,7 +418,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccciLiID.s 			page 1
  138              		.section	.text.DB_UART_SCB_IRQ_GetPriority,"ax",%progbits
  139              		.align	2
  140              		.global	DB_UART_SCB_IRQ_GetPriority
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccciLiID.s 			page 8
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccW32Qxs.s 			page 8
 
 
  141              		.code	16
@@ -478,7 +478,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccciLiID.s 			page 1
  168              		.cfi_endproc
  169              	.LFE7:
  170              		.size	DB_UART_SCB_IRQ_GetPriority, .-DB_UART_SCB_IRQ_GetPriority
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccciLiID.s 			page 9
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccW32Qxs.s 			page 9
 
 
  171              		.section	.text.DB_UART_SCB_IRQ_Enable,"ax",%progbits
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccciLiID.s 			page 1
  202              		.code	16
  203              		.thumb_func
  204              		.type	DB_UART_SCB_IRQ_GetState, %function
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccciLiID.s 			page 10
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccW32Qxs.s 			page 10
 
 
  205              	DB_UART_SCB_IRQ_GetState:
@@ -598,7 +598,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccciLiID.s 			page 1
  238              	DB_UART_SCB_IRQ_Disable:
  239              	.LFB10:
  330:Generated_Source\PSoC4/DB_UART_SCB_IRQ.c **** 
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccciLiID.s 			page 11
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccW32Qxs.s 			page 11
 
 
  331:Generated_Source\PSoC4/DB_UART_SCB_IRQ.c **** 
@@ -658,7 +658,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccciLiID.s 			page 1
  273              		.cfi_def_cfa_offset 8
  274              		.cfi_offset 4, -8
  275              		.cfi_offset 14, -4
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccciLiID.s 			page 12
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccW32Qxs.s 			page 12
 
 
   59:Generated_Source\PSoC4/DB_UART_SCB_IRQ.c **** 
@@ -718,7 +718,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccciLiID.s 			page 1
  322 0008 2000     		movs	r0, r4
  323 000a FFF7FEFF 		bl	DB_UART_SCB_IRQ_SetVector
  324              	.LVL14:
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccciLiID.s 			page 13
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccW32Qxs.s 			page 13
 
 
  108:Generated_Source\PSoC4/DB_UART_SCB_IRQ.c **** 
@@ -778,7 +778,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccciLiID.s 			page 1
  372              		.section	.text.DB_UART_SCB_IRQ_SetPending,"ax",%progbits
  373              		.align	2
  374              		.global	DB_UART_SCB_IRQ_SetPending
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccciLiID.s 			page 14
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccW32Qxs.s 			page 14
 
 
  375              		.code	16
@@ -838,7 +838,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccciLiID.s 			page 1
  403              		.code	16
  404              		.thumb_func
  405              		.type	DB_UART_SCB_IRQ_ClearPending, %function
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccciLiID.s 			page 15
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccW32Qxs.s 			page 15
 
 
  406              	DB_UART_SCB_IRQ_ClearPending:
@@ -898,29 +898,29 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccciLiID.s 			page 1
  435 0004 0400     		.2byte	0x4
  436 0006 00000000 		.4byte	.Ldebug_abbrev0
  437 000a 04       		.byte	0x4
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccciLiID.s 			page 16
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccW32Qxs.s 			page 16
 
 
  438 000b 01       		.uleb128 0x1
- 439 000c CA010000 		.4byte	.LASF36
+ 439 000c 1C020000 		.4byte	.LASF36
  440 0010 0C       		.byte	0xc
  441 0011 1A000000 		.4byte	.LASF37
- 442 0015 9F020000 		.4byte	.LASF38
+ 442 0015 94000000 		.4byte	.LASF38
  443 0019 00000000 		.4byte	.Ldebug_ranges0+0
  444 001d 00000000 		.4byte	0
  445 0021 00000000 		.4byte	.Ldebug_line0
  446 0025 02       		.uleb128 0x2
  447 0026 01       		.byte	0x1
  448 0027 06       		.byte	0x6
- 449 0028 35030000 		.4byte	.LASF0
+ 449 0028 2C030000 		.4byte	.LASF0
  450 002c 02       		.uleb128 0x2
  451 002d 01       		.byte	0x1
  452 002e 08       		.byte	0x8
- 453 002f C9000000 		.4byte	.LASF1
+ 453 002f 1B010000 		.4byte	.LASF1
  454 0033 02       		.uleb128 0x2
  455 0034 02       		.byte	0x2
  456 0035 05       		.byte	0x5
- 457 0036 95020000 		.4byte	.LASF2
+ 457 0036 E7020000 		.4byte	.LASF2
  458 003a 02       		.uleb128 0x2
  459 003b 02       		.byte	0x2
  460 003c 07       		.byte	0x7
@@ -928,19 +928,19 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccciLiID.s 			page 1
  462 0041 02       		.uleb128 0x2
  463 0042 04       		.byte	0x4
  464 0043 05       		.byte	0x5
- 465 0044 09030000 		.4byte	.LASF4
+ 465 0044 00030000 		.4byte	.LASF4
  466 0048 02       		.uleb128 0x2
  467 0049 04       		.byte	0x4
  468 004a 07       		.byte	0x7
- 469 004b E6000000 		.4byte	.LASF5
+ 469 004b 38010000 		.4byte	.LASF5
  470 004f 02       		.uleb128 0x2
  471 0050 08       		.byte	0x8
  472 0051 05       		.byte	0x5
- 473 0052 82020000 		.4byte	.LASF6
+ 473 0052 D4020000 		.4byte	.LASF6
  474 0056 02       		.uleb128 0x2
  475 0057 08       		.byte	0x8
  476 0058 07       		.byte	0x7
- 477 0059 B2000000 		.4byte	.LASF7
+ 477 0059 04010000 		.4byte	.LASF7
  478 005d 03       		.uleb128 0x3
  479 005e 04       		.byte	0x4
  480 005f 05       		.byte	0x5
@@ -948,41 +948,41 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccciLiID.s 			page 1
  482 0064 02       		.uleb128 0x2
  483 0065 04       		.byte	0x4
  484 0066 07       		.byte	0x7
- 485 0067 77010000 		.4byte	.LASF8
+ 485 0067 C9010000 		.4byte	.LASF8
  486 006b 04       		.uleb128 0x4
- 487 006c F8000000 		.4byte	.LASF9
+ 487 006c 4A010000 		.4byte	.LASF9
  488 0070 02       		.byte	0x2
  489 0071 B901     		.2byte	0x1b9
  490 0073 2C000000 		.4byte	0x2c
  491 0077 04       		.uleb128 0x4
- 492 0078 59010000 		.4byte	.LASF10
+ 492 0078 AB010000 		.4byte	.LASF10
  493 007c 02       		.byte	0x2
  494 007d BB01     		.2byte	0x1bb
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccciLiID.s 			page 17
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccW32Qxs.s 			page 17
 
 
  495 007f 48000000 		.4byte	0x48
  496 0083 02       		.uleb128 0x2
  497 0084 04       		.byte	0x4
  498 0085 04       		.byte	0x4
- 499 0086 AC000000 		.4byte	.LASF11
+ 499 0086 FE000000 		.4byte	.LASF11
  500 008a 02       		.uleb128 0x2
  501 008b 08       		.byte	0x8
  502 008c 04       		.byte	0x4
- 503 008d 3B010000 		.4byte	.LASF12
+ 503 008d 8D010000 		.4byte	.LASF12
  504 0091 02       		.uleb128 0x2
  505 0092 01       		.byte	0x1
  506 0093 08       		.byte	0x8
- 507 0094 90020000 		.4byte	.LASF13
+ 507 0094 E2020000 		.4byte	.LASF13
  508 0098 04       		.uleb128 0x4
- 509 0099 12030000 		.4byte	.LASF14
+ 509 0099 09030000 		.4byte	.LASF14
  510 009d 02       		.byte	0x2
  511 009e 6502     		.2byte	0x265
  512 00a0 A4000000 		.4byte	0xa4
  513 00a4 05       		.uleb128 0x5
  514 00a5 77000000 		.4byte	0x77
  515 00a9 04       		.uleb128 0x4
- 516 00aa BD010000 		.4byte	.LASF15
+ 516 00aa 0F020000 		.4byte	.LASF15
  517 00ae 02       		.byte	0x2
  518 00af 7502     		.2byte	0x275
  519 00b1 B5000000 		.4byte	0xb5
@@ -993,13 +993,13 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccciLiID.s 			page 1
  524 00bc 02       		.uleb128 0x2
  525 00bd 08       		.byte	0x8
  526 00be 04       		.byte	0x4
- 527 00bf 6D020000 		.4byte	.LASF16
+ 527 00bf BF020000 		.4byte	.LASF16
  528 00c3 02       		.uleb128 0x2
  529 00c4 04       		.byte	0x4
  530 00c5 07       		.byte	0x7
- 531 00c6 79020000 		.4byte	.LASF17
+ 531 00c6 CB020000 		.4byte	.LASF17
  532 00ca 08       		.uleb128 0x8
- 533 00cb 21010000 		.4byte	.LASF24
+ 533 00cb 73010000 		.4byte	.LASF24
  534 00cf 01       		.byte	0x1
  535 00d0 9F       		.byte	0x9f
  536 00d1 00000000 		.4byte	.LFB3
@@ -1016,9 +1016,9 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccciLiID.s 			page 1
  547 00eb 9C       		.byte	0x9c
  548 00ec FE000000 		.4byte	0xfe
  549 00f0 0A       		.uleb128 0xa
- 550 00f1 84010000 		.4byte	.LASF20
+ 550 00f1 D6010000 		.4byte	.LASF20
  551 00f5 01       		.byte	0x1
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccciLiID.s 			page 18
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccW32Qxs.s 			page 18
 
 
  552 00f6 C7       		.byte	0xc7
@@ -1027,7 +1027,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccciLiID.s 			page 1
  555 00fc 50       		.byte	0x50
  556 00fd 00       		.byte	0
  557 00fe 0B       		.uleb128 0xb
- 558 00ff FE000000 		.4byte	.LASF26
+ 558 00ff 50010000 		.4byte	.LASF26
  559 0103 01       		.byte	0x1
  560 0104 DB       		.byte	0xdb
  561 0105 A9000000 		.4byte	0xa9
@@ -1036,7 +1036,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccciLiID.s 			page 1
  564 0111 01       		.uleb128 0x1
  565 0112 9C       		.byte	0x9c
  566 0113 09       		.uleb128 0x9
- 567 0114 5D030000 		.4byte	.LASF19
+ 567 0114 54030000 		.4byte	.LASF19
  568 0118 01       		.byte	0x1
  569 0119 F9       		.byte	0xf9
  570 011a 00000000 		.4byte	.LFB6
@@ -1045,19 +1045,19 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccciLiID.s 			page 1
  573 0123 9C       		.byte	0x9c
  574 0124 65010000 		.4byte	0x165
  575 0128 0C       		.uleb128 0xc
- 576 0129 18010000 		.4byte	.LASF21
+ 576 0129 6A010000 		.4byte	.LASF21
  577 012d 01       		.byte	0x1
  578 012e F9       		.byte	0xf9
  579 012f 6B000000 		.4byte	0x6b
  580 0133 00000000 		.4byte	.LLST0
  581 0137 0D       		.uleb128 0xd
- 582 0138 D7000000 		.4byte	.LASF22
+ 582 0138 29010000 		.4byte	.LASF22
  583 013c 01       		.byte	0x1
  584 013d FB       		.byte	0xfb
  585 013e 6B000000 		.4byte	0x6b
  586 0142 21000000 		.4byte	.LLST1
  587 0146 0E       		.uleb128 0xe
- 588 0147 FA020000 		.4byte	.LASF23
+ 588 0147 F1020000 		.4byte	.LASF23
  589 014b 01       		.byte	0x1
  590 014c FC       		.byte	0xfc
  591 014d 77000000 		.4byte	0x77
@@ -1070,7 +1070,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccciLiID.s 			page 1
  598 0160 F9020000 		.4byte	0x2f9
  599 0164 00       		.byte	0
  600 0165 10       		.uleb128 0x10
- 601 0166 41030000 		.4byte	.LASF39
+ 601 0166 38030000 		.4byte	.LASF39
  602 016a 01       		.byte	0x1
  603 016b 1501     		.2byte	0x115
  604 016d 6B000000 		.4byte	0x6b
@@ -1078,25 +1078,25 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccciLiID.s 			page 1
  606 0175 10000000 		.4byte	.LFE7-.LFB7
  607 0179 01       		.uleb128 0x1
  608 017a 9C       		.byte	0x9c
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccciLiID.s 			page 19
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccW32Qxs.s 			page 19
 
 
  609 017b 9D010000 		.4byte	0x19d
  610 017f 11       		.uleb128 0x11
- 611 0180 18010000 		.4byte	.LASF21
+ 611 0180 6A010000 		.4byte	.LASF21
  612 0184 01       		.byte	0x1
  613 0185 1701     		.2byte	0x117
  614 0187 77000000 		.4byte	0x77
  615 018b 34000000 		.4byte	.LLST2
  616 018f 12       		.uleb128 0x12
- 617 0190 FA020000 		.4byte	.LASF23
+ 617 0190 F1020000 		.4byte	.LASF23
  618 0194 01       		.byte	0x1
  619 0195 1801     		.2byte	0x118
  620 0197 77000000 		.4byte	0x77
  621 019b 16       		.byte	0x16
  622 019c 00       		.byte	0
  623 019d 13       		.uleb128 0x13
- 624 019e 42010000 		.4byte	.LASF25
+ 624 019e 94010000 		.4byte	.LASF25
  625 01a2 01       		.byte	0x1
  626 01a3 3001     		.2byte	0x130
  627 01a5 00000000 		.4byte	.LFB8
@@ -1113,7 +1113,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccciLiID.s 			page 1
  638 01c3 01       		.uleb128 0x1
  639 01c4 9C       		.byte	0x9c
  640 01c5 13       		.uleb128 0x13
- 641 01c6 94000000 		.4byte	.LASF28
+ 641 01c6 E6000000 		.4byte	.LASF28
  642 01ca 01       		.byte	0x1
  643 01cb 5A01     		.2byte	0x15a
  644 01cd 00000000 		.4byte	.LFB10
@@ -1121,7 +1121,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccciLiID.s 			page 1
  646 01d5 01       		.uleb128 0x1
  647 01d6 9C       		.byte	0x9c
  648 01d7 09       		.uleb128 0x9
- 649 01d8 79030000 		.4byte	.LASF29
+ 649 01d8 70030000 		.4byte	.LASF29
  650 01dc 01       		.byte	0x1
  651 01dd 38       		.byte	0x38
  652 01de 00000000 		.4byte	.LFB0
@@ -1138,7 +1138,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccciLiID.s 			page 1
  663 01fe 0C020000 		.4byte	0x20c
  664 0202 16       		.uleb128 0x16
  665 0203 01       		.uleb128 0x1
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccciLiID.s 			page 20
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccW32Qxs.s 			page 20
 
 
  666 0204 50       		.byte	0x50
@@ -1170,7 +1170,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccciLiID.s 			page 1
  692 0239 9C       		.byte	0x9c
  693 023a 87020000 		.4byte	0x287
  694 023e 0C       		.uleb128 0xc
- 695 023f 84010000 		.4byte	.LASF20
+ 695 023f D6010000 		.4byte	.LASF20
  696 0243 01       		.byte	0x1
  697 0244 63       		.byte	0x63
  698 0245 A9000000 		.4byte	0xa9
@@ -1198,7 +1198,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccciLiID.s 			page 1
  720 0279 50       		.byte	0x50
  721 027a 01       		.uleb128 0x1
  722 027b 33       		.byte	0x33
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccciLiID.s 			page 21
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccW32Qxs.s 			page 21
 
 
  723 027c 00       		.byte	0
@@ -1207,7 +1207,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccciLiID.s 			page 1
  726 0282 9D010000 		.4byte	0x19d
  727 0286 00       		.byte	0
  728 0287 09       		.uleb128 0x9
- 729 0288 58020000 		.4byte	.LASF31
+ 729 0288 AA020000 		.4byte	.LASF31
  730 028c 01       		.byte	0x1
  731 028d 81       		.byte	0x81
  732 028e 00000000 		.4byte	.LFB2
@@ -1223,7 +1223,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccciLiID.s 			page 1
  742 02aa DB000000 		.4byte	0xdb
  743 02ae 00       		.byte	0
  744 02af 13       		.uleb128 0x13
- 745 02b0 A2010000 		.4byte	.LASF32
+ 745 02b0 F4010000 		.4byte	.LASF32
  746 02b4 01       		.byte	0x1
  747 02b5 7501     		.2byte	0x175
  748 02b7 00000000 		.4byte	.LFB11
@@ -1231,7 +1231,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccciLiID.s 			page 1
  750 02bf 01       		.uleb128 0x1
  751 02c0 9C       		.byte	0x9c
  752 02c1 13       		.uleb128 0x13
- 753 02c2 18030000 		.4byte	.LASF33
+ 753 02c2 0F030000 		.4byte	.LASF33
  754 02c6 01       		.byte	0x1
  755 02c7 8E01     		.2byte	0x18e
  756 02c9 00000000 		.4byte	.LFB12
@@ -1251,14 +1251,14 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccciLiID.s 			page 1
  770 02e9 21       		.byte	0x21
  771 02ea D3020000 		.4byte	0x2d3
  772 02ee 1A       		.uleb128 0x1a
- 773 02ef 60010000 		.4byte	.LASF34
- 774 02f3 60010000 		.4byte	.LASF34
+ 773 02ef B2010000 		.4byte	.LASF34
+ 774 02f3 B2010000 		.4byte	.LASF34
  775 02f7 03       		.byte	0x3
  776 02f8 E5       		.byte	0xe5
  777 02f9 1A       		.uleb128 0x1a
- 778 02fa 8C010000 		.4byte	.LASF35
- 779 02fe 8C010000 		.4byte	.LASF35
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccciLiID.s 			page 22
+ 778 02fa DE010000 		.4byte	.LASF35
+ 779 02fe DE010000 		.4byte	.LASF35
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccW32Qxs.s 			page 22
 
 
  780 0302 03       		.byte	0x3
@@ -1318,7 +1318,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccciLiID.s 			page 1
  834 0031 05       		.uleb128 0x5
  835 0032 49       		.uleb128 0x49
  836 0033 13       		.uleb128 0x13
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccciLiID.s 			page 23
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccW32Qxs.s 			page 23
 
 
  837 0034 00       		.byte	0
@@ -1378,7 +1378,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccciLiID.s 			page 1
  891 006b 0E       		.uleb128 0xe
  892 006c 3A       		.uleb128 0x3a
  893 006d 0B       		.uleb128 0xb
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccciLiID.s 			page 24
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccW32Qxs.s 			page 24
 
 
  894 006e 3B       		.uleb128 0x3b
@@ -1438,7 +1438,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccciLiID.s 			page 1
  948 00a6 00       		.byte	0
  949 00a7 00       		.byte	0
  950 00a8 0C       		.uleb128 0xc
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccciLiID.s 			page 25
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccW32Qxs.s 			page 25
 
 
  951 00a9 05       		.uleb128 0x5
@@ -1498,7 +1498,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccciLiID.s 			page 1
  1005 00e1 2E       		.uleb128 0x2e
  1006 00e2 01       		.byte	0x1
  1007 00e3 3F       		.uleb128 0x3f
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccciLiID.s 			page 26
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccW32Qxs.s 			page 26
 
 
  1008 00e4 19       		.uleb128 0x19
@@ -1558,7 +1558,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccciLiID.s 			page 1
  1062 011b 2E       		.uleb128 0x2e
  1063 011c 00       		.byte	0
  1064 011d 3F       		.uleb128 0x3f
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccciLiID.s 			page 27
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccW32Qxs.s 			page 27
 
 
  1065 011e 19       		.uleb128 0x19
@@ -1618,7 +1618,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccciLiID.s 			page 1
  1119 0158 00       		.byte	0
  1120 0159 16       		.uleb128 0x16
  1121 015a 8A8201   		.uleb128 0x410a
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccciLiID.s 			page 28
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccW32Qxs.s 			page 28
 
 
  1122 015d 00       		.byte	0
@@ -1678,7 +1678,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccciLiID.s 			page 1
  1176 0194 0B       		.uleb128 0xb
  1177 0195 3B       		.uleb128 0x3b
  1178 0196 0B       		.uleb128 0xb
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccciLiID.s 			page 29
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccW32Qxs.s 			page 29
 
 
  1179 0197 00       		.byte	0
@@ -1738,7 +1738,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccciLiID.s 			page 1
  1233 0077 01       		.uleb128 0x1
  1234 0078 50       		.byte	0x50
  1235 0079 9F       		.byte	0x9f
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccciLiID.s 			page 30
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccW32Qxs.s 			page 30
 
 
  1236 007a 00000000 		.4byte	0
@@ -1798,7 +1798,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccciLiID.s 			page 1
  1290 0038 00000000 		.4byte	.LFB10
  1291 003c 10000000 		.4byte	.LFE10
  1292 0040 00000000 		.4byte	.LFB0
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccciLiID.s 			page 31
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccW32Qxs.s 			page 31
 
 
  1293 0044 1C000000 		.4byte	.LFE0
@@ -1854,200 +1854,200 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccciLiID.s 			page 1
  1318      5343425F 
  1318      4952515F 
  1318      47657453 
- 1319              	.LASF28:
- 1320 0094 44425F55 		.ascii	"DB_UART_SCB_IRQ_Disable\000"
- 1320      4152545F 
- 1320      5343425F 
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccciLiID.s 			page 32
+ 1319              	.LASF38:
+ 1320 0094 5C5C5642 		.ascii	"\\\\VBOXSVR\\raywang\\Dropbox (MIT)\\CTFs\\eCTF\\ec"
+ 1320      4F585356 
+ 1320      525C7261 
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccW32Qxs.s 			page 32
 
 
- 1320      4952515F 
- 1320      44697361 
- 1321              	.LASF11:
- 1322 00ac 666C6F61 		.ascii	"float\000"
- 1322      7400
- 1323              	.LASF7:
- 1324 00b2 6C6F6E67 		.ascii	"long long unsigned int\000"
- 1324      206C6F6E 
- 1324      6720756E 
- 1324      7369676E 
- 1324      65642069 
- 1325              	.LASF1:
- 1326 00c9 756E7369 		.ascii	"unsigned char\000"
- 1326      676E6564 
- 1326      20636861 
- 1326      7200
- 1327              	.LASF22:
- 1328 00d7 696E7465 		.ascii	"interruptState\000"
- 1328      72727570 
- 1328      74537461 
- 1328      746500
- 1329              	.LASF5:
- 1330 00e6 6C6F6E67 		.ascii	"long unsigned int\000"
- 1330      20756E73 
- 1330      69676E65 
- 1330      6420696E 
- 1330      7400
- 1331              	.LASF9:
- 1332 00f8 75696E74 		.ascii	"uint8\000"
- 1332      3800
- 1333              	.LASF26:
- 1334 00fe 44425F55 		.ascii	"DB_UART_SCB_IRQ_GetVector\000"
- 1334      4152545F 
- 1334      5343425F 
- 1334      4952515F 
- 1334      47657456 
- 1335              	.LASF21:
- 1336 0118 7072696F 		.ascii	"priority\000"
- 1336      72697479 
- 1336      00
- 1337              	.LASF24:
- 1338 0121 44425F55 		.ascii	"DB_UART_SCB_IRQ_Interrupt\000"
- 1338      4152545F 
- 1338      5343425F 
- 1338      4952515F 
- 1338      496E7465 
- 1339              	.LASF12:
- 1340 013b 646F7562 		.ascii	"double\000"
- 1340      6C6500
- 1341              	.LASF25:
- 1342 0142 44425F55 		.ascii	"DB_UART_SCB_IRQ_Enable\000"
- 1342      4152545F 
- 1342      5343425F 
- 1342      4952515F 
- 1342      456E6162 
- 1343              	.LASF10:
- 1344 0159 75696E74 		.ascii	"uint32\000"
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccciLiID.s 			page 33
+ 1320      7977616E 
+ 1320      675C4472 
+ 1321 00c0 74662D32 		.ascii	"tf-2018-techsec\\SECURITY_MODULE.cydsn\000"
+ 1321      3031382D 
+ 1321      74656368 
+ 1321      7365635C 
+ 1321      53454355 
+ 1322              	.LASF28:
+ 1323 00e6 44425F55 		.ascii	"DB_UART_SCB_IRQ_Disable\000"
+ 1323      4152545F 
+ 1323      5343425F 
+ 1323      4952515F 
+ 1323      44697361 
+ 1324              	.LASF11:
+ 1325 00fe 666C6F61 		.ascii	"float\000"
+ 1325      7400
+ 1326              	.LASF7:
+ 1327 0104 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 1327      206C6F6E 
+ 1327      6720756E 
+ 1327      7369676E 
+ 1327      65642069 
+ 1328              	.LASF1:
+ 1329 011b 756E7369 		.ascii	"unsigned char\000"
+ 1329      676E6564 
+ 1329      20636861 
+ 1329      7200
+ 1330              	.LASF22:
+ 1331 0129 696E7465 		.ascii	"interruptState\000"
+ 1331      72727570 
+ 1331      74537461 
+ 1331      746500
+ 1332              	.LASF5:
+ 1333 0138 6C6F6E67 		.ascii	"long unsigned int\000"
+ 1333      20756E73 
+ 1333      69676E65 
+ 1333      6420696E 
+ 1333      7400
+ 1334              	.LASF9:
+ 1335 014a 75696E74 		.ascii	"uint8\000"
+ 1335      3800
+ 1336              	.LASF26:
+ 1337 0150 44425F55 		.ascii	"DB_UART_SCB_IRQ_GetVector\000"
+ 1337      4152545F 
+ 1337      5343425F 
+ 1337      4952515F 
+ 1337      47657456 
+ 1338              	.LASF21:
+ 1339 016a 7072696F 		.ascii	"priority\000"
+ 1339      72697479 
+ 1339      00
+ 1340              	.LASF24:
+ 1341 0173 44425F55 		.ascii	"DB_UART_SCB_IRQ_Interrupt\000"
+ 1341      4152545F 
+ 1341      5343425F 
+ 1341      4952515F 
+ 1341      496E7465 
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccW32Qxs.s 			page 33
 
 
- 1344      333200
- 1345              	.LASF34:
- 1346 0160 4379456E 		.ascii	"CyEnterCriticalSection\000"
- 1346      74657243 
- 1346      72697469 
- 1346      63616C53 
- 1346      65637469 
- 1347              	.LASF8:
- 1348 0177 756E7369 		.ascii	"unsigned int\000"
- 1348      676E6564 
- 1348      20696E74 
- 1348      00
- 1349              	.LASF20:
- 1350 0184 61646472 		.ascii	"address\000"
- 1350      65737300 
- 1351              	.LASF35:
- 1352 018c 43794578 		.ascii	"CyExitCriticalSection\000"
- 1352      69744372 
- 1352      69746963 
- 1352      616C5365 
- 1352      6374696F 
- 1353              	.LASF32:
- 1354 01a2 44425F55 		.ascii	"DB_UART_SCB_IRQ_SetPending\000"
- 1354      4152545F 
- 1354      5343425F 
- 1354      4952515F 
- 1354      53657450 
- 1355              	.LASF15:
- 1356 01bd 63796973 		.ascii	"cyisraddress\000"
- 1356      72616464 
- 1356      72657373 
- 1356      00
- 1357              	.LASF36:
- 1358 01ca 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
- 1358      43313120 
- 1358      352E342E 
- 1358      31203230 
- 1358      31363036 
- 1359 01fd 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m0 -mthumb -g -O"
- 1359      20726576 
- 1359      6973696F 
- 1359      6E203233 
- 1359      37373135 
- 1360 0230 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
- 1360      66756E63 
- 1360      74696F6E 
- 1360      2D736563 
- 1360      74696F6E 
- 1361              	.LASF31:
- 1362 0258 44425F55 		.ascii	"DB_UART_SCB_IRQ_Stop\000"
- 1362      4152545F 
- 1362      5343425F 
- 1362      4952515F 
- 1362      53746F70 
- 1363              	.LASF16:
- 1364 026d 6C6F6E67 		.ascii	"long double\000"
- 1364      20646F75 
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccciLiID.s 			page 34
+ 1342              	.LASF12:
+ 1343 018d 646F7562 		.ascii	"double\000"
+ 1343      6C6500
+ 1344              	.LASF25:
+ 1345 0194 44425F55 		.ascii	"DB_UART_SCB_IRQ_Enable\000"
+ 1345      4152545F 
+ 1345      5343425F 
+ 1345      4952515F 
+ 1345      456E6162 
+ 1346              	.LASF10:
+ 1347 01ab 75696E74 		.ascii	"uint32\000"
+ 1347      333200
+ 1348              	.LASF34:
+ 1349 01b2 4379456E 		.ascii	"CyEnterCriticalSection\000"
+ 1349      74657243 
+ 1349      72697469 
+ 1349      63616C53 
+ 1349      65637469 
+ 1350              	.LASF8:
+ 1351 01c9 756E7369 		.ascii	"unsigned int\000"
+ 1351      676E6564 
+ 1351      20696E74 
+ 1351      00
+ 1352              	.LASF20:
+ 1353 01d6 61646472 		.ascii	"address\000"
+ 1353      65737300 
+ 1354              	.LASF35:
+ 1355 01de 43794578 		.ascii	"CyExitCriticalSection\000"
+ 1355      69744372 
+ 1355      69746963 
+ 1355      616C5365 
+ 1355      6374696F 
+ 1356              	.LASF32:
+ 1357 01f4 44425F55 		.ascii	"DB_UART_SCB_IRQ_SetPending\000"
+ 1357      4152545F 
+ 1357      5343425F 
+ 1357      4952515F 
+ 1357      53657450 
+ 1358              	.LASF15:
+ 1359 020f 63796973 		.ascii	"cyisraddress\000"
+ 1359      72616464 
+ 1359      72657373 
+ 1359      00
+ 1360              	.LASF36:
+ 1361 021c 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 1361      43313120 
+ 1361      352E342E 
+ 1361      31203230 
+ 1361      31363036 
+ 1362 024f 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m0 -mthumb -g -O"
+ 1362      20726576 
+ 1362      6973696F 
+ 1362      6E203233 
+ 1362      37373135 
+ 1363 0282 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
+ 1363      66756E63 
+ 1363      74696F6E 
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccW32Qxs.s 			page 34
 
 
- 1364      626C6500 
- 1365              	.LASF17:
- 1366 0279 73697A65 		.ascii	"sizetype\000"
- 1366      74797065 
- 1366      00
- 1367              	.LASF6:
- 1368 0282 6C6F6E67 		.ascii	"long long int\000"
- 1368      206C6F6E 
- 1368      6720696E 
- 1368      7400
- 1369              	.LASF13:
- 1370 0290 63686172 		.ascii	"char\000"
- 1370      00
- 1371              	.LASF2:
- 1372 0295 73686F72 		.ascii	"short int\000"
- 1372      7420696E 
- 1372      7400
- 1373              	.LASF38:
- 1374 029f 5C5C5642 		.ascii	"\\\\VBOXSVR\\raywang\\Dropbox (MIT)\\CTFs\\eCTF\\20"
- 1374      4F585356 
- 1374      525C7261 
- 1374      7977616E 
- 1374      675C4472 
- 1375 02cb 31382D65 		.ascii	"18-ectf-insecure-example\\SECURITY_MODULE.cydsn\000"
- 1375      6374662D 
- 1375      696E7365 
- 1375      63757265 
- 1375      2D657861 
+ 1363      2D736563 
+ 1363      74696F6E 
+ 1364              	.LASF31:
+ 1365 02aa 44425F55 		.ascii	"DB_UART_SCB_IRQ_Stop\000"
+ 1365      4152545F 
+ 1365      5343425F 
+ 1365      4952515F 
+ 1365      53746F70 
+ 1366              	.LASF16:
+ 1367 02bf 6C6F6E67 		.ascii	"long double\000"
+ 1367      20646F75 
+ 1367      626C6500 
+ 1368              	.LASF17:
+ 1369 02cb 73697A65 		.ascii	"sizetype\000"
+ 1369      74797065 
+ 1369      00
+ 1370              	.LASF6:
+ 1371 02d4 6C6F6E67 		.ascii	"long long int\000"
+ 1371      206C6F6E 
+ 1371      6720696E 
+ 1371      7400
+ 1372              	.LASF13:
+ 1373 02e2 63686172 		.ascii	"char\000"
+ 1373      00
+ 1374              	.LASF2:
+ 1375 02e7 73686F72 		.ascii	"short int\000"
+ 1375      7420696E 
+ 1375      7400
  1376              	.LASF23:
- 1377 02fa 7072696F 		.ascii	"priorityOffset\000"
+ 1377 02f1 7072696F 		.ascii	"priorityOffset\000"
  1377      72697479 
  1377      4F666673 
  1377      657400
  1378              	.LASF4:
- 1379 0309 6C6F6E67 		.ascii	"long int\000"
+ 1379 0300 6C6F6E67 		.ascii	"long int\000"
  1379      20696E74 
  1379      00
  1380              	.LASF14:
- 1381 0312 72656733 		.ascii	"reg32\000"
+ 1381 0309 72656733 		.ascii	"reg32\000"
  1381      3200
  1382              	.LASF33:
- 1383 0318 44425F55 		.ascii	"DB_UART_SCB_IRQ_ClearPending\000"
+ 1383 030f 44425F55 		.ascii	"DB_UART_SCB_IRQ_ClearPending\000"
  1383      4152545F 
  1383      5343425F 
  1383      4952515F 
  1383      436C6561 
  1384              	.LASF0:
- 1385 0335 7369676E 		.ascii	"signed char\000"
+ 1385 032c 7369676E 		.ascii	"signed char\000"
  1385      65642063 
  1385      68617200 
  1386              	.LASF39:
- 1387 0341 44425F55 		.ascii	"DB_UART_SCB_IRQ_GetPriority\000"
+ 1387 0338 44425F55 		.ascii	"DB_UART_SCB_IRQ_GetPriority\000"
  1387      4152545F 
  1387      5343425F 
  1387      4952515F 
  1387      47657450 
  1388              	.LASF19:
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccciLiID.s 			page 35
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccW32Qxs.s 			page 35
 
 
- 1389 035d 44425F55 		.ascii	"DB_UART_SCB_IRQ_SetPriority\000"
+ 1389 0354 44425F55 		.ascii	"DB_UART_SCB_IRQ_SetPriority\000"
  1389      4152545F 
  1389      5343425F 
  1389      4952515F 
  1389      53657450 
  1390              	.LASF29:
- 1391 0379 44425F55 		.ascii	"DB_UART_SCB_IRQ_Start\000"
+ 1391 0370 44425F55 		.ascii	"DB_UART_SCB_IRQ_Start\000"
  1391      4152545F 
  1391      5343425F 
  1391      4952515F 

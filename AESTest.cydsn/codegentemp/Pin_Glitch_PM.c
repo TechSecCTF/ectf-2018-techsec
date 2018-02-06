@@ -1,5 +1,5 @@
 /*******************************************************************************
-* File Name: Output_Pin_1.c  
+* File Name: Pin_Glitch.c  
 * Version 2.20
 *
 * Description:
@@ -15,13 +15,13 @@
 *******************************************************************************/
 
 #include "cytypes.h"
-#include "Output_Pin_1.h"
+#include "Pin_Glitch.h"
 
-static Output_Pin_1_BACKUP_STRUCT  Output_Pin_1_backup = {0u, 0u, 0u};
+static Pin_Glitch_BACKUP_STRUCT  Pin_Glitch_backup = {0u, 0u, 0u};
 
 
 /*******************************************************************************
-* Function Name: Output_Pin_1_Sleep
+* Function Name: Pin_Glitch_Sleep
 ****************************************************************************//**
 *
 * \brief Stores the pin configuration and prepares the pin for entering chip 
@@ -39,30 +39,30 @@ static Output_Pin_1_BACKUP_STRUCT  Output_Pin_1_backup = {0u, 0u, 0u};
 *  deep-sleep/hibernate modes.
 *
 * \funcusage
-*  \snippet Output_Pin_1_SUT.c usage_Output_Pin_1_Sleep_Wakeup
+*  \snippet Pin_Glitch_SUT.c usage_Pin_Glitch_Sleep_Wakeup
 *******************************************************************************/
-void Output_Pin_1_Sleep(void)
+void Pin_Glitch_Sleep(void)
 {
-    #if defined(Output_Pin_1__PC)
-        Output_Pin_1_backup.pcState = Output_Pin_1_PC;
+    #if defined(Pin_Glitch__PC)
+        Pin_Glitch_backup.pcState = Pin_Glitch_PC;
     #else
         #if (CY_PSOC4_4200L)
             /* Save the regulator state and put the PHY into suspend mode */
-            Output_Pin_1_backup.usbState = Output_Pin_1_CR1_REG;
-            Output_Pin_1_USB_POWER_REG |= Output_Pin_1_USBIO_ENTER_SLEEP;
-            Output_Pin_1_CR1_REG &= Output_Pin_1_USBIO_CR1_OFF;
+            Pin_Glitch_backup.usbState = Pin_Glitch_CR1_REG;
+            Pin_Glitch_USB_POWER_REG |= Pin_Glitch_USBIO_ENTER_SLEEP;
+            Pin_Glitch_CR1_REG &= Pin_Glitch_USBIO_CR1_OFF;
         #endif
     #endif
-    #if defined(CYIPBLOCK_m0s8ioss_VERSION) && defined(Output_Pin_1__SIO)
-        Output_Pin_1_backup.sioState = Output_Pin_1_SIO_REG;
+    #if defined(CYIPBLOCK_m0s8ioss_VERSION) && defined(Pin_Glitch__SIO)
+        Pin_Glitch_backup.sioState = Pin_Glitch_SIO_REG;
         /* SIO requires unregulated output buffer and single ended input buffer */
-        Output_Pin_1_SIO_REG &= (uint32)(~Output_Pin_1_SIO_LPM_MASK);
+        Pin_Glitch_SIO_REG &= (uint32)(~Pin_Glitch_SIO_LPM_MASK);
     #endif  
 }
 
 
 /*******************************************************************************
-* Function Name: Output_Pin_1_Wakeup
+* Function Name: Pin_Glitch_Wakeup
 ****************************************************************************//**
 *
 * \brief Restores the pin configuration that was saved during Pin_Sleep(). This 
@@ -77,22 +77,22 @@ void Output_Pin_1_Sleep(void)
 *  None
 *  
 * \funcusage
-*  Refer to Output_Pin_1_Sleep() for an example usage.
+*  Refer to Pin_Glitch_Sleep() for an example usage.
 *******************************************************************************/
-void Output_Pin_1_Wakeup(void)
+void Pin_Glitch_Wakeup(void)
 {
-    #if defined(Output_Pin_1__PC)
-        Output_Pin_1_PC = Output_Pin_1_backup.pcState;
+    #if defined(Pin_Glitch__PC)
+        Pin_Glitch_PC = Pin_Glitch_backup.pcState;
     #else
         #if (CY_PSOC4_4200L)
             /* Restore the regulator state and come out of suspend mode */
-            Output_Pin_1_USB_POWER_REG &= Output_Pin_1_USBIO_EXIT_SLEEP_PH1;
-            Output_Pin_1_CR1_REG = Output_Pin_1_backup.usbState;
-            Output_Pin_1_USB_POWER_REG &= Output_Pin_1_USBIO_EXIT_SLEEP_PH2;
+            Pin_Glitch_USB_POWER_REG &= Pin_Glitch_USBIO_EXIT_SLEEP_PH1;
+            Pin_Glitch_CR1_REG = Pin_Glitch_backup.usbState;
+            Pin_Glitch_USB_POWER_REG &= Pin_Glitch_USBIO_EXIT_SLEEP_PH2;
         #endif
     #endif
-    #if defined(CYIPBLOCK_m0s8ioss_VERSION) && defined(Output_Pin_1__SIO)
-        Output_Pin_1_SIO_REG = Output_Pin_1_backup.sioState;
+    #if defined(CYIPBLOCK_m0s8ioss_VERSION) && defined(Pin_Glitch__SIO)
+        Pin_Glitch_SIO_REG = Pin_Glitch_backup.sioState;
     #endif
 }
 
