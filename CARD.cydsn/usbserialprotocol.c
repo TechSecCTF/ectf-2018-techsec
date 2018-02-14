@@ -75,8 +75,8 @@ void syncConnection(int prov)
         pullMessage(message);                               // 1)
         
         if (strcmp((char*)message, RDY_MSG_RECV)) {
-            pushMessage(message, strlen((char*)message));   // 2) bad
             strcpy((char*)message, RDY_BAD);
+            pushMessage(message, strlen((char*)message));   // 2) bad
         } else if (prov) {
             pushMessage((uint8*)RDY_MSG_PROV, 
                         strlen(RDY_MSG_PROV));              // 2) good prov

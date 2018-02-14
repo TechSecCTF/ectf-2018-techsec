@@ -110,7 +110,8 @@ CY_ISR(Reset_ISR)
 void provision()
 {
     int i;
-    uint8 message[77], numbills;
+    uint8 message[109] = {0x00}
+    uint8 numbills;
     
     for(i = 0; i < 128; i++) {
         PIGGY_BANK_Write((uint8*)EMPTY_BILL, MONEY[i], BILL_LEN);
@@ -119,7 +120,6 @@ void provision()
     // synchronize with atm
     syncConnection(SYNC_PROV);
  
-    memset(message, 0u, 77);
     strcpy((char*)message, PROV_MSG);
     pushMessage(message, (uint8)strlen(PROV_MSG));
     
@@ -127,27 +127,27 @@ void provision()
     // Set blob
     pullMessage(message);
 
-    char hex_bank_key[32];
+    char hex_bank_key[64];
     char hex_nonce[8];
-    memcpy(hex_bank_key, message, 32);
-    memcpy(hex_nonce, message+32, 8);
+    memcpy(hex_bank_key, message, sizeof(hex_bank_key));
+    memcpy(hex_nonce, message + sizeof(hex_bank_key), sizeof(hex_nonce));
 
-    uint8 bank_key[16];
+    uint8 bank_key[32];
     uint8 nonce[4];
 
-    for(int i = 0; i < 16; ++i)
+    for(int i = 0; i < 32; ++i)
     {
         bank_key[i] = hex2byte(hex_bank_key[2*i], hex_bank_key[2*i + 1]);
     }
 
-    for(int i = 0; i < 16; ++i)
+    for(int i = 0; i < 4; ++i)
     {
         nonce[i] = hex2byte(hex_nonce[2*i], hex_nonce[2*i + 1]);
     }
 
-    USER_INFO_Write(bank_key, BANK_AES_KEY, 16);
-    USER_INFO_Write(nonce, NONCE, 4);
-    USER_INFO_Write(message+40, UUID, UUID_LEN);
+    PIGGY_BANK_Write(bank_key, BANK_AES_KEY, sizeof(bank_key));
+    PIGGY_BANK_Write(nonce, NONCE, sizeof(nonce));
+    PIGGY_BANK_Write(message + sizeof(hex_bank_key) + sizeof(hex_nonce), UUID, UUID_LEN);
 
     pushMessage((uint8*)RECV_OK, strlen(RECV_OK));
     

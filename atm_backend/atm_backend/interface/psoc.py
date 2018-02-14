@@ -150,8 +150,8 @@ class Psoc(object):
                 self.port = '/dev/cu.usbmodem1421'
                 logging.info("DYNAMIC SERIAL: Found new serial device HSM")
                 break
-            elif self.name == 'CARD' and any([port.device == '/dev/cu.usbmodem1411' for port in list_ports()]):
-                self.port = '/dev/cu.usbmodem1411'
+            elif self.name == 'CARD' and any([port.device.startswith('/dev/cu.usbmodem1411') for port in list_ports()]):
+                self.port = "/dev/cu.usbmodem1411"
                 logging.info("DYNAMIC SERIAL: Found new serial device CARD")
                 break
 

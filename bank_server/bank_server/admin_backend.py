@@ -115,7 +115,7 @@ class AdminBackend(object):
 
         """
         card_id = str(uuid.uuid4())
-        aes_key = binascii.hexlify(os.urandom(16))
+        aes_key = binascii.hexlify(os.urandom(32))
         nonce = os.urandom(4)
         try:
             amount = int(amount)
@@ -171,7 +171,7 @@ class AdminBackend(object):
                     False on Failure.
         """
         atm_id = str(uuid.uuid4())
-        aes_key = binascii.hexlify(os.urandom(16))
+        aes_key = binascii.hexlify(os.urandom(32))
         nonce = os.urandom(4)
         if self.db_obj.admin_create_atm(atm_id, aes_key, struct.unpack(">I", nonce)[0]):
             logging.info('admin create_atm success')

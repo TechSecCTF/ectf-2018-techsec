@@ -31,8 +31,12 @@ from SimpleXMLRPCServer import SimpleXMLRPCServer
 from bank_server import DB
 import binascii
 import hashlib
+import struct
+import hmac
 import os
+import bcrypt
 from Crypto.Cipher import AES
+from Crypto.Util import Counter
 
 
 class Bank(object):
@@ -95,24 +99,46 @@ class Bank(object):
         else:
             return 'ERROR insufficient funds'
 
-    def check_balance(self, card_id, aes_iv, card_hmac):
-        aes_key = self.db_obj.get_card_aes_key(card_id)
-        if aes_key:
-            true_hmac = hmac.new(binascii.unhexlify(aes_key, enc_uuid + aes_iv, hashlib.sha256).hexdigest())
+    # TODO: Encrypt all return msgs 
+    def check_balance(self, card_id, enc_msg, aes_iv, card_hmac, entered_pin):
+        enc_msg = binascii.unhexlify(enc_msg)
+        aes_iv = binascii.unhexlify(aes_iv)
+        card_hmac = binascii.unhexlify(card_hmac)
 
-            if not hmac.compare_digest(card_hmac, true_hmac):
-                return 'ERROR check_balance: invalid hmac on message'
-        else:
+        aes_key = binascii.unhexlify(self.db_obj.get_card_aes_key(card_id))
+
+        true_nonce = self.db_obj.get_card_nonce(card_id)
+        if not true_nonce or not aes_key:
             return 'ERROR could not lookup account \'' + str(card_id) + '\''
+        # TODO: implement reliable messaging system 
+        new_nonce = true_nonce + 1 
+        self.db_obj.set_card_nonce(card_id, new_nonce)
 
-        # Now, try to decrypt card id
-        # assert len(aes_iv)
-        cipher = AES.new(aes_key, AES.MODE_CTR, counter = aes_iv)
-        card_id = cipher.decrypt(enc_uuid)
-        try:
-            uuid.UUID(str('{' + card_id + '}'))
-        except ValueError:
-            return 'ERROR card_id not present or formatted correctly'
+        # Now, decrypt and check nonce
+        ctr_func =  Counter.new(128, initial_value=int(binascii.hexlify(aes_iv), 16))
+        cipher = AES.new(aes_key, AES.MODE_CTR, counter = ctr_func)
+        card_nonce = cipher.decrypt(enc_msg)
+
+        assert len(card_nonce) == 4
+        card_nonce = struct.unpack(">I", card_nonce)[0]
+        print "card_nonce", card_nonce
+        print "true_nonce", true_nonce
+
+        if card_nonce != true_nonce:
+            return 'ERROR replay nonce is incorrect'
+
+        # Check HMACs 
+        true_hmac = hmac.new(aes_key, enc_msg + aes_iv, hashlib.sha256).digest()
+
+        if not hmac.compare_digest(card_hmac, true_hmac):
+            return 'ERROR check_balance: invalid hmac on message'
+
+        #Final check, pin
+
+        card_pin_hash = self.db_obj.get_card_pin_hash(card_id).encode('utf-8')
+
+        if not bcrypt.checkpw(entered_pin, card_pin_hash):
+            return 'ERROR pin incorrect'
 
         balance = self.db_obj.get_balance(card_id)
         if balance is None:
@@ -127,8 +153,8 @@ class Bank(object):
         except ValueError:
             return 'ERROR card_id not valid'
 
-        salt = binascii.hexlify(os.urandom(8))
-        pin_hash = hashlib.sha256(card_id + pin + salt).hexdigest()
-        self.db_obj.update_pin(card_id, pin_hash, salt)
+        salt = bcrypt.gensalt(13)
+        pin_hash = bcrypt.hashpw(pin, salt)
+        self.db_obj.update_pin(card_id, pin_hash)
 
         return 'OKAY ' + card_id

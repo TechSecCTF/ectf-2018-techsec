@@ -38,18 +38,23 @@ class Card(Psoc):
         """Retrieves the encrypted UUID from the ATM card
 
         Returns:
-            str: UUID of ATM card
+            enc_uuid: encrypted UUID of ATM card
+            aes_iv: random AES IV
+            card_hmac: 
         """
-        enc_uuid = self._pull_msg()
-        self._vp('Card sent encrypted UUID %s' % enc_uuid)
+        uuid = self._pull_msg()
+        self._vp('Card sent UUID %s of len %d' % (repr(uuid), len(uuid)))
+
+        enc_msg = self._pull_msg()
+        self._vp('Card sent encrypted nonce %s of len %d' % (repr(enc_msg), len(enc_msg)))
 
         aes_iv = self._pull_msg()
-        self._vp('Card sent aes_iv %s' % aes_iv)
+        self._vp('Card sent aes_iv %s of len %d' % (repr(aes_iv), len(aes_iv)))
 
         card_hmac = self._pull_msg()
-        self._vp('Card sent hmac %s' % repr(hmac))
+        self._vp('Card sent hmac %s of len %d' % (repr(card_hmac), len(card_hmac)))
 
-        return enc_uuid, aes_iv, card_hmac
+        return uuid, enc_msg, aes_iv, card_hmac
 
     def _send_op(self, op):
         """Sends requested operation to ATM card
@@ -102,11 +107,10 @@ class Card(Psoc):
         self._sync(False)
 
         # Don't do this authentication step
-        # if not self._authenticate(pin):
-        #     return False
+        if not self._authenticate(pin):
+            return False
 
-        # Send encrypted ID 
-
+        # Send balance op 
         self._send_op(self.CHECK_BAL)
 
         return self._get_uuid()
@@ -155,8 +159,8 @@ class Card(Psoc):
 
         self._push_msg('%s\00' % blob)
         while self._pull_msg() != 'K':
-            self._vp('Card hasn\'t accepted blob', logging.error)
-        self._vp('Card accepted uuid')
+            self._vp('Card hasn\'t accepted provisioning blob', logging.error)
+        self._vp('Card accepted provisioning blob')
 
         self._vp('Provisioning complete')
 

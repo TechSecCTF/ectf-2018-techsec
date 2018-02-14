@@ -4,6 +4,7 @@ import logging
 import sys
 import socket
 import xmlrpclib
+import binascii
 
 
 class Bank:
@@ -22,7 +23,7 @@ class Bank:
             sys.exit(1)
         logging.info('Connected to Bank at %s:%s' % (address, str(port)))
 
-    def check_balance(self, card_id, aes_iv, card_hmac):
+    def check_balance(self, card_id, enc_msg, aes_iv, card_hmac, pin):
         """Requests the balance of the account associated with the card_id
 
         Args:
@@ -33,11 +34,11 @@ class Bank:
             bool: False on failure
         """
         logging.info('check_balance: Sending request to Bank')
-        res = self.bank_rpc.check_balance(card_id, aes_iv, card_hmac)
+        res = self.bank_rpc.check_balance(card_id, binascii.hexlify(enc_msg), binascii.hexlify(aes_iv), binascii.hexlify(card_hmac), pin)
         if res[:4] == 'OKAY':
             return int(res[5:])
         logging.info('check_balance: Bank request failed %s', res)
-        return False
+        return False    
 
     def withdraw(self, hsm_id, card_id, amount):
         """Requests a withdrawal from the account associated with the card_id

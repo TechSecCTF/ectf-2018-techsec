@@ -88,6 +88,39 @@ class DB(object):
             return None
         return result[0] 
 
+    @lock_db
+    def get_card_nonce(self, card_id):
+        '''Gets the replay nonce for a certain card_id
+
+        '''
+        self.cur.execute("SELECT nonce FROM cards WHERE card_id = (?);", (card_id,))    
+        result = self.cur.fetchone()
+        if result is None:
+            return None
+        return result[0] 
+
+    @lock_db
+    def get_card_pin_hash(self, card_id):
+        '''Gets the replay nonce for a certain card_id
+
+        '''
+        self.cur.execute("SELECT pin_hash FROM cards WHERE card_id = (?);", (card_id,))    
+        result = self.cur.fetchone()
+        if result is None:
+            return None
+        return result[0] 
+
+
+    @lock_db
+    def set_card_nonce(self, card_id, nonce):
+        '''Sets the replay nonce for a certain card_id
+
+        '''
+        self.cur.execute("UPDATE cards SET nonce = (?) WHERE card_id = (?);", (nonce, card_id,))    
+        result = self.cur.fetchone()
+        if result is None:
+            return None
+        return result[0] 
 
     @lock_db
     def get_atm(self, atm_id):
@@ -139,14 +172,14 @@ class DB(object):
 
 
     @lock_db
-    def update_pin(self, card_id, pin_hash, salt):
+    def update_pin(self, card_id, pin_hash):
         """set number of bills in atm: atm_id
 
         Returns:
             (bool): Returns True on Success. False otherwise.
         """
-        return self.modify("UPDATE cards SET pin_hash = (?), salt = (?) WHERE \
-                                    card_id = (?);", (pin_hash, salt, card_id,))
+        return self.modify("UPDATE cards SET pin_hash = (?) WHERE \
+                                    card_id = (?);", (pin_hash, card_id,))
 
     #############################
     # ADMIN INTERFACE FUNCTIONS #
@@ -159,8 +192,8 @@ class DB(object):
         Returns:
             (bool): Returns True on Success. False otherwise.
         """
-        return self.modify('INSERT INTO cards(account_name, card_id, balance, bank_aes_key, nonce, pin_hash, salt) \
-                            values (?, ?, ?, ?, ?, ?, ?);', (account_name, card_id, amount, aes_key, nonce, "", ""))
+        return self.modify('INSERT INTO cards(account_name, card_id, balance, bank_aes_key, nonce, pin_hash) \
+                            values (?, ?, ?, ?, ?, ?);', (account_name, card_id, amount, aes_key, nonce, ""))
 
     @lock_db
     def admin_create_atm(self, atm_id, aes_key, nonce):
