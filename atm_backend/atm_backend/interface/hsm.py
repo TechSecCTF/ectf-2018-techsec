@@ -3,6 +3,7 @@ import struct
 from serial_emulator import HSMEmulator
 import logging
 import time
+import binascii
 
 
 class HSM(Psoc):
@@ -19,6 +20,9 @@ class HSM(Psoc):
 
     def __init__(self, port=None, verbose=False, dummy=False):
         super(HSM, self).__init__('HSM', port, verbose)
+        self.DECRYPT = 1
+        self.WITHDRAW = 2
+        self.GET_UUID = 3
         self._vp('Please connect HSM to continue.')
         while not self.connected and not dummy:
             time.sleep(2)
@@ -48,6 +52,11 @@ class HSM(Psoc):
             str: UUID of HSM
         """
         self._sync(False)
+        self._vp('Sending GET_UUID command to HSM')
+        self._send_op(self.GET_UUID)
+
+        self._vp('Sending whatever to HSM')
+        self._push_msg("Whatever\00")
         uuid = self._pull_msg()
 
         if uuid == 'P':
@@ -57,6 +66,37 @@ class HSM(Psoc):
         self._vp('Got UUID %s' % uuid)
 
         return uuid
+
+    def _send_op(self, op):
+        self._push_msg(str(op))
+
+        while self._pull_msg() != 'K':
+            self._vp('HSM hasn\'t received op', logging.error)
+        self._vp('HSM received op')
+
+    def decrypt(self, hmac, iv, enc_msg):
+        hmac = binascii.unhexlify(hmac)
+        iv = binascii.unhexlify(iv)
+        enc_msg = binascii.unhexlify(enc_msg)
+
+        # Sync and get UUID
+        # self.get_uuid()
+        self._sync(False)
+
+        self._vp('Sending DECRYPT command to HSM')
+        self._send_op(self.DECRYPT)
+
+        self._vp("Sending message to decrypt")
+        self._push_msg("%s\00" % hmac)
+        self._push_msg("%s\00" % iv)
+        self._push_msg("%s\00" % enc_msg)
+
+        msg = self._pull_msg()
+        self._vp("HSM returned %s" % repr(msg))
+        if msg == 'BAD':
+            return 'HSM could not decrypt message'
+
+        return msg
 
     def withdraw(self, uuid, amount):
         """Attempts to withdraw bills from the HSM

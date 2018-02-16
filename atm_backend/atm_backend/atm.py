@@ -41,10 +41,19 @@ class ATM(object):
 
             # get balance from bank if card accepted PIN
             if card_id:
-                logging.info('check_balance: Requesting balance from Bank')
-                res = self.bank.check_balance(card_id, enc_nonce, aes_iv, card_hmac, pin)
-                if res:
-                    return res
+                logging.info('withdraw: Requesting hsm_id from hsm')
+                hsm_id = self.hsm.get_uuid()
+
+                # request withdrawal from bank if HSM gives UUID
+                if hsm_id:
+                    logging.info('check_balance: Requesting balance from Bank')
+                    hmac, iv, enc_balance = self.bank.check_balance(card_id, enc_nonce, aes_iv, card_hmac, pin, hsm_id)
+                    if iv and hmac and enc_balance:
+                        # send to HSM for decryption
+                        logging.info("Got msg from bank, hmac: %s, iv: %s, enc_balance: %s"% (hmac, iv, enc_balance))
+                        logging.info("Sending balance to HSM for decryption")
+                        res = self.hsm.decrypt(hmac, iv, enc_balance)
+                        return res
             logging.info('check_balance failed')
             return False
         except DeviceRemoved:

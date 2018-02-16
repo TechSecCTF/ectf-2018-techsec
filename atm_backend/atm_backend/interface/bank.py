@@ -6,6 +6,9 @@ import socket
 import xmlrpclib
 import binascii
 
+HMAC_LEN = 64
+IV_LEN = 32
+
 
 class Bank:
     """Interface for communicating with the bank
@@ -23,20 +26,23 @@ class Bank:
             sys.exit(1)
         logging.info('Connected to Bank at %s:%s' % (address, str(port)))
 
-    def check_balance(self, card_id, enc_msg, aes_iv, card_hmac, pin):
+    def check_balance(self, card_id, enc_msg, aes_iv, card_hmac, pin, hsm_id):
         """Requests the balance of the account associated with the card_id
 
         Args:
             card_id (str): UUID of the ATM card to look up
 
         Returns:
-            str: Balance of account on success
+            iv of encrypted balance
+            encrypted balance
             bool: False on failure
         """
         logging.info('check_balance: Sending request to Bank')
-        res = self.bank_rpc.check_balance(card_id, binascii.hexlify(enc_msg), binascii.hexlify(aes_iv), binascii.hexlify(card_hmac), pin)
+        # logging.info(type(pin))
+        res = self.bank_rpc.check_balance(card_id, binascii.hexlify(enc_msg), binascii.hexlify(aes_iv), binascii.hexlify(card_hmac), pin, hsm_id)
         if res[:4] == 'OKAY':
-            return int(res[5:])
+            # return HMAC, IV, and enc_msg
+            return res[5:5+HMAC_LEN], res[5 + HMAC_LEN:5 + HMAC_LEN + IV_LEN], res[5 + HMAC_LEN + IV_LEN:]
         logging.info('check_balance: Bank request failed %s', res)
         return False    
 

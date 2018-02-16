@@ -48,8 +48,7 @@
 // global EEPROM read variables
 static const uint8 PIN[PIN_LEN] = {0x36, 0x35, 0x34, 0x33, 0x35, 0x34, 0x34, 0x36}; //eCTF
 static const uint8 UUID[UUID_LEN] = {0x37, 0x33, 0x36, 0x35, 0x36, 0x33, 0x37, 0x35, 0x37, 0x32, 0x36, 0x39, 0x37, 0x34, 0x37, 0x39}; //security
-static const uint8 BANK_AES_KEY[33] = {'b', 'l', 'a', 'n', 'k', ' ', 
-                                        'k', 'e', 'y', '!', '!','!','!','!','!','!', 0x00 };
+static const uint8 BANK_AES_KEY[33] = { 0x00 };
 static const uint8 NONCE[5] = {'b', 'l', 'a', 'n', 0x00};
 
 

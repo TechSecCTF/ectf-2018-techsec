@@ -17,6 +17,7 @@
 #include "SW1.h"
 #include <strong-arm/sha256.h>
 #include <strong-arm/aes.h>
+#include <strong-arm/hmac.h>
 #include <stdio.h>
 
 
@@ -25,9 +26,14 @@
 #define MAX_BILLS 128
 #define BILL_LEN 16
 #define UUID_LEN 36
+#define DECRYPT '1'
+#define DISPENSE_BILLS '2'
+#define GET_UUID '3'
 #define PROV_MSG "P"
 #define WITH_OK "K"
 #define WITH_BAD "BAD"
+#define WITH_BAF "BAF"
+#define WITH_BAE "BAE"
 #define RECV_OK "K"
 #define EMPTY "EMPTY"
 #define EMPTY_BILL "*****EMPTY*****"
@@ -49,8 +55,7 @@
 static const uint8 MONEY[MAX_BILLS][BILL_LEN] = {EMPTY_BILL};
 static const uint8 UUID[UUID_LEN + 1] = {'b', 'l', 'a', 'n', 'k', ' ', 
                                         'u', 'u', 'i', 'd', '!', 0x00 };
-static const uint8 BANK_AES_KEY[17] = {'b', 'l', 'a', 'n', 'k', ' ', 
-                                        'k', 'e', 'y', '!', '!','!','!','!','!','!', 0x00 };
+static const uint8 BANK_AES_KEY[33] = { 0x00 };
 static const uint8 NONCE[5] = {'b', 'l', 'a', 'n', 0x00};
 static const uint8 BILLS_LEFT[1] = {0x00};
 
@@ -96,6 +101,30 @@ void bytes2hex(uint8_t byte, char* dest)
     sprintf(dest, "%02X", byte);
 }
 
+/* Increment a Big-Endian counter */
+static void increment_replay_nonce(uint8_t counter[4])
+{
+    for (int i = 3; i >= 0; --i)
+    {
+        if ((counter[i] += 1) != 0)
+            break;
+    }
+}
+
+/*
+* Returns 1 if they match, 0 if they don't
+*/
+bool check_hmac(uint8 hmac_to_check[32], uint8 hmac_output[32]){
+    int match = 1;
+    for (int i = 0; i < 32; i++){
+        if (hmac_to_check[i] != hmac_output[i]) {
+            match = 0;
+        }
+    }
+
+    return match;
+}
+
 
 // reset interrupt on button press
 CY_ISR(Reset_ISR)
@@ -105,12 +134,11 @@ CY_ISR(Reset_ISR)
     CySoftwareReset();
 }
 
-
 // provisions HSM (should only ever be called once)
 void provision()
 {
     int i;
-    uint8 message[109] = {0x00}
+    uint8 message[109] = {0x00};
     uint8 numbills;
     
     for(i = 0; i < 128; i++) {
@@ -229,18 +257,55 @@ int main(void)
 
         // synchronize with bank
         syncConnection(SYNC_NORM);
-            
-        // send UUID
-        ptr = UUID;
-        pushMessage((uint8*)ptr, strlen((char*)ptr));
-        
-        // get returned UUID
+
+        // Get command to perform 
         pullMessage(message);
-        
-        // compare UUID with stored UUID
-        if (strcmp((char*)message, (char*)UUID)) {
-            pushMessage((uint8*)WITH_BAD, strlen(WITH_BAD));
-        } else {
+        pushMessage((uint8*)RECV_OK, strlen(RECV_OK));
+
+        if (message[0] == DECRYPT){
+
+            //First, check hmac 
+            pullMessage(message);
+            uint8_t hmac_to_check[32] = {0};
+            memcpy(hmac_to_check, message, sizeof(hmac_to_check));
+
+            // Get IV 
+            pullMessage(message);
+            uint8_t iv[16] = {0};
+            memcpy(iv, message, sizeof(iv));
+
+            // Get ciphertext
+            pullMessage(message);
+            uint8_t ciphertext[16] = {0};
+            memcpy(ciphertext, message, sizeof(ciphertext));  
+
+            uint8_t hmac_output[32];
+            uint8_t hmac_data[32];
+
+            memcpy(hmac_data, ciphertext, sizeof(ciphertext));
+            memcpy(hmac_data + sizeof(ciphertext), iv, sizeof(iv));
+
+            HMAC(hmac_output, BANK_AES_KEY, 32, hmac_data, sizeof(hmac_data));
+            
+            if (!check_hmac(hmac_to_check, hmac_output)) {
+                
+                pushMessage(hmac_output, sizeof(hmac_output));
+                continue;
+            }
+
+            // Decrypt message
+            uint8_t plaintext[16] = {0};
+            aes256_crypt_ctr(plaintext, BANK_AES_KEY, iv, ciphertext, sizeof(ciphertext));
+
+            // Return plaintext 
+            pushMessage(plaintext, sizeof(plaintext));
+
+        } else if (message[0] == GET_UUID){
+            pullMessage(message);
+
+            pushMessage(UUID, UUID_LEN);
+        }
+        else if (message[0] == DISPENSE_BILLS) {
             pushMessage((uint8*)WITH_OK, strlen(WITH_OK));
             
             // get number of bills
@@ -249,7 +314,7 @@ int main(void)
             
             ptr = BILLS_LEFT;
             if (*ptr < numbills) {
-                pushMessage((uint8*)WITH_BAD, strlen(WITH_BAD));
+                pushMessage((uint8*)WITH_BAE, strlen(WITH_BAE));
                 continue;
             } else {
                 pushMessage((uint8*)WITH_OK, strlen(WITH_OK));
@@ -261,6 +326,19 @@ int main(void)
                 dispenseBill();
             }
         }
+
+        // send UUID
+        // ptr = UUID;
+        // pushMessage((uint8*)ptr, strlen((char*)ptr));
+        
+        // get returned UUID
+        // pullMessage(message);
+        
+        // compare UUID with stored UUID
+        // if (strcmp((char*)message, (char*)UUID)) {
+        //     pushMessage((uint8*)WITH_BAD, strlen(WITH_BAD));
+        // }
+         
     }
 }
 

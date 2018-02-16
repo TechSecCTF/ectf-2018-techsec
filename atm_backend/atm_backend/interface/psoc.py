@@ -65,7 +65,7 @@ class Psoc(object):
             msg (str): message to be sent to the PSoC
         """
         pkt = struct.pack("B%ds" % (len(msg)), len(msg), msg)
-        logging.info("Pushing " + msg)
+        logging.info("Pushing " + repr(msg))
         self.write(pkt)
         time.sleep(0.1)
 

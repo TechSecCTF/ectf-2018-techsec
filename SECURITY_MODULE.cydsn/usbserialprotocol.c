@@ -17,7 +17,7 @@
 #define RDY_MSG_RECV "READY"
 #define RDY_MSG_NORM "HSM_N"
 #define RDY_MSG_PROV "HSM_P"
-#define RDY_BAD "BAD"
+#define RDY_BAD "BAG"
 #define GO_MSG "GO"
 
 

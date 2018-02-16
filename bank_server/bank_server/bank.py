@@ -100,15 +100,15 @@ class Bank(object):
             return 'ERROR insufficient funds'
 
     # TODO: Encrypt all return msgs 
-    def check_balance(self, card_id, enc_msg, aes_iv, card_hmac, entered_pin):
+    def check_balance(self, card_id, enc_msg, aes_iv, card_hmac, entered_pin, atm_id):
         enc_msg = binascii.unhexlify(enc_msg)
         aes_iv = binascii.unhexlify(aes_iv)
         card_hmac = binascii.unhexlify(card_hmac)
 
-        aes_key = binascii.unhexlify(self.db_obj.get_card_aes_key(card_id))
+        card_aes_key = binascii.unhexlify(self.db_obj.get_card_aes_key(card_id))
 
         true_nonce = self.db_obj.get_card_nonce(card_id)
-        if not true_nonce or not aes_key:
+        if not true_nonce or not card_aes_key:
             return 'ERROR could not lookup account \'' + str(card_id) + '\''
         # TODO: implement reliable messaging system 
         new_nonce = true_nonce + 1 
@@ -116,7 +116,7 @@ class Bank(object):
 
         # Now, decrypt and check nonce
         ctr_func =  Counter.new(128, initial_value=int(binascii.hexlify(aes_iv), 16))
-        cipher = AES.new(aes_key, AES.MODE_CTR, counter = ctr_func)
+        cipher = AES.new(card_aes_key, AES.MODE_CTR, counter = ctr_func)
         card_nonce = cipher.decrypt(enc_msg)
 
         assert len(card_nonce) == 4
@@ -128,23 +128,41 @@ class Bank(object):
             return 'ERROR replay nonce is incorrect'
 
         # Check HMACs 
-        true_hmac = hmac.new(aes_key, enc_msg + aes_iv, hashlib.sha256).digest()
+        true_hmac = hmac.new(card_aes_key, enc_msg + aes_iv, hashlib.sha256).digest()
 
         if not hmac.compare_digest(card_hmac, true_hmac):
             return 'ERROR check_balance: invalid hmac on message'
 
         #Final check, pin
-
         card_pin_hash = self.db_obj.get_card_pin_hash(card_id).encode('utf-8')
+        print("card pin hash", card_pin_hash)
 
         if not bcrypt.checkpw(entered_pin, card_pin_hash):
             return 'ERROR pin incorrect'
 
-        balance = self.db_obj.get_balance(card_id)
+        balance = str(self.db_obj.get_balance(card_id))
         if balance is None:
             return 'ERROR could not lookup account \'' + str(card_id) + '\''
         else:
-            return 'OKAY ' + str(balance)
+            # Encrypt balance and return it 
+            # First, pad it out with A's
+            # TODO: Break out into new comm 
+
+            assert len(balance) <= 16
+            balance = balance.ljust(16, 'A')
+            print("balance", balance)
+
+            atm_aes_key = binascii.unhexlify(self.db_obj.get_atm_aes_key(atm_id))
+            print "atm_aes_key", repr(atm_aes_key)
+
+            atm_rand_iv = os.urandom(16)
+            ctr_func = Counter.new(128, initial_value=int(binascii.hexlify(atm_rand_iv), 16))
+            enc_cipher = AES.new(atm_aes_key, AES.MODE_CTR, counter = ctr_func)
+            encrypted_balance = enc_cipher.encrypt(balance)
+
+            true_hmac = hmac.new(atm_aes_key, encrypted_balance + atm_rand_iv, hashlib.sha256).hexdigest()
+
+            return 'OKAY ' + true_hmac + atm_rand_iv.encode("hex") + encrypted_balance.encode("hex")
 
     def set_initial_pin(self, card_id, pin):
 

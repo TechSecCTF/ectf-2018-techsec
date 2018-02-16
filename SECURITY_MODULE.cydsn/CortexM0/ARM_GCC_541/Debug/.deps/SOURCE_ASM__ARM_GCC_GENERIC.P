@@ -1,8 +1,8 @@
-//VBOXSVR/raywang/Dropbox\ (MIT)/CTFs/eCTF/2018-ectf-insecure-example/SECURITY_MODULE.cydsn/CortexM0/ARM_GCC_541/Debug/CyBootAsmGnu.o : //VBOXSVR/raywang/Dropbox\ (MIT)/CTFs/eCTF/2018-ectf-insecure-example/SECURITY_MODULE.cydsn/Generated_Source/PSoC4/CyBootAsmGnu.s //VBOXSVR/raywang/Dropbox\ (MIT)/CTFs/eCTF/2018-ectf-insecure-example/SECURITY_MODULE.cydsn/Generated_Source/PSoC4/cydevicegnu_trm.inc //VBOXSVR/raywang/Dropbox\ (MIT)/CTFs/eCTF/2018-ectf-insecure-example/SECURITY_MODULE.cydsn/Generated_Source/PSoC4/cyfittergnu.inc 
+//VBOXSVR/raywang/Dropbox\ (MIT)/CTFs/eCTF/ectf-2018-techsec/SECURITY_MODULE.cydsn/CortexM0/ARM_GCC_541/Debug/CyBootAsmGnu.o : //VBOXSVR/raywang/Dropbox\ (MIT)/CTFs/eCTF/ectf-2018-techsec/SECURITY_MODULE.cydsn/Generated_Source/PSoC4/CyBootAsmGnu.s //VBOXSVR/raywang/Dropbox\ (MIT)/CTFs/eCTF/ectf-2018-techsec/SECURITY_MODULE.cydsn/Generated_Source/PSoC4/cydevicegnu_trm.inc //VBOXSVR/raywang/Dropbox\ (MIT)/CTFs/eCTF/ectf-2018-techsec/SECURITY_MODULE.cydsn/Generated_Source/PSoC4/cyfittergnu.inc 
 
-//VBOXSVR/raywang/Dropbox\ (MIT)/CTFs/eCTF/2018-ectf-insecure-example/SECURITY_MODULE.cydsn/Generated_Source/PSoC4/CyBootAsmGnu.s : 
+//VBOXSVR/raywang/Dropbox\ (MIT)/CTFs/eCTF/ectf-2018-techsec/SECURITY_MODULE.cydsn/Generated_Source/PSoC4/CyBootAsmGnu.s : 
 
-//VBOXSVR/raywang/Dropbox\ (MIT)/CTFs/eCTF/2018-ectf-insecure-example/SECURITY_MODULE.cydsn/Generated_Source/PSoC4/cydevicegnu_trm.inc : 
+//VBOXSVR/raywang/Dropbox\ (MIT)/CTFs/eCTF/ectf-2018-techsec/SECURITY_MODULE.cydsn/Generated_Source/PSoC4/cydevicegnu_trm.inc : 
 
-//VBOXSVR/raywang/Dropbox\ (MIT)/CTFs/eCTF/2018-ectf-insecure-example/SECURITY_MODULE.cydsn/Generated_Source/PSoC4/cyfittergnu.inc : 
+//VBOXSVR/raywang/Dropbox\ (MIT)/CTFs/eCTF/ectf-2018-techsec/SECURITY_MODULE.cydsn/Generated_Source/PSoC4/cyfittergnu.inc : 
 
