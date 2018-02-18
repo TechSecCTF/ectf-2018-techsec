@@ -26,14 +26,13 @@
 #define MAX_BILLS 128
 #define BILL_LEN 16
 #define UUID_LEN 36
+#define NONCE_LEN 4
 #define DECRYPT '1'
 #define DISPENSE_BILLS '2'
 #define GET_UUID '3'
 #define PROV_MSG "P"
 #define WITH_OK "K"
 #define WITH_BAD "BAD"
-#define WITH_BAF "BAF"
-#define WITH_BAE "BAE"
 #define RECV_OK "K"
 #define EMPTY "EMPTY"
 #define EMPTY_BILL "*****EMPTY*****"
@@ -101,16 +100,6 @@ void bytes2hex(uint8_t byte, char* dest)
     sprintf(dest, "%02X", byte);
 }
 
-/* Increment a Big-Endian counter */
-static void increment_replay_nonce(uint8_t counter[4])
-{
-    for (int i = 3; i >= 0; --i)
-    {
-        if ((counter[i] += 1) != 0)
-            break;
-    }
-}
-
 /*
 * Returns 1 if they match, 0 if they don't
 */
@@ -154,28 +143,18 @@ void provision()
         
     // Set blob
     pullMessage(message);
-
     char hex_bank_key[64];
-    char hex_nonce[8];
     memcpy(hex_bank_key, message, sizeof(hex_bank_key));
-    memcpy(hex_nonce, message + sizeof(hex_bank_key), sizeof(hex_nonce));
 
     uint8 bank_key[32];
-    uint8 nonce[4];
 
     for(int i = 0; i < 32; ++i)
     {
         bank_key[i] = hex2byte(hex_bank_key[2*i], hex_bank_key[2*i + 1]);
     }
 
-    for(int i = 0; i < 4; ++i)
-    {
-        nonce[i] = hex2byte(hex_nonce[2*i], hex_nonce[2*i + 1]);
-    }
-
     PIGGY_BANK_Write(bank_key, BANK_AES_KEY, sizeof(bank_key));
-    PIGGY_BANK_Write(nonce, NONCE, sizeof(nonce));
-    PIGGY_BANK_Write(message + sizeof(hex_bank_key) + sizeof(hex_nonce), UUID, UUID_LEN);
+    PIGGY_BANK_Write(message + sizeof(hex_bank_key), UUID, UUID_LEN);
 
     pushMessage((uint8*)RECV_OK, strlen(RECV_OK));
     
@@ -211,15 +190,29 @@ void dispenseBill()
     stackloc = (stackloc + 1) % 128;
 }
 
+void update_nonce(){
+    int nonce = rand();
+    uint8 *nonceptr = (uint8*)&nonce;
+    PIGGY_BANK_Write(nonceptr, NONCE, sizeof(nonce));
+}
+
 
 int main(void)
 {
     CyGlobalIntEnable; /* Enable global interrupts. */
-    
+    uint32_t unique_id[2];
+    CyGetUniqueId(unique_id);
+
+    // Initialize RNG and nonce
+    srand(unique_id[0] ^ unique_id[1]);
+    int nonce = rand();
+    uint8 *nonceptr = (uint8*)&nonce;
+    PIGGY_BANK_Write(nonceptr, NONCE, sizeof(nonce));
+
     // start reset button
     Reset_isr_StartEx(Reset_ISR);
     
-    /* Declare vairables here */
+    /* Declare variables here */
     
     uint8 numbills, i, bills_left;
     uint8 message[64];
@@ -277,18 +270,22 @@ int main(void)
             // Get ciphertext
             pullMessage(message);
             uint8_t ciphertext[16] = {0};
-            memcpy(ciphertext, message, sizeof(ciphertext));  
+            memcpy(ciphertext, message, sizeof(ciphertext));
 
             uint8_t hmac_output[32];
-            uint8_t hmac_data[32];
+            uint8_t hmac_data[36];
 
             memcpy(hmac_data, ciphertext, sizeof(ciphertext));
             memcpy(hmac_data + sizeof(ciphertext), iv, sizeof(iv));
+            memcpy(hmac_data + sizeof(ciphertext) + sizeof(iv), NONCE, sizeof(NONCE));
+
+            // Update nonce
+            update_nonce();
 
             HMAC(hmac_output, BANK_AES_KEY, 32, hmac_data, sizeof(hmac_data));
             
             if (!check_hmac(hmac_to_check, hmac_output)) {
-                
+                //TODO: replace with BAD
                 pushMessage(hmac_output, sizeof(hmac_output));
                 continue;
             }
@@ -301,43 +298,50 @@ int main(void)
             pushMessage(plaintext, sizeof(plaintext));
 
         } else if (message[0] == GET_UUID){
-            pullMessage(message);
-
             pushMessage(UUID, UUID_LEN);
-        }
-        else if (message[0] == DISPENSE_BILLS) {
-            pushMessage((uint8*)WITH_OK, strlen(WITH_OK));
-            
+            pushMessage(NONCE, NONCE_LEN);
+        } else if (message[0] == DISPENSE_BILLS) {
+            // Get HMAC
+            pullMessage(message);
+            uint8_t hmac_to_check[32] = {0};
+            memcpy(hmac_to_check, message, sizeof(hmac_to_check));
+
             // get number of bills
             pullMessage(message);
             numbills = message[0];
-            
+
+            uint8 hmac_output[32];
+            uint8 hmac_data[40];
+            memcpy(hmac_data, UUID, UUID_LEN);
+            memcpy(hmac_data + UUID_LEN, NONCE, NONCE_LEN);
+
+            // Update nonce
+            update_nonce();
+
+            // Check HMAC
+            HMAC(hmac_output, BANK_AES_KEY, 32, hmac_data, sizeof(hmac_data));
+
+            if (!check_hmac(hmac_to_check, hmac_output)) {
+                //TODO: replace with BAD
+                pushMessage(hmac_output, sizeof(hmac_output));
+                continue;
+            }
+
+            // Actually dispense bills
             ptr = BILLS_LEFT;
             if (*ptr < numbills) {
-                pushMessage((uint8*)WITH_BAE, strlen(WITH_BAE));
+                pushMessage((uint8 *) WITH_BAD, strlen(WITH_BAD));
                 continue;
             } else {
-                pushMessage((uint8*)WITH_OK, strlen(WITH_OK));
+                pushMessage((uint8 *) WITH_OK, strlen(WITH_OK));
                 bills_left = *ptr - numbills;
                 PIGGY_BANK_Write(&bills_left, BILLS_LEFT, 0x01);
             }
-            
+
             for (i = 0; i < numbills; i++) {
                 dispenseBill();
             }
         }
-
-        // send UUID
-        // ptr = UUID;
-        // pushMessage((uint8*)ptr, strlen((char*)ptr));
-        
-        // get returned UUID
-        // pullMessage(message);
-        
-        // compare UUID with stored UUID
-        // if (strcmp((char*)message, (char*)UUID)) {
-        //     pushMessage((uint8*)WITH_BAD, strlen(WITH_BAD));
-        // }
          
     }
 }

@@ -13,48 +13,43 @@ class Card(Psoc):
     """
     def __init__(self, port=None, verbose=False):
         super(Card, self).__init__('CARD', port, verbose)
-        self.CHECK_BAL = 1
-        self.WITHDRAW = 2
-        self.CHANGE_PIN = 3
+        self.COMPUTE_HMAC = 2
+        self.GET_UUID = 3
 
-    def _authenticate(self, pin):
+    def _send_challenge_nonce(self, nonce):
         # TODO: Change this
         """Requests authentication from the ATM card
 
         Args:
-            pin (str): Challenge PIN
+            nonce (str): Challenge nonce
 
         Returns:
             bool: True if ATM card verified authentication, False otherwise
         """
-        self._vp('Sending pin %s' % pin)
-        self._push_msg(pin)
+        self._vp('Sending challenge nonce %s' % repr(nonce))
+        self._push_msg(nonce)
 
         resp = self._pull_msg()
         self._vp('Card response was %s' % resp)
         return resp == 'OK'
 
     def _get_uuid(self):
-        """Retrieves the encrypted UUID from the ATM card
+        """Retrieves the UUID from the ATM card
 
         Returns:
-            enc_uuid: encrypted UUID of ATM card
-            aes_iv: random AES IV
+            uuid: UUID of ATM card
+            nonce: Bank's challenge replay nonce
             card_hmac: 
         """
+
+        self._sync(False)
+
+        self._send_op(self.GET_UUID)
+
         uuid = self._pull_msg()
         self._vp('Card sent UUID %s of len %d' % (repr(uuid), len(uuid)))
 
-        enc_msg = self._pull_msg()
-        self._vp('Card sent encrypted nonce %s of len %d' % (repr(enc_msg), len(enc_msg)))
-
-        aes_iv = self._pull_msg()
-        self._vp('Card sent aes_iv %s of len %d' % (repr(aes_iv), len(aes_iv)))
-
-        card_hmac = self._pull_msg()
-        self._vp('Card sent hmac %s of len %d' % (repr(card_hmac), len(card_hmac)))
-
-        return uuid, enc_msg, aes_iv, card_hmac
+        return uuid
 
     def _send_op(self, op):
         """Sends requested operation to ATM card
@@ -70,31 +65,7 @@ class Card(Psoc):
             self._vp('Card hasn\'t received op', logging.error)
         self._vp('Card received op')
 
-    # def change_pin(self, old_pin, new_pin):
-    #     """Requests for a pin to be changed
-
-    #     Args:
-    #         old_pin (str): Challenge PIN
-    #         new_pin (str): New PIN to change to
-
-    #     Returns:
-    #         bool: True if PIN was changed, False otherwise
-    #     """
-    #     self._sync(False)
-
-    #     if not self._authenticate(old_pin):
-    #         return False
-
-    #     self._send_op(self.CHANGE_PIN)
-
-    #     self._vp('Sending PIN %s' % new_pin)
-    #     self._push_msg(new_pin)
-
-    #     resp = self._pull_msg()
-    #     self._vp('Card sent response %s' % resp)
-    #     return resp == 'SUCCESS'
-
-    def check_balance(self, pin):
+    def compute_hmac(self, raw_bank_nonce):
         """Requests for a balance to be checked
 
         Args:
@@ -106,40 +77,22 @@ class Card(Psoc):
         """
         self._sync(False)
 
-        # Don't do this authentication step
-        if not self._authenticate(pin):
+        # Send balance op
+        self._send_op(self.COMPUTE_HMAC)
+
+        # Send challenge nonce to card
+        if not self._send_challenge_nonce(raw_bank_nonce):
             return False
 
-        # Send balance op 
-        self._send_op(self.CHECK_BAL)
-
-        return self._get_uuid()
-
-    def withdraw(self, pin):
-        """Requests to withdraw from ATM
-
-        Args:
-            pin (str): Challenge PIN
-
-        Returns:
-            str: UUID of ATM card on success
-            bool: False if PIN didn't match
-        """
-        self._sync(False)
-
-        if not self._authenticate(pin):
-            return False
-
-        self._send_op(self.WITHDRAW)
-
-        return self._get_uuid()
+        # Get hmac
+        msg = self._pull_msg()
+        return msg
 
     def provision(self, blob):
         """Attempts to provision a new ATM card
 
         Args:
             blob (str): New blob for ATM card
-            pin (str): Initial PIN for ATM card
 
         Returns:
             bool: True if provisioning succeeded, False otherwise
@@ -148,14 +101,9 @@ class Card(Psoc):
 
         msg = self._pull_msg()
         if msg != 'P':
-            self._vp('Card alredy provisioned!', logging.error)
+            self._vp('Card already provisioned!', logging.error)
             return False
         self._vp('Card sent provisioning message')
-
-        # self._push_msg('%s\00' % pin)
-        # while self._pull_msg() != 'K':
-        #     self._vp('Card hasn\'t accepted PIN', logging.error)
-        # self._vp('Card accepted PIN')
 
         self._push_msg('%s\00' % blob)
         while self._pull_msg() != 'K':

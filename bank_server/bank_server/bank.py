@@ -68,18 +68,12 @@ class Bank(object):
         self.server.register_function(self.withdraw)
         self.server.register_function(self.check_balance)
         self.server.register_function(self.set_initial_pin)
+        self.server.register_function(self.generate_session_nonce)
+        self.server.register_function(self.change_pin)
         self.server.serve_forever()
 
-    def withdraw(self, atm_id, card_id, amount):
-        try:
-            amount = int(amount)
-        except ValueError:
-            return 'ERROR withdraw command usage: withdraw <atm_id> <card_id> <amount>'
 
-        atm = self.db_obj.get_atm(atm_id)
-        if atm is None:
-            return 'ERROR could not lookup atm \'' + str(atm_id) + '\''
-
+    def check_funds(self, card_id, atm_id, amount, hex_hsm_nonce):
         num_bills = self.db_obj.get_atm_num_bills(atm_id)
         if num_bills is None:
             return 'ERROR could not lookup atm \'' + str(atm_id) + '\''
@@ -95,74 +89,105 @@ class Bank(object):
         if final_amount >= 0:
             self.db_obj.set_balance(card_id, final_amount)
             self.db_obj.set_atm_num_bills(atm_id, num_bills - amount)
-            return 'OKAY ' + atm_id
+
+            atm_aes_key = binascii.unhexlify(self.db_obj.get_atm_aes_key(atm_id))
+
+            # Compute HMAC for HSM
+            raw_hsm_nonce = hex_hsm_nonce.decode('hex')
+            hex_hmac = hmac.new(atm_aes_key, atm_id + raw_hsm_nonce, hashlib.sha256).hexdigest()
+
+            return 'OKAY ' + hex_hmac
         else:
             return 'ERROR insufficient funds'
 
-    # TODO: Encrypt all return msgs 
-    def check_balance(self, card_id, enc_msg, aes_iv, card_hmac, entered_pin, atm_id):
-        enc_msg = binascii.unhexlify(enc_msg)
-        aes_iv = binascii.unhexlify(aes_iv)
-        card_hmac = binascii.unhexlify(card_hmac)
 
-        card_aes_key = binascii.unhexlify(self.db_obj.get_card_aes_key(card_id))
+    def withdraw(self, card_id, hex_card_hmac, entered_pin, atm_id, hex_hsm_nonce, amount):
+        try:
+            amount = int(amount)
+        except ValueError:
+            return 'ERROR withdraw command usage: withdraw <atm_id> <card_id> <amount>'
 
-        true_nonce = self.db_obj.get_card_nonce(card_id)
-        if not true_nonce or not card_aes_key:
-            return 'ERROR could not lookup account \'' + str(card_id) + '\''
-        # TODO: implement reliable messaging system 
-        new_nonce = true_nonce + 1 
-        self.db_obj.set_card_nonce(card_id, new_nonce)
-
-        # Now, decrypt and check nonce
-        ctr_func =  Counter.new(128, initial_value=int(binascii.hexlify(aes_iv), 16))
-        cipher = AES.new(card_aes_key, AES.MODE_CTR, counter = ctr_func)
-        card_nonce = cipher.decrypt(enc_msg)
-
-        assert len(card_nonce) == 4
-        card_nonce = struct.unpack(">I", card_nonce)[0]
-        print "card_nonce", card_nonce
-        print "true_nonce", true_nonce
-
-        if card_nonce != true_nonce:
-            return 'ERROR replay nonce is incorrect'
-
-        # Check HMACs 
-        true_hmac = hmac.new(card_aes_key, enc_msg + aes_iv, hashlib.sha256).digest()
-
-        if not hmac.compare_digest(card_hmac, true_hmac):
-            return 'ERROR check_balance: invalid hmac on message'
+        if not self.verify_hmac(card_id, hex_card_hmac):
+            return 'ERROR check_balance: could not verify HMAC'
 
         #Final check, pin
-        card_pin_hash = self.db_obj.get_card_pin_hash(card_id).encode('utf-8')
-        print("card pin hash", card_pin_hash)
+        if not self.check_pin(card_id, entered_pin):
+            return 'ERROR check_balance: pin incorrect'
 
-        if not bcrypt.checkpw(entered_pin, card_pin_hash):
-            return 'ERROR pin incorrect'
+        return self.check_funds(card_id, atm_id, amount, hex_hsm_nonce)
 
+
+    def generate_session_nonce(self, card_id):
+        hex_old_session_nonce = self.db_obj.get_card_nonce(card_id)
+        if hex_old_session_nonce is None:
+            return 'ERROR could not lookup card \'' + str(card_id) + '\''
+        return 'OKAY ' + hex_old_session_nonce
+
+
+    def encrypt_balance(self, card_id, atm_id, hex_hsm_nonce):
+        raw_hsm_nonce = binascii.unhexlify(hex_hsm_nonce)
         balance = str(self.db_obj.get_balance(card_id))
         if balance is None:
-            return 'ERROR could not lookup account \'' + str(card_id) + '\''
-        else:
-            # Encrypt balance and return it 
-            # First, pad it out with A's
-            # TODO: Break out into new comm 
+            return 'ERROR could not lookup card \'' + str(card_id) + '\''
 
-            assert len(balance) <= 16
-            balance = balance.ljust(16, 'A')
-            print("balance", balance)
+        # Encrypt balance and return it
+        # First, pad it out with A's
+        assert len(balance) <= 16
+        balance = balance.ljust(16, 'A')
 
-            atm_aes_key = binascii.unhexlify(self.db_obj.get_atm_aes_key(atm_id))
-            print "atm_aes_key", repr(atm_aes_key)
+        atm_aes_key = binascii.unhexlify(self.db_obj.get_atm_aes_key(atm_id))
 
-            atm_rand_iv = os.urandom(16)
-            ctr_func = Counter.new(128, initial_value=int(binascii.hexlify(atm_rand_iv), 16))
-            enc_cipher = AES.new(atm_aes_key, AES.MODE_CTR, counter = ctr_func)
-            encrypted_balance = enc_cipher.encrypt(balance)
+        raw_atm_rand_iv = os.urandom(16)
+        hex_atm_rand_iv = binascii.hexlify(raw_atm_rand_iv)
+        ctr_func = Counter.new(128, initial_value = int(hex_atm_rand_iv, 16))
+        enc_cipher = AES.new(atm_aes_key, AES.MODE_CTR, counter = ctr_func)
+        raw_encrypted_balance = enc_cipher.encrypt(balance)
 
-            true_hmac = hmac.new(atm_aes_key, encrypted_balance + atm_rand_iv, hashlib.sha256).hexdigest()
+        hex_hmac = hmac.new(atm_aes_key, raw_encrypted_balance + raw_atm_rand_iv + raw_hsm_nonce, hashlib.sha256).hexdigest()
 
-            return 'OKAY ' + true_hmac + atm_rand_iv.encode("hex") + encrypted_balance.encode("hex")
+        return 'OKAY ' + hex_hmac + hex_atm_rand_iv + raw_encrypted_balance.encode("hex")
+
+
+    def verify_hmac(self, card_id, hex_card_hmac):
+        raw_card_hmac = binascii.unhexlify(hex_card_hmac)
+        raw_card_aes_key = binascii.unhexlify(self.db_obj.get_card_aes_key(card_id))
+
+        raw_true_nonce = self.db_obj.get_card_nonce(card_id).decode("hex")
+        if not raw_true_nonce or not raw_card_aes_key:
+            return False
+
+        # Set a new nonce
+        hex_session_nonce = binascii.hexlify(os.urandom(4))
+        self.db_obj.set_card_nonce(card_id, hex_session_nonce)
+
+        # Check HMACs
+        raw_true_hmac = hmac.new(raw_card_aes_key, card_id + raw_true_nonce, hashlib.sha256).digest()
+
+        if not hmac.compare_digest(raw_card_hmac, raw_true_hmac):
+            return False
+
+        return True
+
+
+    def check_pin(self, card_id, entered_pin):
+        card_pin_hash = self.db_obj.get_card_pin_hash(card_id).encode('utf-8')
+
+        if not bcrypt.checkpw(entered_pin, card_pin_hash):
+            return False
+
+        return True
+
+
+    def check_balance(self, card_id, hex_card_hmac, entered_pin, atm_id, hex_hsm_nonce):
+
+        if not self.verify_hmac(card_id, hex_card_hmac):
+            return 'ERROR check_balance: could not verify HMAC'
+
+        #Final check, pin
+        if not self.check_pin(card_id, entered_pin):
+            return 'ERROR check_balance: pin incorrect'
+
+        return self.encrypt_balance(card_id, atm_id, hex_hsm_nonce)
 
     def set_initial_pin(self, card_id, pin):
 
@@ -175,4 +200,18 @@ class Bank(object):
         pin_hash = bcrypt.hashpw(pin, salt)
         self.db_obj.update_pin(card_id, pin_hash)
 
+        return 'OKAY ' + card_id
+
+    def change_pin(self, card_id, hex_card_hmac, old_pin, new_pin):
+        if not self.verify_hmac(card_id, hex_card_hmac):
+            return 'ERROR check_balance: could not verify HMAC'
+
+        #Check old pin
+        if not self.check_pin(card_id, old_pin):
+            return 'ERROR check_balance: pin incorrect'
+
+        # Set new pin
+        salt = bcrypt.gensalt(13)
+        pin_hash = bcrypt.hashpw(new_pin, salt)
+        self.db_obj.update_pin(card_id, pin_hash)
         return 'OKAY ' + card_id

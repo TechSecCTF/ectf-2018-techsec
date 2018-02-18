@@ -1,4 +1,5 @@
 import logging
+import binascii
 from interface.psoc import DeviceRemoved, NotProvisioned
 
 
@@ -31,29 +32,38 @@ class ATM(object):
             str: Balance on success
             bool: False on failure
         """
+        hsm_id, raw_hsm_session_nonce = self.hsm.get_uuid()
+
         if not self.card.inserted():
             logging.info('No card inserted')
             return False
 
         try:
-            logging.info('check_balance: Requesting card_id using inputted pin')
-            card_id, enc_nonce, aes_iv, card_hmac = self.card.check_balance(pin)
+            logging.info('check_balance: Requesting card_id')
+            card_id = self.card._get_uuid()
 
-            # get balance from bank if card accepted PIN
-            if card_id:
+            logging.info('check_balance: Requesting session nonce from bank')
+            raw_card_session_nonce = self.bank.generate_session_nonce(card_id)
+
+            logging.info('check_balance: Computing HMAC on card')
+            raw_card_hmac = self.card.compute_hmac(raw_card_session_nonce)
+
+            # get balance from bank
+            if card_id and raw_card_hmac:
                 logging.info('withdraw: Requesting hsm_id from hsm')
-                hsm_id = self.hsm.get_uuid()
+                hsm_id, raw_hsm_session_nonce = self.hsm.get_uuid()
 
                 # request withdrawal from bank if HSM gives UUID
                 if hsm_id:
                     logging.info('check_balance: Requesting balance from Bank')
-                    hmac, iv, enc_balance = self.bank.check_balance(card_id, enc_nonce, aes_iv, card_hmac, pin, hsm_id)
-                    if iv and hmac and enc_balance:
+                    raw_atm_hmac, raw_atm_iv, raw_enc_balance = self.bank.check_balance(card_id, raw_card_hmac, pin, hsm_id, raw_hsm_session_nonce)
+
+                    if raw_atm_iv and raw_atm_hmac and raw_enc_balance:
                         # send to HSM for decryption
-                        logging.info("Got msg from bank, hmac: %s, iv: %s, enc_balance: %s"% (hmac, iv, enc_balance))
+                        logging.info("Got msg from bank, raw_atm_hmac: %s, raw_atm_iv: %s, raw_enc_balance: %s"% (raw_atm_hmac, raw_atm_iv, raw_enc_balance))
                         logging.info("Sending balance to HSM for decryption")
-                        res = self.hsm.decrypt(hmac, iv, enc_balance)
-                        return res
+                        res = self.hsm.decrypt(raw_atm_hmac, raw_atm_iv, raw_enc_balance)
+                        return res.strip('A')
             logging.info('check_balance failed')
             return False
         except DeviceRemoved:
@@ -79,11 +89,20 @@ class ATM(object):
             logging.info('No card inserted')
             return False
         try:
-            logging.info('change_pin: Sending PIN change request to card')
-            if self.card.change_pin(old_pin, new_pin):
-                return True
-            logging.info('change_pin failed')
-            return False
+            logging.info('change_pin: Requesting card_id')
+            card_id = self.card._get_uuid()
+
+            logging.info('change_pin: Requesting session nonce from bank')
+            raw_card_session_nonce = self.bank.generate_session_nonce(card_id)
+
+            logging.info('change_pin: Computing HMAC on card')
+            raw_card_hmac = self.card.compute_hmac(raw_card_session_nonce)
+
+            if not self.bank.change_pin(card_id, raw_card_hmac, old_pin, new_pin):
+                logging.info("Change pin failed")
+                return False
+            return True
+
         except DeviceRemoved:
             logging.info('ATM card was removed!')
             return False
@@ -113,22 +132,28 @@ class ATM(object):
             return False
 
         try:
-            logging.info('withdraw: Requesting card_id from card')
-            # All this does is authenticate PIN on card rn
-            card_id = self.card.withdraw(pin)
+            logging.info('withdraw: Requesting card_id')
+            card_id = self.card._get_uuid()
+
+            logging.info('withdraw: Requesting session nonce from bank')
+            raw_card_session_nonce = self.bank.generate_session_nonce(card_id)
+
+            logging.info('withdraw: Computing HMAC on card')
+            raw_card_hmac = self.card.compute_hmac(raw_card_session_nonce)
 
             # request UUID from HSM if card accepts PIN
-            if card_id:
+            if card_id and raw_card_hmac:
                 logging.info('withdraw: Requesting hsm_id from hsm')
-                hsm_id = self.hsm.get_uuid()
+                hsm_id, raw_hsm_session_nonce = self.hsm.get_uuid()
 
                 # request withdrawal from bank if HSM gives UUID
-                if hsm_id:
+                if hsm_id and raw_hsm_session_nonce:
                     logging.info('withdraw: Requesting withdrawal from bank')
-                    hsm_id = self.bank.withdraw(hsm_id, card_id, amount)
-                    logging.info("HSM ID " + hsm_id)
-                    if hsm_id:
-                        res = self.hsm.withdraw(hsm_id, amount)
+                    raw_atm_hmac = self.bank.withdraw(card_id, raw_card_hmac, pin, hsm_id, raw_hsm_session_nonce, amount)
+                    logging.info("ATM hmac " + repr(raw_atm_hmac))
+
+                    if raw_atm_hmac:
+                        res = self.hsm.withdraw(raw_atm_hmac, amount)
                         if res:
                             return res
                     return False

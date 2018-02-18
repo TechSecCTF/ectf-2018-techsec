@@ -26,9 +26,9 @@
 #define PINCHG_SUC "SUCCESS"
 #define PROV_MSG "P"
 #define RECV_OK "K"
-#define PIN_OK "OK"
-#define PIN_BAD "BAD"
-#define CHANGE_PIN '3'
+#define NONCE_OK "OK"
+#define COMPUTE_HMAC '2'
+#define GET_UUID '3'
 
 //CARD
 
@@ -49,7 +49,6 @@
 static const uint8 PIN[PIN_LEN] = {0x36, 0x35, 0x34, 0x33, 0x35, 0x34, 0x34, 0x36}; //eCTF
 static const uint8 UUID[UUID_LEN] = {0x37, 0x33, 0x36, 0x35, 0x36, 0x33, 0x37, 0x35, 0x37, 0x32, 0x36, 0x39, 0x37, 0x34, 0x37, 0x39}; //security
 static const uint8 BANK_AES_KEY[33] = { 0x00 };
-static const uint8 NONCE[5] = {'b', 'l', 'a', 'n', 0x00};
 
 
 uint8_t hex2byte(char upper_digit, char lower_digit)
@@ -94,17 +93,6 @@ void bytes2hex(uint8_t byte, char* dest)
 }
 
 
-/* Increment a Big-Endian counter */
-static void increment_replay_nonce(uint8_t counter[4])
-{
-    for (int i = 3; i >= 0; --i)
-    {
-        if ((counter[i] += 1) != 0)
-            break;
-    }
-}
-
-
 // reset interrupt on button press
 CY_ISR(Reset_ISR)
 {
@@ -131,26 +119,17 @@ void provision()
     // set account number
     pullMessage(message);
     char hex_bank_key[64];
-    char hex_nonce[8];
     memcpy(hex_bank_key, message, sizeof(hex_bank_key));
-    memcpy(hex_nonce, message + sizeof(hex_bank_key), sizeof(hex_nonce));
 
     uint8_t bank_key[32];
-    uint8_t nonce[4];
 
     for(int i = 0; i < 32; ++i)
     {
         bank_key[i] = hex2byte(hex_bank_key[2*i], hex_bank_key[2*i + 1]);
     }
 
-    for(int i = 0; i < 4; ++i)
-    {
-        nonce[i] = hex2byte(hex_nonce[2*i], hex_nonce[2*i + 1]);
-    }
-
     USER_INFO_Write(bank_key, BANK_AES_KEY, sizeof(bank_key));
-    USER_INFO_Write(nonce, NONCE, sizeof(nonce));
-    USER_INFO_Write(message + 72, UUID, UUID_LEN);
+    USER_INFO_Write(message + sizeof(hex_bank_key), UUID, UUID_LEN);
 
     pushMessage((uint8*)RECV_OK, strlen(RECV_OK));
 }
@@ -196,71 +175,32 @@ int main(void)
         
         // syncronize communication with bank
         syncConnection(SYNC_NORM);
-        
-        // receive pin number from ATM
-        pullMessage(message);
-        
-        // if (strncmp((char*)message, (char*)PIN, PIN_LEN)) {
-        //     pushMessage((uint8*)PIN_BAD, strlen(PIN_BAD));
-        // } else {
-            pushMessage((uint8*)PIN_OK, strlen(PIN_OK));
-            
+
         // get command
         pullMessage(message);
         pushMessage((uint8*)RECV_OK, strlen(RECV_OK));
-        
-        // change PIN or broadcast UUID
-        // if(message[0] == CHANGE_PIN)
-        // {
-        //     pullMessage(message);
-        //     USER_INFO_Write(message, PIN, PIN_LEN);
-            
-        //     pushMessage((uint8*)PINCHG_SUC, strlen(PINCHG_SUC));
-        // } else {
 
-        //Send encrypted UUID
-        // Is the ONLY role of the card now to send its encrypted UUID?
-    
-        uint8_t ciphertext[4];
-        // char hex_ciphertext[96];
+        if (message[0] == GET_UUID) {
+            pushMessage(UUID, UUID_LEN);
+        } else if (message[0] == COMPUTE_HMAC) {
+            // receive challenge nonce from ATM
+            uint8_t nonce[4];
+            pullMessage(message);
+            memcpy(nonce, message, sizeof(nonce));
+            pushMessage((uint8*)NONCE_OK, strlen(NONCE_OK));
 
-        //XXX: Fix
-        uint8_t random_iv[16] = {0xf0,0xf1,0xf2,0xf3,0xf4,0xf5,0xf6,0xf7,0xf8,0xf9,0xfa,0xfb,0xfc,0xfd,0xfe,0xff};
-        aes256_crypt_ctr(ciphertext, BANK_AES_KEY, random_iv, NONCE, 4);
+            //Send HMAC
+            uint8_t hmac_output[32];
+            uint8_t hmac_data[40];
 
-        // for (int i = 0; i < 48; i++){
-        //     bytes2hex(ciphertext[i], hex_ciphertext[2*i]);
-        // }
-        // pushMessage(hex_ciphertext, 96);  
-        
-        uint8_t hmac_output[32];
-        uint8_t hmac_data[20];
+            memcpy(hmac_data, UUID, UUID_LEN);
+            memcpy(hmac_data + UUID_LEN, nonce, sizeof(nonce));
 
-        memcpy(hmac_data, ciphertext, sizeof(ciphertext));
-        memcpy(hmac_data + sizeof(ciphertext), random_iv, sizeof(random_iv));
+            HMAC(hmac_output, BANK_AES_KEY, 32, hmac_data, sizeof(hmac_data));
 
-        // for (int i = 0; i < sizeof(hmac_data); i++){
-        //   printf("%02x", hmac_data[i]); 
-
-        // } 
-        // printf("\n");
-
-        HMAC(hmac_output, BANK_AES_KEY, 32, hmac_data, sizeof(hmac_data));
-
-        // Maybe ensure that all these messages were received?
-        // Push UUID so that bank can look up AES Key for comm 
-        pushMessage(UUID, UUID_LEN);
-        pushMessage(ciphertext, sizeof(ciphertext));
-        pushMessage(random_iv, sizeof(random_iv));
-        pushMessage(hmac_output, sizeof(hmac_output));
-
-        //Increment replay nonce
-        uint8_t nonce[4] = {0};
-        memcpy(nonce, NONCE, 4);
-        increment_replay_nonce(nonce);
-        
-        USER_INFO_Write(nonce, NONCE, sizeof(nonce));
-
+            // Push UUID so that bank can look up AES Key for comm
+            pushMessage(hmac_output, sizeof(hmac_output));
+        }
     }
 }
 

@@ -21,51 +21,37 @@ class HSM(Psoc):
     def __init__(self, port=None, verbose=False, dummy=False):
         super(HSM, self).__init__('HSM', port, verbose)
         self.DECRYPT = 1
-        self.WITHDRAW = 2
+        self.DISPENSE_BILLS = 2
         self.GET_UUID = 3
         self._vp('Please connect HSM to continue.')
         while not self.connected and not dummy:
             time.sleep(2)
         self._vp('Initialized')
 
-    def _authenticate(self, uuid):
-        """Requests authentication from the HSM
-
-        Args:
-            uuid (str): Challenge UUID of HSM
-
-        Returns:
-            bool: True if HSM verified authentication, False otherwise
-        """
-        self._vp('Sending UUID %s' % uuid)
-        self._push_msg('%s\00' % uuid)
-
-        resp = self._pull_msg()
-        self._vp('Received response %s from HSM' % resp)
-
-        return resp == 'K'
-
     def get_uuid(self):
-        """Retrieves the UUID from the HSM
+        """Retrieves the UUID from the HSM, returns a session nonce as well
 
         Returns:
             str: UUID of HSM
+            str: session nonce
         """
         self._sync(False)
+
         self._vp('Sending GET_UUID command to HSM')
         self._send_op(self.GET_UUID)
 
-        self._vp('Sending whatever to HSM')
-        self._push_msg("Whatever\00")
         uuid = self._pull_msg()
+        nonce = self._pull_msg()
 
         if uuid == 'P':
             self._vp('Security module not yet provisioned!', logging.error)
             return None
 
         self._vp('Got UUID %s' % uuid)
+        self._vp('Got session nonce %s' % repr(nonce))
 
-        return uuid
+        return uuid, nonce
+
 
     def _send_op(self, op):
         self._push_msg(str(op))
@@ -74,11 +60,7 @@ class HSM(Psoc):
             self._vp('HSM hasn\'t received op', logging.error)
         self._vp('HSM received op')
 
-    def decrypt(self, hmac, iv, enc_msg):
-        hmac = binascii.unhexlify(hmac)
-        iv = binascii.unhexlify(iv)
-        enc_msg = binascii.unhexlify(enc_msg)
-
+    def decrypt(self, raw_hmac, raw_iv, raw_enc_msg):
         # Sync and get UUID
         # self.get_uuid()
         self._sync(False)
@@ -87,22 +69,23 @@ class HSM(Psoc):
         self._send_op(self.DECRYPT)
 
         self._vp("Sending message to decrypt")
-        self._push_msg("%s\00" % hmac)
-        self._push_msg("%s\00" % iv)
-        self._push_msg("%s\00" % enc_msg)
+        self._push_msg("%s\00" % raw_hmac)
+        self._push_msg("%s\00" % raw_iv)
+        self._push_msg("%s\00" % raw_enc_msg)
 
         msg = self._pull_msg()
         self._vp("HSM returned %s" % repr(msg))
+
         if msg == 'BAD':
             return 'HSM could not decrypt message'
 
         return msg
 
-    def withdraw(self, uuid, amount):
+    def withdraw(self, raw_atm_hmac, amount):
         """Attempts to withdraw bills from the HSM
 
         Args:
-            uuid (str): Challenge UUID of HSM
+            raw_atm_hmac (str): Challenge hmac of HSM
             amount (int): Number of bills to withdraw from HSM
 
         Returns:
@@ -111,14 +94,18 @@ class HSM(Psoc):
                  'Not enough bills in ATM' if HSM doesn't have enough bills
                     to complete request
         """
-        if not self._authenticate(uuid):
-            return 'Insufficient funds'
 
+        self._sync(False)
+
+        self._vp('Sending DISPENSE_BILLS command to HSM')
+        self._send_op(self.DISPENSE_BILLS)
+
+        self._push_msg(raw_atm_hmac)
         msg = struct.pack('B', amount)
         self._push_msg(msg)
 
         msg = self._pull_msg()
-        self._vp('Secmod replied %s' % msg)
+        self._vp('HSM replied %s' % repr(msg))
         if msg == 'BAD':
             return 'Not enough bills in ATM'
 
@@ -151,10 +138,8 @@ class HSM(Psoc):
 
         self._push_msg('%s\00' % blob)
         msg = self._pull_msg()
-        self._vp("RECEIVED MSG1 %s" % msg)
 
         while msg != 'K':
-            self._vp("RECEIVED MSG %s" % repr(msg))
             self._vp('HSM hasn\'t accepted blob \'%s\'' % blob, logging.error)
             msg = self._pull_msg()
         self._vp('HSM accepted blob \'%s\'' % blob)

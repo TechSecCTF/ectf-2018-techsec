@@ -1,9 +1,10 @@
-\\VBOXSVR\raywang\Dropbox (MIT)\CTFs\eCTF\ectf-2018-techsec\SECURITY_MODULE.cydsn\SECURITY_MODULE.cyprj|57b4dfa8-7084-486d-bed1-b71f3e52a9d5
 C:\Program Files (x86)\Cypress\PSoC Creator\4.1\PSoC Creator\psoc\content\default\CyAnnotationLibrary\CyAnnotationLibrary.cylib\CyAnnotationLibrary.cyprj|195d415e-76e0-4b3c-9363-24672123ab8c
 C:\Users\Ray\Documents\PSoC Creator\4.1\Downloads ( 4.1).cylib\Downloads ( 4.1).cyprj|37cad609-c280-4759-b20a-38a90ab911f5
 C:\Program Files (x86)\Cypress\PSoC Creator\4.1\PSoC Creator\psoc\content\cycomponentlibraryupdates\CyComponentLibraryUpdates.cylib\CyComponentLibraryUpdates.cyprj|bb6c98c9-65f3-4835-ad83-a6095a6c0d29
 C:\Program Files (x86)\Cypress\PSoC Creator\4.1\PSoC Creator\psoc\content\cycomponentlibrary\CyComponentLibrary.cylib\CyComponentLibrary.cyprj|eb1fa5b3-3d6a-45d3-a525-ec6b6ff4be25
 C:\Program Files (x86)\Cypress\PSoC Creator\4.1\PSoC Creator\psoc\content\cyprimitives\CyPrimitives.cylib\CyPrimitives.cyprj|696db90d-f938-41bc-a5f1-bead8d967d46
-\\VBOXSVR\raywang\Dropbox (MIT)\CTFs\eCTF\2018-ectf-milestones-demo\Milestones Demo Workspace\strong-arm.cylib\strong-arm.cyprj|2e14b95b-fb98-4f21-aa47-aa3816c2f39d
-\\VBOXSVR\raywang\Dropbox (MIT)\CTFs\eCTF\ectf-2018-techsec\CARD.cydsn\CARD.cyprj|b57a5b74-e842-490c-b990-00bd7ed22255
-\\VBOXSVR\raywang\Dropbox (MIT)\CTFs\eCTF\ectf-2018-techsec\AESTest.cydsn\AESTest.cyprj|37629663-5d0a-4dca-86bd-37857b6f915a
+\\VBOXSVR\raywang\Dropbox (MIT)\CTFs\eCTF\ectf-2018-techsec\AESTest.cydsn\AESTest.cyprj|c21ac1c6-f588-494d-bb4f-55f9c1a7b288
+\\VBOXSVR\raywang\Dropbox (MIT)\CTFs\eCTF\ectf-2018-techsec\CARD.cydsn\CARD.cyprj|44532bb6-ce9e-4fa7-9bd1-576bf5a1c3f8
+\\VBOXSVR\raywang\Dropbox (MIT)\CTFs\eCTF\ectf-2018-techsec\SECURITY_MODULE.cydsn\SECURITY_MODULE.cyprj|c37fe02e-e4ed-401b-9f47-04a500c7fb39
+\\VBOXSVR\raywang\Dropbox (MIT)\CTFs\eCTF\2018-ectf-milestones-demo\Milestones Demo Workspace\strong-arm.cylib\strong-arm.cyprj|4a165356-8ae6-4d05-8282-19763a0fa44d
+C:\Program Files (x86)\Cypress\PSoC Creator\4.1\PSoC Creator\psoc\content\default\CyReferenceLibrary\CyReferenceLibrary.cylib\CyReferenceLibrary.cyprj|ea13a9a9-45c2-448f-aec2-2a7b92828aef

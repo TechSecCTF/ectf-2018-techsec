@@ -123,20 +123,6 @@ class DB(object):
         return result[0] 
 
     @lock_db
-    def get_atm(self, atm_id):
-        """get atm_id of atm: atm_id
-        this is an obviously dumb function but maybe it can be expanded...
-
-        Returns:
-            (string or None): Returns atm_id on Success. None otherwise.
-        """
-        self.cur.execute("SELECT atm_id FROM atms WHERE atm_id = (?);", (atm_id,))
-        result = self.cur.fetchone()
-        if result is None:
-            return None
-        return result[0]
-
-    @lock_db
     def get_atm_num_bills(self, atm_id):
         """get number of bills in atm: atm_id
 
@@ -187,7 +173,7 @@ class DB(object):
 
     @lock_db
     def admin_create_account(self, account_name, card_id, amount, aes_key, nonce):
-        """create account with account_name, card_id, and amount
+        """create account with account_name, card_id, amount, and aes_key
 
         Returns:
             (bool): Returns True on Success. False otherwise.
@@ -196,13 +182,13 @@ class DB(object):
                             values (?, ?, ?, ?, ?, ?);', (account_name, card_id, amount, aes_key, nonce, ""))
 
     @lock_db
-    def admin_create_atm(self, atm_id, aes_key, nonce):
-        """create atm with atm_id
+    def admin_create_atm(self, atm_id, aes_key):
+        """create atm with atm_id and aes_key
 
         Returns:
             (bool): Returns True on Success. False otherwise.
         """
-        return self.modify('INSERT INTO atms(atm_id, num_bills, bank_aes_key, nonce) values (?,?,?,?);', (atm_id, 128, aes_key, nonce,))
+        return self.modify('INSERT INTO atms(atm_id, num_bills, bank_aes_key) values (?,?,?);', (atm_id, 128, aes_key,))
 
     @lock_db
     def admin_get_balance(self, account_name):

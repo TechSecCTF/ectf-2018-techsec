@@ -1,11 +1,10 @@
-\\VBOXSVR\raywang\Dropbox (MIT)\CTFs\eCTF\ectf-2018-techsec\SECURITY_MODULE.cydsn\SECURITY_MODULE.cyprj|b25175f2-16d8-41af-a168-c17edc44202e
-C:\Program Files (x86)\Cypress\PSoC Creator\4.1\PSoC Creator\psoc\content\default\CyAnnotationLibrary\CyAnnotationLibrary.cylib\CyAnnotationLibrary.cyprj|1f2a6609-2f05-48c2-b8e7-36d27da235e7
-C:\Users\Ray\Documents\PSoC Creator\4.1\Downloads ( 4.1).cylib\Downloads ( 4.1).cyprj|032af9f0-8d10-4cf5-b2d3-e9e1f218bf2b
-C:\Program Files (x86)\Cypress\PSoC Creator\4.1\PSoC Creator\psoc\content\cycomponentlibraryupdates\CyComponentLibraryUpdates.cylib\CyComponentLibraryUpdates.cyprj|b2b4e4e0-beb6-46c6-b286-875db8095a6a
-C:\Program Files (x86)\Cypress\PSoC Creator\4.1\PSoC Creator\psoc\content\cycomponentlibrary\CyComponentLibrary.cylib\CyComponentLibrary.cyprj|8e6f1513-fa79-4d35-a329-cde5ece557e6
-C:\Program Files (x86)\Cypress\PSoC Creator\4.1\PSoC Creator\psoc\content\cyprimitives\CyPrimitives.cylib\CyPrimitives.cyprj|831534f5-48ca-4994-b90e-dd38f0196824
-\\VBOXSVR\raywang\Dropbox (MIT)\CTFs\eCTF\ectf-2018-techsec\CARD.cydsn\CARD.cyprj|a2387a7e-465d-4444-b8c3-19b7e7cc127b
-\\VBOXSVR\raywang\Dropbox (MIT)\CTFs\eCTF\2018-ectf-milestones-demo\Milestones Demo Workspace\strong-arm.cylib\strong-arm.cyprj|6aad4c28-75a1-4757-bacd-e4f9c9eac997
-C:\Program Files (x86)\Cypress\PSoC Creator\4.1\PSoC Creator\dev\psoc4\PSoC4AnalogDevice\psoc4arch.cydsn\psoc4arch.cyprj|4401a3e6-a840-4d31-a474-c19b3eb210f0
-\\VBOXSVR\raywang\Dropbox (MIT)\CTFs\eCTF\ectf-2018-techsec\AESTest.cydsn\AESTest.cyprj|23c523d9-cd94-40d8-a48b-1cac590bf031
-C:\Program Files (x86)\Cypress\PSoC Creator\4.1\PSoC Creator\psoc\content\default\CyReferenceLibrary\CyReferenceLibrary.cylib\CyReferenceLibrary.cyprj|4dce4447-d0d9-4128-93b9-e95fda81277e
+C:\Program Files (x86)\Cypress\PSoC Creator\4.1\PSoC Creator\psoc\content\default\CyAnnotationLibrary\CyAnnotationLibrary.cylib\CyAnnotationLibrary.cyprj|195d415e-76e0-4b3c-9363-24672123ab8c
+C:\Users\Ray\Documents\PSoC Creator\4.1\Downloads ( 4.1).cylib\Downloads ( 4.1).cyprj|37cad609-c280-4759-b20a-38a90ab911f5
+C:\Program Files (x86)\Cypress\PSoC Creator\4.1\PSoC Creator\psoc\content\cycomponentlibraryupdates\CyComponentLibraryUpdates.cylib\CyComponentLibraryUpdates.cyprj|bb6c98c9-65f3-4835-ad83-a6095a6c0d29
+C:\Program Files (x86)\Cypress\PSoC Creator\4.1\PSoC Creator\psoc\content\cycomponentlibrary\CyComponentLibrary.cylib\CyComponentLibrary.cyprj|eb1fa5b3-3d6a-45d3-a525-ec6b6ff4be25
+C:\Program Files (x86)\Cypress\PSoC Creator\4.1\PSoC Creator\psoc\content\cyprimitives\CyPrimitives.cylib\CyPrimitives.cyprj|696db90d-f938-41bc-a5f1-bead8d967d46
+\\VBOXSVR\raywang\Dropbox (MIT)\CTFs\eCTF\ectf-2018-techsec\AESTest.cydsn\AESTest.cyprj|c21ac1c6-f588-494d-bb4f-55f9c1a7b288
+\\VBOXSVR\raywang\Dropbox (MIT)\CTFs\eCTF\ectf-2018-techsec\CARD.cydsn\CARD.cyprj|44532bb6-ce9e-4fa7-9bd1-576bf5a1c3f8
+\\VBOXSVR\raywang\Dropbox (MIT)\CTFs\eCTF\ectf-2018-techsec\SECURITY_MODULE.cydsn\SECURITY_MODULE.cyprj|c37fe02e-e4ed-401b-9f47-04a500c7fb39
+\\VBOXSVR\raywang\Dropbox (MIT)\CTFs\eCTF\2018-ectf-milestones-demo\Milestones Demo Workspace\strong-arm.cylib\strong-arm.cyprj|4a165356-8ae6-4d05-8282-19763a0fa44d
+C:\Program Files (x86)\Cypress\PSoC Creator\4.1\PSoC Creator\psoc\content\default\CyReferenceLibrary\CyReferenceLibrary.cylib\CyReferenceLibrary.cyprj|ea13a9a9-45c2-448f-aec2-2a7b92828aef

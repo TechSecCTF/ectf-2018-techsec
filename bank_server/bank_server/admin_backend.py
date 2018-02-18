@@ -91,7 +91,6 @@ class AdminBackend(object):
         self.db_obj = DB(db_path=self.db_path)
         server = SimpleXMLRPCServer((self.admin_host, self.admin_port))
         server.register_introspection_functions()
-        server.register_function(self.hello)
         server.register_function(self.create_account)
         server.register_function(self.update_balance)
         server.register_function(self.check_balance)
@@ -99,11 +98,9 @@ class AdminBackend(object):
         logging.info('admin interface listening on ' + self.admin_host + ':' + str(self.admin_port))
         server.serve_forever()
 
-    def hello(self):
-        return 'hello'
-
     def create_account(self, account_name, amount):
-        """Create account with account_name starting amount
+        """Create account with account_name and  starting amount.
+            Initializes aes_key and card_id
 
         Args:
             account_name(string): name for account
@@ -116,16 +113,17 @@ class AdminBackend(object):
         """
         card_id = str(uuid.uuid4())
         aes_key = binascii.hexlify(os.urandom(32))
-        nonce = os.urandom(4)
         try:
             amount = int(amount)
         except ValueError:
             logging.info('amount must be a integer')
             return False
 
-        if self.db_obj.admin_create_account(account_name, card_id, amount, aes_key, struct.unpack(">I", nonce)[0]):
+        hex_session_nonce = binascii.hexlify(os.urandom(4))
+
+        if self.db_obj.admin_create_account(account_name, card_id, amount, aes_key, hex_session_nonce):
             logging.info('admin create account success')
-            return aes_key + binascii.hexlify(nonce) + card_id
+            return aes_key + card_id
         logging.info('admin create account failed')
         return False
 
@@ -164,7 +162,7 @@ class AdminBackend(object):
         return False
 
     def create_atm(self):
-        """Create atm
+        """Create atm. Initializes an AES-256 key and atm_id
 
         Returns:
             Returns random uuid (string) on Success.
@@ -172,13 +170,9 @@ class AdminBackend(object):
         """
         atm_id = str(uuid.uuid4())
         aes_key = binascii.hexlify(os.urandom(32))
-        nonce = os.urandom(4)
-        if self.db_obj.admin_create_atm(atm_id, aes_key, struct.unpack(">I", nonce)[0]):
+        if self.db_obj.admin_create_atm(atm_id, aes_key):
             logging.info('admin create_atm success')
-            logging.info(aes_key)
-            logging.info(binascii.hexlify(nonce))
-            logging.info(atm_id)
 
-            return aes_key + binascii.hexlify(nonce) + atm_id
+            return aes_key + atm_id
         logging.info('admin create_atm failure')
         return False

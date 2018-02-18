@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc6qyy7a.s 			page 1
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqLqI5V.s 			page 1
 
 
    1              		.syntax unified
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc6qyy7a.s 			page 1
   29:Generated_Source\PSoC4/cyfitter_cfg.c **** #if defined(__GNUC__) || defined(__ARMCC_VERSION)
   30:Generated_Source\PSoC4/cyfitter_cfg.c ****     #define CYPACKED 
   31:Generated_Source\PSoC4/cyfitter_cfg.c ****     #define CYPACKED_ATTR __attribute__ ((packed))
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc6qyy7a.s 			page 2
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqLqI5V.s 			page 2
 
 
   32:Generated_Source\PSoC4/cyfitter_cfg.c ****     #define CYALIGNED __attribute__ ((aligned))
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc6qyy7a.s 			page 1
   35              		.cfi_offset 14, -4
   36 0002 0A00     		movs	r2, r1
   78:Generated_Source\PSoC4/cyfitter_cfg.c **** 	(void)memset(s, 0, n);
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc6qyy7a.s 			page 3
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqLqI5V.s 			page 3
 
 
   37              		.loc 1 78 0
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc6qyy7a.s 			page 1
  115:Generated_Source\PSoC4/cyfitter_cfg.c **** * Parameters:
  116:Generated_Source\PSoC4/cyfitter_cfg.c **** *   void
  117:Generated_Source\PSoC4/cyfitter_cfg.c **** *
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc6qyy7a.s 			page 4
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqLqI5V.s 			page 4
 
 
  118:Generated_Source\PSoC4/cyfitter_cfg.c **** * Return:
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc6qyy7a.s 			page 1
  172:Generated_Source\PSoC4/cyfitter_cfg.c **** CY_CFG_SECTION
  173:Generated_Source\PSoC4/cyfitter_cfg.c **** static void ClockSetup(void)
  174:Generated_Source\PSoC4/cyfitter_cfg.c **** {
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc6qyy7a.s 			page 5
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqLqI5V.s 			page 5
 
 
   55              		.loc 1 174 0
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc6qyy7a.s 			page 1
   92 002c 0D4B     		ldr	r3, .L3+20
   93 002e 1A60     		str	r2, [r3]
  192:Generated_Source\PSoC4/cyfitter_cfg.c **** 
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc6qyy7a.s 			page 6
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqLqI5V.s 			page 6
 
 
  193:Generated_Source\PSoC4/cyfitter_cfg.c **** 	/* CYDEV_CLK_SELECT Starting address: CYDEV_CLK_SELECT */
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc6qyy7a.s 			page 1
  138              	.LFB5:
  203:Generated_Source\PSoC4/cyfitter_cfg.c **** 
  204:Generated_Source\PSoC4/cyfitter_cfg.c **** 
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc6qyy7a.s 			page 7
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqLqI5V.s 			page 7
 
 
  205:Generated_Source\PSoC4/cyfitter_cfg.c **** /* Analog API Functions */
@@ -418,7 +418,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc6qyy7a.s 			page 1
  251:Generated_Source\PSoC4/cyfitter_cfg.c **** 	CyGlobalIntDisable;
  147              		.loc 1 251 0
  148              		.syntax divided
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc6qyy7a.s 			page 8
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqLqI5V.s 			page 8
 
 
  149              	@ 251 "Generated_Source\PSoC4\cyfitter_cfg.c" 1
@@ -478,7 +478,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc6qyy7a.s 			page 1
  181 009e E4B2     		uxtb	r4, r4
  182              	.LVL10:
  183              	.L6:
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc6qyy7a.s 			page 9
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqLqI5V.s 			page 9
 
 
  269:Generated_Source\PSoC4/cyfitter_cfg.c **** 		{
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc6qyy7a.s 			page 1
  293:Generated_Source\PSoC4/cyfitter_cfg.c **** 	/* IOPINS0_3 Starting address: CYDEV_PRT3_BASE */
  294:Generated_Source\PSoC4/cyfitter_cfg.c **** 	CY_SET_REG32((void *)(CYREG_PRT3_PC), 0x00000D80u);
  217              		.loc 1 294 0
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc6qyy7a.s 			page 10
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqLqI5V.s 			page 10
 
 
  218 00d2 D822     		movs	r2, #216
@@ -598,7 +598,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc6qyy7a.s 			page 1
  258              		.align	2
  259              		.set	.LANCHOR0,. + 0
  260              		.type	cfg_memset_list.4847, %object
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc6qyy7a.s 			page 11
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqLqI5V.s 			page 11
 
 
  261              		.size	cfg_memset_list.4847, 12
@@ -658,7 +658,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc6qyy7a.s 			page 1
  315 005a 04       		.uleb128 0x4
  316 005b 02       		.byte	0x2
  317 005c 05       		.byte	0x5
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc6qyy7a.s 			page 12
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqLqI5V.s 			page 12
 
 
  318 005d A2010000 		.4byte	.LASF5
@@ -718,7 +718,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc6qyy7a.s 			page 1
  372 00c7 CB000000 		.4byte	0xcb
  373 00cb 07       		.uleb128 0x7
  374 00cc 8D000000 		.4byte	0x8d
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc6qyy7a.s 			page 13
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqLqI5V.s 			page 13
 
 
  375 00d0 06       		.uleb128 0x6
@@ -778,7 +778,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc6qyy7a.s 			page 1
  429 0133 01       		.byte	0x1
  430 0134 AD       		.byte	0xad
  431 0135 00000000 		.4byte	.LFB3
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc6qyy7a.s 			page 14
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqLqI5V.s 			page 14
 
 
  432 0139 78000000 		.4byte	.LFE3-.LFB3
@@ -838,7 +838,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc6qyy7a.s 			page 1
  486 01a8 01       		.byte	0x1
  487 01a9 0001     		.2byte	0x100
  488 01ab 84000000 		.4byte	0x84
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc6qyy7a.s 			page 15
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqLqI5V.s 			page 15
 
 
  489 01af 00       		.byte	0
@@ -898,7 +898,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc6qyy7a.s 			page 1
  543 022c 01       		.uleb128 0x1
  544 022d 51       		.byte	0x51
  545 022e 15       		.uleb128 0x15
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc6qyy7a.s 			page 16
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqLqI5V.s 			page 16
 
 
  546 022f 74       		.byte	0x74
@@ -958,7 +958,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc6qyy7a.s 			page 1
  600 0009 1B       		.uleb128 0x1b
  601 000a 0E       		.uleb128 0xe
  602 000b 55       		.uleb128 0x55
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc6qyy7a.s 			page 17
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqLqI5V.s 			page 17
 
 
  603 000c 17       		.uleb128 0x17
@@ -1018,7 +1018,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc6qyy7a.s 			page 1
  657 0042 3A       		.uleb128 0x3a
  658 0043 0B       		.uleb128 0xb
  659 0044 3B       		.uleb128 0x3b
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc6qyy7a.s 			page 18
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqLqI5V.s 			page 18
 
 
  660 0045 05       		.uleb128 0x5
@@ -1078,7 +1078,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc6qyy7a.s 			page 1
  714 007e 01       		.uleb128 0x1
  715 007f 31       		.uleb128 0x31
  716 0080 13       		.uleb128 0x13
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc6qyy7a.s 			page 19
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqLqI5V.s 			page 19
 
 
  717 0081 00       		.byte	0
@@ -1138,7 +1138,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc6qyy7a.s 			page 1
  771 00bd 01       		.uleb128 0x1
  772 00be 13       		.uleb128 0x13
  773 00bf 00       		.byte	0
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc6qyy7a.s 			page 20
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqLqI5V.s 			page 20
 
 
  774 00c0 00       		.byte	0
@@ -1198,7 +1198,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc6qyy7a.s 			page 1
  828 00f6 14       		.uleb128 0x14
  829 00f7 34       		.uleb128 0x34
  830 00f8 00       		.byte	0
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc6qyy7a.s 			page 21
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqLqI5V.s 			page 21
 
 
  831 00f9 03       		.uleb128 0x3
@@ -1258,7 +1258,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc6qyy7a.s 			page 1
  885 0131 19       		.uleb128 0x19
  886 0132 2E       		.uleb128 0x2e
  887 0133 00       		.byte	0
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc6qyy7a.s 			page 22
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqLqI5V.s 			page 22
 
 
  888 0134 3F       		.uleb128 0x3f
@@ -1318,7 +1318,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc6qyy7a.s 			page 1
  942 003b 0C000000 		.4byte	.LFE0
  943 003f 0400     		.2byte	0x4
  944 0041 F3       		.byte	0xf3
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc6qyy7a.s 			page 23
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqLqI5V.s 			page 23
 
 
  945 0042 01       		.uleb128 0x1
@@ -1378,7 +1378,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc6qyy7a.s 			page 1
  999 0010 00000000 		.4byte	.LFB0
  1000 0014 0C000000 		.4byte	.LFE0-.LFB0
  1001 0018 00000000 		.4byte	.LFB3
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc6qyy7a.s 			page 24
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqLqI5V.s 			page 24
 
 
  1002 001c 78000000 		.4byte	.LFE3-.LFB3
@@ -1438,7 +1438,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc6qyy7a.s 			page 1
  1036              	.LASF18:
  1037 0055 72656738 		.ascii	"reg8\000"
  1037      00
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc6qyy7a.s 			page 25
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqLqI5V.s 			page 25
 
 
  1038              	.LASF8:
@@ -1498,7 +1498,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc6qyy7a.s 			page 1
  1065 00eb 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
  1065      43313120 
  1065      352E342E 
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc6qyy7a.s 			page 26
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqLqI5V.s 			page 26
 
 
  1065      31203230 
@@ -1558,7 +1558,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc6qyy7a.s 			page 1
  1086      3031382D 
  1086      74656368 
  1086      7365635C 
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc6qyy7a.s 			page 27
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqLqI5V.s 			page 27
 
 
  1086      41455354 
