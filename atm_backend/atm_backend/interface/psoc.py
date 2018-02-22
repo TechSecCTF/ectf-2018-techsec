@@ -156,26 +156,24 @@ class Psoc(object):
     #     self.open()
     #     if self.name == 'CARD':
     #         self.start_disconnect_watcher()
-
-    def device_disconnect_watch(self):
+    
+    def device_connect_watch(self):
         """Threaded function that connects to new serial devices"""
 
         # Read current ports
-        disconnecting = []
+        connecting = []
 
         # Has a new device connected?
-        while not disconnecting and self.port not in disconnecting:
+        while len(connecting) == 0:
             new_ports = [port_info.device for port_info in list_ports()]
-            disconnecting = list(set(self.old_ports) - set(new_ports))
+            connecting = list(set(new_ports) - set(self.old_ports))
             self.old_ports = new_ports
-
-        logging.info("DYNAMIC SERIAL: %s disconnected", self.name)
-        self.port = ''
-        self.connected = False
-        self.lock.acquire()
-        self.ser.close()
-        self.lock.release()
-        self.start_connect_watcher()
+            time.sleep(.25)
+        self.port = connecting[0]
+        logging.info("DYNAMIC SERIAL: Found new serial device")
+        self.open()
+        if self.name == 'CARD':
+            self.start_disconnect_watcher()
 
 
     def device_disconnect_watch(self):

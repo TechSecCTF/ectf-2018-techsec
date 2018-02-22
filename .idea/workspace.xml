@@ -10,12 +10,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="afba7e0f-3e4d-4165-a1cb-316f53ce5fdb" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bank_server/bank_server/ectf.db" afterPath="$PROJECT_DIR$/bank_server/bank_server/ectf.db" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/ectf-2018-techsec.iml" afterPath="$PROJECT_DIR$/.idea/ectf-2018-techsec.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/atm_backend/atm_backend/interface/card.py" afterPath="$PROJECT_DIR$/atm_backend/atm_backend/interface/card.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/atm_backend/atm_backend/interface/psoc.py" afterPath="$PROJECT_DIR$/atm_backend/atm_backend/interface/psoc.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ectf-techsec.cywrk.Ray" afterPath="$PROJECT_DIR$/ectf-techsec.cywrk.Ray" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -191,8 +186,8 @@
           <file leaf-file-name="psoc.py" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/atm_backend/atm_backend/interface/psoc.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="800">
-                  <caret line="161" column="0" lean-forward="true" selection-start-line="161" selection-start-column="0" selection-end-line="161" selection-end-column="0" />
+                <state relative-caret-position="761">
+                  <caret line="158" column="4" lean-forward="false" selection-start-line="158" selection-start-column="4" selection-end-line="158" selection-end-column="4" />
                   <folding>
                     <element signature="e#0#13#0" expanded="true" />
                   </folding>
@@ -691,12 +686,12 @@
       <workItem from="1518845237099" duration="21964000" />
       <workItem from="1518960531747" duration="1048000" />
       <workItem from="1519263196158" duration="2798000" />
-      <workItem from="1519334733610" duration="668000" />
+      <workItem from="1519334733610" duration="767000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="26478000" />
+    <option name="totallyTimeSpent" value="26577000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="291" y="23" width="1743" height="1378" extended-state="0" />
@@ -1207,8 +1202,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/atm_backend/atm_backend/interface/psoc.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="800">
-          <caret line="161" column="0" lean-forward="true" selection-start-line="161" selection-start-column="0" selection-end-line="161" selection-end-column="0" />
+        <state relative-caret-position="761">
+          <caret line="158" column="4" lean-forward="false" selection-start-line="158" selection-start-column="4" selection-end-line="158" selection-end-column="4" />
           <folding>
             <element signature="e#0#13#0" expanded="true" />
           </folding>
