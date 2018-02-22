@@ -132,38 +132,51 @@ class Psoc(object):
             logging.info('DYNAMIC SERIAL: Disconnecting from %s', resp)
             self.start_connect_watcher()
 
-    def device_connect_watch(self):
+    # def device_connect_watch(self):
+    #     """Threaded function that connects to new serial devices"""
+    # 
+    #     # Read current ports
+    #     connecting = []
+
+    #     # For testing purposes, immediately connect to USB modem 1421 for HSM and 1411 for card
+    #     while True:
+    #         if self.name == 'HSM' and any([port.device == '/dev/cu.usbmodem1421' for port in list_ports()]):
+    #             self.port = '/dev/cu.usbmodem1421'
+    #             logging.info("DYNAMIC SERIAL: Found new serial device HSM")
+    #             break
+    #         elif self.name == 'CARD' and any([port.device.startswith('/dev/cu.usbmodem1411') for port in list_ports()]):
+    #             self.port = "/dev/cu.usbmodem1411"
+    #             logging.info("DYNAMIC SERIAL: Found new serial device CARD")
+    #             break
+    # 
+    #         time.sleep(.25)
+    # 
+    # 
+    #     logging.info("DYNAMIC SERIAL: Opening new serial device")
+    #     self.open()
+    #     if self.name == 'CARD':
+    #         self.start_disconnect_watcher()
+
+    def device_disconnect_watch(self):
         """Threaded function that connects to new serial devices"""
 
         # Read current ports
-        connecting = []
+        disconnecting = []
 
         # Has a new device connected?
-        # while len(connecting) == 0:
-        #     new_ports = [port_info.device for port_info in list_ports()]
-        #     connecting = list(set(new_ports) - set(self.old_ports))
-        #     self.old_ports = new_ports
-        #     time.sleep(.25)
-        # self.port = connecting[0]
+        while not disconnecting and self.port not in disconnecting:
+            new_ports = [port_info.device for port_info in list_ports()]
+            disconnecting = list(set(self.old_ports) - set(new_ports))
+            self.old_ports = new_ports
 
-        # For testing purposes, immediately connect to USB modem 1421 for HSM and 1411 for card
-        while True:
-            if self.name == 'HSM' and any([port.device == '/dev/cu.usbmodem1421' for port in list_ports()]):
-                self.port = '/dev/cu.usbmodem1421'
-                logging.info("DYNAMIC SERIAL: Found new serial device HSM")
-                break
-            elif self.name == 'CARD' and any([port.device.startswith('/dev/cu.usbmodem1411') for port in list_ports()]):
-                self.port = "/dev/cu.usbmodem1411"
-                logging.info("DYNAMIC SERIAL: Found new serial device CARD")
-                break
+        logging.info("DYNAMIC SERIAL: %s disconnected", self.name)
+        self.port = ''
+        self.connected = False
+        self.lock.acquire()
+        self.ser.close()
+        self.lock.release()
+        self.start_connect_watcher()
 
-            time.sleep(.25)
-
-
-        logging.info("DYNAMIC SERIAL: Opening new serial device")
-        self.open()
-        if self.name == 'CARD':
-            self.start_disconnect_watcher()
 
     def device_disconnect_watch(self):
         """Threaded function that connects to new serial devices"""

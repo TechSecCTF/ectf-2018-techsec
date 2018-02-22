@@ -16,6 +16,7 @@ class Card(Psoc):
         self.verbose = verbose
 
     def initialize(self):
+        super(Card, self).__init__('CARD', self.port, self.verbose)
         self.COMPUTE_HMAC = 2
         self.GET_UUID = 3
 
