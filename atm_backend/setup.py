@@ -17,7 +17,7 @@ setup(
     python_requires='<3',
     packages=find_packages(include=['atm_backend', 'interface'], exclude=['contrib', 'docs', 'tests']),
 
-    install_requires=['pyserial'],
+    install_requires=['pyserial', 'pycrypto'],
 
     # $ pip install -e .[dev,test]
     extras_require={

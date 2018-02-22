@@ -55,7 +55,7 @@ class Bank(object):
     "ERROR\n"
     """
 
-    def __init__(self, config, db_mutex):
+    def __init__(self, config, db_mutex, ready_event):
         super(Bank, self).__init__()
         self.bank_host = config['bank']['host']
         self.bank_port = int(config['bank']['port'])
@@ -70,6 +70,10 @@ class Bank(object):
         self.server.register_function(self.set_initial_pin)
         self.server.register_function(self.generate_session_nonce)
         self.server.register_function(self.change_pin)
+
+        # Bank is initialized. Tell AdminBackend to report that ready_for_atm
+        # is True.
+        ready_event.set()
         self.server.serve_forever()
 
 

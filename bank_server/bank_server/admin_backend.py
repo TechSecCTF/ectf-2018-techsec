@@ -61,6 +61,7 @@ import logging
 from SimpleXMLRPCServer import SimpleXMLRPCServer
 from . import DB
 import os
+import xmlrpclib
 import Crypto
 import struct
 import binascii
@@ -74,7 +75,7 @@ class AdminBackend(object):
     also expose to ease service discovery on the client-side.
 
     """
-    def __init__(self, config, db_mutex):
+    def __init__(self, config, db_mutex, ready_event):
         """ __init__ reads config object and registers interface to xmlrpc
 
         Args:
@@ -87,6 +88,7 @@ class AdminBackend(object):
         self.admin_port = config['admin']['port']
         self.db_path = config['database']['db_path']
         self.db_mutex = db_mutex
+        self.ready_event = ready_event
 
         self.db_obj = DB(db_path=self.db_path)
         server = SimpleXMLRPCServer((self.admin_host, self.admin_port))
@@ -95,8 +97,14 @@ class AdminBackend(object):
         server.register_function(self.update_balance)
         server.register_function(self.check_balance)
         server.register_function(self.create_atm)
+        server.register_function(self.ready_for_atm)
         logging.info('admin interface listening on ' + self.admin_host + ':' + str(self.admin_port))
         server.serve_forever()
+
+
+    def ready_for_atm(self):
+        return self.ready_event.isSet()
+
 
     def create_account(self, account_name, amount):
         """Create account with account_name and  starting amount.
@@ -123,7 +131,7 @@ class AdminBackend(object):
 
         if self.db_obj.admin_create_account(account_name, card_id, amount, aes_key, hex_session_nonce):
             logging.info('admin create account success')
-            return aes_key + card_id
+            return xmlrpclib.Binary(aes_key + card_id)
         logging.info('admin create account failed')
         return False
 
@@ -173,6 +181,6 @@ class AdminBackend(object):
         if self.db_obj.admin_create_atm(atm_id, aes_key):
             logging.info('admin create_atm success')
 
-            return aes_key + atm_id
+            return xmlrpclib.Binary(aes_key + atm_id)
         logging.info('admin create_atm failure')
         return False

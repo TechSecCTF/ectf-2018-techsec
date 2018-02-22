@@ -97,6 +97,7 @@ import os
 import logging
 from logging import handlers
 import sys
+import threading
 import SimpleXMLRPCServer
 import yaml
 from . import ATM, ProvisionTool
@@ -178,11 +179,24 @@ def main():
     server.register_function(atm.change_pin)
     server.register_function(provision_tool.provision_card)
     server.register_function(provision_tool.provision_atm)
+    server.register_function(provision_tool.ready_for_hsm)
+    server.register_function(provision_tool.hsm_connected)
+    server.register_function(provision_tool.card_connected)
 
     logging.info('ATM xmlrpc interface initialized.')
     logging.info('ATM listening on %s:%s' % (config['devices']['atm']['host'], str(config['devices']['atm']['port'])))
     # Start xmlrpc server
-    server.serve_forever()
+    t = threading.Thread(target=server.serve_forever)
+    t.daemon = True
+    t.start()
+
+    # Blocks until a hsm is connected
+    hsm.initialize()
+
+    # Spins up thread to connect/disconnect cards
+    card.initialize()
+
+    t.join()
 
 
 if __name__ == '__main__':
