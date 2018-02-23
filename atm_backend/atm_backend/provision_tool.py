@@ -40,6 +40,7 @@ class ProvisionTool(object):
         Returns:
             bool: True on Success, False on Failure
         """
+        card_blob = card_blob.data
 
         # First, update card
         self.card.wait_for_insert()
