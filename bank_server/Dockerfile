@@ -9,19 +9,23 @@ FROM python:2.7-alpine
 
 RUN apk update \
     && apk add sqlite
+
+RUN apk add gcc g++ make libffi-dev openssl-dev
     
 EXPOSE 1337
 EXPOSE 1338
 
 WORKDIR /bank
 ADD bank_server ./bank_server
+RUN rm -rf -- /bank/bank_server/logs
+RUN rm -rf -- /bank/bank_server/ectf.db
 RUN mkdir /bank/bank_server/logs
 RUN cat /bank/bank_server/tests/test_db.sql | sqlite3 /bank/bank_server/tests/test.db
 RUN cat /bank/bank_server/ectf_db.sql | sqlite3 /bank/bank_server/ectf.db
 ADD setup.py ./setup.py
 ADD README.md ./README.md
 
-RUN python -m pip install pyyaml nose
+RUN python -m pip install pyyaml nose bcrypt pycrypto
 RUN python setup.py install
 
 CMD python -m bank_server.__main__
