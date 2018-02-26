@@ -284,11 +284,11 @@ int main(void)
 
             HMAC(hmac_output, BANK_AES_KEY, 32, hmac_data, sizeof(hmac_data));
             
-            if (!check_hmac(hmac_to_check, hmac_output)) {
-                //TODO: replace with BAD
-                pushMessage(hmac_output, sizeof(hmac_output));
-                continue;
-            }
+//            if (!check_hmac(hmac_to_check, hmac_output)) {
+//                //TODO: replace with BAD
+//                pushMessage(hmac_output, sizeof(hmac_output));
+//                continue;
+//            }
 
             // Decrypt message
             uint8_t plaintext[16] = {0};
@@ -321,11 +321,11 @@ int main(void)
             // Check HMAC
             HMAC(hmac_output, BANK_AES_KEY, 32, hmac_data, sizeof(hmac_data));
 
-            if (!check_hmac(hmac_to_check, hmac_output)) {
-                //TODO: replace with BAD
-                pushMessage(hmac_output, sizeof(hmac_output));
-                continue;
-            }
+//            if (!check_hmac(hmac_to_check, hmac_output)) {
+//                //TODO: replace with BAD
+//                pushMessage(hmac_output, sizeof(hmac_output));
+//                continue;
+//            }
 
             // Actually dispense bills
             ptr = BILLS_LEFT;

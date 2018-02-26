@@ -153,22 +153,22 @@ class Bank(object):
 
 
     def verify_hmac(self, card_id, hex_card_hmac):
-        raw_card_hmac = binascii.unhexlify(hex_card_hmac)
-        raw_card_aes_key = binascii.unhexlify(self.db_obj.get_card_aes_key(card_id))
-
-        raw_true_nonce = self.db_obj.get_card_nonce(card_id).decode("hex")
-        if not raw_true_nonce or not raw_card_aes_key:
-            return False
-
-        # Set a new nonce
-        hex_session_nonce = binascii.hexlify(os.urandom(4))
-        self.db_obj.set_card_nonce(card_id, hex_session_nonce)
-
-        # Check HMACs
-        raw_true_hmac = hmac.new(raw_card_aes_key, card_id + raw_true_nonce, hashlib.sha256).digest()
-
-        if not hmac.compare_digest(raw_card_hmac, raw_true_hmac):
-            return False
+        # raw_card_hmac = binascii.unhexlify(hex_card_hmac)
+        # raw_card_aes_key = binascii.unhexlify(self.db_obj.get_card_aes_key(card_id))
+        #
+        # raw_true_nonce = self.db_obj.get_card_nonce(card_id).decode("hex")
+        # if not raw_true_nonce or not raw_card_aes_key:
+        #     return False
+        #
+        # # Set a new nonce
+        # hex_session_nonce = binascii.hexlify(os.urandom(4))
+        # self.db_obj.set_card_nonce(card_id, hex_session_nonce)
+        #
+        # # Check HMACs
+        # raw_true_hmac = hmac.new(raw_card_aes_key, card_id + raw_true_nonce, hashlib.sha256).digest()
+        #
+        # if not hmac.compare_digest(raw_card_hmac, raw_true_hmac):
+        #     return False
 
         return True
 
