@@ -816,6 +816,12 @@ net \ATM_UART:BUART:tx_fifo_notfull\
 	switch "Stub-:udbswitch@[UDB=(0,0)][side=top]:v95==>:udb@[UDB=(1,0)]:statusicell.status_3"
 	term   ":udb@[UDB=(1,0)]:statusicell.status_3"
 end \ATM_UART:BUART:tx_fifo_notfull\
+net Net_131
+	term   ":m0s8scbcell_0.interrupt"
+	switch ":m0s8scbcell_0.interrupt==>:interrupt_idmux_10.in_0"
+	switch ":interrupt_idmux_10.interrupt_idmux_10__out==>:interrupt_10.interrupt"
+	term   ":interrupt_10.interrupt"
+end Net_131
 net Net_25
 	term   ":udb@[UDB=(0,1)]:pld1:mc0.q"
 	switch ":udb@[UDB=(0,1)]:pld1:mc0.q==>:udb@[UDB=(0,1)]:pld1:output_permute1.q_0"
@@ -864,12 +870,6 @@ net Net_32
 	switch ":interrupt_idmux_2.interrupt_idmux_2__out==>:interrupt_2.interrupt"
 	term   ":interrupt_2.interrupt"
 end Net_32
-net Net_40
-	term   ":m0s8scbcell_0.interrupt"
-	switch ":m0s8scbcell_0.interrupt==>:interrupt_idmux_10.in_0"
-	switch ":interrupt_idmux_10.interrupt_idmux_10__out==>:interrupt_10.interrupt"
-	term   ":interrupt_10.interrupt"
-end Net_40
 net Net_60
 	term   ":ioport0:pin7.fb"
 	switch ":ioport0:pin7.fb==>:ioport0:hsiom_in7.hsiom7_in"

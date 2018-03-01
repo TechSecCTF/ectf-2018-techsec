@@ -2,7 +2,7 @@
 --	Conversion of SECURITY_MODULE.v to vh2:
 --
 --	Cypress Semiconductor - WARP Version 6.3 IR 41
---	Fri Feb 16 20:13:45 2018
+--	Thu Mar 01 10:57:17 2018
 --
 
 USE cypress.cypress.all;
@@ -32,7 +32,7 @@ SIGNAL one : bit;
 SIGNAL \DB_UART:tmpINTERRUPT_0__tx_net_0\ : bit;
 SIGNAL \DB_UART:Net_1099\ : bit;
 SIGNAL \DB_UART:Net_1258\ : bit;
-SIGNAL Net_4 : bit;
+SIGNAL Net_73 : bit;
 SIGNAL \DB_UART:tmpOE__rx_net_0\ : bit;
 SIGNAL \DB_UART:tmpIO_0__rx_net_0\ : bit;
 TERMINAL \DB_UART:tmpSIOVREF__rx_net_0\ : bit;
@@ -46,20 +46,21 @@ SIGNAL \DB_UART:select_m_wire_1\ : bit;
 SIGNAL \DB_UART:select_m_wire_0\ : bit;
 SIGNAL \DB_UART:sclk_m_wire\ : bit;
 SIGNAL \DB_UART:miso_s_wire\ : bit;
-SIGNAL \DB_UART:scl_wire\ : bit;
-SIGNAL \DB_UART:sda_wire\ : bit;
-SIGNAL Net_7 : bit;
-SIGNAL Net_6 : bit;
+SIGNAL Net_90 : bit;
+SIGNAL Net_91 : bit;
+SIGNAL Net_76 : bit;
+SIGNAL Net_75 : bit;
 SIGNAL \DB_UART:Net_1028\ : bit;
-SIGNAL Net_2 : bit;
-SIGNAL Net_3 : bit;
-SIGNAL Net_12 : bit;
-SIGNAL Net_13 : bit;
-SIGNAL Net_14 : bit;
-SIGNAL Net_15 : bit;
-SIGNAL Net_16 : bit;
-SIGNAL Net_17 : bit;
-SIGNAL Net_18 : bit;
+SIGNAL Net_72 : bit;
+SIGNAL Net_81 : bit;
+SIGNAL Net_82 : bit;
+SIGNAL Net_83 : bit;
+SIGNAL Net_84 : bit;
+SIGNAL Net_85 : bit;
+SIGNAL Net_86 : bit;
+SIGNAL Net_87 : bit;
+SIGNAL Net_89 : bit;
+SIGNAL Net_92 : bit;
 SIGNAL Net_27 : bit;
 SIGNAL \CARD_UART:Net_9\ : bit;
 SIGNAL Net_28 : bit;
@@ -641,7 +642,7 @@ Net_23D <= ((not \CARD_UART:BUART:reset_reg\ and \CARD_UART:BUART:tx_state_2\)
 \DB_UART:SCB_IRQ\:cy_isr_v1_0
 	GENERIC MAP(int_type=>"10",
 		is_nmi=>'0')
-	PORT MAP(int_signal=>Net_4);
+	PORT MAP(int_signal=>Net_73);
 \DB_UART:rx\:cy_psoc3_pins_v1_10
 	GENERIC MAP(id=>"43ec2fa1-bf22-4b71-9477-b6ca7b97f0b0/78e33e5d-45ea-4b75-88d5-73274e8a7ce4",
 		drive_mode=>"001",
@@ -716,7 +717,7 @@ Net_23D <= ((not \CARD_UART:BUART:reset_reg\ and \CARD_UART:BUART:tx_state_2\)
 	GENERIC MAP(cy_registers=>"",
 		scb_mode=>2)
 	PORT MAP(clock=>\DB_UART:Net_847\,
-		interrupt=>Net_4,
+		interrupt=>Net_73,
 		rx=>\DB_UART:rx_wire\,
 		tx=>\DB_UART:tx_wire\,
 		cts=>zero,
@@ -729,10 +730,10 @@ Net_23D <= ((not \CARD_UART:BUART:reset_reg\ and \CARD_UART:BUART:tx_state_2\)
 		miso_s=>\DB_UART:miso_s_wire\,
 		select_s=>zero,
 		sclk_s=>zero,
-		scl=>\DB_UART:scl_wire\,
-		sda=>\DB_UART:sda_wire\,
-		tx_req=>Net_7,
-		rx_req=>Net_6);
+		scl=>Net_90,
+		sda=>Net_91,
+		tx_req=>Net_76,
+		rx_req=>Net_75);
 \CARD_UART:TXInternalInterrupt\:cy_isr_v1_0
 	GENERIC MAP(int_type=>"10",
 		is_nmi=>'0')

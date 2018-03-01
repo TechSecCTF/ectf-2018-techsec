@@ -1,0 +1,2430 @@
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccdfnkDI.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m0
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 4
+  11              		.eabi_attribute 34, 0
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"main.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.Reset_ISR,"ax",%progbits
+  20              		.align	1
+  21              		.global	Reset_ISR
+  22              		.code	16
+  23              		.thumb_func
+  24              		.type	Reset_ISR, %function
+  25              	Reset_ISR:
+  26              	.LFB35:
+  27              		.file 1 "main.c"
+   1:main.c        **** /* ========================================
+   2:main.c        ****  *
+   3:main.c        ****  * Copyright YOUR COMPANY, THE YEAR
+   4:main.c        ****  * All Rights Reserved
+   5:main.c        ****  * UNPUBLISHED, LICENSED SOFTWARE.
+   6:main.c        ****  *
+   7:main.c        ****  * CONFIDENTIAL AND PROPRIETARY INFORMATION
+   8:main.c        ****  * WHICH IS THE PROPERTY OF your company.
+   9:main.c        ****  *
+  10:main.c        ****  * ========================================
+  11:main.c        **** */
+  12:main.c        **** 
+  13:main.c        **** #include "project.h"
+  14:main.c        **** #include <stdlib.h>
+  15:main.c        **** #include "usbserialprotocol.h"
+  16:main.c        **** #include "SW1.h"
+  17:main.c        **** #include "Reset_isr.h"
+  18:main.c        **** #include <strong-arm/sha256.h>
+  19:main.c        **** #include <strong-arm/aes.h>
+  20:main.c        **** #include <strong-arm/random.h>
+  21:main.c        **** #include <strong-arm/hmac.h>
+  22:main.c        **** #include <stdio.h>
+  23:main.c        **** 
+  24:main.c        **** #define PIN_LEN 8
+  25:main.c        **** #define UUID_LEN 36
+  26:main.c        **** #define PINCHG_SUC "SUCCESS"
+  27:main.c        **** #define PROV_MSG "P"
+  28:main.c        **** #define RECV_OK "K"
+  29:main.c        **** #define NONCE_OK "OK"
+  30:main.c        **** #define COMPUTE_HMAC '2'
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccdfnkDI.s 			page 2
+
+
+  31:main.c        **** #define GET_UUID '3'
+  32:main.c        **** 
+  33:main.c        **** //CARD
+  34:main.c        **** 
+  35:main.c        **** /* 
+  36:main.c        ****  * How to read from EEPROM (persistent memory):
+  37:main.c        ****  * 
+  38:main.c        ****  * // read variable:
+  39:main.c        ****  * static const uint8 EEPROM_BUF_VAR[len] = { val1, val2, ... };
+  40:main.c        ****  * // write variable:
+  41:main.c        ****  * volatile const uint8 *ptr = EEPROM_BUF_VAR;
+  42:main.c        ****  * 
+  43:main.c        ****  * uint8 val1 = *ptr;
+  44:main.c        ****  * uint8 buf[4] = { 0x01, 0x02, 0x03, 0x04 };
+  45:main.c        ****  * USER_INFO_Write(message, EEPROM_BUF_VAR, 4u); 
+  46:main.c        ****  */
+  47:main.c        **** 
+  48:main.c        **** // global EEPROM read variables
+  49:main.c        **** static const uint8 PIN[PIN_LEN] = {0x36, 0x35, 0x34, 0x33, 0x35, 0x34, 0x34, 0x36}; //eCTF
+  50:main.c        **** static const uint8 UUID[UUID_LEN] = {0x37, 0x33, 0x36, 0x35, 0x36, 0x33, 0x37, 0x35, 0x37, 0x32, 0x
+  51:main.c        **** static const uint8 BANK_AES_KEY[33] = { 0x00 };
+  52:main.c        **** 
+  53:main.c        **** 
+  54:main.c        **** uint8_t hex2byte(char upper_digit, char lower_digit)
+  55:main.c        **** {
+  56:main.c        ****     uint8_t value = 0;
+  57:main.c        ****     
+  58:main.c        ****     // Lower nybble.
+  59:main.c        ****     if(lower_digit >= '0' && lower_digit <= '9')
+  60:main.c        ****     {
+  61:main.c        ****         value = lower_digit - '0';
+  62:main.c        ****     }
+  63:main.c        ****     else if(lower_digit >= 'a' && lower_digit <= 'f')
+  64:main.c        ****     {
+  65:main.c        ****         value = lower_digit - 'a' + 0xA;
+  66:main.c        ****     }
+  67:main.c        ****     else if(lower_digit >= 'A' && lower_digit <= 'F')
+  68:main.c        ****     {
+  69:main.c        ****         value = lower_digit - 'A' + 0xA;
+  70:main.c        ****     }
+  71:main.c        ****     
+  72:main.c        ****     // Upper nybble.
+  73:main.c        ****     if(upper_digit >= '0' && upper_digit <= '9')
+  74:main.c        ****     {
+  75:main.c        ****         value |= (upper_digit - '0') << 4;
+  76:main.c        ****     }
+  77:main.c        ****     else if(upper_digit >= 'a' && upper_digit <= 'f')
+  78:main.c        ****     {
+  79:main.c        ****         value |= (upper_digit - 'a' + 0xA) << 4;
+  80:main.c        ****     }
+  81:main.c        ****     else if(upper_digit >= 'A' && upper_digit <= 'F')
+  82:main.c        ****     {
+  83:main.c        ****         value |= (upper_digit - 'A' + 0xA) << 4;
+  84:main.c        ****     }
+  85:main.c        ****     
+  86:main.c        ****     // Return result.
+  87:main.c        ****     return value;
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccdfnkDI.s 			page 3
+
+
+  88:main.c        **** }
+  89:main.c        **** 
+  90:main.c        **** void bytes2hex(uint8_t byte, char* dest)
+  91:main.c        **** {       
+  92:main.c        ****     sprintf(dest, "%02X", byte);
+  93:main.c        **** }
+  94:main.c        **** 
+  95:main.c        **** 
+  96:main.c        **** // reset interrupt on button press
+  97:main.c        **** CY_ISR(Reset_ISR)
+  98:main.c        **** {
+  28              		.loc 1 98 0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32 0000 10B5     		push	{r4, lr}
+  33              		.cfi_def_cfa_offset 8
+  34              		.cfi_offset 4, -8
+  35              		.cfi_offset 14, -4
+  99:main.c        ****     pushMessage((uint8*)"In interrupt\n", strlen("In interrupt\n"));
+  36              		.loc 1 99 0
+  37 0002 0D21     		movs	r1, #13
+  38 0004 0348     		ldr	r0, .L2
+  39 0006 FFF7FEFF 		bl	pushMessage
+  40              	.LVL0:
+ 100:main.c        ****     SW1_ClearInterrupt();
+ 101:main.c        ****     CySoftwareReset();
+ 102:main.c        **** }
+  41              		.loc 1 102 0
+  42              		@ sp needed
+ 100:main.c        ****     SW1_ClearInterrupt();
+  43              		.loc 1 100 0
+  44 000a FFF7FEFF 		bl	SW1_ClearInterrupt
+  45              	.LVL1:
+ 101:main.c        **** }
+  46              		.loc 1 101 0
+  47 000e FFF7FEFF 		bl	CySoftwareReset
+  48              	.LVL2:
+  49              		.loc 1 102 0
+  50 0012 10BD     		pop	{r4, pc}
+  51              	.L3:
+  52              		.align	2
+  53              	.L2:
+  54 0014 00000000 		.word	.LC0
+  55              		.cfi_endproc
+  56              	.LFE35:
+  57              		.size	Reset_ISR, .-Reset_ISR
+  58              		.section	.text.hex2byte,"ax",%progbits
+  59              		.align	1
+  60              		.global	hex2byte
+  61              		.code	16
+  62              		.thumb_func
+  63              		.type	hex2byte, %function
+  64              	hex2byte:
+  65              	.LFB33:
+  55:main.c        ****     uint8_t value = 0;
+  66              		.loc 1 55 0
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccdfnkDI.s 			page 4
+
+
+  67              		.cfi_startproc
+  68              		@ args = 0, pretend = 0, frame = 0
+  69              		@ frame_needed = 0, uses_anonymous_args = 0
+  70              		@ link register save eliminated.
+  71              	.LVL3:
+  55:main.c        ****     uint8_t value = 0;
+  72              		.loc 1 55 0
+  73 0000 0300     		movs	r3, r0
+  59:main.c        ****     {
+  74              		.loc 1 59 0
+  75 0002 0800     		movs	r0, r1
+  76              	.LVL4:
+  77 0004 3038     		subs	r0, r0, #48
+  78 0006 C0B2     		uxtb	r0, r0
+  79 0008 0928     		cmp	r0, #9
+  80 000a 0CD9     		bls	.L5
+  63:main.c        ****     {
+  81              		.loc 1 63 0
+  82 000c 0A00     		movs	r2, r1
+  83 000e 613A     		subs	r2, r2, #97
+  84 0010 052A     		cmp	r2, #5
+  85 0012 01D8     		bhi	.L6
+  65:main.c        ****     }
+  86              		.loc 1 65 0
+  87 0014 5739     		subs	r1, r1, #87
+  88              	.LVL5:
+  89 0016 05E0     		b	.L11
+  90              	.LVL6:
+  91              	.L6:
+  67:main.c        ****     {
+  92              		.loc 1 67 0
+  93 0018 0A00     		movs	r2, r1
+  94 001a 413A     		subs	r2, r2, #65
+  56:main.c        ****     
+  95              		.loc 1 56 0
+  96 001c 0020     		movs	r0, #0
+  67:main.c        ****     {
+  97              		.loc 1 67 0
+  98 001e 052A     		cmp	r2, #5
+  99 0020 01D8     		bhi	.L5
+  69:main.c        ****     }
+ 100              		.loc 1 69 0
+ 101 0022 3739     		subs	r1, r1, #55
+ 102              	.LVL7:
+ 103              	.L11:
+ 104 0024 C8B2     		uxtb	r0, r1
+ 105              	.LVL8:
+ 106              	.L5:
+  73:main.c        ****     {
+ 107              		.loc 1 73 0
+ 108 0026 1A00     		movs	r2, r3
+ 109 0028 303A     		subs	r2, r2, #48
+ 110 002a D1B2     		uxtb	r1, r2
+ 111 002c 0929     		cmp	r1, #9
+ 112 002e 03D8     		bhi	.L7
+  75:main.c        ****     }
+ 113              		.loc 1 75 0
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccdfnkDI.s 			page 5
+
+
+ 114 0030 1201     		lsls	r2, r2, #4
+ 115 0032 0243     		orrs	r2, r0
+ 116 0034 1100     		movs	r1, r2
+ 117 0036 07E0     		b	.L12
+ 118              	.L7:
+  77:main.c        ****     {
+ 119              		.loc 1 77 0
+ 120 0038 1A00     		movs	r2, r3
+ 121 003a 613A     		subs	r2, r2, #97
+ 122 003c 052A     		cmp	r2, #5
+ 123 003e 05D8     		bhi	.L9
+  79:main.c        ****     }
+ 124              		.loc 1 79 0
+ 125 0040 573B     		subs	r3, r3, #87
+ 126 0042 1B01     		lsls	r3, r3, #4
+ 127 0044 0343     		orrs	r3, r0
+ 128 0046 1900     		movs	r1, r3
+ 129              	.L12:
+ 130 0048 C8B2     		uxtb	r0, r1
+ 131              	.LVL9:
+ 132 004a 07E0     		b	.L8
+ 133              	.L9:
+  81:main.c        ****     {
+ 134              		.loc 1 81 0
+ 135 004c 1A00     		movs	r2, r3
+ 136 004e 413A     		subs	r2, r2, #65
+ 137 0050 052A     		cmp	r2, #5
+ 138 0052 03D8     		bhi	.L8
+  83:main.c        ****     }
+ 139              		.loc 1 83 0
+ 140 0054 373B     		subs	r3, r3, #55
+ 141 0056 1B01     		lsls	r3, r3, #4
+ 142 0058 1843     		orrs	r0, r3
+ 143              	.LVL10:
+ 144 005a C0B2     		uxtb	r0, r0
+ 145              	.LVL11:
+ 146              	.L8:
+  88:main.c        **** 
+ 147              		.loc 1 88 0
+ 148              		@ sp needed
+ 149 005c 7047     		bx	lr
+ 150              		.cfi_endproc
+ 151              	.LFE33:
+ 152              		.size	hex2byte, .-hex2byte
+ 153              		.section	.text.bytes2hex,"ax",%progbits
+ 154              		.align	1
+ 155              		.global	bytes2hex
+ 156              		.code	16
+ 157              		.thumb_func
+ 158              		.type	bytes2hex, %function
+ 159              	bytes2hex:
+ 160              	.LFB34:
+  91:main.c        ****     sprintf(dest, "%02X", byte);
+ 161              		.loc 1 91 0
+ 162              		.cfi_startproc
+ 163              		@ args = 0, pretend = 0, frame = 0
+ 164              		@ frame_needed = 0, uses_anonymous_args = 0
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccdfnkDI.s 			page 6
+
+
+ 165              	.LVL12:
+ 166 0000 10B5     		push	{r4, lr}
+ 167              		.cfi_def_cfa_offset 8
+ 168              		.cfi_offset 4, -8
+ 169              		.cfi_offset 14, -4
+  91:main.c        ****     sprintf(dest, "%02X", byte);
+ 170              		.loc 1 91 0
+ 171 0002 0200     		movs	r2, r0
+ 172 0004 0800     		movs	r0, r1
+ 173              	.LVL13:
+  92:main.c        **** }
+ 174              		.loc 1 92 0
+ 175 0006 0249     		ldr	r1, .L15
+ 176              	.LVL14:
+ 177 0008 FFF7FEFF 		bl	sprintf
+ 178              	.LVL15:
+  93:main.c        **** 
+ 179              		.loc 1 93 0
+ 180              		@ sp needed
+ 181 000c 10BD     		pop	{r4, pc}
+ 182              	.L16:
+ 183 000e C046     		.align	2
+ 184              	.L15:
+ 185 0010 0E000000 		.word	.LC2
+ 186              		.cfi_endproc
+ 187              	.LFE34:
+ 188              		.size	bytes2hex, .-bytes2hex
+ 189              		.section	.text.provision,"ax",%progbits
+ 190              		.align	1
+ 191              		.global	provision
+ 192              		.code	16
+ 193              		.thumb_func
+ 194              		.type	provision, %function
+ 195              	provision:
+ 196              	.LFB36:
+ 103:main.c        **** 
+ 104:main.c        **** // provisions card (should only ever be called once)
+ 105:main.c        **** void provision()
+ 106:main.c        **** {
+ 197              		.loc 1 106 0
+ 198              		.cfi_startproc
+ 199              		@ args = 0, pretend = 0, frame = 208
+ 200              		@ frame_needed = 0, uses_anonymous_args = 0
+ 201 0000 30B5     		push	{r4, r5, lr}
+ 202              		.cfi_def_cfa_offset 12
+ 203              		.cfi_offset 4, -12
+ 204              		.cfi_offset 5, -8
+ 205              		.cfi_offset 14, -4
+ 206 0002 B5B0     		sub	sp, sp, #212
+ 207              		.cfi_def_cfa_offset 224
+ 107:main.c        ****     uint8 message[109] = {0x00};
+ 208              		.loc 1 107 0
+ 209 0004 6D22     		movs	r2, #109
+ 210 0006 0021     		movs	r1, #0
+ 211 0008 18A8     		add	r0, sp, #96
+ 212 000a FFF7FEFF 		bl	memset
+ 213              	.LVL16:
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccdfnkDI.s 			page 7
+
+
+ 108:main.c        ****     
+ 109:main.c        ****     // synchronize with bank
+ 110:main.c        ****     syncConnection(SYNC_PROV);
+ 214              		.loc 1 110 0
+ 215 000e 0120     		movs	r0, #1
+ 216 0010 FFF7FEFF 		bl	syncConnection
+ 217              	.LVL17:
+ 111:main.c        ****  
+ 112:main.c        ****     pushMessage((uint8*)PROV_MSG, (uint8)strlen(PROV_MSG));
+ 218              		.loc 1 112 0
+ 219 0014 0121     		movs	r1, #1
+ 220 0016 1548     		ldr	r0, .L20
+ 221 0018 FFF7FEFF 		bl	pushMessage
+ 222              	.LVL18:
+ 113:main.c        **** 
+ 114:main.c        ****     // set account number
+ 115:main.c        ****     pullMessage(message);
+ 116:main.c        ****     char hex_bank_key[64];
+ 117:main.c        ****     memcpy(hex_bank_key, message, sizeof(hex_bank_key));
+ 223              		.loc 1 117 0
+ 224 001c 08AD     		add	r5, sp, #32
+ 115:main.c        ****     char hex_bank_key[64];
+ 225              		.loc 1 115 0
+ 226 001e 18A8     		add	r0, sp, #96
+ 227 0020 FFF7FEFF 		bl	pullMessage
+ 228              	.LVL19:
+ 229              		.loc 1 117 0
+ 230 0024 4022     		movs	r2, #64
+ 231 0026 18A9     		add	r1, sp, #96
+ 232 0028 2800     		movs	r0, r5
+ 233 002a FFF7FEFF 		bl	memcpy
+ 234              	.LVL20:
+ 235              	.LBB2:
+ 118:main.c        **** 
+ 119:main.c        ****     uint8_t bank_key[32];
+ 120:main.c        **** 
+ 121:main.c        ****     for(int i = 0; i < 32; ++i)
+ 236              		.loc 1 121 0
+ 237 002e 0024     		movs	r4, #0
+ 238              	.LVL21:
+ 239              	.L18:
+ 240 0030 6300     		lsls	r3, r4, #1
+ 122:main.c        ****     {
+ 123:main.c        ****         bank_key[i] = hex2byte(hex_bank_key[2*i], hex_bank_key[2*i + 1]);
+ 241              		.loc 1 123 0 discriminator 3
+ 242 0032 EA18     		adds	r2, r5, r3
+ 243 0034 E85C     		ldrb	r0, [r5, r3]
+ 244 0036 5178     		ldrb	r1, [r2, #1]
+ 245 0038 FFF7FEFF 		bl	hex2byte
+ 246              	.LVL22:
+ 247 003c 6B46     		mov	r3, sp
+ 248 003e E054     		strb	r0, [r4, r3]
+ 121:main.c        ****     {
+ 249              		.loc 1 121 0 discriminator 3
+ 250 0040 0134     		adds	r4, r4, #1
+ 251              	.LVL23:
+ 252 0042 202C     		cmp	r4, #32
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccdfnkDI.s 			page 8
+
+
+ 253 0044 F4D1     		bne	.L18
+ 254              	.LBE2:
+ 124:main.c        ****     }
+ 125:main.c        **** 
+ 126:main.c        ****     USER_INFO_Write(bank_key, BANK_AES_KEY, sizeof(bank_key));
+ 255              		.loc 1 126 0
+ 256 0046 0A4D     		ldr	r5, .L20+4
+ 257 0048 2200     		movs	r2, r4
+ 258 004a 2900     		movs	r1, r5
+ 259 004c 6846     		mov	r0, sp
+ 260 004e FFF7FEFF 		bl	USER_INFO_Write
+ 261              	.LVL24:
+ 127:main.c        ****     USER_INFO_Write(message + sizeof(hex_bank_key), UUID, UUID_LEN);
+ 262              		.loc 1 127 0
+ 263 0052 2900     		movs	r1, r5
+ 264 0054 2422     		movs	r2, #36
+ 265 0056 2131     		adds	r1, r1, #33
+ 266 0058 28A8     		add	r0, sp, #160
+ 267 005a FFF7FEFF 		bl	USER_INFO_Write
+ 268              	.LVL25:
+ 128:main.c        **** 
+ 129:main.c        ****     pushMessage((uint8*)RECV_OK, strlen(RECV_OK));
+ 269              		.loc 1 129 0
+ 270 005e 0121     		movs	r1, #1
+ 271 0060 0448     		ldr	r0, .L20+8
+ 272 0062 FFF7FEFF 		bl	pushMessage
+ 273              	.LVL26:
+ 130:main.c        **** }
+ 274              		.loc 1 130 0
+ 275 0066 35B0     		add	sp, sp, #212
+ 276              		@ sp needed
+ 277              	.LVL27:
+ 278 0068 30BD     		pop	{r4, r5, pc}
+ 279              	.L21:
+ 280 006a C046     		.align	2
+ 281              	.L20:
+ 282 006c 13000000 		.word	.LC6
+ 283 0070 00000000 		.word	.LANCHOR0
+ 284 0074 15000000 		.word	.LC9
+ 285              		.cfi_endproc
+ 286              	.LFE36:
+ 287              		.size	provision, .-provision
+ 288              		.section	.text.startup.main,"ax",%progbits
+ 289              		.align	1
+ 290              		.global	main
+ 291              		.code	16
+ 292              		.thumb_func
+ 293              		.type	main, %function
+ 294              	main:
+ 295              	.LFB37:
+ 131:main.c        **** 
+ 132:main.c        **** 
+ 133:main.c        **** int main(void)
+ 134:main.c        **** {
+ 296              		.loc 1 134 0
+ 297              		.cfi_startproc
+ 298              		@ args = 0, pretend = 0, frame = 208
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccdfnkDI.s 			page 9
+
+
+ 299              		@ frame_needed = 0, uses_anonymous_args = 0
+ 300 0000 70B5     		push	{r4, r5, r6, lr}
+ 301              		.cfi_def_cfa_offset 16
+ 302              		.cfi_offset 4, -16
+ 303              		.cfi_offset 5, -12
+ 304              		.cfi_offset 6, -8
+ 305              		.cfi_offset 14, -4
+ 306 0002 B6B0     		sub	sp, sp, #216
+ 307              		.cfi_def_cfa_offset 232
+ 135:main.c        ****     // enable global interrupts -- DO NOT DELETE
+ 136:main.c        ****     CyGlobalIntEnable;
+ 308              		.loc 1 136 0
+ 309              		.syntax divided
+ 310              	@ 136 "main.c" 1
+ 311 0004 62B6     		CPSIE   i
+ 312              	@ 0 "" 2
+ 137:main.c        ****     
+ 138:main.c        ****     // start reset button
+ 139:main.c        ****     Reset_isr_StartEx(Reset_ISR);
+ 313              		.loc 1 139 0
+ 314              		.thumb
+ 315              		.syntax unified
+ 316 0006 2448     		ldr	r0, .L28
+ 317 0008 FFF7FEFF 		bl	Reset_isr_StartEx
+ 318              	.LVL28:
+ 140:main.c        ****     
+ 141:main.c        ****     /* Declare vairables here */
+ 142:main.c        ****     uint8 i;
+ 143:main.c        ****     uint8 message[128];
+ 144:main.c        ****     
+ 145:main.c        ****     // local EEPROM read variable
+ 146:main.c        ****     static const uint8 PROVISIONED[1] = {0x00};
+ 147:main.c        ****     
+ 148:main.c        ****     // EEPROM write variable
+ 149:main.c        ****     volatile const uint8 *ptr = PROVISIONED;
+ 150:main.c        ****     
+ 151:main.c        ****     /* Place your initialization/startup code here (e.g. MyInst_Start()) */
+ 152:main.c        ****     USER_INFO_Start();
+ 319              		.loc 1 152 0
+ 320 000c FFF7FEFF 		bl	USER_INFO_Start
+ 321              	.LVL29:
+ 153:main.c        ****     USB_UART_Start();
+ 322              		.loc 1 153 0
+ 323 0010 FFF7FEFF 		bl	USB_UART_Start
+ 324              	.LVL30:
+ 154:main.c        ****     
+ 155:main.c        ****     // Provision card if on first boot
+ 156:main.c        ****     // ptr = PROVISIONED;
+ 157:main.c        ****     if (*ptr == 0x00) {
+ 325              		.loc 1 157 0
+ 326 0014 214C     		ldr	r4, .L28+4
+ 327 0016 2500     		movs	r5, r4
+ 328 0018 4535     		adds	r5, r5, #69
+ 329 001a 2B78     		ldrb	r3, [r5]
+ 330 001c 002B     		cmp	r3, #0
+ 331 001e 08D1     		bne	.L23
+ 158:main.c        ****         provision();
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccdfnkDI.s 			page 10
+
+
+ 332              		.loc 1 158 0
+ 333 0020 FFF7FEFF 		bl	provision
+ 334              	.LVL31:
+ 159:main.c        ****         
+ 160:main.c        ****         // Mark as provisioned
+ 161:main.c        ****         i = 0x01;
+ 335              		.loc 1 161 0
+ 336 0024 0B20     		movs	r0, #11
+ 337 0026 0122     		movs	r2, #1
+ 338 0028 6844     		add	r0, r0, sp
+ 162:main.c        ****         USER_INFO_Write(&i,PROVISIONED, 1u);
+ 339              		.loc 1 162 0
+ 340 002a 2900     		movs	r1, r5
+ 161:main.c        ****         USER_INFO_Write(&i,PROVISIONED, 1u);
+ 341              		.loc 1 161 0
+ 342 002c 0270     		strb	r2, [r0]
+ 343              		.loc 1 162 0
+ 344 002e FFF7FEFF 		bl	USER_INFO_Write
+ 345              	.LVL32:
+ 346              	.L23:
+ 347              	.LBB3:
+ 163:main.c        ****     }
+ 164:main.c        **** 
+ 165:main.c        ****     // USB_UART_UartPutString("Provisioned!\r\n");
+ 166:main.c        ****     
+ 167:main.c        ****     // Go into infinite loop
+ 168:main.c        ****     while (1) {
+ 169:main.c        ****                /* Place your application code here. */
+ 170:main.c        ****         
+ 171:main.c        ****         // syncronize communication with bank
+ 172:main.c        ****         syncConnection(SYNC_NORM);
+ 173:main.c        **** 
+ 174:main.c        ****         // get command
+ 175:main.c        ****         pullMessage(message);
+ 176:main.c        ****         pushMessage((uint8*)RECV_OK, strlen(RECV_OK));
+ 177:main.c        **** 
+ 178:main.c        ****         if (message[0] == GET_UUID) {
+ 179:main.c        ****             pushMessage(UUID, UUID_LEN);
+ 180:main.c        ****         } else if (message[0] == COMPUTE_HMAC) {
+ 181:main.c        ****             // receive challenge nonce from ATM
+ 182:main.c        ****             uint8_t nonce[4];
+ 183:main.c        ****             pullMessage(message);
+ 184:main.c        ****             memcpy(nonce, message, sizeof(nonce));
+ 185:main.c        ****             pushMessage((uint8*)NONCE_OK, strlen(NONCE_OK));
+ 186:main.c        **** 
+ 187:main.c        ****             //Send HMAC
+ 188:main.c        ****             uint8_t hmac_output[32];
+ 189:main.c        ****             uint8_t hmac_data[40];
+ 190:main.c        **** 
+ 191:main.c        ****             memcpy(hmac_data, UUID, UUID_LEN);
+ 192:main.c        ****             memcpy(hmac_data + UUID_LEN, nonce, sizeof(nonce));
+ 193:main.c        **** 
+ 194:main.c        ****             HMAC(hmac_output, BANK_AES_KEY, 32, hmac_data, sizeof(hmac_data));
+ 348              		.loc 1 194 0
+ 349 0032 2826     		movs	r6, #40
+ 350              	.L24:
+ 351              	.LBE3:
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccdfnkDI.s 			page 11
+
+
+ 172:main.c        **** 
+ 352              		.loc 1 172 0
+ 353 0034 0020     		movs	r0, #0
+ 175:main.c        ****         pushMessage((uint8*)RECV_OK, strlen(RECV_OK));
+ 354              		.loc 1 175 0
+ 355 0036 16AD     		add	r5, sp, #88
+ 172:main.c        **** 
+ 356              		.loc 1 172 0
+ 357 0038 FFF7FEFF 		bl	syncConnection
+ 358              	.LVL33:
+ 175:main.c        ****         pushMessage((uint8*)RECV_OK, strlen(RECV_OK));
+ 359              		.loc 1 175 0
+ 360 003c 2800     		movs	r0, r5
+ 361 003e FFF7FEFF 		bl	pullMessage
+ 362              	.LVL34:
+ 176:main.c        **** 
+ 363              		.loc 1 176 0
+ 364 0042 0121     		movs	r1, #1
+ 365 0044 1648     		ldr	r0, .L28+8
+ 366 0046 FFF7FEFF 		bl	pushMessage
+ 367              	.LVL35:
+ 178:main.c        ****             pushMessage(UUID, UUID_LEN);
+ 368              		.loc 1 178 0
+ 369 004a 2B78     		ldrb	r3, [r5]
+ 370 004c 332B     		cmp	r3, #51
+ 371 004e 03D1     		bne	.L25
+ 179:main.c        ****         } else if (message[0] == COMPUTE_HMAC) {
+ 372              		.loc 1 179 0
+ 373 0050 2000     		movs	r0, r4
+ 374 0052 2421     		movs	r1, #36
+ 375 0054 2130     		adds	r0, r0, #33
+ 376 0056 1BE0     		b	.L27
+ 377              	.L25:
+ 180:main.c        ****             // receive challenge nonce from ATM
+ 378              		.loc 1 180 0
+ 379 0058 322B     		cmp	r3, #50
+ 380 005a EBD1     		bne	.L24
+ 381              	.LBB4:
+ 183:main.c        ****             memcpy(nonce, message, sizeof(nonce));
+ 382              		.loc 1 183 0
+ 383 005c 2800     		movs	r0, r5
+ 384 005e FFF7FEFF 		bl	pullMessage
+ 385              	.LVL36:
+ 184:main.c        ****             pushMessage((uint8*)NONCE_OK, strlen(NONCE_OK));
+ 386              		.loc 1 184 0
+ 387 0062 2B68     		ldr	r3, [r5]
+ 185:main.c        **** 
+ 388              		.loc 1 185 0
+ 389 0064 0221     		movs	r1, #2
+ 390 0066 0F48     		ldr	r0, .L28+12
+ 184:main.c        ****             pushMessage((uint8*)NONCE_OK, strlen(NONCE_OK));
+ 391              		.loc 1 184 0
+ 392 0068 0393     		str	r3, [sp, #12]
+ 185:main.c        **** 
+ 393              		.loc 1 185 0
+ 394 006a FFF7FEFF 		bl	pushMessage
+ 395              	.LVL37:
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccdfnkDI.s 			page 12
+
+
+ 191:main.c        ****             memcpy(hmac_data + UUID_LEN, nonce, sizeof(nonce));
+ 396              		.loc 1 191 0
+ 397 006e 2100     		movs	r1, r4
+ 398 0070 2422     		movs	r2, #36
+ 399 0072 2131     		adds	r1, r1, #33
+ 400 0074 0CA8     		add	r0, sp, #48
+ 401 0076 FFF7FEFF 		bl	memcpy
+ 402              	.LVL38:
+ 192:main.c        **** 
+ 403              		.loc 1 192 0
+ 404 007a 039B     		ldr	r3, [sp, #12]
+ 405              		.loc 1 194 0
+ 406 007c 2100     		movs	r1, r4
+ 192:main.c        **** 
+ 407              		.loc 1 192 0
+ 408 007e 1593     		str	r3, [sp, #84]
+ 409              		.loc 1 194 0
+ 410 0080 04A8     		add	r0, sp, #16
+ 411 0082 0096     		str	r6, [sp]
+ 412 0084 0CAB     		add	r3, sp, #48
+ 413 0086 2022     		movs	r2, #32
+ 414 0088 FFF7FEFF 		bl	HMAC
+ 415              	.LVL39:
+ 195:main.c        **** 
+ 196:main.c        ****             pushMessage(hmac_output, sizeof(hmac_output));
+ 416              		.loc 1 196 0
+ 417 008c 2021     		movs	r1, #32
+ 418 008e 04A8     		add	r0, sp, #16
+ 419              	.L27:
+ 420 0090 FFF7FEFF 		bl	pushMessage
+ 421              	.LVL40:
+ 422 0094 CEE7     		b	.L24
+ 423              	.L29:
+ 424 0096 C046     		.align	2
+ 425              	.L28:
+ 426 0098 00000000 		.word	Reset_ISR
+ 427 009c 00000000 		.word	.LANCHOR0
+ 428 00a0 15000000 		.word	.LC9
+ 429 00a4 17000000 		.word	.LC15
+ 430              	.LBE4:
+ 431              		.cfi_endproc
+ 432              	.LFE37:
+ 433              		.size	main, .-main
+ 434              		.section	.rodata
+ 435              		.set	.LANCHOR0,. + 0
+ 436              		.type	BANK_AES_KEY, %object
+ 437              		.size	BANK_AES_KEY, 33
+ 438              	BANK_AES_KEY:
+ 439 0000 00000000 		.space	33
+ 439      00000000 
+ 439      00000000 
+ 439      00000000 
+ 439      00000000 
+ 440              		.type	UUID, %object
+ 441              		.size	UUID, 36
+ 442              	UUID:
+ 443 0021 37       		.byte	55
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccdfnkDI.s 			page 13
+
+
+ 444 0022 33       		.byte	51
+ 445 0023 36       		.byte	54
+ 446 0024 35       		.byte	53
+ 447 0025 36       		.byte	54
+ 448 0026 33       		.byte	51
+ 449 0027 37       		.byte	55
+ 450 0028 35       		.byte	53
+ 451 0029 37       		.byte	55
+ 452 002a 32       		.byte	50
+ 453 002b 36       		.byte	54
+ 454 002c 39       		.byte	57
+ 455 002d 37       		.byte	55
+ 456 002e 34       		.byte	52
+ 457 002f 37       		.byte	55
+ 458 0030 39       		.byte	57
+ 459 0031 00000000 		.space	20
+ 459      00000000 
+ 459      00000000 
+ 459      00000000 
+ 459      00000000 
+ 460              		.type	PROVISIONED.6667, %object
+ 461              		.size	PROVISIONED.6667, 1
+ 462              	PROVISIONED.6667:
+ 463 0045 00       		.space	1
+ 464              		.section	.rodata.str1.1,"aMS",%progbits,1
+ 465              	.LC0:
+ 466 0000 496E2069 		.ascii	"In interrupt\012\000"
+ 466      6E746572 
+ 466      72757074 
+ 466      0A00
+ 467              	.LC2:
+ 468 000e 25303258 		.ascii	"%02X\000"
+ 468      00
+ 469              	.LC6:
+ 470 0013 5000     		.ascii	"P\000"
+ 471              	.LC9:
+ 472 0015 4B00     		.ascii	"K\000"
+ 473              	.LC15:
+ 474 0017 4F4B00   		.ascii	"OK\000"
+ 475              		.text
+ 476              	.Letext0:
+ 477              		.file 2 "c:\\program files (x86)\\cypress\\psoc creator\\4.1\\psoc creator\\import\\gnu\\arm\\5.4.
+ 478              		.file 3 "c:\\program files (x86)\\cypress\\psoc creator\\4.1\\psoc creator\\import\\gnu\\arm\\5.4.
+ 479              		.file 4 "Generated_Source\\PSoC4/cytypes.h"
+ 480              		.file 5 "usbserialprotocol.h"
+ 481              		.file 6 "Generated_Source\\PSoC4/SW1.h"
+ 482              		.file 7 "Generated_Source\\PSoC4/CyLib.h"
+ 483              		.file 8 "c:\\program files (x86)\\cypress\\psoc creator\\4.1\\psoc creator\\import\\gnu\\arm\\5.4.
+ 484              		.file 9 "Generated_Source\\PSoC4/USER_INFO.h"
+ 485              		.file 10 "..\\strong-arm.cylib\\strong-arm\\include/strong-arm/hmac.h"
+ 486              		.file 11 "Generated_Source\\PSoC4/Reset_isr.h"
+ 487              		.file 12 "Generated_Source\\PSoC4/USB_UART.h"
+ 488              		.section	.debug_info,"",%progbits
+ 489              	.Ldebug_info0:
+ 490 0000 FF050000 		.4byte	0x5ff
+ 491 0004 0400     		.2byte	0x4
+ 492 0006 00000000 		.4byte	.Ldebug_abbrev0
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccdfnkDI.s 			page 14
+
+
+ 493 000a 04       		.byte	0x4
+ 494 000b 01       		.uleb128 0x1
+ 495 000c 57020000 		.4byte	.LASF46
+ 496 0010 0C       		.byte	0xc
+ 497 0011 C5010000 		.4byte	.LASF47
+ 498 0015 5B010000 		.4byte	.LASF48
+ 499 0019 18000000 		.4byte	.Ldebug_ranges0+0x18
+ 500 001d 00000000 		.4byte	0
+ 501 0021 00000000 		.4byte	.Ldebug_line0
+ 502 0025 02       		.uleb128 0x2
+ 503 0026 01       		.byte	0x1
+ 504 0027 06       		.byte	0x6
+ 505 0028 41020000 		.4byte	.LASF0
+ 506 002c 03       		.uleb128 0x3
+ 507 002d 28000000 		.4byte	.LASF9
+ 508 0031 02       		.byte	0x2
+ 509 0032 1D       		.byte	0x1d
+ 510 0033 37000000 		.4byte	0x37
+ 511 0037 02       		.uleb128 0x2
+ 512 0038 01       		.byte	0x1
+ 513 0039 08       		.byte	0x8
+ 514 003a 81000000 		.4byte	.LASF1
+ 515 003e 02       		.uleb128 0x2
+ 516 003f 02       		.byte	0x2
+ 517 0040 05       		.byte	0x5
+ 518 0041 DB010000 		.4byte	.LASF2
+ 519 0045 02       		.uleb128 0x2
+ 520 0046 02       		.byte	0x2
+ 521 0047 07       		.byte	0x7
+ 522 0048 38000000 		.4byte	.LASF3
+ 523 004c 02       		.uleb128 0x2
+ 524 004d 04       		.byte	0x4
+ 525 004e 05       		.byte	0x5
+ 526 004f 23020000 		.4byte	.LASF4
+ 527 0053 02       		.uleb128 0x2
+ 528 0054 04       		.byte	0x4
+ 529 0055 07       		.byte	0x7
+ 530 0056 C4000000 		.4byte	.LASF5
+ 531 005a 02       		.uleb128 0x2
+ 532 005b 08       		.byte	0x8
+ 533 005c 05       		.byte	0x5
+ 534 005d B7010000 		.4byte	.LASF6
+ 535 0061 02       		.uleb128 0x2
+ 536 0062 08       		.byte	0x8
+ 537 0063 07       		.byte	0x7
+ 538 0064 28010000 		.4byte	.LASF7
+ 539 0068 04       		.uleb128 0x4
+ 540 0069 04       		.byte	0x4
+ 541 006a 05       		.byte	0x5
+ 542 006b 696E7400 		.ascii	"int\000"
+ 543 006f 02       		.uleb128 0x2
+ 544 0070 04       		.byte	0x4
+ 545 0071 07       		.byte	0x7
+ 546 0072 1B010000 		.4byte	.LASF8
+ 547 0076 03       		.uleb128 0x3
+ 548 0077 3F010000 		.4byte	.LASF10
+ 549 007b 03       		.byte	0x3
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccdfnkDI.s 			page 15
+
+
+ 550 007c 18       		.byte	0x18
+ 551 007d 2C000000 		.4byte	0x2c
+ 552 0081 05       		.uleb128 0x5
+ 553 0082 F5010000 		.4byte	.LASF11
+ 554 0086 04       		.byte	0x4
+ 555 0087 D201     		.2byte	0x1d2
+ 556 0089 37000000 		.4byte	0x37
+ 557 008d 02       		.uleb128 0x2
+ 558 008e 04       		.byte	0x4
+ 559 008f 04       		.byte	0x4
+ 560 0090 66000000 		.4byte	.LASF12
+ 561 0094 02       		.uleb128 0x2
+ 562 0095 08       		.byte	0x8
+ 563 0096 04       		.byte	0x4
+ 564 0097 4B000000 		.4byte	.LASF13
+ 565 009b 02       		.uleb128 0x2
+ 566 009c 01       		.byte	0x1
+ 567 009d 08       		.byte	0x8
+ 568 009e CC010000 		.4byte	.LASF14
+ 569 00a2 02       		.uleb128 0x2
+ 570 00a3 08       		.byte	0x8
+ 571 00a4 04       		.byte	0x4
+ 572 00a5 35020000 		.4byte	.LASF15
+ 573 00a9 02       		.uleb128 0x2
+ 574 00aa 04       		.byte	0x4
+ 575 00ab 07       		.byte	0x7
+ 576 00ac A2010000 		.4byte	.LASF16
+ 577 00b0 06       		.uleb128 0x6
+ 578 00b1 04       		.byte	0x4
+ 579 00b2 9B000000 		.4byte	0x9b
+ 580 00b6 07       		.uleb128 0x7
+ 581 00b7 D1010000 		.4byte	.LASF19
+ 582 00bb 01       		.byte	0x1
+ 583 00bc 61       		.byte	0x61
+ 584 00bd 00000000 		.4byte	.LFB35
+ 585 00c1 18000000 		.4byte	.LFE35-.LFB35
+ 586 00c5 01       		.uleb128 0x1
+ 587 00c6 9C       		.byte	0x9c
+ 588 00c7 FA000000 		.4byte	0xfa
+ 589 00cb 08       		.uleb128 0x8
+ 590 00cc 0A000000 		.4byte	.LVL0
+ 591 00d0 77050000 		.4byte	0x577
+ 592 00d4 E7000000 		.4byte	0xe7
+ 593 00d8 09       		.uleb128 0x9
+ 594 00d9 01       		.uleb128 0x1
+ 595 00da 50       		.byte	0x50
+ 596 00db 05       		.uleb128 0x5
+ 597 00dc 03       		.byte	0x3
+ 598 00dd 00000000 		.4byte	.LC0
+ 599 00e1 09       		.uleb128 0x9
+ 600 00e2 01       		.uleb128 0x1
+ 601 00e3 51       		.byte	0x51
+ 602 00e4 01       		.uleb128 0x1
+ 603 00e5 3D       		.byte	0x3d
+ 604 00e6 00       		.byte	0
+ 605 00e7 0A       		.uleb128 0xa
+ 606 00e8 0E000000 		.4byte	.LVL1
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccdfnkDI.s 			page 16
+
+
+ 607 00ec 82050000 		.4byte	0x582
+ 608 00f0 0A       		.uleb128 0xa
+ 609 00f1 12000000 		.4byte	.LVL2
+ 610 00f5 8D050000 		.4byte	0x58d
+ 611 00f9 00       		.byte	0
+ 612 00fa 0B       		.uleb128 0xb
+ 613 00fb 8F000000 		.4byte	.LASF49
+ 614 00ff 01       		.byte	0x1
+ 615 0100 36       		.byte	0x36
+ 616 0101 76000000 		.4byte	0x76
+ 617 0105 00000000 		.4byte	.LFB33
+ 618 0109 5E000000 		.4byte	.LFE33-.LFB33
+ 619 010d 01       		.uleb128 0x1
+ 620 010e 9C       		.byte	0x9c
+ 621 010f 41010000 		.4byte	0x141
+ 622 0113 0C       		.uleb128 0xc
+ 623 0114 AB010000 		.4byte	.LASF17
+ 624 0118 01       		.byte	0x1
+ 625 0119 36       		.byte	0x36
+ 626 011a 9B000000 		.4byte	0x9b
+ 627 011e 00000000 		.4byte	.LLST0
+ 628 0122 0C       		.uleb128 0xc
+ 629 0123 FF000000 		.4byte	.LASF18
+ 630 0127 01       		.byte	0x1
+ 631 0128 36       		.byte	0x36
+ 632 0129 9B000000 		.4byte	0x9b
+ 633 012d 21000000 		.4byte	.LLST1
+ 634 0131 0D       		.uleb128 0xd
+ 635 0132 32000000 		.4byte	.LASF23
+ 636 0136 01       		.byte	0x1
+ 637 0137 38       		.byte	0x38
+ 638 0138 76000000 		.4byte	0x76
+ 639 013c 5B000000 		.4byte	.LLST2
+ 640 0140 00       		.byte	0
+ 641 0141 07       		.uleb128 0x7
+ 642 0142 4D020000 		.4byte	.LASF20
+ 643 0146 01       		.byte	0x1
+ 644 0147 5A       		.byte	0x5a
+ 645 0148 00000000 		.4byte	.LFB34
+ 646 014c 14000000 		.4byte	.LFE34-.LFB34
+ 647 0150 01       		.uleb128 0x1
+ 648 0151 9C       		.byte	0x9c
+ 649 0152 8F010000 		.4byte	0x18f
+ 650 0156 0C       		.uleb128 0xc
+ 651 0157 52000000 		.4byte	.LASF21
+ 652 015b 01       		.byte	0x1
+ 653 015c 5A       		.byte	0x5a
+ 654 015d 76000000 		.4byte	0x76
+ 655 0161 85000000 		.4byte	.LLST3
+ 656 0165 0C       		.uleb128 0xc
+ 657 0166 7C000000 		.4byte	.LASF22
+ 658 016a 01       		.byte	0x1
+ 659 016b 5A       		.byte	0x5a
+ 660 016c B0000000 		.4byte	0xb0
+ 661 0170 A6000000 		.4byte	.LLST4
+ 662 0174 0E       		.uleb128 0xe
+ 663 0175 0C000000 		.4byte	.LVL15
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccdfnkDI.s 			page 17
+
+
+ 664 0179 98050000 		.4byte	0x598
+ 665 017d 09       		.uleb128 0x9
+ 666 017e 01       		.uleb128 0x1
+ 667 017f 50       		.byte	0x50
+ 668 0180 03       		.uleb128 0x3
+ 669 0181 F3       		.byte	0xf3
+ 670 0182 01       		.uleb128 0x1
+ 671 0183 51       		.byte	0x51
+ 672 0184 09       		.uleb128 0x9
+ 673 0185 01       		.uleb128 0x1
+ 674 0186 51       		.byte	0x51
+ 675 0187 05       		.uleb128 0x5
+ 676 0188 03       		.byte	0x3
+ 677 0189 0E000000 		.4byte	.LC2
+ 678 018d 00       		.byte	0
+ 679 018e 00       		.byte	0
+ 680 018f 0F       		.uleb128 0xf
+ 681 0190 F5000000 		.4byte	.LASF50
+ 682 0194 01       		.byte	0x1
+ 683 0195 69       		.byte	0x69
+ 684 0196 00000000 		.4byte	.LFB36
+ 685 019a 78000000 		.4byte	.LFE36-.LFB36
+ 686 019e 01       		.uleb128 0x1
+ 687 019f 9C       		.byte	0x9c
+ 688 01a0 D3020000 		.4byte	0x2d3
+ 689 01a4 10       		.uleb128 0x10
+ 690 01a5 00000000 		.4byte	.LASF24
+ 691 01a9 01       		.byte	0x1
+ 692 01aa 6B       		.byte	0x6b
+ 693 01ab D3020000 		.4byte	0x2d3
+ 694 01af 03       		.uleb128 0x3
+ 695 01b0 91       		.byte	0x91
+ 696 01b1 807F     		.sleb128 -128
+ 697 01b3 10       		.uleb128 0x10
+ 698 01b4 E8000000 		.4byte	.LASF25
+ 699 01b8 01       		.byte	0x1
+ 700 01b9 74       		.byte	0x74
+ 701 01ba E3020000 		.4byte	0x2e3
+ 702 01be 03       		.uleb128 0x3
+ 703 01bf 91       		.byte	0x91
+ 704 01c0 C07E     		.sleb128 -192
+ 705 01c2 10       		.uleb128 0x10
+ 706 01c3 2C020000 		.4byte	.LASF26
+ 707 01c7 01       		.byte	0x1
+ 708 01c8 77       		.byte	0x77
+ 709 01c9 F3020000 		.4byte	0x2f3
+ 710 01cd 03       		.uleb128 0x3
+ 711 01ce 91       		.byte	0x91
+ 712 01cf A07E     		.sleb128 -224
+ 713 01d1 11       		.uleb128 0x11
+ 714 01d2 2E000000 		.4byte	.LBB2
+ 715 01d6 18000000 		.4byte	.LBE2-.LBB2
+ 716 01da F5010000 		.4byte	0x1f5
+ 717 01de 12       		.uleb128 0x12
+ 718 01df 6900     		.ascii	"i\000"
+ 719 01e1 01       		.byte	0x1
+ 720 01e2 79       		.byte	0x79
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccdfnkDI.s 			page 18
+
+
+ 721 01e3 68000000 		.4byte	0x68
+ 722 01e7 D2000000 		.4byte	.LLST5
+ 723 01eb 0A       		.uleb128 0xa
+ 724 01ec 3C000000 		.4byte	.LVL22
+ 725 01f0 FA000000 		.4byte	0xfa
+ 726 01f4 00       		.byte	0
+ 727 01f5 08       		.uleb128 0x8
+ 728 01f6 0E000000 		.4byte	.LVL16
+ 729 01fa A3050000 		.4byte	0x5a3
+ 730 01fe 15020000 		.4byte	0x215
+ 731 0202 09       		.uleb128 0x9
+ 732 0203 01       		.uleb128 0x1
+ 733 0204 50       		.byte	0x50
+ 734 0205 03       		.uleb128 0x3
+ 735 0206 91       		.byte	0x91
+ 736 0207 807F     		.sleb128 -128
+ 737 0209 09       		.uleb128 0x9
+ 738 020a 01       		.uleb128 0x1
+ 739 020b 51       		.byte	0x51
+ 740 020c 01       		.uleb128 0x1
+ 741 020d 30       		.byte	0x30
+ 742 020e 09       		.uleb128 0x9
+ 743 020f 01       		.uleb128 0x1
+ 744 0210 52       		.byte	0x52
+ 745 0211 02       		.uleb128 0x2
+ 746 0212 08       		.byte	0x8
+ 747 0213 6D       		.byte	0x6d
+ 748 0214 00       		.byte	0
+ 749 0215 08       		.uleb128 0x8
+ 750 0216 14000000 		.4byte	.LVL17
+ 751 021a AC050000 		.4byte	0x5ac
+ 752 021e 28020000 		.4byte	0x228
+ 753 0222 09       		.uleb128 0x9
+ 754 0223 01       		.uleb128 0x1
+ 755 0224 50       		.byte	0x50
+ 756 0225 01       		.uleb128 0x1
+ 757 0226 31       		.byte	0x31
+ 758 0227 00       		.byte	0
+ 759 0228 08       		.uleb128 0x8
+ 760 0229 1C000000 		.4byte	.LVL18
+ 761 022d 77050000 		.4byte	0x577
+ 762 0231 44020000 		.4byte	0x244
+ 763 0235 09       		.uleb128 0x9
+ 764 0236 01       		.uleb128 0x1
+ 765 0237 50       		.byte	0x50
+ 766 0238 05       		.uleb128 0x5
+ 767 0239 03       		.byte	0x3
+ 768 023a 13000000 		.4byte	.LC6
+ 769 023e 09       		.uleb128 0x9
+ 770 023f 01       		.uleb128 0x1
+ 771 0240 51       		.byte	0x51
+ 772 0241 01       		.uleb128 0x1
+ 773 0242 31       		.byte	0x31
+ 774 0243 00       		.byte	0
+ 775 0244 08       		.uleb128 0x8
+ 776 0245 24000000 		.4byte	.LVL19
+ 777 0249 B7050000 		.4byte	0x5b7
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccdfnkDI.s 			page 19
+
+
+ 778 024d 59020000 		.4byte	0x259
+ 779 0251 09       		.uleb128 0x9
+ 780 0252 01       		.uleb128 0x1
+ 781 0253 50       		.byte	0x50
+ 782 0254 03       		.uleb128 0x3
+ 783 0255 91       		.byte	0x91
+ 784 0256 807F     		.sleb128 -128
+ 785 0258 00       		.byte	0
+ 786 0259 08       		.uleb128 0x8
+ 787 025a 2E000000 		.4byte	.LVL20
+ 788 025e C2050000 		.4byte	0x5c2
+ 789 0262 7A020000 		.4byte	0x27a
+ 790 0266 09       		.uleb128 0x9
+ 791 0267 01       		.uleb128 0x1
+ 792 0268 50       		.byte	0x50
+ 793 0269 02       		.uleb128 0x2
+ 794 026a 75       		.byte	0x75
+ 795 026b 00       		.sleb128 0
+ 796 026c 09       		.uleb128 0x9
+ 797 026d 01       		.uleb128 0x1
+ 798 026e 51       		.byte	0x51
+ 799 026f 03       		.uleb128 0x3
+ 800 0270 91       		.byte	0x91
+ 801 0271 807F     		.sleb128 -128
+ 802 0273 09       		.uleb128 0x9
+ 803 0274 01       		.uleb128 0x1
+ 804 0275 52       		.byte	0x52
+ 805 0276 02       		.uleb128 0x2
+ 806 0277 08       		.byte	0x8
+ 807 0278 40       		.byte	0x40
+ 808 0279 00       		.byte	0
+ 809 027a 08       		.uleb128 0x8
+ 810 027b 52000000 		.4byte	.LVL24
+ 811 027f CB050000 		.4byte	0x5cb
+ 812 0283 9A020000 		.4byte	0x29a
+ 813 0287 09       		.uleb128 0x9
+ 814 0288 01       		.uleb128 0x1
+ 815 0289 50       		.byte	0x50
+ 816 028a 02       		.uleb128 0x2
+ 817 028b 7D       		.byte	0x7d
+ 818 028c 00       		.sleb128 0
+ 819 028d 09       		.uleb128 0x9
+ 820 028e 01       		.uleb128 0x1
+ 821 028f 51       		.byte	0x51
+ 822 0290 02       		.uleb128 0x2
+ 823 0291 75       		.byte	0x75
+ 824 0292 00       		.sleb128 0
+ 825 0293 09       		.uleb128 0x9
+ 826 0294 01       		.uleb128 0x1
+ 827 0295 52       		.byte	0x52
+ 828 0296 02       		.uleb128 0x2
+ 829 0297 74       		.byte	0x74
+ 830 0298 00       		.sleb128 0
+ 831 0299 00       		.byte	0
+ 832 029a 08       		.uleb128 0x8
+ 833 029b 5E000000 		.4byte	.LVL25
+ 834 029f CB050000 		.4byte	0x5cb
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccdfnkDI.s 			page 20
+
+
+ 835 02a3 BA020000 		.4byte	0x2ba
+ 836 02a7 09       		.uleb128 0x9
+ 837 02a8 01       		.uleb128 0x1
+ 838 02a9 50       		.byte	0x50
+ 839 02aa 02       		.uleb128 0x2
+ 840 02ab 91       		.byte	0x91
+ 841 02ac 40       		.sleb128 -64
+ 842 02ad 09       		.uleb128 0x9
+ 843 02ae 01       		.uleb128 0x1
+ 844 02af 51       		.byte	0x51
+ 845 02b0 02       		.uleb128 0x2
+ 846 02b1 75       		.byte	0x75
+ 847 02b2 21       		.sleb128 33
+ 848 02b3 09       		.uleb128 0x9
+ 849 02b4 01       		.uleb128 0x1
+ 850 02b5 52       		.byte	0x52
+ 851 02b6 02       		.uleb128 0x2
+ 852 02b7 08       		.byte	0x8
+ 853 02b8 24       		.byte	0x24
+ 854 02b9 00       		.byte	0
+ 855 02ba 0E       		.uleb128 0xe
+ 856 02bb 66000000 		.4byte	.LVL26
+ 857 02bf 77050000 		.4byte	0x577
+ 858 02c3 09       		.uleb128 0x9
+ 859 02c4 01       		.uleb128 0x1
+ 860 02c5 50       		.byte	0x50
+ 861 02c6 05       		.uleb128 0x5
+ 862 02c7 03       		.byte	0x3
+ 863 02c8 15000000 		.4byte	.LC9
+ 864 02cc 09       		.uleb128 0x9
+ 865 02cd 01       		.uleb128 0x1
+ 866 02ce 51       		.byte	0x51
+ 867 02cf 01       		.uleb128 0x1
+ 868 02d0 31       		.byte	0x31
+ 869 02d1 00       		.byte	0
+ 870 02d2 00       		.byte	0
+ 871 02d3 13       		.uleb128 0x13
+ 872 02d4 81000000 		.4byte	0x81
+ 873 02d8 E3020000 		.4byte	0x2e3
+ 874 02dc 14       		.uleb128 0x14
+ 875 02dd A9000000 		.4byte	0xa9
+ 876 02e1 6C       		.byte	0x6c
+ 877 02e2 00       		.byte	0
+ 878 02e3 13       		.uleb128 0x13
+ 879 02e4 9B000000 		.4byte	0x9b
+ 880 02e8 F3020000 		.4byte	0x2f3
+ 881 02ec 14       		.uleb128 0x14
+ 882 02ed A9000000 		.4byte	0xa9
+ 883 02f1 3F       		.byte	0x3f
+ 884 02f2 00       		.byte	0
+ 885 02f3 13       		.uleb128 0x13
+ 886 02f4 76000000 		.4byte	0x76
+ 887 02f8 03030000 		.4byte	0x303
+ 888 02fc 14       		.uleb128 0x14
+ 889 02fd A9000000 		.4byte	0xa9
+ 890 0301 1F       		.byte	0x1f
+ 891 0302 00       		.byte	0
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccdfnkDI.s 			page 21
+
+
+ 892 0303 15       		.uleb128 0x15
+ 893 0304 D6000000 		.4byte	.LASF51
+ 894 0308 01       		.byte	0x1
+ 895 0309 85       		.byte	0x85
+ 896 030a 68000000 		.4byte	0x68
+ 897 030e 00000000 		.4byte	.LFB37
+ 898 0312 A8000000 		.4byte	.LFE37-.LFB37
+ 899 0316 01       		.uleb128 0x1
+ 900 0317 9C       		.byte	0x9c
+ 901 0318 AD040000 		.4byte	0x4ad
+ 902 031c 16       		.uleb128 0x16
+ 903 031d 6900     		.ascii	"i\000"
+ 904 031f 01       		.byte	0x1
+ 905 0320 8E       		.byte	0x8e
+ 906 0321 81000000 		.4byte	0x81
+ 907 0325 03       		.uleb128 0x3
+ 908 0326 91       		.byte	0x91
+ 909 0327 A37E     		.sleb128 -221
+ 910 0329 10       		.uleb128 0x10
+ 911 032a 00000000 		.4byte	.LASF24
+ 912 032e 01       		.byte	0x1
+ 913 032f 8F       		.byte	0x8f
+ 914 0330 AD040000 		.4byte	0x4ad
+ 915 0334 03       		.uleb128 0x3
+ 916 0335 91       		.byte	0x91
+ 917 0336 F07E     		.sleb128 -144
+ 918 0338 10       		.uleb128 0x10
+ 919 0339 47010000 		.4byte	.LASF27
+ 920 033d 01       		.byte	0x1
+ 921 033e 92       		.byte	0x92
+ 922 033f D2040000 		.4byte	0x4d2
+ 923 0343 05       		.uleb128 0x5
+ 924 0344 03       		.byte	0x3
+ 925 0345 45000000 		.4byte	PROVISIONED.6667
+ 926 0349 16       		.uleb128 0x16
+ 927 034a 70747200 		.ascii	"ptr\000"
+ 928 034e 01       		.byte	0x1
+ 929 034f 95       		.byte	0x95
+ 930 0350 D7040000 		.4byte	0x4d7
+ 931 0354 06       		.uleb128 0x6
+ 932 0355 03       		.byte	0x3
+ 933 0356 45000000 		.4byte	PROVISIONED.6667
+ 934 035a 9F       		.byte	0x9f
+ 935 035b 17       		.uleb128 0x17
+ 936 035c 00000000 		.4byte	.Ldebug_ranges0+0
+ 937 0360 1B040000 		.4byte	0x41b
+ 938 0364 10       		.uleb128 0x10
+ 939 0365 BE000000 		.4byte	.LASF28
+ 940 0369 01       		.byte	0x1
+ 941 036a B6       		.byte	0xb6
+ 942 036b E2040000 		.4byte	0x4e2
+ 943 036f 03       		.uleb128 0x3
+ 944 0370 91       		.byte	0x91
+ 945 0371 A47E     		.sleb128 -220
+ 946 0373 10       		.uleb128 0x10
+ 947 0374 08000000 		.4byte	.LASF29
+ 948 0378 01       		.byte	0x1
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccdfnkDI.s 			page 22
+
+
+ 949 0379 BC       		.byte	0xbc
+ 950 037a F3020000 		.4byte	0x2f3
+ 951 037e 03       		.uleb128 0x3
+ 952 037f 91       		.byte	0x91
+ 953 0380 A87E     		.sleb128 -216
+ 954 0382 10       		.uleb128 0x10
+ 955 0383 5C000000 		.4byte	.LASF30
+ 956 0387 01       		.byte	0x1
+ 957 0388 BD       		.byte	0xbd
+ 958 0389 F2040000 		.4byte	0x4f2
+ 959 038d 03       		.uleb128 0x3
+ 960 038e 91       		.byte	0x91
+ 961 038f C87E     		.sleb128 -184
+ 962 0391 08       		.uleb128 0x8
+ 963 0392 62000000 		.4byte	.LVL36
+ 964 0396 B7050000 		.4byte	0x5b7
+ 965 039a A5030000 		.4byte	0x3a5
+ 966 039e 09       		.uleb128 0x9
+ 967 039f 01       		.uleb128 0x1
+ 968 03a0 50       		.byte	0x50
+ 969 03a1 02       		.uleb128 0x2
+ 970 03a2 75       		.byte	0x75
+ 971 03a3 00       		.sleb128 0
+ 972 03a4 00       		.byte	0
+ 973 03a5 08       		.uleb128 0x8
+ 974 03a6 6E000000 		.4byte	.LVL37
+ 975 03aa 77050000 		.4byte	0x577
+ 976 03ae C1030000 		.4byte	0x3c1
+ 977 03b2 09       		.uleb128 0x9
+ 978 03b3 01       		.uleb128 0x1
+ 979 03b4 50       		.byte	0x50
+ 980 03b5 05       		.uleb128 0x5
+ 981 03b6 03       		.byte	0x3
+ 982 03b7 17000000 		.4byte	.LC15
+ 983 03bb 09       		.uleb128 0x9
+ 984 03bc 01       		.uleb128 0x1
+ 985 03bd 51       		.byte	0x51
+ 986 03be 01       		.uleb128 0x1
+ 987 03bf 32       		.byte	0x32
+ 988 03c0 00       		.byte	0
+ 989 03c1 08       		.uleb128 0x8
+ 990 03c2 7A000000 		.4byte	.LVL38
+ 991 03c6 C2050000 		.4byte	0x5c2
+ 992 03ca E2030000 		.4byte	0x3e2
+ 993 03ce 09       		.uleb128 0x9
+ 994 03cf 01       		.uleb128 0x1
+ 995 03d0 50       		.byte	0x50
+ 996 03d1 03       		.uleb128 0x3
+ 997 03d2 91       		.byte	0x91
+ 998 03d3 C87E     		.sleb128 -184
+ 999 03d5 09       		.uleb128 0x9
+ 1000 03d6 01       		.uleb128 0x1
+ 1001 03d7 51       		.byte	0x51
+ 1002 03d8 02       		.uleb128 0x2
+ 1003 03d9 74       		.byte	0x74
+ 1004 03da 21       		.sleb128 33
+ 1005 03db 09       		.uleb128 0x9
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccdfnkDI.s 			page 23
+
+
+ 1006 03dc 01       		.uleb128 0x1
+ 1007 03dd 52       		.byte	0x52
+ 1008 03de 02       		.uleb128 0x2
+ 1009 03df 08       		.byte	0x8
+ 1010 03e0 24       		.byte	0x24
+ 1011 03e1 00       		.byte	0
+ 1012 03e2 08       		.uleb128 0x8
+ 1013 03e3 8C000000 		.4byte	.LVL39
+ 1014 03e7 D6050000 		.4byte	0x5d6
+ 1015 03eb 11040000 		.4byte	0x411
+ 1016 03ef 09       		.uleb128 0x9
+ 1017 03f0 01       		.uleb128 0x1
+ 1018 03f1 50       		.byte	0x50
+ 1019 03f2 03       		.uleb128 0x3
+ 1020 03f3 91       		.byte	0x91
+ 1021 03f4 A87E     		.sleb128 -216
+ 1022 03f6 09       		.uleb128 0x9
+ 1023 03f7 01       		.uleb128 0x1
+ 1024 03f8 51       		.byte	0x51
+ 1025 03f9 02       		.uleb128 0x2
+ 1026 03fa 74       		.byte	0x74
+ 1027 03fb 00       		.sleb128 0
+ 1028 03fc 09       		.uleb128 0x9
+ 1029 03fd 01       		.uleb128 0x1
+ 1030 03fe 52       		.byte	0x52
+ 1031 03ff 02       		.uleb128 0x2
+ 1032 0400 08       		.byte	0x8
+ 1033 0401 20       		.byte	0x20
+ 1034 0402 09       		.uleb128 0x9
+ 1035 0403 01       		.uleb128 0x1
+ 1036 0404 53       		.byte	0x53
+ 1037 0405 03       		.uleb128 0x3
+ 1038 0406 91       		.byte	0x91
+ 1039 0407 C87E     		.sleb128 -184
+ 1040 0409 09       		.uleb128 0x9
+ 1041 040a 02       		.uleb128 0x2
+ 1042 040b 7D       		.byte	0x7d
+ 1043 040c 00       		.sleb128 0
+ 1044 040d 02       		.uleb128 0x2
+ 1045 040e 76       		.byte	0x76
+ 1046 040f 00       		.sleb128 0
+ 1047 0410 00       		.byte	0
+ 1048 0411 0A       		.uleb128 0xa
+ 1049 0412 94000000 		.4byte	.LVL40
+ 1050 0416 77050000 		.4byte	0x577
+ 1051 041a 00       		.byte	0
+ 1052 041b 08       		.uleb128 0x8
+ 1053 041c 0C000000 		.4byte	.LVL28
+ 1054 0420 E1050000 		.4byte	0x5e1
+ 1055 0424 32040000 		.4byte	0x432
+ 1056 0428 09       		.uleb128 0x9
+ 1057 0429 01       		.uleb128 0x1
+ 1058 042a 50       		.byte	0x50
+ 1059 042b 05       		.uleb128 0x5
+ 1060 042c 03       		.byte	0x3
+ 1061 042d 00000000 		.4byte	Reset_ISR
+ 1062 0431 00       		.byte	0
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccdfnkDI.s 			page 24
+
+
+ 1063 0432 0A       		.uleb128 0xa
+ 1064 0433 10000000 		.4byte	.LVL29
+ 1065 0437 EC050000 		.4byte	0x5ec
+ 1066 043b 0A       		.uleb128 0xa
+ 1067 043c 14000000 		.4byte	.LVL30
+ 1068 0440 F7050000 		.4byte	0x5f7
+ 1069 0444 0A       		.uleb128 0xa
+ 1070 0445 24000000 		.4byte	.LVL31
+ 1071 0449 8F010000 		.4byte	0x18f
+ 1072 044d 08       		.uleb128 0x8
+ 1073 044e 32000000 		.4byte	.LVL32
+ 1074 0452 CB050000 		.4byte	0x5cb
+ 1075 0456 6D040000 		.4byte	0x46d
+ 1076 045a 09       		.uleb128 0x9
+ 1077 045b 01       		.uleb128 0x1
+ 1078 045c 50       		.byte	0x50
+ 1079 045d 03       		.uleb128 0x3
+ 1080 045e 91       		.byte	0x91
+ 1081 045f A37E     		.sleb128 -221
+ 1082 0461 09       		.uleb128 0x9
+ 1083 0462 01       		.uleb128 0x1
+ 1084 0463 51       		.byte	0x51
+ 1085 0464 02       		.uleb128 0x2
+ 1086 0465 75       		.byte	0x75
+ 1087 0466 00       		.sleb128 0
+ 1088 0467 09       		.uleb128 0x9
+ 1089 0468 01       		.uleb128 0x1
+ 1090 0469 52       		.byte	0x52
+ 1091 046a 01       		.uleb128 0x1
+ 1092 046b 31       		.byte	0x31
+ 1093 046c 00       		.byte	0
+ 1094 046d 08       		.uleb128 0x8
+ 1095 046e 3C000000 		.4byte	.LVL33
+ 1096 0472 AC050000 		.4byte	0x5ac
+ 1097 0476 80040000 		.4byte	0x480
+ 1098 047a 09       		.uleb128 0x9
+ 1099 047b 01       		.uleb128 0x1
+ 1100 047c 50       		.byte	0x50
+ 1101 047d 01       		.uleb128 0x1
+ 1102 047e 30       		.byte	0x30
+ 1103 047f 00       		.byte	0
+ 1104 0480 08       		.uleb128 0x8
+ 1105 0481 42000000 		.4byte	.LVL34
+ 1106 0485 B7050000 		.4byte	0x5b7
+ 1107 0489 94040000 		.4byte	0x494
+ 1108 048d 09       		.uleb128 0x9
+ 1109 048e 01       		.uleb128 0x1
+ 1110 048f 50       		.byte	0x50
+ 1111 0490 02       		.uleb128 0x2
+ 1112 0491 75       		.byte	0x75
+ 1113 0492 00       		.sleb128 0
+ 1114 0493 00       		.byte	0
+ 1115 0494 0E       		.uleb128 0xe
+ 1116 0495 4A000000 		.4byte	.LVL35
+ 1117 0499 77050000 		.4byte	0x577
+ 1118 049d 09       		.uleb128 0x9
+ 1119 049e 01       		.uleb128 0x1
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccdfnkDI.s 			page 25
+
+
+ 1120 049f 50       		.byte	0x50
+ 1121 04a0 05       		.uleb128 0x5
+ 1122 04a1 03       		.byte	0x3
+ 1123 04a2 15000000 		.4byte	.LC9
+ 1124 04a6 09       		.uleb128 0x9
+ 1125 04a7 01       		.uleb128 0x1
+ 1126 04a8 51       		.byte	0x51
+ 1127 04a9 01       		.uleb128 0x1
+ 1128 04aa 31       		.byte	0x31
+ 1129 04ab 00       		.byte	0
+ 1130 04ac 00       		.byte	0
+ 1131 04ad 13       		.uleb128 0x13
+ 1132 04ae 81000000 		.4byte	0x81
+ 1133 04b2 BD040000 		.4byte	0x4bd
+ 1134 04b6 14       		.uleb128 0x14
+ 1135 04b7 A9000000 		.4byte	0xa9
+ 1136 04bb 7F       		.byte	0x7f
+ 1137 04bc 00       		.byte	0
+ 1138 04bd 13       		.uleb128 0x13
+ 1139 04be CD040000 		.4byte	0x4cd
+ 1140 04c2 CD040000 		.4byte	0x4cd
+ 1141 04c6 14       		.uleb128 0x14
+ 1142 04c7 A9000000 		.4byte	0xa9
+ 1143 04cb 00       		.byte	0
+ 1144 04cc 00       		.byte	0
+ 1145 04cd 18       		.uleb128 0x18
+ 1146 04ce 81000000 		.4byte	0x81
+ 1147 04d2 18       		.uleb128 0x18
+ 1148 04d3 BD040000 		.4byte	0x4bd
+ 1149 04d7 06       		.uleb128 0x6
+ 1150 04d8 04       		.byte	0x4
+ 1151 04d9 DD040000 		.4byte	0x4dd
+ 1152 04dd 19       		.uleb128 0x19
+ 1153 04de CD040000 		.4byte	0x4cd
+ 1154 04e2 13       		.uleb128 0x13
+ 1155 04e3 76000000 		.4byte	0x76
+ 1156 04e7 F2040000 		.4byte	0x4f2
+ 1157 04eb 14       		.uleb128 0x14
+ 1158 04ec A9000000 		.4byte	0xa9
+ 1159 04f0 03       		.byte	0x3
+ 1160 04f1 00       		.byte	0
+ 1161 04f2 13       		.uleb128 0x13
+ 1162 04f3 76000000 		.4byte	0x76
+ 1163 04f7 02050000 		.4byte	0x502
+ 1164 04fb 14       		.uleb128 0x14
+ 1165 04fc A9000000 		.4byte	0xa9
+ 1166 0500 27       		.byte	0x27
+ 1167 0501 00       		.byte	0
+ 1168 0502 13       		.uleb128 0x13
+ 1169 0503 CD040000 		.4byte	0x4cd
+ 1170 0507 12050000 		.4byte	0x512
+ 1171 050b 14       		.uleb128 0x14
+ 1172 050c A9000000 		.4byte	0xa9
+ 1173 0510 07       		.byte	0x7
+ 1174 0511 00       		.byte	0
+ 1175 0512 1A       		.uleb128 0x1a
+ 1176 0513 50494E00 		.ascii	"PIN\000"
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccdfnkDI.s 			page 26
+
+
+ 1177 0517 01       		.byte	0x1
+ 1178 0518 31       		.byte	0x31
+ 1179 0519 26050000 		.4byte	0x526
+ 1180 051d 08       		.byte	0x8
+ 1181 051e 36       		.byte	0x36
+ 1182 051f 35       		.byte	0x35
+ 1183 0520 34       		.byte	0x34
+ 1184 0521 33       		.byte	0x33
+ 1185 0522 35       		.byte	0x35
+ 1186 0523 34       		.byte	0x34
+ 1187 0524 34       		.byte	0x34
+ 1188 0525 36       		.byte	0x36
+ 1189 0526 18       		.uleb128 0x18
+ 1190 0527 02050000 		.4byte	0x502
+ 1191 052b 13       		.uleb128 0x13
+ 1192 052c CD040000 		.4byte	0x4cd
+ 1193 0530 3B050000 		.4byte	0x53b
+ 1194 0534 14       		.uleb128 0x14
+ 1195 0535 A9000000 		.4byte	0xa9
+ 1196 0539 23       		.byte	0x23
+ 1197 053a 00       		.byte	0
+ 1198 053b 10       		.uleb128 0x10
+ 1199 053c 14000000 		.4byte	.LASF31
+ 1200 0540 01       		.byte	0x1
+ 1201 0541 32       		.byte	0x32
+ 1202 0542 4C050000 		.4byte	0x54c
+ 1203 0546 05       		.uleb128 0x5
+ 1204 0547 03       		.byte	0x3
+ 1205 0548 21000000 		.4byte	UUID
+ 1206 054c 18       		.uleb128 0x18
+ 1207 054d 2B050000 		.4byte	0x52b
+ 1208 0551 13       		.uleb128 0x13
+ 1209 0552 CD040000 		.4byte	0x4cd
+ 1210 0556 61050000 		.4byte	0x561
+ 1211 055a 14       		.uleb128 0x14
+ 1212 055b A9000000 		.4byte	0xa9
+ 1213 055f 20       		.byte	0x20
+ 1214 0560 00       		.byte	0
+ 1215 0561 10       		.uleb128 0x10
+ 1216 0562 DB000000 		.4byte	.LASF32
+ 1217 0566 01       		.byte	0x1
+ 1218 0567 33       		.byte	0x33
+ 1219 0568 72050000 		.4byte	0x572
+ 1220 056c 05       		.uleb128 0x5
+ 1221 056d 03       		.byte	0x3
+ 1222 056e 00000000 		.4byte	BANK_AES_KEY
+ 1223 0572 18       		.uleb128 0x18
+ 1224 0573 51050000 		.4byte	0x551
+ 1225 0577 1B       		.uleb128 0x1b
+ 1226 0578 AB000000 		.4byte	.LASF33
+ 1227 057c AB000000 		.4byte	.LASF33
+ 1228 0580 05       		.byte	0x5
+ 1229 0581 1E       		.byte	0x1e
+ 1230 0582 1B       		.uleb128 0x1b
+ 1231 0583 98000000 		.4byte	.LASF34
+ 1232 0587 98000000 		.4byte	.LASF34
+ 1233 058b 06       		.byte	0x6
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccdfnkDI.s 			page 27
+
+
+ 1234 058c 39       		.byte	0x39
+ 1235 058d 1B       		.uleb128 0x1b
+ 1236 058e 6C000000 		.4byte	.LASF35
+ 1237 0592 6C000000 		.4byte	.LASF35
+ 1238 0596 07       		.byte	0x7
+ 1239 0597 E4       		.byte	0xe4
+ 1240 0598 1B       		.uleb128 0x1b
+ 1241 0599 53010000 		.4byte	.LASF36
+ 1242 059d 53010000 		.4byte	.LASF36
+ 1243 05a1 08       		.byte	0x8
+ 1244 05a2 E7       		.byte	0xe7
+ 1245 05a3 1C       		.uleb128 0x1c
+ 1246 05a4 B7000000 		.4byte	.LASF39
+ 1247 05a8 B7000000 		.4byte	.LASF39
+ 1248 05ac 1B       		.uleb128 0x1b
+ 1249 05ad 19000000 		.4byte	.LASF37
+ 1250 05b1 19000000 		.4byte	.LASF37
+ 1251 05b5 05       		.byte	0x5
+ 1252 05b6 2B       		.byte	0x2b
+ 1253 05b7 1B       		.uleb128 0x1b
+ 1254 05b8 E5020000 		.4byte	.LASF38
+ 1255 05bc E5020000 		.4byte	.LASF38
+ 1256 05c0 05       		.byte	0x5
+ 1257 05c1 25       		.byte	0x25
+ 1258 05c2 1C       		.uleb128 0x1c
+ 1259 05c3 FB010000 		.4byte	.LASF40
+ 1260 05c7 FB010000 		.4byte	.LASF40
+ 1261 05cb 1B       		.uleb128 0x1b
+ 1262 05cc E5010000 		.4byte	.LASF41
+ 1263 05d0 E5010000 		.4byte	.LASF41
+ 1264 05d4 09       		.byte	0x9
+ 1265 05d5 2F       		.byte	0x2f
+ 1266 05d6 1B       		.uleb128 0x1b
+ 1267 05d7 57000000 		.4byte	.LASF42
+ 1268 05db 57000000 		.4byte	.LASF42
+ 1269 05df 0A       		.byte	0xa
+ 1270 05e0 17       		.byte	0x17
+ 1271 05e1 1B       		.uleb128 0x1b
+ 1272 05e2 02020000 		.4byte	.LASF43
+ 1273 05e6 02020000 		.4byte	.LASF43
+ 1274 05ea 0B       		.byte	0xb
+ 1275 05eb 18       		.byte	0x18
+ 1276 05ec 1B       		.uleb128 0x1b
+ 1277 05ed 0B010000 		.4byte	.LASF44
+ 1278 05f1 0B010000 		.4byte	.LASF44
+ 1279 05f5 09       		.byte	0x9
+ 1280 05f6 29       		.byte	0x29
+ 1281 05f7 1B       		.uleb128 0x1b
+ 1282 05f8 14020000 		.4byte	.LASF45
+ 1283 05fc 14020000 		.4byte	.LASF45
+ 1284 0600 0C       		.byte	0xc
+ 1285 0601 72       		.byte	0x72
+ 1286 0602 00       		.byte	0
+ 1287              		.section	.debug_abbrev,"",%progbits
+ 1288              	.Ldebug_abbrev0:
+ 1289 0000 01       		.uleb128 0x1
+ 1290 0001 11       		.uleb128 0x11
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccdfnkDI.s 			page 28
+
+
+ 1291 0002 01       		.byte	0x1
+ 1292 0003 25       		.uleb128 0x25
+ 1293 0004 0E       		.uleb128 0xe
+ 1294 0005 13       		.uleb128 0x13
+ 1295 0006 0B       		.uleb128 0xb
+ 1296 0007 03       		.uleb128 0x3
+ 1297 0008 0E       		.uleb128 0xe
+ 1298 0009 1B       		.uleb128 0x1b
+ 1299 000a 0E       		.uleb128 0xe
+ 1300 000b 55       		.uleb128 0x55
+ 1301 000c 17       		.uleb128 0x17
+ 1302 000d 11       		.uleb128 0x11
+ 1303 000e 01       		.uleb128 0x1
+ 1304 000f 10       		.uleb128 0x10
+ 1305 0010 17       		.uleb128 0x17
+ 1306 0011 00       		.byte	0
+ 1307 0012 00       		.byte	0
+ 1308 0013 02       		.uleb128 0x2
+ 1309 0014 24       		.uleb128 0x24
+ 1310 0015 00       		.byte	0
+ 1311 0016 0B       		.uleb128 0xb
+ 1312 0017 0B       		.uleb128 0xb
+ 1313 0018 3E       		.uleb128 0x3e
+ 1314 0019 0B       		.uleb128 0xb
+ 1315 001a 03       		.uleb128 0x3
+ 1316 001b 0E       		.uleb128 0xe
+ 1317 001c 00       		.byte	0
+ 1318 001d 00       		.byte	0
+ 1319 001e 03       		.uleb128 0x3
+ 1320 001f 16       		.uleb128 0x16
+ 1321 0020 00       		.byte	0
+ 1322 0021 03       		.uleb128 0x3
+ 1323 0022 0E       		.uleb128 0xe
+ 1324 0023 3A       		.uleb128 0x3a
+ 1325 0024 0B       		.uleb128 0xb
+ 1326 0025 3B       		.uleb128 0x3b
+ 1327 0026 0B       		.uleb128 0xb
+ 1328 0027 49       		.uleb128 0x49
+ 1329 0028 13       		.uleb128 0x13
+ 1330 0029 00       		.byte	0
+ 1331 002a 00       		.byte	0
+ 1332 002b 04       		.uleb128 0x4
+ 1333 002c 24       		.uleb128 0x24
+ 1334 002d 00       		.byte	0
+ 1335 002e 0B       		.uleb128 0xb
+ 1336 002f 0B       		.uleb128 0xb
+ 1337 0030 3E       		.uleb128 0x3e
+ 1338 0031 0B       		.uleb128 0xb
+ 1339 0032 03       		.uleb128 0x3
+ 1340 0033 08       		.uleb128 0x8
+ 1341 0034 00       		.byte	0
+ 1342 0035 00       		.byte	0
+ 1343 0036 05       		.uleb128 0x5
+ 1344 0037 16       		.uleb128 0x16
+ 1345 0038 00       		.byte	0
+ 1346 0039 03       		.uleb128 0x3
+ 1347 003a 0E       		.uleb128 0xe
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccdfnkDI.s 			page 29
+
+
+ 1348 003b 3A       		.uleb128 0x3a
+ 1349 003c 0B       		.uleb128 0xb
+ 1350 003d 3B       		.uleb128 0x3b
+ 1351 003e 05       		.uleb128 0x5
+ 1352 003f 49       		.uleb128 0x49
+ 1353 0040 13       		.uleb128 0x13
+ 1354 0041 00       		.byte	0
+ 1355 0042 00       		.byte	0
+ 1356 0043 06       		.uleb128 0x6
+ 1357 0044 0F       		.uleb128 0xf
+ 1358 0045 00       		.byte	0
+ 1359 0046 0B       		.uleb128 0xb
+ 1360 0047 0B       		.uleb128 0xb
+ 1361 0048 49       		.uleb128 0x49
+ 1362 0049 13       		.uleb128 0x13
+ 1363 004a 00       		.byte	0
+ 1364 004b 00       		.byte	0
+ 1365 004c 07       		.uleb128 0x7
+ 1366 004d 2E       		.uleb128 0x2e
+ 1367 004e 01       		.byte	0x1
+ 1368 004f 3F       		.uleb128 0x3f
+ 1369 0050 19       		.uleb128 0x19
+ 1370 0051 03       		.uleb128 0x3
+ 1371 0052 0E       		.uleb128 0xe
+ 1372 0053 3A       		.uleb128 0x3a
+ 1373 0054 0B       		.uleb128 0xb
+ 1374 0055 3B       		.uleb128 0x3b
+ 1375 0056 0B       		.uleb128 0xb
+ 1376 0057 27       		.uleb128 0x27
+ 1377 0058 19       		.uleb128 0x19
+ 1378 0059 11       		.uleb128 0x11
+ 1379 005a 01       		.uleb128 0x1
+ 1380 005b 12       		.uleb128 0x12
+ 1381 005c 06       		.uleb128 0x6
+ 1382 005d 40       		.uleb128 0x40
+ 1383 005e 18       		.uleb128 0x18
+ 1384 005f 9742     		.uleb128 0x2117
+ 1385 0061 19       		.uleb128 0x19
+ 1386 0062 01       		.uleb128 0x1
+ 1387 0063 13       		.uleb128 0x13
+ 1388 0064 00       		.byte	0
+ 1389 0065 00       		.byte	0
+ 1390 0066 08       		.uleb128 0x8
+ 1391 0067 898201   		.uleb128 0x4109
+ 1392 006a 01       		.byte	0x1
+ 1393 006b 11       		.uleb128 0x11
+ 1394 006c 01       		.uleb128 0x1
+ 1395 006d 31       		.uleb128 0x31
+ 1396 006e 13       		.uleb128 0x13
+ 1397 006f 01       		.uleb128 0x1
+ 1398 0070 13       		.uleb128 0x13
+ 1399 0071 00       		.byte	0
+ 1400 0072 00       		.byte	0
+ 1401 0073 09       		.uleb128 0x9
+ 1402 0074 8A8201   		.uleb128 0x410a
+ 1403 0077 00       		.byte	0
+ 1404 0078 02       		.uleb128 0x2
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccdfnkDI.s 			page 30
+
+
+ 1405 0079 18       		.uleb128 0x18
+ 1406 007a 9142     		.uleb128 0x2111
+ 1407 007c 18       		.uleb128 0x18
+ 1408 007d 00       		.byte	0
+ 1409 007e 00       		.byte	0
+ 1410 007f 0A       		.uleb128 0xa
+ 1411 0080 898201   		.uleb128 0x4109
+ 1412 0083 00       		.byte	0
+ 1413 0084 11       		.uleb128 0x11
+ 1414 0085 01       		.uleb128 0x1
+ 1415 0086 31       		.uleb128 0x31
+ 1416 0087 13       		.uleb128 0x13
+ 1417 0088 00       		.byte	0
+ 1418 0089 00       		.byte	0
+ 1419 008a 0B       		.uleb128 0xb
+ 1420 008b 2E       		.uleb128 0x2e
+ 1421 008c 01       		.byte	0x1
+ 1422 008d 3F       		.uleb128 0x3f
+ 1423 008e 19       		.uleb128 0x19
+ 1424 008f 03       		.uleb128 0x3
+ 1425 0090 0E       		.uleb128 0xe
+ 1426 0091 3A       		.uleb128 0x3a
+ 1427 0092 0B       		.uleb128 0xb
+ 1428 0093 3B       		.uleb128 0x3b
+ 1429 0094 0B       		.uleb128 0xb
+ 1430 0095 27       		.uleb128 0x27
+ 1431 0096 19       		.uleb128 0x19
+ 1432 0097 49       		.uleb128 0x49
+ 1433 0098 13       		.uleb128 0x13
+ 1434 0099 11       		.uleb128 0x11
+ 1435 009a 01       		.uleb128 0x1
+ 1436 009b 12       		.uleb128 0x12
+ 1437 009c 06       		.uleb128 0x6
+ 1438 009d 40       		.uleb128 0x40
+ 1439 009e 18       		.uleb128 0x18
+ 1440 009f 9742     		.uleb128 0x2117
+ 1441 00a1 19       		.uleb128 0x19
+ 1442 00a2 01       		.uleb128 0x1
+ 1443 00a3 13       		.uleb128 0x13
+ 1444 00a4 00       		.byte	0
+ 1445 00a5 00       		.byte	0
+ 1446 00a6 0C       		.uleb128 0xc
+ 1447 00a7 05       		.uleb128 0x5
+ 1448 00a8 00       		.byte	0
+ 1449 00a9 03       		.uleb128 0x3
+ 1450 00aa 0E       		.uleb128 0xe
+ 1451 00ab 3A       		.uleb128 0x3a
+ 1452 00ac 0B       		.uleb128 0xb
+ 1453 00ad 3B       		.uleb128 0x3b
+ 1454 00ae 0B       		.uleb128 0xb
+ 1455 00af 49       		.uleb128 0x49
+ 1456 00b0 13       		.uleb128 0x13
+ 1457 00b1 02       		.uleb128 0x2
+ 1458 00b2 17       		.uleb128 0x17
+ 1459 00b3 00       		.byte	0
+ 1460 00b4 00       		.byte	0
+ 1461 00b5 0D       		.uleb128 0xd
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccdfnkDI.s 			page 31
+
+
+ 1462 00b6 34       		.uleb128 0x34
+ 1463 00b7 00       		.byte	0
+ 1464 00b8 03       		.uleb128 0x3
+ 1465 00b9 0E       		.uleb128 0xe
+ 1466 00ba 3A       		.uleb128 0x3a
+ 1467 00bb 0B       		.uleb128 0xb
+ 1468 00bc 3B       		.uleb128 0x3b
+ 1469 00bd 0B       		.uleb128 0xb
+ 1470 00be 49       		.uleb128 0x49
+ 1471 00bf 13       		.uleb128 0x13
+ 1472 00c0 02       		.uleb128 0x2
+ 1473 00c1 17       		.uleb128 0x17
+ 1474 00c2 00       		.byte	0
+ 1475 00c3 00       		.byte	0
+ 1476 00c4 0E       		.uleb128 0xe
+ 1477 00c5 898201   		.uleb128 0x4109
+ 1478 00c8 01       		.byte	0x1
+ 1479 00c9 11       		.uleb128 0x11
+ 1480 00ca 01       		.uleb128 0x1
+ 1481 00cb 31       		.uleb128 0x31
+ 1482 00cc 13       		.uleb128 0x13
+ 1483 00cd 00       		.byte	0
+ 1484 00ce 00       		.byte	0
+ 1485 00cf 0F       		.uleb128 0xf
+ 1486 00d0 2E       		.uleb128 0x2e
+ 1487 00d1 01       		.byte	0x1
+ 1488 00d2 3F       		.uleb128 0x3f
+ 1489 00d3 19       		.uleb128 0x19
+ 1490 00d4 03       		.uleb128 0x3
+ 1491 00d5 0E       		.uleb128 0xe
+ 1492 00d6 3A       		.uleb128 0x3a
+ 1493 00d7 0B       		.uleb128 0xb
+ 1494 00d8 3B       		.uleb128 0x3b
+ 1495 00d9 0B       		.uleb128 0xb
+ 1496 00da 11       		.uleb128 0x11
+ 1497 00db 01       		.uleb128 0x1
+ 1498 00dc 12       		.uleb128 0x12
+ 1499 00dd 06       		.uleb128 0x6
+ 1500 00de 40       		.uleb128 0x40
+ 1501 00df 18       		.uleb128 0x18
+ 1502 00e0 9742     		.uleb128 0x2117
+ 1503 00e2 19       		.uleb128 0x19
+ 1504 00e3 01       		.uleb128 0x1
+ 1505 00e4 13       		.uleb128 0x13
+ 1506 00e5 00       		.byte	0
+ 1507 00e6 00       		.byte	0
+ 1508 00e7 10       		.uleb128 0x10
+ 1509 00e8 34       		.uleb128 0x34
+ 1510 00e9 00       		.byte	0
+ 1511 00ea 03       		.uleb128 0x3
+ 1512 00eb 0E       		.uleb128 0xe
+ 1513 00ec 3A       		.uleb128 0x3a
+ 1514 00ed 0B       		.uleb128 0xb
+ 1515 00ee 3B       		.uleb128 0x3b
+ 1516 00ef 0B       		.uleb128 0xb
+ 1517 00f0 49       		.uleb128 0x49
+ 1518 00f1 13       		.uleb128 0x13
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccdfnkDI.s 			page 32
+
+
+ 1519 00f2 02       		.uleb128 0x2
+ 1520 00f3 18       		.uleb128 0x18
+ 1521 00f4 00       		.byte	0
+ 1522 00f5 00       		.byte	0
+ 1523 00f6 11       		.uleb128 0x11
+ 1524 00f7 0B       		.uleb128 0xb
+ 1525 00f8 01       		.byte	0x1
+ 1526 00f9 11       		.uleb128 0x11
+ 1527 00fa 01       		.uleb128 0x1
+ 1528 00fb 12       		.uleb128 0x12
+ 1529 00fc 06       		.uleb128 0x6
+ 1530 00fd 01       		.uleb128 0x1
+ 1531 00fe 13       		.uleb128 0x13
+ 1532 00ff 00       		.byte	0
+ 1533 0100 00       		.byte	0
+ 1534 0101 12       		.uleb128 0x12
+ 1535 0102 34       		.uleb128 0x34
+ 1536 0103 00       		.byte	0
+ 1537 0104 03       		.uleb128 0x3
+ 1538 0105 08       		.uleb128 0x8
+ 1539 0106 3A       		.uleb128 0x3a
+ 1540 0107 0B       		.uleb128 0xb
+ 1541 0108 3B       		.uleb128 0x3b
+ 1542 0109 0B       		.uleb128 0xb
+ 1543 010a 49       		.uleb128 0x49
+ 1544 010b 13       		.uleb128 0x13
+ 1545 010c 02       		.uleb128 0x2
+ 1546 010d 17       		.uleb128 0x17
+ 1547 010e 00       		.byte	0
+ 1548 010f 00       		.byte	0
+ 1549 0110 13       		.uleb128 0x13
+ 1550 0111 01       		.uleb128 0x1
+ 1551 0112 01       		.byte	0x1
+ 1552 0113 49       		.uleb128 0x49
+ 1553 0114 13       		.uleb128 0x13
+ 1554 0115 01       		.uleb128 0x1
+ 1555 0116 13       		.uleb128 0x13
+ 1556 0117 00       		.byte	0
+ 1557 0118 00       		.byte	0
+ 1558 0119 14       		.uleb128 0x14
+ 1559 011a 21       		.uleb128 0x21
+ 1560 011b 00       		.byte	0
+ 1561 011c 49       		.uleb128 0x49
+ 1562 011d 13       		.uleb128 0x13
+ 1563 011e 2F       		.uleb128 0x2f
+ 1564 011f 0B       		.uleb128 0xb
+ 1565 0120 00       		.byte	0
+ 1566 0121 00       		.byte	0
+ 1567 0122 15       		.uleb128 0x15
+ 1568 0123 2E       		.uleb128 0x2e
+ 1569 0124 01       		.byte	0x1
+ 1570 0125 3F       		.uleb128 0x3f
+ 1571 0126 19       		.uleb128 0x19
+ 1572 0127 03       		.uleb128 0x3
+ 1573 0128 0E       		.uleb128 0xe
+ 1574 0129 3A       		.uleb128 0x3a
+ 1575 012a 0B       		.uleb128 0xb
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccdfnkDI.s 			page 33
+
+
+ 1576 012b 3B       		.uleb128 0x3b
+ 1577 012c 0B       		.uleb128 0xb
+ 1578 012d 27       		.uleb128 0x27
+ 1579 012e 19       		.uleb128 0x19
+ 1580 012f 49       		.uleb128 0x49
+ 1581 0130 13       		.uleb128 0x13
+ 1582 0131 8701     		.uleb128 0x87
+ 1583 0133 19       		.uleb128 0x19
+ 1584 0134 11       		.uleb128 0x11
+ 1585 0135 01       		.uleb128 0x1
+ 1586 0136 12       		.uleb128 0x12
+ 1587 0137 06       		.uleb128 0x6
+ 1588 0138 40       		.uleb128 0x40
+ 1589 0139 18       		.uleb128 0x18
+ 1590 013a 9742     		.uleb128 0x2117
+ 1591 013c 19       		.uleb128 0x19
+ 1592 013d 01       		.uleb128 0x1
+ 1593 013e 13       		.uleb128 0x13
+ 1594 013f 00       		.byte	0
+ 1595 0140 00       		.byte	0
+ 1596 0141 16       		.uleb128 0x16
+ 1597 0142 34       		.uleb128 0x34
+ 1598 0143 00       		.byte	0
+ 1599 0144 03       		.uleb128 0x3
+ 1600 0145 08       		.uleb128 0x8
+ 1601 0146 3A       		.uleb128 0x3a
+ 1602 0147 0B       		.uleb128 0xb
+ 1603 0148 3B       		.uleb128 0x3b
+ 1604 0149 0B       		.uleb128 0xb
+ 1605 014a 49       		.uleb128 0x49
+ 1606 014b 13       		.uleb128 0x13
+ 1607 014c 02       		.uleb128 0x2
+ 1608 014d 18       		.uleb128 0x18
+ 1609 014e 00       		.byte	0
+ 1610 014f 00       		.byte	0
+ 1611 0150 17       		.uleb128 0x17
+ 1612 0151 0B       		.uleb128 0xb
+ 1613 0152 01       		.byte	0x1
+ 1614 0153 55       		.uleb128 0x55
+ 1615 0154 17       		.uleb128 0x17
+ 1616 0155 01       		.uleb128 0x1
+ 1617 0156 13       		.uleb128 0x13
+ 1618 0157 00       		.byte	0
+ 1619 0158 00       		.byte	0
+ 1620 0159 18       		.uleb128 0x18
+ 1621 015a 26       		.uleb128 0x26
+ 1622 015b 00       		.byte	0
+ 1623 015c 49       		.uleb128 0x49
+ 1624 015d 13       		.uleb128 0x13
+ 1625 015e 00       		.byte	0
+ 1626 015f 00       		.byte	0
+ 1627 0160 19       		.uleb128 0x19
+ 1628 0161 35       		.uleb128 0x35
+ 1629 0162 00       		.byte	0
+ 1630 0163 49       		.uleb128 0x49
+ 1631 0164 13       		.uleb128 0x13
+ 1632 0165 00       		.byte	0
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccdfnkDI.s 			page 34
+
+
+ 1633 0166 00       		.byte	0
+ 1634 0167 1A       		.uleb128 0x1a
+ 1635 0168 34       		.uleb128 0x34
+ 1636 0169 00       		.byte	0
+ 1637 016a 03       		.uleb128 0x3
+ 1638 016b 08       		.uleb128 0x8
+ 1639 016c 3A       		.uleb128 0x3a
+ 1640 016d 0B       		.uleb128 0xb
+ 1641 016e 3B       		.uleb128 0x3b
+ 1642 016f 0B       		.uleb128 0xb
+ 1643 0170 49       		.uleb128 0x49
+ 1644 0171 13       		.uleb128 0x13
+ 1645 0172 1C       		.uleb128 0x1c
+ 1646 0173 0A       		.uleb128 0xa
+ 1647 0174 00       		.byte	0
+ 1648 0175 00       		.byte	0
+ 1649 0176 1B       		.uleb128 0x1b
+ 1650 0177 2E       		.uleb128 0x2e
+ 1651 0178 00       		.byte	0
+ 1652 0179 3F       		.uleb128 0x3f
+ 1653 017a 19       		.uleb128 0x19
+ 1654 017b 3C       		.uleb128 0x3c
+ 1655 017c 19       		.uleb128 0x19
+ 1656 017d 6E       		.uleb128 0x6e
+ 1657 017e 0E       		.uleb128 0xe
+ 1658 017f 03       		.uleb128 0x3
+ 1659 0180 0E       		.uleb128 0xe
+ 1660 0181 3A       		.uleb128 0x3a
+ 1661 0182 0B       		.uleb128 0xb
+ 1662 0183 3B       		.uleb128 0x3b
+ 1663 0184 0B       		.uleb128 0xb
+ 1664 0185 00       		.byte	0
+ 1665 0186 00       		.byte	0
+ 1666 0187 1C       		.uleb128 0x1c
+ 1667 0188 2E       		.uleb128 0x2e
+ 1668 0189 00       		.byte	0
+ 1669 018a 3F       		.uleb128 0x3f
+ 1670 018b 19       		.uleb128 0x19
+ 1671 018c 3C       		.uleb128 0x3c
+ 1672 018d 19       		.uleb128 0x19
+ 1673 018e 6E       		.uleb128 0x6e
+ 1674 018f 0E       		.uleb128 0xe
+ 1675 0190 03       		.uleb128 0x3
+ 1676 0191 0E       		.uleb128 0xe
+ 1677 0192 00       		.byte	0
+ 1678 0193 00       		.byte	0
+ 1679 0194 00       		.byte	0
+ 1680              		.section	.debug_loc,"",%progbits
+ 1681              	.Ldebug_loc0:
+ 1682              	.LLST0:
+ 1683 0000 00000000 		.4byte	.LVL3
+ 1684 0004 04000000 		.4byte	.LVL4
+ 1685 0008 0100     		.2byte	0x1
+ 1686 000a 50       		.byte	0x50
+ 1687 000b 04000000 		.4byte	.LVL4
+ 1688 000f 5E000000 		.4byte	.LFE33
+ 1689 0013 0400     		.2byte	0x4
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccdfnkDI.s 			page 35
+
+
+ 1690 0015 F3       		.byte	0xf3
+ 1691 0016 01       		.uleb128 0x1
+ 1692 0017 50       		.byte	0x50
+ 1693 0018 9F       		.byte	0x9f
+ 1694 0019 00000000 		.4byte	0
+ 1695 001d 00000000 		.4byte	0
+ 1696              	.LLST1:
+ 1697 0021 00000000 		.4byte	.LVL3
+ 1698 0025 16000000 		.4byte	.LVL5
+ 1699 0029 0100     		.2byte	0x1
+ 1700 002b 51       		.byte	0x51
+ 1701 002c 16000000 		.4byte	.LVL5
+ 1702 0030 18000000 		.4byte	.LVL6
+ 1703 0034 0400     		.2byte	0x4
+ 1704 0036 F3       		.byte	0xf3
+ 1705 0037 01       		.uleb128 0x1
+ 1706 0038 51       		.byte	0x51
+ 1707 0039 9F       		.byte	0x9f
+ 1708 003a 18000000 		.4byte	.LVL6
+ 1709 003e 24000000 		.4byte	.LVL7
+ 1710 0042 0100     		.2byte	0x1
+ 1711 0044 51       		.byte	0x51
+ 1712 0045 24000000 		.4byte	.LVL7
+ 1713 0049 5E000000 		.4byte	.LFE33
+ 1714 004d 0400     		.2byte	0x4
+ 1715 004f F3       		.byte	0xf3
+ 1716 0050 01       		.uleb128 0x1
+ 1717 0051 51       		.byte	0x51
+ 1718 0052 9F       		.byte	0x9f
+ 1719 0053 00000000 		.4byte	0
+ 1720 0057 00000000 		.4byte	0
+ 1721              	.LLST2:
+ 1722 005b 00000000 		.4byte	.LVL3
+ 1723 005f 26000000 		.4byte	.LVL8
+ 1724 0063 0200     		.2byte	0x2
+ 1725 0065 30       		.byte	0x30
+ 1726 0066 9F       		.byte	0x9f
+ 1727 0067 26000000 		.4byte	.LVL8
+ 1728 006b 5A000000 		.4byte	.LVL10
+ 1729 006f 0100     		.2byte	0x1
+ 1730 0071 50       		.byte	0x50
+ 1731 0072 5C000000 		.4byte	.LVL11
+ 1732 0076 5E000000 		.4byte	.LFE33
+ 1733 007a 0100     		.2byte	0x1
+ 1734 007c 50       		.byte	0x50
+ 1735 007d 00000000 		.4byte	0
+ 1736 0081 00000000 		.4byte	0
+ 1737              	.LLST3:
+ 1738 0085 00000000 		.4byte	.LVL12
+ 1739 0089 06000000 		.4byte	.LVL13
+ 1740 008d 0100     		.2byte	0x1
+ 1741 008f 50       		.byte	0x50
+ 1742 0090 06000000 		.4byte	.LVL13
+ 1743 0094 14000000 		.4byte	.LFE34
+ 1744 0098 0400     		.2byte	0x4
+ 1745 009a F3       		.byte	0xf3
+ 1746 009b 01       		.uleb128 0x1
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccdfnkDI.s 			page 36
+
+
+ 1747 009c 50       		.byte	0x50
+ 1748 009d 9F       		.byte	0x9f
+ 1749 009e 00000000 		.4byte	0
+ 1750 00a2 00000000 		.4byte	0
+ 1751              	.LLST4:
+ 1752 00a6 00000000 		.4byte	.LVL12
+ 1753 00aa 08000000 		.4byte	.LVL14
+ 1754 00ae 0100     		.2byte	0x1
+ 1755 00b0 51       		.byte	0x51
+ 1756 00b1 08000000 		.4byte	.LVL14
+ 1757 00b5 0B000000 		.4byte	.LVL15-1
+ 1758 00b9 0100     		.2byte	0x1
+ 1759 00bb 50       		.byte	0x50
+ 1760 00bc 0B000000 		.4byte	.LVL15-1
+ 1761 00c0 14000000 		.4byte	.LFE34
+ 1762 00c4 0400     		.2byte	0x4
+ 1763 00c6 F3       		.byte	0xf3
+ 1764 00c7 01       		.uleb128 0x1
+ 1765 00c8 51       		.byte	0x51
+ 1766 00c9 9F       		.byte	0x9f
+ 1767 00ca 00000000 		.4byte	0
+ 1768 00ce 00000000 		.4byte	0
+ 1769              	.LLST5:
+ 1770 00d2 2E000000 		.4byte	.LVL20
+ 1771 00d6 30000000 		.4byte	.LVL21
+ 1772 00da 0200     		.2byte	0x2
+ 1773 00dc 30       		.byte	0x30
+ 1774 00dd 9F       		.byte	0x9f
+ 1775 00de 30000000 		.4byte	.LVL21
+ 1776 00e2 68000000 		.4byte	.LVL27
+ 1777 00e6 0100     		.2byte	0x1
+ 1778 00e8 54       		.byte	0x54
+ 1779 00e9 00000000 		.4byte	0
+ 1780 00ed 00000000 		.4byte	0
+ 1781              		.section	.debug_aranges,"",%progbits
+ 1782 0000 3C000000 		.4byte	0x3c
+ 1783 0004 0200     		.2byte	0x2
+ 1784 0006 00000000 		.4byte	.Ldebug_info0
+ 1785 000a 04       		.byte	0x4
+ 1786 000b 00       		.byte	0
+ 1787 000c 0000     		.2byte	0
+ 1788 000e 0000     		.2byte	0
+ 1789 0010 00000000 		.4byte	.LFB35
+ 1790 0014 18000000 		.4byte	.LFE35-.LFB35
+ 1791 0018 00000000 		.4byte	.LFB33
+ 1792 001c 5E000000 		.4byte	.LFE33-.LFB33
+ 1793 0020 00000000 		.4byte	.LFB34
+ 1794 0024 14000000 		.4byte	.LFE34-.LFB34
+ 1795 0028 00000000 		.4byte	.LFB36
+ 1796 002c 78000000 		.4byte	.LFE36-.LFB36
+ 1797 0030 00000000 		.4byte	.LFB37
+ 1798 0034 A8000000 		.4byte	.LFE37-.LFB37
+ 1799 0038 00000000 		.4byte	0
+ 1800 003c 00000000 		.4byte	0
+ 1801              		.section	.debug_ranges,"",%progbits
+ 1802              	.Ldebug_ranges0:
+ 1803 0000 32000000 		.4byte	.LBB3
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccdfnkDI.s 			page 37
+
+
+ 1804 0004 34000000 		.4byte	.LBE3
+ 1805 0008 5C000000 		.4byte	.LBB4
+ 1806 000c A8000000 		.4byte	.LBE4
+ 1807 0010 00000000 		.4byte	0
+ 1808 0014 00000000 		.4byte	0
+ 1809 0018 00000000 		.4byte	.LFB35
+ 1810 001c 18000000 		.4byte	.LFE35
+ 1811 0020 00000000 		.4byte	.LFB33
+ 1812 0024 5E000000 		.4byte	.LFE33
+ 1813 0028 00000000 		.4byte	.LFB34
+ 1814 002c 14000000 		.4byte	.LFE34
+ 1815 0030 00000000 		.4byte	.LFB36
+ 1816 0034 78000000 		.4byte	.LFE36
+ 1817 0038 00000000 		.4byte	.LFB37
+ 1818 003c A8000000 		.4byte	.LFE37
+ 1819 0040 00000000 		.4byte	0
+ 1820 0044 00000000 		.4byte	0
+ 1821              		.section	.debug_line,"",%progbits
+ 1822              	.Ldebug_line0:
+ 1823 0000 ED020000 		.section	.debug_str,"MS",%progbits,1
+ 1823      02004402 
+ 1823      00000201 
+ 1823      FB0E0D00 
+ 1823      01010101 
+ 1824              	.LASF24:
+ 1825 0000 6D657373 		.ascii	"message\000"
+ 1825      61676500 
+ 1826              	.LASF29:
+ 1827 0008 686D6163 		.ascii	"hmac_output\000"
+ 1827      5F6F7574 
+ 1827      70757400 
+ 1828              	.LASF31:
+ 1829 0014 55554944 		.ascii	"UUID\000"
+ 1829      00
+ 1830              	.LASF37:
+ 1831 0019 73796E63 		.ascii	"syncConnection\000"
+ 1831      436F6E6E 
+ 1831      65637469 
+ 1831      6F6E00
+ 1832              	.LASF9:
+ 1833 0028 5F5F7569 		.ascii	"__uint8_t\000"
+ 1833      6E74385F 
+ 1833      7400
+ 1834              	.LASF23:
+ 1835 0032 76616C75 		.ascii	"value\000"
+ 1835      6500
+ 1836              	.LASF3:
+ 1837 0038 73686F72 		.ascii	"short unsigned int\000"
+ 1837      7420756E 
+ 1837      7369676E 
+ 1837      65642069 
+ 1837      6E7400
+ 1838              	.LASF13:
+ 1839 004b 646F7562 		.ascii	"double\000"
+ 1839      6C6500
+ 1840              	.LASF21:
+ 1841 0052 62797465 		.ascii	"byte\000"
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccdfnkDI.s 			page 38
+
+
+ 1841      00
+ 1842              	.LASF42:
+ 1843 0057 484D4143 		.ascii	"HMAC\000"
+ 1843      00
+ 1844              	.LASF30:
+ 1845 005c 686D6163 		.ascii	"hmac_data\000"
+ 1845      5F646174 
+ 1845      6100
+ 1846              	.LASF12:
+ 1847 0066 666C6F61 		.ascii	"float\000"
+ 1847      7400
+ 1848              	.LASF35:
+ 1849 006c 4379536F 		.ascii	"CySoftwareReset\000"
+ 1849      66747761 
+ 1849      72655265 
+ 1849      73657400 
+ 1850              	.LASF22:
+ 1851 007c 64657374 		.ascii	"dest\000"
+ 1851      00
+ 1852              	.LASF1:
+ 1853 0081 756E7369 		.ascii	"unsigned char\000"
+ 1853      676E6564 
+ 1853      20636861 
+ 1853      7200
+ 1854              	.LASF49:
+ 1855 008f 68657832 		.ascii	"hex2byte\000"
+ 1855      62797465 
+ 1855      00
+ 1856              	.LASF34:
+ 1857 0098 5357315F 		.ascii	"SW1_ClearInterrupt\000"
+ 1857      436C6561 
+ 1857      72496E74 
+ 1857      65727275 
+ 1857      707400
+ 1858              	.LASF33:
+ 1859 00ab 70757368 		.ascii	"pushMessage\000"
+ 1859      4D657373 
+ 1859      61676500 
+ 1860              	.LASF39:
+ 1861 00b7 6D656D73 		.ascii	"memset\000"
+ 1861      657400
+ 1862              	.LASF28:
+ 1863 00be 6E6F6E63 		.ascii	"nonce\000"
+ 1863      6500
+ 1864              	.LASF5:
+ 1865 00c4 6C6F6E67 		.ascii	"long unsigned int\000"
+ 1865      20756E73 
+ 1865      69676E65 
+ 1865      6420696E 
+ 1865      7400
+ 1866              	.LASF51:
+ 1867 00d6 6D61696E 		.ascii	"main\000"
+ 1867      00
+ 1868              	.LASF32:
+ 1869 00db 42414E4B 		.ascii	"BANK_AES_KEY\000"
+ 1869      5F414553 
+ 1869      5F4B4559 
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccdfnkDI.s 			page 39
+
+
+ 1869      00
+ 1870              	.LASF25:
+ 1871 00e8 6865785F 		.ascii	"hex_bank_key\000"
+ 1871      62616E6B 
+ 1871      5F6B6579 
+ 1871      00
+ 1872              	.LASF50:
+ 1873 00f5 70726F76 		.ascii	"provision\000"
+ 1873      6973696F 
+ 1873      6E00
+ 1874              	.LASF18:
+ 1875 00ff 6C6F7765 		.ascii	"lower_digit\000"
+ 1875      725F6469 
+ 1875      67697400 
+ 1876              	.LASF44:
+ 1877 010b 55534552 		.ascii	"USER_INFO_Start\000"
+ 1877      5F494E46 
+ 1877      4F5F5374 
+ 1877      61727400 
+ 1878              	.LASF8:
+ 1879 011b 756E7369 		.ascii	"unsigned int\000"
+ 1879      676E6564 
+ 1879      20696E74 
+ 1879      00
+ 1880              	.LASF7:
+ 1881 0128 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 1881      206C6F6E 
+ 1881      6720756E 
+ 1881      7369676E 
+ 1881      65642069 
+ 1882              	.LASF10:
+ 1883 013f 75696E74 		.ascii	"uint8_t\000"
+ 1883      385F7400 
+ 1884              	.LASF27:
+ 1885 0147 50524F56 		.ascii	"PROVISIONED\000"
+ 1885      4953494F 
+ 1885      4E454400 
+ 1886              	.LASF36:
+ 1887 0153 73707269 		.ascii	"sprintf\000"
+ 1887      6E746600 
+ 1888              	.LASF48:
+ 1889 015b 5C5C5642 		.ascii	"\\\\VBOXSVR\\raywang\\Dropbox (MIT)\\CTFs\\eCTF\\ec"
+ 1889      4F585356 
+ 1889      525C7261 
+ 1889      7977616E 
+ 1889      675C4472 
+ 1890 0187 74662D32 		.ascii	"tf-2018-techsec\\CARD.cydsn\000"
+ 1890      3031382D 
+ 1890      74656368 
+ 1890      7365635C 
+ 1890      43415244 
+ 1891              	.LASF16:
+ 1892 01a2 73697A65 		.ascii	"sizetype\000"
+ 1892      74797065 
+ 1892      00
+ 1893              	.LASF17:
+ 1894 01ab 75707065 		.ascii	"upper_digit\000"
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccdfnkDI.s 			page 40
+
+
+ 1894      725F6469 
+ 1894      67697400 
+ 1895              	.LASF6:
+ 1896 01b7 6C6F6E67 		.ascii	"long long int\000"
+ 1896      206C6F6E 
+ 1896      6720696E 
+ 1896      7400
+ 1897              	.LASF47:
+ 1898 01c5 6D61696E 		.ascii	"main.c\000"
+ 1898      2E6300
+ 1899              	.LASF14:
+ 1900 01cc 63686172 		.ascii	"char\000"
+ 1900      00
+ 1901              	.LASF19:
+ 1902 01d1 52657365 		.ascii	"Reset_ISR\000"
+ 1902      745F4953 
+ 1902      5200
+ 1903              	.LASF2:
+ 1904 01db 73686F72 		.ascii	"short int\000"
+ 1904      7420696E 
+ 1904      7400
+ 1905              	.LASF41:
+ 1906 01e5 55534552 		.ascii	"USER_INFO_Write\000"
+ 1906      5F494E46 
+ 1906      4F5F5772 
+ 1906      69746500 
+ 1907              	.LASF11:
+ 1908 01f5 75696E74 		.ascii	"uint8\000"
+ 1908      3800
+ 1909              	.LASF40:
+ 1910 01fb 6D656D63 		.ascii	"memcpy\000"
+ 1910      707900
+ 1911              	.LASF43:
+ 1912 0202 52657365 		.ascii	"Reset_isr_StartEx\000"
+ 1912      745F6973 
+ 1912      725F5374 
+ 1912      61727445 
+ 1912      7800
+ 1913              	.LASF45:
+ 1914 0214 5553425F 		.ascii	"USB_UART_Start\000"
+ 1914      55415254 
+ 1914      5F537461 
+ 1914      727400
+ 1915              	.LASF4:
+ 1916 0223 6C6F6E67 		.ascii	"long int\000"
+ 1916      20696E74 
+ 1916      00
+ 1917              	.LASF26:
+ 1918 022c 62616E6B 		.ascii	"bank_key\000"
+ 1918      5F6B6579 
+ 1918      00
+ 1919              	.LASF15:
+ 1920 0235 6C6F6E67 		.ascii	"long double\000"
+ 1920      20646F75 
+ 1920      626C6500 
+ 1921              	.LASF0:
+ 1922 0241 7369676E 		.ascii	"signed char\000"
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccdfnkDI.s 			page 41
+
+
+ 1922      65642063 
+ 1922      68617200 
+ 1923              	.LASF20:
+ 1924 024d 62797465 		.ascii	"bytes2hex\000"
+ 1924      73326865 
+ 1924      7800
+ 1925              	.LASF46:
+ 1926 0257 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 1926      43313120 
+ 1926      352E342E 
+ 1926      31203230 
+ 1926      31363036 
+ 1927 028a 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m0 -mthumb -g -O"
+ 1927      20726576 
+ 1927      6973696F 
+ 1927      6E203233 
+ 1927      37373135 
+ 1928 02bd 73202D66 		.ascii	"s -ffunction-sections -ffat-lto-objects\000"
+ 1928      66756E63 
+ 1928      74696F6E 
+ 1928      2D736563 
+ 1928      74696F6E 
+ 1929              	.LASF38:
+ 1930 02e5 70756C6C 		.ascii	"pullMessage\000"
+ 1930      4D657373 
+ 1930      61676500 
+ 1931              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

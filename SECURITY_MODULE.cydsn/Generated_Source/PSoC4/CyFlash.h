@@ -1,6 +1,6 @@
 /***************************************************************************//**
 * \file CyFlash.h
-* \version 5.50
+* \version 5.60
 *
 * \brief Provides the function definitions for the FLASH.
 *
@@ -9,7 +9,7 @@
 *
 ********************************************************************************
 * \copyright
-* Copyright 2010-2016, Cypress Semiconductor Corporation.  All rights reserved.
+* Copyright 2010-2017, Cypress Semiconductor Corporation.  All rights reserved.
 * You may use this file only in accordance with the license, terms, conditions,
 * disclaimers, and limitations in the end user license agreement accompanying
 * the software package with which this file was provided.
@@ -255,7 +255,7 @@ typedef struct cySysFlashClockBackupStruct
 #define CY_FLASH_API_RETURN             (((CY_FLASH_CPUSS_SYSARG_REG & 0xF0000000u) == 0xF0000000u) ? \
                                          (CY_FLASH_CPUSS_SYSARG_REG & 0x000000FFu) : \
                                          (((CY_FLASH_CPUSS_SYSARG_REG & 0xF0000000u) == 0xA0000000u) ? \
-                                            CYRET_SUCCESS : CY_FLASH_CPUSS_SYSARG_REG))
+                                            CYRET_SUCCESS : (CY_FLASH_CPUSS_SYSARG_REG & 0x000000FFu)))
 
 
 /*******************************************************************************

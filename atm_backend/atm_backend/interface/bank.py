@@ -37,6 +37,7 @@ class Bank:
             raw_hsm_nonce: challenge nonce from HSM to bank
 
         Returns:
+            hmac
             iv of encrypted balance
             encrypted balance
             bool: False on failure
@@ -46,7 +47,7 @@ class Bank:
         res = self.bank_rpc.check_balance(card_id, binascii.hexlify(raw_card_hmac), pin, hsm_id, binascii.hexlify(raw_hsm_nonce))
         if res[:4] == 'OKAY':
             # return HMAC, IV, and enc_msg
-            return res[5:5+HMAC_LEN].decode('hex'), res[5 + HMAC_LEN:5 + HMAC_LEN + IV_LEN].decode('hex'), res[5 + HMAC_LEN + IV_LEN:].decode('hex')
+            return (res[5:5+HMAC_LEN].decode('hex'), res[5 + HMAC_LEN:5 + HMAC_LEN + IV_LEN].decode('hex'), res[5 + HMAC_LEN + IV_LEN:].decode('hex'))
         logging.info('check_balance: Bank request failed %s', res)
         return False    
 
@@ -55,12 +56,13 @@ class Bank:
 
         Args:
             card_id (str): UUID of the ATM card
+            card_hmac
             hsm_id (str): UUID of the HSM
             raw_hsm_nonce (str): challenge nonce of HSM
             amount (str): Requested amount to withdraw
 
         Returns:
-            str: hsm_id on success
+            str: hmac on success
             bool: False on failure
         """
         logging.info('withdraw: Sending request to Bank')
@@ -70,16 +72,16 @@ class Bank:
         logging.info('withdraw: Bank request failed %s', res)
         return False
 
-    def generate_session_nonce(self, card_id):
+    def get_session_nonce(self, card_id):
         """ Requests a new session nonce for a card communication
 
         return:
             str: Session nonce
         """
-        res = self.bank_rpc.generate_session_nonce(card_id)
+        res = self.bank_rpc.get_session_nonce(card_id)
         if res[:4] == 'OKAY':
             return res[5:].decode('hex')
-        logging.info('generate_session_nonce: Bank request failed %s', res)
+        logging.info('get_session_nonce: Bank request failed %s', res)
         return False
 
 

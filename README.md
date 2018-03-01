@@ -1,15 +1,6 @@
 # Embedded CTF Example Code
 
-This repository contains an example reference system for MITRE's 2018 
-[Embedded System CTF](http://mitrecyberacademy.org/competitions/embedded/).
-This example meets all the requirements outlined in the challenge writeup
-document, but is not implemented securely.  
-
-## Disclaimer
-This code is incomplete, insecure, and does not meet MITRE standards for
-quality.  This code is being provided for educational purposes to serve as a
-simple example that meets the minimum functional requirements for the 2018 MITRE
-eCTF competition.  Use this code at your own risk!
+This repository contains the PSOC Card and HSM code of TechSec.
 
 # Getting started
 
@@ -148,5 +139,3 @@ atm\_backend and the bank\_server.
 ### Example 'socat' commmand to redirect TCP traffic
 `socat TCP-LISTEN:1336,fork,reuseaddr TCP:192.168.99.100:1336 &`
 `socat TCP-LISTEN:1338,fork,reuseaddr TCP:192.168.99.100:1338 &`
-
-

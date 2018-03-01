@@ -1,0 +1,19 @@
+Last Modified Date & Time: 02/28/2018 11:51:47
+
+CARD: CARD.cydwr
+	cy_boot [v5.50] to [v5.60]
+	cy_lfclk [v1.10] to [v1.20]
+	LIN_Dynamic [v3.40] to [v4.0]
+
+CARD: TopDesign.cysch
+	USB_UART [v3.20] to [v4.0]
+
+SECURITY_MODULE: SECURITY_MODULE.cydwr
+	cy_boot [v5.50] to [v5.60]
+	cy_lfclk [v1.10] to [v1.20]
+	LIN_Dynamic [v3.40] to [v4.0]
+
+SECURITY_MODULE: TopDesign.cysch
+	DB_UART [v3.20] to [v4.0]
+
+

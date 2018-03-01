@@ -1,6 +1,6 @@
 /***************************************************************************//**
 * \file cytypes.h
-* \version 5.50
+* \version 5.60
 *
 * \brief CyTypes provides register access macros and approved types for use in
 * firmware.
@@ -16,7 +16,7 @@
 *
 ********************************************************************************
 * \copyright
-* Copyright 2008-2016, Cypress Semiconductor Corporation.  All rights reserved.
+* Copyright 2008-2017, Cypress Semiconductor Corporation.  All rights reserved.
 * You may use this file only in accordance with the license, terms, conditions,
 * disclaimers, and limitations in the end user license agreement accompanying
 * the software package with which this file was provided.
@@ -121,11 +121,35 @@
     #define CY_PSOC4_4400 (0u != 0u)
 #endif  /* CYDEV_CHIP_MEMBER_4I */
 
+#ifdef CYDEV_CHIP_MEMBER_4E
+    #define CY_CCG2 (CYDEV_CHIP_MEMBER_USED == CYDEV_CHIP_MEMBER_4E)
+#else
+    #define CY_CCG2 (0u != 0u)
+#endif  /* CYDEV_CHIP_MEMBER_4E */
+
 #ifdef CYDEV_CHIP_MEMBER_4O
     #define CY_CCG3 (CYDEV_CHIP_MEMBER_USED == CYDEV_CHIP_MEMBER_4O)
 #else
     #define CY_CCG3 (0u != 0u)
-#endif  /* CYDEV_CHIP_MEMBER_4I */
+#endif  /* CYDEV_CHIP_MEMBER_4O */
+
+#ifdef CYDEV_CHIP_MEMBER_4R
+    #define CY_CCG3PA (CYDEV_CHIP_MEMBER_USED == CYDEV_CHIP_MEMBER_4R)
+#else
+    #define CY_CCG3PA (0u != 0u)
+#endif  /* CYDEV_CHIP_MEMBER_4R */
+
+#ifdef CYDEV_CHIP_MEMBER_4N
+    #define CY_CCG4 (CYDEV_CHIP_MEMBER_USED == CYDEV_CHIP_MEMBER_4N)
+#else
+    #define CY_CCG4 (0u != 0u)
+#endif  /* CYDEV_CHIP_MEMBER_4N */
+
+#ifdef CYDEV_CHIP_MEMBER_4S
+    #define CY_CCG5 (CYDEV_CHIP_MEMBER_USED == CYDEV_CHIP_MEMBER_4S)
+#else
+    #define CY_CCG5 (0u != 0u)
+#endif  /* CYDEV_CHIP_MEMBER_4S */
 
 #ifdef CYDEV_CHIP_MEMBER_4P
     #define CY_PSOC4_4100BLII (CYDEV_CHIP_MEMBER_USED == CYDEV_CHIP_MEMBER_4P)
@@ -134,6 +158,8 @@
     #define CY_PSOC4_4100BLII (0u != 0u)
     #define CY_PSOC4_4200BLII (0u != 0u)
 #endif  /* CYDEV_CHIP_MEMBER_4P */
+
+
 
 
 #define CY_IP_HOBTO_DEVICE      (!(1 == 1))
@@ -249,7 +275,6 @@
         #define CY_IP_BLESS             (0 != 0)
         #define CY_IP_BLESSV3           (0 != 0)
     #endif  /* (CY_IP_HOBTO_DEVICE) */
-
 
     #if (CY_IP_HOBTO_DEVICE)
         #define CY_IP_USBDEV            (0 != 0)

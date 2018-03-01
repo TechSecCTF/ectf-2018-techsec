@@ -107,15 +107,15 @@ class AdminBackend(object):
 
 
     def create_account(self, account_name, amount):
-        """Create account with account_name and  starting amount.
-            Initializes aes_key and card_id
+        """Create account with account_name and starting amount.
+            Initializes aes_key, card_id, and session nonce
 
         Args:
             account_name(string): name for account
             amount(string): initial balance
 
         Returns:
-            Returns random uuid (string) on Success.
+            Returns aes key and random uuid (string) on Success.
                     False on Failure.
 
         """

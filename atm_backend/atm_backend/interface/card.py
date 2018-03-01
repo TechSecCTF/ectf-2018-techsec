@@ -21,7 +21,6 @@ class Card(Psoc):
         self.GET_UUID = 3
 
     def _send_challenge_nonce(self, nonce):
-        # TODO: Change this
         """Requests authentication from the ATM card
 
         Args:
@@ -30,11 +29,9 @@ class Card(Psoc):
         Returns:
             bool: True if ATM card verified authentication, False otherwise
         """
-        self._vp('Sending challenge nonce %s' % repr(nonce))
         self._push_msg(nonce)
 
         resp = self._pull_msg()
-        self._vp('Card response was %s' % resp)
         return resp == 'OK'
 
     def _get_uuid(self):
@@ -42,8 +39,6 @@ class Card(Psoc):
 
         Returns:
             uuid: UUID of ATM card
-            nonce: Bank's challenge replay nonce
-            card_hmac: 
         """
 
         self._sync(False)
@@ -51,7 +46,6 @@ class Card(Psoc):
         self._send_op(self.GET_UUID)
 
         uuid = self._pull_msg()
-        self._vp('Card sent UUID %s of len %d' % (repr(uuid), len(uuid)))
 
         return uuid
 
@@ -59,8 +53,7 @@ class Card(Psoc):
         """Sends requested operation to ATM card
 
         Args:
-            op (int): Operation to send from [self.CHECK_BAL, self.WITHDRAW,
-                self.CHANGE_PIN]
+            op (int): Operation to send from [self.COMPUTE_HMAC, self.GET_UUID]
         """
         self._vp('Sending op %d' % op)
         self._push_msg(str(op))

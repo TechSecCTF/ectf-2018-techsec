@@ -52,9 +52,6 @@ class HSM(Psoc):
             self._vp('Security module not yet provisioned!', logging.error)
             return None
 
-        self._vp('Got UUID %s' % uuid)
-        self._vp('Got session nonce %s' % repr(nonce))
-
         return uuid, nonce
 
 
@@ -79,7 +76,6 @@ class HSM(Psoc):
         self._push_msg("%s\00" % raw_enc_msg)
 
         msg = self._pull_msg()
-        self._vp("HSM returned %s" % repr(msg))
 
         if msg == 'BAD':
             return 'HSM could not decrypt message'
@@ -110,7 +106,6 @@ class HSM(Psoc):
         self._push_msg(msg)
 
         msg = self._pull_msg()
-        self._vp('HSM replied %s' % repr(msg))
         if msg == 'BAD':
             return 'Not enough bills in ATM'
 

@@ -1,6 +1,6 @@
 /***************************************************************************//**
 * \file CyLib.c
-* \version 5.50
+* \version 5.60
 *
 * \brief Provides a system API for the Clocking, Interrupts, SysTick, and
 * Voltage Detect.
@@ -10,7 +10,7 @@
 *
 ********************************************************************************
 * \copyright
-* Copyright 2010-2016, Cypress Semiconductor Corporation.  All rights reserved.
+* Copyright 2010-2017, Cypress Semiconductor Corporation.  All rights reserved.
 * You may use this file only in accordance with the license, terms, conditions,
 * disclaimers, and limitations in the end user license agreement accompanying
 * the software package with which this file was provided.
@@ -2671,7 +2671,6 @@ void CySysTickInit(void)
 
     CySysTickSetReload(cydelayFreqHz/1000u);
     CySysTickClear();
-    CyIntEnable(CY_INT_SYSTICK_IRQN);
 }
 
 

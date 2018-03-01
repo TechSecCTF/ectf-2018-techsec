@@ -1,5 +1,5 @@
 -- Project:   SECURITY_MODULE
--- Generated: 02/16/2018 20:13:52
+-- Generated: 03/01/2018 10:57:22
 -- PSoC Creator  4.1 Update 1
 
 ENTITY SECURITY_MODULE IS
@@ -27,10 +27,10 @@ ARCHITECTURE __DEFAULT__ OF SECURITY_MODULE IS
     SIGNAL Net_26 : bit;
     SIGNAL Net_27 : bit;
     SIGNAL Net_28 : bit;
-    SIGNAL Net_4 : bit;
-    SIGNAL Net_6 : bit;
     SIGNAL Net_60 : bit;
-    SIGNAL Net_7 : bit;
+    SIGNAL Net_73 : bit;
+    SIGNAL Net_75 : bit;
+    SIGNAL Net_76 : bit;
     SIGNAL Rx_1(0)__PA : bit;
     SIGNAL SW1(0)__PA : bit;
     SIGNAL Tx_1(0)__PA : bit;
@@ -1122,7 +1122,7 @@ BEGIN
             int_type => "10",
             is_nmi => 0)
         PORT MAP(
-            interrupt => Net_4,
+            interrupt => Net_73,
             clock => ClockBlock_HFCLK);
 
     \DB_UART:SCB\:m0s8scbcell
@@ -1131,7 +1131,7 @@ BEGIN
             scb_mode => 2)
         PORT MAP(
             clock => \DB_UART:Net_847_ff2\,
-            interrupt => Net_4,
+            interrupt => Net_73,
             uart_rx => \DB_UART:rx_wire\,
             uart_tx => \DB_UART:tx_wire\,
             uart_cts => open,
@@ -1147,8 +1147,8 @@ BEGIN
             miso_s => \DB_UART:miso_s_wire\,
             select_s => open,
             sclk_s => open,
-            tr_tx_req => Net_7,
-            tr_rx_req => Net_6);
+            tr_tx_req => Net_76,
+            tr_rx_req => Net_75);
 
     \CARD_UART:TXInternalInterrupt\:interrupt
         GENERIC MAP(

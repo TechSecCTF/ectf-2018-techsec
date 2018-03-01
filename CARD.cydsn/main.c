@@ -110,12 +110,7 @@ void provision()
     syncConnection(SYNC_PROV);
  
     pushMessage((uint8*)PROV_MSG, (uint8)strlen(PROV_MSG));
-        
-    // set PIN
-    // pullMessage(message);
-    // USER_INFO_Write(message, PIN, PIN_LEN);
-    // pushMessage((uint8*)RECV_OK, strlen(RECV_OK));
-    
+
     // set account number
     pullMessage(message);
     char hex_bank_key[64];
@@ -198,7 +193,6 @@ int main(void)
 
             HMAC(hmac_output, BANK_AES_KEY, 32, hmac_data, sizeof(hmac_data));
 
-            // Push UUID so that bank can look up AES Key for comm
             pushMessage(hmac_output, sizeof(hmac_output));
         }
     }

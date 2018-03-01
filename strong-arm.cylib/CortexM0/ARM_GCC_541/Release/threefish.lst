@@ -1,0 +1,3786 @@
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqUfWSx.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m0
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 4
+  11              		.eabi_attribute 34, 0
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"threefish.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.bytes_to_words,"ax",%progbits
+  20              		.align	1
+  21              		.code	16
+  22              		.thumb_func
+  23              		.type	bytes_to_words, %function
+  24              	bytes_to_words:
+  25              	.LFB2:
+  26              		.file 1 "strong-arm\\src\\threefish\\threefish.c"
+   1:strong-arm\src\threefish/threefish.c **** /* Currently, only 512-bit mode is implemented. */
+   2:strong-arm\src\threefish/threefish.c **** #include <strong-arm/threefish.h>
+   3:strong-arm\src\threefish/threefish.c **** 
+   4:strong-arm\src\threefish/threefish.c **** 
+   5:strong-arm\src\threefish/threefish.c **** /* Rotation Constants */
+   6:strong-arm\src\threefish/threefish.c **** const uint8_t R8[8][4] = {
+   7:strong-arm\src\threefish/threefish.c **** 	{46, 36, 19, 37},
+   8:strong-arm\src\threefish/threefish.c **** 	{33, 27, 14, 42},
+   9:strong-arm\src\threefish/threefish.c **** 	{17, 49, 36, 39},
+  10:strong-arm\src\threefish/threefish.c **** 	{44, 9, 54, 56},
+  11:strong-arm\src\threefish/threefish.c **** 	{39, 30, 34, 24},
+  12:strong-arm\src\threefish/threefish.c **** 	{13, 50, 10, 17},
+  13:strong-arm\src\threefish/threefish.c **** 	{25, 29, 39, 43},
+  14:strong-arm\src\threefish/threefish.c **** 	{8, 35, 56, 22}
+  15:strong-arm\src\threefish/threefish.c **** };
+  16:strong-arm\src\threefish/threefish.c **** 
+  17:strong-arm\src\threefish/threefish.c **** /* C240 */
+  18:strong-arm\src\threefish/threefish.c **** const uint64_t C240 = 0x1BD11BDAA9FC1A22ull;
+  19:strong-arm\src\threefish/threefish.c **** 
+  20:strong-arm\src\threefish/threefish.c **** 
+  21:strong-arm\src\threefish/threefish.c **** /* Rotate Left */
+  22:strong-arm\src\threefish/threefish.c **** #define ROL(x, n) (((x) << (n)) | ((x) >> (64 - (n))))
+  23:strong-arm\src\threefish/threefish.c **** 
+  24:strong-arm\src\threefish/threefish.c **** /* Rotate Right */
+  25:strong-arm\src\threefish/threefish.c **** #define ROR(x, n) (((x) >> (n)) | ((x) << (64 - (n))))
+  26:strong-arm\src\threefish/threefish.c **** 
+  27:strong-arm\src\threefish/threefish.c **** 
+  28:strong-arm\src\threefish/threefish.c **** static uint64_t unpack_uint64_little (uint8_t const src[static 8])
+  29:strong-arm\src\threefish/threefish.c **** {
+  30:strong-arm\src\threefish/threefish.c **** 	return   ((uint64_t)(src[0]) <<  0)
+  31:strong-arm\src\threefish/threefish.c **** 	       | ((uint64_t)(src[1]) <<  8)
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqUfWSx.s 			page 2
+
+
+  32:strong-arm\src\threefish/threefish.c **** 	       | ((uint64_t)(src[2]) << 16)
+  33:strong-arm\src\threefish/threefish.c **** 	       | ((uint64_t)(src[3]) << 24)
+  34:strong-arm\src\threefish/threefish.c **** 	       | ((uint64_t)(src[4]) << 32)
+  35:strong-arm\src\threefish/threefish.c **** 	       | ((uint64_t)(src[5]) << 40)
+  36:strong-arm\src\threefish/threefish.c **** 	       | ((uint64_t)(src[6]) << 48)
+  37:strong-arm\src\threefish/threefish.c **** 	       | ((uint64_t)(src[7]) << 56);
+  38:strong-arm\src\threefish/threefish.c **** }
+  39:strong-arm\src\threefish/threefish.c **** 
+  40:strong-arm\src\threefish/threefish.c **** 
+  41:strong-arm\src\threefish/threefish.c **** static void pack_uint64_little (uint8_t dst[static 8], uint64_t src)
+  42:strong-arm\src\threefish/threefish.c **** {
+  43:strong-arm\src\threefish/threefish.c **** 	dst[0] = (uint8_t)(src >>  0);
+  44:strong-arm\src\threefish/threefish.c **** 	dst[1] = (uint8_t)(src >>  8);
+  45:strong-arm\src\threefish/threefish.c **** 	dst[2] = (uint8_t)(src >> 16);
+  46:strong-arm\src\threefish/threefish.c **** 	dst[3] = (uint8_t)(src >> 24);
+  47:strong-arm\src\threefish/threefish.c **** 	dst[4] = (uint8_t)(src >> 32);
+  48:strong-arm\src\threefish/threefish.c **** 	dst[5] = (uint8_t)(src >> 40);
+  49:strong-arm\src\threefish/threefish.c **** 	dst[6] = (uint8_t)(src >> 48);
+  50:strong-arm\src\threefish/threefish.c **** 	dst[7] = (uint8_t)(src >> 56);
+  51:strong-arm\src\threefish/threefish.c **** }
+  52:strong-arm\src\threefish/threefish.c **** 
+  53:strong-arm\src\threefish/threefish.c **** 
+  54:strong-arm\src\threefish/threefish.c **** static void bytes_to_words (uint64_t *dst, uint8_t const *src, uint32_t count)
+  55:strong-arm\src\threefish/threefish.c **** {
+  27              		.loc 1 55 0
+  28              		.cfi_startproc
+  29              		@ args = 0, pretend = 0, frame = 0
+  30              		@ frame_needed = 0, uses_anonymous_args = 0
+  31              	.LVL0:
+  32 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+  33              		.cfi_def_cfa_offset 20
+  34              		.cfi_offset 4, -20
+  35              		.cfi_offset 5, -16
+  36              		.cfi_offset 6, -12
+  37              		.cfi_offset 7, -8
+  38              		.cfi_offset 14, -4
+  39              	.LVL1:
+  40              	.L2:
+  56:strong-arm\src\threefish/threefish.c **** 	for (; count; --count)
+  41              		.loc 1 56 0 discriminator 1
+  42 0002 002A     		cmp	r2, #0
+  43 0004 1CD0     		beq	.L5
+  44              	.LVL2:
+  45              	.LBB20:
+  46              	.LBB21:
+  30:strong-arm\src\threefish/threefish.c **** 	       | ((uint64_t)(src[1]) <<  8)
+  47              		.loc 1 30 0 discriminator 2
+  48 0006 4B78     		ldrb	r3, [r1, #1]
+  49 0008 0D78     		ldrb	r5, [r1]
+  50 000a 8F78     		ldrb	r7, [r1, #2]
+  51 000c 1B02     		lsls	r3, r3, #8
+  52 000e 2B43     		orrs	r3, r5
+  53 0010 3F04     		lsls	r7, r7, #16
+  54 0012 1C00     		movs	r4, r3
+  55 0014 3B00     		movs	r3, r7
+  56 0016 CF78     		ldrb	r7, [r1, #3]
+  57 0018 2343     		orrs	r3, r4
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqUfWSx.s 			page 3
+
+
+  58 001a 3F06     		lsls	r7, r7, #24
+  59 001c 4C79     		ldrb	r4, [r1, #5]
+  60 001e 0E79     		ldrb	r6, [r1, #4]
+  61 0020 1F43     		orrs	r7, r3
+  62 0022 8B79     		ldrb	r3, [r1, #6]
+  63 0024 2402     		lsls	r4, r4, #8
+  64 0026 3443     		orrs	r4, r6
+  65 0028 1B04     		lsls	r3, r3, #16
+  66 002a 2343     		orrs	r3, r4
+  67 002c 1C00     		movs	r4, r3
+  68 002e CB79     		ldrb	r3, [r1, #7]
+  69              	.LBE21:
+  70              	.LBE20:
+  71              		.loc 1 56 0 discriminator 2
+  72 0030 013A     		subs	r2, r2, #1
+  73              	.LVL3:
+  74              	.LBB23:
+  75              	.LBB22:
+  30:strong-arm\src\threefish/threefish.c **** 	       | ((uint64_t)(src[1]) <<  8)
+  76              		.loc 1 30 0 discriminator 2
+  77 0032 1B06     		lsls	r3, r3, #24
+  78 0034 2343     		orrs	r3, r4
+  79              	.LVL4:
+  80              	.LBE22:
+  81              	.LBE23:
+  57:strong-arm\src\threefish/threefish.c **** 	{
+  58:strong-arm\src\threefish/threefish.c **** 		*(dst++) = unpack_uint64_little (src);
+  82              		.loc 1 58 0 discriminator 2
+  83 0036 0760     		str	r7, [r0]
+  84 0038 4360     		str	r3, [r0, #4]
+  59:strong-arm\src\threefish/threefish.c **** 		src += 8;
+  85              		.loc 1 59 0 discriminator 2
+  86 003a 0831     		adds	r1, r1, #8
+  87              	.LVL5:
+  88 003c 0830     		adds	r0, r0, #8
+  89 003e E0E7     		b	.L2
+  90              	.LVL6:
+  91              	.L5:
+  60:strong-arm\src\threefish/threefish.c **** 	}
+  61:strong-arm\src\threefish/threefish.c **** }
+  92              		.loc 1 61 0
+  93              		@ sp needed
+  94 0040 F0BD     		pop	{r4, r5, r6, r7, pc}
+  95              		.cfi_endproc
+  96              	.LFE2:
+  97              		.size	bytes_to_words, .-bytes_to_words
+  98              		.section	.text.words_to_bytes.constprop.0,"ax",%progbits
+  99              		.align	1
+ 100              		.code	16
+ 101              		.thumb_func
+ 102              		.type	words_to_bytes.constprop.0, %function
+ 103              	words_to_bytes.constprop.0:
+ 104              	.LFB8:
+  62:strong-arm\src\threefish/threefish.c **** 
+  63:strong-arm\src\threefish/threefish.c **** 
+  64:strong-arm\src\threefish/threefish.c **** static void words_to_bytes (uint8_t *dst, uint64_t const *src, uint32_t count)
+ 105              		.loc 1 64 0
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqUfWSx.s 			page 4
+
+
+ 106              		.cfi_startproc
+ 107              		@ args = 0, pretend = 0, frame = 0
+ 108              		@ frame_needed = 0, uses_anonymous_args = 0
+ 109              	.LVL7:
+ 110 0000 30B5     		push	{r4, r5, lr}
+ 111              		.cfi_def_cfa_offset 12
+ 112              		.cfi_offset 4, -12
+ 113              		.cfi_offset 5, -8
+ 114              		.cfi_offset 14, -4
+ 115 0002 0C00     		movs	r4, r1
+ 116 0004 4034     		adds	r4, r4, #64
+ 117              	.LVL8:
+ 118              	.L7:
+  65:strong-arm\src\threefish/threefish.c **** {
+  66:strong-arm\src\threefish/threefish.c **** 	for (; count; --count)
+  67:strong-arm\src\threefish/threefish.c **** 	{
+  68:strong-arm\src\threefish/threefish.c **** 		pack_uint64_little (dst, *src);
+ 119              		.loc 1 68 0
+ 120 0006 0A68     		ldr	r2, [r1]
+ 121 0008 4B68     		ldr	r3, [r1, #4]
+ 122              	.LVL9:
+ 123              	.LBB26:
+ 124              	.LBB27:
+  44:strong-arm\src\threefish/threefish.c **** 	dst[2] = (uint8_t)(src >> 16);
+ 125              		.loc 1 44 0
+ 126 000a 150A     		lsrs	r5, r2, #8
+  43:strong-arm\src\threefish/threefish.c **** 	dst[1] = (uint8_t)(src >>  8);
+ 127              		.loc 1 43 0
+ 128 000c 0270     		strb	r2, [r0]
+  44:strong-arm\src\threefish/threefish.c **** 	dst[2] = (uint8_t)(src >> 16);
+ 129              		.loc 1 44 0
+ 130 000e 4570     		strb	r5, [r0, #1]
+  45:strong-arm\src\threefish/threefish.c **** 	dst[3] = (uint8_t)(src >> 24);
+ 131              		.loc 1 45 0
+ 132 0010 150C     		lsrs	r5, r2, #16
+  46:strong-arm\src\threefish/threefish.c **** 	dst[4] = (uint8_t)(src >> 32);
+ 133              		.loc 1 46 0
+ 134 0012 120E     		lsrs	r2, r2, #24
+ 135              	.LVL10:
+ 136 0014 C270     		strb	r2, [r0, #3]
+  48:strong-arm\src\threefish/threefish.c **** 	dst[6] = (uint8_t)(src >> 48);
+ 137              		.loc 1 48 0
+ 138 0016 1A0A     		lsrs	r2, r3, #8
+  47:strong-arm\src\threefish/threefish.c **** 	dst[5] = (uint8_t)(src >> 40);
+ 139              		.loc 1 47 0
+ 140 0018 0371     		strb	r3, [r0, #4]
+  48:strong-arm\src\threefish/threefish.c **** 	dst[6] = (uint8_t)(src >> 48);
+ 141              		.loc 1 48 0
+ 142 001a 4271     		strb	r2, [r0, #5]
+ 143              	.LBE27:
+ 144              	.LBE26:
+  69:strong-arm\src\threefish/threefish.c **** 		src += 1;
+ 145              		.loc 1 69 0
+ 146 001c 0831     		adds	r1, r1, #8
+ 147              	.LVL11:
+ 148              	.LBB29:
+ 149              	.LBB28:
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqUfWSx.s 			page 5
+
+
+  49:strong-arm\src\threefish/threefish.c **** 	dst[7] = (uint8_t)(src >> 56);
+ 150              		.loc 1 49 0
+ 151 001e 1A0C     		lsrs	r2, r3, #16
+  50:strong-arm\src\threefish/threefish.c **** }
+ 152              		.loc 1 50 0
+ 153 0020 1B0E     		lsrs	r3, r3, #24
+  45:strong-arm\src\threefish/threefish.c **** 	dst[3] = (uint8_t)(src >> 24);
+ 154              		.loc 1 45 0
+ 155 0022 8570     		strb	r5, [r0, #2]
+  49:strong-arm\src\threefish/threefish.c **** 	dst[7] = (uint8_t)(src >> 56);
+ 156              		.loc 1 49 0
+ 157 0024 8271     		strb	r2, [r0, #6]
+  50:strong-arm\src\threefish/threefish.c **** }
+ 158              		.loc 1 50 0
+ 159 0026 C371     		strb	r3, [r0, #7]
+ 160              	.LVL12:
+ 161              	.LBE28:
+ 162              	.LBE29:
+  70:strong-arm\src\threefish/threefish.c **** 		dst += 8;
+ 163              		.loc 1 70 0
+ 164 0028 0830     		adds	r0, r0, #8
+ 165              	.LVL13:
+  66:strong-arm\src\threefish/threefish.c **** 	{
+ 166              		.loc 1 66 0
+ 167 002a A142     		cmp	r1, r4
+ 168 002c EBD1     		bne	.L7
+  71:strong-arm\src\threefish/threefish.c **** 	}
+  72:strong-arm\src\threefish/threefish.c **** }
+ 169              		.loc 1 72 0
+ 170              		@ sp needed
+ 171 002e 30BD     		pop	{r4, r5, pc}
+ 172              		.cfi_endproc
+ 173              	.LFE8:
+ 174              		.size	words_to_bytes.constprop.0, .-words_to_bytes.constprop.0
+ 175              		.global	__aeabi_llsl
+ 176              		.global	__aeabi_llsr
+ 177              		.section	.text.threefish512_encrypt_block,"ax",%progbits
+ 178              		.align	1
+ 179              		.global	threefish512_encrypt_block
+ 180              		.code	16
+ 181              		.thumb_func
+ 182              		.type	threefish512_encrypt_block, %function
+ 183              	threefish512_encrypt_block:
+ 184              	.LFB6:
+  73:strong-arm\src\threefish/threefish.c **** 
+  74:strong-arm\src\threefish/threefish.c **** 
+  75:strong-arm\src\threefish/threefish.c **** /* Mix function for N_w = 8 */
+  76:strong-arm\src\threefish/threefish.c **** static void mix8 (uint64_t *y0, uint64_t *y1, uint8_t roundnum, uint8_t j, uint64_t x0, uint64_t x1
+  77:strong-arm\src\threefish/threefish.c **** {
+  78:strong-arm\src\threefish/threefish.c **** 	*y0 = x0 + x1;
+  79:strong-arm\src\threefish/threefish.c **** 	*y1 = ROL (x1, R8[roundnum&7][j]) ^ *y0;
+  80:strong-arm\src\threefish/threefish.c **** }
+  81:strong-arm\src\threefish/threefish.c **** 
+  82:strong-arm\src\threefish/threefish.c **** 
+  83:strong-arm\src\threefish/threefish.c **** /* Inverse Mix function for N_w = 8 */
+  84:strong-arm\src\threefish/threefish.c **** static void unmix8 (uint64_t *x0, uint64_t *x1, uint8_t roundnum, uint8_t j, uint64_t y0, uint64_t 
+  85:strong-arm\src\threefish/threefish.c **** {
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqUfWSx.s 			page 6
+
+
+  86:strong-arm\src\threefish/threefish.c **** 	*x1 = ROR (y1 ^ y0, R8[roundnum&7][j]);
+  87:strong-arm\src\threefish/threefish.c **** 	*x0 = y0 - *x1;
+  88:strong-arm\src\threefish/threefish.c **** }
+  89:strong-arm\src\threefish/threefish.c **** 
+  90:strong-arm\src\threefish/threefish.c **** 
+  91:strong-arm\src\threefish/threefish.c **** void threefish512_encrypt_block (uint8_t ciphertext[static 64], uint8_t const key[static 64], uint8
+  92:strong-arm\src\threefish/threefish.c **** {
+ 185              		.loc 1 92 0
+ 186              		.cfi_startproc
+ 187              		@ args = 0, pretend = 0, frame = 240
+ 188              		@ frame_needed = 0, uses_anonymous_args = 0
+ 189              	.LVL14:
+ 190 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 191              		.cfi_def_cfa_offset 20
+ 192              		.cfi_offset 4, -20
+ 193              		.cfi_offset 5, -16
+ 194              		.cfi_offset 6, -12
+ 195              		.cfi_offset 7, -8
+ 196              		.cfi_offset 14, -4
+ 197 0002 1400     		movs	r4, r2
+ 198 0004 1D00     		movs	r5, r3
+ 199 0006 BDB0     		sub	sp, sp, #244
+ 200              		.cfi_def_cfa_offset 264
+ 201              		.loc 1 92 0
+ 202 0008 1090     		str	r0, [sp, #64]
+  93:strong-arm\src\threefish/threefish.c **** 	uint64_t k[9];
+  94:strong-arm\src\threefish/threefish.c **** 	uint64_t t[3];
+  95:strong-arm\src\threefish/threefish.c **** 	uint64_t v[8];
+  96:strong-arm\src\threefish/threefish.c **** 
+  97:strong-arm\src\threefish/threefish.c **** 	bytes_to_words (k, key, 8);
+ 203              		.loc 1 97 0
+ 204 000a 0822     		movs	r2, #8
+ 205              	.LVL15:
+ 206 000c 2AA8     		add	r0, sp, #168
+ 207              	.LVL16:
+ 208 000e FFF7FEFF 		bl	bytes_to_words
+ 209              	.LVL17:
+  98:strong-arm\src\threefish/threefish.c **** 	bytes_to_words (t, tweak, 2);
+ 210              		.loc 1 98 0
+ 211 0012 2100     		movs	r1, r4
+ 212 0014 0222     		movs	r2, #2
+ 213 0016 14A8     		add	r0, sp, #80
+  99:strong-arm\src\threefish/threefish.c **** 	bytes_to_words (v, plaintext, 8);
+ 214              		.loc 1 99 0
+ 215 0018 1AAC     		add	r4, sp, #104
+ 216              	.LVL18:
+  98:strong-arm\src\threefish/threefish.c **** 	bytes_to_words (t, tweak, 2);
+ 217              		.loc 1 98 0
+ 218 001a FFF7FEFF 		bl	bytes_to_words
+ 219              	.LVL19:
+ 220              		.loc 1 99 0
+ 221 001e 2900     		movs	r1, r5
+ 222 0020 0822     		movs	r2, #8
+ 223 0022 2000     		movs	r0, r4
+ 224 0024 FFF7FEFF 		bl	bytes_to_words
+ 225              	.LVL20:
+ 100:strong-arm\src\threefish/threefish.c **** 
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqUfWSx.s 			page 7
+
+
+ 101:strong-arm\src\threefish/threefish.c **** 	/* Begin Key Schedule */
+ 102:strong-arm\src\threefish/threefish.c **** 	k[8] = C240 ^ k[0] ^ k[1] ^ k[2] ^ k[3] ^ k[4] ^ k[5] ^ k[6] ^ k[7];
+ 226              		.loc 1 102 0
+ 227 0028 3698     		ldr	r0, [sp, #216]
+ 228 002a 3799     		ldr	r1, [sp, #220]
+ 229 002c 349A     		ldr	r2, [sp, #208]
+ 230 002e 359B     		ldr	r3, [sp, #212]
+ 231 0030 0600     		movs	r6, r0
+ 232 0032 0F00     		movs	r7, r1
+ 233 0034 2A98     		ldr	r0, [sp, #168]
+ 234 0036 2C99     		ldr	r1, [sp, #176]
+ 235 0038 4140     		eors	r1, r0
+ 236 003a 2B98     		ldr	r0, [sp, #172]
+ 237 003c 0090     		str	r0, [sp]
+ 238 003e 009D     		ldr	r5, [sp]
+ 239              	.LVL21:
+ 240 0040 2D98     		ldr	r0, [sp, #180]
+ 241 0042 4540     		eors	r5, r0
+ 242 0044 9548     		ldr	r0, .L31
+ 243 0046 4840     		eors	r0, r1
+ 244 0048 9549     		ldr	r1, .L31+4
+ 245 004a 6940     		eors	r1, r5
+ 246 004c 2E9D     		ldr	r5, [sp, #184]
+ 247 004e 6840     		eors	r0, r5
+ 248 0050 2F9D     		ldr	r5, [sp, #188]
+ 249 0052 6940     		eors	r1, r5
+ 250 0054 309D     		ldr	r5, [sp, #192]
+ 251 0056 6840     		eors	r0, r5
+ 252 0058 319D     		ldr	r5, [sp, #196]
+ 253 005a 6940     		eors	r1, r5
+ 254 005c 329D     		ldr	r5, [sp, #200]
+ 255 005e 6840     		eors	r0, r5
+ 256 0060 339D     		ldr	r5, [sp, #204]
+ 257 0062 5040     		eors	r0, r2
+ 258 0064 6940     		eors	r1, r5
+ 259 0066 389D     		ldr	r5, [sp, #224]
+ 260 0068 7040     		eors	r0, r6
+ 261 006a 6840     		eors	r0, r5
+ 262 006c 5940     		eors	r1, r3
+ 263 006e 3A90     		str	r0, [sp, #232]
+ 264 0070 3998     		ldr	r0, [sp, #228]
+ 265 0072 7940     		eors	r1, r7
+ 266 0074 4140     		eors	r1, r0
+ 267 0076 3B91     		str	r1, [sp, #236]
+ 103:strong-arm\src\threefish/threefish.c **** 	t[2] = t[0] ^ t[1];
+ 268              		.loc 1 103 0
+ 269 0078 1498     		ldr	r0, [sp, #80]
+ 270 007a 1599     		ldr	r1, [sp, #84]
+ 271 007c 0290     		str	r0, [sp, #8]
+ 272 007e 0391     		str	r1, [sp, #12]
+ 273 0080 1698     		ldr	r0, [sp, #88]
+ 274 0082 1799     		ldr	r1, [sp, #92]
+ 275 0084 0490     		str	r0, [sp, #16]
+ 276 0086 0591     		str	r1, [sp, #20]
+ 277 0088 0498     		ldr	r0, [sp, #16]
+ 278 008a 0299     		ldr	r1, [sp, #8]
+ 279 008c 2500     		movs	r5, r4
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqUfWSx.s 			page 8
+
+
+ 280 008e 4140     		eors	r1, r0
+ 281 0090 0091     		str	r1, [sp]
+ 282 0092 0598     		ldr	r0, [sp, #20]
+ 283 0094 0399     		ldr	r1, [sp, #12]
+ 284 0096 4140     		eors	r1, r0
+ 285 0098 0191     		str	r1, [sp, #4]
+ 286 009a 0098     		ldr	r0, [sp]
+ 287 009c 0199     		ldr	r1, [sp, #4]
+ 288 009e 1890     		str	r0, [sp, #96]
+ 289 00a0 1991     		str	r1, [sp, #100]
+ 104:strong-arm\src\threefish/threefish.c **** 
+ 105:strong-arm\src\threefish/threefish.c **** 	k[5] += t[0];
+ 290              		.loc 1 105 0
+ 291 00a2 0298     		ldr	r0, [sp, #8]
+ 292 00a4 0399     		ldr	r1, [sp, #12]
+ 293 00a6 1218     		adds	r2, r2, r0
+ 294 00a8 4B41     		adcs	r3, r3, r1
+ 295 00aa 3492     		str	r2, [sp, #208]
+ 296 00ac 3593     		str	r3, [sp, #212]
+ 106:strong-arm\src\threefish/threefish.c **** 	k[6] += t[1];
+ 297              		.loc 1 106 0
+ 298 00ae 0498     		ldr	r0, [sp, #16]
+ 299 00b0 0599     		ldr	r1, [sp, #20]
+ 300 00b2 3200     		movs	r2, r6
+ 301 00b4 3B00     		movs	r3, r7
+ 302 00b6 1218     		adds	r2, r2, r0
+ 303 00b8 4B41     		adcs	r3, r3, r1
+ 304 00ba 3692     		str	r2, [sp, #216]
+ 305 00bc 3793     		str	r3, [sp, #220]
+ 306              	.LVL22:
+ 307 00be 0023     		movs	r3, #0
+ 308 00c0 1E00     		movs	r6, r3
+ 309 00c2 0D93     		str	r3, [sp, #52]
+ 310 00c4 0E93     		str	r3, [sp, #56]
+ 311              	.LBB30:
+ 107:strong-arm\src\threefish/threefish.c **** 
+ 108:strong-arm\src\threefish/threefish.c **** 	for (uint8_t roundnum = 0; roundnum < 72; ++roundnum)
+ 312              		.loc 1 108 0
+ 313 00c6 0C93     		str	r3, [sp, #48]
+ 314              	.LVL23:
+ 315              	.L13:
+ 316              	.LBB31:
+ 109:strong-arm\src\threefish/threefish.c **** 	{
+ 110:strong-arm\src\threefish/threefish.c **** 		uint64_t extra;
+ 111:strong-arm\src\threefish/threefish.c **** 
+ 112:strong-arm\src\threefish/threefish.c **** 		/* Add subkey */
+ 113:strong-arm\src\threefish/threefish.c **** 		if ((roundnum & 3) == 0)
+ 317              		.loc 1 113 0
+ 318 00c8 0322     		movs	r2, #3
+ 319 00ca 0C9B     		ldr	r3, [sp, #48]
+ 320 00cc 1340     		ands	r3, r2
+ 321 00ce 62D1     		bne	.L10
+ 322              	.L11:
+ 323              	.LBB32:
+ 324              	.LBB33:
+ 114:strong-arm\src\threefish/threefish.c **** 		{
+ 115:strong-arm\src\threefish/threefish.c **** 			for (int i = 0; i < 8; ++i)
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqUfWSx.s 			page 9
+
+
+ 116:strong-arm\src\threefish/threefish.c **** 				v[i] += k[i];
+ 325              		.loc 1 116 0 discriminator 3
+ 326 00d0 2AA9     		add	r1, sp, #168
+ 327 00d2 EA18     		adds	r2, r5, r3
+ 328 00d4 C918     		adds	r1, r1, r3
+ 329 00d6 1668     		ldr	r6, [r2]
+ 330 00d8 5768     		ldr	r7, [r2, #4]
+ 331 00da 0868     		ldr	r0, [r1]
+ 332 00dc 4968     		ldr	r1, [r1, #4]
+ 333 00de 8019     		adds	r0, r0, r6
+ 334 00e0 7941     		adcs	r1, r1, r7
+ 335 00e2 0833     		adds	r3, r3, #8
+ 336 00e4 1060     		str	r0, [r2]
+ 337 00e6 5160     		str	r1, [r2, #4]
+ 338              	.LVL24:
+ 115:strong-arm\src\threefish/threefish.c **** 				v[i] += k[i];
+ 339              		.loc 1 115 0 discriminator 3
+ 340 00e8 402B     		cmp	r3, #64
+ 341 00ea F1D1     		bne	.L11
+ 342              	.LVL25:
+ 343              	.LBE33:
+ 117:strong-arm\src\threefish/threefish.c **** 
+ 118:strong-arm\src\threefish/threefish.c **** 			/* Update subkey */
+ 119:strong-arm\src\threefish/threefish.c **** 			uint8_t s = roundnum >> 2;
+ 120:strong-arm\src\threefish/threefish.c **** 			extra = k[0];
+ 344              		.loc 1 120 0
+ 345 00ec 2A98     		ldr	r0, [sp, #168]
+ 346 00ee 2B99     		ldr	r1, [sp, #172]
+ 347              	.LVL26:
+ 121:strong-arm\src\threefish/threefish.c **** 			k[0] = k[1];
+ 348              		.loc 1 121 0
+ 349 00f0 2C9B     		ldr	r3, [sp, #176]
+ 350 00f2 2D9C     		ldr	r4, [sp, #180]
+ 122:strong-arm\src\threefish/threefish.c **** 			k[1] = k[2];
+ 123:strong-arm\src\threefish/threefish.c **** 			k[2] = k[3];
+ 124:strong-arm\src\threefish/threefish.c **** 			k[3] = k[4];
+ 125:strong-arm\src\threefish/threefish.c **** 			k[4] = k[5] - t[0];
+ 351              		.loc 1 125 0
+ 352 00f4 029E     		ldr	r6, [sp, #8]
+ 353 00f6 039F     		ldr	r7, [sp, #12]
+ 121:strong-arm\src\threefish/threefish.c **** 			k[0] = k[1];
+ 354              		.loc 1 121 0
+ 355 00f8 2A93     		str	r3, [sp, #168]
+ 356 00fa 2B94     		str	r4, [sp, #172]
+ 122:strong-arm\src\threefish/threefish.c **** 			k[1] = k[2];
+ 357              		.loc 1 122 0
+ 358 00fc 2E9B     		ldr	r3, [sp, #184]
+ 359 00fe 2F9C     		ldr	r4, [sp, #188]
+ 360 0100 2C93     		str	r3, [sp, #176]
+ 361 0102 2D94     		str	r4, [sp, #180]
+ 123:strong-arm\src\threefish/threefish.c **** 			k[3] = k[4];
+ 362              		.loc 1 123 0
+ 363 0104 309B     		ldr	r3, [sp, #192]
+ 364 0106 319C     		ldr	r4, [sp, #196]
+ 365 0108 2E93     		str	r3, [sp, #184]
+ 366 010a 2F94     		str	r4, [sp, #188]
+ 124:strong-arm\src\threefish/threefish.c **** 			k[4] = k[5] - t[0];
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqUfWSx.s 			page 10
+
+
+ 367              		.loc 1 124 0
+ 368 010c 329B     		ldr	r3, [sp, #200]
+ 369 010e 339C     		ldr	r4, [sp, #204]
+ 370 0110 3093     		str	r3, [sp, #192]
+ 371 0112 3194     		str	r4, [sp, #196]
+ 372              		.loc 1 125 0
+ 373 0114 349B     		ldr	r3, [sp, #208]
+ 374 0116 359C     		ldr	r4, [sp, #212]
+ 375 0118 1A00     		movs	r2, r3
+ 376 011a 2300     		movs	r3, r4
+ 377 011c 921B     		subs	r2, r2, r6
+ 378 011e BB41     		sbcs	r3, r3, r7
+ 126:strong-arm\src\threefish/threefish.c **** 			k[5] = k[6];
+ 127:strong-arm\src\threefish/threefish.c **** 			k[6] = k[7] - s + t[2];
+ 379              		.loc 1 127 0
+ 380 0120 009E     		ldr	r6, [sp]
+ 381 0122 019F     		ldr	r7, [sp, #4]
+ 125:strong-arm\src\threefish/threefish.c **** 			k[5] = k[6];
+ 382              		.loc 1 125 0
+ 383 0124 3292     		str	r2, [sp, #200]
+ 384 0126 3393     		str	r3, [sp, #204]
+ 126:strong-arm\src\threefish/threefish.c **** 			k[5] = k[6];
+ 385              		.loc 1 126 0
+ 386 0128 369B     		ldr	r3, [sp, #216]
+ 387 012a 379C     		ldr	r4, [sp, #220]
+ 388 012c 3493     		str	r3, [sp, #208]
+ 389 012e 3594     		str	r4, [sp, #212]
+ 390              		.loc 1 127 0
+ 391 0130 0C9B     		ldr	r3, [sp, #48]
+ 392 0132 9B08     		lsrs	r3, r3, #2
+ 393 0134 0693     		str	r3, [sp, #24]
+ 394 0136 0023     		movs	r3, #0
+ 395 0138 0793     		str	r3, [sp, #28]
+ 396 013a 389B     		ldr	r3, [sp, #224]
+ 397 013c 399C     		ldr	r4, [sp, #228]
+ 398 013e 1A00     		movs	r2, r3
+ 399 0140 2300     		movs	r3, r4
+ 400 0142 9219     		adds	r2, r2, r6
+ 401 0144 7B41     		adcs	r3, r3, r7
+ 402 0146 069E     		ldr	r6, [sp, #24]
+ 403 0148 079F     		ldr	r7, [sp, #28]
+ 404 014a 921B     		subs	r2, r2, r6
+ 405 014c BB41     		sbcs	r3, r3, r7
+ 128:strong-arm\src\threefish/threefish.c **** 			k[7] = k[8] + s + 1;
+ 406              		.loc 1 128 0
+ 407 014e 0126     		movs	r6, #1
+ 127:strong-arm\src\threefish/threefish.c **** 			k[7] = k[8] + s + 1;
+ 408              		.loc 1 127 0
+ 409 0150 3692     		str	r2, [sp, #216]
+ 410 0152 3793     		str	r3, [sp, #220]
+ 411              		.loc 1 128 0
+ 412 0154 3A9B     		ldr	r3, [sp, #232]
+ 413 0156 3B9C     		ldr	r4, [sp, #236]
+ 414 0158 0027     		movs	r7, #0
+ 415 015a 0893     		str	r3, [sp, #32]
+ 416 015c 0994     		str	r4, [sp, #36]
+ 417 015e 1A00     		movs	r2, r3
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqUfWSx.s 			page 11
+
+
+ 418 0160 2300     		movs	r3, r4
+ 419 0162 9219     		adds	r2, r2, r6
+ 420 0164 7B41     		adcs	r3, r3, r7
+ 421 0166 069E     		ldr	r6, [sp, #24]
+ 422 0168 079F     		ldr	r7, [sp, #28]
+ 423 016a 9219     		adds	r2, r2, r6
+ 424 016c 7B41     		adcs	r3, r3, r7
+ 425 016e 3892     		str	r2, [sp, #224]
+ 426 0170 3993     		str	r3, [sp, #228]
+ 129:strong-arm\src\threefish/threefish.c **** 			k[8] = extra;
+ 427              		.loc 1 129 0
+ 428 0172 039B     		ldr	r3, [sp, #12]
+ 429 0174 029A     		ldr	r2, [sp, #8]
+ 430 0176 3A90     		str	r0, [sp, #232]
+ 431 0178 3B91     		str	r1, [sp, #236]
+ 432              	.LVL27:
+ 130:strong-arm\src\threefish/threefish.c **** 
+ 131:strong-arm\src\threefish/threefish.c **** 			extra = t[0];
+ 132:strong-arm\src\threefish/threefish.c **** 			t[0] = t[1];
+ 433              		.loc 1 132 0
+ 434 017a 0498     		ldr	r0, [sp, #16]
+ 435 017c 0599     		ldr	r1, [sp, #20]
+ 436 017e 0290     		str	r0, [sp, #8]
+ 437 0180 0391     		str	r1, [sp, #12]
+ 438              	.LVL28:
+ 133:strong-arm\src\threefish/threefish.c **** 			t[1] = t[2];
+ 439              		.loc 1 133 0
+ 440 0182 0098     		ldr	r0, [sp]
+ 441 0184 0199     		ldr	r1, [sp, #4]
+ 442 0186 0490     		str	r0, [sp, #16]
+ 443 0188 0591     		str	r1, [sp, #20]
+ 134:strong-arm\src\threefish/threefish.c **** 			t[2] = extra;
+ 444              		.loc 1 134 0
+ 445 018a 0193     		str	r3, [sp, #4]
+ 129:strong-arm\src\threefish/threefish.c **** 
+ 446              		.loc 1 129 0
+ 447 018c 0123     		movs	r3, #1
+ 448 018e 1E00     		movs	r6, r3
+ 449              		.loc 1 134 0
+ 450 0190 0092     		str	r2, [sp]
+ 129:strong-arm\src\threefish/threefish.c **** 
+ 451              		.loc 1 129 0
+ 452 0192 0D93     		str	r3, [sp, #52]
+ 453 0194 0E93     		str	r3, [sp, #56]
+ 454              	.LVL29:
+ 455              	.L10:
+ 129:strong-arm\src\threefish/threefish.c **** 
+ 456              		.loc 1 129 0 is_stmt 0 discriminator 1
+ 457 0196 0023     		movs	r3, #0
+ 458              	.LBE32:
+ 459              	.LBB34:
+ 460              	.LBB35:
+ 461              	.LBB36:
+  79:strong-arm\src\threefish/threefish.c **** }
+ 462              		.loc 1 79 0 is_stmt 1 discriminator 1
+ 463 0198 0C9A     		ldr	r2, [sp, #48]
+ 464              	.LBE36:
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqUfWSx.s 			page 12
+
+
+ 465              	.LBE35:
+ 466              	.LBE34:
+ 467              	.LBB43:
+ 129:strong-arm\src\threefish/threefish.c **** 
+ 468              		.loc 1 129 0 discriminator 1
+ 469 019a 1F00     		movs	r7, r3
+ 470              	.LBE43:
+ 471              	.LBB44:
+ 472              	.LBB40:
+ 473              	.LBB37:
+  79:strong-arm\src\threefish/threefish.c **** }
+ 474              		.loc 1 79 0 discriminator 1
+ 475 019c 0733     		adds	r3, r3, #7
+ 476 019e 1340     		ands	r3, r2
+ 477 01a0 404A     		ldr	r2, .L31+8
+ 478 01a2 9B00     		lsls	r3, r3, #2
+ 479 01a4 D318     		adds	r3, r2, r3
+ 480 01a6 1AAC     		add	r4, sp, #104
+ 481 01a8 1393     		str	r3, [sp, #76]
+ 482              	.LVL30:
+ 483              	.L12:
+ 484              	.LBE37:
+ 485              	.LBE40:
+ 135:strong-arm\src\threefish/threefish.c **** 		}
+ 136:strong-arm\src\threefish/threefish.c **** 
+ 137:strong-arm\src\threefish/threefish.c **** 		/* Mix */
+ 138:strong-arm\src\threefish/threefish.c **** 		for (int j = 0; j < 4; ++j)
+ 139:strong-arm\src\threefish/threefish.c **** 			mix8 (v+(2*j), v+(2*j)+1, roundnum, j, v[2*j], v[(2*j)+1]);
+ 486              		.loc 1 139 0 discriminator 3
+ 487 01aa A268     		ldr	r2, [r4, #8]
+ 488 01ac E368     		ldr	r3, [r4, #12]
+ 489 01ae 0892     		str	r2, [sp, #32]
+ 490 01b0 0993     		str	r3, [sp, #36]
+ 491              	.LVL31:
+ 492              	.LBB41:
+ 493              	.LBB38:
+  78:strong-arm\src\threefish/threefish.c **** 	*y1 = ROL (x1, R8[roundnum&7][j]) ^ *y0;
+ 494              		.loc 1 78 0 discriminator 3
+ 495 01b2 0898     		ldr	r0, [sp, #32]
+ 496 01b4 0999     		ldr	r1, [sp, #36]
+ 497 01b6 2268     		ldr	r2, [r4]
+ 498 01b8 6368     		ldr	r3, [r4, #4]
+ 499              	.LVL32:
+ 500 01ba 1218     		adds	r2, r2, r0
+ 501 01bc 4B41     		adcs	r3, r3, r1
+ 502 01be 2260     		str	r2, [r4]
+ 503 01c0 6360     		str	r3, [r4, #4]
+ 504              	.LVL33:
+ 505 01c2 0A92     		str	r2, [sp, #40]
+ 506 01c4 0B93     		str	r3, [sp, #44]
+  79:strong-arm\src\threefish/threefish.c **** }
+ 507              		.loc 1 79 0 discriminator 3
+ 508 01c6 139B     		ldr	r3, [sp, #76]
+ 509 01c8 DB5D     		ldrb	r3, [r3, r7]
+ 510 01ca 1A00     		movs	r2, r3
+ 511 01cc 0F93     		str	r3, [sp, #60]
+ 512 01ce FFF7FEFF 		bl	__aeabi_llsl
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqUfWSx.s 			page 13
+
+
+ 513              	.LVL34:
+ 514 01d2 0F9B     		ldr	r3, [sp, #60]
+ 515 01d4 1190     		str	r0, [sp, #68]
+ 516 01d6 5A42     		rsbs	r2, r3, #0
+ 517 01d8 3F23     		movs	r3, #63
+ 518 01da 1291     		str	r1, [sp, #72]
+ 519 01dc 1A40     		ands	r2, r3
+ 520 01de 0898     		ldr	r0, [sp, #32]
+ 521 01e0 0999     		ldr	r1, [sp, #36]
+ 522 01e2 FFF7FEFF 		bl	__aeabi_llsr
+ 523              	.LVL35:
+ 524 01e6 119B     		ldr	r3, [sp, #68]
+ 525 01e8 0343     		orrs	r3, r0
+ 526 01ea 1800     		movs	r0, r3
+ 527 01ec 129B     		ldr	r3, [sp, #72]
+ 528 01ee 0B43     		orrs	r3, r1
+ 529 01f0 1900     		movs	r1, r3
+ 530 01f2 0A9B     		ldr	r3, [sp, #40]
+ 531 01f4 5840     		eors	r0, r3
+ 532 01f6 0B9B     		ldr	r3, [sp, #44]
+ 533 01f8 A060     		str	r0, [r4, #8]
+ 534 01fa 5940     		eors	r1, r3
+ 535              	.LBE38:
+ 536              	.LBE41:
+ 138:strong-arm\src\threefish/threefish.c **** 			mix8 (v+(2*j), v+(2*j)+1, roundnum, j, v[2*j], v[(2*j)+1]);
+ 537              		.loc 1 138 0 discriminator 3
+ 538 01fc 3B00     		movs	r3, r7
+ 539 01fe 0133     		adds	r3, r3, #1
+ 540              	.LBB42:
+ 541              	.LBB39:
+  79:strong-arm\src\threefish/threefish.c **** }
+ 542              		.loc 1 79 0 discriminator 3
+ 543 0200 E160     		str	r1, [r4, #12]
+ 544              	.LVL36:
+ 545              	.LBE39:
+ 546              	.LBE42:
+ 138:strong-arm\src\threefish/threefish.c **** 			mix8 (v+(2*j), v+(2*j)+1, roundnum, j, v[2*j], v[(2*j)+1]);
+ 547              		.loc 1 138 0 discriminator 3
+ 548 0202 1F00     		movs	r7, r3
+ 549              	.LVL37:
+ 550 0204 1034     		adds	r4, r4, #16
+ 551 0206 042B     		cmp	r3, #4
+ 552 0208 CFD1     		bne	.L12
+ 553              	.LBE44:
+ 140:strong-arm\src\threefish/threefish.c **** 
+ 141:strong-arm\src\threefish/threefish.c **** 		/* Permute */
+ 142:strong-arm\src\threefish/threefish.c **** 		extra = v[0];
+ 554              		.loc 1 142 0 discriminator 2
+ 555 020a 2A68     		ldr	r2, [r5]
+ 556 020c 6B68     		ldr	r3, [r5, #4]
+ 557              	.LVL38:
+ 143:strong-arm\src\threefish/threefish.c **** 		v[0] = v[2];
+ 558              		.loc 1 143 0 discriminator 2
+ 559 020e 2869     		ldr	r0, [r5, #16]
+ 560 0210 6969     		ldr	r1, [r5, #20]
+ 561 0212 2860     		str	r0, [r5]
+ 562 0214 6960     		str	r1, [r5, #4]
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqUfWSx.s 			page 14
+
+
+ 144:strong-arm\src\threefish/threefish.c **** 		v[2] = v[4];
+ 563              		.loc 1 144 0 discriminator 2
+ 564 0216 286A     		ldr	r0, [r5, #32]
+ 565 0218 696A     		ldr	r1, [r5, #36]
+ 566 021a 2861     		str	r0, [r5, #16]
+ 567 021c 6961     		str	r1, [r5, #20]
+ 145:strong-arm\src\threefish/threefish.c **** 		v[4] = v[6];
+ 568              		.loc 1 145 0 discriminator 2
+ 569 021e 286B     		ldr	r0, [r5, #48]
+ 570 0220 696B     		ldr	r1, [r5, #52]
+ 146:strong-arm\src\threefish/threefish.c **** 		v[6] = extra;
+ 571              		.loc 1 146 0 discriminator 2
+ 572 0222 2A63     		str	r2, [r5, #48]
+ 573 0224 6B63     		str	r3, [r5, #52]
+ 147:strong-arm\src\threefish/threefish.c **** 		extra = v[3];
+ 574              		.loc 1 147 0 discriminator 2
+ 575 0226 AA69     		ldr	r2, [r5, #24]
+ 576 0228 EB69     		ldr	r3, [r5, #28]
+ 577              	.LVL39:
+ 145:strong-arm\src\threefish/threefish.c **** 		v[4] = v[6];
+ 578              		.loc 1 145 0 discriminator 2
+ 579 022a 2862     		str	r0, [r5, #32]
+ 580 022c 6962     		str	r1, [r5, #36]
+ 148:strong-arm\src\threefish/threefish.c **** 		v[3] = v[7];
+ 581              		.loc 1 148 0 discriminator 2
+ 582 022e A86B     		ldr	r0, [r5, #56]
+ 583 0230 E96B     		ldr	r1, [r5, #60]
+ 149:strong-arm\src\threefish/threefish.c **** 		v[7] = extra;
+ 584              		.loc 1 149 0 discriminator 2
+ 585 0232 AA63     		str	r2, [r5, #56]
+ 586 0234 EB63     		str	r3, [r5, #60]
+ 587              	.LBE31:
+ 108:strong-arm\src\threefish/threefish.c **** 	{
+ 588              		.loc 1 108 0 discriminator 2
+ 589 0236 0C9B     		ldr	r3, [sp, #48]
+ 590              	.LVL40:
+ 591              	.LBB46:
+ 148:strong-arm\src\threefish/threefish.c **** 		v[3] = v[7];
+ 592              		.loc 1 148 0 discriminator 2
+ 593 0238 A861     		str	r0, [r5, #24]
+ 594 023a E961     		str	r1, [r5, #28]
+ 595              	.LBE46:
+ 108:strong-arm\src\threefish/threefish.c **** 	{
+ 596              		.loc 1 108 0 discriminator 2
+ 597 023c 0133     		adds	r3, r3, #1
+ 598 023e DBB2     		uxtb	r3, r3
+ 599 0240 0C93     		str	r3, [sp, #48]
+ 600              	.LVL41:
+ 601 0242 482B     		cmp	r3, #72
+ 602 0244 00D0     		beq	.LCB497
+ 603 0246 3FE7     		b	.L13	@long jump
+ 604              	.LCB497:
+ 605 0248 0E9B     		ldr	r3, [sp, #56]
+ 606 024a 002B     		cmp	r3, #0
+ 607 024c 03D0     		beq	.L14
+ 608 024e 029B     		ldr	r3, [sp, #8]
+ 609 0250 039C     		ldr	r4, [sp, #12]
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqUfWSx.s 			page 15
+
+
+ 610 0252 1493     		str	r3, [sp, #80]
+ 611 0254 1594     		str	r4, [sp, #84]
+ 612              	.L14:
+ 613 0256 0D9B     		ldr	r3, [sp, #52]
+ 614 0258 002B     		cmp	r3, #0
+ 615 025a 03D0     		beq	.L15
+ 616 025c 009B     		ldr	r3, [sp]
+ 617 025e 019C     		ldr	r4, [sp, #4]
+ 618 0260 1893     		str	r3, [sp, #96]
+ 619 0262 1994     		str	r4, [sp, #100]
+ 620              	.L15:
+ 621 0264 002E     		cmp	r6, #0
+ 622 0266 03D0     		beq	.L16
+ 623 0268 049B     		ldr	r3, [sp, #16]
+ 624 026a 059C     		ldr	r4, [sp, #20]
+ 625 026c 1693     		str	r3, [sp, #88]
+ 626 026e 1794     		str	r4, [sp, #92]
+ 627              	.L16:
+ 628              	.LBB47:
+ 629              	.LBB45:
+ 129:strong-arm\src\threefish/threefish.c **** 
+ 630              		.loc 1 129 0
+ 631 0270 0023     		movs	r3, #0
+ 632              	.LVL42:
+ 633              	.L17:
+ 634              	.LBE45:
+ 635              	.LBE47:
+ 636              	.LBE30:
+ 637              	.LBB48:
+ 150:strong-arm\src\threefish/threefish.c **** 	}
+ 151:strong-arm\src\threefish/threefish.c **** 
+ 152:strong-arm\src\threefish/threefish.c **** 	/* Add last subkey */
+ 153:strong-arm\src\threefish/threefish.c **** 	for (int i = 0; i < 8; ++i)
+ 154:strong-arm\src\threefish/threefish.c **** 		v[i] += k[i];
+ 638              		.loc 1 154 0 discriminator 3
+ 639 0272 2AA9     		add	r1, sp, #168
+ 640 0274 EA18     		adds	r2, r5, r3
+ 641 0276 C918     		adds	r1, r1, r3
+ 642 0278 1668     		ldr	r6, [r2]
+ 643 027a 5768     		ldr	r7, [r2, #4]
+ 644 027c 0868     		ldr	r0, [r1]
+ 645 027e 4968     		ldr	r1, [r1, #4]
+ 646 0280 8019     		adds	r0, r0, r6
+ 647 0282 7941     		adcs	r1, r1, r7
+ 648 0284 0833     		adds	r3, r3, #8
+ 649 0286 1060     		str	r0, [r2]
+ 650 0288 5160     		str	r1, [r2, #4]
+ 651              	.LVL43:
+ 153:strong-arm\src\threefish/threefish.c **** 		v[i] += k[i];
+ 652              		.loc 1 153 0 discriminator 3
+ 653 028a 402B     		cmp	r3, #64
+ 654 028c F1D1     		bne	.L17
+ 655              	.LBE48:
+ 155:strong-arm\src\threefish/threefish.c **** 
+ 156:strong-arm\src\threefish/threefish.c **** 	words_to_bytes (ciphertext, v, 8);
+ 656              		.loc 1 156 0
+ 657 028e 2900     		movs	r1, r5
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqUfWSx.s 			page 16
+
+
+ 658 0290 1098     		ldr	r0, [sp, #64]
+ 659 0292 FFF7FEFF 		bl	words_to_bytes.constprop.0
+ 660              	.LVL44:
+ 157:strong-arm\src\threefish/threefish.c **** }
+ 661              		.loc 1 157 0
+ 662 0296 3DB0     		add	sp, sp, #244
+ 663              		@ sp needed
+ 664              	.LVL45:
+ 665 0298 F0BD     		pop	{r4, r5, r6, r7, pc}
+ 666              	.L32:
+ 667 029a C046     		.align	2
+ 668              	.L31:
+ 669 029c 221AFCA9 		.word	-1443096030
+ 670 02a0 DA1BD11B 		.word	466688986
+ 671 02a4 00000000 		.word	.LANCHOR0
+ 672              		.cfi_endproc
+ 673              	.LFE6:
+ 674              		.size	threefish512_encrypt_block, .-threefish512_encrypt_block
+ 675              		.section	.text.threefish512_decrypt_block,"ax",%progbits
+ 676              		.align	1
+ 677              		.global	threefish512_decrypt_block
+ 678              		.code	16
+ 679              		.thumb_func
+ 680              		.type	threefish512_decrypt_block, %function
+ 681              	threefish512_decrypt_block:
+ 682              	.LFB7:
+ 158:strong-arm\src\threefish/threefish.c **** 
+ 159:strong-arm\src\threefish/threefish.c **** 
+ 160:strong-arm\src\threefish/threefish.c **** /* 
+ 161:strong-arm\src\threefish/threefish.c ****  * Decryption is the obvious inverse of encryption.  In other words, do everything backwards.
+ 162:strong-arm\src\threefish/threefish.c ****  * The only non-obvious thing here is reversing the Key Scheduling since we use a rolling key sched
+ 163:strong-arm\src\threefish/threefish.c ****  * implementation.
+ 164:strong-arm\src\threefish/threefish.c ****  */
+ 165:strong-arm\src\threefish/threefish.c **** void threefish512_decrypt_block (uint8_t plaintext[static 64], uint8_t const key[static 64], uint8_
+ 166:strong-arm\src\threefish/threefish.c **** {
+ 683              		.loc 1 166 0
+ 684              		.cfi_startproc
+ 685              		@ args = 0, pretend = 0, frame = 256
+ 686              		@ frame_needed = 0, uses_anonymous_args = 0
+ 687              	.LVL46:
+ 688 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 689              		.cfi_def_cfa_offset 20
+ 690              		.cfi_offset 4, -20
+ 691              		.cfi_offset 5, -16
+ 692              		.cfi_offset 6, -12
+ 693              		.cfi_offset 7, -8
+ 694              		.cfi_offset 14, -4
+ 695 0002 1500     		movs	r5, r2
+ 696 0004 1E00     		movs	r6, r3
+ 697 0006 C1B0     		sub	sp, sp, #260
+ 698              		.cfi_def_cfa_offset 280
+ 167:strong-arm\src\threefish/threefish.c **** 	uint64_t k[9];
+ 168:strong-arm\src\threefish/threefish.c **** 	uint64_t t[3];
+ 169:strong-arm\src\threefish/threefish.c **** 	uint64_t v[8];
+ 170:strong-arm\src\threefish/threefish.c **** 
+ 171:strong-arm\src\threefish/threefish.c **** 	bytes_to_words (k, key, 8);
+ 699              		.loc 1 171 0
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqUfWSx.s 			page 17
+
+
+ 700 0008 2EAC     		add	r4, sp, #184
+ 166:strong-arm\src\threefish/threefish.c **** 	uint64_t k[9];
+ 701              		.loc 1 166 0
+ 702 000a 1490     		str	r0, [sp, #80]
+ 703              		.loc 1 171 0
+ 704 000c 0822     		movs	r2, #8
+ 705              	.LVL47:
+ 706 000e 2000     		movs	r0, r4
+ 707              	.LVL48:
+ 708 0010 FFF7FEFF 		bl	bytes_to_words
+ 709              	.LVL49:
+ 172:strong-arm\src\threefish/threefish.c **** 	bytes_to_words (t, tweak, 2);
+ 710              		.loc 1 172 0
+ 711 0014 2900     		movs	r1, r5
+ 712 0016 0222     		movs	r2, #2
+ 713 0018 18A8     		add	r0, sp, #96
+ 173:strong-arm\src\threefish/threefish.c **** 	bytes_to_words (v, ciphertext, 8);
+ 714              		.loc 1 173 0
+ 715 001a 1EAD     		add	r5, sp, #120
+ 716              	.LVL50:
+ 172:strong-arm\src\threefish/threefish.c **** 	bytes_to_words (t, tweak, 2);
+ 717              		.loc 1 172 0
+ 718 001c FFF7FEFF 		bl	bytes_to_words
+ 719              	.LVL51:
+ 720              		.loc 1 173 0
+ 721 0020 3100     		movs	r1, r6
+ 722 0022 0822     		movs	r2, #8
+ 723 0024 2800     		movs	r0, r5
+ 724 0026 FFF7FEFF 		bl	bytes_to_words
+ 725              	.LVL52:
+ 174:strong-arm\src\threefish/threefish.c **** 
+ 175:strong-arm\src\threefish/threefish.c **** 	/* Begin Key Schedule */
+ 176:strong-arm\src\threefish/threefish.c **** 	k[8] = C240 ^ k[0] ^ k[1] ^ k[2] ^ k[3] ^ k[4] ^ k[5] ^ k[6] ^ k[7];
+ 726              		.loc 1 176 0
+ 727 002a A26A     		ldr	r2, [r4, #40]
+ 728 002c E36A     		ldr	r3, [r4, #44]
+ 729 002e A068     		ldr	r0, [r4, #8]
+ 730 0030 2E99     		ldr	r1, [sp, #184]
+ 731 0032 6668     		ldr	r6, [r4, #4]
+ 732              	.LVL53:
+ 733 0034 4140     		eors	r1, r0
+ 734 0036 E068     		ldr	r0, [r4, #12]
+ 735 0038 4640     		eors	r6, r0
+ 736 003a 9A48     		ldr	r0, .L59
+ 737 003c 4840     		eors	r0, r1
+ 738 003e 9A49     		ldr	r1, .L59+4
+ 739 0040 7140     		eors	r1, r6
+ 740 0042 2669     		ldr	r6, [r4, #16]
+ 741 0044 7040     		eors	r0, r6
+ 742 0046 6669     		ldr	r6, [r4, #20]
+ 743 0048 7140     		eors	r1, r6
+ 744 004a A669     		ldr	r6, [r4, #24]
+ 745 004c 7040     		eors	r0, r6
+ 746 004e E669     		ldr	r6, [r4, #28]
+ 747 0050 7140     		eors	r1, r6
+ 748 0052 266A     		ldr	r6, [r4, #32]
+ 749 0054 7040     		eors	r0, r6
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqUfWSx.s 			page 18
+
+
+ 750 0056 666A     		ldr	r6, [r4, #36]
+ 751 0058 5040     		eors	r0, r2
+ 752 005a 7140     		eors	r1, r6
+ 753 005c 266B     		ldr	r6, [r4, #48]
+ 754 005e 5940     		eors	r1, r3
+ 755 0060 7040     		eors	r0, r6
+ 756 0062 666B     		ldr	r6, [r4, #52]
+ 757 0064 7140     		eors	r1, r6
+ 758 0066 A66B     		ldr	r6, [r4, #56]
+ 759 0068 7040     		eors	r0, r6
+ 760 006a 2064     		str	r0, [r4, #64]
+ 761 006c E06B     		ldr	r0, [r4, #60]
+ 762 006e 4140     		eors	r1, r0
+ 763 0070 6164     		str	r1, [r4, #68]
+ 177:strong-arm\src\threefish/threefish.c **** 	t[2] = t[0] ^ t[1];
+ 764              		.loc 1 177 0
+ 765 0072 1898     		ldr	r0, [sp, #96]
+ 766 0074 1999     		ldr	r1, [sp, #100]
+ 767 0076 0490     		str	r0, [sp, #16]
+ 768 0078 0591     		str	r1, [sp, #20]
+ 769 007a 1A98     		ldr	r0, [sp, #104]
+ 770 007c 1B99     		ldr	r1, [sp, #108]
+ 771 007e 0290     		str	r0, [sp, #8]
+ 772 0080 0391     		str	r1, [sp, #12]
+ 773 0082 0298     		ldr	r0, [sp, #8]
+ 774 0084 0499     		ldr	r1, [sp, #16]
+ 775 0086 4140     		eors	r1, r0
+ 776 0088 0091     		str	r1, [sp]
+ 777 008a 0398     		ldr	r0, [sp, #12]
+ 778 008c 0599     		ldr	r1, [sp, #20]
+ 779 008e 4140     		eors	r1, r0
+ 780 0090 0191     		str	r1, [sp, #4]
+ 781 0092 0098     		ldr	r0, [sp]
+ 782 0094 0199     		ldr	r1, [sp, #4]
+ 783 0096 1C90     		str	r0, [sp, #112]
+ 784 0098 1D91     		str	r1, [sp, #116]
+ 178:strong-arm\src\threefish/threefish.c **** 
+ 179:strong-arm\src\threefish/threefish.c **** 	k[5] += t[0];
+ 785              		.loc 1 179 0
+ 786 009a 0498     		ldr	r0, [sp, #16]
+ 787 009c 0599     		ldr	r1, [sp, #20]
+ 788 009e 1218     		adds	r2, r2, r0
+ 789 00a0 4B41     		adcs	r3, r3, r1
+ 790 00a2 A262     		str	r2, [r4, #40]
+ 791 00a4 E362     		str	r3, [r4, #44]
+ 180:strong-arm\src\threefish/threefish.c **** 	k[6] += t[1];
+ 792              		.loc 1 180 0
+ 793 00a6 226B     		ldr	r2, [r4, #48]
+ 794 00a8 636B     		ldr	r3, [r4, #52]
+ 795 00aa 0298     		ldr	r0, [sp, #8]
+ 796 00ac 0399     		ldr	r1, [sp, #12]
+ 797 00ae 1218     		adds	r2, r2, r0
+ 798 00b0 4B41     		adcs	r3, r3, r1
+ 181:strong-arm\src\threefish/threefish.c **** 	k[7] += 18;
+ 799              		.loc 1 181 0
+ 800 00b2 A06B     		ldr	r0, [r4, #56]
+ 801 00b4 E16B     		ldr	r1, [r4, #60]
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqUfWSx.s 			page 19
+
+
+ 180:strong-arm\src\threefish/threefish.c **** 	k[6] += t[1];
+ 802              		.loc 1 180 0
+ 803 00b6 2263     		str	r2, [r4, #48]
+ 804 00b8 6363     		str	r3, [r4, #52]
+ 805              		.loc 1 181 0
+ 806 00ba 1222     		movs	r2, #18
+ 807 00bc 0023     		movs	r3, #0
+ 808 00be 1218     		adds	r2, r2, r0
+ 809 00c0 4B41     		adcs	r3, r3, r1
+ 810 00c2 A263     		str	r2, [r4, #56]
+ 811 00c4 E363     		str	r3, [r4, #60]
+ 812              	.LVL54:
+ 813 00c6 0023     		movs	r3, #0
+ 814              	.LVL55:
+ 815              	.L34:
+ 816 00c8 EA18     		adds	r2, r5, r3
+ 817              	.LBB49:
+ 182:strong-arm\src\threefish/threefish.c **** 
+ 183:strong-arm\src\threefish/threefish.c **** 	/* Subtract last subkey */
+ 184:strong-arm\src\threefish/threefish.c **** 	for (int i = 0; i < 8; ++i)
+ 185:strong-arm\src\threefish/threefish.c **** 		v[i] -= k[i];
+ 818              		.loc 1 185 0 discriminator 3
+ 819 00ca E118     		adds	r1, r4, r3
+ 820 00cc 0868     		ldr	r0, [r1]
+ 821 00ce 4968     		ldr	r1, [r1, #4]
+ 822 00d0 1668     		ldr	r6, [r2]
+ 823 00d2 5768     		ldr	r7, [r2, #4]
+ 824 00d4 361A     		subs	r6, r6, r0
+ 825 00d6 8F41     		sbcs	r7, r7, r1
+ 826 00d8 3000     		movs	r0, r6
+ 827 00da 3900     		movs	r1, r7
+ 828 00dc 0833     		adds	r3, r3, #8
+ 829 00de 1060     		str	r0, [r2]
+ 830 00e0 5160     		str	r1, [r2, #4]
+ 184:strong-arm\src\threefish/threefish.c **** 		v[i] -= k[i];
+ 831              		.loc 1 184 0 discriminator 3
+ 832 00e2 402B     		cmp	r3, #64
+ 833 00e4 F0D1     		bne	.L34
+ 834 00e6 0025     		movs	r5, #0
+ 835 00e8 0733     		adds	r3, r3, #7
+ 836 00ea 0B95     		str	r5, [sp, #44]
+ 837 00ec 0C95     		str	r5, [sp, #48]
+ 838 00ee 0A93     		str	r3, [sp, #40]
+ 839              	.L37:
+ 840              	.LVL56:
+ 841              	.LBE49:
+ 842              	.LBB50:
+ 843              	.LBB51:
+ 186:strong-arm\src\threefish/threefish.c **** 
+ 187:strong-arm\src\threefish/threefish.c **** 	for (uint8_t roundnum = 71; roundnum != 255; --roundnum)
+ 188:strong-arm\src\threefish/threefish.c **** 	{
+ 189:strong-arm\src\threefish/threefish.c **** 		uint64_t extra;
+ 190:strong-arm\src\threefish/threefish.c **** 
+ 191:strong-arm\src\threefish/threefish.c **** 		/* Invert permutation */
+ 192:strong-arm\src\threefish/threefish.c **** 		extra = v[2];
+ 844              		.loc 1 192 0
+ 845 00f0 229A     		ldr	r2, [sp, #136]
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqUfWSx.s 			page 20
+
+
+ 846 00f2 239B     		ldr	r3, [sp, #140]
+ 847              	.LVL57:
+ 193:strong-arm\src\threefish/threefish.c **** 		v[2] = v[0];
+ 848              		.loc 1 193 0
+ 849 00f4 1E98     		ldr	r0, [sp, #120]
+ 850 00f6 1F99     		ldr	r1, [sp, #124]
+ 851 00f8 2290     		str	r0, [sp, #136]
+ 852 00fa 2391     		str	r1, [sp, #140]
+ 194:strong-arm\src\threefish/threefish.c **** 		v[0] = v[6];
+ 853              		.loc 1 194 0
+ 854 00fc 2A98     		ldr	r0, [sp, #168]
+ 855 00fe 2B99     		ldr	r1, [sp, #172]
+ 856 0100 1E90     		str	r0, [sp, #120]
+ 857 0102 1F91     		str	r1, [sp, #124]
+ 195:strong-arm\src\threefish/threefish.c **** 		v[6] = v[4];
+ 858              		.loc 1 195 0
+ 859 0104 2698     		ldr	r0, [sp, #152]
+ 860 0106 2799     		ldr	r1, [sp, #156]
+ 196:strong-arm\src\threefish/threefish.c **** 		v[4] = extra;
+ 861              		.loc 1 196 0
+ 862 0108 2692     		str	r2, [sp, #152]
+ 863 010a 2793     		str	r3, [sp, #156]
+ 197:strong-arm\src\threefish/threefish.c **** 		extra = v[3];
+ 864              		.loc 1 197 0
+ 865 010c 249A     		ldr	r2, [sp, #144]
+ 866 010e 259B     		ldr	r3, [sp, #148]
+ 867              	.LVL58:
+ 195:strong-arm\src\threefish/threefish.c **** 		v[6] = v[4];
+ 868              		.loc 1 195 0
+ 869 0110 2A90     		str	r0, [sp, #168]
+ 870 0112 2B91     		str	r1, [sp, #172]
+ 198:strong-arm\src\threefish/threefish.c **** 		v[3] = v[7];
+ 871              		.loc 1 198 0
+ 872 0114 2C98     		ldr	r0, [sp, #176]
+ 873 0116 2D99     		ldr	r1, [sp, #180]
+ 199:strong-arm\src\threefish/threefish.c **** 		v[7] = extra;
+ 874              		.loc 1 199 0
+ 875 0118 2C92     		str	r2, [sp, #176]
+ 876 011a 2D93     		str	r3, [sp, #180]
+ 877              	.LVL59:
+ 878              	.LBB52:
+ 200:strong-arm\src\threefish/threefish.c **** 
+ 201:strong-arm\src\threefish/threefish.c **** 		/* UnMIX */
+ 202:strong-arm\src\threefish/threefish.c **** 		for (int j = 0; j < 4; ++j)
+ 879              		.loc 1 202 0
+ 880 011c 0023     		movs	r3, #0
+ 881              	.LBB53:
+ 882              	.LBB54:
+  86:strong-arm\src\threefish/threefish.c **** 	*x0 = y0 - *x1;
+ 883              		.loc 1 86 0
+ 884 011e 0722     		movs	r2, #7
+ 885              	.LVL60:
+ 886              	.LBE54:
+ 887              	.LBE53:
+ 888              	.LBE52:
+ 198:strong-arm\src\threefish/threefish.c **** 		v[7] = extra;
+ 889              		.loc 1 198 0
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqUfWSx.s 			page 21
+
+
+ 890 0120 0690     		str	r0, [sp, #24]
+ 891 0122 0791     		str	r1, [sp, #28]
+ 892              	.LBB63:
+ 893              		.loc 1 202 0
+ 894 0124 0693     		str	r3, [sp, #24]
+ 895              	.LBB59:
+ 896              	.LBB55:
+  86:strong-arm\src\threefish/threefish.c **** 	*x0 = y0 - *x1;
+ 897              		.loc 1 86 0
+ 898 0126 0A9B     		ldr	r3, [sp, #40]
+ 899              	.LBE55:
+ 900              	.LBE59:
+ 901              	.LBE63:
+ 198:strong-arm\src\threefish/threefish.c **** 		v[7] = extra;
+ 902              		.loc 1 198 0
+ 903 0128 2490     		str	r0, [sp, #144]
+ 904 012a 2591     		str	r1, [sp, #148]
+ 905              	.LVL61:
+ 906              	.LBB64:
+ 907              	.LBB60:
+ 908              	.LBB56:
+  86:strong-arm\src\threefish/threefish.c **** 	*x0 = y0 - *x1;
+ 909              		.loc 1 86 0
+ 910 012c 1340     		ands	r3, r2
+ 911 012e 5F4A     		ldr	r2, .L59+8
+ 912 0130 9B00     		lsls	r3, r3, #2
+ 913 0132 D318     		adds	r3, r2, r3
+ 914 0134 1EAC     		add	r4, sp, #120
+ 915 0136 1793     		str	r3, [sp, #92]
+ 916              	.LVL62:
+ 917              	.L35:
+  86:strong-arm\src\threefish/threefish.c **** 	*x0 = y0 - *x1;
+ 918              		.loc 1 86 0 is_stmt 0 discriminator 3
+ 919 0138 A368     		ldr	r3, [r4, #8]
+ 920              	.LBE56:
+ 921              	.LBE60:
+ 203:strong-arm\src\threefish/threefish.c **** 			unmix8 (v+(2*j), v+(2*j)+1, roundnum, j, v[2*j], v[(2*j)+1]);
+ 922              		.loc 1 203 0 is_stmt 1 discriminator 3
+ 923 013a 2668     		ldr	r6, [r4]
+ 924 013c 6768     		ldr	r7, [r4, #4]
+ 925              	.LVL63:
+ 926              	.LBB61:
+ 927              	.LBB57:
+  86:strong-arm\src\threefish/threefish.c **** 	*x0 = y0 - *x1;
+ 928              		.loc 1 86 0 discriminator 3
+ 929 013e 7340     		eors	r3, r6
+ 930 0140 1293     		str	r3, [sp, #72]
+ 931 0142 E368     		ldr	r3, [r4, #12]
+ 932 0144 069A     		ldr	r2, [sp, #24]
+ 933 0146 7B40     		eors	r3, r7
+ 934 0148 1393     		str	r3, [sp, #76]
+ 935 014a 179B     		ldr	r3, [sp, #92]
+ 936 014c 1298     		ldr	r0, [sp, #72]
+ 937 014e 9B5C     		ldrb	r3, [r3, r2]
+ 938 0150 1399     		ldr	r1, [sp, #76]
+ 939 0152 1A00     		movs	r2, r3
+ 940 0154 0D93     		str	r3, [sp, #52]
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqUfWSx.s 			page 22
+
+
+ 941 0156 FFF7FEFF 		bl	__aeabi_llsr
+ 942              	.LVL64:
+ 943 015a 0D9B     		ldr	r3, [sp, #52]
+ 944 015c 1590     		str	r0, [sp, #84]
+ 945 015e 5A42     		rsbs	r2, r3, #0
+ 946 0160 3F23     		movs	r3, #63
+ 947 0162 1691     		str	r1, [sp, #88]
+ 948 0164 1A40     		ands	r2, r3
+ 949 0166 1298     		ldr	r0, [sp, #72]
+ 950 0168 1399     		ldr	r1, [sp, #76]
+ 951 016a FFF7FEFF 		bl	__aeabi_llsl
+ 952              	.LVL65:
+ 953 016e 159B     		ldr	r3, [sp, #84]
+ 954 0170 0343     		orrs	r3, r0
+ 955 0172 0893     		str	r3, [sp, #32]
+ 956 0174 169B     		ldr	r3, [sp, #88]
+ 957 0176 0B43     		orrs	r3, r1
+ 958 0178 0993     		str	r3, [sp, #36]
+ 959 017a 089A     		ldr	r2, [sp, #32]
+ 960 017c 099B     		ldr	r3, [sp, #36]
+  87:strong-arm\src\threefish/threefish.c **** }
+ 961              		.loc 1 87 0 discriminator 3
+ 962 017e B61A     		subs	r6, r6, r2
+ 963 0180 9F41     		sbcs	r7, r7, r3
+ 964              	.LVL66:
+  86:strong-arm\src\threefish/threefish.c **** 	*x0 = y0 - *x1;
+ 965              		.loc 1 86 0 discriminator 3
+ 966 0182 A260     		str	r2, [r4, #8]
+ 967 0184 E360     		str	r3, [r4, #12]
+ 968              	.LBE57:
+ 969              	.LBE61:
+ 202:strong-arm\src\threefish/threefish.c **** 			unmix8 (v+(2*j), v+(2*j)+1, roundnum, j, v[2*j], v[(2*j)+1]);
+ 970              		.loc 1 202 0 discriminator 3
+ 971 0186 069B     		ldr	r3, [sp, #24]
+ 972              	.LBB62:
+ 973              	.LBB58:
+  87:strong-arm\src\threefish/threefish.c **** }
+ 974              		.loc 1 87 0 discriminator 3
+ 975 0188 2660     		str	r6, [r4]
+ 976 018a 6760     		str	r7, [r4, #4]
+ 977              	.LVL67:
+ 978              	.LBE58:
+ 979              	.LBE62:
+ 202:strong-arm\src\threefish/threefish.c **** 			unmix8 (v+(2*j), v+(2*j)+1, roundnum, j, v[2*j], v[(2*j)+1]);
+ 980              		.loc 1 202 0 discriminator 3
+ 981 018c 0133     		adds	r3, r3, #1
+ 982 018e 0693     		str	r3, [sp, #24]
+ 983              	.LVL68:
+ 984 0190 1034     		adds	r4, r4, #16
+ 985 0192 042B     		cmp	r3, #4
+ 986 0194 D0D1     		bne	.L35
+ 987              	.LBE64:
+ 204:strong-arm\src\threefish/threefish.c **** 
+ 205:strong-arm\src\threefish/threefish.c **** 		/* Subtract subkey */
+ 206:strong-arm\src\threefish/threefish.c **** 		if ((roundnum & 3) == 0)
+ 988              		.loc 1 206 0
+ 989 0196 0A9A     		ldr	r2, [sp, #40]
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqUfWSx.s 			page 23
+
+
+ 990 0198 013B     		subs	r3, r3, #1
+ 991              	.LVL69:
+ 992 019a 1A40     		ands	r2, r3
+ 993 019c 06D0     		beq	.L36
+ 994              	.LVL70:
+ 995              	.L40:
+ 996              	.LBE51:
+ 187:strong-arm\src\threefish/threefish.c **** 	{
+ 997              		.loc 1 187 0
+ 998 019e 0A9B     		ldr	r3, [sp, #40]
+ 999 01a0 013B     		subs	r3, r3, #1
+ 1000 01a2 DBB2     		uxtb	r3, r3
+ 1001 01a4 0A93     		str	r3, [sp, #40]
+ 1002              	.LVL71:
+ 1003 01a6 FF2B     		cmp	r3, #255
+ 1004 01a8 A2D1     		bne	.L37
+ 1005 01aa 60E0     		b	.L58
+ 1006              	.LVL72:
+ 1007              	.L36:
+ 1008              	.LBB69:
+ 1009              	.LBB65:
+ 207:strong-arm\src\threefish/threefish.c **** 		{
+ 208:strong-arm\src\threefish/threefish.c **** 			/* Update subkey */
+ 209:strong-arm\src\threefish/threefish.c **** 			uint8_t s = roundnum >> 2;
+ 1010              		.loc 1 209 0
+ 1011 01ac 0A9B     		ldr	r3, [sp, #40]
+ 210:strong-arm\src\threefish/threefish.c **** 			extra = k[8];
+ 211:strong-arm\src\threefish/threefish.c **** 			k[8] = k[7] - (s+1);
+ 212:strong-arm\src\threefish/threefish.c **** 			k[7] = k[6] - t[1] + s;
+ 1012              		.loc 1 212 0
+ 1013 01ae 1192     		str	r2, [sp, #68]
+ 209:strong-arm\src\threefish/threefish.c **** 			extra = k[8];
+ 1014              		.loc 1 209 0
+ 1015 01b0 9C08     		lsrs	r4, r3, #2
+ 210:strong-arm\src\threefish/threefish.c **** 			extra = k[8];
+ 1016              		.loc 1 210 0
+ 1017 01b2 2EAB     		add	r3, sp, #184
+ 1018 01b4 186C     		ldr	r0, [r3, #64]
+ 1019 01b6 596C     		ldr	r1, [r3, #68]
+ 1020 01b8 0690     		str	r0, [sp, #24]
+ 1021 01ba 0791     		str	r1, [sp, #28]
+ 1022              	.LVL73:
+ 211:strong-arm\src\threefish/threefish.c **** 			k[7] = k[6] - t[1] + s;
+ 1023              		.loc 1 211 0
+ 1024 01bc 611C     		adds	r1, r4, #1
+ 1025 01be 0E91     		str	r1, [sp, #56]
+ 1026 01c0 C917     		asrs	r1, r1, #31
+ 1027 01c2 0F91     		str	r1, [sp, #60]
+ 1028 01c4 0E9D     		ldr	r5, [sp, #56]
+ 1029 01c6 0F9E     		ldr	r6, [sp, #60]
+ 1030 01c8 986B     		ldr	r0, [r3, #56]
+ 1031 01ca D96B     		ldr	r1, [r3, #60]
+ 1032              	.LVL74:
+ 1033 01cc 401B     		subs	r0, r0, r5
+ 1034 01ce B141     		sbcs	r1, r1, r6
+ 1035              		.loc 1 212 0
+ 1036 01d0 029D     		ldr	r5, [sp, #8]
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqUfWSx.s 			page 24
+
+
+ 1037 01d2 039E     		ldr	r6, [sp, #12]
+ 211:strong-arm\src\threefish/threefish.c **** 			k[7] = k[6] - t[1] + s;
+ 1038              		.loc 1 211 0
+ 1039 01d4 1864     		str	r0, [r3, #64]
+ 1040 01d6 5964     		str	r1, [r3, #68]
+ 1041              	.LVL75:
+ 1042              		.loc 1 212 0
+ 1043 01d8 186B     		ldr	r0, [r3, #48]
+ 1044 01da 596B     		ldr	r1, [r3, #52]
+ 1045 01dc 401B     		subs	r0, r0, r5
+ 1046 01de B141     		sbcs	r1, r1, r6
+ 1047 01e0 1094     		str	r4, [sp, #64]
+ 1048 01e2 109C     		ldr	r4, [sp, #64]
+ 1049 01e4 119D     		ldr	r5, [sp, #68]
+ 1050 01e6 0019     		adds	r0, r0, r4
+ 1051 01e8 6941     		adcs	r1, r1, r5
+ 213:strong-arm\src\threefish/threefish.c **** 			k[6] = k[5];
+ 214:strong-arm\src\threefish/threefish.c **** 			k[5] = k[4] + t[2];
+ 1052              		.loc 1 214 0
+ 1053 01ea 009C     		ldr	r4, [sp]
+ 1054 01ec 019D     		ldr	r5, [sp, #4]
+ 212:strong-arm\src\threefish/threefish.c **** 			k[6] = k[5];
+ 1055              		.loc 1 212 0
+ 1056 01ee 9863     		str	r0, [r3, #56]
+ 1057 01f0 D963     		str	r1, [r3, #60]
+ 213:strong-arm\src\threefish/threefish.c **** 			k[6] = k[5];
+ 1058              		.loc 1 213 0
+ 1059 01f2 986A     		ldr	r0, [r3, #40]
+ 1060 01f4 D96A     		ldr	r1, [r3, #44]
+ 1061 01f6 1863     		str	r0, [r3, #48]
+ 1062 01f8 5963     		str	r1, [r3, #52]
+ 1063              		.loc 1 214 0
+ 1064 01fa 186A     		ldr	r0, [r3, #32]
+ 1065 01fc 596A     		ldr	r1, [r3, #36]
+ 1066 01fe 0019     		adds	r0, r0, r4
+ 1067 0200 6941     		adcs	r1, r1, r5
+ 1068 0202 9862     		str	r0, [r3, #40]
+ 1069 0204 D962     		str	r1, [r3, #44]
+ 215:strong-arm\src\threefish/threefish.c **** 			k[4] = k[3];
+ 1070              		.loc 1 215 0
+ 1071 0206 9869     		ldr	r0, [r3, #24]
+ 1072 0208 D969     		ldr	r1, [r3, #28]
+ 1073 020a 1862     		str	r0, [r3, #32]
+ 1074 020c 5962     		str	r1, [r3, #36]
+ 216:strong-arm\src\threefish/threefish.c **** 			k[3] = k[2];
+ 1075              		.loc 1 216 0
+ 1076 020e 1869     		ldr	r0, [r3, #16]
+ 1077 0210 5969     		ldr	r1, [r3, #20]
+ 1078 0212 9861     		str	r0, [r3, #24]
+ 1079 0214 D961     		str	r1, [r3, #28]
+ 217:strong-arm\src\threefish/threefish.c **** 			k[2] = k[1];
+ 1080              		.loc 1 217 0
+ 1081 0216 9868     		ldr	r0, [r3, #8]
+ 1082 0218 D968     		ldr	r1, [r3, #12]
+ 1083 021a 1861     		str	r0, [r3, #16]
+ 1084 021c 5961     		str	r1, [r3, #20]
+ 218:strong-arm\src\threefish/threefish.c **** 			k[1] = k[0];
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqUfWSx.s 			page 25
+
+
+ 1085              		.loc 1 218 0
+ 1086 021e 2E98     		ldr	r0, [sp, #184]
+ 1087 0220 2F99     		ldr	r1, [sp, #188]
+ 1088 0222 9860     		str	r0, [r3, #8]
+ 1089 0224 D960     		str	r1, [r3, #12]
+ 219:strong-arm\src\threefish/threefish.c **** 			k[0] = extra;
+ 1090              		.loc 1 219 0
+ 1091 0226 0698     		ldr	r0, [sp, #24]
+ 1092 0228 0799     		ldr	r1, [sp, #28]
+ 1093 022a 2E90     		str	r0, [sp, #184]
+ 1094 022c 2F91     		str	r1, [sp, #188]
+ 1095              	.LVL76:
+ 1096              	.L39:
+ 1097 022e 1EA9     		add	r1, sp, #120
+ 1098 0230 8C18     		adds	r4, r1, r2
+ 1099              	.LBB66:
+ 220:strong-arm\src\threefish/threefish.c **** 
+ 221:strong-arm\src\threefish/threefish.c **** 			extra = t[2];
+ 222:strong-arm\src\threefish/threefish.c **** 			t[2] = t[1];
+ 223:strong-arm\src\threefish/threefish.c **** 			t[1] = t[0];
+ 224:strong-arm\src\threefish/threefish.c **** 			t[0] = extra;
+ 225:strong-arm\src\threefish/threefish.c **** 
+ 226:strong-arm\src\threefish/threefish.c **** 			/* Subtract */
+ 227:strong-arm\src\threefish/threefish.c **** 			for (int i = 0; i < 8; ++i)
+ 228:strong-arm\src\threefish/threefish.c **** 				v[i] -= k[i];
+ 1100              		.loc 1 228 0 discriminator 3
+ 1101 0232 9918     		adds	r1, r3, r2
+ 1102 0234 0868     		ldr	r0, [r1]
+ 1103 0236 4968     		ldr	r1, [r1, #4]
+ 1104 0238 2568     		ldr	r5, [r4]
+ 1105 023a 6668     		ldr	r6, [r4, #4]
+ 1106 023c 2D1A     		subs	r5, r5, r0
+ 1107 023e 8E41     		sbcs	r6, r6, r1
+ 1108 0240 2800     		movs	r0, r5
+ 1109 0242 3100     		movs	r1, r6
+ 1110 0244 0832     		adds	r2, r2, #8
+ 1111 0246 2060     		str	r0, [r4]
+ 1112 0248 6160     		str	r1, [r4, #4]
+ 227:strong-arm\src\threefish/threefish.c **** 				v[i] -= k[i];
+ 1113              		.loc 1 227 0 discriminator 3
+ 1114 024a 402A     		cmp	r2, #64
+ 1115 024c EFD1     		bne	.L39
+ 1116              	.LBE66:
+ 223:strong-arm\src\threefish/threefish.c **** 			t[0] = extra;
+ 1117              		.loc 1 223 0
+ 1118 024e 0498     		ldr	r0, [sp, #16]
+ 1119 0250 0599     		ldr	r1, [sp, #20]
+ 1120              	.LBB67:
+ 1121 0252 0125     		movs	r5, #1
+ 1122 0254 029A     		ldr	r2, [sp, #8]
+ 1123 0256 039B     		ldr	r3, [sp, #12]
+ 1124 0258 0B95     		str	r5, [sp, #44]
+ 1125              	.LBE67:
+ 1126 025a 0290     		str	r0, [sp, #8]
+ 1127 025c 0391     		str	r1, [sp, #12]
+ 224:strong-arm\src\threefish/threefish.c **** 
+ 1128              		.loc 1 224 0
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqUfWSx.s 			page 26
+
+
+ 1129 025e 0098     		ldr	r0, [sp]
+ 1130 0260 0199     		ldr	r1, [sp, #4]
+ 1131              	.LBB68:
+ 1132 0262 0C95     		str	r5, [sp, #48]
+ 1133              	.LBE68:
+ 1134 0264 0490     		str	r0, [sp, #16]
+ 1135 0266 0591     		str	r1, [sp, #20]
+ 222:strong-arm\src\threefish/threefish.c **** 			t[1] = t[0];
+ 1136              		.loc 1 222 0
+ 1137 0268 0092     		str	r2, [sp]
+ 1138              	.LVL77:
+ 1139 026a 0193     		str	r3, [sp, #4]
+ 1140 026c 97E7     		b	.L40
+ 1141              	.L58:
+ 1142 026e 0C9B     		ldr	r3, [sp, #48]
+ 1143 0270 002B     		cmp	r3, #0
+ 1144 0272 03D0     		beq	.L41
+ 1145 0274 029B     		ldr	r3, [sp, #8]
+ 1146 0276 039C     		ldr	r4, [sp, #12]
+ 1147 0278 1A93     		str	r3, [sp, #104]
+ 1148 027a 1B94     		str	r4, [sp, #108]
+ 1149              	.L41:
+ 1150 027c 0B9B     		ldr	r3, [sp, #44]
+ 1151 027e 002B     		cmp	r3, #0
+ 1152 0280 03D0     		beq	.L42
+ 1153 0282 009B     		ldr	r3, [sp]
+ 1154 0284 019C     		ldr	r4, [sp, #4]
+ 1155 0286 1C93     		str	r3, [sp, #112]
+ 1156 0288 1D94     		str	r4, [sp, #116]
+ 1157              	.L42:
+ 1158 028a 002D     		cmp	r5, #0
+ 1159 028c 03D0     		beq	.L43
+ 1160 028e 049B     		ldr	r3, [sp, #16]
+ 1161 0290 059C     		ldr	r4, [sp, #20]
+ 1162 0292 1893     		str	r3, [sp, #96]
+ 1163 0294 1994     		str	r4, [sp, #100]
+ 1164              	.L43:
+ 1165              	.LBE65:
+ 1166              	.LBE69:
+ 1167              	.LBE50:
+ 229:strong-arm\src\threefish/threefish.c **** 		}
+ 230:strong-arm\src\threefish/threefish.c **** 	}
+ 231:strong-arm\src\threefish/threefish.c **** 
+ 232:strong-arm\src\threefish/threefish.c **** 	words_to_bytes (plaintext, v, 8);
+ 1168              		.loc 1 232 0
+ 1169 0296 1EA9     		add	r1, sp, #120
+ 1170 0298 1498     		ldr	r0, [sp, #80]
+ 1171 029a FFF7FEFF 		bl	words_to_bytes.constprop.0
+ 1172              	.LVL78:
+ 233:strong-arm\src\threefish/threefish.c **** }
+ 1173              		.loc 1 233 0
+ 1174 029e 41B0     		add	sp, sp, #260
+ 1175              		@ sp needed
+ 1176 02a0 F0BD     		pop	{r4, r5, r6, r7, pc}
+ 1177              	.L60:
+ 1178 02a2 C046     		.align	2
+ 1179              	.L59:
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqUfWSx.s 			page 27
+
+
+ 1180 02a4 221AFCA9 		.word	-1443096030
+ 1181 02a8 DA1BD11B 		.word	466688986
+ 1182 02ac 00000000 		.word	.LANCHOR0
+ 1183              		.cfi_endproc
+ 1184              	.LFE7:
+ 1185              		.size	threefish512_decrypt_block, .-threefish512_decrypt_block
+ 1186              		.global	C240
+ 1187              		.global	R8
+ 1188              		.section	.rodata
+ 1189              		.align	3
+ 1190              		.set	.LANCHOR0,. + 0
+ 1191              		.type	R8, %object
+ 1192              		.size	R8, 32
+ 1193              	R8:
+ 1194 0000 2E       		.byte	46
+ 1195 0001 24       		.byte	36
+ 1196 0002 13       		.byte	19
+ 1197 0003 25       		.byte	37
+ 1198 0004 21       		.byte	33
+ 1199 0005 1B       		.byte	27
+ 1200 0006 0E       		.byte	14
+ 1201 0007 2A       		.byte	42
+ 1202 0008 11       		.byte	17
+ 1203 0009 31       		.byte	49
+ 1204 000a 24       		.byte	36
+ 1205 000b 27       		.byte	39
+ 1206 000c 2C       		.byte	44
+ 1207 000d 09       		.byte	9
+ 1208 000e 36       		.byte	54
+ 1209 000f 38       		.byte	56
+ 1210 0010 27       		.byte	39
+ 1211 0011 1E       		.byte	30
+ 1212 0012 22       		.byte	34
+ 1213 0013 18       		.byte	24
+ 1214 0014 0D       		.byte	13
+ 1215 0015 32       		.byte	50
+ 1216 0016 0A       		.byte	10
+ 1217 0017 11       		.byte	17
+ 1218 0018 19       		.byte	25
+ 1219 0019 1D       		.byte	29
+ 1220 001a 27       		.byte	39
+ 1221 001b 2B       		.byte	43
+ 1222 001c 08       		.byte	8
+ 1223 001d 23       		.byte	35
+ 1224 001e 38       		.byte	56
+ 1225 001f 16       		.byte	22
+ 1226              		.type	C240, %object
+ 1227              		.size	C240, 8
+ 1228              	C240:
+ 1229 0020 221AFCA9 		.word	-1443096030
+ 1230 0024 DA1BD11B 		.word	466688986
+ 1231              		.text
+ 1232              	.Letext0:
+ 1233              		.file 2 "c:\\program files (x86)\\cypress\\psoc creator\\4.1\\psoc creator\\import\\gnu\\arm\\5.4.
+ 1234              		.file 3 "c:\\program files (x86)\\cypress\\psoc creator\\4.1\\psoc creator\\import\\gnu\\arm\\5.4.
+ 1235              		.section	.debug_info,"",%progbits
+ 1236              	.Ldebug_info0:
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqUfWSx.s 			page 28
+
+
+ 1237 0000 69060000 		.4byte	0x669
+ 1238 0004 0400     		.2byte	0x4
+ 1239 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 1240 000a 04       		.byte	0x4
+ 1241 000b 01       		.uleb128 0x1
+ 1242 000c F6010000 		.4byte	.LASF29
+ 1243 0010 0C       		.byte	0xc
+ 1244 0011 2F010000 		.4byte	.LASF30
+ 1245 0015 BF000000 		.4byte	.LASF31
+ 1246 0019 38010000 		.4byte	.Ldebug_ranges0+0x138
+ 1247 001d 00000000 		.4byte	0
+ 1248 0021 00000000 		.4byte	.Ldebug_line0
+ 1249 0025 02       		.uleb128 0x2
+ 1250 0026 01       		.byte	0x1
+ 1251 0027 06       		.byte	0x6
+ 1252 0028 EA010000 		.4byte	.LASF0
+ 1253 002c 03       		.uleb128 0x3
+ 1254 002d 0B000000 		.4byte	.LASF5
+ 1255 0031 02       		.byte	0x2
+ 1256 0032 1D       		.byte	0x1d
+ 1257 0033 37000000 		.4byte	0x37
+ 1258 0037 02       		.uleb128 0x2
+ 1259 0038 01       		.byte	0x1
+ 1260 0039 08       		.byte	0x8
+ 1261 003a 6B000000 		.4byte	.LASF1
+ 1262 003e 02       		.uleb128 0x2
+ 1263 003f 02       		.byte	0x2
+ 1264 0040 05       		.byte	0x5
+ 1265 0041 BE010000 		.4byte	.LASF2
+ 1266 0045 02       		.uleb128 0x2
+ 1267 0046 02       		.byte	0x2
+ 1268 0047 07       		.byte	0x7
+ 1269 0048 AC000000 		.4byte	.LASF3
+ 1270 004c 02       		.uleb128 0x2
+ 1271 004d 04       		.byte	0x4
+ 1272 004e 05       		.byte	0x5
+ 1273 004f E1010000 		.4byte	.LASF4
+ 1274 0053 03       		.uleb128 0x3
+ 1275 0054 0C010000 		.4byte	.LASF6
+ 1276 0058 02       		.byte	0x2
+ 1277 0059 41       		.byte	0x41
+ 1278 005a 5E000000 		.4byte	0x5e
+ 1279 005e 02       		.uleb128 0x2
+ 1280 005f 04       		.byte	0x4
+ 1281 0060 07       		.byte	0x7
+ 1282 0061 94000000 		.4byte	.LASF7
+ 1283 0065 02       		.uleb128 0x2
+ 1284 0066 08       		.byte	0x8
+ 1285 0067 05       		.byte	0x5
+ 1286 0068 90010000 		.4byte	.LASF8
+ 1287 006c 03       		.uleb128 0x3
+ 1288 006d C8010000 		.4byte	.LASF9
+ 1289 0071 02       		.byte	0x2
+ 1290 0072 5B       		.byte	0x5b
+ 1291 0073 77000000 		.4byte	0x77
+ 1292 0077 02       		.uleb128 0x2
+ 1293 0078 08       		.byte	0x8
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqUfWSx.s 			page 29
+
+
+ 1294 0079 07       		.byte	0x7
+ 1295 007a 61010000 		.4byte	.LASF10
+ 1296 007e 04       		.uleb128 0x4
+ 1297 007f 04       		.byte	0x4
+ 1298 0080 05       		.byte	0x5
+ 1299 0081 696E7400 		.ascii	"int\000"
+ 1300 0085 02       		.uleb128 0x2
+ 1301 0086 04       		.byte	0x4
+ 1302 0087 07       		.byte	0x7
+ 1303 0088 54010000 		.4byte	.LASF11
+ 1304 008c 03       		.uleb128 0x3
+ 1305 008d 78010000 		.4byte	.LASF12
+ 1306 0091 03       		.byte	0x3
+ 1307 0092 18       		.byte	0x18
+ 1308 0093 2C000000 		.4byte	0x2c
+ 1309 0097 03       		.uleb128 0x3
+ 1310 0098 D8010000 		.4byte	.LASF13
+ 1311 009c 03       		.byte	0x3
+ 1312 009d 30       		.byte	0x30
+ 1313 009e 53000000 		.4byte	0x53
+ 1314 00a2 03       		.uleb128 0x3
+ 1315 00a3 2E000000 		.4byte	.LASF14
+ 1316 00a7 03       		.byte	0x3
+ 1317 00a8 3C       		.byte	0x3c
+ 1318 00a9 6C000000 		.4byte	0x6c
+ 1319 00ad 05       		.uleb128 0x5
+ 1320 00ae 9E010000 		.4byte	.LASF16
+ 1321 00b2 01       		.byte	0x1
+ 1322 00b3 4C       		.byte	0x4c
+ 1323 00b4 01       		.byte	0x1
+ 1324 00b5 F6000000 		.4byte	0xf6
+ 1325 00b9 06       		.uleb128 0x6
+ 1326 00ba 793000   		.ascii	"y0\000"
+ 1327 00bd 01       		.byte	0x1
+ 1328 00be 4C       		.byte	0x4c
+ 1329 00bf F6000000 		.4byte	0xf6
+ 1330 00c3 06       		.uleb128 0x6
+ 1331 00c4 793100   		.ascii	"y1\000"
+ 1332 00c7 01       		.byte	0x1
+ 1333 00c8 4C       		.byte	0x4c
+ 1334 00c9 F6000000 		.4byte	0xf6
+ 1335 00cd 07       		.uleb128 0x7
+ 1336 00ce 26010000 		.4byte	.LASF15
+ 1337 00d2 01       		.byte	0x1
+ 1338 00d3 4C       		.byte	0x4c
+ 1339 00d4 8C000000 		.4byte	0x8c
+ 1340 00d8 06       		.uleb128 0x6
+ 1341 00d9 6A00     		.ascii	"j\000"
+ 1342 00db 01       		.byte	0x1
+ 1343 00dc 4C       		.byte	0x4c
+ 1344 00dd 8C000000 		.4byte	0x8c
+ 1345 00e1 06       		.uleb128 0x6
+ 1346 00e2 783000   		.ascii	"x0\000"
+ 1347 00e5 01       		.byte	0x1
+ 1348 00e6 4C       		.byte	0x4c
+ 1349 00e7 A2000000 		.4byte	0xa2
+ 1350 00eb 06       		.uleb128 0x6
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqUfWSx.s 			page 30
+
+
+ 1351 00ec 783100   		.ascii	"x1\000"
+ 1352 00ef 01       		.byte	0x1
+ 1353 00f0 4C       		.byte	0x4c
+ 1354 00f1 A2000000 		.4byte	0xa2
+ 1355 00f5 00       		.byte	0
+ 1356 00f6 08       		.uleb128 0x8
+ 1357 00f7 04       		.byte	0x4
+ 1358 00f8 A2000000 		.4byte	0xa2
+ 1359 00fc 05       		.uleb128 0x5
+ 1360 00fd 80010000 		.4byte	.LASF17
+ 1361 0101 01       		.byte	0x1
+ 1362 0102 54       		.byte	0x54
+ 1363 0103 01       		.byte	0x1
+ 1364 0104 45010000 		.4byte	0x145
+ 1365 0108 06       		.uleb128 0x6
+ 1366 0109 783000   		.ascii	"x0\000"
+ 1367 010c 01       		.byte	0x1
+ 1368 010d 54       		.byte	0x54
+ 1369 010e F6000000 		.4byte	0xf6
+ 1370 0112 06       		.uleb128 0x6
+ 1371 0113 783100   		.ascii	"x1\000"
+ 1372 0116 01       		.byte	0x1
+ 1373 0117 54       		.byte	0x54
+ 1374 0118 F6000000 		.4byte	0xf6
+ 1375 011c 07       		.uleb128 0x7
+ 1376 011d 26010000 		.4byte	.LASF15
+ 1377 0121 01       		.byte	0x1
+ 1378 0122 54       		.byte	0x54
+ 1379 0123 8C000000 		.4byte	0x8c
+ 1380 0127 06       		.uleb128 0x6
+ 1381 0128 6A00     		.ascii	"j\000"
+ 1382 012a 01       		.byte	0x1
+ 1383 012b 54       		.byte	0x54
+ 1384 012c 8C000000 		.4byte	0x8c
+ 1385 0130 06       		.uleb128 0x6
+ 1386 0131 793000   		.ascii	"y0\000"
+ 1387 0134 01       		.byte	0x1
+ 1388 0135 54       		.byte	0x54
+ 1389 0136 A2000000 		.4byte	0xa2
+ 1390 013a 06       		.uleb128 0x6
+ 1391 013b 793100   		.ascii	"y1\000"
+ 1392 013e 01       		.byte	0x1
+ 1393 013f 54       		.byte	0x54
+ 1394 0140 A2000000 		.4byte	0xa2
+ 1395 0144 00       		.byte	0
+ 1396 0145 05       		.uleb128 0x5
+ 1397 0146 17010000 		.4byte	.LASF18
+ 1398 014a 01       		.byte	0x1
+ 1399 014b 40       		.byte	0x40
+ 1400 014c 01       		.byte	0x1
+ 1401 014d 73010000 		.4byte	0x173
+ 1402 0151 06       		.uleb128 0x6
+ 1403 0152 64737400 		.ascii	"dst\000"
+ 1404 0156 01       		.byte	0x1
+ 1405 0157 40       		.byte	0x40
+ 1406 0158 73010000 		.4byte	0x173
+ 1407 015c 06       		.uleb128 0x6
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqUfWSx.s 			page 31
+
+
+ 1408 015d 73726300 		.ascii	"src\000"
+ 1409 0161 01       		.byte	0x1
+ 1410 0162 40       		.byte	0x40
+ 1411 0163 79010000 		.4byte	0x179
+ 1412 0167 07       		.uleb128 0x7
+ 1413 0168 B8010000 		.4byte	.LASF19
+ 1414 016c 01       		.byte	0x1
+ 1415 016d 40       		.byte	0x40
+ 1416 016e 97000000 		.4byte	0x97
+ 1417 0172 00       		.byte	0
+ 1418 0173 08       		.uleb128 0x8
+ 1419 0174 04       		.byte	0x4
+ 1420 0175 8C000000 		.4byte	0x8c
+ 1421 0179 08       		.uleb128 0x8
+ 1422 017a 04       		.byte	0x4
+ 1423 017b 7F010000 		.4byte	0x17f
+ 1424 017f 09       		.uleb128 0x9
+ 1425 0180 A2000000 		.4byte	0xa2
+ 1426 0184 0A       		.uleb128 0xa
+ 1427 0185 A3010000 		.4byte	.LASF32
+ 1428 0189 01       		.byte	0x1
+ 1429 018a 1C       		.byte	0x1c
+ 1430 018b A2000000 		.4byte	0xa2
+ 1431 018f 01       		.byte	0x1
+ 1432 0190 A0010000 		.4byte	0x1a0
+ 1433 0194 06       		.uleb128 0x6
+ 1434 0195 73726300 		.ascii	"src\000"
+ 1435 0199 01       		.byte	0x1
+ 1436 019a 1C       		.byte	0x1c
+ 1437 019b A0010000 		.4byte	0x1a0
+ 1438 019f 00       		.byte	0
+ 1439 01a0 08       		.uleb128 0x8
+ 1440 01a1 04       		.byte	0x4
+ 1441 01a2 A6010000 		.4byte	0x1a6
+ 1442 01a6 09       		.uleb128 0x9
+ 1443 01a7 8C000000 		.4byte	0x8c
+ 1444 01ab 0B       		.uleb128 0xb
+ 1445 01ac 5C000000 		.4byte	.LASF33
+ 1446 01b0 01       		.byte	0x1
+ 1447 01b1 36       		.byte	0x36
+ 1448 01b2 00000000 		.4byte	.LFB2
+ 1449 01b6 42000000 		.4byte	.LFE2-.LFB2
+ 1450 01ba 01       		.uleb128 0x1
+ 1451 01bb 9C       		.byte	0x9c
+ 1452 01bc 07020000 		.4byte	0x207
+ 1453 01c0 0C       		.uleb128 0xc
+ 1454 01c1 64737400 		.ascii	"dst\000"
+ 1455 01c5 01       		.byte	0x1
+ 1456 01c6 36       		.byte	0x36
+ 1457 01c7 F6000000 		.4byte	0xf6
+ 1458 01cb 00000000 		.4byte	.LLST0
+ 1459 01cf 0C       		.uleb128 0xc
+ 1460 01d0 73726300 		.ascii	"src\000"
+ 1461 01d4 01       		.byte	0x1
+ 1462 01d5 36       		.byte	0x36
+ 1463 01d6 A0010000 		.4byte	0x1a0
+ 1464 01da 3F000000 		.4byte	.LLST1
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqUfWSx.s 			page 32
+
+
+ 1465 01de 0D       		.uleb128 0xd
+ 1466 01df B8010000 		.4byte	.LASF19
+ 1467 01e3 01       		.byte	0x1
+ 1468 01e4 36       		.byte	0x36
+ 1469 01e5 97000000 		.4byte	0x97
+ 1470 01e9 5D000000 		.4byte	.LLST2
+ 1471 01ed 0E       		.uleb128 0xe
+ 1472 01ee 84010000 		.4byte	0x184
+ 1473 01f2 06000000 		.4byte	.LBB20
+ 1474 01f6 00000000 		.4byte	.Ldebug_ranges0+0
+ 1475 01fa 01       		.byte	0x1
+ 1476 01fb 3A       		.byte	0x3a
+ 1477 01fc 0F       		.uleb128 0xf
+ 1478 01fd 94010000 		.4byte	0x194
+ 1479 0201 88000000 		.4byte	.LLST3
+ 1480 0205 00       		.byte	0
+ 1481 0206 00       		.byte	0
+ 1482 0207 05       		.uleb128 0x5
+ 1483 0208 15000000 		.4byte	.LASF20
+ 1484 020c 01       		.byte	0x1
+ 1485 020d 29       		.byte	0x29
+ 1486 020e 01       		.byte	0x1
+ 1487 020f 2A020000 		.4byte	0x22a
+ 1488 0213 06       		.uleb128 0x6
+ 1489 0214 64737400 		.ascii	"dst\000"
+ 1490 0218 01       		.byte	0x1
+ 1491 0219 29       		.byte	0x29
+ 1492 021a 73010000 		.4byte	0x173
+ 1493 021e 06       		.uleb128 0x6
+ 1494 021f 73726300 		.ascii	"src\000"
+ 1495 0223 01       		.byte	0x1
+ 1496 0224 29       		.byte	0x29
+ 1497 0225 A2000000 		.4byte	0xa2
+ 1498 0229 00       		.byte	0
+ 1499 022a 10       		.uleb128 0x10
+ 1500 022b 45010000 		.4byte	0x145
+ 1501 022f 00000000 		.4byte	.LFB8
+ 1502 0233 30000000 		.4byte	.LFE8-.LFB8
+ 1503 0237 01       		.uleb128 0x1
+ 1504 0238 9C       		.byte	0x9c
+ 1505 0239 7B020000 		.4byte	0x27b
+ 1506 023d 0F       		.uleb128 0xf
+ 1507 023e 51010000 		.4byte	0x151
+ 1508 0242 9B000000 		.4byte	.LLST4
+ 1509 0246 0F       		.uleb128 0xf
+ 1510 0247 5C010000 		.4byte	0x15c
+ 1511 024b B9000000 		.4byte	.LLST5
+ 1512 024f 0F       		.uleb128 0xf
+ 1513 0250 67010000 		.4byte	0x167
+ 1514 0254 E4000000 		.4byte	.LLST6
+ 1515 0258 0E       		.uleb128 0xe
+ 1516 0259 07020000 		.4byte	0x207
+ 1517 025d 0A000000 		.4byte	.LBB26
+ 1518 0261 18000000 		.4byte	.Ldebug_ranges0+0x18
+ 1519 0265 01       		.byte	0x1
+ 1520 0266 44       		.byte	0x44
+ 1521 0267 0F       		.uleb128 0xf
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqUfWSx.s 			page 33
+
+
+ 1522 0268 1E020000 		.4byte	0x21e
+ 1523 026c F8000000 		.4byte	.LLST7
+ 1524 0270 0F       		.uleb128 0xf
+ 1525 0271 13020000 		.4byte	0x213
+ 1526 0275 10010000 		.4byte	.LLST8
+ 1527 0279 00       		.byte	0
+ 1528 027a 00       		.byte	0
+ 1529 027b 11       		.uleb128 0x11
+ 1530 027c 37000000 		.4byte	.LASF26
+ 1531 0280 01       		.byte	0x1
+ 1532 0281 5B       		.byte	0x5b
+ 1533 0282 00000000 		.4byte	.LFB6
+ 1534 0286 A8020000 		.4byte	.LFE6-.LFB6
+ 1535 028a 01       		.uleb128 0x1
+ 1536 028b 9C       		.byte	0x9c
+ 1537 028c 39040000 		.4byte	0x439
+ 1538 0290 0D       		.uleb128 0xd
+ 1539 0291 00000000 		.4byte	.LASF21
+ 1540 0295 01       		.byte	0x1
+ 1541 0296 5B       		.byte	0x5b
+ 1542 0297 73010000 		.4byte	0x173
+ 1543 029b 23010000 		.4byte	.LLST9
+ 1544 029f 0C       		.uleb128 0xc
+ 1545 02a0 6B657900 		.ascii	"key\000"
+ 1546 02a4 01       		.byte	0x1
+ 1547 02a5 5B       		.byte	0x5b
+ 1548 02a6 A0010000 		.4byte	0x1a0
+ 1549 02aa 43010000 		.4byte	.LLST10
+ 1550 02ae 0D       		.uleb128 0xd
+ 1551 02af A6000000 		.4byte	.LASF22
+ 1552 02b3 01       		.byte	0x1
+ 1553 02b4 5B       		.byte	0x5b
+ 1554 02b5 A0010000 		.4byte	0x1a0
+ 1555 02b9 64010000 		.4byte	.LLST11
+ 1556 02bd 0D       		.uleb128 0xd
+ 1557 02be 52000000 		.4byte	.LASF23
+ 1558 02c2 01       		.byte	0x1
+ 1559 02c3 5B       		.byte	0x5b
+ 1560 02c4 A0010000 		.4byte	0x1a0
+ 1561 02c8 9B010000 		.4byte	.LLST12
+ 1562 02cc 12       		.uleb128 0x12
+ 1563 02cd 6B00     		.ascii	"k\000"
+ 1564 02cf 01       		.byte	0x1
+ 1565 02d0 5D       		.byte	0x5d
+ 1566 02d1 39040000 		.4byte	0x439
+ 1567 02d5 03       		.uleb128 0x3
+ 1568 02d6 91       		.byte	0x91
+ 1569 02d7 A07F     		.sleb128 -96
+ 1570 02d9 12       		.uleb128 0x12
+ 1571 02da 7400     		.ascii	"t\000"
+ 1572 02dc 01       		.byte	0x1
+ 1573 02dd 5E       		.byte	0x5e
+ 1574 02de 50040000 		.4byte	0x450
+ 1575 02e2 03       		.uleb128 0x3
+ 1576 02e3 91       		.byte	0x91
+ 1577 02e4 C87E     		.sleb128 -184
+ 1578 02e6 12       		.uleb128 0x12
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqUfWSx.s 			page 34
+
+
+ 1579 02e7 7600     		.ascii	"v\000"
+ 1580 02e9 01       		.byte	0x1
+ 1581 02ea 5F       		.byte	0x5f
+ 1582 02eb 60040000 		.4byte	0x460
+ 1583 02ef 03       		.uleb128 0x3
+ 1584 02f0 91       		.byte	0x91
+ 1585 02f1 E07E     		.sleb128 -160
+ 1586 02f3 13       		.uleb128 0x13
+ 1587 02f4 C6000000 		.4byte	.LBB30
+ 1588 02f8 AC010000 		.4byte	.LBE30-.LBB30
+ 1589 02fc A8030000 		.4byte	0x3a8
+ 1590 0300 14       		.uleb128 0x14
+ 1591 0301 26010000 		.4byte	.LASF15
+ 1592 0305 01       		.byte	0x1
+ 1593 0306 6C       		.byte	0x6c
+ 1594 0307 8C000000 		.4byte	0x8c
+ 1595 030b C7010000 		.4byte	.LLST13
+ 1596 030f 15       		.uleb128 0x15
+ 1597 0310 30000000 		.4byte	.Ldebug_ranges0+0x30
+ 1598 0314 14       		.uleb128 0x14
+ 1599 0315 28000000 		.4byte	.LASF24
+ 1600 0319 01       		.byte	0x1
+ 1601 031a 6E       		.byte	0x6e
+ 1602 031b A2000000 		.4byte	0xa2
+ 1603 031f E8010000 		.4byte	.LLST14
+ 1604 0323 16       		.uleb128 0x16
+ 1605 0324 50000000 		.4byte	.Ldebug_ranges0+0x50
+ 1606 0328 4D030000 		.4byte	0x34d
+ 1607 032c 17       		.uleb128 0x17
+ 1608 032d 7300     		.ascii	"s\000"
+ 1609 032f 01       		.byte	0x1
+ 1610 0330 77       		.byte	0x77
+ 1611 0331 8C000000 		.4byte	0x8c
+ 1612 0335 1D020000 		.4byte	.LLST15
+ 1613 0339 18       		.uleb128 0x18
+ 1614 033a D0000000 		.4byte	.LBB33
+ 1615 033e 1C000000 		.4byte	.LBE33-.LBB33
+ 1616 0342 19       		.uleb128 0x19
+ 1617 0343 6900     		.ascii	"i\000"
+ 1618 0345 01       		.byte	0x1
+ 1619 0346 73       		.byte	0x73
+ 1620 0347 7E000000 		.4byte	0x7e
+ 1621 034b 00       		.byte	0
+ 1622 034c 00       		.byte	0
+ 1623 034d 15       		.uleb128 0x15
+ 1624 034e 70000000 		.4byte	.Ldebug_ranges0+0x70
+ 1625 0352 17       		.uleb128 0x17
+ 1626 0353 6A00     		.ascii	"j\000"
+ 1627 0355 01       		.byte	0x1
+ 1628 0356 8A       		.byte	0x8a
+ 1629 0357 7E000000 		.4byte	0x7e
+ 1630 035b 37020000 		.4byte	.LLST16
+ 1631 035f 0E       		.uleb128 0xe
+ 1632 0360 AD000000 		.4byte	0xad
+ 1633 0364 98010000 		.4byte	.LBB35
+ 1634 0368 88000000 		.4byte	.Ldebug_ranges0+0x88
+ 1635 036c 01       		.byte	0x1
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqUfWSx.s 			page 35
+
+
+ 1636 036d 8B       		.byte	0x8b
+ 1637 036e 0F       		.uleb128 0xf
+ 1638 036f EB000000 		.4byte	0xeb
+ 1639 0373 6C020000 		.4byte	.LLST17
+ 1640 0377 0F       		.uleb128 0xf
+ 1641 0378 E1000000 		.4byte	0xe1
+ 1642 037c A1020000 		.4byte	.LLST18
+ 1643 0380 0F       		.uleb128 0xf
+ 1644 0381 D8000000 		.4byte	0xd8
+ 1645 0385 B5020000 		.4byte	.LLST19
+ 1646 0389 0F       		.uleb128 0xf
+ 1647 038a CD000000 		.4byte	0xcd
+ 1648 038e C8020000 		.4byte	.LLST20
+ 1649 0392 0F       		.uleb128 0xf
+ 1650 0393 C3000000 		.4byte	0xc3
+ 1651 0397 DD020000 		.4byte	.LLST21
+ 1652 039b 0F       		.uleb128 0xf
+ 1653 039c B9000000 		.4byte	0xb9
+ 1654 03a0 F2020000 		.4byte	.LLST22
+ 1655 03a4 00       		.byte	0
+ 1656 03a5 00       		.byte	0
+ 1657 03a6 00       		.byte	0
+ 1658 03a7 00       		.byte	0
+ 1659 03a8 13       		.uleb128 0x13
+ 1660 03a9 72020000 		.4byte	.LBB48
+ 1661 03ad 1C000000 		.4byte	.LBE48-.LBB48
+ 1662 03b1 BF030000 		.4byte	0x3bf
+ 1663 03b5 19       		.uleb128 0x19
+ 1664 03b6 6900     		.ascii	"i\000"
+ 1665 03b8 01       		.byte	0x1
+ 1666 03b9 99       		.byte	0x99
+ 1667 03ba 7E000000 		.4byte	0x7e
+ 1668 03be 00       		.byte	0
+ 1669 03bf 1A       		.uleb128 0x1a
+ 1670 03c0 12000000 		.4byte	.LVL17
+ 1671 03c4 AB010000 		.4byte	0x1ab
+ 1672 03c8 E0030000 		.4byte	0x3e0
+ 1673 03cc 1B       		.uleb128 0x1b
+ 1674 03cd 01       		.uleb128 0x1
+ 1675 03ce 50       		.byte	0x50
+ 1676 03cf 03       		.uleb128 0x3
+ 1677 03d0 91       		.byte	0x91
+ 1678 03d1 A07F     		.sleb128 -96
+ 1679 03d3 1B       		.uleb128 0x1b
+ 1680 03d4 01       		.uleb128 0x1
+ 1681 03d5 51       		.byte	0x51
+ 1682 03d6 03       		.uleb128 0x3
+ 1683 03d7 F3       		.byte	0xf3
+ 1684 03d8 01       		.uleb128 0x1
+ 1685 03d9 51       		.byte	0x51
+ 1686 03da 1B       		.uleb128 0x1b
+ 1687 03db 01       		.uleb128 0x1
+ 1688 03dc 52       		.byte	0x52
+ 1689 03dd 01       		.uleb128 0x1
+ 1690 03de 38       		.byte	0x38
+ 1691 03df 00       		.byte	0
+ 1692 03e0 1A       		.uleb128 0x1a
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqUfWSx.s 			page 36
+
+
+ 1693 03e1 1E000000 		.4byte	.LVL19
+ 1694 03e5 AB010000 		.4byte	0x1ab
+ 1695 03e9 01040000 		.4byte	0x401
+ 1696 03ed 1B       		.uleb128 0x1b
+ 1697 03ee 01       		.uleb128 0x1
+ 1698 03ef 50       		.byte	0x50
+ 1699 03f0 03       		.uleb128 0x3
+ 1700 03f1 91       		.byte	0x91
+ 1701 03f2 C87E     		.sleb128 -184
+ 1702 03f4 1B       		.uleb128 0x1b
+ 1703 03f5 01       		.uleb128 0x1
+ 1704 03f6 51       		.byte	0x51
+ 1705 03f7 03       		.uleb128 0x3
+ 1706 03f8 F3       		.byte	0xf3
+ 1707 03f9 01       		.uleb128 0x1
+ 1708 03fa 52       		.byte	0x52
+ 1709 03fb 1B       		.uleb128 0x1b
+ 1710 03fc 01       		.uleb128 0x1
+ 1711 03fd 52       		.byte	0x52
+ 1712 03fe 01       		.uleb128 0x1
+ 1713 03ff 32       		.byte	0x32
+ 1714 0400 00       		.byte	0
+ 1715 0401 1A       		.uleb128 0x1a
+ 1716 0402 28000000 		.4byte	.LVL20
+ 1717 0406 AB010000 		.4byte	0x1ab
+ 1718 040a 20040000 		.4byte	0x420
+ 1719 040e 1B       		.uleb128 0x1b
+ 1720 040f 01       		.uleb128 0x1
+ 1721 0410 50       		.byte	0x50
+ 1722 0411 02       		.uleb128 0x2
+ 1723 0412 74       		.byte	0x74
+ 1724 0413 00       		.sleb128 0
+ 1725 0414 1B       		.uleb128 0x1b
+ 1726 0415 01       		.uleb128 0x1
+ 1727 0416 51       		.byte	0x51
+ 1728 0417 02       		.uleb128 0x2
+ 1729 0418 75       		.byte	0x75
+ 1730 0419 00       		.sleb128 0
+ 1731 041a 1B       		.uleb128 0x1b
+ 1732 041b 01       		.uleb128 0x1
+ 1733 041c 52       		.byte	0x52
+ 1734 041d 01       		.uleb128 0x1
+ 1735 041e 38       		.byte	0x38
+ 1736 041f 00       		.byte	0
+ 1737 0420 1C       		.uleb128 0x1c
+ 1738 0421 96020000 		.4byte	.LVL44
+ 1739 0425 2A020000 		.4byte	0x22a
+ 1740 0429 1B       		.uleb128 0x1b
+ 1741 042a 01       		.uleb128 0x1
+ 1742 042b 50       		.byte	0x50
+ 1743 042c 04       		.uleb128 0x4
+ 1744 042d 91       		.byte	0x91
+ 1745 042e B87E     		.sleb128 -200
+ 1746 0430 06       		.byte	0x6
+ 1747 0431 1B       		.uleb128 0x1b
+ 1748 0432 01       		.uleb128 0x1
+ 1749 0433 51       		.byte	0x51
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqUfWSx.s 			page 37
+
+
+ 1750 0434 02       		.uleb128 0x2
+ 1751 0435 75       		.byte	0x75
+ 1752 0436 00       		.sleb128 0
+ 1753 0437 00       		.byte	0
+ 1754 0438 00       		.byte	0
+ 1755 0439 1D       		.uleb128 0x1d
+ 1756 043a A2000000 		.4byte	0xa2
+ 1757 043e 49040000 		.4byte	0x449
+ 1758 0442 1E       		.uleb128 0x1e
+ 1759 0443 49040000 		.4byte	0x449
+ 1760 0447 08       		.byte	0x8
+ 1761 0448 00       		.byte	0
+ 1762 0449 02       		.uleb128 0x2
+ 1763 044a 04       		.byte	0x4
+ 1764 044b 07       		.byte	0x7
+ 1765 044c 87010000 		.4byte	.LASF25
+ 1766 0450 1D       		.uleb128 0x1d
+ 1767 0451 A2000000 		.4byte	0xa2
+ 1768 0455 60040000 		.4byte	0x460
+ 1769 0459 1E       		.uleb128 0x1e
+ 1770 045a 49040000 		.4byte	0x449
+ 1771 045e 02       		.byte	0x2
+ 1772 045f 00       		.byte	0
+ 1773 0460 1D       		.uleb128 0x1d
+ 1774 0461 A2000000 		.4byte	0xa2
+ 1775 0465 70040000 		.4byte	0x470
+ 1776 0469 1E       		.uleb128 0x1e
+ 1777 046a 49040000 		.4byte	0x449
+ 1778 046e 07       		.byte	0x7
+ 1779 046f 00       		.byte	0
+ 1780 0470 11       		.uleb128 0x11
+ 1781 0471 79000000 		.4byte	.LASF27
+ 1782 0475 01       		.byte	0x1
+ 1783 0476 A5       		.byte	0xa5
+ 1784 0477 00000000 		.4byte	.LFB7
+ 1785 047b B0020000 		.4byte	.LFE7-.LFB7
+ 1786 047f 01       		.uleb128 0x1
+ 1787 0480 9C       		.byte	0x9c
+ 1788 0481 30060000 		.4byte	0x630
+ 1789 0485 0D       		.uleb128 0xd
+ 1790 0486 52000000 		.4byte	.LASF23
+ 1791 048a 01       		.byte	0x1
+ 1792 048b A5       		.byte	0xa5
+ 1793 048c 73010000 		.4byte	0x173
+ 1794 0490 05030000 		.4byte	.LLST23
+ 1795 0494 0C       		.uleb128 0xc
+ 1796 0495 6B657900 		.ascii	"key\000"
+ 1797 0499 01       		.byte	0x1
+ 1798 049a A5       		.byte	0xa5
+ 1799 049b A0010000 		.4byte	0x1a0
+ 1800 049f 25030000 		.4byte	.LLST24
+ 1801 04a3 0D       		.uleb128 0xd
+ 1802 04a4 A6000000 		.4byte	.LASF22
+ 1803 04a8 01       		.byte	0x1
+ 1804 04a9 A5       		.byte	0xa5
+ 1805 04aa A0010000 		.4byte	0x1a0
+ 1806 04ae 46030000 		.4byte	.LLST25
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqUfWSx.s 			page 38
+
+
+ 1807 04b2 0D       		.uleb128 0xd
+ 1808 04b3 00000000 		.4byte	.LASF21
+ 1809 04b7 01       		.byte	0x1
+ 1810 04b8 A5       		.byte	0xa5
+ 1811 04b9 A0010000 		.4byte	0x1a0
+ 1812 04bd 7D030000 		.4byte	.LLST26
+ 1813 04c1 12       		.uleb128 0x12
+ 1814 04c2 6B00     		.ascii	"k\000"
+ 1815 04c4 01       		.byte	0x1
+ 1816 04c5 A7       		.byte	0xa7
+ 1817 04c6 39040000 		.4byte	0x439
+ 1818 04ca 03       		.uleb128 0x3
+ 1819 04cb 91       		.byte	0x91
+ 1820 04cc A07F     		.sleb128 -96
+ 1821 04ce 12       		.uleb128 0x12
+ 1822 04cf 7400     		.ascii	"t\000"
+ 1823 04d1 01       		.byte	0x1
+ 1824 04d2 A8       		.byte	0xa8
+ 1825 04d3 50040000 		.4byte	0x450
+ 1826 04d7 03       		.uleb128 0x3
+ 1827 04d8 91       		.byte	0x91
+ 1828 04d9 C87E     		.sleb128 -184
+ 1829 04db 12       		.uleb128 0x12
+ 1830 04dc 7600     		.ascii	"v\000"
+ 1831 04de 01       		.byte	0x1
+ 1832 04df A9       		.byte	0xa9
+ 1833 04e0 60040000 		.4byte	0x460
+ 1834 04e4 03       		.uleb128 0x3
+ 1835 04e5 91       		.byte	0x91
+ 1836 04e6 E07E     		.sleb128 -160
+ 1837 04e8 13       		.uleb128 0x13
+ 1838 04e9 CA000000 		.4byte	.LBB49
+ 1839 04ed 26000000 		.4byte	.LBE49-.LBB49
+ 1840 04f1 03050000 		.4byte	0x503
+ 1841 04f5 17       		.uleb128 0x17
+ 1842 04f6 6900     		.ascii	"i\000"
+ 1843 04f8 01       		.byte	0x1
+ 1844 04f9 B8       		.byte	0xb8
+ 1845 04fa 7E000000 		.4byte	0x7e
+ 1846 04fe A9030000 		.4byte	.LLST27
+ 1847 0502 00       		.byte	0
+ 1848 0503 13       		.uleb128 0x13
+ 1849 0504 F0000000 		.4byte	.LBB50
+ 1850 0508 A6010000 		.4byte	.LBE50-.LBB50
+ 1851 050c B6050000 		.4byte	0x5b6
+ 1852 0510 1F       		.uleb128 0x1f
+ 1853 0511 26010000 		.4byte	.LASF15
+ 1854 0515 01       		.byte	0x1
+ 1855 0516 BB       		.byte	0xbb
+ 1856 0517 8C000000 		.4byte	0x8c
+ 1857 051b 03       		.uleb128 0x3
+ 1858 051c 91       		.byte	0x91
+ 1859 051d 907E     		.sleb128 -240
+ 1860 051f 15       		.uleb128 0x15
+ 1861 0520 B0000000 		.4byte	.Ldebug_ranges0+0xb0
+ 1862 0524 14       		.uleb128 0x14
+ 1863 0525 28000000 		.4byte	.LASF24
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqUfWSx.s 			page 39
+
+
+ 1864 0529 01       		.byte	0x1
+ 1865 052a BD       		.byte	0xbd
+ 1866 052b A2000000 		.4byte	0xa2
+ 1867 052f BD030000 		.4byte	.LLST28
+ 1868 0533 16       		.uleb128 0x16
+ 1869 0534 C8000000 		.4byte	.Ldebug_ranges0+0xc8
+ 1870 0538 90050000 		.4byte	0x590
+ 1871 053c 17       		.uleb128 0x17
+ 1872 053d 6A00     		.ascii	"j\000"
+ 1873 053f 01       		.byte	0x1
+ 1874 0540 CA       		.byte	0xca
+ 1875 0541 7E000000 		.4byte	0x7e
+ 1876 0545 25040000 		.4byte	.LLST29
+ 1877 0549 0E       		.uleb128 0xe
+ 1878 054a FC000000 		.4byte	0xfc
+ 1879 054e 1E010000 		.4byte	.LBB53
+ 1880 0552 E8000000 		.4byte	.Ldebug_ranges0+0xe8
+ 1881 0556 01       		.byte	0x1
+ 1882 0557 CB       		.byte	0xcb
+ 1883 0558 0F       		.uleb128 0xf
+ 1884 0559 3A010000 		.4byte	0x13a
+ 1885 055d 6B040000 		.4byte	.LLST30
+ 1886 0561 0F       		.uleb128 0xf
+ 1887 0562 30010000 		.4byte	0x130
+ 1888 0566 7F040000 		.4byte	.LLST31
+ 1889 056a 0F       		.uleb128 0xf
+ 1890 056b 27010000 		.4byte	0x127
+ 1891 056f 97040000 		.4byte	.LLST32
+ 1892 0573 0F       		.uleb128 0xf
+ 1893 0574 1C010000 		.4byte	0x11c
+ 1894 0578 AC040000 		.4byte	.LLST33
+ 1895 057c 0F       		.uleb128 0xf
+ 1896 057d 12010000 		.4byte	0x112
+ 1897 0581 C1040000 		.4byte	.LLST34
+ 1898 0585 0F       		.uleb128 0xf
+ 1899 0586 08010000 		.4byte	0x108
+ 1900 058a D6040000 		.4byte	.LLST35
+ 1901 058e 00       		.byte	0
+ 1902 058f 00       		.byte	0
+ 1903 0590 18       		.uleb128 0x18
+ 1904 0591 AC010000 		.4byte	.LBB65
+ 1905 0595 EA000000 		.4byte	.LBE65-.LBB65
+ 1906 0599 12       		.uleb128 0x12
+ 1907 059a 7300     		.ascii	"s\000"
+ 1908 059c 01       		.byte	0x1
+ 1909 059d D1       		.byte	0xd1
+ 1910 059e 8C000000 		.4byte	0x8c
+ 1911 05a2 01       		.uleb128 0x1
+ 1912 05a3 54       		.byte	0x54
+ 1913 05a4 15       		.uleb128 0x15
+ 1914 05a5 18010000 		.4byte	.Ldebug_ranges0+0x118
+ 1915 05a9 19       		.uleb128 0x19
+ 1916 05aa 6900     		.ascii	"i\000"
+ 1917 05ac 01       		.byte	0x1
+ 1918 05ad E3       		.byte	0xe3
+ 1919 05ae 7E000000 		.4byte	0x7e
+ 1920 05b2 00       		.byte	0
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqUfWSx.s 			page 40
+
+
+ 1921 05b3 00       		.byte	0
+ 1922 05b4 00       		.byte	0
+ 1923 05b5 00       		.byte	0
+ 1924 05b6 1A       		.uleb128 0x1a
+ 1925 05b7 14000000 		.4byte	.LVL49
+ 1926 05bb AB010000 		.4byte	0x1ab
+ 1927 05bf D6050000 		.4byte	0x5d6
+ 1928 05c3 1B       		.uleb128 0x1b
+ 1929 05c4 01       		.uleb128 0x1
+ 1930 05c5 50       		.byte	0x50
+ 1931 05c6 02       		.uleb128 0x2
+ 1932 05c7 74       		.byte	0x74
+ 1933 05c8 00       		.sleb128 0
+ 1934 05c9 1B       		.uleb128 0x1b
+ 1935 05ca 01       		.uleb128 0x1
+ 1936 05cb 51       		.byte	0x51
+ 1937 05cc 03       		.uleb128 0x3
+ 1938 05cd F3       		.byte	0xf3
+ 1939 05ce 01       		.uleb128 0x1
+ 1940 05cf 51       		.byte	0x51
+ 1941 05d0 1B       		.uleb128 0x1b
+ 1942 05d1 01       		.uleb128 0x1
+ 1943 05d2 52       		.byte	0x52
+ 1944 05d3 01       		.uleb128 0x1
+ 1945 05d4 38       		.byte	0x38
+ 1946 05d5 00       		.byte	0
+ 1947 05d6 1A       		.uleb128 0x1a
+ 1948 05d7 20000000 		.4byte	.LVL51
+ 1949 05db AB010000 		.4byte	0x1ab
+ 1950 05df F7050000 		.4byte	0x5f7
+ 1951 05e3 1B       		.uleb128 0x1b
+ 1952 05e4 01       		.uleb128 0x1
+ 1953 05e5 50       		.byte	0x50
+ 1954 05e6 03       		.uleb128 0x3
+ 1955 05e7 91       		.byte	0x91
+ 1956 05e8 C87E     		.sleb128 -184
+ 1957 05ea 1B       		.uleb128 0x1b
+ 1958 05eb 01       		.uleb128 0x1
+ 1959 05ec 51       		.byte	0x51
+ 1960 05ed 03       		.uleb128 0x3
+ 1961 05ee F3       		.byte	0xf3
+ 1962 05ef 01       		.uleb128 0x1
+ 1963 05f0 52       		.byte	0x52
+ 1964 05f1 1B       		.uleb128 0x1b
+ 1965 05f2 01       		.uleb128 0x1
+ 1966 05f3 52       		.byte	0x52
+ 1967 05f4 01       		.uleb128 0x1
+ 1968 05f5 32       		.byte	0x32
+ 1969 05f6 00       		.byte	0
+ 1970 05f7 1A       		.uleb128 0x1a
+ 1971 05f8 2A000000 		.4byte	.LVL52
+ 1972 05fc AB010000 		.4byte	0x1ab
+ 1973 0600 16060000 		.4byte	0x616
+ 1974 0604 1B       		.uleb128 0x1b
+ 1975 0605 01       		.uleb128 0x1
+ 1976 0606 50       		.byte	0x50
+ 1977 0607 02       		.uleb128 0x2
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqUfWSx.s 			page 41
+
+
+ 1978 0608 75       		.byte	0x75
+ 1979 0609 00       		.sleb128 0
+ 1980 060a 1B       		.uleb128 0x1b
+ 1981 060b 01       		.uleb128 0x1
+ 1982 060c 51       		.byte	0x51
+ 1983 060d 02       		.uleb128 0x2
+ 1984 060e 76       		.byte	0x76
+ 1985 060f 00       		.sleb128 0
+ 1986 0610 1B       		.uleb128 0x1b
+ 1987 0611 01       		.uleb128 0x1
+ 1988 0612 52       		.byte	0x52
+ 1989 0613 01       		.uleb128 0x1
+ 1990 0614 38       		.byte	0x38
+ 1991 0615 00       		.byte	0
+ 1992 0616 1C       		.uleb128 0x1c
+ 1993 0617 9E020000 		.4byte	.LVL78
+ 1994 061b 2A020000 		.4byte	0x22a
+ 1995 061f 1B       		.uleb128 0x1b
+ 1996 0620 01       		.uleb128 0x1
+ 1997 0621 50       		.byte	0x50
+ 1998 0622 04       		.uleb128 0x4
+ 1999 0623 91       		.byte	0x91
+ 2000 0624 B87E     		.sleb128 -200
+ 2001 0626 06       		.byte	0x6
+ 2002 0627 1B       		.uleb128 0x1b
+ 2003 0628 01       		.uleb128 0x1
+ 2004 0629 51       		.byte	0x51
+ 2005 062a 03       		.uleb128 0x3
+ 2006 062b 91       		.byte	0x91
+ 2007 062c E07E     		.sleb128 -160
+ 2008 062e 00       		.byte	0
+ 2009 062f 00       		.byte	0
+ 2010 0630 1D       		.uleb128 0x1d
+ 2011 0631 A6010000 		.4byte	0x1a6
+ 2012 0635 46060000 		.4byte	0x646
+ 2013 0639 1E       		.uleb128 0x1e
+ 2014 063a 49040000 		.4byte	0x449
+ 2015 063e 07       		.byte	0x7
+ 2016 063f 1E       		.uleb128 0x1e
+ 2017 0640 49040000 		.4byte	0x449
+ 2018 0644 03       		.byte	0x3
+ 2019 0645 00       		.byte	0
+ 2020 0646 20       		.uleb128 0x20
+ 2021 0647 523800   		.ascii	"R8\000"
+ 2022 064a 01       		.byte	0x1
+ 2023 064b 06       		.byte	0x6
+ 2024 064c 56060000 		.4byte	0x656
+ 2025 0650 05       		.uleb128 0x5
+ 2026 0651 03       		.byte	0x3
+ 2027 0652 00000000 		.4byte	R8
+ 2028 0656 09       		.uleb128 0x9
+ 2029 0657 30060000 		.4byte	0x630
+ 2030 065b 21       		.uleb128 0x21
+ 2031 065c D3010000 		.4byte	.LASF28
+ 2032 0660 01       		.byte	0x1
+ 2033 0661 12       		.byte	0x12
+ 2034 0662 7F010000 		.4byte	0x17f
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqUfWSx.s 			page 42
+
+
+ 2035 0666 05       		.uleb128 0x5
+ 2036 0667 03       		.byte	0x3
+ 2037 0668 00000000 		.4byte	C240
+ 2038 066c 00       		.byte	0
+ 2039              		.section	.debug_abbrev,"",%progbits
+ 2040              	.Ldebug_abbrev0:
+ 2041 0000 01       		.uleb128 0x1
+ 2042 0001 11       		.uleb128 0x11
+ 2043 0002 01       		.byte	0x1
+ 2044 0003 25       		.uleb128 0x25
+ 2045 0004 0E       		.uleb128 0xe
+ 2046 0005 13       		.uleb128 0x13
+ 2047 0006 0B       		.uleb128 0xb
+ 2048 0007 03       		.uleb128 0x3
+ 2049 0008 0E       		.uleb128 0xe
+ 2050 0009 1B       		.uleb128 0x1b
+ 2051 000a 0E       		.uleb128 0xe
+ 2052 000b 55       		.uleb128 0x55
+ 2053 000c 17       		.uleb128 0x17
+ 2054 000d 11       		.uleb128 0x11
+ 2055 000e 01       		.uleb128 0x1
+ 2056 000f 10       		.uleb128 0x10
+ 2057 0010 17       		.uleb128 0x17
+ 2058 0011 00       		.byte	0
+ 2059 0012 00       		.byte	0
+ 2060 0013 02       		.uleb128 0x2
+ 2061 0014 24       		.uleb128 0x24
+ 2062 0015 00       		.byte	0
+ 2063 0016 0B       		.uleb128 0xb
+ 2064 0017 0B       		.uleb128 0xb
+ 2065 0018 3E       		.uleb128 0x3e
+ 2066 0019 0B       		.uleb128 0xb
+ 2067 001a 03       		.uleb128 0x3
+ 2068 001b 0E       		.uleb128 0xe
+ 2069 001c 00       		.byte	0
+ 2070 001d 00       		.byte	0
+ 2071 001e 03       		.uleb128 0x3
+ 2072 001f 16       		.uleb128 0x16
+ 2073 0020 00       		.byte	0
+ 2074 0021 03       		.uleb128 0x3
+ 2075 0022 0E       		.uleb128 0xe
+ 2076 0023 3A       		.uleb128 0x3a
+ 2077 0024 0B       		.uleb128 0xb
+ 2078 0025 3B       		.uleb128 0x3b
+ 2079 0026 0B       		.uleb128 0xb
+ 2080 0027 49       		.uleb128 0x49
+ 2081 0028 13       		.uleb128 0x13
+ 2082 0029 00       		.byte	0
+ 2083 002a 00       		.byte	0
+ 2084 002b 04       		.uleb128 0x4
+ 2085 002c 24       		.uleb128 0x24
+ 2086 002d 00       		.byte	0
+ 2087 002e 0B       		.uleb128 0xb
+ 2088 002f 0B       		.uleb128 0xb
+ 2089 0030 3E       		.uleb128 0x3e
+ 2090 0031 0B       		.uleb128 0xb
+ 2091 0032 03       		.uleb128 0x3
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqUfWSx.s 			page 43
+
+
+ 2092 0033 08       		.uleb128 0x8
+ 2093 0034 00       		.byte	0
+ 2094 0035 00       		.byte	0
+ 2095 0036 05       		.uleb128 0x5
+ 2096 0037 2E       		.uleb128 0x2e
+ 2097 0038 01       		.byte	0x1
+ 2098 0039 03       		.uleb128 0x3
+ 2099 003a 0E       		.uleb128 0xe
+ 2100 003b 3A       		.uleb128 0x3a
+ 2101 003c 0B       		.uleb128 0xb
+ 2102 003d 3B       		.uleb128 0x3b
+ 2103 003e 0B       		.uleb128 0xb
+ 2104 003f 27       		.uleb128 0x27
+ 2105 0040 19       		.uleb128 0x19
+ 2106 0041 20       		.uleb128 0x20
+ 2107 0042 0B       		.uleb128 0xb
+ 2108 0043 01       		.uleb128 0x1
+ 2109 0044 13       		.uleb128 0x13
+ 2110 0045 00       		.byte	0
+ 2111 0046 00       		.byte	0
+ 2112 0047 06       		.uleb128 0x6
+ 2113 0048 05       		.uleb128 0x5
+ 2114 0049 00       		.byte	0
+ 2115 004a 03       		.uleb128 0x3
+ 2116 004b 08       		.uleb128 0x8
+ 2117 004c 3A       		.uleb128 0x3a
+ 2118 004d 0B       		.uleb128 0xb
+ 2119 004e 3B       		.uleb128 0x3b
+ 2120 004f 0B       		.uleb128 0xb
+ 2121 0050 49       		.uleb128 0x49
+ 2122 0051 13       		.uleb128 0x13
+ 2123 0052 00       		.byte	0
+ 2124 0053 00       		.byte	0
+ 2125 0054 07       		.uleb128 0x7
+ 2126 0055 05       		.uleb128 0x5
+ 2127 0056 00       		.byte	0
+ 2128 0057 03       		.uleb128 0x3
+ 2129 0058 0E       		.uleb128 0xe
+ 2130 0059 3A       		.uleb128 0x3a
+ 2131 005a 0B       		.uleb128 0xb
+ 2132 005b 3B       		.uleb128 0x3b
+ 2133 005c 0B       		.uleb128 0xb
+ 2134 005d 49       		.uleb128 0x49
+ 2135 005e 13       		.uleb128 0x13
+ 2136 005f 00       		.byte	0
+ 2137 0060 00       		.byte	0
+ 2138 0061 08       		.uleb128 0x8
+ 2139 0062 0F       		.uleb128 0xf
+ 2140 0063 00       		.byte	0
+ 2141 0064 0B       		.uleb128 0xb
+ 2142 0065 0B       		.uleb128 0xb
+ 2143 0066 49       		.uleb128 0x49
+ 2144 0067 13       		.uleb128 0x13
+ 2145 0068 00       		.byte	0
+ 2146 0069 00       		.byte	0
+ 2147 006a 09       		.uleb128 0x9
+ 2148 006b 26       		.uleb128 0x26
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqUfWSx.s 			page 44
+
+
+ 2149 006c 00       		.byte	0
+ 2150 006d 49       		.uleb128 0x49
+ 2151 006e 13       		.uleb128 0x13
+ 2152 006f 00       		.byte	0
+ 2153 0070 00       		.byte	0
+ 2154 0071 0A       		.uleb128 0xa
+ 2155 0072 2E       		.uleb128 0x2e
+ 2156 0073 01       		.byte	0x1
+ 2157 0074 03       		.uleb128 0x3
+ 2158 0075 0E       		.uleb128 0xe
+ 2159 0076 3A       		.uleb128 0x3a
+ 2160 0077 0B       		.uleb128 0xb
+ 2161 0078 3B       		.uleb128 0x3b
+ 2162 0079 0B       		.uleb128 0xb
+ 2163 007a 27       		.uleb128 0x27
+ 2164 007b 19       		.uleb128 0x19
+ 2165 007c 49       		.uleb128 0x49
+ 2166 007d 13       		.uleb128 0x13
+ 2167 007e 20       		.uleb128 0x20
+ 2168 007f 0B       		.uleb128 0xb
+ 2169 0080 01       		.uleb128 0x1
+ 2170 0081 13       		.uleb128 0x13
+ 2171 0082 00       		.byte	0
+ 2172 0083 00       		.byte	0
+ 2173 0084 0B       		.uleb128 0xb
+ 2174 0085 2E       		.uleb128 0x2e
+ 2175 0086 01       		.byte	0x1
+ 2176 0087 03       		.uleb128 0x3
+ 2177 0088 0E       		.uleb128 0xe
+ 2178 0089 3A       		.uleb128 0x3a
+ 2179 008a 0B       		.uleb128 0xb
+ 2180 008b 3B       		.uleb128 0x3b
+ 2181 008c 0B       		.uleb128 0xb
+ 2182 008d 27       		.uleb128 0x27
+ 2183 008e 19       		.uleb128 0x19
+ 2184 008f 11       		.uleb128 0x11
+ 2185 0090 01       		.uleb128 0x1
+ 2186 0091 12       		.uleb128 0x12
+ 2187 0092 06       		.uleb128 0x6
+ 2188 0093 40       		.uleb128 0x40
+ 2189 0094 18       		.uleb128 0x18
+ 2190 0095 9742     		.uleb128 0x2117
+ 2191 0097 19       		.uleb128 0x19
+ 2192 0098 01       		.uleb128 0x1
+ 2193 0099 13       		.uleb128 0x13
+ 2194 009a 00       		.byte	0
+ 2195 009b 00       		.byte	0
+ 2196 009c 0C       		.uleb128 0xc
+ 2197 009d 05       		.uleb128 0x5
+ 2198 009e 00       		.byte	0
+ 2199 009f 03       		.uleb128 0x3
+ 2200 00a0 08       		.uleb128 0x8
+ 2201 00a1 3A       		.uleb128 0x3a
+ 2202 00a2 0B       		.uleb128 0xb
+ 2203 00a3 3B       		.uleb128 0x3b
+ 2204 00a4 0B       		.uleb128 0xb
+ 2205 00a5 49       		.uleb128 0x49
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqUfWSx.s 			page 45
+
+
+ 2206 00a6 13       		.uleb128 0x13
+ 2207 00a7 02       		.uleb128 0x2
+ 2208 00a8 17       		.uleb128 0x17
+ 2209 00a9 00       		.byte	0
+ 2210 00aa 00       		.byte	0
+ 2211 00ab 0D       		.uleb128 0xd
+ 2212 00ac 05       		.uleb128 0x5
+ 2213 00ad 00       		.byte	0
+ 2214 00ae 03       		.uleb128 0x3
+ 2215 00af 0E       		.uleb128 0xe
+ 2216 00b0 3A       		.uleb128 0x3a
+ 2217 00b1 0B       		.uleb128 0xb
+ 2218 00b2 3B       		.uleb128 0x3b
+ 2219 00b3 0B       		.uleb128 0xb
+ 2220 00b4 49       		.uleb128 0x49
+ 2221 00b5 13       		.uleb128 0x13
+ 2222 00b6 02       		.uleb128 0x2
+ 2223 00b7 17       		.uleb128 0x17
+ 2224 00b8 00       		.byte	0
+ 2225 00b9 00       		.byte	0
+ 2226 00ba 0E       		.uleb128 0xe
+ 2227 00bb 1D       		.uleb128 0x1d
+ 2228 00bc 01       		.byte	0x1
+ 2229 00bd 31       		.uleb128 0x31
+ 2230 00be 13       		.uleb128 0x13
+ 2231 00bf 52       		.uleb128 0x52
+ 2232 00c0 01       		.uleb128 0x1
+ 2233 00c1 55       		.uleb128 0x55
+ 2234 00c2 17       		.uleb128 0x17
+ 2235 00c3 58       		.uleb128 0x58
+ 2236 00c4 0B       		.uleb128 0xb
+ 2237 00c5 59       		.uleb128 0x59
+ 2238 00c6 0B       		.uleb128 0xb
+ 2239 00c7 00       		.byte	0
+ 2240 00c8 00       		.byte	0
+ 2241 00c9 0F       		.uleb128 0xf
+ 2242 00ca 05       		.uleb128 0x5
+ 2243 00cb 00       		.byte	0
+ 2244 00cc 31       		.uleb128 0x31
+ 2245 00cd 13       		.uleb128 0x13
+ 2246 00ce 02       		.uleb128 0x2
+ 2247 00cf 17       		.uleb128 0x17
+ 2248 00d0 00       		.byte	0
+ 2249 00d1 00       		.byte	0
+ 2250 00d2 10       		.uleb128 0x10
+ 2251 00d3 2E       		.uleb128 0x2e
+ 2252 00d4 01       		.byte	0x1
+ 2253 00d5 31       		.uleb128 0x31
+ 2254 00d6 13       		.uleb128 0x13
+ 2255 00d7 11       		.uleb128 0x11
+ 2256 00d8 01       		.uleb128 0x1
+ 2257 00d9 12       		.uleb128 0x12
+ 2258 00da 06       		.uleb128 0x6
+ 2259 00db 40       		.uleb128 0x40
+ 2260 00dc 18       		.uleb128 0x18
+ 2261 00dd 9742     		.uleb128 0x2117
+ 2262 00df 19       		.uleb128 0x19
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqUfWSx.s 			page 46
+
+
+ 2263 00e0 01       		.uleb128 0x1
+ 2264 00e1 13       		.uleb128 0x13
+ 2265 00e2 00       		.byte	0
+ 2266 00e3 00       		.byte	0
+ 2267 00e4 11       		.uleb128 0x11
+ 2268 00e5 2E       		.uleb128 0x2e
+ 2269 00e6 01       		.byte	0x1
+ 2270 00e7 3F       		.uleb128 0x3f
+ 2271 00e8 19       		.uleb128 0x19
+ 2272 00e9 03       		.uleb128 0x3
+ 2273 00ea 0E       		.uleb128 0xe
+ 2274 00eb 3A       		.uleb128 0x3a
+ 2275 00ec 0B       		.uleb128 0xb
+ 2276 00ed 3B       		.uleb128 0x3b
+ 2277 00ee 0B       		.uleb128 0xb
+ 2278 00ef 27       		.uleb128 0x27
+ 2279 00f0 19       		.uleb128 0x19
+ 2280 00f1 11       		.uleb128 0x11
+ 2281 00f2 01       		.uleb128 0x1
+ 2282 00f3 12       		.uleb128 0x12
+ 2283 00f4 06       		.uleb128 0x6
+ 2284 00f5 40       		.uleb128 0x40
+ 2285 00f6 18       		.uleb128 0x18
+ 2286 00f7 9642     		.uleb128 0x2116
+ 2287 00f9 19       		.uleb128 0x19
+ 2288 00fa 01       		.uleb128 0x1
+ 2289 00fb 13       		.uleb128 0x13
+ 2290 00fc 00       		.byte	0
+ 2291 00fd 00       		.byte	0
+ 2292 00fe 12       		.uleb128 0x12
+ 2293 00ff 34       		.uleb128 0x34
+ 2294 0100 00       		.byte	0
+ 2295 0101 03       		.uleb128 0x3
+ 2296 0102 08       		.uleb128 0x8
+ 2297 0103 3A       		.uleb128 0x3a
+ 2298 0104 0B       		.uleb128 0xb
+ 2299 0105 3B       		.uleb128 0x3b
+ 2300 0106 0B       		.uleb128 0xb
+ 2301 0107 49       		.uleb128 0x49
+ 2302 0108 13       		.uleb128 0x13
+ 2303 0109 02       		.uleb128 0x2
+ 2304 010a 18       		.uleb128 0x18
+ 2305 010b 00       		.byte	0
+ 2306 010c 00       		.byte	0
+ 2307 010d 13       		.uleb128 0x13
+ 2308 010e 0B       		.uleb128 0xb
+ 2309 010f 01       		.byte	0x1
+ 2310 0110 11       		.uleb128 0x11
+ 2311 0111 01       		.uleb128 0x1
+ 2312 0112 12       		.uleb128 0x12
+ 2313 0113 06       		.uleb128 0x6
+ 2314 0114 01       		.uleb128 0x1
+ 2315 0115 13       		.uleb128 0x13
+ 2316 0116 00       		.byte	0
+ 2317 0117 00       		.byte	0
+ 2318 0118 14       		.uleb128 0x14
+ 2319 0119 34       		.uleb128 0x34
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqUfWSx.s 			page 47
+
+
+ 2320 011a 00       		.byte	0
+ 2321 011b 03       		.uleb128 0x3
+ 2322 011c 0E       		.uleb128 0xe
+ 2323 011d 3A       		.uleb128 0x3a
+ 2324 011e 0B       		.uleb128 0xb
+ 2325 011f 3B       		.uleb128 0x3b
+ 2326 0120 0B       		.uleb128 0xb
+ 2327 0121 49       		.uleb128 0x49
+ 2328 0122 13       		.uleb128 0x13
+ 2329 0123 02       		.uleb128 0x2
+ 2330 0124 17       		.uleb128 0x17
+ 2331 0125 00       		.byte	0
+ 2332 0126 00       		.byte	0
+ 2333 0127 15       		.uleb128 0x15
+ 2334 0128 0B       		.uleb128 0xb
+ 2335 0129 01       		.byte	0x1
+ 2336 012a 55       		.uleb128 0x55
+ 2337 012b 17       		.uleb128 0x17
+ 2338 012c 00       		.byte	0
+ 2339 012d 00       		.byte	0
+ 2340 012e 16       		.uleb128 0x16
+ 2341 012f 0B       		.uleb128 0xb
+ 2342 0130 01       		.byte	0x1
+ 2343 0131 55       		.uleb128 0x55
+ 2344 0132 17       		.uleb128 0x17
+ 2345 0133 01       		.uleb128 0x1
+ 2346 0134 13       		.uleb128 0x13
+ 2347 0135 00       		.byte	0
+ 2348 0136 00       		.byte	0
+ 2349 0137 17       		.uleb128 0x17
+ 2350 0138 34       		.uleb128 0x34
+ 2351 0139 00       		.byte	0
+ 2352 013a 03       		.uleb128 0x3
+ 2353 013b 08       		.uleb128 0x8
+ 2354 013c 3A       		.uleb128 0x3a
+ 2355 013d 0B       		.uleb128 0xb
+ 2356 013e 3B       		.uleb128 0x3b
+ 2357 013f 0B       		.uleb128 0xb
+ 2358 0140 49       		.uleb128 0x49
+ 2359 0141 13       		.uleb128 0x13
+ 2360 0142 02       		.uleb128 0x2
+ 2361 0143 17       		.uleb128 0x17
+ 2362 0144 00       		.byte	0
+ 2363 0145 00       		.byte	0
+ 2364 0146 18       		.uleb128 0x18
+ 2365 0147 0B       		.uleb128 0xb
+ 2366 0148 01       		.byte	0x1
+ 2367 0149 11       		.uleb128 0x11
+ 2368 014a 01       		.uleb128 0x1
+ 2369 014b 12       		.uleb128 0x12
+ 2370 014c 06       		.uleb128 0x6
+ 2371 014d 00       		.byte	0
+ 2372 014e 00       		.byte	0
+ 2373 014f 19       		.uleb128 0x19
+ 2374 0150 34       		.uleb128 0x34
+ 2375 0151 00       		.byte	0
+ 2376 0152 03       		.uleb128 0x3
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqUfWSx.s 			page 48
+
+
+ 2377 0153 08       		.uleb128 0x8
+ 2378 0154 3A       		.uleb128 0x3a
+ 2379 0155 0B       		.uleb128 0xb
+ 2380 0156 3B       		.uleb128 0x3b
+ 2381 0157 0B       		.uleb128 0xb
+ 2382 0158 49       		.uleb128 0x49
+ 2383 0159 13       		.uleb128 0x13
+ 2384 015a 00       		.byte	0
+ 2385 015b 00       		.byte	0
+ 2386 015c 1A       		.uleb128 0x1a
+ 2387 015d 898201   		.uleb128 0x4109
+ 2388 0160 01       		.byte	0x1
+ 2389 0161 11       		.uleb128 0x11
+ 2390 0162 01       		.uleb128 0x1
+ 2391 0163 31       		.uleb128 0x31
+ 2392 0164 13       		.uleb128 0x13
+ 2393 0165 01       		.uleb128 0x1
+ 2394 0166 13       		.uleb128 0x13
+ 2395 0167 00       		.byte	0
+ 2396 0168 00       		.byte	0
+ 2397 0169 1B       		.uleb128 0x1b
+ 2398 016a 8A8201   		.uleb128 0x410a
+ 2399 016d 00       		.byte	0
+ 2400 016e 02       		.uleb128 0x2
+ 2401 016f 18       		.uleb128 0x18
+ 2402 0170 9142     		.uleb128 0x2111
+ 2403 0172 18       		.uleb128 0x18
+ 2404 0173 00       		.byte	0
+ 2405 0174 00       		.byte	0
+ 2406 0175 1C       		.uleb128 0x1c
+ 2407 0176 898201   		.uleb128 0x4109
+ 2408 0179 01       		.byte	0x1
+ 2409 017a 11       		.uleb128 0x11
+ 2410 017b 01       		.uleb128 0x1
+ 2411 017c 31       		.uleb128 0x31
+ 2412 017d 13       		.uleb128 0x13
+ 2413 017e 00       		.byte	0
+ 2414 017f 00       		.byte	0
+ 2415 0180 1D       		.uleb128 0x1d
+ 2416 0181 01       		.uleb128 0x1
+ 2417 0182 01       		.byte	0x1
+ 2418 0183 49       		.uleb128 0x49
+ 2419 0184 13       		.uleb128 0x13
+ 2420 0185 01       		.uleb128 0x1
+ 2421 0186 13       		.uleb128 0x13
+ 2422 0187 00       		.byte	0
+ 2423 0188 00       		.byte	0
+ 2424 0189 1E       		.uleb128 0x1e
+ 2425 018a 21       		.uleb128 0x21
+ 2426 018b 00       		.byte	0
+ 2427 018c 49       		.uleb128 0x49
+ 2428 018d 13       		.uleb128 0x13
+ 2429 018e 2F       		.uleb128 0x2f
+ 2430 018f 0B       		.uleb128 0xb
+ 2431 0190 00       		.byte	0
+ 2432 0191 00       		.byte	0
+ 2433 0192 1F       		.uleb128 0x1f
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqUfWSx.s 			page 49
+
+
+ 2434 0193 34       		.uleb128 0x34
+ 2435 0194 00       		.byte	0
+ 2436 0195 03       		.uleb128 0x3
+ 2437 0196 0E       		.uleb128 0xe
+ 2438 0197 3A       		.uleb128 0x3a
+ 2439 0198 0B       		.uleb128 0xb
+ 2440 0199 3B       		.uleb128 0x3b
+ 2441 019a 0B       		.uleb128 0xb
+ 2442 019b 49       		.uleb128 0x49
+ 2443 019c 13       		.uleb128 0x13
+ 2444 019d 02       		.uleb128 0x2
+ 2445 019e 18       		.uleb128 0x18
+ 2446 019f 00       		.byte	0
+ 2447 01a0 00       		.byte	0
+ 2448 01a1 20       		.uleb128 0x20
+ 2449 01a2 34       		.uleb128 0x34
+ 2450 01a3 00       		.byte	0
+ 2451 01a4 03       		.uleb128 0x3
+ 2452 01a5 08       		.uleb128 0x8
+ 2453 01a6 3A       		.uleb128 0x3a
+ 2454 01a7 0B       		.uleb128 0xb
+ 2455 01a8 3B       		.uleb128 0x3b
+ 2456 01a9 0B       		.uleb128 0xb
+ 2457 01aa 49       		.uleb128 0x49
+ 2458 01ab 13       		.uleb128 0x13
+ 2459 01ac 3F       		.uleb128 0x3f
+ 2460 01ad 19       		.uleb128 0x19
+ 2461 01ae 02       		.uleb128 0x2
+ 2462 01af 18       		.uleb128 0x18
+ 2463 01b0 00       		.byte	0
+ 2464 01b1 00       		.byte	0
+ 2465 01b2 21       		.uleb128 0x21
+ 2466 01b3 34       		.uleb128 0x34
+ 2467 01b4 00       		.byte	0
+ 2468 01b5 03       		.uleb128 0x3
+ 2469 01b6 0E       		.uleb128 0xe
+ 2470 01b7 3A       		.uleb128 0x3a
+ 2471 01b8 0B       		.uleb128 0xb
+ 2472 01b9 3B       		.uleb128 0x3b
+ 2473 01ba 0B       		.uleb128 0xb
+ 2474 01bb 49       		.uleb128 0x49
+ 2475 01bc 13       		.uleb128 0x13
+ 2476 01bd 3F       		.uleb128 0x3f
+ 2477 01be 19       		.uleb128 0x19
+ 2478 01bf 02       		.uleb128 0x2
+ 2479 01c0 18       		.uleb128 0x18
+ 2480 01c1 00       		.byte	0
+ 2481 01c2 00       		.byte	0
+ 2482 01c3 00       		.byte	0
+ 2483              		.section	.debug_loc,"",%progbits
+ 2484              	.Ldebug_loc0:
+ 2485              	.LLST0:
+ 2486 0000 00000000 		.4byte	.LVL0
+ 2487 0004 02000000 		.4byte	.LVL1
+ 2488 0008 0100     		.2byte	0x1
+ 2489 000a 50       		.byte	0x50
+ 2490 000b 02000000 		.4byte	.LVL1
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqUfWSx.s 			page 50
+
+
+ 2491 000f 06000000 		.4byte	.LVL2
+ 2492 0013 0400     		.2byte	0x4
+ 2493 0015 F3       		.byte	0xf3
+ 2494 0016 01       		.uleb128 0x1
+ 2495 0017 50       		.byte	0x50
+ 2496 0018 9F       		.byte	0x9f
+ 2497 0019 06000000 		.4byte	.LVL2
+ 2498 001d 40000000 		.4byte	.LVL6
+ 2499 0021 0600     		.2byte	0x6
+ 2500 0023 F3       		.byte	0xf3
+ 2501 0024 01       		.uleb128 0x1
+ 2502 0025 50       		.byte	0x50
+ 2503 0026 23       		.byte	0x23
+ 2504 0027 08       		.uleb128 0x8
+ 2505 0028 9F       		.byte	0x9f
+ 2506 0029 40000000 		.4byte	.LVL6
+ 2507 002d 42000000 		.4byte	.LFE2
+ 2508 0031 0400     		.2byte	0x4
+ 2509 0033 F3       		.byte	0xf3
+ 2510 0034 01       		.uleb128 0x1
+ 2511 0035 50       		.byte	0x50
+ 2512 0036 9F       		.byte	0x9f
+ 2513 0037 00000000 		.4byte	0
+ 2514 003b 00000000 		.4byte	0
+ 2515              	.LLST1:
+ 2516 003f 00000000 		.4byte	.LVL0
+ 2517 0043 3C000000 		.4byte	.LVL5
+ 2518 0047 0100     		.2byte	0x1
+ 2519 0049 51       		.byte	0x51
+ 2520 004a 3C000000 		.4byte	.LVL5
+ 2521 004e 42000000 		.4byte	.LFE2
+ 2522 0052 0100     		.2byte	0x1
+ 2523 0054 51       		.byte	0x51
+ 2524 0055 00000000 		.4byte	0
+ 2525 0059 00000000 		.4byte	0
+ 2526              	.LLST2:
+ 2527 005d 00000000 		.4byte	.LVL0
+ 2528 0061 32000000 		.4byte	.LVL3
+ 2529 0065 0100     		.2byte	0x1
+ 2530 0067 52       		.byte	0x52
+ 2531 0068 32000000 		.4byte	.LVL3
+ 2532 006c 3C000000 		.4byte	.LVL5
+ 2533 0070 0300     		.2byte	0x3
+ 2534 0072 72       		.byte	0x72
+ 2535 0073 01       		.sleb128 1
+ 2536 0074 9F       		.byte	0x9f
+ 2537 0075 3C000000 		.4byte	.LVL5
+ 2538 0079 42000000 		.4byte	.LFE2
+ 2539 007d 0100     		.2byte	0x1
+ 2540 007f 52       		.byte	0x52
+ 2541 0080 00000000 		.4byte	0
+ 2542 0084 00000000 		.4byte	0
+ 2543              	.LLST3:
+ 2544 0088 06000000 		.4byte	.LVL2
+ 2545 008c 36000000 		.4byte	.LVL4
+ 2546 0090 0100     		.2byte	0x1
+ 2547 0092 51       		.byte	0x51
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqUfWSx.s 			page 51
+
+
+ 2548 0093 00000000 		.4byte	0
+ 2549 0097 00000000 		.4byte	0
+ 2550              	.LLST4:
+ 2551 009b 00000000 		.4byte	.LVL7
+ 2552 009f 2A000000 		.4byte	.LVL13
+ 2553 00a3 0100     		.2byte	0x1
+ 2554 00a5 50       		.byte	0x50
+ 2555 00a6 2A000000 		.4byte	.LVL13
+ 2556 00aa 30000000 		.4byte	.LFE8
+ 2557 00ae 0100     		.2byte	0x1
+ 2558 00b0 50       		.byte	0x50
+ 2559 00b1 00000000 		.4byte	0
+ 2560 00b5 00000000 		.4byte	0
+ 2561              	.LLST5:
+ 2562 00b9 00000000 		.4byte	.LVL7
+ 2563 00bd 1E000000 		.4byte	.LVL11
+ 2564 00c1 0100     		.2byte	0x1
+ 2565 00c3 51       		.byte	0x51
+ 2566 00c4 1E000000 		.4byte	.LVL11
+ 2567 00c8 28000000 		.4byte	.LVL12
+ 2568 00cc 0300     		.2byte	0x3
+ 2569 00ce 71       		.byte	0x71
+ 2570 00cf 78       		.sleb128 -8
+ 2571 00d0 9F       		.byte	0x9f
+ 2572 00d1 28000000 		.4byte	.LVL12
+ 2573 00d5 30000000 		.4byte	.LFE8
+ 2574 00d9 0100     		.2byte	0x1
+ 2575 00db 51       		.byte	0x51
+ 2576 00dc 00000000 		.4byte	0
+ 2577 00e0 00000000 		.4byte	0
+ 2578              	.LLST6:
+ 2579 00e4 00000000 		.4byte	.LVL7
+ 2580 00e8 06000000 		.4byte	.LVL8
+ 2581 00ec 0200     		.2byte	0x2
+ 2582 00ee 38       		.byte	0x38
+ 2583 00ef 9F       		.byte	0x9f
+ 2584 00f0 00000000 		.4byte	0
+ 2585 00f4 00000000 		.4byte	0
+ 2586              	.LLST7:
+ 2587 00f8 0A000000 		.4byte	.LVL9
+ 2588 00fc 14000000 		.4byte	.LVL10
+ 2589 0100 0600     		.2byte	0x6
+ 2590 0102 52       		.byte	0x52
+ 2591 0103 93       		.byte	0x93
+ 2592 0104 04       		.uleb128 0x4
+ 2593 0105 53       		.byte	0x53
+ 2594 0106 93       		.byte	0x93
+ 2595 0107 04       		.uleb128 0x4
+ 2596 0108 00000000 		.4byte	0
+ 2597 010c 00000000 		.4byte	0
+ 2598              	.LLST8:
+ 2599 0110 0A000000 		.4byte	.LVL9
+ 2600 0114 28000000 		.4byte	.LVL12
+ 2601 0118 0100     		.2byte	0x1
+ 2602 011a 50       		.byte	0x50
+ 2603 011b 00000000 		.4byte	0
+ 2604 011f 00000000 		.4byte	0
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqUfWSx.s 			page 52
+
+
+ 2605              	.LLST9:
+ 2606 0123 00000000 		.4byte	.LVL14
+ 2607 0127 0E000000 		.4byte	.LVL16
+ 2608 012b 0100     		.2byte	0x1
+ 2609 012d 50       		.byte	0x50
+ 2610 012e 0E000000 		.4byte	.LVL16
+ 2611 0132 A8020000 		.4byte	.LFE6
+ 2612 0136 0300     		.2byte	0x3
+ 2613 0138 91       		.byte	0x91
+ 2614 0139 B87E     		.sleb128 -200
+ 2615 013b 00000000 		.4byte	0
+ 2616 013f 00000000 		.4byte	0
+ 2617              	.LLST10:
+ 2618 0143 00000000 		.4byte	.LVL14
+ 2619 0147 11000000 		.4byte	.LVL17-1
+ 2620 014b 0100     		.2byte	0x1
+ 2621 014d 51       		.byte	0x51
+ 2622 014e 11000000 		.4byte	.LVL17-1
+ 2623 0152 A8020000 		.4byte	.LFE6
+ 2624 0156 0400     		.2byte	0x4
+ 2625 0158 F3       		.byte	0xf3
+ 2626 0159 01       		.uleb128 0x1
+ 2627 015a 51       		.byte	0x51
+ 2628 015b 9F       		.byte	0x9f
+ 2629 015c 00000000 		.4byte	0
+ 2630 0160 00000000 		.4byte	0
+ 2631              	.LLST11:
+ 2632 0164 00000000 		.4byte	.LVL14
+ 2633 0168 0C000000 		.4byte	.LVL15
+ 2634 016c 0100     		.2byte	0x1
+ 2635 016e 52       		.byte	0x52
+ 2636 016f 0C000000 		.4byte	.LVL15
+ 2637 0173 1A000000 		.4byte	.LVL18
+ 2638 0177 0100     		.2byte	0x1
+ 2639 0179 54       		.byte	0x54
+ 2640 017a 1A000000 		.4byte	.LVL18
+ 2641 017e 1D000000 		.4byte	.LVL19-1
+ 2642 0182 0100     		.2byte	0x1
+ 2643 0184 51       		.byte	0x51
+ 2644 0185 1D000000 		.4byte	.LVL19-1
+ 2645 0189 A8020000 		.4byte	.LFE6
+ 2646 018d 0400     		.2byte	0x4
+ 2647 018f F3       		.byte	0xf3
+ 2648 0190 01       		.uleb128 0x1
+ 2649 0191 52       		.byte	0x52
+ 2650 0192 9F       		.byte	0x9f
+ 2651 0193 00000000 		.4byte	0
+ 2652 0197 00000000 		.4byte	0
+ 2653              	.LLST12:
+ 2654 019b 00000000 		.4byte	.LVL14
+ 2655 019f 11000000 		.4byte	.LVL17-1
+ 2656 01a3 0100     		.2byte	0x1
+ 2657 01a5 53       		.byte	0x53
+ 2658 01a6 11000000 		.4byte	.LVL17-1
+ 2659 01aa 40000000 		.4byte	.LVL21
+ 2660 01ae 0100     		.2byte	0x1
+ 2661 01b0 55       		.byte	0x55
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqUfWSx.s 			page 53
+
+
+ 2662 01b1 40000000 		.4byte	.LVL21
+ 2663 01b5 A8020000 		.4byte	.LFE6
+ 2664 01b9 0400     		.2byte	0x4
+ 2665 01bb F3       		.byte	0xf3
+ 2666 01bc 01       		.uleb128 0x1
+ 2667 01bd 53       		.byte	0x53
+ 2668 01be 9F       		.byte	0x9f
+ 2669 01bf 00000000 		.4byte	0
+ 2670 01c3 00000000 		.4byte	0
+ 2671              	.LLST13:
+ 2672 01c7 BE000000 		.4byte	.LVL22
+ 2673 01cb C8000000 		.4byte	.LVL23
+ 2674 01cf 0200     		.2byte	0x2
+ 2675 01d1 30       		.byte	0x30
+ 2676 01d2 9F       		.byte	0x9f
+ 2677 01d3 C8000000 		.4byte	.LVL23
+ 2678 01d7 A8020000 		.4byte	.LFE6
+ 2679 01db 0300     		.2byte	0x3
+ 2680 01dd 91       		.byte	0x91
+ 2681 01de A87E     		.sleb128 -216
+ 2682 01e0 00000000 		.4byte	0
+ 2683 01e4 00000000 		.4byte	0
+ 2684              	.LLST14:
+ 2685 01e8 F0000000 		.4byte	.LVL26
+ 2686 01ec 7A010000 		.4byte	.LVL27
+ 2687 01f0 0600     		.2byte	0x6
+ 2688 01f2 50       		.byte	0x50
+ 2689 01f3 93       		.byte	0x93
+ 2690 01f4 04       		.uleb128 0x4
+ 2691 01f5 51       		.byte	0x51
+ 2692 01f6 93       		.byte	0x93
+ 2693 01f7 04       		.uleb128 0x4
+ 2694 01f8 7A010000 		.4byte	.LVL27
+ 2695 01fc 82010000 		.4byte	.LVL28
+ 2696 0200 0300     		.2byte	0x3
+ 2697 0202 91       		.byte	0x91
+ 2698 0203 807E     		.sleb128 -256
+ 2699 0205 0E020000 		.4byte	.LVL38
+ 2700 0209 72020000 		.4byte	.LVL42
+ 2701 020d 0600     		.2byte	0x6
+ 2702 020f 52       		.byte	0x52
+ 2703 0210 93       		.byte	0x93
+ 2704 0211 04       		.uleb128 0x4
+ 2705 0212 53       		.byte	0x53
+ 2706 0213 93       		.byte	0x93
+ 2707 0214 04       		.uleb128 0x4
+ 2708 0215 00000000 		.4byte	0
+ 2709 0219 00000000 		.4byte	0
+ 2710              	.LLST15:
+ 2711 021d EC000000 		.4byte	.LVL25
+ 2712 0221 96010000 		.4byte	.LVL29
+ 2713 0225 0800     		.2byte	0x8
+ 2714 0227 91       		.byte	0x91
+ 2715 0228 A87E     		.sleb128 -216
+ 2716 022a 94       		.byte	0x94
+ 2717 022b 01       		.byte	0x1
+ 2718 022c 32       		.byte	0x32
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqUfWSx.s 			page 54
+
+
+ 2719 022d 25       		.byte	0x25
+ 2720 022e 9F       		.byte	0x9f
+ 2721 022f 00000000 		.4byte	0
+ 2722 0233 00000000 		.4byte	0
+ 2723              	.LLST16:
+ 2724 0237 96010000 		.4byte	.LVL29
+ 2725 023b AA010000 		.4byte	.LVL30
+ 2726 023f 0200     		.2byte	0x2
+ 2727 0241 30       		.byte	0x30
+ 2728 0242 9F       		.byte	0x9f
+ 2729 0243 AA010000 		.4byte	.LVL30
+ 2730 0247 04020000 		.4byte	.LVL37
+ 2731 024b 0100     		.2byte	0x1
+ 2732 024d 57       		.byte	0x57
+ 2733 024e 04020000 		.4byte	.LVL37
+ 2734 0252 38020000 		.4byte	.LVL40
+ 2735 0256 0100     		.2byte	0x1
+ 2736 0258 53       		.byte	0x53
+ 2737 0259 38020000 		.4byte	.LVL40
+ 2738 025d 98020000 		.4byte	.LVL45
+ 2739 0261 0100     		.2byte	0x1
+ 2740 0263 57       		.byte	0x57
+ 2741 0264 00000000 		.4byte	0
+ 2742 0268 00000000 		.4byte	0
+ 2743              	.LLST17:
+ 2744 026c B2010000 		.4byte	.LVL31
+ 2745 0270 BA010000 		.4byte	.LVL32
+ 2746 0274 0600     		.2byte	0x6
+ 2747 0276 52       		.byte	0x52
+ 2748 0277 93       		.byte	0x93
+ 2749 0278 04       		.uleb128 0x4
+ 2750 0279 53       		.byte	0x53
+ 2751 027a 93       		.byte	0x93
+ 2752 027b 04       		.uleb128 0x4
+ 2753 027c BA010000 		.4byte	.LVL32
+ 2754 0280 D1010000 		.4byte	.LVL34-1
+ 2755 0284 0600     		.2byte	0x6
+ 2756 0286 50       		.byte	0x50
+ 2757 0287 93       		.byte	0x93
+ 2758 0288 04       		.uleb128 0x4
+ 2759 0289 51       		.byte	0x51
+ 2760 028a 93       		.byte	0x93
+ 2761 028b 04       		.uleb128 0x4
+ 2762 028c D1010000 		.4byte	.LVL34-1
+ 2763 0290 02020000 		.4byte	.LVL36
+ 2764 0294 0300     		.2byte	0x3
+ 2765 0296 91       		.byte	0x91
+ 2766 0297 987E     		.sleb128 -232
+ 2767 0299 00000000 		.4byte	0
+ 2768 029d 00000000 		.4byte	0
+ 2769              	.LLST18:
+ 2770 02a1 B2010000 		.4byte	.LVL31
+ 2771 02a5 C2010000 		.4byte	.LVL33
+ 2772 02a9 0200     		.2byte	0x2
+ 2773 02ab 74       		.byte	0x74
+ 2774 02ac 00       		.sleb128 0
+ 2775 02ad 00000000 		.4byte	0
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqUfWSx.s 			page 55
+
+
+ 2776 02b1 00000000 		.4byte	0
+ 2777              	.LLST19:
+ 2778 02b5 B2010000 		.4byte	.LVL31
+ 2779 02b9 02020000 		.4byte	.LVL36
+ 2780 02bd 0100     		.2byte	0x1
+ 2781 02bf 57       		.byte	0x57
+ 2782 02c0 00000000 		.4byte	0
+ 2783 02c4 00000000 		.4byte	0
+ 2784              	.LLST20:
+ 2785 02c8 B2010000 		.4byte	.LVL31
+ 2786 02cc 02020000 		.4byte	.LVL36
+ 2787 02d0 0300     		.2byte	0x3
+ 2788 02d2 91       		.byte	0x91
+ 2789 02d3 A87E     		.sleb128 -216
+ 2790 02d5 00000000 		.4byte	0
+ 2791 02d9 00000000 		.4byte	0
+ 2792              	.LLST21:
+ 2793 02dd B2010000 		.4byte	.LVL31
+ 2794 02e1 02020000 		.4byte	.LVL36
+ 2795 02e5 0300     		.2byte	0x3
+ 2796 02e7 74       		.byte	0x74
+ 2797 02e8 08       		.sleb128 8
+ 2798 02e9 9F       		.byte	0x9f
+ 2799 02ea 00000000 		.4byte	0
+ 2800 02ee 00000000 		.4byte	0
+ 2801              	.LLST22:
+ 2802 02f2 B2010000 		.4byte	.LVL31
+ 2803 02f6 02020000 		.4byte	.LVL36
+ 2804 02fa 0100     		.2byte	0x1
+ 2805 02fc 54       		.byte	0x54
+ 2806 02fd 00000000 		.4byte	0
+ 2807 0301 00000000 		.4byte	0
+ 2808              	.LLST23:
+ 2809 0305 00000000 		.4byte	.LVL46
+ 2810 0309 10000000 		.4byte	.LVL48
+ 2811 030d 0100     		.2byte	0x1
+ 2812 030f 50       		.byte	0x50
+ 2813 0310 10000000 		.4byte	.LVL48
+ 2814 0314 B0020000 		.4byte	.LFE7
+ 2815 0318 0300     		.2byte	0x3
+ 2816 031a 91       		.byte	0x91
+ 2817 031b B87E     		.sleb128 -200
+ 2818 031d 00000000 		.4byte	0
+ 2819 0321 00000000 		.4byte	0
+ 2820              	.LLST24:
+ 2821 0325 00000000 		.4byte	.LVL46
+ 2822 0329 13000000 		.4byte	.LVL49-1
+ 2823 032d 0100     		.2byte	0x1
+ 2824 032f 51       		.byte	0x51
+ 2825 0330 13000000 		.4byte	.LVL49-1
+ 2826 0334 B0020000 		.4byte	.LFE7
+ 2827 0338 0400     		.2byte	0x4
+ 2828 033a F3       		.byte	0xf3
+ 2829 033b 01       		.uleb128 0x1
+ 2830 033c 51       		.byte	0x51
+ 2831 033d 9F       		.byte	0x9f
+ 2832 033e 00000000 		.4byte	0
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqUfWSx.s 			page 56
+
+
+ 2833 0342 00000000 		.4byte	0
+ 2834              	.LLST25:
+ 2835 0346 00000000 		.4byte	.LVL46
+ 2836 034a 0E000000 		.4byte	.LVL47
+ 2837 034e 0100     		.2byte	0x1
+ 2838 0350 52       		.byte	0x52
+ 2839 0351 0E000000 		.4byte	.LVL47
+ 2840 0355 1C000000 		.4byte	.LVL50
+ 2841 0359 0100     		.2byte	0x1
+ 2842 035b 55       		.byte	0x55
+ 2843 035c 1C000000 		.4byte	.LVL50
+ 2844 0360 1F000000 		.4byte	.LVL51-1
+ 2845 0364 0100     		.2byte	0x1
+ 2846 0366 51       		.byte	0x51
+ 2847 0367 1F000000 		.4byte	.LVL51-1
+ 2848 036b B0020000 		.4byte	.LFE7
+ 2849 036f 0400     		.2byte	0x4
+ 2850 0371 F3       		.byte	0xf3
+ 2851 0372 01       		.uleb128 0x1
+ 2852 0373 52       		.byte	0x52
+ 2853 0374 9F       		.byte	0x9f
+ 2854 0375 00000000 		.4byte	0
+ 2855 0379 00000000 		.4byte	0
+ 2856              	.LLST26:
+ 2857 037d 00000000 		.4byte	.LVL46
+ 2858 0381 13000000 		.4byte	.LVL49-1
+ 2859 0385 0100     		.2byte	0x1
+ 2860 0387 53       		.byte	0x53
+ 2861 0388 13000000 		.4byte	.LVL49-1
+ 2862 038c 34000000 		.4byte	.LVL53
+ 2863 0390 0100     		.2byte	0x1
+ 2864 0392 56       		.byte	0x56
+ 2865 0393 34000000 		.4byte	.LVL53
+ 2866 0397 B0020000 		.4byte	.LFE7
+ 2867 039b 0400     		.2byte	0x4
+ 2868 039d F3       		.byte	0xf3
+ 2869 039e 01       		.uleb128 0x1
+ 2870 039f 53       		.byte	0x53
+ 2871 03a0 9F       		.byte	0x9f
+ 2872 03a1 00000000 		.4byte	0
+ 2873 03a5 00000000 		.4byte	0
+ 2874              	.LLST27:
+ 2875 03a9 C6000000 		.4byte	.LVL54
+ 2876 03ad C8000000 		.4byte	.LVL55
+ 2877 03b1 0200     		.2byte	0x2
+ 2878 03b3 30       		.byte	0x30
+ 2879 03b4 9F       		.byte	0x9f
+ 2880 03b5 00000000 		.4byte	0
+ 2881 03b9 00000000 		.4byte	0
+ 2882              	.LLST28:
+ 2883 03bd F4000000 		.4byte	.LVL57
+ 2884 03c1 20010000 		.4byte	.LVL60
+ 2885 03c5 0600     		.2byte	0x6
+ 2886 03c7 52       		.byte	0x52
+ 2887 03c8 93       		.byte	0x93
+ 2888 03c9 04       		.uleb128 0x4
+ 2889 03ca 53       		.byte	0x53
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqUfWSx.s 			page 57
+
+
+ 2890 03cb 93       		.byte	0x93
+ 2891 03cc 04       		.uleb128 0x4
+ 2892 03cd 20010000 		.4byte	.LVL60
+ 2893 03d1 2C010000 		.4byte	.LVL61
+ 2894 03d5 0300     		.2byte	0x3
+ 2895 03d7 91       		.byte	0x91
+ 2896 03d8 F87E     		.sleb128 -136
+ 2897 03da 2C010000 		.4byte	.LVL61
+ 2898 03de 38010000 		.4byte	.LVL62
+ 2899 03e2 0300     		.2byte	0x3
+ 2900 03e4 91       		.byte	0x91
+ 2901 03e5 987F     		.sleb128 -104
+ 2902 03e7 BC010000 		.4byte	.LVL73
+ 2903 03eb CC010000 		.4byte	.LVL74
+ 2904 03ef 0600     		.2byte	0x6
+ 2905 03f1 50       		.byte	0x50
+ 2906 03f2 93       		.byte	0x93
+ 2907 03f3 04       		.uleb128 0x4
+ 2908 03f4 51       		.byte	0x51
+ 2909 03f5 93       		.byte	0x93
+ 2910 03f6 04       		.uleb128 0x4
+ 2911 03f7 CC010000 		.4byte	.LVL74
+ 2912 03fb D8010000 		.4byte	.LVL75
+ 2913 03ff 0300     		.2byte	0x3
+ 2914 0401 73       		.byte	0x73
+ 2915 0402 C000     		.sleb128 64
+ 2916 0404 D8010000 		.4byte	.LVL75
+ 2917 0408 2E020000 		.4byte	.LVL76
+ 2918 040c 0300     		.2byte	0x3
+ 2919 040e 91       		.byte	0x91
+ 2920 040f 807E     		.sleb128 -256
+ 2921 0411 2E020000 		.4byte	.LVL76
+ 2922 0415 6A020000 		.4byte	.LVL77
+ 2923 0419 0200     		.2byte	0x2
+ 2924 041b 7D       		.byte	0x7d
+ 2925 041c 00       		.sleb128 0
+ 2926 041d 00000000 		.4byte	0
+ 2927 0421 00000000 		.4byte	0
+ 2928              	.LLST29:
+ 2929 0425 1C010000 		.4byte	.LVL59
+ 2930 0429 38010000 		.4byte	.LVL62
+ 2931 042d 0200     		.2byte	0x2
+ 2932 042f 30       		.byte	0x30
+ 2933 0430 9F       		.byte	0x9f
+ 2934 0431 38010000 		.4byte	.LVL62
+ 2935 0435 90010000 		.4byte	.LVL68
+ 2936 0439 0300     		.2byte	0x3
+ 2937 043b 91       		.byte	0x91
+ 2938 043c 807E     		.sleb128 -256
+ 2939 043e 90010000 		.4byte	.LVL68
+ 2940 0442 9A010000 		.4byte	.LVL69
+ 2941 0446 0100     		.2byte	0x1
+ 2942 0448 53       		.byte	0x53
+ 2943 0449 9A010000 		.4byte	.LVL69
+ 2944 044d 9E010000 		.4byte	.LVL70
+ 2945 0451 0300     		.2byte	0x3
+ 2946 0453 91       		.byte	0x91
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqUfWSx.s 			page 58
+
+
+ 2947 0454 807E     		.sleb128 -256
+ 2948 0456 AC010000 		.4byte	.LVL72
+ 2949 045a BC010000 		.4byte	.LVL73
+ 2950 045e 0300     		.2byte	0x3
+ 2951 0460 91       		.byte	0x91
+ 2952 0461 807E     		.sleb128 -256
+ 2953 0463 00000000 		.4byte	0
+ 2954 0467 00000000 		.4byte	0
+ 2955              	.LLST30:
+ 2956 046b 3E010000 		.4byte	.LVL63
+ 2957 046f 59010000 		.4byte	.LVL64-1
+ 2958 0473 0200     		.2byte	0x2
+ 2959 0475 74       		.byte	0x74
+ 2960 0476 08       		.sleb128 8
+ 2961 0477 00000000 		.4byte	0
+ 2962 047b 00000000 		.4byte	0
+ 2963              	.LLST31:
+ 2964 047f 3E010000 		.4byte	.LVL63
+ 2965 0483 82010000 		.4byte	.LVL66
+ 2966 0487 0600     		.2byte	0x6
+ 2967 0489 56       		.byte	0x56
+ 2968 048a 93       		.byte	0x93
+ 2969 048b 04       		.uleb128 0x4
+ 2970 048c 57       		.byte	0x57
+ 2971 048d 93       		.byte	0x93
+ 2972 048e 04       		.uleb128 0x4
+ 2973 048f 00000000 		.4byte	0
+ 2974 0493 00000000 		.4byte	0
+ 2975              	.LLST32:
+ 2976 0497 3E010000 		.4byte	.LVL63
+ 2977 049b 8C010000 		.4byte	.LVL67
+ 2978 049f 0300     		.2byte	0x3
+ 2979 04a1 91       		.byte	0x91
+ 2980 04a2 807E     		.sleb128 -256
+ 2981 04a4 00000000 		.4byte	0
+ 2982 04a8 00000000 		.4byte	0
+ 2983              	.LLST33:
+ 2984 04ac 3E010000 		.4byte	.LVL63
+ 2985 04b0 8C010000 		.4byte	.LVL67
+ 2986 04b4 0300     		.2byte	0x3
+ 2987 04b6 91       		.byte	0x91
+ 2988 04b7 907E     		.sleb128 -240
+ 2989 04b9 00000000 		.4byte	0
+ 2990 04bd 00000000 		.4byte	0
+ 2991              	.LLST34:
+ 2992 04c1 3E010000 		.4byte	.LVL63
+ 2993 04c5 8C010000 		.4byte	.LVL67
+ 2994 04c9 0300     		.2byte	0x3
+ 2995 04cb 74       		.byte	0x74
+ 2996 04cc 08       		.sleb128 8
+ 2997 04cd 9F       		.byte	0x9f
+ 2998 04ce 00000000 		.4byte	0
+ 2999 04d2 00000000 		.4byte	0
+ 3000              	.LLST35:
+ 3001 04d6 3E010000 		.4byte	.LVL63
+ 3002 04da 8C010000 		.4byte	.LVL67
+ 3003 04de 0100     		.2byte	0x1
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqUfWSx.s 			page 59
+
+
+ 3004 04e0 54       		.byte	0x54
+ 3005 04e1 00000000 		.4byte	0
+ 3006 04e5 00000000 		.4byte	0
+ 3007              		.section	.debug_aranges,"",%progbits
+ 3008 0000 34000000 		.4byte	0x34
+ 3009 0004 0200     		.2byte	0x2
+ 3010 0006 00000000 		.4byte	.Ldebug_info0
+ 3011 000a 04       		.byte	0x4
+ 3012 000b 00       		.byte	0
+ 3013 000c 0000     		.2byte	0
+ 3014 000e 0000     		.2byte	0
+ 3015 0010 00000000 		.4byte	.LFB2
+ 3016 0014 42000000 		.4byte	.LFE2-.LFB2
+ 3017 0018 00000000 		.4byte	.LFB8
+ 3018 001c 30000000 		.4byte	.LFE8-.LFB8
+ 3019 0020 00000000 		.4byte	.LFB6
+ 3020 0024 A8020000 		.4byte	.LFE6-.LFB6
+ 3021 0028 00000000 		.4byte	.LFB7
+ 3022 002c B0020000 		.4byte	.LFE7-.LFB7
+ 3023 0030 00000000 		.4byte	0
+ 3024 0034 00000000 		.4byte	0
+ 3025              		.section	.debug_ranges,"",%progbits
+ 3026              	.Ldebug_ranges0:
+ 3027 0000 06000000 		.4byte	.LBB20
+ 3028 0004 30000000 		.4byte	.LBE20
+ 3029 0008 32000000 		.4byte	.LBB23
+ 3030 000c 36000000 		.4byte	.LBE23
+ 3031 0010 00000000 		.4byte	0
+ 3032 0014 00000000 		.4byte	0
+ 3033 0018 0A000000 		.4byte	.LBB26
+ 3034 001c 1C000000 		.4byte	.LBE26
+ 3035 0020 1E000000 		.4byte	.LBB29
+ 3036 0024 28000000 		.4byte	.LBE29
+ 3037 0028 00000000 		.4byte	0
+ 3038 002c 00000000 		.4byte	0
+ 3039 0030 C8000000 		.4byte	.LBB31
+ 3040 0034 36020000 		.4byte	.LBE31
+ 3041 0038 38020000 		.4byte	.LBB46
+ 3042 003c 3C020000 		.4byte	.LBE46
+ 3043 0040 70020000 		.4byte	.LBB47
+ 3044 0044 72020000 		.4byte	.LBE47
+ 3045 0048 00000000 		.4byte	0
+ 3046 004c 00000000 		.4byte	0
+ 3047 0050 D0000000 		.4byte	.LBB32
+ 3048 0054 98010000 		.4byte	.LBE32
+ 3049 0058 9A010000 		.4byte	.LBB43
+ 3050 005c 9C010000 		.4byte	.LBE43
+ 3051 0060 70020000 		.4byte	.LBB45
+ 3052 0064 72020000 		.4byte	.LBE45
+ 3053 0068 00000000 		.4byte	0
+ 3054 006c 00000000 		.4byte	0
+ 3055 0070 98010000 		.4byte	.LBB34
+ 3056 0074 9A010000 		.4byte	.LBE34
+ 3057 0078 9C010000 		.4byte	.LBB44
+ 3058 007c 0A020000 		.4byte	.LBE44
+ 3059 0080 00000000 		.4byte	0
+ 3060 0084 00000000 		.4byte	0
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqUfWSx.s 			page 60
+
+
+ 3061 0088 98010000 		.4byte	.LBB35
+ 3062 008c 9A010000 		.4byte	.LBE35
+ 3063 0090 9C010000 		.4byte	.LBB40
+ 3064 0094 AA010000 		.4byte	.LBE40
+ 3065 0098 B2010000 		.4byte	.LBB41
+ 3066 009c FC010000 		.4byte	.LBE41
+ 3067 00a0 00020000 		.4byte	.LBB42
+ 3068 00a4 02020000 		.4byte	.LBE42
+ 3069 00a8 00000000 		.4byte	0
+ 3070 00ac 00000000 		.4byte	0
+ 3071 00b0 F0000000 		.4byte	.LBB51
+ 3072 00b4 9E010000 		.4byte	.LBE51
+ 3073 00b8 AC010000 		.4byte	.LBB69
+ 3074 00bc 96020000 		.4byte	.LBE69
+ 3075 00c0 00000000 		.4byte	0
+ 3076 00c4 00000000 		.4byte	0
+ 3077 00c8 1C010000 		.4byte	.LBB52
+ 3078 00cc 20010000 		.4byte	.LBE52
+ 3079 00d0 24010000 		.4byte	.LBB63
+ 3080 00d4 28010000 		.4byte	.LBE63
+ 3081 00d8 2C010000 		.4byte	.LBB64
+ 3082 00dc 96010000 		.4byte	.LBE64
+ 3083 00e0 00000000 		.4byte	0
+ 3084 00e4 00000000 		.4byte	0
+ 3085 00e8 1E010000 		.4byte	.LBB53
+ 3086 00ec 20010000 		.4byte	.LBE53
+ 3087 00f0 26010000 		.4byte	.LBB59
+ 3088 00f4 28010000 		.4byte	.LBE59
+ 3089 00f8 2C010000 		.4byte	.LBB60
+ 3090 00fc 3A010000 		.4byte	.LBE60
+ 3091 0100 3E010000 		.4byte	.LBB61
+ 3092 0104 86010000 		.4byte	.LBE61
+ 3093 0108 88010000 		.4byte	.LBB62
+ 3094 010c 8C010000 		.4byte	.LBE62
+ 3095 0110 00000000 		.4byte	0
+ 3096 0114 00000000 		.4byte	0
+ 3097 0118 32020000 		.4byte	.LBB66
+ 3098 011c 4E020000 		.4byte	.LBE66
+ 3099 0120 52020000 		.4byte	.LBB67
+ 3100 0124 5A020000 		.4byte	.LBE67
+ 3101 0128 62020000 		.4byte	.LBB68
+ 3102 012c 64020000 		.4byte	.LBE68
+ 3103 0130 00000000 		.4byte	0
+ 3104 0134 00000000 		.4byte	0
+ 3105 0138 00000000 		.4byte	.LFB2
+ 3106 013c 42000000 		.4byte	.LFE2
+ 3107 0140 00000000 		.4byte	.LFB8
+ 3108 0144 30000000 		.4byte	.LFE8
+ 3109 0148 00000000 		.4byte	.LFB6
+ 3110 014c A8020000 		.4byte	.LFE6
+ 3111 0150 00000000 		.4byte	.LFB7
+ 3112 0154 B0020000 		.4byte	.LFE7
+ 3113 0158 00000000 		.4byte	0
+ 3114 015c 00000000 		.4byte	0
+ 3115              		.section	.debug_line,"",%progbits
+ 3116              	.Ldebug_line0:
+ 3117 0000 25030000 		.section	.debug_str,"MS",%progbits,1
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqUfWSx.s 			page 61
+
+
+ 3117      02003801 
+ 3117      00000201 
+ 3117      FB0E0D00 
+ 3117      01010101 
+ 3118              	.LASF21:
+ 3119 0000 63697068 		.ascii	"ciphertext\000"
+ 3119      65727465 
+ 3119      787400
+ 3120              	.LASF5:
+ 3121 000b 5F5F7569 		.ascii	"__uint8_t\000"
+ 3121      6E74385F 
+ 3121      7400
+ 3122              	.LASF20:
+ 3123 0015 7061636B 		.ascii	"pack_uint64_little\000"
+ 3123      5F75696E 
+ 3123      7436345F 
+ 3123      6C697474 
+ 3123      6C6500
+ 3124              	.LASF24:
+ 3125 0028 65787472 		.ascii	"extra\000"
+ 3125      6100
+ 3126              	.LASF14:
+ 3127 002e 75696E74 		.ascii	"uint64_t\000"
+ 3127      36345F74 
+ 3127      00
+ 3128              	.LASF26:
+ 3129 0037 74687265 		.ascii	"threefish512_encrypt_block\000"
+ 3129      65666973 
+ 3129      68353132 
+ 3129      5F656E63 
+ 3129      72797074 
+ 3130              	.LASF23:
+ 3131 0052 706C6169 		.ascii	"plaintext\000"
+ 3131      6E746578 
+ 3131      7400
+ 3132              	.LASF33:
+ 3133 005c 62797465 		.ascii	"bytes_to_words\000"
+ 3133      735F746F 
+ 3133      5F776F72 
+ 3133      647300
+ 3134              	.LASF1:
+ 3135 006b 756E7369 		.ascii	"unsigned char\000"
+ 3135      676E6564 
+ 3135      20636861 
+ 3135      7200
+ 3136              	.LASF27:
+ 3137 0079 74687265 		.ascii	"threefish512_decrypt_block\000"
+ 3137      65666973 
+ 3137      68353132 
+ 3137      5F646563 
+ 3137      72797074 
+ 3138              	.LASF7:
+ 3139 0094 6C6F6E67 		.ascii	"long unsigned int\000"
+ 3139      20756E73 
+ 3139      69676E65 
+ 3139      6420696E 
+ 3139      7400
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqUfWSx.s 			page 62
+
+
+ 3140              	.LASF22:
+ 3141 00a6 74776561 		.ascii	"tweak\000"
+ 3141      6B00
+ 3142              	.LASF3:
+ 3143 00ac 73686F72 		.ascii	"short unsigned int\000"
+ 3143      7420756E 
+ 3143      7369676E 
+ 3143      65642069 
+ 3143      6E7400
+ 3144              	.LASF31:
+ 3145 00bf 5C5C5642 		.ascii	"\\\\VBOXSVR\\raywang\\Dropbox (MIT)\\CTFs\\eCTF\\ec"
+ 3145      4F585356 
+ 3145      525C7261 
+ 3145      7977616E 
+ 3145      675C4472 
+ 3146 00eb 74662D32 		.ascii	"tf-2018-techsec\\strong-arm.cylib\000"
+ 3146      3031382D 
+ 3146      74656368 
+ 3146      7365635C 
+ 3146      7374726F 
+ 3147              	.LASF6:
+ 3148 010c 5F5F7569 		.ascii	"__uint32_t\000"
+ 3148      6E743332 
+ 3148      5F7400
+ 3149              	.LASF18:
+ 3150 0117 776F7264 		.ascii	"words_to_bytes\000"
+ 3150      735F746F 
+ 3150      5F627974 
+ 3150      657300
+ 3151              	.LASF15:
+ 3152 0126 726F756E 		.ascii	"roundnum\000"
+ 3152      646E756D 
+ 3152      00
+ 3153              	.LASF30:
+ 3154 012f 7374726F 		.ascii	"strong-arm\\src\\threefish\\threefish.c\000"
+ 3154      6E672D61 
+ 3154      726D5C73 
+ 3154      72635C74 
+ 3154      68726565 
+ 3155              	.LASF11:
+ 3156 0154 756E7369 		.ascii	"unsigned int\000"
+ 3156      676E6564 
+ 3156      20696E74 
+ 3156      00
+ 3157              	.LASF10:
+ 3158 0161 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 3158      206C6F6E 
+ 3158      6720756E 
+ 3158      7369676E 
+ 3158      65642069 
+ 3159              	.LASF12:
+ 3160 0178 75696E74 		.ascii	"uint8_t\000"
+ 3160      385F7400 
+ 3161              	.LASF17:
+ 3162 0180 756E6D69 		.ascii	"unmix8\000"
+ 3162      783800
+ 3163              	.LASF25:
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqUfWSx.s 			page 63
+
+
+ 3164 0187 73697A65 		.ascii	"sizetype\000"
+ 3164      74797065 
+ 3164      00
+ 3165              	.LASF8:
+ 3166 0190 6C6F6E67 		.ascii	"long long int\000"
+ 3166      206C6F6E 
+ 3166      6720696E 
+ 3166      7400
+ 3167              	.LASF16:
+ 3168 019e 6D697838 		.ascii	"mix8\000"
+ 3168      00
+ 3169              	.LASF32:
+ 3170 01a3 756E7061 		.ascii	"unpack_uint64_little\000"
+ 3170      636B5F75 
+ 3170      696E7436 
+ 3170      345F6C69 
+ 3170      74746C65 
+ 3171              	.LASF19:
+ 3172 01b8 636F756E 		.ascii	"count\000"
+ 3172      7400
+ 3173              	.LASF2:
+ 3174 01be 73686F72 		.ascii	"short int\000"
+ 3174      7420696E 
+ 3174      7400
+ 3175              	.LASF9:
+ 3176 01c8 5F5F7569 		.ascii	"__uint64_t\000"
+ 3176      6E743634 
+ 3176      5F7400
+ 3177              	.LASF28:
+ 3178 01d3 43323430 		.ascii	"C240\000"
+ 3178      00
+ 3179              	.LASF13:
+ 3180 01d8 75696E74 		.ascii	"uint32_t\000"
+ 3180      33325F74 
+ 3180      00
+ 3181              	.LASF4:
+ 3182 01e1 6C6F6E67 		.ascii	"long int\000"
+ 3182      20696E74 
+ 3182      00
+ 3183              	.LASF0:
+ 3184 01ea 7369676E 		.ascii	"signed char\000"
+ 3184      65642063 
+ 3184      68617200 
+ 3185              	.LASF29:
+ 3186 01f6 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 3186      43313120 
+ 3186      352E342E 
+ 3186      31203230 
+ 3186      31363036 
+ 3187 0229 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m0 -mthumb -g -O"
+ 3187      20726576 
+ 3187      6973696F 
+ 3187      6E203233 
+ 3187      37373135 
+ 3188 025c 73202D66 		.ascii	"s -ffunction-sections -ffat-lto-objects\000"
+ 3188      66756E63 
+ 3188      74696F6E 
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccqUfWSx.s 			page 64
+
+
+ 3188      2D736563 
+ 3188      74696F6E 
+ 3189              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

@@ -1,6 +1,6 @@
 /***************************************************************************//**
 * \file CyLib.h
-* \version 5.50
+* \version 5.60
 *
 * \brief Provides a system API for the clocking, and interrupts.
 *
@@ -9,7 +9,7 @@
 *
 ********************************************************************************
 * \copyright
-* Copyright 2008-2016, Cypress Semiconductor Corporation.  All rights reserved.
+* Copyright 2008-2017, Cypress Semiconductor Corporation.  All rights reserved.
 * You may use this file only in accordance with the license, terms, conditions,
 * disclaimers, and limitations in the end user license agreement accompanying
 * the software package with which this file was provided.
@@ -1474,11 +1474,11 @@ extern uint32 CySysTickInitVar;
 #define CY_SYS_CLK_IMO_TRIM4_GAIN          (CY_SYS_CLK_IMO_TRIM4_USB_GAIN)
 
 /* SFLASH0 block has been renamed to SFLASH */
-#if (CY_PSOC4_4100 || CY_PSOC4_4200)
+#if (CY_PSOC4_4100 || CY_PSOC4_4200 || CY_PSOC4_4000U)
     #if !defined(CYREG_SFLASH_IMO_TRIM21)
         #define CYREG_SFLASH_IMO_TRIM21         (CYREG_SFLASH0_IMO_TRIM21)
     #endif  /* !defined(CYREG_SFLASH_IMO_TRIM21) */
-#endif /* (CY_PSOC4_4100 || CY_PSOC4_4200) */
+#endif /* (CY_PSOC4_4100 || CY_PSOC4_4200 || CY_PSOC4_4000U) */
 
 #if (CY_IP_CPUSS_CM0)
 

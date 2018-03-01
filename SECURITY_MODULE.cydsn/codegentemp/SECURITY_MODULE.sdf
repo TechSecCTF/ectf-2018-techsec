@@ -1,6 +1,6 @@
 (DELAYFILE
  (SDFVERSION "IEEE 1497 4.0")
- (DATE "2018-02-17T04:13:56Z")
+ (DATE "2018-03-01T18:57:23Z")
  (DESIGN "SECURITY_MODULE")
  (VENDOR "Cypress Semiconductor")
  (PROGRAM "PSoC Creator")
@@ -30,8 +30,8 @@
     (INTERCONNECT Rx_1\(0\).fb \\CARD_UART\:BUART\:rx_status_3\\.main_6 (5.260:5.260:5.260))
     (INTERCONNECT \\CARD_UART\:BUART\:sTX\:TxSts\\.interrupt \\CARD_UART\:TXInternalInterrupt\\.interrupt (1.000:1.000:1.000))
     (INTERCONNECT \\CARD_UART\:BUART\:sRX\:RxSts\\.interrupt \\CARD_UART\:RXInternalInterrupt\\.interrupt (1.000:1.000:1.000))
-    (INTERCONNECT \\DB_UART\:SCB\\.interrupt \\DB_UART\:SCB_IRQ\\.interrupt (0.000:0.000:0.000))
     (INTERCONNECT SW1\(0\).fb Reset_isr.interrupt (1.000:1.000:1.000))
+    (INTERCONNECT \\DB_UART\:SCB\\.interrupt \\DB_UART\:SCB_IRQ\\.interrupt (0.000:0.000:0.000))
     (INTERCONNECT Tx_1\(0\).pad_out Tx_1\(0\).pad_in (0.000:0.000:0.000))
     (INTERCONNECT \\CARD_UART\:BUART\:counter_load_not\\.q \\CARD_UART\:BUART\:sTX\:sCLOCK\:TxBitClkGen\\.cs_addr_0 (2.246:2.246:2.246))
     (INTERCONNECT \\CARD_UART\:BUART\:pollcount_0\\.q \\CARD_UART\:BUART\:pollcount_0\\.main_3 (4.002:4.002:4.002))

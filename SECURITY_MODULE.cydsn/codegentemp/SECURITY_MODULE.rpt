@@ -1,13 +1,13 @@
-Loading plugins phase: Elapsed time ==> 0s.288ms
+Loading plugins phase: Elapsed time ==> 0s.187ms
 <CYPRESSTAG name="CyDsfit arguments...">
 cydsfit arguments: -.fdsnotice -.fdswarpdepfile=warp_dependencies.txt -.fdselabdepfile=elab_dependencies.txt -.fdsbldfile=generated_files.txt -.fdsreffile=referenced_files.txt -p \\VBOXSVR\raywang\Dropbox (MIT)\CTFs\eCTF\ectf-2018-techsec\SECURITY_MODULE.cydsn\SECURITY_MODULE.cyprj -d CY8C4245AXI-483 -s \\VBOXSVR\raywang\Dropbox (MIT)\CTFs\eCTF\ectf-2018-techsec\SECURITY_MODULE.cydsn\Generated_Source\PSoC4 -- -yv2 -q10 -ygs -o2 -v3 -.fftcfgtype=LE
 </CYPRESSTAG>
 <CYPRESSTAG name="Design elaboration results...">
 </CYPRESSTAG>
-Elaboration phase: Elapsed time ==> 2s.538ms
+Elaboration phase: Elapsed time ==> 1s.530ms
 <CYPRESSTAG name="HDL generation results...">
 </CYPRESSTAG>
-HDL generation phase: Elapsed time ==> 0s.067ms
+HDL generation phase: Elapsed time ==> 0s.046ms
 <CYPRESSTAG name="Synthesis results...">
 
      | | | | | | |
@@ -41,7 +41,7 @@ Options  :    -yv2 -q10 -ygs -o2 -v3 -.fftcfgtype=LE -ya -.fftprj=\\VBOXSVR\rayw
 ======================================================================
 
 vlogfe V6.3 IR 41:  Verilog parser
-Fri Feb 16 20:13:42 2018
+Thu Mar 01 10:57:16 2018
 
 
 ======================================================================
@@ -51,7 +51,7 @@ Options  :    -yv2 -q10 SECURITY_MODULE.v
 ======================================================================
 
 vpp V6.3 IR 41:  Verilog Pre-Processor
-Fri Feb 16 20:13:43 2018
+Thu Mar 01 10:57:16 2018
 
 Flattening file 'C:\Program Files (x86)\Cypress\PSoC Creator\4.1\PSoC Creator\psoc\content\CyPrimitives\cyprimitives.cylib\cy_virtualmux_v1_0\cy_virtualmux_v1_0.v'
 Flattening file 'C:\Program Files (x86)\Cypress\PSoC Creator\4.1\PSoC Creator\psoc\content\CyPrimitives\cyprimitives.cylib\ZeroTerminal\ZeroTerminal.v'
@@ -96,7 +96,7 @@ Options  :    -yv2 -q10 -ygs -o2 -v3 -.fftcfgtype=LE -ya -.fftprj=\\VBOXSVR\rayw
 ======================================================================
 
 tovif V6.3 IR 41:  High-level synthesis
-Fri Feb 16 20:13:43 2018
+Thu Mar 01 10:57:16 2018
 
 Linking 'C:\Program Files (x86)\Cypress\PSoC Creator\4.1\PSoC Creator\warp\lib\common\std.vhd'.
 Linking 'C:\Program Files (x86)\Cypress\PSoC Creator\4.1\PSoC Creator\warp\lib\common\cypress.vhd'.
@@ -130,7 +130,7 @@ Options  :    -yv2 -q10 -ygs -o2 -v3 -.fftcfgtype=LE -ya -.fftprj=\\VBOXSVR\rayw
 ======================================================================
 
 topld V6.3 IR 41:  Synthesis and optimization
-Fri Feb 16 20:13:44 2018
+Thu Mar 01 10:57:17 2018
 
 Linking 'C:\Program Files (x86)\Cypress\PSoC Creator\4.1\PSoC Creator\warp\lib\common\std.vhd'.
 Linking 'C:\Program Files (x86)\Cypress\PSoC Creator\4.1\PSoC Creator\warp\lib\common\cypress.vhd'.
@@ -163,15 +163,16 @@ Detecting unused logic.
 	\DB_UART:uncfg_rx_irq\
 	\DB_UART:Net_1099\
 	\DB_UART:Net_1258\
-	Net_2
-	Net_3
-	Net_12
-	Net_13
-	Net_14
-	Net_15
-	Net_16
-	Net_17
-	Net_18
+	Net_72
+	Net_81
+	Net_82
+	Net_83
+	Net_84
+	Net_85
+	Net_86
+	Net_87
+	Net_89
+	Net_92
 	\CARD_UART:BUART:reset_sr\
 	\CARD_UART:BUART:sRX:s23Poll:MODULE_1:g2:a0:b_1\
 	\CARD_UART:BUART:sRX:s23Poll:MODULE_1:g2:a0:b_0\
@@ -199,7 +200,7 @@ Detecting unused logic.
 	\CARD_UART:BUART:sRX:MODULE_5:lte\
 
 
-Deleted 38 User equations/components.
+Deleted 39 User equations/components.
 Deleted 0 Synthesized equations/components.
 
 ------------------------------------------------------
@@ -259,108 +260,108 @@ Removing Rhs of wire zero[17] = \DB_UART:select_s_wire\[2]
 Removing Rhs of wire one[18] = \DB_UART:tmpOE__tx_net_0\[12]
 Removing Lhs of wire \DB_UART:tmpOE__rx_net_0\[25] = one[18]
 Removing Lhs of wire \DB_UART:cts_wire\[29] = zero[17]
-Removing Rhs of wire Net_27[54] = \CARD_UART:BUART:tx_interrupt_out\[75]
-Removing Rhs of wire Net_28[58] = \CARD_UART:BUART:rx_interrupt_out\[76]
-Removing Lhs of wire \CARD_UART:Net_61\[59] = \CARD_UART:Net_9\[56]
-Removing Lhs of wire \CARD_UART:BUART:tx_hd_send_break\[63] = zero[17]
-Removing Lhs of wire \CARD_UART:BUART:HalfDuplexSend\[64] = zero[17]
-Removing Lhs of wire \CARD_UART:BUART:FinalParityType_1\[65] = zero[17]
-Removing Lhs of wire \CARD_UART:BUART:FinalParityType_0\[66] = zero[17]
-Removing Lhs of wire \CARD_UART:BUART:FinalAddrMode_2\[67] = zero[17]
-Removing Lhs of wire \CARD_UART:BUART:FinalAddrMode_1\[68] = zero[17]
-Removing Lhs of wire \CARD_UART:BUART:FinalAddrMode_0\[69] = zero[17]
-Removing Lhs of wire \CARD_UART:BUART:tx_ctrl_mark\[70] = zero[17]
-Removing Rhs of wire \CARD_UART:BUART:tx_bitclk_enable_pre\[80] = \CARD_UART:BUART:tx_bitclk_dp\[116]
-Removing Lhs of wire \CARD_UART:BUART:tx_counter_tc\[126] = \CARD_UART:BUART:tx_counter_dp\[117]
-Removing Lhs of wire \CARD_UART:BUART:tx_status_6\[127] = zero[17]
-Removing Lhs of wire \CARD_UART:BUART:tx_status_5\[128] = zero[17]
-Removing Lhs of wire \CARD_UART:BUART:tx_status_4\[129] = zero[17]
-Removing Lhs of wire \CARD_UART:BUART:tx_status_1\[131] = \CARD_UART:BUART:tx_fifo_empty\[94]
-Removing Lhs of wire \CARD_UART:BUART:tx_status_3\[133] = \CARD_UART:BUART:tx_fifo_notfull\[93]
-Removing Lhs of wire \CARD_UART:BUART:rx_count7_bit8_wire\[193] = zero[17]
-Removing Lhs of wire \CARD_UART:BUART:sRX:s23Poll:add_vv_vv_MODGEN_1_1\[201] = \CARD_UART:BUART:sRX:s23Poll:MODULE_1:g2:a0:s_1\[212]
-Removing Lhs of wire \CARD_UART:BUART:sRX:s23Poll:add_vv_vv_MODGEN_1_0\[203] = \CARD_UART:BUART:sRX:s23Poll:MODULE_1:g2:a0:s_0\[213]
-Removing Lhs of wire \CARD_UART:BUART:sRX:s23Poll:cmp_vv_vv_MODGEN_2\[204] = \CARD_UART:BUART:sRX:s23Poll:MODULE_2:g2:a0:lta_0\[229]
-Removing Lhs of wire \CARD_UART:BUART:sRX:s23Poll:cmp_vv_vv_MODGEN_3\[205] = \CARD_UART:BUART:sRX:s23Poll:MODULE_3:g2:a0:lta_0\[243]
-Removing Lhs of wire \CARD_UART:BUART:sRX:s23Poll:MODULE_1:g2:a0:a_1\[206] = \CARD_UART:BUART:sRX:s23Poll:MODIN1_1\[207]
-Removing Lhs of wire \CARD_UART:BUART:sRX:s23Poll:MODIN1_1\[207] = \CARD_UART:BUART:pollcount_1\[199]
-Removing Lhs of wire \CARD_UART:BUART:sRX:s23Poll:MODULE_1:g2:a0:a_0\[208] = \CARD_UART:BUART:sRX:s23Poll:MODIN1_0\[209]
-Removing Lhs of wire \CARD_UART:BUART:sRX:s23Poll:MODIN1_0\[209] = \CARD_UART:BUART:pollcount_0\[202]
-Removing Lhs of wire \CARD_UART:BUART:sRX:s23Poll:MODULE_1:g2:a0:g1:z1:s0:g1:u0:c_0\[215] = one[18]
-Removing Lhs of wire \CARD_UART:BUART:sRX:s23Poll:MODULE_1:g2:a0:g1:z1:s0:g1:u0:b_0\[216] = one[18]
-Removing Lhs of wire \CARD_UART:BUART:sRX:s23Poll:MODULE_2:g2:a0:newa_1\[217] = \CARD_UART:BUART:pollcount_1\[199]
-Removing Lhs of wire \CARD_UART:BUART:sRX:s23Poll:MODIN2_1\[218] = \CARD_UART:BUART:pollcount_1\[199]
-Removing Lhs of wire \CARD_UART:BUART:sRX:s23Poll:MODULE_2:g2:a0:newa_0\[219] = \CARD_UART:BUART:pollcount_0\[202]
-Removing Lhs of wire \CARD_UART:BUART:sRX:s23Poll:MODIN2_0\[220] = \CARD_UART:BUART:pollcount_0\[202]
-Removing Lhs of wire \CARD_UART:BUART:sRX:s23Poll:MODULE_2:g2:a0:newb_1\[221] = zero[17]
-Removing Lhs of wire \CARD_UART:BUART:sRX:s23Poll:MODULE_2:g2:a0:newb_0\[222] = one[18]
-Removing Lhs of wire \CARD_UART:BUART:sRX:s23Poll:MODULE_2:g2:a0:dataa_1\[223] = \CARD_UART:BUART:pollcount_1\[199]
-Removing Lhs of wire \CARD_UART:BUART:sRX:s23Poll:MODULE_2:g2:a0:dataa_0\[224] = \CARD_UART:BUART:pollcount_0\[202]
-Removing Lhs of wire \CARD_UART:BUART:sRX:s23Poll:MODULE_2:g2:a0:datab_1\[225] = zero[17]
-Removing Lhs of wire \CARD_UART:BUART:sRX:s23Poll:MODULE_2:g2:a0:datab_0\[226] = one[18]
-Removing Lhs of wire \CARD_UART:BUART:sRX:s23Poll:MODULE_3:g2:a0:newa_1\[231] = \CARD_UART:BUART:pollcount_1\[199]
-Removing Lhs of wire \CARD_UART:BUART:sRX:s23Poll:MODIN3_1\[232] = \CARD_UART:BUART:pollcount_1\[199]
-Removing Lhs of wire \CARD_UART:BUART:sRX:s23Poll:MODULE_3:g2:a0:newa_0\[233] = \CARD_UART:BUART:pollcount_0\[202]
-Removing Lhs of wire \CARD_UART:BUART:sRX:s23Poll:MODIN3_0\[234] = \CARD_UART:BUART:pollcount_0\[202]
-Removing Lhs of wire \CARD_UART:BUART:sRX:s23Poll:MODULE_3:g2:a0:newb_1\[235] = one[18]
-Removing Lhs of wire \CARD_UART:BUART:sRX:s23Poll:MODULE_3:g2:a0:newb_0\[236] = zero[17]
-Removing Lhs of wire \CARD_UART:BUART:sRX:s23Poll:MODULE_3:g2:a0:dataa_1\[237] = \CARD_UART:BUART:pollcount_1\[199]
-Removing Lhs of wire \CARD_UART:BUART:sRX:s23Poll:MODULE_3:g2:a0:dataa_0\[238] = \CARD_UART:BUART:pollcount_0\[202]
-Removing Lhs of wire \CARD_UART:BUART:sRX:s23Poll:MODULE_3:g2:a0:datab_1\[239] = one[18]
-Removing Lhs of wire \CARD_UART:BUART:sRX:s23Poll:MODULE_3:g2:a0:datab_0\[240] = zero[17]
-Removing Lhs of wire \CARD_UART:BUART:rx_status_1\[247] = zero[17]
-Removing Rhs of wire \CARD_UART:BUART:rx_status_2\[248] = \CARD_UART:BUART:rx_parity_error_status\[249]
-Removing Rhs of wire \CARD_UART:BUART:rx_status_3\[250] = \CARD_UART:BUART:rx_stop_bit_error\[251]
-Removing Lhs of wire \CARD_UART:BUART:sRX:cmp_vv_vv_MODGEN_4\[261] = \CARD_UART:BUART:sRX:MODULE_4:g2:a0:lta_0\[310]
-Removing Lhs of wire \CARD_UART:BUART:sRX:cmp_vv_vv_MODGEN_5\[265] = \CARD_UART:BUART:sRX:MODULE_5:g1:a0:xneq\[332]
-Removing Lhs of wire \CARD_UART:BUART:sRX:MODULE_4:g2:a0:newa_6\[266] = zero[17]
-Removing Lhs of wire \CARD_UART:BUART:sRX:MODULE_4:g2:a0:newa_5\[267] = zero[17]
-Removing Lhs of wire \CARD_UART:BUART:sRX:MODULE_4:g2:a0:newa_4\[268] = zero[17]
-Removing Lhs of wire \CARD_UART:BUART:sRX:MODULE_4:g2:a0:newa_3\[269] = \CARD_UART:BUART:sRX:MODIN4_6\[270]
-Removing Lhs of wire \CARD_UART:BUART:sRX:MODIN4_6\[270] = \CARD_UART:BUART:rx_count_6\[188]
-Removing Lhs of wire \CARD_UART:BUART:sRX:MODULE_4:g2:a0:newa_2\[271] = \CARD_UART:BUART:sRX:MODIN4_5\[272]
-Removing Lhs of wire \CARD_UART:BUART:sRX:MODIN4_5\[272] = \CARD_UART:BUART:rx_count_5\[189]
-Removing Lhs of wire \CARD_UART:BUART:sRX:MODULE_4:g2:a0:newa_1\[273] = \CARD_UART:BUART:sRX:MODIN4_4\[274]
-Removing Lhs of wire \CARD_UART:BUART:sRX:MODIN4_4\[274] = \CARD_UART:BUART:rx_count_4\[190]
-Removing Lhs of wire \CARD_UART:BUART:sRX:MODULE_4:g2:a0:newa_0\[275] = \CARD_UART:BUART:sRX:MODIN4_3\[276]
-Removing Lhs of wire \CARD_UART:BUART:sRX:MODIN4_3\[276] = \CARD_UART:BUART:rx_count_3\[191]
-Removing Lhs of wire \CARD_UART:BUART:sRX:MODULE_4:g2:a0:newb_6\[277] = zero[17]
-Removing Lhs of wire \CARD_UART:BUART:sRX:MODULE_4:g2:a0:newb_5\[278] = zero[17]
-Removing Lhs of wire \CARD_UART:BUART:sRX:MODULE_4:g2:a0:newb_4\[279] = zero[17]
-Removing Lhs of wire \CARD_UART:BUART:sRX:MODULE_4:g2:a0:newb_3\[280] = zero[17]
-Removing Lhs of wire \CARD_UART:BUART:sRX:MODULE_4:g2:a0:newb_2\[281] = one[18]
-Removing Lhs of wire \CARD_UART:BUART:sRX:MODULE_4:g2:a0:newb_1\[282] = one[18]
-Removing Lhs of wire \CARD_UART:BUART:sRX:MODULE_4:g2:a0:newb_0\[283] = one[18]
-Removing Lhs of wire \CARD_UART:BUART:sRX:MODULE_4:g2:a0:dataa_6\[284] = zero[17]
-Removing Lhs of wire \CARD_UART:BUART:sRX:MODULE_4:g2:a0:dataa_5\[285] = zero[17]
-Removing Lhs of wire \CARD_UART:BUART:sRX:MODULE_4:g2:a0:dataa_4\[286] = zero[17]
-Removing Lhs of wire \CARD_UART:BUART:sRX:MODULE_4:g2:a0:dataa_3\[287] = \CARD_UART:BUART:rx_count_6\[188]
-Removing Lhs of wire \CARD_UART:BUART:sRX:MODULE_4:g2:a0:dataa_2\[288] = \CARD_UART:BUART:rx_count_5\[189]
-Removing Lhs of wire \CARD_UART:BUART:sRX:MODULE_4:g2:a0:dataa_1\[289] = \CARD_UART:BUART:rx_count_4\[190]
-Removing Lhs of wire \CARD_UART:BUART:sRX:MODULE_4:g2:a0:dataa_0\[290] = \CARD_UART:BUART:rx_count_3\[191]
-Removing Lhs of wire \CARD_UART:BUART:sRX:MODULE_4:g2:a0:datab_6\[291] = zero[17]
-Removing Lhs of wire \CARD_UART:BUART:sRX:MODULE_4:g2:a0:datab_5\[292] = zero[17]
-Removing Lhs of wire \CARD_UART:BUART:sRX:MODULE_4:g2:a0:datab_4\[293] = zero[17]
-Removing Lhs of wire \CARD_UART:BUART:sRX:MODULE_4:g2:a0:datab_3\[294] = zero[17]
-Removing Lhs of wire \CARD_UART:BUART:sRX:MODULE_4:g2:a0:datab_2\[295] = one[18]
-Removing Lhs of wire \CARD_UART:BUART:sRX:MODULE_4:g2:a0:datab_1\[296] = one[18]
-Removing Lhs of wire \CARD_UART:BUART:sRX:MODULE_4:g2:a0:datab_0\[297] = one[18]
-Removing Lhs of wire \CARD_UART:BUART:sRX:MODULE_5:g1:a0:newa_0\[312] = \CARD_UART:BUART:rx_postpoll\[147]
-Removing Lhs of wire \CARD_UART:BUART:sRX:MODULE_5:g1:a0:newb_0\[313] = \CARD_UART:BUART:rx_parity_bit\[264]
-Removing Lhs of wire \CARD_UART:BUART:sRX:MODULE_5:g1:a0:dataa_0\[314] = \CARD_UART:BUART:rx_postpoll\[147]
-Removing Lhs of wire \CARD_UART:BUART:sRX:MODULE_5:g1:a0:datab_0\[315] = \CARD_UART:BUART:rx_parity_bit\[264]
-Removing Lhs of wire \CARD_UART:BUART:sRX:MODULE_5:g1:a0:gx:u0:a_0\[316] = \CARD_UART:BUART:rx_postpoll\[147]
-Removing Lhs of wire \CARD_UART:BUART:sRX:MODULE_5:g1:a0:gx:u0:b_0\[317] = \CARD_UART:BUART:rx_parity_bit\[264]
-Removing Lhs of wire \CARD_UART:BUART:sRX:MODULE_5:g1:a0:gx:u0:aeqb_0\[319] = one[18]
-Removing Lhs of wire \CARD_UART:BUART:sRX:MODULE_5:g1:a0:gx:u0:eq_0\[320] = \CARD_UART:BUART:sRX:MODULE_5:g1:a0:gx:u0:xnor_array_0\[318]
-Removing Lhs of wire \CARD_UART:BUART:sRX:MODULE_5:g1:a0:gx:u0:eqi_0\[321] = \CARD_UART:BUART:sRX:MODULE_5:g1:a0:gx:u0:xnor_array_0\[318]
-Removing Lhs of wire tmpOE__Rx_1_net_0[343] = one[18]
-Removing Lhs of wire tmpOE__Tx_1_net_0[348] = one[18]
-Removing Lhs of wire tmpOE__SW1_net_0[356] = one[18]
-Removing Lhs of wire \CARD_UART:BUART:reset_reg\\D\[360] = zero[17]
-Removing Lhs of wire \CARD_UART:BUART:rx_bitclk\\D\[375] = \CARD_UART:BUART:rx_bitclk_pre\[182]
-Removing Lhs of wire \CARD_UART:BUART:rx_parity_error_pre\\D\[384] = \CARD_UART:BUART:rx_parity_error_pre\[259]
-Removing Lhs of wire \CARD_UART:BUART:rx_break_status\\D\[385] = zero[17]
+Removing Rhs of wire Net_27[55] = \CARD_UART:BUART:tx_interrupt_out\[76]
+Removing Rhs of wire Net_28[59] = \CARD_UART:BUART:rx_interrupt_out\[77]
+Removing Lhs of wire \CARD_UART:Net_61\[60] = \CARD_UART:Net_9\[57]
+Removing Lhs of wire \CARD_UART:BUART:tx_hd_send_break\[64] = zero[17]
+Removing Lhs of wire \CARD_UART:BUART:HalfDuplexSend\[65] = zero[17]
+Removing Lhs of wire \CARD_UART:BUART:FinalParityType_1\[66] = zero[17]
+Removing Lhs of wire \CARD_UART:BUART:FinalParityType_0\[67] = zero[17]
+Removing Lhs of wire \CARD_UART:BUART:FinalAddrMode_2\[68] = zero[17]
+Removing Lhs of wire \CARD_UART:BUART:FinalAddrMode_1\[69] = zero[17]
+Removing Lhs of wire \CARD_UART:BUART:FinalAddrMode_0\[70] = zero[17]
+Removing Lhs of wire \CARD_UART:BUART:tx_ctrl_mark\[71] = zero[17]
+Removing Rhs of wire \CARD_UART:BUART:tx_bitclk_enable_pre\[81] = \CARD_UART:BUART:tx_bitclk_dp\[117]
+Removing Lhs of wire \CARD_UART:BUART:tx_counter_tc\[127] = \CARD_UART:BUART:tx_counter_dp\[118]
+Removing Lhs of wire \CARD_UART:BUART:tx_status_6\[128] = zero[17]
+Removing Lhs of wire \CARD_UART:BUART:tx_status_5\[129] = zero[17]
+Removing Lhs of wire \CARD_UART:BUART:tx_status_4\[130] = zero[17]
+Removing Lhs of wire \CARD_UART:BUART:tx_status_1\[132] = \CARD_UART:BUART:tx_fifo_empty\[95]
+Removing Lhs of wire \CARD_UART:BUART:tx_status_3\[134] = \CARD_UART:BUART:tx_fifo_notfull\[94]
+Removing Lhs of wire \CARD_UART:BUART:rx_count7_bit8_wire\[194] = zero[17]
+Removing Lhs of wire \CARD_UART:BUART:sRX:s23Poll:add_vv_vv_MODGEN_1_1\[202] = \CARD_UART:BUART:sRX:s23Poll:MODULE_1:g2:a0:s_1\[213]
+Removing Lhs of wire \CARD_UART:BUART:sRX:s23Poll:add_vv_vv_MODGEN_1_0\[204] = \CARD_UART:BUART:sRX:s23Poll:MODULE_1:g2:a0:s_0\[214]
+Removing Lhs of wire \CARD_UART:BUART:sRX:s23Poll:cmp_vv_vv_MODGEN_2\[205] = \CARD_UART:BUART:sRX:s23Poll:MODULE_2:g2:a0:lta_0\[230]
+Removing Lhs of wire \CARD_UART:BUART:sRX:s23Poll:cmp_vv_vv_MODGEN_3\[206] = \CARD_UART:BUART:sRX:s23Poll:MODULE_3:g2:a0:lta_0\[244]
+Removing Lhs of wire \CARD_UART:BUART:sRX:s23Poll:MODULE_1:g2:a0:a_1\[207] = \CARD_UART:BUART:sRX:s23Poll:MODIN1_1\[208]
+Removing Lhs of wire \CARD_UART:BUART:sRX:s23Poll:MODIN1_1\[208] = \CARD_UART:BUART:pollcount_1\[200]
+Removing Lhs of wire \CARD_UART:BUART:sRX:s23Poll:MODULE_1:g2:a0:a_0\[209] = \CARD_UART:BUART:sRX:s23Poll:MODIN1_0\[210]
+Removing Lhs of wire \CARD_UART:BUART:sRX:s23Poll:MODIN1_0\[210] = \CARD_UART:BUART:pollcount_0\[203]
+Removing Lhs of wire \CARD_UART:BUART:sRX:s23Poll:MODULE_1:g2:a0:g1:z1:s0:g1:u0:c_0\[216] = one[18]
+Removing Lhs of wire \CARD_UART:BUART:sRX:s23Poll:MODULE_1:g2:a0:g1:z1:s0:g1:u0:b_0\[217] = one[18]
+Removing Lhs of wire \CARD_UART:BUART:sRX:s23Poll:MODULE_2:g2:a0:newa_1\[218] = \CARD_UART:BUART:pollcount_1\[200]
+Removing Lhs of wire \CARD_UART:BUART:sRX:s23Poll:MODIN2_1\[219] = \CARD_UART:BUART:pollcount_1\[200]
+Removing Lhs of wire \CARD_UART:BUART:sRX:s23Poll:MODULE_2:g2:a0:newa_0\[220] = \CARD_UART:BUART:pollcount_0\[203]
+Removing Lhs of wire \CARD_UART:BUART:sRX:s23Poll:MODIN2_0\[221] = \CARD_UART:BUART:pollcount_0\[203]
+Removing Lhs of wire \CARD_UART:BUART:sRX:s23Poll:MODULE_2:g2:a0:newb_1\[222] = zero[17]
+Removing Lhs of wire \CARD_UART:BUART:sRX:s23Poll:MODULE_2:g2:a0:newb_0\[223] = one[18]
+Removing Lhs of wire \CARD_UART:BUART:sRX:s23Poll:MODULE_2:g2:a0:dataa_1\[224] = \CARD_UART:BUART:pollcount_1\[200]
+Removing Lhs of wire \CARD_UART:BUART:sRX:s23Poll:MODULE_2:g2:a0:dataa_0\[225] = \CARD_UART:BUART:pollcount_0\[203]
+Removing Lhs of wire \CARD_UART:BUART:sRX:s23Poll:MODULE_2:g2:a0:datab_1\[226] = zero[17]
+Removing Lhs of wire \CARD_UART:BUART:sRX:s23Poll:MODULE_2:g2:a0:datab_0\[227] = one[18]
+Removing Lhs of wire \CARD_UART:BUART:sRX:s23Poll:MODULE_3:g2:a0:newa_1\[232] = \CARD_UART:BUART:pollcount_1\[200]
+Removing Lhs of wire \CARD_UART:BUART:sRX:s23Poll:MODIN3_1\[233] = \CARD_UART:BUART:pollcount_1\[200]
+Removing Lhs of wire \CARD_UART:BUART:sRX:s23Poll:MODULE_3:g2:a0:newa_0\[234] = \CARD_UART:BUART:pollcount_0\[203]
+Removing Lhs of wire \CARD_UART:BUART:sRX:s23Poll:MODIN3_0\[235] = \CARD_UART:BUART:pollcount_0\[203]
+Removing Lhs of wire \CARD_UART:BUART:sRX:s23Poll:MODULE_3:g2:a0:newb_1\[236] = one[18]
+Removing Lhs of wire \CARD_UART:BUART:sRX:s23Poll:MODULE_3:g2:a0:newb_0\[237] = zero[17]
+Removing Lhs of wire \CARD_UART:BUART:sRX:s23Poll:MODULE_3:g2:a0:dataa_1\[238] = \CARD_UART:BUART:pollcount_1\[200]
+Removing Lhs of wire \CARD_UART:BUART:sRX:s23Poll:MODULE_3:g2:a0:dataa_0\[239] = \CARD_UART:BUART:pollcount_0\[203]
+Removing Lhs of wire \CARD_UART:BUART:sRX:s23Poll:MODULE_3:g2:a0:datab_1\[240] = one[18]
+Removing Lhs of wire \CARD_UART:BUART:sRX:s23Poll:MODULE_3:g2:a0:datab_0\[241] = zero[17]
+Removing Lhs of wire \CARD_UART:BUART:rx_status_1\[248] = zero[17]
+Removing Rhs of wire \CARD_UART:BUART:rx_status_2\[249] = \CARD_UART:BUART:rx_parity_error_status\[250]
+Removing Rhs of wire \CARD_UART:BUART:rx_status_3\[251] = \CARD_UART:BUART:rx_stop_bit_error\[252]
+Removing Lhs of wire \CARD_UART:BUART:sRX:cmp_vv_vv_MODGEN_4\[262] = \CARD_UART:BUART:sRX:MODULE_4:g2:a0:lta_0\[311]
+Removing Lhs of wire \CARD_UART:BUART:sRX:cmp_vv_vv_MODGEN_5\[266] = \CARD_UART:BUART:sRX:MODULE_5:g1:a0:xneq\[333]
+Removing Lhs of wire \CARD_UART:BUART:sRX:MODULE_4:g2:a0:newa_6\[267] = zero[17]
+Removing Lhs of wire \CARD_UART:BUART:sRX:MODULE_4:g2:a0:newa_5\[268] = zero[17]
+Removing Lhs of wire \CARD_UART:BUART:sRX:MODULE_4:g2:a0:newa_4\[269] = zero[17]
+Removing Lhs of wire \CARD_UART:BUART:sRX:MODULE_4:g2:a0:newa_3\[270] = \CARD_UART:BUART:sRX:MODIN4_6\[271]
+Removing Lhs of wire \CARD_UART:BUART:sRX:MODIN4_6\[271] = \CARD_UART:BUART:rx_count_6\[189]
+Removing Lhs of wire \CARD_UART:BUART:sRX:MODULE_4:g2:a0:newa_2\[272] = \CARD_UART:BUART:sRX:MODIN4_5\[273]
+Removing Lhs of wire \CARD_UART:BUART:sRX:MODIN4_5\[273] = \CARD_UART:BUART:rx_count_5\[190]
+Removing Lhs of wire \CARD_UART:BUART:sRX:MODULE_4:g2:a0:newa_1\[274] = \CARD_UART:BUART:sRX:MODIN4_4\[275]
+Removing Lhs of wire \CARD_UART:BUART:sRX:MODIN4_4\[275] = \CARD_UART:BUART:rx_count_4\[191]
+Removing Lhs of wire \CARD_UART:BUART:sRX:MODULE_4:g2:a0:newa_0\[276] = \CARD_UART:BUART:sRX:MODIN4_3\[277]
+Removing Lhs of wire \CARD_UART:BUART:sRX:MODIN4_3\[277] = \CARD_UART:BUART:rx_count_3\[192]
+Removing Lhs of wire \CARD_UART:BUART:sRX:MODULE_4:g2:a0:newb_6\[278] = zero[17]
+Removing Lhs of wire \CARD_UART:BUART:sRX:MODULE_4:g2:a0:newb_5\[279] = zero[17]
+Removing Lhs of wire \CARD_UART:BUART:sRX:MODULE_4:g2:a0:newb_4\[280] = zero[17]
+Removing Lhs of wire \CARD_UART:BUART:sRX:MODULE_4:g2:a0:newb_3\[281] = zero[17]
+Removing Lhs of wire \CARD_UART:BUART:sRX:MODULE_4:g2:a0:newb_2\[282] = one[18]
+Removing Lhs of wire \CARD_UART:BUART:sRX:MODULE_4:g2:a0:newb_1\[283] = one[18]
+Removing Lhs of wire \CARD_UART:BUART:sRX:MODULE_4:g2:a0:newb_0\[284] = one[18]
+Removing Lhs of wire \CARD_UART:BUART:sRX:MODULE_4:g2:a0:dataa_6\[285] = zero[17]
+Removing Lhs of wire \CARD_UART:BUART:sRX:MODULE_4:g2:a0:dataa_5\[286] = zero[17]
+Removing Lhs of wire \CARD_UART:BUART:sRX:MODULE_4:g2:a0:dataa_4\[287] = zero[17]
+Removing Lhs of wire \CARD_UART:BUART:sRX:MODULE_4:g2:a0:dataa_3\[288] = \CARD_UART:BUART:rx_count_6\[189]
+Removing Lhs of wire \CARD_UART:BUART:sRX:MODULE_4:g2:a0:dataa_2\[289] = \CARD_UART:BUART:rx_count_5\[190]
+Removing Lhs of wire \CARD_UART:BUART:sRX:MODULE_4:g2:a0:dataa_1\[290] = \CARD_UART:BUART:rx_count_4\[191]
+Removing Lhs of wire \CARD_UART:BUART:sRX:MODULE_4:g2:a0:dataa_0\[291] = \CARD_UART:BUART:rx_count_3\[192]
+Removing Lhs of wire \CARD_UART:BUART:sRX:MODULE_4:g2:a0:datab_6\[292] = zero[17]
+Removing Lhs of wire \CARD_UART:BUART:sRX:MODULE_4:g2:a0:datab_5\[293] = zero[17]
+Removing Lhs of wire \CARD_UART:BUART:sRX:MODULE_4:g2:a0:datab_4\[294] = zero[17]
+Removing Lhs of wire \CARD_UART:BUART:sRX:MODULE_4:g2:a0:datab_3\[295] = zero[17]
+Removing Lhs of wire \CARD_UART:BUART:sRX:MODULE_4:g2:a0:datab_2\[296] = one[18]
+Removing Lhs of wire \CARD_UART:BUART:sRX:MODULE_4:g2:a0:datab_1\[297] = one[18]
+Removing Lhs of wire \CARD_UART:BUART:sRX:MODULE_4:g2:a0:datab_0\[298] = one[18]
+Removing Lhs of wire \CARD_UART:BUART:sRX:MODULE_5:g1:a0:newa_0\[313] = \CARD_UART:BUART:rx_postpoll\[148]
+Removing Lhs of wire \CARD_UART:BUART:sRX:MODULE_5:g1:a0:newb_0\[314] = \CARD_UART:BUART:rx_parity_bit\[265]
+Removing Lhs of wire \CARD_UART:BUART:sRX:MODULE_5:g1:a0:dataa_0\[315] = \CARD_UART:BUART:rx_postpoll\[148]
+Removing Lhs of wire \CARD_UART:BUART:sRX:MODULE_5:g1:a0:datab_0\[316] = \CARD_UART:BUART:rx_parity_bit\[265]
+Removing Lhs of wire \CARD_UART:BUART:sRX:MODULE_5:g1:a0:gx:u0:a_0\[317] = \CARD_UART:BUART:rx_postpoll\[148]
+Removing Lhs of wire \CARD_UART:BUART:sRX:MODULE_5:g1:a0:gx:u0:b_0\[318] = \CARD_UART:BUART:rx_parity_bit\[265]
+Removing Lhs of wire \CARD_UART:BUART:sRX:MODULE_5:g1:a0:gx:u0:aeqb_0\[320] = one[18]
+Removing Lhs of wire \CARD_UART:BUART:sRX:MODULE_5:g1:a0:gx:u0:eq_0\[321] = \CARD_UART:BUART:sRX:MODULE_5:g1:a0:gx:u0:xnor_array_0\[319]
+Removing Lhs of wire \CARD_UART:BUART:sRX:MODULE_5:g1:a0:gx:u0:eqi_0\[322] = \CARD_UART:BUART:sRX:MODULE_5:g1:a0:gx:u0:xnor_array_0\[319]
+Removing Lhs of wire tmpOE__Rx_1_net_0[344] = one[18]
+Removing Lhs of wire tmpOE__Tx_1_net_0[349] = one[18]
+Removing Lhs of wire tmpOE__SW1_net_0[357] = one[18]
+Removing Lhs of wire \CARD_UART:BUART:reset_reg\\D\[361] = zero[17]
+Removing Lhs of wire \CARD_UART:BUART:rx_bitclk\\D\[376] = \CARD_UART:BUART:rx_bitclk_pre\[183]
+Removing Lhs of wire \CARD_UART:BUART:rx_parity_error_pre\\D\[385] = \CARD_UART:BUART:rx_parity_error_pre\[260]
+Removing Lhs of wire \CARD_UART:BUART:rx_break_status\\D\[386] = zero[17]
 
 ------------------------------------------------------
 Aliased 0 equations, 111 wires.
@@ -509,15 +510,15 @@ Aliasing \CARD_UART:BUART:rx_status_6\ to zero
 Aliasing \CARD_UART:BUART:rx_markspace_status\\D\ to zero
 Aliasing \CARD_UART:BUART:rx_parity_error_status\\D\ to zero
 Aliasing \CARD_UART:BUART:rx_addr_match_status\\D\ to zero
-Removing Rhs of wire \CARD_UART:BUART:rx_bitclk_enable\[146] = \CARD_UART:BUART:rx_bitclk\[194]
-Removing Lhs of wire \CARD_UART:BUART:rx_status_0\[245] = zero[17]
-Removing Lhs of wire \CARD_UART:BUART:rx_status_6\[254] = zero[17]
-Removing Lhs of wire \CARD_UART:BUART:tx_ctrl_mark_last\\D\[367] = \CARD_UART:BUART:tx_ctrl_mark_last\[137]
-Removing Lhs of wire \CARD_UART:BUART:rx_markspace_status\\D\[379] = zero[17]
-Removing Lhs of wire \CARD_UART:BUART:rx_parity_error_status\\D\[380] = zero[17]
-Removing Lhs of wire \CARD_UART:BUART:rx_addr_match_status\\D\[382] = zero[17]
-Removing Lhs of wire \CARD_UART:BUART:rx_markspace_pre\\D\[383] = \CARD_UART:BUART:rx_markspace_pre\[258]
-Removing Lhs of wire \CARD_UART:BUART:rx_parity_bit\\D\[388] = \CARD_UART:BUART:rx_parity_bit\[264]
+Removing Rhs of wire \CARD_UART:BUART:rx_bitclk_enable\[147] = \CARD_UART:BUART:rx_bitclk\[195]
+Removing Lhs of wire \CARD_UART:BUART:rx_status_0\[246] = zero[17]
+Removing Lhs of wire \CARD_UART:BUART:rx_status_6\[255] = zero[17]
+Removing Lhs of wire \CARD_UART:BUART:tx_ctrl_mark_last\\D\[368] = \CARD_UART:BUART:tx_ctrl_mark_last\[138]
+Removing Lhs of wire \CARD_UART:BUART:rx_markspace_status\\D\[380] = zero[17]
+Removing Lhs of wire \CARD_UART:BUART:rx_parity_error_status\\D\[381] = zero[17]
+Removing Lhs of wire \CARD_UART:BUART:rx_addr_match_status\\D\[383] = zero[17]
+Removing Lhs of wire \CARD_UART:BUART:rx_markspace_pre\\D\[384] = \CARD_UART:BUART:rx_markspace_pre\[259]
+Removing Lhs of wire \CARD_UART:BUART:rx_parity_bit\\D\[389] = \CARD_UART:BUART:rx_parity_bit\[265]
 
 ------------------------------------------------------
 Aliased 0 equations, 9 wires.
@@ -556,14 +557,14 @@ CYPRESS_DIR    : C:\Program Files (x86)\Cypress\PSoC Creator\4.1\PSoC Creator\wa
 Warp Program   : C:\Program Files (x86)\Cypress\PSoC Creator\4.1\PSoC Creator\warp\bin\warp.exe
 Warp Arguments : -yv2 -q10 -ygs -o2 -v3 -.fftcfgtype=LE -ya "-.fftprj=\\VBOXSVR\raywang\Dropbox (MIT)\CTFs\eCTF\ectf-2018-techsec\SECURITY_MODULE.cydsn\SECURITY_MODULE.cyprj" -dcpsoc3 SECURITY_MODULE.v -verilog
 </CYPRESSTAG>
-Warp synthesis phase: Elapsed time ==> 3s.196ms
+Warp synthesis phase: Elapsed time ==> 2s.062ms
 <CYPRESSTAG name="Fitter results...">
 <CYPRESSTAG name="Fitter startup details...">
-cyp3fit: V4.1.0.3210, Family: PSoC3, Started at: Friday, 16 February 2018 20:13:45
+cyp3fit: V4.1.0.3210, Family: PSoC3, Started at: Thursday, 01 March 2018 10:57:18
 Options: -yv2 -q10 -ygs -o2 -v3 -.fftcfgtype=LE -ya -.fftprj=\\VBOXSVR\raywang\Dropbox (MIT)\CTFs\eCTF\ectf-2018-techsec\SECURITY_MODULE.cydsn\SECURITY_MODULE.cyprj -d CY8C4245AXI-483 SECURITY_MODULE.v -verilog
 </CYPRESSTAG>
 <CYPRESSTAG name="Design parsing">
-Design parsing phase: Elapsed time ==> 0s.033ms
+Design parsing phase: Elapsed time ==> 0s.015ms
 </CYPRESSTAG>
 <CYPRESSTAG name="Tech Mapping">
 <CYPRESSTAG name="Initial Mapping" icon="FILE_RPT_TECHM">
@@ -1516,7 +1517,7 @@ Design Equations
 
     interrupt: Name =\DB_UART:SCB_IRQ\
         PORT MAP (
-            interrupt => Net_4 );
+            interrupt => Net_73 );
         Properties:
         {
             int_type = "10"
@@ -1584,8 +1585,8 @@ DAC                           :      :      :      :
   7-bit IDAC                  :    0 :    1 :    1 :  0.00 %
   8-bit IDAC                  :    0 :    1 :    1 :  0.00 %
 </CYPRESSTAG>
-Technology Mapping: Elapsed time ==> 2s.796ms
-Tech Mapping phase: Elapsed time ==> 2s.846ms
+Technology Mapping: Elapsed time ==> 1s.437ms
+Tech Mapping phase: Elapsed time ==> 1s.468ms
 </CYPRESSTAG>
 <CYPRESSTAG name="Analog Placement">
 <CYPRESSTAG name="FFB & IO Pre Placement">
@@ -1604,15 +1605,15 @@ ClockGenBlock                       : CLK_GEN_[FFB(CLK_GEN,0)]
 </CYPRESSTAG>
 </CYPRESSTAG>
 <CYPRESSTAG name="Real Analog Placement">
-Elapsed time ==> 0.1961373s
+Elapsed time ==> 0.1500484s
 </CYPRESSTAG>
-Analog Placement phase: Elapsed time ==> 0s.451ms
+Analog Placement phase: Elapsed time ==> 0s.312ms
 </CYPRESSTAG>
 <CYPRESSTAG name="Analog Routing">
 <CYPRESSTAG name="Analog Routing">
-Route success=True, Iterations=1 Elapsed=0.0010637 secs
+Route success=True, Iterations=1 Elapsed=0.0011088 secs
 </CYPRESSTAG>
-Analog Routing phase: Elapsed time ==> 0s.016ms
+Analog Routing phase: Elapsed time ==> 0s.015ms
 </CYPRESSTAG>
 <CYPRESSTAG name="Analog Code Generation">
 ============ Analog Final Answer Routes ============
@@ -1623,11 +1624,11 @@ Map of item to net {
 }
 Mux Info {
 }
-Analog Code Generation phase: Elapsed time ==> 0s.016ms
+Analog Code Generation phase: Elapsed time ==> 0s.031ms
 </CYPRESSTAG>
 <CYPRESSTAG name="Digital Placement">
 <CYPRESSTAG name="Detailed placement messages">
-I2076: Total run-time: 0.7 sec.
+I2076: Total run-time: 0.4 sec.
 
 </CYPRESSTAG>
 <CYPRESSTAG name="PLD Packing">
@@ -1651,14 +1652,14 @@ PLD Packing Summary
 <CYPRESSTAG name="Packed PLD Contents">
 Packed PLD Contents not displayed at this verbose level.</CYPRESSTAG>
 </CYPRESSTAG>
-PLD Packing: Elapsed time ==> 0s.050ms
+PLD Packing: Elapsed time ==> 0s.015ms
 </CYPRESSTAG>
 <CYPRESSTAG name="Partitioning">
 <CYPRESSTAG name="Initial Partitioning Summary">
 Initial Partitioning Summary not displayed at this verbose level.</CYPRESSTAG>
 <CYPRESSTAG name="Final Partitioning Summary">
 Final Partitioning Summary not displayed at this verbose level.</CYPRESSTAG>
-Partitioning: Elapsed time ==> 0s.016ms
+Partitioning: Elapsed time ==> 0s.015ms
 </CYPRESSTAG>
 <CYPRESSTAG name="Final Placement Summary">
 
@@ -2391,7 +2392,7 @@ Intr container @ [IntrContainer=(0)]:
   Intr@ [IntrContainer=(0)][IntrId=(10)] 
     interrupt: Name =\DB_UART:SCB_IRQ\
         PORT MAP (
-            interrupt => Net_4 );
+            interrupt => Net_73 );
         Properties:
         {
             int_type = "10"
@@ -2633,7 +2634,7 @@ SCB group 0:
     m0s8scbcell: Name =\DB_UART:SCB\
         PORT MAP (
             clock => \DB_UART:Net_847_ff2\ ,
-            interrupt => Net_4 ,
+            interrupt => Net_73 ,
             uart_rx => \DB_UART:rx_wire\ ,
             uart_tx => \DB_UART:tx_wire\ ,
             uart_rts => \DB_UART:rts_wire\ ,
@@ -2644,8 +2645,8 @@ SCB group 0:
             select_m_0 => \DB_UART:select_m_wire_0\ ,
             sclk_m => \DB_UART:sclk_m_wire\ ,
             miso_s => \DB_UART:miso_s_wire\ ,
-            tr_tx_req => Net_7 ,
-            tr_rx_req => Net_6 );
+            tr_tx_req => Net_76 ,
+            tr_rx_req => Net_75 );
         Properties:
         {
             cy_registers = ""
@@ -2692,33 +2693,33 @@ Port | Pin | Fixed |      Type |       Drive Mode |            Name | Connection
 </CYPRESSTAG>
 </CYPRESSTAG>
 </CYPRESSTAG>
-Digital component placer commit/Report: Elapsed time ==> 2s.743ms
-Digital Placement phase: Elapsed time ==> 4s.071ms
+Digital component placer commit/Report: Elapsed time ==> 1s.484ms
+Digital Placement phase: Elapsed time ==> 2s.249ms
 </CYPRESSTAG>
 <CYPRESSTAG name="Digital Routing">
 "C:\Program Files (x86)\Cypress\PSoC Creator\4.1\PSoC Creator\bin/sjrouter.exe" --xml-path "C:\Program Files (x86)\Cypress\PSoC Creator\4.1\PSoC Creator\dev\psoc4/psoc4a/route_arch-rrg.cydata" --vh2-path "SECURITY_MODULE_r.vh2" --pcf-path "SECURITY_MODULE.pco" --des-name "SECURITY_MODULE" --dsf-path "SECURITY_MODULE.dsf" --sdc-path "SECURITY_MODULE.sdc" --lib-path "SECURITY_MODULE_r.lib"
 Routing successful.
-Digital Routing phase: Elapsed time ==> 2s.845ms
+Digital Routing phase: Elapsed time ==> 1s.187ms
 </CYPRESSTAG>
 <CYPRESSTAG name="Bitstream Generation">
-Bitstream Generation phase: Elapsed time ==> 0s.759ms
+Bitstream Generation phase: Elapsed time ==> 0s.265ms
 </CYPRESSTAG>
 <CYPRESSTAG name="Bitstream Verification">
-Bitstream Verification phase: Elapsed time ==> 0s.073ms
+Bitstream Verification phase: Elapsed time ==> 0s.031ms
 </CYPRESSTAG>
 <CYPRESSTAG name="Static timing analysis">
 Timing report is in SECURITY_MODULE_timing.html.
-Static timing analysis phase: Elapsed time ==> 1s.048ms
+Static timing analysis phase: Elapsed time ==> 0s.328ms
 </CYPRESSTAG>
 <CYPRESSTAG name="Data reporting">
 Data reporting phase: Elapsed time ==> 0s.000ms
 </CYPRESSTAG>
 <CYPRESSTAG name="Database update...">
-Design database save phase: Elapsed time ==> 0s.571ms
+Design database save phase: Elapsed time ==> 0s.187ms
 </CYPRESSTAG>
-cydsfit: Elapsed time ==> 12s.882ms
+cydsfit: Elapsed time ==> 6s.141ms
 </CYPRESSTAG>
-Fitter phase: Elapsed time ==> 12s.882ms
-API generation phase: Elapsed time ==> 4s.667ms
-Dependency generation phase: Elapsed time ==> 0s.057ms
-Cleanup phase: Elapsed time ==> 0s.000ms
+Fitter phase: Elapsed time ==> 6s.141ms
+API generation phase: Elapsed time ==> 1s.921ms
+Dependency generation phase: Elapsed time ==> 0s.015ms
+Cleanup phase: Elapsed time ==> 0s.015ms

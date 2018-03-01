@@ -2,7 +2,7 @@
 --	Conversion of CARD.v to vh2:
 --
 --	Cypress Semiconductor - WARP Version 6.3 IR 41
---	Fri Feb 02 11:36:32 2018
+--	Thu Mar 01 11:00:20 2018
 --
 
 USE cypress.cypress.all;
@@ -379,7 +379,7 @@ TERMINAL \USB_UART:tmpSIOVREF__tx_net_0\ : bit;
 SIGNAL \USB_UART:tmpINTERRUPT_0__tx_net_0\ : bit;
 SIGNAL \USB_UART:Net_1099\ : bit;
 SIGNAL \USB_UART:Net_1258\ : bit;
-SIGNAL Net_40 : bit;
+SIGNAL Net_131 : bit;
 SIGNAL \USB_UART:tmpOE__rx_net_0\ : bit;
 SIGNAL \USB_UART:tmpIO_0__rx_net_0\ : bit;
 TERMINAL \USB_UART:tmpSIOVREF__rx_net_0\ : bit;
@@ -393,20 +393,21 @@ SIGNAL \USB_UART:select_m_wire_1\ : bit;
 SIGNAL \USB_UART:select_m_wire_0\ : bit;
 SIGNAL \USB_UART:sclk_m_wire\ : bit;
 SIGNAL \USB_UART:miso_s_wire\ : bit;
-SIGNAL \USB_UART:scl_wire\ : bit;
-SIGNAL \USB_UART:sda_wire\ : bit;
-SIGNAL Net_43 : bit;
-SIGNAL Net_42 : bit;
+SIGNAL Net_148 : bit;
+SIGNAL Net_149 : bit;
+SIGNAL Net_134 : bit;
+SIGNAL Net_133 : bit;
 SIGNAL \USB_UART:Net_1028\ : bit;
-SIGNAL Net_38 : bit;
-SIGNAL Net_39 : bit;
-SIGNAL Net_48 : bit;
-SIGNAL Net_49 : bit;
-SIGNAL Net_50 : bit;
-SIGNAL Net_51 : bit;
-SIGNAL Net_52 : bit;
-SIGNAL Net_53 : bit;
-SIGNAL Net_54 : bit;
+SIGNAL Net_130 : bit;
+SIGNAL Net_139 : bit;
+SIGNAL Net_140 : bit;
+SIGNAL Net_141 : bit;
+SIGNAL Net_142 : bit;
+SIGNAL Net_143 : bit;
+SIGNAL Net_144 : bit;
+SIGNAL Net_145 : bit;
+SIGNAL Net_147 : bit;
+SIGNAL Net_150 : bit;
 SIGNAL Net_60 : bit;
 SIGNAL tmpOE__SW1_net_0 : bit;
 SIGNAL tmpIO_0__SW1_net_0 : bit;
@@ -1091,7 +1092,7 @@ Tx_1:cy_psoc3_pins_v1_10
 \USB_UART:SCB_IRQ\:cy_isr_v1_0
 	GENERIC MAP(int_type=>"10",
 		is_nmi=>'0')
-	PORT MAP(int_signal=>Net_40);
+	PORT MAP(int_signal=>Net_131);
 \USB_UART:rx\:cy_psoc3_pins_v1_10
 	GENERIC MAP(id=>"43ec2fa1-bf22-4b71-9477-b6ca7b97f0b0/78e33e5d-45ea-4b75-88d5-73274e8a7ce4",
 		drive_mode=>"001",
@@ -1166,7 +1167,7 @@ Tx_1:cy_psoc3_pins_v1_10
 	GENERIC MAP(cy_registers=>"",
 		scb_mode=>2)
 	PORT MAP(clock=>\USB_UART:Net_847\,
-		interrupt=>Net_40,
+		interrupt=>Net_131,
 		rx=>\USB_UART:rx_wire\,
 		tx=>\USB_UART:tx_wire\,
 		cts=>zero,
@@ -1179,10 +1180,10 @@ Tx_1:cy_psoc3_pins_v1_10
 		miso_s=>\USB_UART:miso_s_wire\,
 		select_s=>zero,
 		sclk_s=>zero,
-		scl=>\USB_UART:scl_wire\,
-		sda=>\USB_UART:sda_wire\,
-		tx_req=>Net_43,
-		rx_req=>Net_42);
+		scl=>Net_148,
+		sda=>Net_149,
+		tx_req=>Net_134,
+		rx_req=>Net_133);
 Reset_isr:cy_isr_v1_0
 	GENERIC MAP(int_type=>"10",
 		is_nmi=>'0')

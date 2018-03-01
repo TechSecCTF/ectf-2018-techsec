@@ -1,5 +1,5 @@
 -- Project:   CARD
--- Generated: 02/02/2018 11:36:43
+-- Generated: 03/01/2018 11:00:24
 -- PSoC Creator  4.1 Update 1
 
 ENTITY CARD IS
@@ -22,13 +22,13 @@ ARCHITECTURE __DEFAULT__ OF CARD IS
     SIGNAL ClockBlock_LFCLK : bit;
     SIGNAL ClockBlock_Routed1 : bit;
     SIGNAL ClockBlock_SYSCLK : bit;
+    SIGNAL Net_131 : bit;
+    SIGNAL Net_133 : bit;
+    SIGNAL Net_134 : bit;
     SIGNAL Net_25 : bit;
     ATTRIBUTE placement_force OF Net_25 : SIGNAL IS "U(0,1,B)0";
     SIGNAL Net_31 : bit;
     SIGNAL Net_32 : bit;
-    SIGNAL Net_40 : bit;
-    SIGNAL Net_42 : bit;
-    SIGNAL Net_43 : bit;
     SIGNAL Net_60 : bit;
     SIGNAL Net_7 : bit;
     SIGNAL Rx_1(0)__PA : bit;
@@ -1311,7 +1311,7 @@ BEGIN
             int_type => "10",
             is_nmi => 0)
         PORT MAP(
-            interrupt => Net_40,
+            interrupt => Net_131,
             clock => ClockBlock_HFCLK);
 
     \USB_UART:SCB\:m0s8scbcell
@@ -1320,7 +1320,7 @@ BEGIN
             scb_mode => 2)
         PORT MAP(
             clock => \USB_UART:Net_847_ff2\,
-            interrupt => Net_40,
+            interrupt => Net_131,
             uart_rx => \USB_UART:rx_wire\,
             uart_tx => \USB_UART:tx_wire\,
             uart_cts => open,
@@ -1336,8 +1336,8 @@ BEGIN
             miso_s => \USB_UART:miso_s_wire\,
             select_s => open,
             sclk_s => open,
-            tr_tx_req => Net_43,
-            tr_rx_req => Net_42);
+            tr_tx_req => Net_134,
+            tr_rx_req => Net_133);
 
     Reset_isr:interrupt
         GENERIC MAP(

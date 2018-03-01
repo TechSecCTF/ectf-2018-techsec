@@ -1,6 +1,6 @@
 /***************************************************************************//**
 * \file CyFlash.c
-* \version 5.50
+* \version 5.60
 *
 * \brief Provides an API for the FLASH.
 *
@@ -11,7 +11,7 @@
 *
 ********************************************************************************
 * \copyright
-* Copyright 2010-2016, Cypress Semiconductor Corporation.  All rights reserved.
+* Copyright 2010-2017, Cypress Semiconductor Corporation.  All rights reserved.
 * You may use this file only in accordance with the license, terms, conditions,
 * disclaimers, and limitations in the end user license agreement accompanying
 * the software package with which this file was provided.
@@ -22,12 +22,13 @@
 
 /*******************************************************************************
 * Cypress identified a defect with the Flash write functionality of the
-* PSoC 4000, PSoC 4100, and PSoC 4200 devices. The CySysFlashWriteRow() function
-* now checks the data to be written and, if necessary, modifies it to have a
-* non-zero checksum. After writing to Flash, the modified data is replaced
-* (Flash program) with the correct (original) data.
+* PSoC 4000, PSoC 4000U, PSoC 4100, and PSoC 4200 devices. The 
+* CySysFlashWriteRow() function now checks the data to be written and, if 
+* necessary, modifies it to have a non-zero checksum. After writing to Flash, 
+* the modified data is replaced (Flash program) with 
+* the correct (original) data.
 *******************************************************************************/
-#define CY_FLASH_CHECKSUM_WORKAROUND    (CY_PSOC4_4000 || CY_PSOC4_4100 || CY_PSOC4_4200)
+#define CY_FLASH_CHECKSUM_WORKAROUND    (CY_PSOC4_4000 || CY_PSOC4_4100 || CY_PSOC4_4200 || CY_PSOC4_4000U)
 
 #if (CY_IP_FM || ((!CY_PSOC4_4000) && CY_IP_SPCIF_SYNCHRONOUS) || (!CY_IP_FM) && CY_PSOC4_4000)
     static CY_SYS_FLASH_CLOCK_BACKUP_STRUCT cySysFlashBackup;
@@ -201,6 +202,11 @@ uint32 CySysFlashWriteRow(uint32 rowNum, const uint8 rowData[])
             if(clkCnfRetValue == CY_SYS_FLASH_SUCCESS)
             {
                 clkCnfRetValue = CySysFlashClockRestore();
+
+                if(clkCnfRetValue != CY_SYS_FLASH_SUCCESS)
+                {
+                    retValue = clkCnfRetValue;
+                }
             }
 
             CyExitCriticalSection(interruptState);

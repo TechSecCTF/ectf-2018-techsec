@@ -1,6 +1,6 @@
 /***************************************************************************//**
 * \file DB_UART.h
-* \version 3.20
+* \version 4.0
 *
 * \brief
 *  This file provides constants and parameter values for the SCB Component.
@@ -9,7 +9,7 @@
 *
 ********************************************************************************
 * \copyright
-* Copyright 2013-2016, Cypress Semiconductor Corporation.  All rights reserved.
+* Copyright 2013-2017, Cypress Semiconductor Corporation.  All rights reserved.
 * You may use this file only in accordance with the license, terms, conditions,
 * disclaimers, and limitations in the end user license agreement accompanying
 * the software package with which this file was provided.
@@ -30,14 +30,18 @@
 /* SCB IP block v2 is available in all other devices */
 #define DB_UART_CY_SCBIP_V2    (CYIPBLOCK_m0s8scb_VERSION >= 2u)
 
-#define DB_UART_SCB_MODE                     (4u)
+/** Component version major.minor */
+#define DB_UART_COMP_VERSION_MAJOR    (4)
+#define DB_UART_COMP_VERSION_MINOR    (0)
+    
+#define DB_UART_SCB_MODE           (4u)
 
 /* SCB modes enum */
-#define DB_UART_SCB_MODE_I2C                 (0x01u)
-#define DB_UART_SCB_MODE_SPI                 (0x02u)
-#define DB_UART_SCB_MODE_UART                (0x04u)
-#define DB_UART_SCB_MODE_EZI2C               (0x08u)
-#define DB_UART_SCB_MODE_UNCONFIG            (0xFFu)
+#define DB_UART_SCB_MODE_I2C       (0x01u)
+#define DB_UART_SCB_MODE_SPI       (0x02u)
+#define DB_UART_SCB_MODE_UART      (0x04u)
+#define DB_UART_SCB_MODE_EZI2C     (0x08u)
+#define DB_UART_SCB_MODE_UNCONFIG  (0xFFu)
 
 /* Condition compilation depends on operation mode: Unconfigured implies apply to all modes */
 #define DB_UART_SCB_MODE_I2C_CONST_CFG       (DB_UART_SCB_MODE_I2C       == DB_UART_SCB_MODE)
@@ -1471,12 +1475,9 @@ extern uint8 DB_UART_initVar;
 * on the scb IP depending on the version:
 *  CY_SCBIP_V0: resets state, status, TX and RX FIFOs.
 *  CY_SCBIP_V1 or later: resets state, status, TX and RX FIFOs and interrupt sources.
+* Clear I2C command registers are because they are not impacted by re-enable.
 */
-#define DB_UART_SCB_SW_RESET \
-                        do{           \
-                            DB_UART_CTRL_REG &= ((uint32) ~DB_UART_CTRL_ENABLED); \
-                            DB_UART_CTRL_REG |= ((uint32)  DB_UART_CTRL_ENABLED); \
-                        }while(0)
+#define DB_UART_SCB_SW_RESET   DB_UART_I2CFwBlockReset()
 
 /* TX FIFO macro */
 #define DB_UART_CLEAR_TX_FIFO \
@@ -1770,6 +1771,14 @@ extern uint8 DB_UART_initVar;
                                                                   ~(DB_UART_I2C_CTRL_M_READY_DATA_ACK |       \
                                                                     DB_UART_I2C_CTRL_M_NOT_READY_DATA_NACK)); \
                             }while(0)
+/* Disables auto data ACK/NACK bits */
+#define DB_UART_DISABLE_AUTO_DATA \
+                do{                        \
+                    DB_UART_I2C_CTRL_REG &= ((uint32) ~(DB_UART_I2C_CTRL_M_READY_DATA_ACK      |  \
+                                                                 DB_UART_I2C_CTRL_M_NOT_READY_DATA_NACK |  \
+                                                                 DB_UART_I2C_CTRL_S_READY_DATA_ACK      |  \
+                                                                 DB_UART_I2C_CTRL_S_NOT_READY_DATA_NACK)); \
+                }while(0)
 
 /* Master commands */
 #define DB_UART_I2C_MASTER_GENERATE_START \
@@ -1987,6 +1996,10 @@ extern uint8 DB_UART_initVar;
 #define DB_UART_GET_UART_RX_CTRL_MP_MODE(mpMode)   ((0u != (mpMode)) ? \
                                                         (DB_UART_UART_RX_CTRL_MP_MODE) : (0u))
 
+#define DB_UART_GET_UART_RX_CTRL_BREAK_WIDTH(width)    (((uint32) ((uint32) (width) - 1u) << \
+                                                                    DB_UART_UART_RX_CTRL_BREAK_WIDTH_POS) & \
+                                                                    DB_UART_UART_RX_CTRL_BREAK_WIDTH_MASK)
+
 /* DB_UART_UART_TX_CTRL */
 #define DB_UART_GET_UART_TX_CTRL_MODE(stopBits)    (((uint32) (stopBits) - 1u) & \
                                                                 DB_UART_UART_RX_CTRL_STOP_BITS_MASK)
@@ -2034,7 +2047,7 @@ extern uint8 DB_UART_initVar;
 
 /* DB_UART_TX_CTRL */
 #define DB_UART_GET_TX_CTRL_DATA_WIDTH(dataWidth)  (((uint32) (dataWidth) - 1u) & \
-                                                                DB_UART_RX_CTRL_DATA_WIDTH_MASK)
+                                                                DB_UART_TX_CTRL_DATA_WIDTH_MASK)
 
 #define DB_UART_GET_TX_CTRL_BIT_ORDER(bitOrder)    ((0u != (bitOrder)) ? \
                                                                 (DB_UART_TX_CTRL_MSB_FIRST) : (0u))

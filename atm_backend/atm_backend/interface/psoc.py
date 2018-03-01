@@ -132,31 +132,6 @@ class Psoc(object):
             logging.info('DYNAMIC SERIAL: Disconnecting from %s', resp)
             self.start_connect_watcher()
 
-    # def device_connect_watch(self):
-    #     """Threaded function that connects to new serial devices"""
-    # 
-    #     # Read current ports
-    #     connecting = []
-
-    #     # For testing purposes, immediately connect to USB modem 1421 for HSM and 1411 for card
-    #     while True:
-    #         if self.name == 'HSM' and any([port.device == '/dev/cu.usbmodem1421' for port in list_ports()]):
-    #             self.port = '/dev/cu.usbmodem1421'
-    #             logging.info("DYNAMIC SERIAL: Found new serial device HSM")
-    #             break
-    #         elif self.name == 'CARD' and any([port.device.startswith('/dev/cu.usbmodem1411') for port in list_ports()]):
-    #             self.port = "/dev/cu.usbmodem1411"
-    #             logging.info("DYNAMIC SERIAL: Found new serial device CARD")
-    #             break
-    # 
-    #         time.sleep(.25)
-    # 
-    # 
-    #     logging.info("DYNAMIC SERIAL: Opening new serial device")
-    #     self.open()
-    #     if self.name == 'CARD':
-    #         self.start_disconnect_watcher()
-    
     def device_connect_watch(self):
         """Threaded function that connects to new serial devices"""
 

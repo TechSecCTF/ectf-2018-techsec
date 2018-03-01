@@ -43,27 +43,35 @@ class ATM(object):
             card_id = self.card._get_uuid()
 
             logging.info('check_balance: Requesting session nonce from bank')
-            raw_card_session_nonce = self.bank.generate_session_nonce(card_id)
+            raw_card_session_nonce = self.bank.get_session_nonce(card_id)
+            if not raw_card_session_nonce:
+                return False
 
             logging.info('check_balance: Computing HMAC on card')
             raw_card_hmac = self.card.compute_hmac(raw_card_session_nonce)
 
             # get balance from bank
             if card_id and raw_card_hmac:
-                logging.info('withdraw: Requesting hsm_id from hsm')
+                logging.info('check balance: Requesting hsm_id from hsm')
                 hsm_id, raw_hsm_session_nonce = self.hsm.get_uuid()
 
                 # request withdrawal from bank if HSM gives UUID
                 if hsm_id:
                     logging.info('check_balance: Requesting balance from Bank')
-                    raw_atm_hmac, raw_atm_iv, raw_enc_balance = self.bank.check_balance(card_id, raw_card_hmac, pin, hsm_id, raw_hsm_session_nonce)
+                    check_balance_vals = self.bank.check_balance(card_id, raw_card_hmac, pin, hsm_id, raw_hsm_session_nonce)
 
-                    if raw_atm_iv and raw_atm_hmac and raw_enc_balance:
+
+                    if check_balance_vals:
+                        raw_atm_hmac, raw_atm_iv, raw_enc_balance = check_balance_vals
+
                         # send to HSM for decryption
-                        logging.info("Got msg from bank, raw_atm_hmac: %s, raw_atm_iv: %s, raw_enc_balance: %s"% (raw_atm_hmac, raw_atm_iv, raw_enc_balance))
                         logging.info("Sending balance to HSM for decryption")
                         res = self.hsm.decrypt(raw_atm_hmac, raw_atm_iv, raw_enc_balance)
-                        return res.strip('A')
+                        res = res.strip('A')
+                        try:
+                            return int(res)
+                        except ValueError:
+                            return False
             logging.info('check_balance failed')
             return False
         except DeviceRemoved:
@@ -93,7 +101,7 @@ class ATM(object):
             card_id = self.card._get_uuid()
 
             logging.info('change_pin: Requesting session nonce from bank')
-            raw_card_session_nonce = self.bank.generate_session_nonce(card_id)
+            raw_card_session_nonce = self.bank.get_session_nonce(card_id)
 
             logging.info('change_pin: Computing HMAC on card')
             raw_card_hmac = self.card.compute_hmac(raw_card_session_nonce)
@@ -136,7 +144,7 @@ class ATM(object):
             card_id = self.card._get_uuid()
 
             logging.info('withdraw: Requesting session nonce from bank')
-            raw_card_session_nonce = self.bank.generate_session_nonce(card_id)
+            raw_card_session_nonce = self.bank.get_session_nonce(card_id)
 
             logging.info('withdraw: Computing HMAC on card')
             raw_card_hmac = self.card.compute_hmac(raw_card_session_nonce)
@@ -150,7 +158,6 @@ class ATM(object):
                 if hsm_id and raw_hsm_session_nonce:
                     logging.info('withdraw: Requesting withdrawal from bank')
                     raw_atm_hmac = self.bank.withdraw(card_id, raw_card_hmac, pin, hsm_id, raw_hsm_session_nonce, amount)
-                    logging.info("ATM hmac " + repr(raw_atm_hmac))
 
                     if raw_atm_hmac:
                         res = self.hsm.withdraw(raw_atm_hmac, amount)
