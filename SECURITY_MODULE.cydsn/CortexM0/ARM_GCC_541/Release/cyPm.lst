@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccjQjVYt.s 			page 1
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc9pmo1Q.s 			page 1
 
 
    1              		.syntax unified
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccjQjVYt.s 			page 1
   28:Generated_Source\PSoC4/cyPm.c **** * its main clock can be removed. It is identical to Active from a peripheral
   29:Generated_Source\PSoC4/cyPm.c **** * point of view. Any enabled interrupts can cause wakeup from the Sleep mode.
   30:Generated_Source\PSoC4/cyPm.c **** *
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccjQjVYt.s 			page 2
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc9pmo1Q.s 			page 2
 
 
   31:Generated_Source\PSoC4/cyPm.c **** *******************************************************************************/
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccjQjVYt.s 			page 1
   67              		.align	1
   68              		.global	CySysPmDeepSleep
   69              		.code	16
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccjQjVYt.s 			page 3
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc9pmo1Q.s 			page 3
 
 
   70              		.thumb_func
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccjQjVYt.s 			page 1
   70:Generated_Source\PSoC4/cyPm.c **** 
   91              		.loc 1 70 0
   92 0006 FFF7FEFF 		bl	CyEnterCriticalSection
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccjQjVYt.s 			page 4
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc9pmo1Q.s 			page 4
 
 
   93              	.LVL2:
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccjQjVYt.s 			page 1
  123 0028 3000     		movs	r0, r6
   82:Generated_Source\PSoC4/cyPm.c **** 
  124              		.loc 1 82 0
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccjQjVYt.s 			page 5
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc9pmo1Q.s 			page 5
 
 
  125 002a 9BB2     		uxth	r3, r3
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccjQjVYt.s 			page 1
  158 004a 2B60     		str	r3, [r5]
  107:Generated_Source\PSoC4/cyPm.c **** }
  159              		.loc 1 107 0
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccjQjVYt.s 			page 6
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc9pmo1Q.s 			page 6
 
 
  160 004c FFF7FEFF 		bl	CyExitCriticalSection
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccjQjVYt.s 			page 1
  139:Generated_Source\PSoC4/cyPm.c ****     {
  184              		.loc 1 139 0
  185              		.cfi_startproc
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccjQjVYt.s 			page 7
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc9pmo1Q.s 			page 7
 
 
  186              		@ args = 0, pretend = 0, frame = 0
@@ -418,7 +418,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccjQjVYt.s 			page 1
  162:Generated_Source\PSoC4/cyPm.c ****         CY_PM_PWR_STOP_REG = (CY_PM_PWR_STOP_REG & (uint32)(~CY_PM_PWR_STOP_TOKEN_MASK)) | CY_PM_PW
  216              		.loc 1 162 0
  217 0026 094A     		ldr	r2, .L8+16
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccjQjVYt.s 			page 8
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc9pmo1Q.s 			page 8
 
 
  218 0028 FB31     		adds	r1, r1, #251
@@ -478,7 +478,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccjQjVYt.s 			page 1
  178:Generated_Source\PSoC4/cyPm.c ****     *
  179:Generated_Source\PSoC4/cyPm.c ****     * Puts the part into the Stop state. All internal supplies are off;
  180:Generated_Source\PSoC4/cyPm.c ****     * no state is retained.
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccjQjVYt.s 			page 9
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc9pmo1Q.s 			page 9
 
 
  181:Generated_Source\PSoC4/cyPm.c ****     *
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccjQjVYt.s 			page 1
  235:Generated_Source\PSoC4/cyPm.c ****     * the wakeup from stop mode. The wakeup pin is active low by default.
  236:Generated_Source\PSoC4/cyPm.c ****     *
  237:Generated_Source\PSoC4/cyPm.c ****     * \param polarity
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccjQjVYt.s 			page 10
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc9pmo1Q.s 			page 10
 
 
  238:Generated_Source\PSoC4/cyPm.c ****     * - \ref CY_PM_STOP_WAKEUP_ACTIVE_LOW Logical zero will wakeup the chip
@@ -598,7 +598,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccjQjVYt.s 			page 1
  293              		.loc 1 253 0
  294              		@ sp needed
  295              	.LVL12:
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccjQjVYt.s 			page 11
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc9pmo1Q.s 			page 11
 
 
  296 0024 10BD     		pop	{r4, pc}
@@ -658,7 +658,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccjQjVYt.s 			page 1
  283:Generated_Source\PSoC4/cyPm.c ****             reason = CY_PM_RESET_REASON_WAKEUP_HIB;
  321              		.loc 1 283 0
  322 0002 0220     		movs	r0, #2
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccjQjVYt.s 			page 12
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc9pmo1Q.s 			page 12
 
 
  274:Generated_Source\PSoC4/cyPm.c ****         {
@@ -718,7 +718,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccjQjVYt.s 			page 1
  302:Generated_Source\PSoC4/cyPm.c ****     ****************************************************************************//**
  303:Generated_Source\PSoC4/cyPm.c ****     *
  304:Generated_Source\PSoC4/cyPm.c ****     * Freezes IO-Cells directly to save the IO-Cell state on wake up from the
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccjQjVYt.s 			page 13
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc9pmo1Q.s 			page 13
 
 
  305:Generated_Source\PSoC4/cyPm.c ****     * Hibernate or Stop state. It is not required to call this function before
@@ -778,7 +778,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccjQjVYt.s 			page 1
  380              		.loc 1 333 0
  381 001a 1A68     		ldr	r2, [r3]
  334:Generated_Source\PSoC4/cyPm.c ****             (void) CY_PM_PWR_STOP_REG;
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccjQjVYt.s 			page 14
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc9pmo1Q.s 			page 14
 
 
  382              		.loc 1 334 0
@@ -838,7 +838,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccjQjVYt.s 			page 1
  426 000c 2268     		ldr	r2, [r4]
  427 000e 1340     		ands	r3, r2
  428 0010 F222     		movs	r2, #242
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccjQjVYt.s 			page 15
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc9pmo1Q.s 			page 15
 
 
  429 0012 1343     		orrs	r3, r2
@@ -898,7 +898,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccjQjVYt.s 			page 1
  343:Generated_Source\PSoC4/cyPm.c **** 
  344:Generated_Source\PSoC4/cyPm.c ****     /*******************************************************************************
  345:Generated_Source\PSoC4/cyPm.c ****     * Function Name: CySysPmUnfreezeIo
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccjQjVYt.s 			page 16
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc9pmo1Q.s 			page 16
 
 
  346:Generated_Source\PSoC4/cyPm.c ****     ****************************************************************************//**
@@ -958,7 +958,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccjQjVYt.s 			page 1
  373:Generated_Source\PSoC4/cyPm.c ****         *  enough time for internal settling.
  374:Generated_Source\PSoC4/cyPm.c ****         */
  375:Generated_Source\PSoC4/cyPm.c ****         (void) CY_PM_PWR_STOP_REG;
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccjQjVYt.s 			page 17
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc9pmo1Q.s 			page 17
 
 
  500              		.loc 1 375 0
@@ -1005,28 +1005,28 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccjQjVYt.s 			page 1
  532 0006 00000000 		.4byte	.Ldebug_abbrev0
  533 000a 04       		.byte	0x4
  534 000b 01       		.uleb128 0x1
- 535 000c 37020000 		.4byte	.LASF32
+ 535 000c 21020000 		.4byte	.LASF32
  536 0010 0C       		.byte	0xc
- 537 0011 F1010000 		.4byte	.LASF33
- 538 0015 56000000 		.4byte	.LASF34
+ 537 0011 DB010000 		.4byte	.LASF33
+ 538 0015 7B010000 		.4byte	.LASF34
  539 0019 00000000 		.4byte	.Ldebug_ranges0+0
  540 001d 00000000 		.4byte	0
  541 0021 00000000 		.4byte	.Ldebug_line0
  542 0025 02       		.uleb128 0x2
  543 0026 01       		.byte	0x1
  544 0027 06       		.byte	0x6
- 545 0028 1B020000 		.4byte	.LASF0
+ 545 0028 05020000 		.4byte	.LASF0
  546 002c 02       		.uleb128 0x2
  547 002d 01       		.byte	0x1
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccjQjVYt.s 			page 18
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc9pmo1Q.s 			page 18
 
 
  548 002e 08       		.byte	0x8
- 549 002f C5000000 		.4byte	.LASF1
+ 549 002f 73000000 		.4byte	.LASF1
  550 0033 02       		.uleb128 0x2
  551 0034 02       		.byte	0x2
  552 0035 05       		.byte	0x5
- 553 0036 CD010000 		.4byte	.LASF2
+ 553 0036 B7010000 		.4byte	.LASF2
  554 003a 02       		.uleb128 0x2
  555 003b 02       		.byte	0x2
  556 003c 07       		.byte	0x7
@@ -1034,19 +1034,19 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccjQjVYt.s 			page 1
  558 0041 02       		.uleb128 0x2
  559 0042 04       		.byte	0x4
  560 0043 05       		.byte	0x5
- 561 0044 E8010000 		.4byte	.LASF4
+ 561 0044 D2010000 		.4byte	.LASF4
  562 0048 02       		.uleb128 0x2
  563 0049 04       		.byte	0x4
  564 004a 07       		.byte	0x7
- 565 004b E2000000 		.4byte	.LASF5
+ 565 004b 90000000 		.4byte	.LASF5
  566 004f 02       		.uleb128 0x2
  567 0050 08       		.byte	0x8
  568 0051 05       		.byte	0x5
- 569 0052 AD010000 		.4byte	.LASF6
+ 569 0052 5B010000 		.4byte	.LASF6
  570 0056 02       		.uleb128 0x2
  571 0057 08       		.byte	0x8
  572 0058 07       		.byte	0x7
- 573 0059 AE000000 		.4byte	.LASF7
+ 573 0059 5C000000 		.4byte	.LASF7
  574 005d 03       		.uleb128 0x3
  575 005e 04       		.byte	0x4
  576 005f 05       		.byte	0x5
@@ -1054,37 +1054,37 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccjQjVYt.s 			page 1
  578 0064 02       		.uleb128 0x2
  579 0065 04       		.byte	0x4
  580 0066 07       		.byte	0x7
- 581 0067 44010000 		.4byte	.LASF8
+ 581 0067 F2000000 		.4byte	.LASF8
  582 006b 04       		.uleb128 0x4
- 583 006c F4000000 		.4byte	.LASF9
+ 583 006c A2000000 		.4byte	.LASF9
  584 0070 02       		.byte	0x2
  585 0071 D201     		.2byte	0x1d2
  586 0073 2C000000 		.4byte	0x2c
  587 0077 04       		.uleb128 0x4
- 588 0078 1F010000 		.4byte	.LASF10
+ 588 0078 CD000000 		.4byte	.LASF10
  589 007c 02       		.byte	0x2
  590 007d D301     		.2byte	0x1d3
  591 007f 3A000000 		.4byte	0x3a
  592 0083 04       		.uleb128 0x4
- 593 0084 26010000 		.4byte	.LASF11
+ 593 0084 D4000000 		.4byte	.LASF11
  594 0088 02       		.byte	0x2
  595 0089 D401     		.2byte	0x1d4
  596 008b 48000000 		.4byte	0x48
  597 008f 02       		.uleb128 0x2
  598 0090 04       		.byte	0x4
  599 0091 04       		.byte	0x4
- 600 0092 A8000000 		.4byte	.LASF12
+ 600 0092 56000000 		.4byte	.LASF12
  601 0096 02       		.uleb128 0x2
  602 0097 08       		.byte	0x8
  603 0098 04       		.byte	0x4
- 604 0099 06010000 		.4byte	.LASF13
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccjQjVYt.s 			page 19
+ 604 0099 B4000000 		.4byte	.LASF13
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc9pmo1Q.s 			page 19
 
 
  605 009d 02       		.uleb128 0x2
  606 009e 01       		.byte	0x1
  607 009f 08       		.byte	0x8
- 608 00a0 BB010000 		.4byte	.LASF14
+ 608 00a0 69010000 		.4byte	.LASF14
  609 00a4 04       		.uleb128 0x4
  610 00a5 00000000 		.4byte	.LASF15
  611 00a9 02       		.byte	0x2
@@ -1102,11 +1102,11 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccjQjVYt.s 			page 1
  623 00c6 02       		.uleb128 0x2
  624 00c7 08       		.byte	0x8
  625 00c8 04       		.byte	0x4
- 626 00c9 0F020000 		.4byte	.LASF17
+ 626 00c9 F9010000 		.4byte	.LASF17
  627 00cd 02       		.uleb128 0x2
  628 00ce 04       		.byte	0x4
  629 00cf 07       		.byte	0x7
- 630 00d0 A4010000 		.4byte	.LASF18
+ 630 00d0 52010000 		.4byte	.LASF18
  631 00d4 06       		.uleb128 0x6
  632 00d5 25000000 		.4byte	.LASF19
  633 00d9 01       		.byte	0x1
@@ -1117,7 +1117,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccjQjVYt.s 			page 1
  638 00e4 9C       		.byte	0x9c
  639 00e5 0B010000 		.4byte	0x10b
  640 00e9 07       		.uleb128 0x7
- 641 00ea D3000000 		.4byte	.LASF21
+ 641 00ea 81000000 		.4byte	.LASF21
  642 00ee 01       		.byte	0x1
  643 00ef 22       		.byte	0x22
  644 00f0 6B000000 		.4byte	0x6b
@@ -1130,7 +1130,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccjQjVYt.s 			page 1
  651 0106 B8020000 		.4byte	0x2b8
  652 010a 00       		.byte	0
  653 010b 06       		.uleb128 0x6
- 654 010c D7010000 		.4byte	.LASF20
+ 654 010c C1010000 		.4byte	.LASF20
  655 0110 01       		.byte	0x1
  656 0111 3F       		.byte	0x3f
  657 0112 00000000 		.4byte	.LFB1
@@ -1138,17 +1138,17 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccjQjVYt.s 			page 1
  659 011a 01       		.uleb128 0x1
  660 011b 9C       		.byte	0x9c
  661 011c 6B010000 		.4byte	0x16b
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccjQjVYt.s 			page 20
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc9pmo1Q.s 			page 20
 
 
  662 0120 07       		.uleb128 0x7
- 663 0121 D3000000 		.4byte	.LASF21
+ 663 0121 81000000 		.4byte	.LASF21
  664 0125 01       		.byte	0x1
  665 0126 41       		.byte	0x41
  666 0127 6B000000 		.4byte	0x6b
  667 012b 13000000 		.4byte	.LLST1
  668 012f 09       		.uleb128 0x9
- 669 0130 C0010000 		.4byte	.LASF22
+ 669 0130 6E010000 		.4byte	.LASF22
  670 0134 01       		.byte	0x1
  671 0135 43       		.byte	0x43
  672 0136 C1000000 		.4byte	0xc1
@@ -1190,7 +1190,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccjQjVYt.s 			page 1
  708 017b 9C       		.byte	0x9c
  709 017c A2010000 		.4byte	0x1a2
  710 0180 07       		.uleb128 0x7
- 711 0181 D3000000 		.4byte	.LASF21
+ 711 0181 81000000 		.4byte	.LASF21
  712 0185 01       		.byte	0x1
  713 0186 8C       		.byte	0x8c
  714 0187 6B000000 		.4byte	0x6b
@@ -1198,7 +1198,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccjQjVYt.s 			page 1
  716 018f 08       		.uleb128 0x8
  717 0190 06000000 		.4byte	.LVL7
  718 0194 AD020000 		.4byte	0x2ad
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccjQjVYt.s 			page 21
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc9pmo1Q.s 			page 21
 
 
  719 0198 08       		.uleb128 0x8
@@ -1215,13 +1215,13 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccjQjVYt.s 			page 1
  730 01b2 9C       		.byte	0x9c
  731 01b3 E8010000 		.4byte	0x1e8
  732 01b7 0D       		.uleb128 0xd
- 733 01b8 85010000 		.4byte	.LASF35
+ 733 01b8 33010000 		.4byte	.LASF35
  734 01bc 01       		.byte	0x1
  735 01bd F2       		.byte	0xf2
  736 01be 83000000 		.4byte	0x83
  737 01c2 39000000 		.4byte	.LLST3
  738 01c6 07       		.uleb128 0x7
- 739 01c7 D3000000 		.4byte	.LASF21
+ 739 01c7 81000000 		.4byte	.LASF21
  740 01cb 01       		.byte	0x1
  741 01cc F4       		.byte	0xf4
  742 01cd 6B000000 		.4byte	0x6b
@@ -1234,7 +1234,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccjQjVYt.s 			page 1
  749 01e3 B8020000 		.4byte	0x2b8
  750 01e7 00       		.byte	0
  751 01e8 0E       		.uleb128 0xe
- 752 01e9 8E010000 		.4byte	.LASF36
+ 752 01e9 3C010000 		.4byte	.LASF36
  753 01ed 01       		.byte	0x1
  754 01ee 0E01     		.2byte	0x10e
  755 01f0 83000000 		.4byte	0x83
@@ -1244,26 +1244,26 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccjQjVYt.s 			page 1
  759 01fd 9C       		.byte	0x9c
  760 01fe 13020000 		.4byte	0x213
  761 0202 0F       		.uleb128 0xf
- 762 0203 7E010000 		.4byte	.LASF25
+ 762 0203 2C010000 		.4byte	.LASF25
  763 0207 01       		.byte	0x1
  764 0208 1001     		.2byte	0x110
  765 020a 83000000 		.4byte	0x83
  766 020e 78000000 		.4byte	.LLST5
  767 0212 00       		.byte	0
  768 0213 10       		.uleb128 0x10
- 769 0214 27020000 		.4byte	.LASF26
+ 769 0214 11020000 		.4byte	.LASF26
  770 0218 01       		.byte	0x1
  771 0219 3801     		.2byte	0x138
  772 021b 00000000 		.4byte	.LFB6
  773 021f 34000000 		.4byte	.LFE6-.LFB6
  774 0223 01       		.uleb128 0x1
  775 0224 9C       		.byte	0x9c
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccjQjVYt.s 			page 22
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc9pmo1Q.s 			page 22
 
 
  776 0225 4C020000 		.4byte	0x24c
  777 0229 0F       		.uleb128 0xf
- 778 022a D3000000 		.4byte	.LASF21
+ 778 022a 81000000 		.4byte	.LASF21
  779 022e 01       		.byte	0x1
  780 022f 3A01     		.2byte	0x13a
  781 0231 6B000000 		.4byte	0x6b
@@ -1276,7 +1276,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccjQjVYt.s 			page 1
  788 0247 B8020000 		.4byte	0x2b8
  789 024b 00       		.byte	0
  790 024c 06       		.uleb128 0x6
- 791 024d FA000000 		.4byte	.LASF27
+ 791 024d A8000000 		.4byte	.LASF27
  792 0251 01       		.byte	0x1
  793 0252 C5       		.byte	0xc5
  794 0253 00000000 		.4byte	.LFB3
@@ -1292,7 +1292,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccjQjVYt.s 			page 1
  804 026f 13020000 		.4byte	0x213
  805 0273 00       		.byte	0
  806 0274 10       		.uleb128 0x10
- 807 0275 0D010000 		.4byte	.LASF28
+ 807 0275 BB000000 		.4byte	.LASF28
  808 0279 01       		.byte	0x1
  809 027a 6801     		.2byte	0x168
  810 027c 00000000 		.4byte	.LFB7
@@ -1301,7 +1301,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccjQjVYt.s 			page 1
  813 0285 9C       		.byte	0x9c
  814 0286 AD020000 		.4byte	0x2ad
  815 028a 0F       		.uleb128 0xf
- 816 028b D3000000 		.4byte	.LASF21
+ 816 028b 81000000 		.4byte	.LASF21
  817 028f 01       		.byte	0x1
  818 0290 6A01     		.2byte	0x16a
  819 0292 6B000000 		.4byte	0x6b
@@ -1314,21 +1314,21 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccjQjVYt.s 			page 1
  826 02a8 B8020000 		.4byte	0x2b8
  827 02ac 00       		.byte	0
  828 02ad 11       		.uleb128 0x11
- 829 02ae 2D010000 		.4byte	.LASF29
- 830 02b2 2D010000 		.4byte	.LASF29
+ 829 02ae DB000000 		.4byte	.LASF29
+ 830 02b2 DB000000 		.4byte	.LASF29
  831 02b6 03       		.byte	0x3
  832 02b7 E5       		.byte	0xe5
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccjQjVYt.s 			page 23
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc9pmo1Q.s 			page 23
 
 
  833 02b8 11       		.uleb128 0x11
- 834 02b9 51010000 		.4byte	.LASF30
- 835 02bd 51010000 		.4byte	.LASF30
+ 834 02b9 FF000000 		.4byte	.LASF30
+ 835 02bd FF000000 		.4byte	.LASF30
  836 02c1 03       		.byte	0x3
  837 02c2 E6       		.byte	0xe6
  838 02c3 11       		.uleb128 0x11
- 839 02c4 67010000 		.4byte	.LASF31
- 840 02c8 67010000 		.4byte	.LASF31
+ 839 02c4 15010000 		.4byte	.LASF31
+ 840 02c8 15010000 		.4byte	.LASF31
  841 02cc 03       		.byte	0x3
  842 02cd 6B       		.byte	0x6b
  843 02ce 00       		.byte	0
@@ -1378,7 +1378,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccjQjVYt.s 			page 1
  887 0029 04       		.uleb128 0x4
  888 002a 16       		.uleb128 0x16
  889 002b 00       		.byte	0
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccjQjVYt.s 			page 24
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc9pmo1Q.s 			page 24
 
 
  890 002c 03       		.uleb128 0x3
@@ -1438,7 +1438,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccjQjVYt.s 			page 1
  944 0063 17       		.uleb128 0x17
  945 0064 00       		.byte	0
  946 0065 00       		.byte	0
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccjQjVYt.s 			page 25
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc9pmo1Q.s 			page 25
 
 
  947 0066 08       		.uleb128 0x8
@@ -1498,7 +1498,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccjQjVYt.s 			page 1
  1001 00a5 05       		.uleb128 0x5
  1002 00a6 00       		.byte	0
  1003 00a7 03       		.uleb128 0x3
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccjQjVYt.s 			page 26
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc9pmo1Q.s 			page 26
 
 
  1004 00a8 0E       		.uleb128 0xe
@@ -1558,7 +1558,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccjQjVYt.s 			page 1
  1058 00df 2E       		.uleb128 0x2e
  1059 00e0 01       		.byte	0x1
  1060 00e1 3F       		.uleb128 0x3f
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccjQjVYt.s 			page 27
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc9pmo1Q.s 			page 27
 
 
  1061 00e2 19       		.uleb128 0x19
@@ -1618,7 +1618,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccjQjVYt.s 			page 1
  1115 0022 00000000 		.4byte	0
  1116              	.LLST2:
  1117 0026 06000000 		.4byte	.LVL7
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccjQjVYt.s 			page 28
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc9pmo1Q.s 			page 28
 
 
  1118 002a 39000000 		.4byte	.LVL8-1
@@ -1678,7 +1678,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccjQjVYt.s 			page 1
  1172 00b5 00000000 		.4byte	0
  1173 00b9 00000000 		.4byte	0
  1174              		.section	.debug_aranges,"",%progbits
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccjQjVYt.s 			page 29
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc9pmo1Q.s 			page 29
 
 
  1175 0000 54000000 		.4byte	0x54
@@ -1738,7 +1738,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccjQjVYt.s 			page 1
  1224      3600
  1225              	.LASF16:
  1226 0006 72656733 		.ascii	"reg32\000"
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccjQjVYt.s 			page 30
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc9pmo1Q.s 			page 30
 
 
  1226      3200
@@ -1765,171 +1765,169 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccjQjVYt.s 			page 1
  1234      69626572 
  1234      6E617465 
  1234      00
- 1235              	.LASF34:
- 1236 0056 5C5C5642 		.ascii	"\\\\VBOXSVR\\raywang\\Dropbox (MIT)\\CTFs\\eCTF\\ec"
- 1236      4F585356 
- 1236      525C7261 
- 1236      7977616E 
- 1236      675C4472 
- 1237 0082 74662D32 		.ascii	"tf-2018-techsec\\SECURITY_MODULE.cydsn\000"
- 1237      3031382D 
- 1237      74656368 
- 1237      7365635C 
- 1237      53454355 
- 1238              	.LASF12:
- 1239 00a8 666C6F61 		.ascii	"float\000"
- 1239      7400
- 1240              	.LASF7:
- 1241 00ae 6C6F6E67 		.ascii	"long long unsigned int\000"
- 1241      206C6F6E 
- 1241      6720756E 
- 1241      7369676E 
- 1241      65642069 
- 1242              	.LASF1:
- 1243 00c5 756E7369 		.ascii	"unsigned char\000"
- 1243      676E6564 
- 1243      20636861 
- 1243      7200
- 1244              	.LASF21:
- 1245 00d3 696E7465 		.ascii	"interruptState\000"
- 1245      72727570 
- 1245      74537461 
- 1245      746500
- 1246              	.LASF5:
- 1247 00e2 6C6F6E67 		.ascii	"long unsigned int\000"
- 1247      20756E73 
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccjQjVYt.s 			page 31
+ 1235              	.LASF12:
+ 1236 0056 666C6F61 		.ascii	"float\000"
+ 1236      7400
+ 1237              	.LASF7:
+ 1238 005c 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 1238      206C6F6E 
+ 1238      6720756E 
+ 1238      7369676E 
+ 1238      65642069 
+ 1239              	.LASF1:
+ 1240 0073 756E7369 		.ascii	"unsigned char\000"
+ 1240      676E6564 
+ 1240      20636861 
+ 1240      7200
+ 1241              	.LASF21:
+ 1242 0081 696E7465 		.ascii	"interruptState\000"
+ 1242      72727570 
+ 1242      74537461 
+ 1242      746500
+ 1243              	.LASF5:
+ 1244 0090 6C6F6E67 		.ascii	"long unsigned int\000"
+ 1244      20756E73 
+ 1244      69676E65 
+ 1244      6420696E 
+ 1244      7400
+ 1245              	.LASF9:
+ 1246 00a2 75696E74 		.ascii	"uint8\000"
+ 1246      3800
+ 1247              	.LASF27:
+ 1248 00a8 43795379 		.ascii	"CySysPmStop\000"
+ 1248      73506D53 
+ 1248      746F7000 
+ 1249              	.LASF13:
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc9pmo1Q.s 			page 31
 
 
- 1247      69676E65 
- 1247      6420696E 
- 1247      7400
- 1248              	.LASF9:
- 1249 00f4 75696E74 		.ascii	"uint8\000"
- 1249      3800
- 1250              	.LASF27:
- 1251 00fa 43795379 		.ascii	"CySysPmStop\000"
- 1251      73506D53 
- 1251      746F7000 
- 1252              	.LASF13:
- 1253 0106 646F7562 		.ascii	"double\000"
- 1253      6C6500
- 1254              	.LASF28:
- 1255 010d 43795379 		.ascii	"CySysPmUnfreezeIo\000"
- 1255      73506D55 
- 1255      6E667265 
- 1255      657A6549 
- 1255      6F00
- 1256              	.LASF10:
- 1257 011f 75696E74 		.ascii	"uint16\000"
- 1257      313600
- 1258              	.LASF11:
- 1259 0126 75696E74 		.ascii	"uint32\000"
- 1259      333200
- 1260              	.LASF29:
- 1261 012d 4379456E 		.ascii	"CyEnterCriticalSection\000"
- 1261      74657243 
- 1261      72697469 
- 1261      63616C53 
- 1261      65637469 
- 1262              	.LASF8:
- 1263 0144 756E7369 		.ascii	"unsigned int\000"
- 1263      676E6564 
- 1263      20696E74 
- 1263      00
- 1264              	.LASF30:
- 1265 0151 43794578 		.ascii	"CyExitCriticalSection\000"
- 1265      69744372 
- 1265      69746963 
- 1265      616C5365 
- 1265      6374696F 
- 1266              	.LASF31:
- 1267 0167 43795379 		.ascii	"CySysClkWriteSysclkDiv\000"
- 1267      73436C6B 
- 1267      57726974 
- 1267      65537973 
- 1267      636C6B44 
- 1268              	.LASF25:
- 1269 017e 72656173 		.ascii	"reason\000"
- 1269      6F6E00
- 1270              	.LASF35:
- 1271 0185 706F6C61 		.ascii	"polarity\000"
- 1271      72697479 
- 1271      00
- 1272              	.LASF36:
- 1273 018e 43795379 		.ascii	"CySysPmGetResetReason\000"
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccjQjVYt.s 			page 32
+ 1250 00b4 646F7562 		.ascii	"double\000"
+ 1250      6C6500
+ 1251              	.LASF28:
+ 1252 00bb 43795379 		.ascii	"CySysPmUnfreezeIo\000"
+ 1252      73506D55 
+ 1252      6E667265 
+ 1252      657A6549 
+ 1252      6F00
+ 1253              	.LASF10:
+ 1254 00cd 75696E74 		.ascii	"uint16\000"
+ 1254      313600
+ 1255              	.LASF11:
+ 1256 00d4 75696E74 		.ascii	"uint32\000"
+ 1256      333200
+ 1257              	.LASF29:
+ 1258 00db 4379456E 		.ascii	"CyEnterCriticalSection\000"
+ 1258      74657243 
+ 1258      72697469 
+ 1258      63616C53 
+ 1258      65637469 
+ 1259              	.LASF8:
+ 1260 00f2 756E7369 		.ascii	"unsigned int\000"
+ 1260      676E6564 
+ 1260      20696E74 
+ 1260      00
+ 1261              	.LASF30:
+ 1262 00ff 43794578 		.ascii	"CyExitCriticalSection\000"
+ 1262      69744372 
+ 1262      69746963 
+ 1262      616C5365 
+ 1262      6374696F 
+ 1263              	.LASF31:
+ 1264 0115 43795379 		.ascii	"CySysClkWriteSysclkDiv\000"
+ 1264      73436C6B 
+ 1264      57726974 
+ 1264      65537973 
+ 1264      636C6B44 
+ 1265              	.LASF25:
+ 1266 012c 72656173 		.ascii	"reason\000"
+ 1266      6F6E00
+ 1267              	.LASF35:
+ 1268 0133 706F6C61 		.ascii	"polarity\000"
+ 1268      72697479 
+ 1268      00
+ 1269              	.LASF36:
+ 1270 013c 43795379 		.ascii	"CySysPmGetResetReason\000"
+ 1270      73506D47 
+ 1270      65745265 
+ 1270      73657452 
+ 1270      6561736F 
+ 1271              	.LASF18:
+ 1272 0152 73697A65 		.ascii	"sizetype\000"
+ 1272      74797065 
+ 1272      00
+ 1273              	.LASF6:
+ 1274 015b 6C6F6E67 		.ascii	"long long int\000"
+ 1274      206C6F6E 
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc9pmo1Q.s 			page 32
 
 
- 1273      73506D47 
- 1273      65745265 
- 1273      73657452 
- 1273      6561736F 
- 1274              	.LASF18:
- 1275 01a4 73697A65 		.ascii	"sizetype\000"
- 1275      74797065 
- 1275      00
- 1276              	.LASF6:
- 1277 01ad 6C6F6E67 		.ascii	"long long int\000"
- 1277      206C6F6E 
- 1277      6720696E 
- 1277      7400
- 1278              	.LASF14:
- 1279 01bb 63686172 		.ascii	"char\000"
- 1279      00
- 1280              	.LASF22:
- 1281 01c0 636C6B53 		.ascii	"clkSelectReg\000"
- 1281      656C6563 
- 1281      74526567 
- 1281      00
+ 1274      6720696E 
+ 1274      7400
+ 1275              	.LASF14:
+ 1276 0169 63686172 		.ascii	"char\000"
+ 1276      00
+ 1277              	.LASF22:
+ 1278 016e 636C6B53 		.ascii	"clkSelectReg\000"
+ 1278      656C6563 
+ 1278      74526567 
+ 1278      00
+ 1279              	.LASF34:
+ 1280 017b 453A5C65 		.ascii	"E:\\eCTF\\ectf-2018-techsec-submission2\\SECURITY_M"
+ 1280      4354465C 
+ 1280      65637466 
+ 1280      2D323031 
+ 1280      382D7465 
+ 1281 01ab 4F44554C 		.ascii	"ODULE.cydsn\000"
+ 1281      452E6379 
+ 1281      64736E00 
  1282              	.LASF2:
- 1283 01cd 73686F72 		.ascii	"short int\000"
+ 1283 01b7 73686F72 		.ascii	"short int\000"
  1283      7420696E 
  1283      7400
  1284              	.LASF20:
- 1285 01d7 43795379 		.ascii	"CySysPmDeepSleep\000"
+ 1285 01c1 43795379 		.ascii	"CySysPmDeepSleep\000"
  1285      73506D44 
  1285      65657053 
  1285      6C656570 
  1285      00
  1286              	.LASF4:
- 1287 01e8 6C6F6E67 		.ascii	"long int\000"
+ 1287 01d2 6C6F6E67 		.ascii	"long int\000"
  1287      20696E74 
  1287      00
  1288              	.LASF33:
- 1289 01f1 47656E65 		.ascii	"Generated_Source\\PSoC4\\cyPm.c\000"
+ 1289 01db 47656E65 		.ascii	"Generated_Source\\PSoC4\\cyPm.c\000"
  1289      72617465 
  1289      645F536F 
  1289      75726365 
  1289      5C50536F 
  1290              	.LASF17:
- 1291 020f 6C6F6E67 		.ascii	"long double\000"
+ 1291 01f9 6C6F6E67 		.ascii	"long double\000"
  1291      20646F75 
  1291      626C6500 
  1292              	.LASF0:
- 1293 021b 7369676E 		.ascii	"signed char\000"
+ 1293 0205 7369676E 		.ascii	"signed char\000"
  1293      65642063 
  1293      68617200 
  1294              	.LASF26:
- 1295 0227 43795379 		.ascii	"CySysPmFreezeIo\000"
+ 1295 0211 43795379 		.ascii	"CySysPmFreezeIo\000"
  1295      73506D46 
  1295      7265657A 
  1295      65496F00 
  1296              	.LASF32:
- 1297 0237 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 1297 0221 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
  1297      43313120 
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccjQjVYt.s 			page 33
-
-
  1297      352E342E 
  1297      31203230 
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc9pmo1Q.s 			page 33
+
+
  1297      31363036 
- 1298 026a 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m0 -mthumb -g -O"
+ 1298 0254 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m0 -mthumb -g -O"
  1298      20726576 
  1298      6973696F 
  1298      6E203233 
  1298      37373135 
- 1299 029d 73202D66 		.ascii	"s -ffunction-sections -ffat-lto-objects\000"
+ 1299 0287 73202D66 		.ascii	"s -ffunction-sections -ffat-lto-objects\000"
  1299      66756E63 
  1299      74696F6E 
  1299      2D736563 

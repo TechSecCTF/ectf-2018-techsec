@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccdfnkDI.s 			page 1
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccXsUIfN.s 			page 1
 
 
    1              		.syntax unified
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccdfnkDI.s 			page 1
   28:main.c        **** #define RECV_OK "K"
   29:main.c        **** #define NONCE_OK "OK"
   30:main.c        **** #define COMPUTE_HMAC '2'
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccdfnkDI.s 			page 2
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccXsUIfN.s 			page 2
 
 
   31:main.c        **** #define GET_UUID '3'
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccdfnkDI.s 			page 1
   85:main.c        ****     
   86:main.c        ****     // Return result.
   87:main.c        ****     return value;
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccdfnkDI.s 			page 3
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccXsUIfN.s 			page 3
 
 
   88:main.c        **** }
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccdfnkDI.s 			page 1
   65              	.LFB33:
   55:main.c        ****     uint8_t value = 0;
   66              		.loc 1 55 0
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccdfnkDI.s 			page 4
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccXsUIfN.s 			page 4
 
 
   67              		.cfi_startproc
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccdfnkDI.s 			page 1
  112 002e 03D8     		bhi	.L7
   75:main.c        ****     }
  113              		.loc 1 75 0
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccdfnkDI.s 			page 5
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccXsUIfN.s 			page 5
 
 
  114 0030 1201     		lsls	r2, r2, #4
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccdfnkDI.s 			page 1
  162              		.cfi_startproc
  163              		@ args = 0, pretend = 0, frame = 0
  164              		@ frame_needed = 0, uses_anonymous_args = 0
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccdfnkDI.s 			page 6
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccXsUIfN.s 			page 6
 
 
  165              	.LVL12:
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccdfnkDI.s 			page 1
  211 0008 18A8     		add	r0, sp, #96
  212 000a FFF7FEFF 		bl	memset
  213              	.LVL16:
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccdfnkDI.s 			page 7
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccXsUIfN.s 			page 7
 
 
  108:main.c        ****     
@@ -418,7 +418,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccdfnkDI.s 			page 1
  250 0040 0134     		adds	r4, r4, #1
  251              	.LVL23:
  252 0042 202C     		cmp	r4, #32
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccdfnkDI.s 			page 8
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccXsUIfN.s 			page 8
 
 
  253 0044 F4D1     		bne	.L18
@@ -478,7 +478,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccdfnkDI.s 			page 1
  296              		.loc 1 134 0
  297              		.cfi_startproc
  298              		@ args = 0, pretend = 0, frame = 208
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccdfnkDI.s 			page 9
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccXsUIfN.s 			page 9
 
 
  299              		@ frame_needed = 0, uses_anonymous_args = 0
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccdfnkDI.s 			page 1
  330 001c 002B     		cmp	r3, #0
  331 001e 08D1     		bne	.L23
  158:main.c        ****         provision();
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccdfnkDI.s 			page 10
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccXsUIfN.s 			page 10
 
 
  332              		.loc 1 158 0
@@ -598,7 +598,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccdfnkDI.s 			page 1
  349 0032 2826     		movs	r6, #40
  350              	.L24:
  351              	.LBE3:
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccdfnkDI.s 			page 11
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccXsUIfN.s 			page 11
 
 
  172:main.c        **** 
@@ -658,7 +658,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccdfnkDI.s 			page 1
  393              		.loc 1 185 0
  394 006a FFF7FEFF 		bl	pushMessage
  395              	.LVL37:
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccdfnkDI.s 			page 12
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccXsUIfN.s 			page 12
 
 
  191:main.c        ****             memcpy(hmac_data + UUID_LEN, nonce, sizeof(nonce));
@@ -718,7 +718,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccdfnkDI.s 			page 1
  441              		.size	UUID, 36
  442              	UUID:
  443 0021 37       		.byte	55
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccdfnkDI.s 			page 13
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccXsUIfN.s 			page 13
 
 
  444 0022 33       		.byte	51
@@ -778,22 +778,22 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccdfnkDI.s 			page 1
  490 0000 FF050000 		.4byte	0x5ff
  491 0004 0400     		.2byte	0x4
  492 0006 00000000 		.4byte	.Ldebug_abbrev0
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccdfnkDI.s 			page 14
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccXsUIfN.s 			page 14
 
 
  493 000a 04       		.byte	0x4
  494 000b 01       		.uleb128 0x1
- 495 000c 57020000 		.4byte	.LASF46
+ 495 000c 41020000 		.4byte	.LASF46
  496 0010 0C       		.byte	0xc
- 497 0011 C5010000 		.4byte	.LASF47
- 498 0015 5B010000 		.4byte	.LASF48
+ 497 0011 B1010000 		.4byte	.LASF47
+ 498 0015 81000000 		.4byte	.LASF48
  499 0019 18000000 		.4byte	.Ldebug_ranges0+0x18
  500 001d 00000000 		.4byte	0
  501 0021 00000000 		.4byte	.Ldebug_line0
  502 0025 02       		.uleb128 0x2
  503 0026 01       		.byte	0x1
  504 0027 06       		.byte	0x6
- 505 0028 41020000 		.4byte	.LASF0
+ 505 0028 2B020000 		.4byte	.LASF0
  506 002c 03       		.uleb128 0x3
  507 002d 28000000 		.4byte	.LASF9
  508 0031 02       		.byte	0x2
@@ -802,11 +802,11 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccdfnkDI.s 			page 1
  511 0037 02       		.uleb128 0x2
  512 0038 01       		.byte	0x1
  513 0039 08       		.byte	0x8
- 514 003a 81000000 		.4byte	.LASF1
+ 514 003a B2000000 		.4byte	.LASF1
  515 003e 02       		.uleb128 0x2
  516 003f 02       		.byte	0x2
  517 0040 05       		.byte	0x5
- 518 0041 DB010000 		.4byte	.LASF2
+ 518 0041 C7010000 		.4byte	.LASF2
  519 0045 02       		.uleb128 0x2
  520 0046 02       		.byte	0x2
  521 0047 07       		.byte	0x7
@@ -814,19 +814,19 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccdfnkDI.s 			page 1
  523 004c 02       		.uleb128 0x2
  524 004d 04       		.byte	0x4
  525 004e 05       		.byte	0x5
- 526 004f 23020000 		.4byte	.LASF4
+ 526 004f 0D020000 		.4byte	.LASF4
  527 0053 02       		.uleb128 0x2
  528 0054 04       		.byte	0x4
  529 0055 07       		.byte	0x7
- 530 0056 C4000000 		.4byte	.LASF5
+ 530 0056 F5000000 		.4byte	.LASF5
  531 005a 02       		.uleb128 0x2
  532 005b 08       		.byte	0x8
  533 005c 05       		.byte	0x5
- 534 005d B7010000 		.4byte	.LASF6
+ 534 005d A3010000 		.4byte	.LASF6
  535 0061 02       		.uleb128 0x2
  536 0062 08       		.byte	0x8
  537 0063 07       		.byte	0x7
- 538 0064 28010000 		.4byte	.LASF7
+ 538 0064 4C010000 		.4byte	.LASF7
  539 0068 04       		.uleb128 0x4
  540 0069 04       		.byte	0x4
  541 006a 05       		.byte	0x5
@@ -834,17 +834,17 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccdfnkDI.s 			page 1
  543 006f 02       		.uleb128 0x2
  544 0070 04       		.byte	0x4
  545 0071 07       		.byte	0x7
- 546 0072 1B010000 		.4byte	.LASF8
+ 546 0072 3F010000 		.4byte	.LASF8
  547 0076 03       		.uleb128 0x3
- 548 0077 3F010000 		.4byte	.LASF10
+ 548 0077 63010000 		.4byte	.LASF10
  549 007b 03       		.byte	0x3
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccdfnkDI.s 			page 15
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccXsUIfN.s 			page 15
 
 
  550 007c 18       		.byte	0x18
  551 007d 2C000000 		.4byte	0x2c
  552 0081 05       		.uleb128 0x5
- 553 0082 F5010000 		.4byte	.LASF11
+ 553 0082 E1010000 		.4byte	.LASF11
  554 0086 04       		.byte	0x4
  555 0087 D201     		.2byte	0x1d2
  556 0089 37000000 		.4byte	0x37
@@ -859,20 +859,20 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccdfnkDI.s 			page 1
  565 009b 02       		.uleb128 0x2
  566 009c 01       		.byte	0x1
  567 009d 08       		.byte	0x8
- 568 009e CC010000 		.4byte	.LASF14
+ 568 009e B8010000 		.4byte	.LASF14
  569 00a2 02       		.uleb128 0x2
  570 00a3 08       		.byte	0x8
  571 00a4 04       		.byte	0x4
- 572 00a5 35020000 		.4byte	.LASF15
+ 572 00a5 1F020000 		.4byte	.LASF15
  573 00a9 02       		.uleb128 0x2
  574 00aa 04       		.byte	0x4
  575 00ab 07       		.byte	0x7
- 576 00ac A2010000 		.4byte	.LASF16
+ 576 00ac 8E010000 		.4byte	.LASF16
  577 00b0 06       		.uleb128 0x6
  578 00b1 04       		.byte	0x4
  579 00b2 9B000000 		.4byte	0x9b
  580 00b6 07       		.uleb128 0x7
- 581 00b7 D1010000 		.4byte	.LASF19
+ 581 00b7 BD010000 		.4byte	.LASF19
  582 00bb 01       		.byte	0x1
  583 00bc 61       		.byte	0x61
  584 00bd 00000000 		.4byte	.LFB35
@@ -898,7 +898,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccdfnkDI.s 			page 1
  604 00e6 00       		.byte	0
  605 00e7 0A       		.uleb128 0xa
  606 00e8 0E000000 		.4byte	.LVL1
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccdfnkDI.s 			page 16
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccXsUIfN.s 			page 16
 
 
  607 00ec 82050000 		.4byte	0x582
@@ -907,7 +907,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccdfnkDI.s 			page 1
  610 00f5 8D050000 		.4byte	0x58d
  611 00f9 00       		.byte	0
  612 00fa 0B       		.uleb128 0xb
- 613 00fb 8F000000 		.4byte	.LASF49
+ 613 00fb C0000000 		.4byte	.LASF49
  614 00ff 01       		.byte	0x1
  615 0100 36       		.byte	0x36
  616 0101 76000000 		.4byte	0x76
@@ -917,13 +917,13 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccdfnkDI.s 			page 1
  620 010e 9C       		.byte	0x9c
  621 010f 41010000 		.4byte	0x141
  622 0113 0C       		.uleb128 0xc
- 623 0114 AB010000 		.4byte	.LASF17
+ 623 0114 97010000 		.4byte	.LASF17
  624 0118 01       		.byte	0x1
  625 0119 36       		.byte	0x36
  626 011a 9B000000 		.4byte	0x9b
  627 011e 00000000 		.4byte	.LLST0
  628 0122 0C       		.uleb128 0xc
- 629 0123 FF000000 		.4byte	.LASF18
+ 629 0123 23010000 		.4byte	.LASF18
  630 0127 01       		.byte	0x1
  631 0128 36       		.byte	0x36
  632 0129 9B000000 		.4byte	0x9b
@@ -936,7 +936,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccdfnkDI.s 			page 1
  639 013c 5B000000 		.4byte	.LLST2
  640 0140 00       		.byte	0
  641 0141 07       		.uleb128 0x7
- 642 0142 4D020000 		.4byte	.LASF20
+ 642 0142 37020000 		.4byte	.LASF20
  643 0146 01       		.byte	0x1
  644 0147 5A       		.byte	0x5a
  645 0148 00000000 		.4byte	.LFB34
@@ -958,7 +958,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccdfnkDI.s 			page 1
  661 0170 A6000000 		.4byte	.LLST4
  662 0174 0E       		.uleb128 0xe
  663 0175 0C000000 		.4byte	.LVL15
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccdfnkDI.s 			page 17
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccXsUIfN.s 			page 17
 
 
  664 0179 98050000 		.4byte	0x598
@@ -978,7 +978,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccdfnkDI.s 			page 1
  678 018d 00       		.byte	0
  679 018e 00       		.byte	0
  680 018f 0F       		.uleb128 0xf
- 681 0190 F5000000 		.4byte	.LASF50
+ 681 0190 19010000 		.4byte	.LASF50
  682 0194 01       		.byte	0x1
  683 0195 69       		.byte	0x69
  684 0196 00000000 		.4byte	.LFB36
@@ -995,7 +995,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccdfnkDI.s 			page 1
  695 01b0 91       		.byte	0x91
  696 01b1 807F     		.sleb128 -128
  697 01b3 10       		.uleb128 0x10
- 698 01b4 E8000000 		.4byte	.LASF25
+ 698 01b4 0C010000 		.4byte	.LASF25
  699 01b8 01       		.byte	0x1
  700 01b9 74       		.byte	0x74
  701 01ba E3020000 		.4byte	0x2e3
@@ -1003,7 +1003,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccdfnkDI.s 			page 1
  703 01bf 91       		.byte	0x91
  704 01c0 C07E     		.sleb128 -192
  705 01c2 10       		.uleb128 0x10
- 706 01c3 2C020000 		.4byte	.LASF26
+ 706 01c3 16020000 		.4byte	.LASF26
  707 01c7 01       		.byte	0x1
  708 01c8 77       		.byte	0x77
  709 01c9 F3020000 		.4byte	0x2f3
@@ -1018,7 +1018,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccdfnkDI.s 			page 1
  718 01df 6900     		.ascii	"i\000"
  719 01e1 01       		.byte	0x1
  720 01e2 79       		.byte	0x79
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccdfnkDI.s 			page 18
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccXsUIfN.s 			page 18
 
 
  721 01e3 68000000 		.4byte	0x68
@@ -1078,7 +1078,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccdfnkDI.s 			page 1
  775 0244 08       		.uleb128 0x8
  776 0245 24000000 		.4byte	.LVL19
  777 0249 B7050000 		.4byte	0x5b7
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccdfnkDI.s 			page 19
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccXsUIfN.s 			page 19
 
 
  778 024d 59020000 		.4byte	0x259
@@ -1138,7 +1138,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccdfnkDI.s 			page 1
  832 029a 08       		.uleb128 0x8
  833 029b 5E000000 		.4byte	.LVL25
  834 029f CB050000 		.4byte	0x5cb
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccdfnkDI.s 			page 20
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccXsUIfN.s 			page 20
 
 
  835 02a3 BA020000 		.4byte	0x2ba
@@ -1198,11 +1198,11 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccdfnkDI.s 			page 1
  889 02fd A9000000 		.4byte	0xa9
  890 0301 1F       		.byte	0x1f
  891 0302 00       		.byte	0
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccdfnkDI.s 			page 21
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccXsUIfN.s 			page 21
 
 
  892 0303 15       		.uleb128 0x15
- 893 0304 D6000000 		.4byte	.LASF51
+ 893 0304 07010000 		.4byte	.LASF51
  894 0308 01       		.byte	0x1
  895 0309 85       		.byte	0x85
  896 030a 68000000 		.4byte	0x68
@@ -1228,7 +1228,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccdfnkDI.s 			page 1
  916 0335 91       		.byte	0x91
  917 0336 F07E     		.sleb128 -144
  918 0338 10       		.uleb128 0x10
- 919 0339 47010000 		.4byte	.LASF27
+ 919 0339 6B010000 		.4byte	.LASF27
  920 033d 01       		.byte	0x1
  921 033e 92       		.byte	0x92
  922 033f D2040000 		.4byte	0x4d2
@@ -1248,7 +1248,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccdfnkDI.s 			page 1
  936 035c 00000000 		.4byte	.Ldebug_ranges0+0
  937 0360 1B040000 		.4byte	0x41b
  938 0364 10       		.uleb128 0x10
- 939 0365 BE000000 		.4byte	.LASF28
+ 939 0365 EF000000 		.4byte	.LASF28
  940 0369 01       		.byte	0x1
  941 036a B6       		.byte	0xb6
  942 036b E2040000 		.4byte	0x4e2
@@ -1258,7 +1258,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccdfnkDI.s 			page 1
  946 0373 10       		.uleb128 0x10
  947 0374 08000000 		.4byte	.LASF29
  948 0378 01       		.byte	0x1
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccdfnkDI.s 			page 22
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccXsUIfN.s 			page 22
 
 
  949 0379 BC       		.byte	0xbc
@@ -1318,7 +1318,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccdfnkDI.s 			page 1
  1003 03d9 74       		.byte	0x74
  1004 03da 21       		.sleb128 33
  1005 03db 09       		.uleb128 0x9
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccdfnkDI.s 			page 23
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccXsUIfN.s 			page 23
 
 
  1006 03dc 01       		.uleb128 0x1
@@ -1378,7 +1378,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccdfnkDI.s 			page 1
  1060 042c 03       		.byte	0x3
  1061 042d 00000000 		.4byte	Reset_ISR
  1062 0431 00       		.byte	0
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccdfnkDI.s 			page 24
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccXsUIfN.s 			page 24
 
 
  1063 0432 0A       		.uleb128 0xa
@@ -1438,7 +1438,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccdfnkDI.s 			page 1
  1117 0499 77050000 		.4byte	0x577
  1118 049d 09       		.uleb128 0x9
  1119 049e 01       		.uleb128 0x1
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccdfnkDI.s 			page 25
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccXsUIfN.s 			page 25
 
 
  1120 049f 50       		.byte	0x50
@@ -1498,7 +1498,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccdfnkDI.s 			page 1
  1174 0511 00       		.byte	0
  1175 0512 1A       		.uleb128 0x1a
  1176 0513 50494E00 		.ascii	"PIN\000"
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccdfnkDI.s 			page 26
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccXsUIfN.s 			page 26
 
 
  1177 0517 01       		.byte	0x1
@@ -1540,7 +1540,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccdfnkDI.s 			page 1
  1213 055f 20       		.byte	0x20
  1214 0560 00       		.byte	0
  1215 0561 10       		.uleb128 0x10
- 1216 0562 DB000000 		.4byte	.LASF32
+ 1216 0562 00020000 		.4byte	.LASF32
  1217 0566 01       		.byte	0x1
  1218 0567 33       		.byte	0x33
  1219 0568 72050000 		.4byte	0x572
@@ -1550,15 +1550,15 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccdfnkDI.s 			page 1
  1223 0572 18       		.uleb128 0x18
  1224 0573 51050000 		.4byte	0x551
  1225 0577 1B       		.uleb128 0x1b
- 1226 0578 AB000000 		.4byte	.LASF33
- 1227 057c AB000000 		.4byte	.LASF33
+ 1226 0578 DC000000 		.4byte	.LASF33
+ 1227 057c DC000000 		.4byte	.LASF33
  1228 0580 05       		.byte	0x5
  1229 0581 1E       		.byte	0x1e
  1230 0582 1B       		.uleb128 0x1b
- 1231 0583 98000000 		.4byte	.LASF34
- 1232 0587 98000000 		.4byte	.LASF34
+ 1231 0583 C9000000 		.4byte	.LASF34
+ 1232 0587 C9000000 		.4byte	.LASF34
  1233 058b 06       		.byte	0x6
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccdfnkDI.s 			page 27
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccXsUIfN.s 			page 27
 
 
  1234 058c 39       		.byte	0x39
@@ -1568,29 +1568,29 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccdfnkDI.s 			page 1
  1238 0596 07       		.byte	0x7
  1239 0597 E4       		.byte	0xe4
  1240 0598 1B       		.uleb128 0x1b
- 1241 0599 53010000 		.4byte	.LASF36
- 1242 059d 53010000 		.4byte	.LASF36
+ 1241 0599 77010000 		.4byte	.LASF36
+ 1242 059d 77010000 		.4byte	.LASF36
  1243 05a1 08       		.byte	0x8
  1244 05a2 E7       		.byte	0xe7
  1245 05a3 1C       		.uleb128 0x1c
- 1246 05a4 B7000000 		.4byte	.LASF39
- 1247 05a8 B7000000 		.4byte	.LASF39
+ 1246 05a4 E8000000 		.4byte	.LASF39
+ 1247 05a8 E8000000 		.4byte	.LASF39
  1248 05ac 1B       		.uleb128 0x1b
  1249 05ad 19000000 		.4byte	.LASF37
  1250 05b1 19000000 		.4byte	.LASF37
  1251 05b5 05       		.byte	0x5
  1252 05b6 2B       		.byte	0x2b
  1253 05b7 1B       		.uleb128 0x1b
- 1254 05b8 E5020000 		.4byte	.LASF38
- 1255 05bc E5020000 		.4byte	.LASF38
+ 1254 05b8 CF020000 		.4byte	.LASF38
+ 1255 05bc CF020000 		.4byte	.LASF38
  1256 05c0 05       		.byte	0x5
  1257 05c1 25       		.byte	0x25
  1258 05c2 1C       		.uleb128 0x1c
- 1259 05c3 FB010000 		.4byte	.LASF40
- 1260 05c7 FB010000 		.4byte	.LASF40
+ 1259 05c3 E7010000 		.4byte	.LASF40
+ 1260 05c7 E7010000 		.4byte	.LASF40
  1261 05cb 1B       		.uleb128 0x1b
- 1262 05cc E5010000 		.4byte	.LASF41
- 1263 05d0 E5010000 		.4byte	.LASF41
+ 1262 05cc D1010000 		.4byte	.LASF41
+ 1263 05d0 D1010000 		.4byte	.LASF41
  1264 05d4 09       		.byte	0x9
  1265 05d5 2F       		.byte	0x2f
  1266 05d6 1B       		.uleb128 0x1b
@@ -1599,18 +1599,18 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccdfnkDI.s 			page 1
  1269 05df 0A       		.byte	0xa
  1270 05e0 17       		.byte	0x17
  1271 05e1 1B       		.uleb128 0x1b
- 1272 05e2 02020000 		.4byte	.LASF43
- 1273 05e6 02020000 		.4byte	.LASF43
+ 1272 05e2 EE010000 		.4byte	.LASF43
+ 1273 05e6 EE010000 		.4byte	.LASF43
  1274 05ea 0B       		.byte	0xb
  1275 05eb 18       		.byte	0x18
  1276 05ec 1B       		.uleb128 0x1b
- 1277 05ed 0B010000 		.4byte	.LASF44
- 1278 05f1 0B010000 		.4byte	.LASF44
+ 1277 05ed 2F010000 		.4byte	.LASF44
+ 1278 05f1 2F010000 		.4byte	.LASF44
  1279 05f5 09       		.byte	0x9
  1280 05f6 29       		.byte	0x29
  1281 05f7 1B       		.uleb128 0x1b
- 1282 05f8 14020000 		.4byte	.LASF45
- 1283 05fc 14020000 		.4byte	.LASF45
+ 1282 05f8 7F010000 		.4byte	.LASF45
+ 1283 05fc 7F010000 		.4byte	.LASF45
  1284 0600 0C       		.byte	0xc
  1285 0601 72       		.byte	0x72
  1286 0602 00       		.byte	0
@@ -1618,7 +1618,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccdfnkDI.s 			page 1
  1288              	.Ldebug_abbrev0:
  1289 0000 01       		.uleb128 0x1
  1290 0001 11       		.uleb128 0x11
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccdfnkDI.s 			page 28
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccXsUIfN.s 			page 28
 
 
  1291 0002 01       		.byte	0x1
@@ -1678,7 +1678,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccdfnkDI.s 			page 1
  1345 0038 00       		.byte	0
  1346 0039 03       		.uleb128 0x3
  1347 003a 0E       		.uleb128 0xe
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccdfnkDI.s 			page 29
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccXsUIfN.s 			page 29
 
 
  1348 003b 3A       		.uleb128 0x3a
@@ -1738,7 +1738,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccdfnkDI.s 			page 1
  1402 0074 8A8201   		.uleb128 0x410a
  1403 0077 00       		.byte	0
  1404 0078 02       		.uleb128 0x2
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccdfnkDI.s 			page 30
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccXsUIfN.s 			page 30
 
 
  1405 0079 18       		.uleb128 0x18
@@ -1798,7 +1798,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccdfnkDI.s 			page 1
  1459 00b3 00       		.byte	0
  1460 00b4 00       		.byte	0
  1461 00b5 0D       		.uleb128 0xd
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccdfnkDI.s 			page 31
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccXsUIfN.s 			page 31
 
 
  1462 00b6 34       		.uleb128 0x34
@@ -1858,7 +1858,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccdfnkDI.s 			page 1
  1516 00ef 0B       		.uleb128 0xb
  1517 00f0 49       		.uleb128 0x49
  1518 00f1 13       		.uleb128 0x13
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccdfnkDI.s 			page 32
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccXsUIfN.s 			page 32
 
 
  1519 00f2 02       		.uleb128 0x2
@@ -1918,7 +1918,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccdfnkDI.s 			page 1
  1573 0128 0E       		.uleb128 0xe
  1574 0129 3A       		.uleb128 0x3a
  1575 012a 0B       		.uleb128 0xb
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccdfnkDI.s 			page 33
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccXsUIfN.s 			page 33
 
 
  1576 012b 3B       		.uleb128 0x3b
@@ -1978,7 +1978,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccdfnkDI.s 			page 1
  1630 0163 49       		.uleb128 0x49
  1631 0164 13       		.uleb128 0x13
  1632 0165 00       		.byte	0
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccdfnkDI.s 			page 34
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccXsUIfN.s 			page 34
 
 
  1633 0166 00       		.byte	0
@@ -2038,7 +2038,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccdfnkDI.s 			page 1
  1687 000b 04000000 		.4byte	.LVL4
  1688 000f 5E000000 		.4byte	.LFE33
  1689 0013 0400     		.2byte	0x4
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccdfnkDI.s 			page 35
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccXsUIfN.s 			page 35
 
 
  1690 0015 F3       		.byte	0xf3
@@ -2098,7 +2098,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccdfnkDI.s 			page 1
  1744 0098 0400     		.2byte	0x4
  1745 009a F3       		.byte	0xf3
  1746 009b 01       		.uleb128 0x1
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccdfnkDI.s 			page 36
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccXsUIfN.s 			page 36
 
 
  1747 009c 50       		.byte	0x50
@@ -2158,7 +2158,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccdfnkDI.s 			page 1
  1801              		.section	.debug_ranges,"",%progbits
  1802              	.Ldebug_ranges0:
  1803 0000 32000000 		.4byte	.LBB3
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccdfnkDI.s 			page 37
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccXsUIfN.s 			page 37
 
 
  1804 0004 34000000 		.4byte	.LBE3
@@ -2218,7 +2218,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccdfnkDI.s 			page 1
  1839      6C6500
  1840              	.LASF21:
  1841 0052 62797465 		.ascii	"byte\000"
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccdfnkDI.s 			page 38
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccXsUIfN.s 			page 38
 
 
  1841      00
@@ -2240,191 +2240,187 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccdfnkDI.s 			page 1
  1850              	.LASF22:
  1851 007c 64657374 		.ascii	"dest\000"
  1851      00
- 1852              	.LASF1:
- 1853 0081 756E7369 		.ascii	"unsigned char\000"
- 1853      676E6564 
- 1853      20636861 
- 1853      7200
- 1854              	.LASF49:
- 1855 008f 68657832 		.ascii	"hex2byte\000"
- 1855      62797465 
- 1855      00
- 1856              	.LASF34:
- 1857 0098 5357315F 		.ascii	"SW1_ClearInterrupt\000"
- 1857      436C6561 
- 1857      72496E74 
- 1857      65727275 
- 1857      707400
- 1858              	.LASF33:
- 1859 00ab 70757368 		.ascii	"pushMessage\000"
- 1859      4D657373 
- 1859      61676500 
- 1860              	.LASF39:
- 1861 00b7 6D656D73 		.ascii	"memset\000"
- 1861      657400
- 1862              	.LASF28:
- 1863 00be 6E6F6E63 		.ascii	"nonce\000"
- 1863      6500
- 1864              	.LASF5:
- 1865 00c4 6C6F6E67 		.ascii	"long unsigned int\000"
- 1865      20756E73 
- 1865      69676E65 
- 1865      6420696E 
- 1865      7400
- 1866              	.LASF51:
- 1867 00d6 6D61696E 		.ascii	"main\000"
- 1867      00
- 1868              	.LASF32:
- 1869 00db 42414E4B 		.ascii	"BANK_AES_KEY\000"
- 1869      5F414553 
- 1869      5F4B4559 
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccdfnkDI.s 			page 39
+ 1852              	.LASF48:
+ 1853 0081 453A5C65 		.ascii	"E:\\eCTF\\ectf-2018-techsec-submission2\\CARD.cydsn"
+ 1853      4354465C 
+ 1853      65637466 
+ 1853      2D323031 
+ 1853      382D7465 
+ 1854 00b1 00       		.ascii	"\000"
+ 1855              	.LASF1:
+ 1856 00b2 756E7369 		.ascii	"unsigned char\000"
+ 1856      676E6564 
+ 1856      20636861 
+ 1856      7200
+ 1857              	.LASF49:
+ 1858 00c0 68657832 		.ascii	"hex2byte\000"
+ 1858      62797465 
+ 1858      00
+ 1859              	.LASF34:
+ 1860 00c9 5357315F 		.ascii	"SW1_ClearInterrupt\000"
+ 1860      436C6561 
+ 1860      72496E74 
+ 1860      65727275 
+ 1860      707400
+ 1861              	.LASF33:
+ 1862 00dc 70757368 		.ascii	"pushMessage\000"
+ 1862      4D657373 
+ 1862      61676500 
+ 1863              	.LASF39:
+ 1864 00e8 6D656D73 		.ascii	"memset\000"
+ 1864      657400
+ 1865              	.LASF28:
+ 1866 00ef 6E6F6E63 		.ascii	"nonce\000"
+ 1866      6500
+ 1867              	.LASF5:
+ 1868 00f5 6C6F6E67 		.ascii	"long unsigned int\000"
+ 1868      20756E73 
+ 1868      69676E65 
+ 1868      6420696E 
+ 1868      7400
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccXsUIfN.s 			page 39
 
 
- 1869      00
- 1870              	.LASF25:
- 1871 00e8 6865785F 		.ascii	"hex_bank_key\000"
- 1871      62616E6B 
- 1871      5F6B6579 
- 1871      00
- 1872              	.LASF50:
- 1873 00f5 70726F76 		.ascii	"provision\000"
- 1873      6973696F 
- 1873      6E00
- 1874              	.LASF18:
- 1875 00ff 6C6F7765 		.ascii	"lower_digit\000"
- 1875      725F6469 
- 1875      67697400 
- 1876              	.LASF44:
- 1877 010b 55534552 		.ascii	"USER_INFO_Start\000"
- 1877      5F494E46 
- 1877      4F5F5374 
- 1877      61727400 
- 1878              	.LASF8:
- 1879 011b 756E7369 		.ascii	"unsigned int\000"
- 1879      676E6564 
- 1879      20696E74 
- 1879      00
- 1880              	.LASF7:
- 1881 0128 6C6F6E67 		.ascii	"long long unsigned int\000"
- 1881      206C6F6E 
- 1881      6720756E 
- 1881      7369676E 
- 1881      65642069 
- 1882              	.LASF10:
- 1883 013f 75696E74 		.ascii	"uint8_t\000"
- 1883      385F7400 
- 1884              	.LASF27:
- 1885 0147 50524F56 		.ascii	"PROVISIONED\000"
- 1885      4953494F 
- 1885      4E454400 
- 1886              	.LASF36:
- 1887 0153 73707269 		.ascii	"sprintf\000"
- 1887      6E746600 
- 1888              	.LASF48:
- 1889 015b 5C5C5642 		.ascii	"\\\\VBOXSVR\\raywang\\Dropbox (MIT)\\CTFs\\eCTF\\ec"
- 1889      4F585356 
- 1889      525C7261 
- 1889      7977616E 
- 1889      675C4472 
- 1890 0187 74662D32 		.ascii	"tf-2018-techsec\\CARD.cydsn\000"
- 1890      3031382D 
- 1890      74656368 
- 1890      7365635C 
- 1890      43415244 
+ 1869              	.LASF51:
+ 1870 0107 6D61696E 		.ascii	"main\000"
+ 1870      00
+ 1871              	.LASF25:
+ 1872 010c 6865785F 		.ascii	"hex_bank_key\000"
+ 1872      62616E6B 
+ 1872      5F6B6579 
+ 1872      00
+ 1873              	.LASF50:
+ 1874 0119 70726F76 		.ascii	"provision\000"
+ 1874      6973696F 
+ 1874      6E00
+ 1875              	.LASF18:
+ 1876 0123 6C6F7765 		.ascii	"lower_digit\000"
+ 1876      725F6469 
+ 1876      67697400 
+ 1877              	.LASF44:
+ 1878 012f 55534552 		.ascii	"USER_INFO_Start\000"
+ 1878      5F494E46 
+ 1878      4F5F5374 
+ 1878      61727400 
+ 1879              	.LASF8:
+ 1880 013f 756E7369 		.ascii	"unsigned int\000"
+ 1880      676E6564 
+ 1880      20696E74 
+ 1880      00
+ 1881              	.LASF7:
+ 1882 014c 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 1882      206C6F6E 
+ 1882      6720756E 
+ 1882      7369676E 
+ 1882      65642069 
+ 1883              	.LASF10:
+ 1884 0163 75696E74 		.ascii	"uint8_t\000"
+ 1884      385F7400 
+ 1885              	.LASF27:
+ 1886 016b 50524F56 		.ascii	"PROVISIONED\000"
+ 1886      4953494F 
+ 1886      4E454400 
+ 1887              	.LASF36:
+ 1888 0177 73707269 		.ascii	"sprintf\000"
+ 1888      6E746600 
+ 1889              	.LASF45:
+ 1890 017f 5553425F 		.ascii	"USB_UART_Start\000"
+ 1890      55415254 
+ 1890      5F537461 
+ 1890      727400
  1891              	.LASF16:
- 1892 01a2 73697A65 		.ascii	"sizetype\000"
+ 1892 018e 73697A65 		.ascii	"sizetype\000"
  1892      74797065 
  1892      00
  1893              	.LASF17:
- 1894 01ab 75707065 		.ascii	"upper_digit\000"
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccdfnkDI.s 			page 40
-
-
+ 1894 0197 75707065 		.ascii	"upper_digit\000"
  1894      725F6469 
  1894      67697400 
  1895              	.LASF6:
- 1896 01b7 6C6F6E67 		.ascii	"long long int\000"
+ 1896 01a3 6C6F6E67 		.ascii	"long long int\000"
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccXsUIfN.s 			page 40
+
+
  1896      206C6F6E 
  1896      6720696E 
  1896      7400
  1897              	.LASF47:
- 1898 01c5 6D61696E 		.ascii	"main.c\000"
+ 1898 01b1 6D61696E 		.ascii	"main.c\000"
  1898      2E6300
  1899              	.LASF14:
- 1900 01cc 63686172 		.ascii	"char\000"
+ 1900 01b8 63686172 		.ascii	"char\000"
  1900      00
  1901              	.LASF19:
- 1902 01d1 52657365 		.ascii	"Reset_ISR\000"
+ 1902 01bd 52657365 		.ascii	"Reset_ISR\000"
  1902      745F4953 
  1902      5200
  1903              	.LASF2:
- 1904 01db 73686F72 		.ascii	"short int\000"
+ 1904 01c7 73686F72 		.ascii	"short int\000"
  1904      7420696E 
  1904      7400
  1905              	.LASF41:
- 1906 01e5 55534552 		.ascii	"USER_INFO_Write\000"
+ 1906 01d1 55534552 		.ascii	"USER_INFO_Write\000"
  1906      5F494E46 
  1906      4F5F5772 
  1906      69746500 
  1907              	.LASF11:
- 1908 01f5 75696E74 		.ascii	"uint8\000"
+ 1908 01e1 75696E74 		.ascii	"uint8\000"
  1908      3800
  1909              	.LASF40:
- 1910 01fb 6D656D63 		.ascii	"memcpy\000"
+ 1910 01e7 6D656D63 		.ascii	"memcpy\000"
  1910      707900
  1911              	.LASF43:
- 1912 0202 52657365 		.ascii	"Reset_isr_StartEx\000"
+ 1912 01ee 52657365 		.ascii	"Reset_isr_StartEx\000"
  1912      745F6973 
  1912      725F5374 
  1912      61727445 
  1912      7800
- 1913              	.LASF45:
- 1914 0214 5553425F 		.ascii	"USB_UART_Start\000"
- 1914      55415254 
- 1914      5F537461 
- 1914      727400
+ 1913              	.LASF32:
+ 1914 0200 42414E4B 		.ascii	"BANK_AES_KEY\000"
+ 1914      5F414553 
+ 1914      5F4B4559 
+ 1914      00
  1915              	.LASF4:
- 1916 0223 6C6F6E67 		.ascii	"long int\000"
+ 1916 020d 6C6F6E67 		.ascii	"long int\000"
  1916      20696E74 
  1916      00
  1917              	.LASF26:
- 1918 022c 62616E6B 		.ascii	"bank_key\000"
+ 1918 0216 62616E6B 		.ascii	"bank_key\000"
  1918      5F6B6579 
  1918      00
  1919              	.LASF15:
- 1920 0235 6C6F6E67 		.ascii	"long double\000"
+ 1920 021f 6C6F6E67 		.ascii	"long double\000"
  1920      20646F75 
  1920      626C6500 
  1921              	.LASF0:
- 1922 0241 7369676E 		.ascii	"signed char\000"
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccdfnkDI.s 			page 41
-
-
+ 1922 022b 7369676E 		.ascii	"signed char\000"
  1922      65642063 
  1922      68617200 
  1923              	.LASF20:
- 1924 024d 62797465 		.ascii	"bytes2hex\000"
+ 1924 0237 62797465 		.ascii	"bytes2hex\000"
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccXsUIfN.s 			page 41
+
+
  1924      73326865 
  1924      7800
  1925              	.LASF46:
- 1926 0257 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 1926 0241 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
  1926      43313120 
  1926      352E342E 
  1926      31203230 
  1926      31363036 
- 1927 028a 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m0 -mthumb -g -O"
+ 1927 0274 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m0 -mthumb -g -O"
  1927      20726576 
  1927      6973696F 
  1927      6E203233 
  1927      37373135 
- 1928 02bd 73202D66 		.ascii	"s -ffunction-sections -ffat-lto-objects\000"
+ 1928 02a7 73202D66 		.ascii	"s -ffunction-sections -ffat-lto-objects\000"
  1928      66756E63 
  1928      74696F6E 
  1928      2D736563 
  1928      74696F6E 
  1929              	.LASF38:
- 1930 02e5 70756C6C 		.ascii	"pullMessage\000"
+ 1930 02cf 70756C6C 		.ascii	"pullMessage\000"
  1930      4D657373 
  1930      61676500 
  1931              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

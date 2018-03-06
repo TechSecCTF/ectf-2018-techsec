@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc401zJY.s 			page 1
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cctmwFwr.s 			page 1
 
 
    1              		.syntax unified
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc401zJY.s 			page 1
   47              	.LVL1:
   48              	.L4:
   49 000a 0020     		movs	r0, #0
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc401zJY.s 			page 2
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cctmwFwr.s 			page 2
 
 
   50 000c 17E0     		b	.L3
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc401zJY.s 			page 1
   89 003a 6870     		strb	r0, [r5, #1]
   23:strong-arm\src\asn1/der.c **** 
   24:strong-arm\src\asn1/der.c **** 	return 2 + len_r + len_s;
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc401zJY.s 			page 3
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cctmwFwr.s 			page 3
 
 
   90              		.loc 1 24 0
@@ -146,17 +146,17 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc401zJY.s 			page 1
  111 0006 00000000 		.4byte	.Ldebug_abbrev0
  112 000a 04       		.byte	0x4
  113 000b 01       		.uleb128 0x1
- 114 000c 5B010000 		.4byte	.LASF18
+ 114 000c 45010000 		.4byte	.LASF18
  115 0010 0C       		.byte	0xc
  116 0011 00000000 		.4byte	.LASF19
- 117 0015 6F000000 		.4byte	.LASF20
+ 117 0015 2B000000 		.4byte	.LASF20
  118 0019 00000000 		.4byte	.Ldebug_ranges0+0
  119 001d 00000000 		.4byte	0
  120 0021 00000000 		.4byte	.Ldebug_line0
  121 0025 02       		.uleb128 0x2
  122 0026 01       		.byte	0x1
  123 0027 06       		.byte	0x6
- 124 0028 4F010000 		.4byte	.LASF0
+ 124 0028 39010000 		.4byte	.LASF0
  125 002c 03       		.uleb128 0x3
  126 002d 21000000 		.4byte	.LASF5
  127 0031 02       		.byte	0x2
@@ -165,39 +165,39 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc401zJY.s 			page 1
  130 0037 02       		.uleb128 0x2
  131 0038 01       		.byte	0x1
  132 0039 08       		.byte	0x8
- 133 003a 2B000000 		.4byte	.LASF1
+ 133 003a 62000000 		.4byte	.LASF1
  134 003e 02       		.uleb128 0x2
  135 003f 02       		.byte	0x2
  136 0040 05       		.byte	0x5
- 137 0041 27010000 		.4byte	.LASF2
+ 137 0041 11010000 		.4byte	.LASF2
  138 0045 02       		.uleb128 0x2
  139 0046 02       		.byte	0x2
  140 0047 07       		.byte	0x7
- 141 0048 4B000000 		.4byte	.LASF3
+ 141 0048 82000000 		.4byte	.LASF3
  142 004c 02       		.uleb128 0x2
  143 004d 04       		.byte	0x4
  144 004e 05       		.byte	0x5
- 145 004f 46010000 		.4byte	.LASF4
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc401zJY.s 			page 4
+ 145 004f 30010000 		.4byte	.LASF4
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cctmwFwr.s 			page 4
 
 
  146 0053 03       		.uleb128 0x3
- 147 0054 BC000000 		.4byte	.LASF6
+ 147 0054 A6000000 		.4byte	.LASF6
  148 0058 02       		.byte	0x2
  149 0059 41       		.byte	0x41
  150 005a 5E000000 		.4byte	0x5e
  151 005e 02       		.uleb128 0x2
  152 005f 04       		.byte	0x4
  153 0060 07       		.byte	0x7
- 154 0061 39000000 		.4byte	.LASF7
+ 154 0061 70000000 		.4byte	.LASF7
  155 0065 02       		.uleb128 0x2
  156 0066 08       		.byte	0x8
  157 0067 05       		.byte	0x5
- 158 0068 19010000 		.4byte	.LASF8
+ 158 0068 03010000 		.4byte	.LASF8
  159 006c 02       		.uleb128 0x2
  160 006d 08       		.byte	0x8
  161 006e 07       		.byte	0x7
- 162 006f F1000000 		.4byte	.LASF9
+ 162 006f DB000000 		.4byte	.LASF9
  163 0073 04       		.uleb128 0x4
  164 0074 04       		.byte	0x4
  165 0075 05       		.byte	0x5
@@ -205,14 +205,14 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc401zJY.s 			page 1
  167 007a 02       		.uleb128 0x2
  168 007b 04       		.byte	0x4
  169 007c 07       		.byte	0x7
- 170 007d E4000000 		.4byte	.LASF10
+ 170 007d CE000000 		.4byte	.LASF10
  171 0081 03       		.uleb128 0x3
- 172 0082 08010000 		.4byte	.LASF11
+ 172 0082 F2000000 		.4byte	.LASF11
  173 0086 03       		.byte	0x3
  174 0087 18       		.byte	0x18
  175 0088 2C000000 		.4byte	0x2c
  176 008c 03       		.uleb128 0x3
- 177 008d 3D010000 		.4byte	.LASF12
+ 177 008d 27010000 		.4byte	.LASF12
  178 0091 03       		.byte	0x3
  179 0092 30       		.byte	0x30
  180 0093 53000000 		.4byte	0x53
@@ -238,17 +238,17 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc401zJY.s 			page 1
  200 00ba 02       		.uleb128 0x2
  201 00bb 04       		.byte	0x4
  202 00bc 07       		.byte	0x7
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc401zJY.s 			page 5
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cctmwFwr.s 			page 5
 
 
- 203 00bd 10010000 		.4byte	.LASF13
+ 203 00bd FA000000 		.4byte	.LASF13
  204 00c1 03       		.uleb128 0x3
  205 00c2 1A000000 		.4byte	.LASF14
  206 00c6 04       		.byte	0x4
  207 00c7 14       		.byte	0x14
  208 00c8 97000000 		.4byte	0x97
  209 00cc 09       		.uleb128 0x9
- 210 00cd CF000000 		.4byte	.LASF21
+ 210 00cd B9000000 		.4byte	.LASF21
  211 00d1 01       		.byte	0x1
  212 00d2 04       		.byte	0x4
  213 00d3 8C000000 		.4byte	0x8c
@@ -264,7 +264,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc401zJY.s 			page 1
  223 00ec 80010000 		.4byte	0x180
  224 00f0 00000000 		.4byte	.LLST0
  225 00f4 0B       		.uleb128 0xb
- 226 00f5 C7000000 		.4byte	.LASF15
+ 226 00f5 B1000000 		.4byte	.LASF15
  227 00f9 01       		.byte	0x1
  228 00fa 04       		.byte	0x4
  229 00fb 8C000000 		.4byte	0x8c
@@ -282,13 +282,13 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc401zJY.s 			page 1
  241 0115 90010000 		.4byte	0x190
  242 0119 D0000000 		.4byte	.LLST3
  243 011d 0C       		.uleb128 0xc
- 244 011e 31010000 		.4byte	.LASF16
+ 244 011e 1B010000 		.4byte	.LASF16
  245 0122 01       		.byte	0x1
  246 0123 06       		.byte	0x6
  247 0124 8C000000 		.4byte	0x8c
  248 0128 12010000 		.4byte	.LLST4
  249 012c 0C       		.uleb128 0xc
- 250 012d 37010000 		.4byte	.LASF17
+ 250 012d 21010000 		.4byte	.LASF17
  251 0131 01       		.byte	0x1
  252 0132 06       		.byte	0x6
  253 0133 8C000000 		.4byte	0x8c
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc401zJY.s 			page 1
  257 0140 95010000 		.4byte	0x195
  258 0144 55010000 		.4byte	0x155
  259 0148 0E       		.uleb128 0xe
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc401zJY.s 			page 6
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cctmwFwr.s 			page 6
 
 
  260 0149 01       		.uleb128 0x1
@@ -357,11 +357,11 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc401zJY.s 			page 1
  313 0190 11       		.uleb128 0x11
  314 0191 85010000 		.4byte	0x185
  315 0195 12       		.uleb128 0x12
- 316 0196 5E000000 		.4byte	.LASF22
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc401zJY.s 			page 7
+ 316 0196 95000000 		.4byte	.LASF22
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cctmwFwr.s 			page 7
 
 
- 317 019a 5E000000 		.4byte	.LASF22
+ 317 019a 95000000 		.4byte	.LASF22
  318 019e 04       		.byte	0x4
  319 019f 50       		.byte	0x50
  320 01a0 00       		.byte	0
@@ -418,7 +418,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc401zJY.s 			page 1
  371 0030 3E       		.uleb128 0x3e
  372 0031 0B       		.uleb128 0xb
  373 0032 03       		.uleb128 0x3
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc401zJY.s 			page 8
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cctmwFwr.s 			page 8
 
 
  374 0033 08       		.uleb128 0x8
@@ -478,7 +478,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc401zJY.s 			page 1
  428 0069 03       		.uleb128 0x3
  429 006a 0E       		.uleb128 0xe
  430 006b 3A       		.uleb128 0x3a
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc401zJY.s 			page 9
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cctmwFwr.s 			page 9
 
 
  431 006c 0B       		.uleb128 0xb
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc401zJY.s 			page 1
  485 00a3 3A       		.uleb128 0x3a
  486 00a4 0B       		.uleb128 0xb
  487 00a5 3B       		.uleb128 0x3b
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc401zJY.s 			page 10
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cctmwFwr.s 			page 10
 
 
  488 00a6 0B       		.uleb128 0xb
@@ -598,7 +598,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc401zJY.s 			page 1
  542 00e3 00       		.byte	0
  543 00e4 3F       		.uleb128 0x3f
  544 00e5 19       		.uleb128 0x19
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc401zJY.s 			page 11
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cctmwFwr.s 			page 11
 
 
  545 00e6 3C       		.uleb128 0x3c
@@ -658,7 +658,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc401zJY.s 			page 1
  599 005f 1A000000 		.4byte	.LVL4
  600 0063 0100     		.2byte	0x1
  601 0065 51       		.byte	0x51
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc401zJY.s 			page 12
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cctmwFwr.s 			page 12
 
 
  602 0066 1A000000 		.4byte	.LVL4
@@ -718,7 +718,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc401zJY.s 			page 1
  656 00e5 57       		.byte	0x57
  657 00e6 0E000000 		.4byte	.LVL2
  658 00ea 10000000 		.4byte	.LVL3
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc401zJY.s 			page 13
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cctmwFwr.s 			page 13
 
 
  659 00ee 0100     		.2byte	0x1
@@ -778,7 +778,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc401zJY.s 			page 1
  712      02005F01 
  712      00000201 
  712      FB0E0D00 
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc401zJY.s 			page 14
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cctmwFwr.s 			page 14
 
 
  712      01010101 
@@ -795,116 +795,113 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc401zJY.s 			page 1
  718 0021 5F5F7569 		.ascii	"__uint8_t\000"
  718      6E74385F 
  718      7400
- 719              	.LASF1:
- 720 002b 756E7369 		.ascii	"unsigned char\000"
- 720      676E6564 
- 720      20636861 
- 720      7200
- 721              	.LASF7:
- 722 0039 6C6F6E67 		.ascii	"long unsigned int\000"
- 722      20756E73 
- 722      69676E65 
- 722      6420696E 
- 722      7400
- 723              	.LASF3:
- 724 004b 73686F72 		.ascii	"short unsigned int\000"
- 724      7420756E 
- 724      7369676E 
- 724      65642069 
- 724      6E7400
- 725              	.LASF22:
- 726 005e 66665F64 		.ascii	"ff_der_serialize\000"
- 726      65725F73 
- 726      65726961 
- 726      6C697A65 
- 726      00
- 727              	.LASF20:
- 728 006f 5C5C5642 		.ascii	"\\\\VBOXSVR\\raywang\\Dropbox (MIT)\\CTFs\\eCTF\\ec"
- 728      4F585356 
- 728      525C7261 
- 728      7977616E 
- 728      675C4472 
- 729 009b 74662D32 		.ascii	"tf-2018-techsec\\strong-arm.cylib\000"
- 729      3031382D 
- 729      74656368 
- 729      7365635C 
- 729      7374726F 
+ 719              	.LASF20:
+ 720 002b 453A5C65 		.ascii	"E:\\eCTF\\ectf-2018-techsec-submission2\\strong-arm"
+ 720      4354465C 
+ 720      65637466 
+ 720      2D323031 
+ 720      382D7465 
+ 721 005b 2E63796C 		.ascii	".cylib\000"
+ 721      696200
+ 722              	.LASF1:
+ 723 0062 756E7369 		.ascii	"unsigned char\000"
+ 723      676E6564 
+ 723      20636861 
+ 723      7200
+ 724              	.LASF7:
+ 725 0070 6C6F6E67 		.ascii	"long unsigned int\000"
+ 725      20756E73 
+ 725      69676E65 
+ 725      6420696E 
+ 725      7400
+ 726              	.LASF3:
+ 727 0082 73686F72 		.ascii	"short unsigned int\000"
+ 727      7420756E 
+ 727      7369676E 
+ 727      65642069 
+ 727      6E7400
+ 728              	.LASF22:
+ 729 0095 66665F64 		.ascii	"ff_der_serialize\000"
+ 729      65725F73 
+ 729      65726961 
+ 729      6C697A65 
+ 729      00
  730              	.LASF6:
- 731 00bc 5F5F7569 		.ascii	"__uint32_t\000"
+ 731 00a6 5F5F7569 		.ascii	"__uint32_t\000"
  731      6E743332 
  731      5F7400
  732              	.LASF15:
- 733 00c7 6D61785F 		.ascii	"max_len\000"
+ 733 00b1 6D61785F 		.ascii	"max_len\000"
  733      6C656E00 
  734              	.LASF21:
- 735 00cf 6465725F 		.ascii	"der_encode_signature\000"
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc401zJY.s 			page 15
-
-
+ 735 00b9 6465725F 		.ascii	"der_encode_signature\000"
  735      656E636F 
  735      64655F73 
  735      69676E61 
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cctmwFwr.s 			page 15
+
+
  735      74757265 
  736              	.LASF10:
- 737 00e4 756E7369 		.ascii	"unsigned int\000"
+ 737 00ce 756E7369 		.ascii	"unsigned int\000"
  737      676E6564 
  737      20696E74 
  737      00
  738              	.LASF9:
- 739 00f1 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 739 00db 6C6F6E67 		.ascii	"long long unsigned int\000"
  739      206C6F6E 
  739      6720756E 
  739      7369676E 
  739      65642069 
  740              	.LASF11:
- 741 0108 75696E74 		.ascii	"uint8_t\000"
+ 741 00f2 75696E74 		.ascii	"uint8_t\000"
  741      385F7400 
  742              	.LASF13:
- 743 0110 73697A65 		.ascii	"sizetype\000"
+ 743 00fa 73697A65 		.ascii	"sizetype\000"
  743      74797065 
  743      00
  744              	.LASF8:
- 745 0119 6C6F6E67 		.ascii	"long long int\000"
+ 745 0103 6C6F6E67 		.ascii	"long long int\000"
  745      206C6F6E 
  745      6720696E 
  745      7400
  746              	.LASF2:
- 747 0127 73686F72 		.ascii	"short int\000"
+ 747 0111 73686F72 		.ascii	"short int\000"
  747      7420696E 
  747      7400
  748              	.LASF16:
- 749 0131 6C656E5F 		.ascii	"len_r\000"
+ 749 011b 6C656E5F 		.ascii	"len_r\000"
  749      7200
  750              	.LASF17:
- 751 0137 6C656E5F 		.ascii	"len_s\000"
+ 751 0121 6C656E5F 		.ascii	"len_s\000"
  751      7300
  752              	.LASF12:
- 753 013d 75696E74 		.ascii	"uint32_t\000"
+ 753 0127 75696E74 		.ascii	"uint32_t\000"
  753      33325F74 
  753      00
  754              	.LASF4:
- 755 0146 6C6F6E67 		.ascii	"long int\000"
+ 755 0130 6C6F6E67 		.ascii	"long int\000"
  755      20696E74 
  755      00
  756              	.LASF0:
- 757 014f 7369676E 		.ascii	"signed char\000"
+ 757 0139 7369676E 		.ascii	"signed char\000"
  757      65642063 
  757      68617200 
  758              	.LASF18:
- 759 015b 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 759 0145 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
  759      43313120 
  759      352E342E 
  759      31203230 
  759      31363036 
- 760 018e 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m0 -mthumb -g -O"
+ 760 0178 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m0 -mthumb -g -O"
  760      20726576 
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc401zJY.s 			page 16
-
-
  760      6973696F 
  760      6E203233 
  760      37373135 
- 761 01c1 73202D66 		.ascii	"s -ffunction-sections -ffat-lto-objects\000"
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cctmwFwr.s 			page 16
+
+
+ 761 01ab 73202D66 		.ascii	"s -ffunction-sections -ffat-lto-objects\000"
  761      66756E63 
  761      74696F6E 
  761      2D736563 

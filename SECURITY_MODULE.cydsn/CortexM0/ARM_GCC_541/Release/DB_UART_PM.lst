@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccTt0IlG.s 			page 1
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccnT9vSO.s 			page 1
 
 
    1              		.syntax unified
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccTt0IlG.s 			page 1
   28:Generated_Source\PSoC4/DB_UART_PM.c **** #endif /* (DB_UART_SCB_MODE_EZI2C_INC) */
   29:Generated_Source\PSoC4/DB_UART_PM.c **** 
   30:Generated_Source\PSoC4/DB_UART_PM.c **** #if(DB_UART_SCB_MODE_SPI_INC || DB_UART_SCB_MODE_UART_INC)
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccTt0IlG.s 			page 2
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccnT9vSO.s 			page 2
 
 
   31:Generated_Source\PSoC4/DB_UART_PM.c ****     #include "DB_UART_SPI_UART_PVT.h"
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccTt0IlG.s 			page 1
   81:Generated_Source\PSoC4/DB_UART_PM.c ****             DB_UART_I2CSaveConfig();
   82:Generated_Source\PSoC4/DB_UART_PM.c ****         }
   83:Generated_Source\PSoC4/DB_UART_PM.c ****         else if(DB_UART_SCB_MODE_EZI2C_RUNTM_CFG)
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccTt0IlG.s 			page 3
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccnT9vSO.s 			page 3
 
 
   84:Generated_Source\PSoC4/DB_UART_PM.c ****         {
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccTt0IlG.s 			page 1
   40              		.cfi_offset 14, -4
   41              		.loc 1 128 0
   42 0008 D90F     		lsrs	r1, r3, #31
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccTt0IlG.s 			page 4
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccnT9vSO.s 			page 4
 
 
   43 000a 1170     		strb	r1, [r2]
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccTt0IlG.s 			page 1
  156:Generated_Source\PSoC4/DB_UART_PM.c **** *   DB_UART_Sleep() function may produce unexpected behavior.
  157:Generated_Source\PSoC4/DB_UART_PM.c **** *
  158:Generated_Source\PSoC4/DB_UART_PM.c **** *******************************************************************************/
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccTt0IlG.s 			page 5
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccnT9vSO.s 			page 5
 
 
  159:Generated_Source\PSoC4/DB_UART_PM.c **** void DB_UART_Wakeup(void)
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccTt0IlG.s 			page 1
  205:Generated_Source\PSoC4/DB_UART_PM.c ****         DB_UART_SpiRestoreConfig();
  206:Generated_Source\PSoC4/DB_UART_PM.c **** 
  207:Generated_Source\PSoC4/DB_UART_PM.c ****     #elif (DB_UART_SCB_MODE_UART_CONST_CFG && DB_UART_UART_WAKE_ENABLE_CONST)
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccTt0IlG.s 			page 6
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccnT9vSO.s 			page 6
 
 
  208:Generated_Source\PSoC4/DB_UART_PM.c ****         DB_UART_UartRestoreConfig();
@@ -353,18 +353,18 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccTt0IlG.s 			page 1
  114 000b 01       		.uleb128 0x1
  115 000c 3C000000 		.4byte	.LASF22
  116 0010 0C       		.byte	0xc
- 117 0011 96010000 		.4byte	.LASF23
- 118 0015 DA010000 		.4byte	.LASF24
+ 117 0011 C6010000 		.4byte	.LASF23
+ 118 0015 44010000 		.4byte	.LASF24
  119 0019 00000000 		.4byte	.Ldebug_ranges0+0
  120 001d 00000000 		.4byte	0
  121 0021 00000000 		.4byte	.Ldebug_line0
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccTt0IlG.s 			page 7
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccnT9vSO.s 			page 7
 
 
  122 0025 02       		.uleb128 0x2
  123 0026 01       		.byte	0x1
  124 0027 06       		.byte	0x6
- 125 0028 7E010000 		.4byte	.LASF0
+ 125 0028 BA010000 		.4byte	.LASF0
  126 002c 02       		.uleb128 0x2
  127 002d 01       		.byte	0x1
  128 002e 08       		.byte	0x8
@@ -372,7 +372,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccTt0IlG.s 			page 1
  130 0033 02       		.uleb128 0x2
  131 0034 02       		.byte	0x2
  132 0035 05       		.byte	0x5
- 133 0036 D0010000 		.4byte	.LASF2
+ 133 0036 03020000 		.4byte	.LASF2
  134 003a 02       		.uleb128 0x2
  135 003b 02       		.byte	0x2
  136 003c 07       		.byte	0x7
@@ -418,16 +418,16 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccTt0IlG.s 			page 1
  176 008a 02       		.uleb128 0x2
  177 008b 08       		.byte	0x8
  178 008c 04       		.byte	0x4
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccTt0IlG.s 			page 8
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccnT9vSO.s 			page 8
 
 
- 179 008d 44010000 		.4byte	.LASF12
+ 179 008d 80010000 		.4byte	.LASF12
  180 0091 02       		.uleb128 0x2
  181 0092 01       		.byte	0x1
  182 0093 08       		.byte	0x8
  183 0094 36010000 		.4byte	.LASF13
  184 0098 04       		.uleb128 0x4
- 185 0099 69010000 		.4byte	.LASF14
+ 185 0099 A5010000 		.4byte	.LASF14
  186 009d 02       		.byte	0x2
  187 009e 7E02     		.2byte	0x27e
  188 00a0 A4000000 		.4byte	0xa4
@@ -436,11 +436,11 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccTt0IlG.s 			page 1
  191 00a9 02       		.uleb128 0x2
  192 00aa 08       		.byte	0x8
  193 00ab 04       		.byte	0x4
- 194 00ac 8A010000 		.4byte	.LASF15
+ 194 00ac EA010000 		.4byte	.LASF15
  195 00b0 02       		.uleb128 0x2
  196 00b1 04       		.byte	0x4
  197 00b2 07       		.byte	0x7
- 198 00b3 BA010000 		.4byte	.LASF16
+ 198 00b3 0D020000 		.4byte	.LASF16
  199 00b7 06       		.uleb128 0x6
  200 00b8 01       		.byte	0x1
  201 00b9 03       		.byte	0x3
@@ -472,13 +472,13 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccTt0IlG.s 			page 1
  227 00f1 26010000 		.4byte	0x126
  228 00f5 00       		.byte	0
  229 00f6 09       		.uleb128 0x9
- 230 00f7 4B010000 		.4byte	.LASF19
+ 230 00f7 87010000 		.4byte	.LASF19
  231 00fb 01       		.byte	0x1
  232 00fc 9F       		.byte	0x9f
  233 00fd 00000000 		.4byte	.LFB1
  234 0101 14000000 		.4byte	.LFE1-.LFB1
  235 0105 01       		.uleb128 0x1
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccTt0IlG.s 			page 9
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccnT9vSO.s 			page 9
 
 
  236 0106 9C       		.byte	0x9c
@@ -488,7 +488,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccTt0IlG.s 			page 1
  240 0110 31010000 		.4byte	0x131
  241 0114 00       		.byte	0
  242 0115 0B       		.uleb128 0xb
- 243 0116 5A010000 		.4byte	.LASF26
+ 243 0116 96010000 		.4byte	.LASF26
  244 011a 01       		.byte	0x1
  245 011b 2D       		.byte	0x2d
  246 011c CC000000 		.4byte	0xcc
@@ -496,13 +496,13 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccTt0IlG.s 			page 1
  248 0121 03       		.byte	0x3
  249 0122 00000000 		.4byte	DB_UART_backup
  250 0126 0C       		.uleb128 0xc
- 251 0127 C3010000 		.4byte	.LASF20
- 252 012b C3010000 		.4byte	.LASF20
+ 251 0127 F6010000 		.4byte	.LASF20
+ 252 012b F6010000 		.4byte	.LASF20
  253 012f 03       		.byte	0x3
  254 0130 73       		.byte	0x73
  255 0131 0C       		.uleb128 0xc
- 256 0132 6F010000 		.4byte	.LASF21
- 257 0136 6F010000 		.4byte	.LASF21
+ 256 0132 AB010000 		.4byte	.LASF21
+ 257 0136 AB010000 		.4byte	.LASF21
  258 013a 03       		.byte	0x3
  259 013b 71       		.byte	0x71
  260 013c 00       		.byte	0
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccTt0IlG.s 			page 1
  290 001b 0E       		.uleb128 0xe
  291 001c 00       		.byte	0
  292 001d 00       		.byte	0
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccTt0IlG.s 			page 10
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccnT9vSO.s 			page 10
 
 
  293 001e 03       		.uleb128 0x3
@@ -598,7 +598,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccTt0IlG.s 			page 1
  347 0054 13       		.uleb128 0x13
  348 0055 38       		.uleb128 0x38
  349 0056 0B       		.uleb128 0xb
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccTt0IlG.s 			page 11
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccnT9vSO.s 			page 11
 
 
  350 0057 00       		.byte	0
@@ -658,7 +658,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccTt0IlG.s 			page 1
  404 0090 3A       		.uleb128 0x3a
  405 0091 0B       		.uleb128 0xb
  406 0092 3B       		.uleb128 0x3b
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccTt0IlG.s 			page 12
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccnT9vSO.s 			page 12
 
 
  407 0093 0B       		.uleb128 0xb
@@ -718,7 +718,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccTt0IlG.s 			page 1
  458      FB0E0D00 
  458      01010101 
  459              	.LASF6:
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccTt0IlG.s 			page 13
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccnT9vSO.s 			page 13
 
 
  460 0000 6C6F6E67 		.ascii	"long long int\000"
@@ -778,7 +778,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccTt0IlG.s 			page 1
  480      7420756E 
  480      7369676E 
  480      65642069 
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccTt0IlG.s 			page 14
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccnT9vSO.s 			page 14
 
 
  480      6E7400
@@ -803,66 +803,64 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccTt0IlG.s 			page 1
  490 013b 6C6F6E67 		.ascii	"long int\000"
  490      20696E74 
  490      00
- 491              	.LASF12:
- 492 0144 646F7562 		.ascii	"double\000"
- 492      6C6500
- 493              	.LASF19:
- 494 014b 44425F55 		.ascii	"DB_UART_Wakeup\000"
- 494      4152545F 
- 494      57616B65 
- 494      757000
- 495              	.LASF26:
- 496 015a 44425F55 		.ascii	"DB_UART_backup\000"
- 496      4152545F 
- 496      6261636B 
- 496      757000
- 497              	.LASF14:
- 498 0169 72656733 		.ascii	"reg32\000"
- 498      3200
- 499              	.LASF21:
- 500 016f 44425F55 		.ascii	"DB_UART_Enable\000"
- 500      4152545F 
- 500      456E6162 
- 500      6C6500
- 501              	.LASF0:
- 502 017e 7369676E 		.ascii	"signed char\000"
- 502      65642063 
- 502      68617200 
- 503              	.LASF15:
- 504 018a 6C6F6E67 		.ascii	"long double\000"
- 504      20646F75 
- 504      626C6500 
- 505              	.LASF23:
- 506 0196 47656E65 		.ascii	"Generated_Source\\PSoC4\\DB_UART_PM.c\000"
- 506      72617465 
- 506      645F536F 
- 506      75726365 
- 506      5C50536F 
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccTt0IlG.s 			page 15
+ 491              	.LASF24:
+ 492 0144 453A5C65 		.ascii	"E:\\eCTF\\ectf-2018-techsec-submission2\\SECURITY_M"
+ 492      4354465C 
+ 492      65637466 
+ 492      2D323031 
+ 492      382D7465 
+ 493 0174 4F44554C 		.ascii	"ODULE.cydsn\000"
+ 493      452E6379 
+ 493      64736E00 
+ 494              	.LASF12:
+ 495 0180 646F7562 		.ascii	"double\000"
+ 495      6C6500
+ 496              	.LASF19:
+ 497 0187 44425F55 		.ascii	"DB_UART_Wakeup\000"
+ 497      4152545F 
+ 497      57616B65 
+ 497      757000
+ 498              	.LASF26:
+ 499 0196 44425F55 		.ascii	"DB_UART_backup\000"
+ 499      4152545F 
+ 499      6261636B 
+ 499      757000
+ 500              	.LASF14:
+ 501 01a5 72656733 		.ascii	"reg32\000"
+ 501      3200
+ 502              	.LASF21:
+ 503 01ab 44425F55 		.ascii	"DB_UART_Enable\000"
+ 503      4152545F 
+ 503      456E6162 
+ 503      6C6500
+ 504              	.LASF0:
+ 505 01ba 7369676E 		.ascii	"signed char\000"
+ 505      65642063 
+ 505      68617200 
+ 506              	.LASF23:
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccnT9vSO.s 			page 15
 
 
- 507              	.LASF16:
- 508 01ba 73697A65 		.ascii	"sizetype\000"
- 508      74797065 
- 508      00
- 509              	.LASF20:
- 510 01c3 44425F55 		.ascii	"DB_UART_Stop\000"
- 510      4152545F 
- 510      53746F70 
- 510      00
- 511              	.LASF2:
- 512 01d0 73686F72 		.ascii	"short int\000"
- 512      7420696E 
- 512      7400
- 513              	.LASF24:
- 514 01da 5C5C5642 		.ascii	"\\\\VBOXSVR\\raywang\\Dropbox (MIT)\\CTFs\\eCTF\\ec"
- 514      4F585356 
- 514      525C7261 
- 514      7977616E 
- 514      675C4472 
- 515 0206 74662D32 		.ascii	"tf-2018-techsec\\SECURITY_MODULE.cydsn\000"
- 515      3031382D 
- 515      74656368 
- 515      7365635C 
- 515      53454355 
+ 507 01c6 47656E65 		.ascii	"Generated_Source\\PSoC4\\DB_UART_PM.c\000"
+ 507      72617465 
+ 507      645F536F 
+ 507      75726365 
+ 507      5C50536F 
+ 508              	.LASF15:
+ 509 01ea 6C6F6E67 		.ascii	"long double\000"
+ 509      20646F75 
+ 509      626C6500 
+ 510              	.LASF20:
+ 511 01f6 44425F55 		.ascii	"DB_UART_Stop\000"
+ 511      4152545F 
+ 511      53746F70 
+ 511      00
+ 512              	.LASF2:
+ 513 0203 73686F72 		.ascii	"short int\000"
+ 513      7420696E 
+ 513      7400
+ 514              	.LASF16:
+ 515 020d 73697A65 		.ascii	"sizetype\000"
+ 515      74797065 
+ 515      00
  516              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

@@ -1,3 +1,3 @@
-# Component constraints for \\VBOXSVR\raywang\Dropbox (MIT)\CTFs\eCTF\ectf-2018-techsec\CARD.cydsn\TopDesign\TopDesign.cysch
-# Project: \\VBOXSVR\raywang\Dropbox (MIT)\CTFs\eCTF\ectf-2018-techsec\CARD.cydsn\CARD.cyprj
-# Date: Thu, 01 Mar 2018 19:00:18 GMT
+# Component constraints for E:\eCTF\ectf-2018-techsec-submission2\CARD.cydsn\TopDesign\TopDesign.cysch
+# Project: E:\eCTF\ectf-2018-techsec-submission2\CARD.cydsn\CARD.cyprj
+# Date: Mon, 05 Mar 2018 21:21:30 GMT

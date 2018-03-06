@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc302yiB.s 			page 1
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccrKgj8f.s 			page 1
 
 
    1              		.syntax unified
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc302yiB.s 			page 1
   51              		.file 2 "c:\\program files (x86)\\cypress\\psoc creator\\4.1\\psoc creator\\import\\gnu\\arm\\5.4.
   52              		.file 3 "Generated_Source\\PSoC4\\cymetadata.c"
   53              		.section	.debug_info,"",%progbits
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc302yiB.s 			page 2
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccrKgj8f.s 			page 2
 
 
   54              	.Ldebug_info0:
@@ -67,15 +67,15 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc302yiB.s 			page 1
   57 0006 00000000 		.4byte	.Ldebug_abbrev0
   58 000a 04       		.byte	0x4
   59 000b 01       		.uleb128 0x1
-  60 000c 4A010000 		.4byte	.LASF15
+  60 000c 34010000 		.4byte	.LASF15
   61 0010 0C       		.byte	0xc
-  62 0011 8A000000 		.4byte	.LASF16
-  63 0015 1E000000 		.4byte	.LASF17
+  62 0011 38000000 		.4byte	.LASF16
+  63 0015 81000000 		.4byte	.LASF17
   64 0019 00000000 		.4byte	.Ldebug_line0
   65 001d 02       		.uleb128 0x2
   66 001e 01       		.byte	0x1
   67 001f 06       		.byte	0x6
-  68 0020 3E010000 		.4byte	.LASF0
+  68 0020 28010000 		.4byte	.LASF0
   69 0024 03       		.uleb128 0x3
   70 0025 00000000 		.4byte	.LASF9
   71 0029 01       		.byte	0x1
@@ -84,31 +84,31 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc302yiB.s 			page 1
   74 002f 02       		.uleb128 0x2
   75 0030 01       		.byte	0x1
   76 0031 08       		.byte	0x8
-  77 0032 7C000000 		.4byte	.LASF1
+  77 0032 2A000000 		.4byte	.LASF1
   78 0036 02       		.uleb128 0x2
   79 0037 02       		.byte	0x2
   80 0038 05       		.byte	0x5
-  81 0039 2B010000 		.4byte	.LASF2
+  81 0039 15010000 		.4byte	.LASF2
   82 003d 02       		.uleb128 0x2
   83 003e 02       		.byte	0x2
   84 003f 07       		.byte	0x7
-  85 0040 C0000000 		.4byte	.LASF3
+  85 0040 6E000000 		.4byte	.LASF3
   86 0044 02       		.uleb128 0x2
   87 0045 04       		.byte	0x4
   88 0046 05       		.byte	0x5
-  89 0047 35010000 		.4byte	.LASF4
+  89 0047 1F010000 		.4byte	.LASF4
   90 004b 02       		.uleb128 0x2
   91 004c 04       		.byte	0x4
   92 004d 07       		.byte	0x7
-  93 004e AE000000 		.4byte	.LASF5
+  93 004e 5C000000 		.4byte	.LASF5
   94 0052 02       		.uleb128 0x2
   95 0053 08       		.byte	0x8
   96 0054 05       		.byte	0x5
-  97 0055 1D010000 		.4byte	.LASF6
+  97 0055 07010000 		.4byte	.LASF6
   98 0059 02       		.uleb128 0x2
   99 005a 08       		.byte	0x8
  100 005b 07       		.byte	0x7
- 101 005c E0000000 		.4byte	.LASF7
+ 101 005c CA000000 		.4byte	.LASF7
  102 0060 04       		.uleb128 0x4
  103 0061 04       		.byte	0x4
  104 0062 05       		.byte	0x5
@@ -116,12 +116,12 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc302yiB.s 			page 1
  106 0067 02       		.uleb128 0x2
  107 0068 04       		.byte	0x4
  108 0069 07       		.byte	0x7
- 109 006a D3000000 		.4byte	.LASF8
+ 109 006a BD000000 		.4byte	.LASF8
  110 006e 03       		.uleb128 0x3
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc302yiB.s 			page 3
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccrKgj8f.s 			page 3
 
 
- 111 006f F7000000 		.4byte	.LASF10
+ 111 006f E1000000 		.4byte	.LASF10
  112 0073 02       		.byte	0x2
  113 0074 18       		.byte	0x18
  114 0075 24000000 		.4byte	0x24
@@ -135,11 +135,11 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc302yiB.s 			page 1
  122 0089 02       		.uleb128 0x2
  123 008a 04       		.byte	0x4
  124 008b 07       		.byte	0x7
- 125 008c 14010000 		.4byte	.LASF11
+ 125 008c FE000000 		.4byte	.LASF11
  126 0090 07       		.uleb128 0x7
  127 0091 6E000000 		.4byte	0x6e
  128 0095 08       		.uleb128 0x8
- 129 0096 FF000000 		.4byte	.LASF12
+ 129 0096 E9000000 		.4byte	.LASF12
  130 009a 03       		.byte	0x3
  131 009b 1F       		.byte	0x1f
  132 009c A6000000 		.4byte	0xa6
@@ -156,7 +156,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc302yiB.s 			page 1
  143 00b9 0B       		.byte	0xb
  144 00ba 00       		.byte	0
  145 00bb 08       		.uleb128 0x8
- 146 00bc 70000000 		.4byte	.LASF13
+ 146 00bc 1E000000 		.4byte	.LASF13
  147 00c0 03       		.byte	0x3
  148 00c1 30       		.byte	0x30
  149 00c2 CC000000 		.4byte	0xcc
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc302yiB.s 			page 1
  165 00e7 3F       		.byte	0x3f
  166 00e8 F2000000 		.4byte	0xf2
  167 00ec 05       		.uleb128 0x5
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc302yiB.s 			page 4
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccrKgj8f.s 			page 4
 
 
  168 00ed 03       		.byte	0x3
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc302yiB.s 			page 1
  222 002f 08       		.uleb128 0x8
  223 0030 00       		.byte	0
  224 0031 00       		.byte	0
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc302yiB.s 			page 5
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccrKgj8f.s 			page 5
 
 
  225 0032 05       		.uleb128 0x5
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc302yiB.s 			page 1
  279              	.Ldebug_line0:
  280 0000 3D010000 		.section	.debug_str,"MS",%progbits,1
  280      02003701 
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc302yiB.s 			page 6
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccrKgj8f.s 			page 6
 
 
  280      00000201 
@@ -314,100 +314,98 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc302yiB.s 			page 1
  284      63686970 
  284      70726F74 
  284      65637400 
- 285              	.LASF17:
- 286 001e 5C5C5642 		.ascii	"\\\\VBOXSVR\\raywang\\Dropbox (MIT)\\CTFs\\eCTF\\ec"
- 286      4F585356 
- 286      525C7261 
- 286      7977616E 
- 286      675C4472 
- 287 004a 74662D32 		.ascii	"tf-2018-techsec\\SECURITY_MODULE.cydsn\000"
- 287      3031382D 
- 287      74656368 
- 287      7365635C 
- 287      53454355 
- 288              	.LASF13:
- 289 0070 63795F6D 		.ascii	"cy_metadata\000"
- 289      65746164 
- 289      61746100 
- 290              	.LASF1:
- 291 007c 756E7369 		.ascii	"unsigned char\000"
- 291      676E6564 
- 291      20636861 
- 291      7200
- 292              	.LASF16:
- 293 008a 47656E65 		.ascii	"Generated_Source\\PSoC4\\cymetadata.c\000"
- 293      72617465 
- 293      645F536F 
- 293      75726365 
- 293      5C50536F 
- 294              	.LASF5:
- 295 00ae 6C6F6E67 		.ascii	"long unsigned int\000"
- 295      20756E73 
- 295      69676E65 
- 295      6420696E 
- 295      7400
- 296              	.LASF3:
- 297 00c0 73686F72 		.ascii	"short unsigned int\000"
- 297      7420756E 
- 297      7369676E 
- 297      65642069 
- 297      6E7400
+ 285              	.LASF13:
+ 286 001e 63795F6D 		.ascii	"cy_metadata\000"
+ 286      65746164 
+ 286      61746100 
+ 287              	.LASF1:
+ 288 002a 756E7369 		.ascii	"unsigned char\000"
+ 288      676E6564 
+ 288      20636861 
+ 288      7200
+ 289              	.LASF16:
+ 290 0038 47656E65 		.ascii	"Generated_Source\\PSoC4\\cymetadata.c\000"
+ 290      72617465 
+ 290      645F536F 
+ 290      75726365 
+ 290      5C50536F 
+ 291              	.LASF5:
+ 292 005c 6C6F6E67 		.ascii	"long unsigned int\000"
+ 292      20756E73 
+ 292      69676E65 
+ 292      6420696E 
+ 292      7400
+ 293              	.LASF3:
+ 294 006e 73686F72 		.ascii	"short unsigned int\000"
+ 294      7420756E 
+ 294      7369676E 
+ 294      65642069 
+ 294      6E7400
+ 295              	.LASF17:
+ 296 0081 453A5C65 		.ascii	"E:\\eCTF\\ectf-2018-techsec-submission2\\SECURITY_M"
+ 296      4354465C 
+ 296      65637466 
+ 296      2D323031 
+ 296      382D7465 
+ 297 00b1 4F44554C 		.ascii	"ODULE.cydsn\000"
+ 297      452E6379 
+ 297      64736E00 
  298              	.LASF8:
- 299 00d3 756E7369 		.ascii	"unsigned int\000"
+ 299 00bd 756E7369 		.ascii	"unsigned int\000"
  299      676E6564 
  299      20696E74 
  299      00
  300              	.LASF7:
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc302yiB.s 			page 7
-
-
- 301 00e0 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 301 00ca 6C6F6E67 		.ascii	"long long unsigned int\000"
  301      206C6F6E 
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccrKgj8f.s 			page 7
+
+
  301      6720756E 
  301      7369676E 
  301      65642069 
  302              	.LASF10:
- 303 00f7 75696E74 		.ascii	"uint8_t\000"
+ 303 00e1 75696E74 		.ascii	"uint8_t\000"
  303      385F7400 
  304              	.LASF12:
- 305 00ff 63795F6D 		.ascii	"cy_meta_flashprotect\000"
+ 305 00e9 63795F6D 		.ascii	"cy_meta_flashprotect\000"
  305      6574615F 
  305      666C6173 
  305      6870726F 
  305      74656374 
  306              	.LASF11:
- 307 0114 73697A65 		.ascii	"sizetype\000"
+ 307 00fe 73697A65 		.ascii	"sizetype\000"
  307      74797065 
  307      00
  308              	.LASF6:
- 309 011d 6C6F6E67 		.ascii	"long long int\000"
+ 309 0107 6C6F6E67 		.ascii	"long long int\000"
  309      206C6F6E 
  309      6720696E 
  309      7400
  310              	.LASF2:
- 311 012b 73686F72 		.ascii	"short int\000"
+ 311 0115 73686F72 		.ascii	"short int\000"
  311      7420696E 
  311      7400
  312              	.LASF4:
- 313 0135 6C6F6E67 		.ascii	"long int\000"
+ 313 011f 6C6F6E67 		.ascii	"long int\000"
  313      20696E74 
  313      00
  314              	.LASF0:
- 315 013e 7369676E 		.ascii	"signed char\000"
+ 315 0128 7369676E 		.ascii	"signed char\000"
  315      65642063 
  315      68617200 
  316              	.LASF15:
- 317 014a 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 317 0134 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
  317      43313120 
  317      352E342E 
  317      31203230 
  317      31363036 
- 318 017d 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m0 -mthumb -g -O"
+ 318 0167 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m0 -mthumb -g -O"
  318      20726576 
  318      6973696F 
  318      6E203233 
  318      37373135 
- 319 01b0 73202D66 		.ascii	"s -ffunction-sections -ffat-lto-objects\000"
+ 319 019a 73202D66 		.ascii	"s -ffunction-sections -ffat-lto-objects\000"
  319      66756E63 
  319      74696F6E 
  319      2D736563 

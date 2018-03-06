@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc2h8pTT.s 			page 1
 
 
    1              		.syntax unified
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
   28:Generated_Source\PSoC4/CyLib.c **** uint32 cydelayFreqKhz = (CYDEV_BCLK__SYSCLK__HZ + CY_DELAY_1K_MINUS_1_THRESHOLD) / CY_DELAY_1K_THRE
   29:Generated_Source\PSoC4/CyLib.c **** uint8  cydelayFreqMhz = (uint8)((CYDEV_BCLK__SYSCLK__HZ + CY_DELAY_1M_MINUS_1_THRESHOLD) / CY_DELAY
   30:Generated_Source\PSoC4/CyLib.c **** uint32 cydelay32kMs   = CY_DELAY_MS_OVERFLOW * ((CYDEV_BCLK__SYSCLK__HZ + CY_DELAY_1K_MINUS_1_THRES
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 2
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc2h8pTT.s 			page 2
 
 
   31:Generated_Source\PSoC4/CyLib.c ****                         CY_DELAY_1K_THRESHOLD);
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
   85:Generated_Source\PSoC4/CyLib.c **** /* Stored CY_SYS_CLK_IMO_TRIM4_REG when modified for USB lock */
   86:Generated_Source\PSoC4/CyLib.c **** #if (CY_IP_IMO_TRIMMABLE_BY_USB && CY_IP_SRSSV2)
   87:Generated_Source\PSoC4/CyLib.c ****     uint32 CySysClkImoTrim4 = 0u;
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 3
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc2h8pTT.s 			page 3
 
 
   88:Generated_Source\PSoC4/CyLib.c **** #endif /* (CY_IP_IMO_TRIMMABLE_BY_USB && CY_IP_SRSSV2) */
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
   44 000c 7047     		bx	lr
   45              	.L3:
   46 000e C046     		.align	2
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 4
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc2h8pTT.s 			page 4
 
 
   47              	.L2:
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
   74              		.loc 1 150 0
   75 000a 7047     		bx	lr
   76              	.L6:
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 5
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc2h8pTT.s 			page 5
 
 
   77              		.align	2
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
  191:Generated_Source\PSoC4/CyLib.c ****             /* Set oscillator interface control port to WCO */
  192:Generated_Source\PSoC4/CyLib.c ****             #if (CY_IP_IMO_TRIMMABLE_BY_WCO && CY_IP_IMO_TRIMMABLE_BY_USB)
  193:Generated_Source\PSoC4/CyLib.c ****                 CY_SYS_CLK_OSCINTF_CTL_REG =
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 6
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc2h8pTT.s 			page 6
 
 
  194:Generated_Source\PSoC4/CyLib.c ****                     (CY_SYS_CLK_OSCINTF_CTL_REG & (uint32) ~CY_SYS_CLK_OSCINTF_CTL_PORT_SEL_MASK) |
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
  248:Generated_Source\PSoC4/CyLib.c ****             else
  249:Generated_Source\PSoC4/CyLib.c ****             {
  250:Generated_Source\PSoC4/CyLib.c ****                 lfLimit = (uint32) CY_SFLASH_IMO_TRIM_REG(freq - CY_SYS_CLK_IMO_MIN_FREQ_MHZ) +
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 7
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc2h8pTT.s 			page 7
 
 
  251:Generated_Source\PSoC4/CyLib.c ****                     cyImoFreqMhz2DpllOffset[freq - CY_SYS_CLK_IMO_FREQ_WCO_DPLL_TABLE_OFFSET];
@@ -418,7 +418,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
  305:Generated_Source\PSoC4/CyLib.c ****     {
  306:Generated_Source\PSoC4/CyLib.c ****         return ((0u != (CY_SYS_CLK_WCO_CONFIG_REG & CY_SYS_CLK_WCO_CONFIG_DPLL_ENABLE)) ?
  307:Generated_Source\PSoC4/CyLib.c ****                 (uint32) 1u :
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 8
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc2h8pTT.s 			page 8
 
 
  308:Generated_Source\PSoC4/CyLib.c ****                 (uint32) 0u);
@@ -478,7 +478,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
  362:Generated_Source\PSoC4/CyLib.c ****     *******************************************************************************/
  363:Generated_Source\PSoC4/CyLib.c ****     void CySysClkImoDisableUsbLock(void)
  364:Generated_Source\PSoC4/CyLib.c ****     {
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 9
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc2h8pTT.s 			page 9
 
 
  365:Generated_Source\PSoC4/CyLib.c ****         CY_SYS_CLK_USBDEVv2_CR1_REG &= (uint32) ~CY_SYS_CLK_USBDEVv2_CR1_ENABLE_LOCK;
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
  419:Generated_Source\PSoC4/CyLib.c **** *
  420:Generated_Source\PSoC4/CyLib.c **** * \param clkSelect One of the available HFCLK direct sources.
  421:Generated_Source\PSoC4/CyLib.c **** * CY_SYS_CLK_HFCLK_IMO     IMO.
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 10
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc2h8pTT.s 			page 10
 
 
  422:Generated_Source\PSoC4/CyLib.c **** * CY_SYS_CLK_HFCLK_EXTCLK  External clock pin.
@@ -598,7 +598,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
  111 000c 0A68     		ldr	r2, [r1]
  112 000e 9A43     		bics	r2, r3
  113              	.LVL2:
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 11
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc2h8pTT.s 			page 11
 
 
  448:Generated_Source\PSoC4/CyLib.c ****     }
@@ -658,7 +658,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
  145              	.LVL6:
  146 0000 10B5     		push	{r4, lr}
  147              		.cfi_def_cfa_offset 8
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 12
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc2h8pTT.s 			page 12
 
 
  148              		.cfi_offset 4, -8
@@ -718,7 +718,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
  178              	.L15:
  179 0028 08010B40 		.word	1074462984
  180 002c 00000000 		.word	.LANCHOR0
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 13
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc2h8pTT.s 			page 13
 
 
  181 0030 FFFFFFF1 		.word	-234881025
@@ -778,7 +778,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
  528:Generated_Source\PSoC4/CyLib.c ****     CyExitCriticalSection(interruptState);
  529:Generated_Source\PSoC4/CyLib.c **** 
  530:Generated_Source\PSoC4/CyLib.c ****     return (sysclkSource);
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 14
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc2h8pTT.s 			page 14
 
 
  531:Generated_Source\PSoC4/CyLib.c **** }
@@ -838,7 +838,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
  553:Generated_Source\PSoC4/CyLib.c **** *
  554:Generated_Source\PSoC4/CyLib.c **** * \param divider Power of 2 prescaler selection
  555:Generated_Source\PSoC4/CyLib.c **** *  CY_SYS_CLK_SYSCLK_DIV1        SYSCLK = HFCLK / 1
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 15
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc2h8pTT.s 			page 15
 
 
  556:Generated_Source\PSoC4/CyLib.c **** *  CY_SYS_CLK_SYSCLK_DIV2        SYSCLK = HFCLK / 2
@@ -898,7 +898,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
  268 001c 2B60     		str	r3, [r5]
  574:Generated_Source\PSoC4/CyLib.c ****                                     CY_SYS_CLK_SELECT_SYSCLK_DIV_SHIFT))));
  575:Generated_Source\PSoC4/CyLib.c **** 
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 16
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc2h8pTT.s 			page 16
 
 
  576:Generated_Source\PSoC4/CyLib.c ****     CyExitCriticalSection(interruptState);
@@ -958,7 +958,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
  608:Generated_Source\PSoC4/CyLib.c **** * from Flash. If the SYSCLK clock frequency decreases, you can call
  609:Generated_Source\PSoC4/CyLib.c **** * \ref CySysFlashSetWaitCycles() to improve the CPU performance. See
  610:Generated_Source\PSoC4/CyLib.c **** * \ref CySysFlashSetWaitCycles() description for more information.
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 17
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc2h8pTT.s 			page 17
 
 
  611:Generated_Source\PSoC4/CyLib.c **** *
@@ -1018,7 +1018,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
  665:Generated_Source\PSoC4/CyLib.c ****                 if ((24u == freq) || (48u == freq))
  666:Generated_Source\PSoC4/CyLib.c ****                 {
  667:Generated_Source\PSoC4/CyLib.c ****                     usbLock = 1u;
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 18
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc2h8pTT.s 			page 18
 
 
  668:Generated_Source\PSoC4/CyLib.c ****                     CySysClkImoDisableUsbLock();
@@ -1078,7 +1078,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
  722:Generated_Source\PSoC4/CyLib.c ****                 bgTrim5 = CY_SFLASH_IMO_TMPCO4_REG;
  723:Generated_Source\PSoC4/CyLib.c ****             }
  724:Generated_Source\PSoC4/CyLib.c **** 
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 19
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc2h8pTT.s 			page 19
 
 
  725:Generated_Source\PSoC4/CyLib.c ****             /* Get IMO_TRIM2 value for the new frequency */
@@ -1138,7 +1138,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
  779:Generated_Source\PSoC4/CyLib.c ****                 }
  780:Generated_Source\PSoC4/CyLib.c ****                 else
  781:Generated_Source\PSoC4/CyLib.c ****                 {
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 20
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc2h8pTT.s 			page 20
 
 
  782:Generated_Source\PSoC4/CyLib.c ****                     imoTrim1Value = (uint8) CY_SFLASH_IMO_TRIM_REG(freq - CY_SYS_CLK_IMO_FREQ_TABLE
@@ -1198,7 +1198,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
  836:Generated_Source\PSoC4/CyLib.c ****         
  837:Generated_Source\PSoC4/CyLib.c ****         #if (CY_IP_IMO_TRIMMABLE_BY_USB)
  838:Generated_Source\PSoC4/CyLib.c ****             uint32 usbLock = 0u;
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 21
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc2h8pTT.s 			page 21
 
 
  839:Generated_Source\PSoC4/CyLib.c ****         #endif  /* (CY_IP_IMO_TRIMMABLE_BY_USB) */
@@ -1258,7 +1258,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
  893:Generated_Source\PSoC4/CyLib.c ****                     imoTrim1Value = CY_SFLASH_IMO_TRIM_USBMODE_24_REG;
  894:Generated_Source\PSoC4/CyLib.c ****                 }
  895:Generated_Source\PSoC4/CyLib.c ****                 else
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 22
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc2h8pTT.s 			page 22
 
 
  896:Generated_Source\PSoC4/CyLib.c ****                 {
@@ -1318,7 +1318,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
  950:Generated_Source\PSoC4/CyLib.c **** 
  951:Generated_Source\PSoC4/CyLib.c **** #endif /* (CY_IP_SRSSV2) */
  952:Generated_Source\PSoC4/CyLib.c **** 
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 23
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc2h8pTT.s 			page 23
 
 
  953:Generated_Source\PSoC4/CyLib.c **** 
@@ -1378,7 +1378,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
 1007:Generated_Source\PSoC4/CyLib.c ****     * runtime, the \ref CyDelayFreq() with the appropriate parameter should be
 1008:Generated_Source\PSoC4/CyLib.c ****     * called.
 1009:Generated_Source\PSoC4/CyLib.c ****     *
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 24
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc2h8pTT.s 			page 24
 
 
 1010:Generated_Source\PSoC4/CyLib.c ****     * PSoC 4100 BLE / PSoC 4200 BLE: The WCO must be enabled prior to enabling ECO.
@@ -1438,7 +1438,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
 1064:Generated_Source\PSoC4/CyLib.c ****                 {
 1065:Generated_Source\PSoC4/CyLib.c ****                     CY_SYS_BLESS_INTR_MASK_REG &= ~CY_SYS_BLESS_BLERD_ACTIVE_INTR_MASK;
 1066:Generated_Source\PSoC4/CyLib.c ****                 }
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 25
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc2h8pTT.s 			page 25
 
 
 1067:Generated_Source\PSoC4/CyLib.c ****                 
@@ -1498,7 +1498,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
 1121:Generated_Source\PSoC4/CyLib.c ****                 
 1122:Generated_Source\PSoC4/CyLib.c ****                 /* Clear Interrupt */
 1123:Generated_Source\PSoC4/CyLib.c ****                 CY_SYS_RCB_INTR_REG = CY_SYS_RCB_INTR_CLEAR;
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 26
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc2h8pTT.s 			page 26
 
 
 1124:Generated_Source\PSoC4/CyLib.c ****                 
@@ -1558,7 +1558,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
 1178:Generated_Source\PSoC4/CyLib.c ****             CY_SYS_BLESS_MT_CFG_REG &= ~(CY_SYS_BLESS_MT_CFG_DPSLP_ECO_ON  <<  CYFLD_BLE_BLESS_DPSL
 1179:Generated_Source\PSoC4/CyLib.c ****         #else
 1180:Generated_Source\PSoC4/CyLib.c ****             CY_SYS_CLK_ECO_CONFIG_REG &= (uint32) ~(CY_SYS_CLK_ECO_CONFIG_ENABLE | CY_SYS_CLK_ECO_C
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 27
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc2h8pTT.s 			page 27
 
 
 1181:Generated_Source\PSoC4/CyLib.c ****         #endif /* (CY_IP_WCO_BLESS) */
@@ -1618,7 +1618,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
 1235:Generated_Source\PSoC4/CyLib.c ****         *
 1236:Generated_Source\PSoC4/CyLib.c ****         * If the SYSCLK clock frequency increases during the device operation, call
 1237:Generated_Source\PSoC4/CyLib.c ****         * CySysFlashSetWaitCycles() with the appropriate parameter to adjust the number
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 28
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc2h8pTT.s 			page 28
 
 
 1238:Generated_Source\PSoC4/CyLib.c ****         * of clock cycles the cache will wait before sampling data comes back from
@@ -1678,7 +1678,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
 1292:Generated_Source\PSoC4/CyLib.c ****         * Feedback resistor trim - This bit field sets the feedback resistor trim and
 1293:Generated_Source\PSoC4/CyLib.c ****         * impacts the oscillation amplitude.
 1294:Generated_Source\PSoC4/CyLib.c ****         *
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 29
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc2h8pTT.s 			page 29
 
 
 1295:Generated_Source\PSoC4/CyLib.c ****         * Amplifier gain trim - This bit field sets the amplifier gain trim and affects
@@ -1738,7 +1738,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
 1349:Generated_Source\PSoC4/CyLib.c ****             CY_SYS_CLK_ECO_TRIM0_REG = regTmp;
 1350:Generated_Source\PSoC4/CyLib.c **** 
 1351:Generated_Source\PSoC4/CyLib.c ****             regTmp  = CY_SYS_CLK_ECO_TRIM1_REG & ~(CY_SYS_CLK_ECO_TRIM1_FTRIM_MASK |
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 30
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc2h8pTT.s 			page 30
 
 
 1352:Generated_Source\PSoC4/CyLib.c ****                                                    CY_SYS_CLK_ECO_TRIM1_RTRIM_MASK |
@@ -1798,7 +1798,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
 1406:Generated_Source\PSoC4/CyLib.c ****                 returnStatus = CYRET_BAD_PARAM;
 1407:Generated_Source\PSoC4/CyLib.c ****             }
 1408:Generated_Source\PSoC4/CyLib.c ****             else
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 31
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc2h8pTT.s 			page 31
 
 
 1409:Generated_Source\PSoC4/CyLib.c ****             {
@@ -1858,7 +1858,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
 1463:Generated_Source\PSoC4/CyLib.c ****                 }
 1464:Generated_Source\PSoC4/CyLib.c **** 
 1465:Generated_Source\PSoC4/CyLib.c ****                 /* Calculate feedback resistor trim */
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 32
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc2h8pTT.s 			page 32
 
 
 1466:Generated_Source\PSoC4/CyLib.c ****                 if (freq > CY_SYS_CLK_ECO_FREQ_FOR_FTRIM0)
@@ -1918,7 +1918,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
 1520:Generated_Source\PSoC4/CyLib.c ****     * once the PLL is locked if the wait parameter is 1).
 1521:Generated_Source\PSoC4/CyLib.c ****     *
 1522:Generated_Source\PSoC4/CyLib.c ****     * This API is available only for PSoC 4200L devices.
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 33
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc2h8pTT.s 			page 33
 
 
 1523:Generated_Source\PSoC4/CyLib.c ****     *
@@ -1978,7 +1978,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
 1577:Generated_Source\PSoC4/CyLib.c ****                     }
 1578:Generated_Source\PSoC4/CyLib.c **** 
 1579:Generated_Source\PSoC4/CyLib.c ****                     CyDelayUs(1u);
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 34
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc2h8pTT.s 			page 34
 
 
 1580:Generated_Source\PSoC4/CyLib.c ****                     counts--;
@@ -2038,7 +2038,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
 1634:Generated_Source\PSoC4/CyLib.c ****     *
 1635:Generated_Source\PSoC4/CyLib.c ****     * Ensures that either PLL is not the source of HFCLK before it is disabled,
 1636:Generated_Source\PSoC4/CyLib.c ****     * otherwise, the CPU will halt.
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 35
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc2h8pTT.s 			page 35
 
 
 1637:Generated_Source\PSoC4/CyLib.c ****     *
@@ -2098,7 +2098,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
 1691:Generated_Source\PSoC4/CyLib.c ****     {
 1692:Generated_Source\PSoC4/CyLib.c ****         uint32   regTmp;
 1693:Generated_Source\PSoC4/CyLib.c ****         cystatus tmp;
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 36
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc2h8pTT.s 			page 36
 
 
 1694:Generated_Source\PSoC4/CyLib.c ****         uint8    interruptState;
@@ -2158,7 +2158,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
 1748:Generated_Source\PSoC4/CyLib.c ****     * CY_SYS_PLL_BYPASS_AUTO - Automatic usage of the lock indicator. When unlocked,
 1749:Generated_Source\PSoC4/CyLib.c ****     * automatically selects PLL the reference input (bypass mode). When locked,
 1750:Generated_Source\PSoC4/CyLib.c ****     * automatically selects the PLL output.
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 37
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc2h8pTT.s 			page 37
 
 
 1751:Generated_Source\PSoC4/CyLib.c ****     *
@@ -2218,7 +2218,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
 1805:Generated_Source\PSoC4/CyLib.c ****         return (returnValue);
 1806:Generated_Source\PSoC4/CyLib.c ****     }
 1807:Generated_Source\PSoC4/CyLib.c **** 
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 38
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc2h8pTT.s 			page 38
 
 
 1808:Generated_Source\PSoC4/CyLib.c **** 
@@ -2278,7 +2278,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
 1862:Generated_Source\PSoC4/CyLib.c ****     *
 1863:Generated_Source\PSoC4/CyLib.c ****     *******************************************************************************/
 1864:Generated_Source\PSoC4/CyLib.c ****     uint32 CySysClkPllGetUnlockStatus(uint32 pll)
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 39
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc2h8pTT.s 			page 39
 
 
 1865:Generated_Source\PSoC4/CyLib.c ****     {
@@ -2338,7 +2338,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
 1919:Generated_Source\PSoC4/CyLib.c ****         uint32 qMax;
 1920:Generated_Source\PSoC4/CyLib.c **** 
 1921:Generated_Source\PSoC4/CyLib.c ****         uint32 qVal = CY_SYS_CLK_PLL_INVALID;
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 40
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc2h8pTT.s 			page 40
 
 
 1922:Generated_Source\PSoC4/CyLib.c ****         uint32 pVal = CY_SYS_CLK_PLL_INVALID;
@@ -2398,7 +2398,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
 1976:Generated_Source\PSoC4/CyLib.c ****                 if ((pVal != CY_SYS_CLK_PLL_INVALID) && (qVal != CY_SYS_CLK_PLL_INVALID))
 1977:Generated_Source\PSoC4/CyLib.c ****                 {
 1978:Generated_Source\PSoC4/CyLib.c ****                     if (CySysClkPllSetPQ(pll, pVal, qVal, CY_SYS_CLK_PLL_CURRENT_DEFAULT) == CYRET_
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 41
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc2h8pTT.s 			page 41
 
 
 1979:Generated_Source\PSoC4/CyLib.c ****                     {
@@ -2458,7 +2458,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
 2033:Generated_Source\PSoC4/CyLib.c ****     * Function Name: CySysClkPllSetOutputDivider
 2034:Generated_Source\PSoC4/CyLib.c ****     ****************************************************************************//**
 2035:Generated_Source\PSoC4/CyLib.c ****     *
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 42
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc2h8pTT.s 			page 42
 
 
 2036:Generated_Source\PSoC4/CyLib.c ****     *  Sets the output clock divider for the PLL.
@@ -2518,7 +2518,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
 2090:Generated_Source\PSoC4/CyLib.c ****     * Function Name: CySysLvdEnable
 2091:Generated_Source\PSoC4/CyLib.c ****     ****************************************************************************//**
 2092:Generated_Source\PSoC4/CyLib.c ****     *
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 43
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc2h8pTT.s 			page 43
 
 
 2093:Generated_Source\PSoC4/CyLib.c ****     *  Enables the output of the low-voltage monitor when Vddd is at or below the
@@ -2578,7 +2578,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
 2147:Generated_Source\PSoC4/CyLib.c ****     *******************************************************************************/
 2148:Generated_Source\PSoC4/CyLib.c ****     void CySysLvdDisable(void)
 2149:Generated_Source\PSoC4/CyLib.c ****     {
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 44
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc2h8pTT.s 			page 44
 
 
  291              		.loc 1 2149 0
@@ -2638,7 +2638,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
 2164:Generated_Source\PSoC4/CyLib.c ****     *
 2165:Generated_Source\PSoC4/CyLib.c ****     *******************************************************************************/
 2166:Generated_Source\PSoC4/CyLib.c ****     uint32 CySysLvdGetInterruptSource(void)
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 45
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc2h8pTT.s 			page 45
 
 
 2167:Generated_Source\PSoC4/CyLib.c ****     {
@@ -2698,7 +2698,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
  364              		.loc 1 2184 0
  365 0000 0222     		movs	r2, #2
  366 0002 014B     		ldr	r3, .L30
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 46
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc2h8pTT.s 			page 46
 
 
 2185:Generated_Source\PSoC4/CyLib.c ****     }
@@ -2758,7 +2758,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
 2211:Generated_Source\PSoC4/CyLib.c **** 
 2212:Generated_Source\PSoC4/CyLib.c ****     reason &= (CY_SYS_RESET_WDT | CY_SYS_RESET_PROTFAULT | CY_SYS_RESET_SW);
  394              		.loc 1 2212 0
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 47
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc2h8pTT.s 			page 47
 
 
  395 0000 1923     		movs	r3, #25
@@ -2818,7 +2818,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
 2230:Generated_Source\PSoC4/CyLib.c **** *******************************************************************************/
 2231:Generated_Source\PSoC4/CyLib.c **** uint32 CyDisableInts(void)
 2232:Generated_Source\PSoC4/CyLib.c **** {
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 48
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc2h8pTT.s 			page 48
 
 
  429              		.loc 1 2232 0
@@ -2878,7 +2878,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
 2249:Generated_Source\PSoC4/CyLib.c **** *  Enables interrupts to a given state.
 2250:Generated_Source\PSoC4/CyLib.c **** *
 2251:Generated_Source\PSoC4/CyLib.c **** *  \param mask The 32 bit mask of interrupts to enable.
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 49
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc2h8pTT.s 			page 49
 
 
 2252:Generated_Source\PSoC4/CyLib.c **** *
@@ -2938,7 +2938,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
 2276:Generated_Source\PSoC4/CyLib.c **** * \return The old ISR vector at this location.
 2277:Generated_Source\PSoC4/CyLib.c **** *
 2278:Generated_Source\PSoC4/CyLib.c **** *******************************************************************************/
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 50
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc2h8pTT.s 			page 50
 
 
 2279:Generated_Source\PSoC4/CyLib.c **** cyisraddress CyIntSetSysVector(uint8 number, cyisraddress address)
@@ -2998,7 +2998,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
 2301:Generated_Source\PSoC4/CyLib.c **** *   interrupts are for SysTick, PendSV and others.
 2302:Generated_Source\PSoC4/CyLib.c **** *
 2303:Generated_Source\PSoC4/CyLib.c **** *  \param number: System interrupt number:
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 51
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc2h8pTT.s 			page 51
 
 
 2304:Generated_Source\PSoC4/CyLib.c **** *    CY_INT_NMI_IRQN        - Non Maskable Interrupt
@@ -3058,7 +3058,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
 2331:Generated_Source\PSoC4/CyLib.c **** *
 2332:Generated_Source\PSoC4/CyLib.c **** * \return Previous interrupt vector value.
 2333:Generated_Source\PSoC4/CyLib.c **** *
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 52
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc2h8pTT.s 			page 52
 
 
 2334:Generated_Source\PSoC4/CyLib.c **** *******************************************************************************/
@@ -3118,7 +3118,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
 2353:Generated_Source\PSoC4/CyLib.c **** * Function Name: CyIntGetVector
 2354:Generated_Source\PSoC4/CyLib.c **** ****************************************************************************//**
 2355:Generated_Source\PSoC4/CyLib.c **** *
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 53
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc2h8pTT.s 			page 53
 
 
 2356:Generated_Source\PSoC4/CyLib.c **** *  Gets the interrupt vector of the specified interrupt number.
@@ -3178,7 +3178,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
 2380:Generated_Source\PSoC4/CyLib.c **** *
 2381:Generated_Source\PSoC4/CyLib.c **** *******************************************************************************/
 2382:Generated_Source\PSoC4/CyLib.c **** void CyIntSetPriority(uint8 number, uint8 priority)
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 54
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc2h8pTT.s 			page 54
 
 
 2383:Generated_Source\PSoC4/CyLib.c **** {
@@ -3238,7 +3238,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
  651 0020 2368     		ldr	r3, [r4]
  652              	.LVL34:
 2398:Generated_Source\PSoC4/CyLib.c ****     CY_INT_PRIORITY_REG(number) = value;
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 55
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc2h8pTT.s 			page 55
 
 
 2399:Generated_Source\PSoC4/CyLib.c **** 
@@ -3298,7 +3298,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
 2417:Generated_Source\PSoC4/CyLib.c **** {
  685              		.loc 1 2417 0
  686              		.cfi_startproc
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 56
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc2h8pTT.s 			page 56
 
 
  687              		@ args = 0, pretend = 0, frame = 0
@@ -3358,7 +3358,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
 2429:Generated_Source\PSoC4/CyLib.c **** * Function Name: CyIntEnable
 2430:Generated_Source\PSoC4/CyLib.c **** ****************************************************************************//**
 2431:Generated_Source\PSoC4/CyLib.c **** *
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 57
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc2h8pTT.s 			page 57
 
 
 2432:Generated_Source\PSoC4/CyLib.c **** *  Enables the specified interrupt number.
@@ -3418,7 +3418,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
 2451:Generated_Source\PSoC4/CyLib.c **** * \return
 2452:Generated_Source\PSoC4/CyLib.c **** *  Enable status: 1 if enabled, 0 if disabled
 2453:Generated_Source\PSoC4/CyLib.c **** *
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 58
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc2h8pTT.s 			page 58
 
 
 2454:Generated_Source\PSoC4/CyLib.c **** *******************************************************************************/
@@ -3478,7 +3478,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
 2471:Generated_Source\PSoC4/CyLib.c **** void CyIntDisable(uint8 number)
 2472:Generated_Source\PSoC4/CyLib.c **** {
  799              		.loc 1 2472 0
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 59
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc2h8pTT.s 			page 59
 
 
  800              		.cfi_startproc
@@ -3538,7 +3538,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
 2487:Generated_Source\PSoC4/CyLib.c ****     CY_INT_SET_PEND_REG = ((uint32) 0x01u << (CY_INT_ENABLE_RANGE_MASK & number));
  839              		.loc 1 2487 0
  840 0000 1F23     		movs	r3, #31
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 60
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc2h8pTT.s 			page 60
 
 
  841 0002 1840     		ands	r0, r3
@@ -3598,7 +3598,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
  879 0008 014A     		ldr	r2, .L68
 2503:Generated_Source\PSoC4/CyLib.c **** }
  880              		.loc 1 2503 0
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 61
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc2h8pTT.s 			page 61
 
 
  881              		@ sp needed
@@ -3658,7 +3658,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
 2526:Generated_Source\PSoC4/CyLib.c ****     #elif defined(__C51__)
 2527:Generated_Source\PSoC4/CyLib.c ****         CYDEV_HALT_CPU;
 2528:Generated_Source\PSoC4/CyLib.c ****     #endif  /* (__ARMCC_VERSION) */
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 62
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc2h8pTT.s 			page 62
 
 
 2529:Generated_Source\PSoC4/CyLib.c **** }
@@ -3718,7 +3718,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
  944              		.loc 1 2545 0
  945 000a 1360     		str	r3, [r2]
  946              		.loc 1 2547 0
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 63
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc2h8pTT.s 			page 63
 
 
  947 000c 7047     		bx	lr
@@ -3778,7 +3778,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
 2562:Generated_Source\PSoC4/CyLib.c ****     {
 2563:Generated_Source\PSoC4/CyLib.c ****         /* This loop prevents overflow.
 2564:Generated_Source\PSoC4/CyLib.c ****          * At 100MHz, milliseconds * cydelayFreqKhz overflows at about 42 seconds
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 64
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc2h8pTT.s 			page 64
 
 
 2565:Generated_Source\PSoC4/CyLib.c ****          */
@@ -3838,7 +3838,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
 2581:Generated_Source\PSoC4/CyLib.c **** *******************************************************************************/
 2582:Generated_Source\PSoC4/CyLib.c **** void CyDelayUs(uint16 microseconds)
 2583:Generated_Source\PSoC4/CyLib.c **** {
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 65
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc2h8pTT.s 			page 65
 
 
  1023              		.loc 1 2583 0
@@ -3898,7 +3898,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
  1073              		.cfi_def_cfa_offset 48
  647:Generated_Source\PSoC4/CyLib.c **** 
  1074              		.loc 1 647 0
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 66
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc2h8pTT.s 			page 66
 
 
  1075 0006 FFF7FEFF 		bl	CyEnterCriticalSection
@@ -3958,7 +3958,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
  709:Generated_Source\PSoC4/CyLib.c ****             {
  1118              		.loc 1 709 0
  1119 0038 2D4B     		ldr	r3, .L96+24
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 67
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc2h8pTT.s 			page 67
 
 
  1120 003a 1B78     		ldrb	r3, [r3]
@@ -4018,7 +4018,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
  1162 0066 EA1E     		subs	r2, r5, #3
  722:Generated_Source\PSoC4/CyLib.c ****             }
  1163              		.loc 1 722 0
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 68
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc2h8pTT.s 			page 68
 
 
  1164 0068 DBB2     		uxtb	r3, r3
@@ -4078,7 +4078,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
  1208 009e 1E4A     		ldr	r2, .L96+64
  785:Generated_Source\PSoC4/CyLib.c ****             #endif  /* (CY_IP_IMO_TRIMMABLE_BY_USB) */
  1209              		.loc 1 785 0
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 69
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc2h8pTT.s 			page 69
 
 
  1210 00a0 ED18     		adds	r5, r5, r3
@@ -4138,7 +4138,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
  823:Generated_Source\PSoC4/CyLib.c ****     }
  1251              		.loc 1 823 0
  1252 00cc 0498     		ldr	r0, [sp, #16]
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 70
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc2h8pTT.s 			page 70
 
 
  1253 00ce FFF7FEFF 		bl	CyExitCriticalSection
@@ -4198,7 +4198,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
  1304 0002 0225     		movs	r5, #2
 2124:Generated_Source\PSoC4/CyLib.c ****                 ((threshold << CY_LVD_PWR_VMON_CONFIG_LVD_SEL_SHIFT) & CY_LVD_PWR_VMON_CONFIG_LVD_S
  1305              		.loc 1 2124 0
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 71
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc2h8pTT.s 			page 71
 
 
  1306 0004 1E21     		movs	r1, #30
@@ -4258,7 +4258,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
  1348              	.LBE12:
  1349              	.LBE13:
 2137:Generated_Source\PSoC4/CyLib.c ****     }
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 72
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc2h8pTT.s 			page 72
 
 
  1350              		.loc 1 2137 0
@@ -4318,7 +4318,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
 2600:Generated_Source\PSoC4/CyLib.c ****         cydelayFreqHz = freq;
  1389              		.loc 1 2600 0
  1390 0008 2061     		str	r0, [r4, #16]
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 73
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc2h8pTT.s 			page 73
 
 
  1391 000a 01E0     		b	.L103
@@ -4378,7 +4378,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
  1434              		.align	1
  1435              		.global	CySysTickInit
  1436              		.code	16
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 74
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc2h8pTT.s 			page 74
 
 
  1437              		.thumb_func
@@ -4438,7 +4438,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
  1443              		@ args = 0, pretend = 0, frame = 0
  1444              		@ frame_needed = 0, uses_anonymous_args = 0
  1445              	.LVL96:
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 75
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc2h8pTT.s 			page 75
 
 
  1446 0000 10B5     		push	{r4, lr}
@@ -4498,7 +4498,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
  1482              	.LBB17:
 2290:Generated_Source\PSoC4/CyLib.c **** 
  1483              		.loc 1 2290 0
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 76
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc2h8pTT.s 			page 76
 
 
  1484 0018 1A60     		str	r2, [r3]
@@ -4558,7 +4558,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
 2712:Generated_Source\PSoC4/CyLib.c **** ****************************************************************************//**
 2713:Generated_Source\PSoC4/CyLib.c **** *
 2714:Generated_Source\PSoC4/CyLib.c **** *  Enables the SysTick interrupt.
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 77
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc2h8pTT.s 			page 77
 
 
 2715:Generated_Source\PSoC4/CyLib.c **** *
@@ -4618,7 +4618,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
 2761:Generated_Source\PSoC4/CyLib.c **** ****************************************************************************//**
 2762:Generated_Source\PSoC4/CyLib.c **** *
 2763:Generated_Source\PSoC4/CyLib.c **** *  Gets value the counter is set to on startup and after it reaches zero.
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 78
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc2h8pTT.s 			page 78
 
 
 2764:Generated_Source\PSoC4/CyLib.c **** *
@@ -4678,7 +4678,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
 2818:Generated_Source\PSoC4/CyLib.c ****     {
 2819:Generated_Source\PSoC4/CyLib.c ****         if (clockSource == CY_SYS_SYST_CSR_CLK_SRC_SYSCLK)
 2820:Generated_Source\PSoC4/CyLib.c ****         {
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 79
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc2h8pTT.s 			page 79
 
 
 2821:Generated_Source\PSoC4/CyLib.c ****             CY_SYS_SYST_CSR_REG |= (uint32)(CY_SYS_SYST_CSR_CLK_SRC_SYSCLK << CY_SYS_SYST_CSR_CLK_S
@@ -4738,7 +4738,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
 2875:Generated_Source\PSoC4/CyLib.c **** *  Clears the SysTick counter for well-defined startup.
 2876:Generated_Source\PSoC4/CyLib.c **** *
 2877:Generated_Source\PSoC4/CyLib.c **** *******************************************************************************/
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 80
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc2h8pTT.s 			page 80
 
 
 2878:Generated_Source\PSoC4/CyLib.c **** void CySysTickClear(void)
@@ -4798,7 +4798,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
  1551              	.L110:
  1552 000c 10E000E0 		.word	-536813552
  1553              		.cfi_endproc
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 81
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc2h8pTT.s 			page 81
 
 
  1554              	.LFE33:
@@ -4858,7 +4858,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
  1602              		.cfi_offset 14, -4
 2689:Generated_Source\PSoC4/CyLib.c ****     CY_SYS_SYST_CSR_REG |= CY_SYS_SYST_CSR_ENABLE;
  1603              		.loc 1 2689 0
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 82
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc2h8pTT.s 			page 82
 
 
  1604 0002 FFF7FEFF 		bl	CySysTickEnableInterrupt
@@ -4918,7 +4918,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
  1650 0010 6361     		str	r3, [r4, #20]
  1651              	.L119:
 2636:Generated_Source\PSoC4/CyLib.c **** }
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 83
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc2h8pTT.s 			page 83
 
 
  1652              		.loc 1 2636 0
@@ -4978,7 +4978,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
  1700              		.thumb_func
  1701              		.type	CySysTickSetReload, %function
  1702              	CySysTickSetReload:
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 84
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc2h8pTT.s 			page 84
 
 
  1703              	.LFB36:
@@ -5038,7 +5038,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
  1749              	.L130:
  1750 000a C046     		.align	2
  1751              	.L129:
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 85
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc2h8pTT.s 			page 85
 
 
  1752 000c 14E000E0 		.word	-536813548
@@ -5098,7 +5098,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
  1799              		.loc 1 2867 0
  1800 0000 024B     		ldr	r3, .L135
 2868:Generated_Source\PSoC4/CyLib.c **** 
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 86
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc2h8pTT.s 			page 86
 
 
  1801              		.loc 1 2868 0
@@ -5158,7 +5158,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
 2911:Generated_Source\PSoC4/CyLib.c **** *
 2912:Generated_Source\PSoC4/CyLib.c **** *******************************************************************************/
 2913:Generated_Source\PSoC4/CyLib.c **** cySysTickCallback CySysTickSetCallback(uint32 number, cySysTickCallback function)
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 87
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc2h8pTT.s 			page 87
 
 
 2914:Generated_Source\PSoC4/CyLib.c **** {
@@ -5218,7 +5218,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
  1835 0008 08D1     		bne	.L137
  1836 000a 0024     		movs	r4, #0
  1837              	.L140:
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 88
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc2h8pTT.s 			page 88
 
 
  1838              	.LBB26:
@@ -5278,7 +5278,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
  1879 0002 014B     		ldr	r3, .L149
 2881:Generated_Source\PSoC4/CyLib.c **** 
  1880              		.loc 1 2881 0
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 89
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc2h8pTT.s 			page 89
 
 
  1881              		@ sp needed
@@ -5338,7 +5338,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
  1928              		.code	16
  1929              		.thumb_func
  1930              		.type	CySysTickGetCallback, %function
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 90
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc2h8pTT.s 			page 90
 
 
  1931              	CySysTickGetCallback:
@@ -5398,7 +5398,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
  1964              		@ args = 0, pretend = 0, frame = 0
  1965              		@ frame_needed = 0, uses_anonymous_args = 0
  1966              		@ link register save eliminated.
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 91
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc2h8pTT.s 			page 91
 
 
  1967              	.LVL116:
@@ -5458,7 +5458,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
  1992              		.loc 1 2987 0
  1993 001e 0360     		str	r3, [r0]
 2988:Generated_Source\PSoC4/CyLib.c **** 
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 92
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc2h8pTT.s 			page 92
 
 
  1994              		.loc 1 2988 0
@@ -5518,7 +5518,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
  2040              		.cfi_endproc
  2041              	.LFE44:
  2042              		.size	CyGetUniqueId, .-CyGetUniqueId
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 93
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc2h8pTT.s 			page 93
 
 
  2043              		.global	CySysClkPumpConfig
@@ -5578,7 +5578,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
  2097 002a 32       		.byte	50
  2098 002b 33       		.byte	51
  2099 002c 34       		.byte	52
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 94
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc2h8pTT.s 			page 94
 
 
  2100 002d 35       		.byte	53
@@ -5632,48 +5632,48 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
  2144 0006 00000000 		.4byte	.Ldebug_abbrev0
  2145 000a 04       		.byte	0x4
  2146 000b 01       		.uleb128 0x1
- 2147 000c C7030000 		.4byte	.LASF103
+ 2147 000c 75030000 		.4byte	.LASF103
  2148 0010 0C       		.byte	0xc
- 2149 0011 8E060000 		.4byte	.LASF104
- 2150 0015 61000000 		.4byte	.LASF105
+ 2149 0011 78060000 		.4byte	.LASF104
+ 2150 0015 C3050000 		.4byte	.LASF105
  2151 0019 38000000 		.4byte	.Ldebug_ranges0+0x38
  2152 001d 00000000 		.4byte	0
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 95
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc2h8pTT.s 			page 95
 
 
  2153 0021 00000000 		.4byte	.Ldebug_line0
  2154 0025 02       		.uleb128 0x2
  2155 0026 01       		.byte	0x1
  2156 0027 06       		.byte	0x6
- 2157 0028 42010000 		.4byte	.LASF0
+ 2157 0028 FE000000 		.4byte	.LASF0
  2158 002c 02       		.uleb128 0x2
  2159 002d 01       		.byte	0x1
  2160 002e 08       		.byte	0x8
- 2161 002f 32050000 		.4byte	.LASF1
+ 2161 002f E0040000 		.4byte	.LASF1
  2162 0033 02       		.uleb128 0x2
  2163 0034 02       		.byte	0x2
  2164 0035 05       		.byte	0x5
- 2165 0036 47050000 		.4byte	.LASF2
+ 2165 0036 F5040000 		.4byte	.LASF2
  2166 003a 02       		.uleb128 0x2
  2167 003b 02       		.byte	0x2
  2168 003c 07       		.byte	0x7
- 2169 003d 08030000 		.4byte	.LASF3
+ 2169 003d B6020000 		.4byte	.LASF3
  2170 0041 02       		.uleb128 0x2
  2171 0042 04       		.byte	0x4
  2172 0043 05       		.byte	0x5
- 2173 0044 81010000 		.4byte	.LASF4
+ 2173 0044 3D010000 		.4byte	.LASF4
  2174 0048 02       		.uleb128 0x2
  2175 0049 04       		.byte	0x4
  2176 004a 07       		.byte	0x7
- 2177 004b 82020000 		.4byte	.LASF5
+ 2177 004b 3E020000 		.4byte	.LASF5
  2178 004f 02       		.uleb128 0x2
  2179 0050 08       		.byte	0x8
  2180 0051 05       		.byte	0x5
- 2181 0052 34010000 		.4byte	.LASF6
+ 2181 0052 F0000000 		.4byte	.LASF6
  2182 0056 02       		.uleb128 0x2
  2183 0057 08       		.byte	0x8
  2184 0058 07       		.byte	0x7
- 2185 0059 C8000000 		.4byte	.LASF7
+ 2185 0059 84000000 		.4byte	.LASF7
  2186 005d 03       		.uleb128 0x3
  2187 005e 04       		.byte	0x4
  2188 005f 05       		.byte	0x5
@@ -5681,9 +5681,9 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
  2190 0064 02       		.uleb128 0x2
  2191 0065 04       		.byte	0x4
  2192 0066 07       		.byte	0x7
- 2193 0067 66020000 		.4byte	.LASF8
+ 2193 0067 22020000 		.4byte	.LASF8
  2194 006b 04       		.uleb128 0x4
- 2195 006c AC010000 		.4byte	.LASF9
+ 2195 006c 68010000 		.4byte	.LASF9
  2196 0070 02       		.byte	0x2
  2197 0071 D201     		.2byte	0x1d2
  2198 0073 2C000000 		.4byte	0x2c
@@ -5693,41 +5693,41 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
  2202 007d D301     		.2byte	0x1d3
  2203 007f 3A000000 		.4byte	0x3a
  2204 0083 04       		.uleb128 0x4
- 2205 0084 EC010000 		.4byte	.LASF11
+ 2205 0084 A8010000 		.4byte	.LASF11
  2206 0088 02       		.byte	0x2
  2207 0089 D401     		.2byte	0x1d4
  2208 008b 48000000 		.4byte	0x48
  2209 008f 02       		.uleb128 0x2
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 96
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc2h8pTT.s 			page 96
 
 
  2210 0090 04       		.byte	0x4
  2211 0091 04       		.byte	0x4
- 2212 0092 B5040000 		.4byte	.LASF12
+ 2212 0092 63040000 		.4byte	.LASF12
  2213 0096 02       		.uleb128 0x2
  2214 0097 08       		.byte	0x8
  2215 0098 04       		.byte	0x4
- 2216 0099 C8010000 		.4byte	.LASF13
+ 2216 0099 84010000 		.4byte	.LASF13
  2217 009d 02       		.uleb128 0x2
  2218 009e 01       		.byte	0x1
  2219 009f 08       		.byte	0x8
- 2220 00a0 9D050000 		.4byte	.LASF14
+ 2220 00a0 4B050000 		.4byte	.LASF14
  2221 00a4 04       		.uleb128 0x4
- 2222 00a5 1C050000 		.4byte	.LASF15
+ 2222 00a5 CA040000 		.4byte	.LASF15
  2223 00a9 02       		.byte	0x2
  2224 00aa 7C02     		.2byte	0x27c
  2225 00ac B0000000 		.4byte	0xb0
  2226 00b0 05       		.uleb128 0x5
  2227 00b1 6B000000 		.4byte	0x6b
  2228 00b5 04       		.uleb128 0x4
- 2229 00b6 76030000 		.4byte	.LASF16
+ 2229 00b6 24030000 		.4byte	.LASF16
  2230 00ba 02       		.byte	0x2
  2231 00bb 7E02     		.2byte	0x27e
  2232 00bd C1000000 		.4byte	0xc1
  2233 00c1 05       		.uleb128 0x5
  2234 00c2 83000000 		.4byte	0x83
  2235 00c6 04       		.uleb128 0x4
- 2236 00c7 A2050000 		.4byte	.LASF17
+ 2236 00c7 50050000 		.4byte	.LASF17
  2237 00cb 02       		.byte	0x2
  2238 00cc 8E02     		.2byte	0x28e
  2239 00ce D2000000 		.4byte	0xd2
@@ -5738,27 +5738,27 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
  2244 00d9 02       		.uleb128 0x2
  2245 00da 08       		.byte	0x8
  2246 00db 04       		.byte	0x4
- 2247 00dc B3030000 		.4byte	.LASF18
+ 2247 00dc 61030000 		.4byte	.LASF18
  2248 00e0 02       		.uleb128 0x2
  2249 00e1 04       		.byte	0x4
  2250 00e2 07       		.byte	0x7
- 2251 00e3 98030000 		.4byte	.LASF19
+ 2251 00e3 46030000 		.4byte	.LASF19
  2252 00e7 08       		.uleb128 0x8
- 2253 00e8 E0040000 		.4byte	.LASF20
+ 2253 00e8 8E040000 		.4byte	.LASF20
  2254 00ec 03       		.byte	0x3
  2255 00ed F5       		.byte	0xf5
  2256 00ee D2000000 		.4byte	0xd2
  2257 00f2 09       		.uleb128 0x9
- 2258 00f3 D5010000 		.4byte	.LASF21
+ 2258 00f3 91010000 		.4byte	.LASF21
  2259 00f7 01       		.byte	0x1
  2260 00f8 8608     		.2byte	0x886
  2261 00fa 01       		.byte	0x1
  2262 00fb 0A       		.uleb128 0xa
- 2263 00fc 83050000 		.4byte	.LASF106
+ 2263 00fc 31050000 		.4byte	.LASF106
  2264 0100 01       		.byte	0x1
  2265 0101 860B     		.2byte	0xb86
  2266 0103 01       		.byte	0x1
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 97
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc2h8pTT.s 			page 97
 
 
  2267 0104 13010000 		.4byte	0x113
@@ -5769,36 +5769,36 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
  2272 010e 83000000 		.4byte	0x83
  2273 0112 00       		.byte	0
  2274 0113 09       		.uleb128 0x9
- 2275 0114 73020000 		.4byte	.LASF22
+ 2275 0114 2F020000 		.4byte	.LASF22
  2276 0118 01       		.byte	0x1
  2277 0119 3E0B     		.2byte	0xb3e
  2278 011b 01       		.byte	0x1
  2279 011c 0C       		.uleb128 0xc
- 2280 011d C1060000 		.4byte	.LASF107
+ 2280 011d AB060000 		.4byte	.LASF107
  2281 0121 01       		.byte	0x1
  2282 0122 C10A     		.2byte	0xac1
  2283 0124 01       		.byte	0x1
  2284 0125 36010000 		.4byte	0x136
  2285 0129 0D       		.uleb128 0xd
- 2286 012a 3C020000 		.4byte	.LASF23
+ 2286 012a F8010000 		.4byte	.LASF23
  2287 012e 01       		.byte	0x1
  2288 012f C10A     		.2byte	0xac1
  2289 0131 83000000 		.4byte	0x83
  2290 0135 00       		.byte	0
  2291 0136 0E       		.uleb128 0xe
- 2292 0137 4F030000 		.4byte	.LASF108
+ 2292 0137 FD020000 		.4byte	.LASF108
  2293 013b 01       		.byte	0x1
  2294 013c E708     		.2byte	0x8e7
  2295 013e C6000000 		.4byte	0xc6
  2296 0142 01       		.byte	0x1
  2297 0143 78010000 		.4byte	0x178
  2298 0147 0D       		.uleb128 0xd
- 2299 0148 2A030000 		.4byte	.LASF24
+ 2299 0148 D8020000 		.4byte	.LASF24
  2300 014c 01       		.byte	0x1
  2301 014d E708     		.2byte	0x8e7
  2302 014f 6B000000 		.4byte	0x6b
  2303 0153 0D       		.uleb128 0xd
- 2304 0154 BF030000 		.4byte	.LASF25
+ 2304 0154 6D030000 		.4byte	.LASF25
  2305 0158 01       		.byte	0x1
  2306 0159 E708     		.2byte	0x8e7
  2307 015b C6000000 		.4byte	0xc6
@@ -5817,8 +5817,8 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
  2320 0179 04       		.byte	0x4
  2321 017a C6000000 		.4byte	0xc6
  2322 017e 10       		.uleb128 0x10
- 2323 017f 6C060000 		.4byte	.LASF28
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 98
+ 2323 017f 56060000 		.4byte	.LASF28
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc2h8pTT.s 			page 98
 
 
  2324 0183 01       		.byte	0x1
@@ -5828,7 +5828,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
  2328 018d 01       		.uleb128 0x1
  2329 018e 9C       		.byte	0x9c
  2330 018f 10       		.uleb128 0x10
- 2331 0190 AF020000 		.4byte	.LASF29
+ 2331 0190 6B020000 		.4byte	.LASF29
  2332 0194 01       		.byte	0x1
  2333 0195 8B       		.byte	0x8b
  2334 0196 00000000 		.4byte	.LFB1
@@ -5845,19 +5845,19 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
  2345 01b1 9C       		.byte	0x9c
  2346 01b2 F9010000 		.4byte	0x1f9
  2347 01b6 12       		.uleb128 0x12
- 2348 01b7 6F050000 		.4byte	.LASF34
+ 2348 01b7 1D050000 		.4byte	.LASF34
  2349 01bb 01       		.byte	0x1
  2350 01bc AD01     		.2byte	0x1ad
  2351 01be 83000000 		.4byte	0x83
  2352 01c2 00000000 		.4byte	.LLST0
  2353 01c6 13       		.uleb128 0x13
- 2354 01c7 5F010000 		.4byte	.LASF30
+ 2354 01c7 1B010000 		.4byte	.LASF30
  2355 01cb 01       		.byte	0x1
  2356 01cc AF01     		.2byte	0x1af
  2357 01ce 6B000000 		.4byte	0x6b
  2358 01d2 2C000000 		.4byte	.LLST1
  2359 01d6 13       		.uleb128 0x13
- 2360 01d7 BA060000 		.4byte	.LASF31
+ 2360 01d7 A4060000 		.4byte	.LASF31
  2361 01db 01       		.byte	0x1
  2362 01dc B001     		.2byte	0x1b0
  2363 01de 83000000 		.4byte	0x83
@@ -5870,7 +5870,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
  2370 01f4 E70A0000 		.4byte	0xae7
  2371 01f8 00       		.byte	0
  2372 01f9 11       		.uleb128 0x11
- 2373 01fa 61030000 		.4byte	.LASF33
+ 2373 01fa 0F030000 		.4byte	.LASF33
  2374 01fe 01       		.byte	0x1
  2375 01ff D901     		.2byte	0x1d9
  2376 0201 00000000 		.4byte	.LFB3
@@ -5878,11 +5878,11 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
  2378 0209 01       		.uleb128 0x1
  2379 020a 9C       		.byte	0x9c
  2380 020b 1E020000 		.4byte	0x21e
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 99
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc2h8pTT.s 			page 99
 
 
  2381 020f 15       		.uleb128 0x15
- 2382 0210 C1010000 		.4byte	.LASF35
+ 2382 0210 7D010000 		.4byte	.LASF35
  2383 0214 01       		.byte	0x1
  2384 0215 D901     		.2byte	0x1d9
  2385 0217 83000000 		.4byte	0x83
@@ -5890,7 +5890,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
  2387 021c 50       		.byte	0x50
  2388 021d 00       		.byte	0
  2389 021e 16       		.uleb128 0x16
- 2390 021f F8010000 		.4byte	.LASF40
+ 2390 021f B4010000 		.4byte	.LASF40
  2391 0223 01       		.byte	0x1
  2392 0224 FE01     		.2byte	0x1fe
  2393 0226 83000000 		.4byte	0x83
@@ -5900,13 +5900,13 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
  2397 0233 9C       		.byte	0x9c
  2398 0234 6B020000 		.4byte	0x26b
  2399 0238 13       		.uleb128 0x13
- 2400 0239 5F010000 		.4byte	.LASF30
+ 2400 0239 1B010000 		.4byte	.LASF30
  2401 023d 01       		.byte	0x1
  2402 023e 0002     		.2byte	0x200
  2403 0240 6B000000 		.4byte	0x6b
  2404 0244 5D000000 		.4byte	.LLST3
  2405 0248 13       		.uleb128 0x13
- 2406 0249 5D040000 		.4byte	.LASF36
+ 2406 0249 0B040000 		.4byte	.LASF36
  2407 024d 01       		.byte	0x1
  2408 024e 0102     		.2byte	0x201
  2409 0250 83000000 		.4byte	0x83
@@ -5919,7 +5919,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
  2416 0266 E70A0000 		.4byte	0xae7
  2417 026a 00       		.byte	0
  2418 026b 11       		.uleb128 0x11
- 2419 026c BF050000 		.4byte	.LASF37
+ 2419 026c 6D050000 		.4byte	.LASF37
  2420 0270 01       		.byte	0x1
  2421 0271 3502     		.2byte	0x235
  2422 0273 00000000 		.4byte	.LFB5
@@ -5928,17 +5928,17 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
  2425 027c 9C       		.byte	0x9c
  2426 027d B4020000 		.4byte	0x2b4
  2427 0281 12       		.uleb128 0x12
- 2428 0282 64060000 		.4byte	.LASF38
+ 2428 0282 4E060000 		.4byte	.LASF38
  2429 0286 01       		.byte	0x1
  2430 0287 3502     		.2byte	0x235
  2431 0289 83000000 		.4byte	0x83
  2432 028d 92000000 		.4byte	.LLST5
  2433 0291 13       		.uleb128 0x13
- 2434 0292 5F010000 		.4byte	.LASF30
+ 2434 0292 1B010000 		.4byte	.LASF30
  2435 0296 01       		.byte	0x1
  2436 0297 3702     		.2byte	0x237
  2437 0299 6B000000 		.4byte	0x6b
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 100
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc2h8pTT.s 			page 100
 
 
  2438 029d BE000000 		.4byte	.LLST6
@@ -5950,7 +5950,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
  2444 02af E70A0000 		.4byte	0xae7
  2445 02b3 00       		.byte	0
  2446 02b4 17       		.uleb128 0x17
- 2447 02b5 37060000 		.4byte	.LASF39
+ 2447 02b5 21060000 		.4byte	.LASF39
  2448 02b9 01       		.byte	0x1
  2449 02ba 6408     		.2byte	0x864
  2450 02bc 00000000 		.4byte	.LFB8
@@ -5958,7 +5958,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
  2452 02c4 01       		.uleb128 0x1
  2453 02c5 9C       		.byte	0x9c
  2454 02c6 18       		.uleb128 0x18
- 2455 02c7 94020000 		.4byte	.LASF82
+ 2455 02c7 50020000 		.4byte	.LASF82
  2456 02cb 01       		.byte	0x1
  2457 02cc 7608     		.2byte	0x876
  2458 02ce 83000000 		.4byte	0x83
@@ -5973,7 +5973,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
  2467 02e9 01       		.uleb128 0x1
  2468 02ea 9C       		.byte	0x9c
  2469 02eb 16       		.uleb128 0x16
- 2470 02ec F4020000 		.4byte	.LASF41
+ 2470 02ec A2020000 		.4byte	.LASF41
  2471 02f0 01       		.byte	0x1
  2472 02f1 A008     		.2byte	0x8a0
  2473 02f3 83000000 		.4byte	0x83
@@ -5983,22 +5983,22 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
  2477 0300 9C       		.byte	0x9c
  2478 0301 26030000 		.4byte	0x326
  2479 0305 12       		.uleb128 0x12
- 2480 0306 40050000 		.4byte	.LASF42
+ 2480 0306 EE040000 		.4byte	.LASF42
  2481 030a 01       		.byte	0x1
  2482 030b A008     		.2byte	0x8a0
  2483 030d 83000000 		.4byte	0x83
  2484 0311 D1000000 		.4byte	.LLST7
  2485 0315 13       		.uleb128 0x13
- 2486 0316 8B030000 		.4byte	.LASF43
+ 2486 0316 39030000 		.4byte	.LASF43
  2487 031a 01       		.byte	0x1
  2488 031b A208     		.2byte	0x8a2
  2489 031d 83000000 		.4byte	0x83
  2490 0321 EF000000 		.4byte	.LLST8
  2491 0325 00       		.byte	0
  2492 0326 16       		.uleb128 0x16
- 2493 0327 E6020000 		.4byte	.LASF44
+ 2493 0327 61000000 		.4byte	.LASF44
  2494 032b 01       		.byte	0x1
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 101
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc2h8pTT.s 			page 101
 
 
  2495 032c B708     		.2byte	0x8b7
@@ -6017,7 +6017,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
  2508 034d 50       		.byte	0x50
  2509 034e 00       		.byte	0
  2510 034f 11       		.uleb128 0x11
- 2511 0350 F0000000 		.4byte	.LASF46
+ 2511 0350 AC000000 		.4byte	.LASF46
  2512 0354 01       		.byte	0x1
  2513 0355 CE08     		.2byte	0x8ce
  2514 0357 00000000 		.4byte	.LFB13
@@ -6026,7 +6026,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
  2517 0360 9C       		.byte	0x9c
  2518 0361 74030000 		.4byte	0x374
  2519 0365 15       		.uleb128 0x15
- 2520 0366 F3010000 		.4byte	.LASF47
+ 2520 0366 AF010000 		.4byte	.LASF47
  2521 036a 01       		.byte	0x1
  2522 036b CE08     		.2byte	0x8ce
  2523 036d 83000000 		.4byte	0x83
@@ -6056,9 +6056,9 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
  2547 03a3 00000020 		.4byte	0x20000000
  2548 03a7 00       		.byte	0
  2549 03a8 16       		.uleb128 0x16
- 2550 03a9 5D050000 		.4byte	.LASF48
+ 2550 03a9 0B050000 		.4byte	.LASF48
  2551 03ad 01       		.byte	0x1
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 102
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc2h8pTT.s 			page 102
 
 
  2552 03ae 0909     		.2byte	0x909
@@ -6069,7 +6069,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
  2557 03bd 9C       		.byte	0x9c
  2558 03be E3030000 		.4byte	0x3e3
  2559 03c2 12       		.uleb128 0x12
- 2560 03c3 2A030000 		.4byte	.LASF24
+ 2560 03c3 D8020000 		.4byte	.LASF24
  2561 03c7 01       		.byte	0x1
  2562 03c8 0909     		.2byte	0x909
  2563 03ca 6B000000 		.4byte	0x6b
@@ -6082,7 +6082,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
  2570 03de 00000020 		.4byte	0x20000000
  2571 03e2 00       		.byte	0
  2572 03e3 16       		.uleb128 0x16
- 2573 03e4 1B030000 		.4byte	.LASF49
+ 2573 03e4 C9020000 		.4byte	.LASF49
  2574 03e8 01       		.byte	0x1
  2575 03e9 1F09     		.2byte	0x91f
  2576 03eb C6000000 		.4byte	0xc6
@@ -6092,13 +6092,13 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
  2580 03f8 9C       		.byte	0x9c
  2581 03f9 3A040000 		.4byte	0x43a
  2582 03fd 12       		.uleb128 0x12
- 2583 03fe 2A030000 		.4byte	.LASF24
+ 2583 03fe D8020000 		.4byte	.LASF24
  2584 0402 01       		.byte	0x1
  2585 0403 1F09     		.2byte	0x91f
  2586 0405 6B000000 		.4byte	0x6b
  2587 0409 53010000 		.4byte	.LLST11
  2588 040d 15       		.uleb128 0x15
- 2589 040e BF030000 		.4byte	.LASF25
+ 2589 040e 6D030000 		.4byte	.LASF25
  2590 0412 01       		.byte	0x1
  2591 0413 1F09     		.2byte	0x91f
  2592 0415 C6000000 		.4byte	0xc6
@@ -6118,11 +6118,11 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
  2606 0431 78010000 		.4byte	0x178
  2607 0435 00000020 		.4byte	0x20000000
  2608 0439 00       		.byte	0
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 103
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc2h8pTT.s 			page 103
 
 
  2609 043a 16       		.uleb128 0x16
- 2610 043b F2040000 		.4byte	.LASF50
+ 2610 043b A0040000 		.4byte	.LASF50
  2611 043f 01       		.byte	0x1
  2612 0440 3B09     		.2byte	0x93b
  2613 0442 C6000000 		.4byte	0xc6
@@ -6132,7 +6132,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
  2617 044f 9C       		.byte	0x9c
  2618 0450 75040000 		.4byte	0x475
  2619 0454 12       		.uleb128 0x12
- 2620 0455 2A030000 		.4byte	.LASF24
+ 2620 0455 D8020000 		.4byte	.LASF24
  2621 0459 01       		.byte	0x1
  2622 045a 3B09     		.2byte	0x93b
  2623 045c 6B000000 		.4byte	0x6b
@@ -6145,7 +6145,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
  2630 0470 00000020 		.4byte	0x20000000
  2631 0474 00       		.byte	0
  2632 0475 11       		.uleb128 0x11
- 2633 0476 A4040000 		.4byte	.LASF51
+ 2633 0476 52040000 		.4byte	.LASF51
  2634 047a 01       		.byte	0x1
  2635 047b 4E09     		.2byte	0x94e
  2636 047d 00000000 		.4byte	.LFB18
@@ -6154,34 +6154,34 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
  2639 0486 9C       		.byte	0x9c
  2640 0487 EE040000 		.4byte	0x4ee
  2641 048b 12       		.uleb128 0x12
- 2642 048c 2A030000 		.4byte	.LASF24
+ 2642 048c D8020000 		.4byte	.LASF24
  2643 0490 01       		.byte	0x1
  2644 0491 4E09     		.2byte	0x94e
  2645 0493 6B000000 		.4byte	0x6b
  2646 0497 95010000 		.4byte	.LLST13
  2647 049b 12       		.uleb128 0x12
- 2648 049c 31030000 		.4byte	.LASF52
+ 2648 049c DF020000 		.4byte	.LASF52
  2649 04a0 01       		.byte	0x1
  2650 04a1 4E09     		.2byte	0x94e
  2651 04a3 6B000000 		.4byte	0x6b
  2652 04a7 B6010000 		.4byte	.LLST14
  2653 04ab 13       		.uleb128 0x13
- 2654 04ac 5F010000 		.4byte	.LASF30
+ 2654 04ac 1B010000 		.4byte	.LASF30
  2655 04b0 01       		.byte	0x1
  2656 04b1 5009     		.2byte	0x950
  2657 04b3 6B000000 		.4byte	0x6b
  2658 04b7 D7010000 		.4byte	.LLST15
  2659 04bb 13       		.uleb128 0x13
- 2660 04bc CF010000 		.4byte	.LASF53
+ 2660 04bc 8B010000 		.4byte	.LASF53
  2661 04c0 01       		.byte	0x1
  2662 04c1 5109     		.2byte	0x951
  2663 04c3 83000000 		.4byte	0x83
  2664 04c7 EA010000 		.4byte	.LLST16
  2665 04cb 13       		.uleb128 0x13
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 104
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc2h8pTT.s 			page 104
 
 
- 2666 04cc 3C020000 		.4byte	.LASF23
+ 2666 04cc F8010000 		.4byte	.LASF23
  2667 04d0 01       		.byte	0x1
  2668 04d1 5209     		.2byte	0x952
  2669 04d3 83000000 		.4byte	0x83
@@ -6194,7 +6194,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
  2676 04e9 E70A0000 		.4byte	0xae7
  2677 04ed 00       		.byte	0
  2678 04ee 16       		.uleb128 0x16
- 2679 04ef 10020000 		.4byte	.LASF54
+ 2679 04ef CC010000 		.4byte	.LASF54
  2680 04f3 01       		.byte	0x1
  2681 04f4 7009     		.2byte	0x970
  2682 04f6 6B000000 		.4byte	0x6b
@@ -6204,20 +6204,20 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
  2686 0503 9C       		.byte	0x9c
  2687 0504 29050000 		.4byte	0x529
  2688 0508 12       		.uleb128 0x12
- 2689 0509 2A030000 		.4byte	.LASF24
+ 2689 0509 D8020000 		.4byte	.LASF24
  2690 050d 01       		.byte	0x1
  2691 050e 7009     		.2byte	0x970
  2692 0510 6B000000 		.4byte	0x6b
  2693 0514 1B020000 		.4byte	.LLST18
  2694 0518 13       		.uleb128 0x13
- 2695 0519 31030000 		.4byte	.LASF52
+ 2695 0519 DF020000 		.4byte	.LASF52
  2696 051d 01       		.byte	0x1
  2697 051e 7209     		.2byte	0x972
  2698 0520 6B000000 		.4byte	0x6b
  2699 0524 3C020000 		.4byte	.LLST19
  2700 0528 00       		.byte	0
  2701 0529 11       		.uleb128 0x11
- 2702 052a 51050000 		.4byte	.LASF55
+ 2702 052a FF040000 		.4byte	.LASF55
  2703 052e 01       		.byte	0x1
  2704 052f 8509     		.2byte	0x985
  2705 0531 00000000 		.4byte	.LFB20
@@ -6226,19 +6226,19 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
  2708 053a 9C       		.byte	0x9c
  2709 053b 50050000 		.4byte	0x550
  2710 053f 12       		.uleb128 0x12
- 2711 0540 2A030000 		.4byte	.LASF24
+ 2711 0540 D8020000 		.4byte	.LASF24
  2712 0544 01       		.byte	0x1
  2713 0545 8509     		.2byte	0x985
  2714 0547 6B000000 		.4byte	0x6b
  2715 054b 5D020000 		.4byte	.LLST20
  2716 054f 00       		.byte	0
  2717 0550 16       		.uleb128 0x16
- 2718 0551 26010000 		.4byte	.LASF56
+ 2718 0551 E2000000 		.4byte	.LASF56
  2719 0555 01       		.byte	0x1
  2720 0556 9709     		.2byte	0x997
  2721 0558 6B000000 		.4byte	0x6b
  2722 055c 00000000 		.4byte	.LFB21
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 105
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc2h8pTT.s 			page 105
 
 
  2723 0560 18000000 		.4byte	.LFE21-.LFB21
@@ -6246,14 +6246,14 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
  2725 0565 9C       		.byte	0x9c
  2726 0566 7B050000 		.4byte	0x57b
  2727 056a 12       		.uleb128 0x12
- 2728 056b 2A030000 		.4byte	.LASF24
+ 2728 056b D8020000 		.4byte	.LASF24
  2729 056f 01       		.byte	0x1
  2730 0570 9709     		.2byte	0x997
  2731 0572 6B000000 		.4byte	0x6b
  2732 0576 7E020000 		.4byte	.LLST21
  2733 057a 00       		.byte	0
  2734 057b 11       		.uleb128 0x11
- 2735 057c 8A010000 		.4byte	.LASF57
+ 2735 057c 46010000 		.4byte	.LASF57
  2736 0580 01       		.byte	0x1
  2737 0581 A709     		.2byte	0x9a7
  2738 0583 00000000 		.4byte	.LFB22
@@ -6262,14 +6262,14 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
  2741 058c 9C       		.byte	0x9c
  2742 058d A2050000 		.4byte	0x5a2
  2743 0591 12       		.uleb128 0x12
- 2744 0592 2A030000 		.4byte	.LASF24
+ 2744 0592 D8020000 		.4byte	.LASF24
  2745 0596 01       		.byte	0x1
  2746 0597 A709     		.2byte	0x9a7
  2747 0599 6B000000 		.4byte	0x6b
  2748 059d 9F020000 		.4byte	.LLST22
  2749 05a1 00       		.byte	0
  2750 05a2 11       		.uleb128 0x11
- 2751 05a3 D6020000 		.4byte	.LASF58
+ 2751 05a3 92020000 		.4byte	.LASF58
  2752 05a7 01       		.byte	0x1
  2753 05a8 B509     		.2byte	0x9b5
  2754 05aa 00000000 		.4byte	.LFB23
@@ -6278,14 +6278,14 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
  2757 05b3 9C       		.byte	0x9c
  2758 05b4 C9050000 		.4byte	0x5c9
  2759 05b8 12       		.uleb128 0x12
- 2760 05b9 2A030000 		.4byte	.LASF24
+ 2760 05b9 D8020000 		.4byte	.LASF24
  2761 05bd 01       		.byte	0x1
  2762 05be B509     		.2byte	0x9b5
  2763 05c0 6B000000 		.4byte	0x6b
  2764 05c4 C0020000 		.4byte	.LLST23
  2765 05c8 00       		.byte	0
  2766 05c9 11       		.uleb128 0x11
- 2767 05ca A1030000 		.4byte	.LASF59
+ 2767 05ca 4F030000 		.4byte	.LASF59
  2768 05ce 01       		.byte	0x1
  2769 05cf C409     		.2byte	0x9c4
  2770 05d1 00000000 		.4byte	.LFB24
@@ -6294,17 +6294,17 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
  2773 05da 9C       		.byte	0x9c
  2774 05db F0050000 		.4byte	0x5f0
  2775 05df 12       		.uleb128 0x12
- 2776 05e0 2A030000 		.4byte	.LASF24
+ 2776 05e0 D8020000 		.4byte	.LASF24
  2777 05e4 01       		.byte	0x1
  2778 05e5 C409     		.2byte	0x9c4
  2779 05e7 6B000000 		.4byte	0x6b
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 106
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc2h8pTT.s 			page 106
 
 
  2780 05eb E1020000 		.4byte	.LLST24
  2781 05ef 00       		.byte	0
  2782 05f0 11       		.uleb128 0x11
- 2783 05f1 2B050000 		.4byte	.LASF60
+ 2783 05f1 D9040000 		.4byte	.LASF60
  2784 05f5 01       		.byte	0x1
  2785 05f6 D309     		.2byte	0x9d3
  2786 05f8 00000000 		.4byte	.LFB25
@@ -6313,7 +6313,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
  2789 0601 9C       		.byte	0x9c
  2790 0602 15060000 		.4byte	0x615
  2791 0606 15       		.uleb128 0x15
- 2792 0607 40050000 		.4byte	.LASF42
+ 2792 0607 EE040000 		.4byte	.LASF42
  2793 060b 01       		.byte	0x1
  2794 060c D309     		.2byte	0x9d3
  2795 060e 6B000000 		.4byte	0x6b
@@ -6321,7 +6321,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
  2797 0613 50       		.byte	0x50
  2798 0614 00       		.byte	0
  2799 0615 17       		.uleb128 0x17
- 2800 0616 FD000000 		.4byte	.LASF61
+ 2800 0616 B9000000 		.4byte	.LASF61
  2801 061a 01       		.byte	0x1
  2802 061b EB09     		.2byte	0x9eb
  2803 061d 00000000 		.4byte	.LFB26
@@ -6329,7 +6329,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
  2805 0625 01       		.uleb128 0x1
  2806 0626 9C       		.byte	0x9c
  2807 0627 11       		.uleb128 0x11
- 2808 0628 15060000 		.4byte	.LASF62
+ 2808 0628 FF050000 		.4byte	.LASF62
  2809 062c 01       		.byte	0x1
  2810 062d FF09     		.2byte	0x9ff
  2811 062f 00000000 		.4byte	.LFB27
@@ -6338,7 +6338,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
  2814 0638 9C       		.byte	0x9c
  2815 0639 60060000 		.4byte	0x660
  2816 063d 12       		.uleb128 0x12
- 2817 063e 01050000 		.4byte	.LASF63
+ 2817 063e AF040000 		.4byte	.LASF63
  2818 0642 01       		.byte	0x1
  2819 0643 FF09     		.2byte	0x9ff
  2820 0645 83000000 		.4byte	0x83
@@ -6351,19 +6351,19 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
  2827 065b F20A0000 		.4byte	0xaf2
  2828 065f 00       		.byte	0
  2829 0660 11       		.uleb128 0x11
- 2830 0661 79050000 		.4byte	.LASF64
+ 2830 0661 27050000 		.4byte	.LASF64
  2831 0665 01       		.byte	0x1
  2832 0666 160A     		.2byte	0xa16
  2833 0668 00000000 		.4byte	.LFB28
  2834 066c 14000000 		.4byte	.LFE28-.LFB28
  2835 0670 01       		.uleb128 0x1
  2836 0671 9C       		.byte	0x9c
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 107
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc2h8pTT.s 			page 107
 
 
  2837 0672 90060000 		.4byte	0x690
  2838 0676 12       		.uleb128 0x12
- 2839 0677 AD060000 		.4byte	.LASF65
+ 2839 0677 97060000 		.4byte	.LASF65
  2840 067b 01       		.byte	0x1
  2841 067c 160A     		.2byte	0xa16
  2842 067e 77000000 		.4byte	0x77
@@ -6373,7 +6373,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
  2846 068b F20A0000 		.4byte	0xaf2
  2847 068f 00       		.byte	0
  2848 0690 11       		.uleb128 0x11
- 2849 0691 3A030000 		.4byte	.LASF66
+ 2849 0691 E8020000 		.4byte	.LASF66
  2850 0695 01       		.byte	0x1
  2851 0696 6F02     		.2byte	0x26f
  2852 0698 00000000 		.4byte	.LFB6
@@ -6382,7 +6382,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
  2855 06a1 9C       		.byte	0x9c
  2856 06a2 6A070000 		.4byte	0x76a
  2857 06a6 12       		.uleb128 0x12
- 2858 06a7 4E010000 		.4byte	.LASF67
+ 2858 06a7 0A010000 		.4byte	.LASF67
  2859 06ab 01       		.byte	0x1
  2860 06ac 6F02     		.2byte	0x26f
  2861 06ae 83000000 		.4byte	0x83
@@ -6394,34 +6394,34 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
  2867 06be 6B000000 		.4byte	0x6b
  2868 06c2 80030000 		.4byte	.LLST28
  2869 06c6 13       		.uleb128 0x13
- 2870 06c7 55040000 		.4byte	.LASF69
+ 2870 06c7 03040000 		.4byte	.LASF69
  2871 06cb 01       		.byte	0x1
  2872 06cc 7602     		.2byte	0x276
  2873 06ce 6B000000 		.4byte	0x6b
  2874 06d2 BF030000 		.4byte	.LLST29
  2875 06d6 13       		.uleb128 0x13
- 2876 06d7 7D060000 		.4byte	.LASF70
+ 2876 06d7 67060000 		.4byte	.LASF70
  2877 06db 01       		.byte	0x1
  2878 06dc 7702     		.2byte	0x277
  2879 06de 6B000000 		.4byte	0x6b
  2880 06e2 D3030000 		.4byte	.LLST30
  2881 06e6 13       		.uleb128 0x13
- 2882 06e7 B3000000 		.4byte	.LASF71
+ 2882 06e7 6F000000 		.4byte	.LASF71
  2883 06eb 01       		.byte	0x1
  2884 06ec 7802     		.2byte	0x278
  2885 06ee 6B000000 		.4byte	0x6b
  2886 06f2 E7030000 		.4byte	.LLST31
  2887 06f6 13       		.uleb128 0x13
- 2888 06f7 FE050000 		.4byte	.LASF72
+ 2888 06f7 AC050000 		.4byte	.LASF72
  2889 06fb 01       		.byte	0x1
  2890 06fc 7902     		.2byte	0x279
  2891 06fe 6B000000 		.4byte	0x6b
  2892 0702 FA030000 		.4byte	.LLST32
  2893 0706 1A       		.uleb128 0x1a
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 108
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc2h8pTT.s 			page 108
 
 
- 2894 0707 5F010000 		.4byte	.LASF30
+ 2894 0707 1B010000 		.4byte	.LASF30
  2895 070b 01       		.byte	0x1
  2896 070c 8402     		.2byte	0x284
  2897 070e 6B000000 		.4byte	0x6b
@@ -6475,10 +6475,10 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
  2945 0768 00       		.byte	0
  2946 0769 00       		.byte	0
  2947 076a 11       		.uleb128 0x11
- 2948 076b D1040000 		.4byte	.LASF73
+ 2948 076b 7F040000 		.4byte	.LASF73
  2949 076f 01       		.byte	0x1
  2950 0770 4608     		.2byte	0x846
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 109
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc2h8pTT.s 			page 109
 
 
  2951 0772 00000000 		.4byte	.LFB7
@@ -6487,7 +6487,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
  2954 077b 9C       		.byte	0x9c
  2955 077c B2070000 		.4byte	0x7b2
  2956 0780 12       		.uleb128 0x12
- 2957 0781 21050000 		.4byte	.LASF74
+ 2957 0781 CF040000 		.4byte	.LASF74
  2958 0785 01       		.byte	0x1
  2959 0786 4608     		.2byte	0x846
  2960 0788 83000000 		.4byte	0x83
@@ -6510,7 +6510,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
  2977 07b0 00       		.byte	0
  2978 07b1 00       		.byte	0
  2979 07b2 25       		.uleb128 0x25
- 2980 07b3 53010000 		.4byte	.LASF75
+ 2980 07b3 0F010000 		.4byte	.LASF75
  2981 07b7 01       		.byte	0x1
  2982 07b8 240A     		.2byte	0xa24
  2983 07ba 00000000 		.4byte	.LFB29
@@ -6519,14 +6519,14 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
  2986 07c3 9C       		.byte	0x9c
  2987 07c4 D9070000 		.4byte	0x7d9
  2988 07c8 12       		.uleb128 0x12
- 2989 07c9 4E010000 		.4byte	.LASF67
+ 2989 07c9 0A010000 		.4byte	.LASF67
  2990 07cd 01       		.byte	0x1
  2991 07ce 240A     		.2byte	0xa24
  2992 07d0 83000000 		.4byte	0x83
  2993 07d4 4D040000 		.4byte	.LLST34
  2994 07d8 00       		.byte	0
  2995 07d9 25       		.uleb128 0x25
- 2996 07da 2E020000 		.4byte	.LASF76
+ 2996 07da EA010000 		.4byte	.LASF76
  2997 07de 01       		.byte	0x1
  2998 07df 610A     		.2byte	0xa61
  2999 07e1 00000000 		.4byte	.LFB31
@@ -6538,7 +6538,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
  3005 07f0 6900     		.ascii	"i\000"
  3006 07f2 01       		.byte	0x1
  3007 07f3 630A     		.2byte	0xa63
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 110
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc2h8pTT.s 			page 110
 
 
  3008 07f5 83000000 		.4byte	0x83
@@ -6585,7 +6585,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
  3049 0868 710A     		.2byte	0xa71
  3050 086a 00       		.byte	0
  3051 086b 17       		.uleb128 0x17
- 3052 086c 56060000 		.4byte	.LASF77
+ 3052 086c 40060000 		.4byte	.LASF77
  3053 0870 01       		.byte	0x1
  3054 0871 900A     		.2byte	0xa90
  3055 0873 00000000 		.4byte	.LFB33
@@ -6593,18 +6593,18 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
  3057 087b 01       		.uleb128 0x1
  3058 087c 9C       		.byte	0x9c
  3059 087d 17       		.uleb128 0x17
- 3060 087e 0D010000 		.4byte	.LASF78
+ 3060 087e C9000000 		.4byte	.LASF78
  3061 0882 01       		.byte	0x1
  3062 0883 A00A     		.2byte	0xaa0
  3063 0885 00000000 		.4byte	.LFB34
  3064 0889 10000000 		.4byte	.LFE34-.LFB34
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 111
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc2h8pTT.s 			page 111
 
 
  3065 088d 01       		.uleb128 0x1
  3066 088e 9C       		.byte	0x9c
  3067 088f 11       		.uleb128 0x11
- 3068 0890 AF050000 		.4byte	.LASF79
+ 3068 0890 5D050000 		.4byte	.LASF79
  3069 0894 01       		.byte	0x1
  3070 0895 7F0A     		.2byte	0xa7f
  3071 0897 00000000 		.4byte	.LFB32
@@ -6617,7 +6617,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
  3078 08aa 7D080000 		.4byte	0x87d
  3079 08ae 00       		.byte	0
  3080 08af 11       		.uleb128 0x11
- 3081 08b0 7C030000 		.4byte	.LASF80
+ 3081 08b0 2A030000 		.4byte	.LASF80
  3082 08b4 01       		.byte	0x1
  3083 08b5 440A     		.2byte	0xa44
  3084 08b7 00000000 		.4byte	.LFB30
@@ -6633,7 +6633,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
  3094 08d3 8F080000 		.4byte	0x88f
  3095 08d7 00       		.byte	0
  3096 08d8 17       		.uleb128 0x17
- 3097 08d9 1D060000 		.4byte	.LASF81
+ 3097 08d9 07060000 		.4byte	.LASF81
  3098 08dd 01       		.byte	0x1
  3099 08de B00A     		.2byte	0xab0
  3100 08e0 00000000 		.4byte	.LFB35
@@ -6652,19 +6652,19 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
  3113 0902 14050000 		.4byte	.LLST40
  3114 0906 00       		.byte	0
  3115 0907 18       		.uleb128 0x18
- 3116 0908 6E010000 		.4byte	.LASF83
+ 3116 0908 2A010000 		.4byte	.LASF83
  3117 090c 01       		.byte	0x1
  3118 090d D10A     		.2byte	0xad1
  3119 090f 83000000 		.4byte	0x83
  3120 0913 00000000 		.4byte	.LFB37
  3121 0917 10000000 		.4byte	.LFE37-.LFB37
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 112
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc2h8pTT.s 			page 112
 
 
  3122 091b 01       		.uleb128 0x1
  3123 091c 9C       		.byte	0x9c
  3124 091d 18       		.uleb128 0x18
- 3125 091e 84040000 		.4byte	.LASF84
+ 3125 091e 32040000 		.4byte	.LASF84
  3126 0922 01       		.byte	0x1
  3127 0923 E10A     		.2byte	0xae1
  3128 0925 83000000 		.4byte	0x83
@@ -6673,7 +6673,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
  3131 0931 01       		.uleb128 0x1
  3132 0932 9C       		.byte	0x9c
  3133 0933 18       		.uleb128 0x18
- 3134 0934 50020000 		.4byte	.LASF85
+ 3134 0934 0C020000 		.4byte	.LASF85
  3135 0938 01       		.byte	0x1
  3136 0939 310B     		.2byte	0xb31
  3137 093b 83000000 		.4byte	0x83
@@ -6708,7 +6708,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
  3166 098b 01       		.uleb128 0x1
  3167 098c 9C       		.byte	0x9c
  3168 098d 16       		.uleb128 0x16
- 3169 098e D6050000 		.4byte	.LASF86
+ 3169 098e 84050000 		.4byte	.LASF86
  3170 0992 01       		.byte	0x1
  3171 0993 610B     		.2byte	0xb61
  3172 0995 E7000000 		.4byte	0xe7
@@ -6718,16 +6718,16 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
  3176 09a2 9C       		.byte	0x9c
  3177 09a3 D4090000 		.4byte	0x9d4
  3178 09a7 12       		.uleb128 0x12
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 113
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc2h8pTT.s 			page 113
 
 
- 3179 09a8 2A030000 		.4byte	.LASF24
+ 3179 09a8 D8020000 		.4byte	.LASF24
  3180 09ac 01       		.byte	0x1
  3181 09ad 610B     		.2byte	0xb61
  3182 09af 83000000 		.4byte	0x83
  3183 09b3 35050000 		.4byte	.LLST41
  3184 09b7 15       		.uleb128 0x15
- 3185 09b8 6A040000 		.4byte	.LASF87
+ 3185 09b8 18040000 		.4byte	.LASF87
  3186 09bc 01       		.byte	0x1
  3187 09bd 610B     		.2byte	0xb61
  3188 09bf E7000000 		.4byte	0xe7
@@ -6742,7 +6742,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
  3197 09d2 50       		.byte	0x50
  3198 09d3 00       		.byte	0
  3199 09d4 16       		.uleb128 0x16
- 3200 09d5 97010000 		.4byte	.LASF89
+ 3200 09d5 53010000 		.4byte	.LASF89
  3201 09d9 01       		.byte	0x1
  3202 09da 790B     		.2byte	0xb79
  3203 09dc E7000000 		.4byte	0xe7
@@ -6752,14 +6752,14 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
  3207 09e9 9C       		.byte	0x9c
  3208 09ea FF090000 		.4byte	0x9ff
  3209 09ee 12       		.uleb128 0x12
- 3210 09ef 2A030000 		.4byte	.LASF24
+ 3210 09ef D8020000 		.4byte	.LASF24
  3211 09f3 01       		.byte	0x1
  3212 09f4 790B     		.2byte	0xb79
  3213 09f6 83000000 		.4byte	0x83
  3214 09fa 56050000 		.4byte	.LLST42
  3215 09fe 00       		.byte	0
  3216 09ff 11       		.uleb128 0x11
- 3217 0a00 42020000 		.4byte	.LASF90
+ 3217 0a00 FE010000 		.4byte	.LASF90
  3218 0a04 01       		.byte	0x1
  3219 0a05 A60B     		.2byte	0xba6
  3220 0a07 00000000 		.4byte	.LFB44
@@ -6768,7 +6768,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
  3223 0a10 9C       		.byte	0x9c
  3224 0a11 240A0000 		.4byte	0xa24
  3225 0a15 15       		.uleb128 0x15
- 3226 0a16 0C060000 		.4byte	.LASF91
+ 3226 0a16 BA050000 		.4byte	.LASF91
  3227 0a1a 01       		.byte	0x1
  3228 0a1b A60B     		.2byte	0xba6
  3229 0a1d 240A0000 		.4byte	0xa24
@@ -6778,7 +6778,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
  3233 0a24 06       		.uleb128 0x6
  3234 0a25 04       		.byte	0x4
  3235 0a26 83000000 		.4byte	0x83
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 114
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc2h8pTT.s 			page 114
 
 
  3236 0a2a 2F       		.uleb128 0x2f
@@ -6789,7 +6789,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
  3241 0a38 04       		.byte	0x4
  3242 0a39 00       		.byte	0
  3243 0a3a 31       		.uleb128 0x31
- 3244 0a3b EB050000 		.4byte	.LASF92
+ 3244 0a3b 99050000 		.4byte	.LASF92
  3245 0a3f 01       		.byte	0x1
  3246 0a40 22       		.byte	0x22
  3247 0a41 2A0A0000 		.4byte	0xa2a
@@ -6797,7 +6797,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
  3249 0a46 03       		.byte	0x3
  3250 0a47 00000000 		.4byte	CySysTickCallbacks
  3251 0a4b 32       		.uleb128 0x32
- 3252 0a4c 96040000 		.4byte	.LASF93
+ 3252 0a4c 44040000 		.4byte	.LASF93
  3253 0a50 01       		.byte	0x1
  3254 0a51 1B       		.byte	0x1b
  3255 0a52 83000000 		.4byte	0x83
@@ -6805,7 +6805,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
  3257 0a57 03       		.byte	0x3
  3258 0a58 00000000 		.4byte	cydelayFreqHz
  3259 0a5c 32       		.uleb128 0x32
- 3260 0a5d B2010000 		.4byte	.LASF94
+ 3260 0a5d 6E010000 		.4byte	.LASF94
  3261 0a61 01       		.byte	0x1
  3262 0a62 1C       		.byte	0x1c
  3263 0a63 83000000 		.4byte	0x83
@@ -6813,7 +6813,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
  3265 0a68 03       		.byte	0x3
  3266 0a69 00000000 		.4byte	cydelayFreqKhz
  3267 0a6d 32       		.uleb128 0x32
- 3268 0a6e 47060000 		.4byte	.LASF95
+ 3268 0a6e 31060000 		.4byte	.LASF95
  3269 0a72 01       		.byte	0x1
  3270 0a73 1D       		.byte	0x1d
  3271 0a74 6B000000 		.4byte	0x6b
@@ -6821,7 +6821,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
  3273 0a79 03       		.byte	0x3
  3274 0a7a 00000000 		.4byte	cydelayFreqMhz
  3275 0a7e 32       		.uleb128 0x32
- 3276 0a7f 21020000 		.4byte	.LASF96
+ 3276 0a7f DD010000 		.4byte	.LASF96
  3277 0a83 01       		.byte	0x1
  3278 0a84 1E       		.byte	0x1e
  3279 0a85 83000000 		.4byte	0x83
@@ -6829,7 +6829,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
  3281 0a8a 03       		.byte	0x3
  3282 0a8b 00000000 		.4byte	cydelay32kMs
  3283 0a8f 32       		.uleb128 0x32
- 3284 0a90 DF000000 		.4byte	.LASF97
+ 3284 0a90 9B000000 		.4byte	.LASF97
  3285 0a94 01       		.byte	0x1
  3286 0a95 36       		.byte	0x36
  3287 0a96 83000000 		.4byte	0x83
@@ -6838,7 +6838,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
  3290 0a9c 00000000 		.4byte	CySysTickInitVar
  3291 0aa0 2F       		.uleb128 0x2f
  3292 0aa1 B00A0000 		.4byte	0xab0
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 115
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc2h8pTT.s 			page 115
 
 
  3293 0aa5 B00A0000 		.4byte	0xab0
@@ -6849,7 +6849,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
  3298 0ab0 33       		.uleb128 0x33
  3299 0ab1 6B000000 		.4byte	0x6b
  3300 0ab5 32       		.uleb128 0x32
- 3301 0ab6 73040000 		.4byte	.LASF98
+ 3301 0ab6 21040000 		.4byte	.LASF98
  3302 0aba 01       		.byte	0x1
  3303 0abb 3B       		.byte	0x3b
  3304 0abc C60A0000 		.4byte	0xac6
@@ -6867,18 +6867,18 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
  3316 0ad7 03       		.byte	0x3
  3317 0ad8 00000000 		.4byte	CySysClkPumpConfig
  3318 0adc 34       		.uleb128 0x34
- 3319 0add BF020000 		.4byte	.LASF100
- 3320 0ae1 BF020000 		.4byte	.LASF100
+ 3319 0add 7B020000 		.4byte	.LASF100
+ 3320 0ae1 7B020000 		.4byte	.LASF100
  3321 0ae5 03       		.byte	0x3
  3322 0ae6 E5       		.byte	0xe5
  3323 0ae7 34       		.uleb128 0x34
- 3324 0ae8 BB040000 		.4byte	.LASF101
- 3325 0aec BB040000 		.4byte	.LASF101
+ 3324 0ae8 69040000 		.4byte	.LASF101
+ 3325 0aec 69040000 		.4byte	.LASF101
  3326 0af0 03       		.byte	0x3
  3327 0af1 E6       		.byte	0xe6
  3328 0af2 34       		.uleb128 0x34
- 3329 0af3 0E050000 		.4byte	.LASF102
- 3330 0af7 0E050000 		.4byte	.LASF102
+ 3329 0af3 BC040000 		.4byte	.LASF102
+ 3330 0af7 BC040000 		.4byte	.LASF102
  3331 0afb 03       		.byte	0x3
  3332 0afc DC       		.byte	0xdc
  3333 0afd 00       		.byte	0
@@ -6898,7 +6898,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
  3347 000b 55       		.uleb128 0x55
  3348 000c 17       		.uleb128 0x17
  3349 000d 11       		.uleb128 0x11
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 116
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc2h8pTT.s 			page 116
 
 
  3350 000e 01       		.uleb128 0x1
@@ -6958,7 +6958,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
  3404 0044 00       		.byte	0
  3405 0045 00       		.byte	0
  3406 0046 07       		.uleb128 0x7
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 117
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc2h8pTT.s 			page 117
 
 
  3407 0047 15       		.uleb128 0x15
@@ -7018,7 +7018,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
  3461 007d 34       		.uleb128 0x34
  3462 007e 00       		.byte	0
  3463 007f 03       		.uleb128 0x3
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 118
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc2h8pTT.s 			page 118
 
 
  3464 0080 08       		.uleb128 0x8
@@ -7078,7 +7078,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
  3518 00b6 49       		.uleb128 0x49
  3519 00b7 13       		.uleb128 0x13
  3520 00b8 20       		.uleb128 0x20
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 119
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc2h8pTT.s 			page 119
 
 
  3521 00b9 0B       		.uleb128 0xb
@@ -7138,7 +7138,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
  3575 00f0 11       		.uleb128 0x11
  3576 00f1 01       		.uleb128 0x1
  3577 00f2 12       		.uleb128 0x12
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 120
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc2h8pTT.s 			page 120
 
 
  3578 00f3 06       		.uleb128 0x6
@@ -7198,7 +7198,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
  3632 012c 0B       		.uleb128 0xb
  3633 012d 3B       		.uleb128 0x3b
  3634 012e 05       		.uleb128 0x5
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 121
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc2h8pTT.s 			page 121
 
 
  3635 012f 49       		.uleb128 0x49
@@ -7258,7 +7258,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
  3689 0167 00       		.byte	0
  3690 0168 00       		.byte	0
  3691 0169 18       		.uleb128 0x18
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 122
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc2h8pTT.s 			page 122
 
 
  3692 016a 2E       		.uleb128 0x2e
@@ -7318,7 +7318,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
  3746 01a2 1B       		.uleb128 0x1b
  3747 01a3 2E       		.uleb128 0x2e
  3748 01a4 01       		.byte	0x1
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 123
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc2h8pTT.s 			page 123
 
 
  3749 01a5 31       		.uleb128 0x31
@@ -7378,7 +7378,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
  3803 01dc 0E       		.uleb128 0xe
  3804 01dd 3A       		.uleb128 0x3a
  3805 01de 0B       		.uleb128 0xb
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 124
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc2h8pTT.s 			page 124
 
 
  3806 01df 3B       		.uleb128 0x3b
@@ -7438,7 +7438,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
  3860 021c 01       		.byte	0x1
  3861 021d 3F       		.uleb128 0x3f
  3862 021e 19       		.uleb128 0x19
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 125
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc2h8pTT.s 			page 125
 
 
  3863 021f 03       		.uleb128 0x3
@@ -7498,7 +7498,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
  3917 0256 01       		.byte	0x1
  3918 0257 55       		.uleb128 0x55
  3919 0258 17       		.uleb128 0x17
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 126
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc2h8pTT.s 			page 126
 
 
  3920 0259 00       		.byte	0
@@ -7558,7 +7558,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
  3974 028f 9642     		.uleb128 0x2116
  3975 0291 19       		.uleb128 0x19
  3976 0292 01       		.uleb128 0x1
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 127
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc2h8pTT.s 			page 127
 
 
  3977 0293 13       		.uleb128 0x13
@@ -7618,7 +7618,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
  4031 02c9 32       		.uleb128 0x32
  4032 02ca 34       		.uleb128 0x34
  4033 02cb 00       		.byte	0
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 128
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc2h8pTT.s 			page 128
 
 
  4034 02cc 03       		.uleb128 0x3
@@ -7678,7 +7678,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
  4088 0021 01       		.uleb128 0x1
  4089 0022 50       		.byte	0x50
  4090 0023 9F       		.byte	0x9f
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 129
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc2h8pTT.s 			page 129
 
 
  4091 0024 00000000 		.4byte	0
@@ -7738,7 +7738,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
  4145 00b2 F3       		.byte	0xf3
  4146 00b3 01       		.uleb128 0x1
  4147 00b4 50       		.byte	0x50
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 130
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc2h8pTT.s 			page 130
 
 
  4148 00b5 9F       		.byte	0x9f
@@ -7798,7 +7798,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
  4202 013c 50       		.byte	0x50
  4203 013d 04000000 		.4byte	.LVL25
  4204 0141 0C000000 		.4byte	.LFE15
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 131
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc2h8pTT.s 			page 131
 
 
  4205 0145 0400     		.2byte	0x4
@@ -7858,7 +7858,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
  4259 01c1 17000000 		.4byte	.LVL33-1
  4260 01c5 34000000 		.4byte	.LFE18
  4261 01c9 0400     		.2byte	0x4
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 132
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc2h8pTT.s 			page 132
 
 
  4262 01cb F3       		.byte	0xf3
@@ -7918,7 +7918,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
  4316 024b 1A       		.byte	0x1a
  4317 024c 08       		.byte	0x8
  4318 024d FF       		.byte	0xff
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 133
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc2h8pTT.s 			page 133
 
 
  4319 024e 1A       		.byte	0x1a
@@ -7978,7 +7978,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
  4373 02c8 0100     		.2byte	0x1
  4374 02ca 50       		.byte	0x50
  4375 02cb 04000000 		.4byte	.LVL51
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 134
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc2h8pTT.s 			page 134
 
 
  4376 02cf 14000000 		.4byte	.LFE23
@@ -8038,7 +8038,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
  4430 0354 0100     		.2byte	0x1
  4431 0356 55       		.byte	0x55
  4432 0357 A2000000 		.4byte	.LVL81
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 135
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc2h8pTT.s 			page 135
 
 
  4433 035b CC000000 		.4byte	.LVL87
@@ -8098,7 +8098,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
  4486 03df 00000000 		.4byte	0
  4487 03e3 00000000 		.4byte	0
  4488              	.LLST31:
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 136
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc2h8pTT.s 			page 136
 
 
  4489 03e7 8A000000 		.4byte	.LVL78
@@ -8158,7 +8158,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
  4543 046a 00000000 		.4byte	0
  4544              	.LLST35:
  4545 046e 00000000 		.4byte	.LVL96
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 137
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc2h8pTT.s 			page 137
 
 
  4546 0472 0C000000 		.4byte	.LVL97
@@ -8218,7 +8218,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
  4600 04f9 00000000 		.4byte	0
  4601 04fd 00000000 		.4byte	0
  4602              	.LLST39:
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 138
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc2h8pTT.s 			page 138
 
 
  4603 0501 22000000 		.4byte	.LVL103
@@ -8278,7 +8278,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
  4657 000c 0000     		.2byte	0
  4658 000e 0000     		.2byte	0
  4659 0010 00000000 		.4byte	.LFB0
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 139
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc2h8pTT.s 			page 139
 
 
  4660 0014 14000000 		.4byte	.LFE0-.LFB0
@@ -8338,7 +8338,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
  4714 00ec 24010000 		.4byte	.LFE6-.LFB6
  4715 00f0 00000000 		.4byte	.LFB7
  4716 00f4 44000000 		.4byte	.LFE7-.LFB7
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 140
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc2h8pTT.s 			page 140
 
 
  4717 00f8 00000000 		.4byte	.LFB29
@@ -8398,7 +8398,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
  4771 0048 00000000 		.4byte	.LFB2
  4772 004c 20000000 		.4byte	.LFE2
  4773 0050 00000000 		.4byte	.LFB3
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 141
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc2h8pTT.s 			page 141
 
 
  4774 0054 34000000 		.4byte	.LFE3
@@ -8458,7 +8458,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
  4828 012c 44000000 		.4byte	.LFE31
  4829 0130 00000000 		.4byte	.LFB33
  4830 0134 10000000 		.4byte	.LFE33
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 142
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc2h8pTT.s 			page 142
 
 
  4831 0138 00000000 		.4byte	.LFB34
@@ -8518,7 +8518,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
  4871      65486663 
  4871      6C6B4469 
  4872              	.LASF99:
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 143
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc2h8pTT.s 			page 143
 
 
  4873 0040 43795379 		.ascii	"CySysClkPumpConfig\000"
@@ -8532,534 +8532,532 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 1
  4876              	.LASF88:
  4877 005a 72657456 		.ascii	"retVal\000"
  4877      616C00
- 4878              	.LASF105:
- 4879 0061 5C5C5642 		.ascii	"\\\\VBOXSVR\\raywang\\Dropbox (MIT)\\CTFs\\eCTF\\ec"
- 4879      4F585356 
- 4879      525C7261 
- 4879      7977616E 
- 4879      675C4472 
- 4880 008d 74662D32 		.ascii	"tf-2018-techsec\\SECURITY_MODULE.cydsn\000"
- 4880      3031382D 
- 4880      74656368 
- 4880      7365635C 
- 4880      53454355 
- 4881              	.LASF71:
- 4882 00b3 63757272 		.ascii	"currentImoTrim2Value\000"
- 4882      656E7449 
- 4882      6D6F5472 
- 4882      696D3256 
- 4882      616C7565 
- 4883              	.LASF7:
- 4884 00c8 6C6F6E67 		.ascii	"long long unsigned int\000"
- 4884      206C6F6E 
- 4884      6720756E 
- 4884      7369676E 
- 4884      65642069 
- 4885              	.LASF97:
- 4886 00df 43795379 		.ascii	"CySysTickInitVar\000"
- 4886      73546963 
- 4886      6B496E69 
- 4886      74566172 
- 4886      00
- 4887              	.LASF46:
- 4888 00f0 4379456E 		.ascii	"CyEnableInts\000"
- 4888      61626C65 
- 4888      496E7473 
- 4888      00
- 4889              	.LASF61:
- 4890 00fd 4379536F 		.ascii	"CySoftwareReset\000"
- 4890      66747761 
- 4890      72655265 
- 4890      73657400 
- 4891              	.LASF78:
- 4892 010d 43795379 		.ascii	"CySysTickEnableInterrupt\000"
- 4892      73546963 
- 4892      6B456E61 
- 4892      626C6549 
- 4892      6E746572 
- 4893              	.LASF56:
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 144
+ 4878              	.LASF44:
+ 4879 0061 43794469 		.ascii	"CyDisableInts\000"
+ 4879      7361626C 
+ 4879      65496E74 
+ 4879      7300
+ 4880              	.LASF71:
+ 4881 006f 63757272 		.ascii	"currentImoTrim2Value\000"
+ 4881      656E7449 
+ 4881      6D6F5472 
+ 4881      696D3256 
+ 4881      616C7565 
+ 4882              	.LASF7:
+ 4883 0084 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 4883      206C6F6E 
+ 4883      6720756E 
+ 4883      7369676E 
+ 4883      65642069 
+ 4884              	.LASF97:
+ 4885 009b 43795379 		.ascii	"CySysTickInitVar\000"
+ 4885      73546963 
+ 4885      6B496E69 
+ 4885      74566172 
+ 4885      00
+ 4886              	.LASF46:
+ 4887 00ac 4379456E 		.ascii	"CyEnableInts\000"
+ 4887      61626C65 
+ 4887      496E7473 
+ 4887      00
+ 4888              	.LASF61:
+ 4889 00b9 4379536F 		.ascii	"CySoftwareReset\000"
+ 4889      66747761 
+ 4889      72655265 
+ 4889      73657400 
+ 4890              	.LASF78:
+ 4891 00c9 43795379 		.ascii	"CySysTickEnableInterrupt\000"
+ 4891      73546963 
+ 4891      6B456E61 
+ 4891      626C6549 
+ 4891      6E746572 
+ 4892              	.LASF56:
+ 4893 00e2 4379496E 		.ascii	"CyIntGetState\000"
+ 4893      74476574 
+ 4893      53746174 
+ 4893      6500
+ 4894              	.LASF6:
+ 4895 00f0 6C6F6E67 		.ascii	"long long int\000"
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc2h8pTT.s 			page 144
 
 
- 4894 0126 4379496E 		.ascii	"CyIntGetState\000"
- 4894      74476574 
- 4894      53746174 
- 4894      6500
- 4895              	.LASF6:
- 4896 0134 6C6F6E67 		.ascii	"long long int\000"
- 4896      206C6F6E 
- 4896      6720696E 
- 4896      7400
- 4897              	.LASF0:
- 4898 0142 7369676E 		.ascii	"signed char\000"
- 4898      65642063 
- 4898      68617200 
- 4899              	.LASF67:
- 4900 014e 66726571 		.ascii	"freq\000"
- 4900      00
- 4901              	.LASF75:
- 4902 0153 43794465 		.ascii	"CyDelayFreq\000"
- 4902      6C617946 
- 4902      72657100 
- 4903              	.LASF30:
- 4904 015f 696E7465 		.ascii	"interruptState\000"
- 4904      72727570 
- 4904      74537461 
- 4904      746500
- 4905              	.LASF83:
- 4906 016e 43795379 		.ascii	"CySysTickGetReload\000"
- 4906      73546963 
- 4906      6B476574 
- 4906      52656C6F 
- 4906      616400
- 4907              	.LASF4:
- 4908 0181 6C6F6E67 		.ascii	"long int\000"
- 4908      20696E74 
- 4908      00
- 4909              	.LASF57:
- 4910 018a 4379496E 		.ascii	"CyIntDisable\000"
- 4910      74446973 
- 4910      61626C65 
- 4910      00
- 4911              	.LASF89:
- 4912 0197 43795379 		.ascii	"CySysTickGetCallback\000"
- 4912      73546963 
- 4912      6B476574 
- 4912      43616C6C 
- 4912      6261636B 
- 4913              	.LASF9:
- 4914 01ac 75696E74 		.ascii	"uint8\000"
- 4914      3800
- 4915              	.LASF94:
- 4916 01b2 63796465 		.ascii	"cydelayFreqKhz\000"
- 4916      6C617946 
- 4916      7265714B 
- 4916      687A00
- 4917              	.LASF35:
- 4918 01c1 656E6162 		.ascii	"enable\000"
- 4918      6C6500
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 145
+ 4895      206C6F6E 
+ 4895      6720696E 
+ 4895      7400
+ 4896              	.LASF0:
+ 4897 00fe 7369676E 		.ascii	"signed char\000"
+ 4897      65642063 
+ 4897      68617200 
+ 4898              	.LASF67:
+ 4899 010a 66726571 		.ascii	"freq\000"
+ 4899      00
+ 4900              	.LASF75:
+ 4901 010f 43794465 		.ascii	"CyDelayFreq\000"
+ 4901      6C617946 
+ 4901      72657100 
+ 4902              	.LASF30:
+ 4903 011b 696E7465 		.ascii	"interruptState\000"
+ 4903      72727570 
+ 4903      74537461 
+ 4903      746500
+ 4904              	.LASF83:
+ 4905 012a 43795379 		.ascii	"CySysTickGetReload\000"
+ 4905      73546963 
+ 4905      6B476574 
+ 4905      52656C6F 
+ 4905      616400
+ 4906              	.LASF4:
+ 4907 013d 6C6F6E67 		.ascii	"long int\000"
+ 4907      20696E74 
+ 4907      00
+ 4908              	.LASF57:
+ 4909 0146 4379496E 		.ascii	"CyIntDisable\000"
+ 4909      74446973 
+ 4909      61626C65 
+ 4909      00
+ 4910              	.LASF89:
+ 4911 0153 43795379 		.ascii	"CySysTickGetCallback\000"
+ 4911      73546963 
+ 4911      6B476574 
+ 4911      43616C6C 
+ 4911      6261636B 
+ 4912              	.LASF9:
+ 4913 0168 75696E74 		.ascii	"uint8\000"
+ 4913      3800
+ 4914              	.LASF94:
+ 4915 016e 63796465 		.ascii	"cydelayFreqKhz\000"
+ 4915      6C617946 
+ 4915      7265714B 
+ 4915      687A00
+ 4916              	.LASF35:
+ 4917 017d 656E6162 		.ascii	"enable\000"
+ 4917      6C6500
+ 4918              	.LASF13:
+ 4919 0184 646F7562 		.ascii	"double\000"
+ 4919      6C6500
+ 4920              	.LASF53:
+ 4921 018b 73686966 		.ascii	"shift\000"
+ 4921      7400
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc2h8pTT.s 			page 145
 
 
- 4919              	.LASF13:
- 4920 01c8 646F7562 		.ascii	"double\000"
- 4920      6C6500
- 4921              	.LASF53:
- 4922 01cf 73686966 		.ascii	"shift\000"
- 4922      7400
- 4923              	.LASF21:
- 4924 01d5 43795379 		.ascii	"CySysLvdClearInterrupt\000"
- 4924      734C7664 
- 4924      436C6561 
- 4924      72496E74 
- 4924      65727275 
- 4925              	.LASF11:
- 4926 01ec 75696E74 		.ascii	"uint32\000"
- 4926      333200
- 4927              	.LASF47:
- 4928 01f3 6D61736B 		.ascii	"mask\000"
- 4928      00
- 4929              	.LASF40:
- 4930 01f8 43795379 		.ascii	"CySysClkGetSysclkSource\000"
- 4930      73436C6B 
- 4930      47657453 
- 4930      7973636C 
- 4930      6B536F75 
- 4931              	.LASF54:
- 4932 0210 4379496E 		.ascii	"CyIntGetPriority\000"
- 4932      74476574 
- 4932      5072696F 
- 4932      72697479 
- 4932      00
- 4933              	.LASF96:
- 4934 0221 63796465 		.ascii	"cydelay32kMs\000"
- 4934      6C617933 
- 4934      326B4D73 
- 4934      00
- 4935              	.LASF76:
- 4936 022e 43795379 		.ascii	"CySysTickInit\000"
- 4936      73546963 
- 4936      6B496E69 
- 4936      7400
- 4937              	.LASF23:
- 4938 023c 76616C75 		.ascii	"value\000"
- 4938      6500
- 4939              	.LASF90:
- 4940 0242 43794765 		.ascii	"CyGetUniqueId\000"
- 4940      74556E69 
- 4940      71756549 
- 4940      6400
- 4941              	.LASF85:
- 4942 0250 43795379 		.ascii	"CySysTickGetCountFlag\000"
- 4942      73546963 
- 4942      6B476574 
- 4942      436F756E 
- 4942      74466C61 
- 4943              	.LASF8:
- 4944 0266 756E7369 		.ascii	"unsigned int\000"
- 4944      676E6564 
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 146
+ 4922              	.LASF21:
+ 4923 0191 43795379 		.ascii	"CySysLvdClearInterrupt\000"
+ 4923      734C7664 
+ 4923      436C6561 
+ 4923      72496E74 
+ 4923      65727275 
+ 4924              	.LASF11:
+ 4925 01a8 75696E74 		.ascii	"uint32\000"
+ 4925      333200
+ 4926              	.LASF47:
+ 4927 01af 6D61736B 		.ascii	"mask\000"
+ 4927      00
+ 4928              	.LASF40:
+ 4929 01b4 43795379 		.ascii	"CySysClkGetSysclkSource\000"
+ 4929      73436C6B 
+ 4929      47657453 
+ 4929      7973636C 
+ 4929      6B536F75 
+ 4930              	.LASF54:
+ 4931 01cc 4379496E 		.ascii	"CyIntGetPriority\000"
+ 4931      74476574 
+ 4931      5072696F 
+ 4931      72697479 
+ 4931      00
+ 4932              	.LASF96:
+ 4933 01dd 63796465 		.ascii	"cydelay32kMs\000"
+ 4933      6C617933 
+ 4933      326B4D73 
+ 4933      00
+ 4934              	.LASF76:
+ 4935 01ea 43795379 		.ascii	"CySysTickInit\000"
+ 4935      73546963 
+ 4935      6B496E69 
+ 4935      7400
+ 4936              	.LASF23:
+ 4937 01f8 76616C75 		.ascii	"value\000"
+ 4937      6500
+ 4938              	.LASF90:
+ 4939 01fe 43794765 		.ascii	"CyGetUniqueId\000"
+ 4939      74556E69 
+ 4939      71756549 
+ 4939      6400
+ 4940              	.LASF85:
+ 4941 020c 43795379 		.ascii	"CySysTickGetCountFlag\000"
+ 4941      73546963 
+ 4941      6B476574 
+ 4941      436F756E 
+ 4941      74466C61 
+ 4942              	.LASF8:
+ 4943 0222 756E7369 		.ascii	"unsigned int\000"
+ 4943      676E6564 
+ 4943      20696E74 
+ 4943      00
+ 4944              	.LASF22:
+ 4945 022f 43795379 		.ascii	"CySysTickClear\000"
+ 4945      73546963 
+ 4945      6B436C65 
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc2h8pTT.s 			page 146
 
 
- 4944      20696E74 
- 4944      00
- 4945              	.LASF22:
- 4946 0273 43795379 		.ascii	"CySysTickClear\000"
- 4946      73546963 
- 4946      6B436C65 
- 4946      617200
- 4947              	.LASF5:
- 4948 0282 6C6F6E67 		.ascii	"long unsigned int\000"
- 4948      20756E73 
- 4948      69676E65 
- 4948      6420696E 
- 4948      7400
- 4949              	.LASF82:
- 4950 0294 43795379 		.ascii	"CySysLvdGetInterruptSource\000"
- 4950      734C7664 
- 4950      47657449 
- 4950      6E746572 
- 4950      72757074 
- 4951              	.LASF29:
- 4952 02af 43795379 		.ascii	"CySysClkImoStop\000"
- 4952      73436C6B 
- 4952      496D6F53 
- 4952      746F7000 
- 4953              	.LASF100:
- 4954 02bf 4379456E 		.ascii	"CyEnterCriticalSection\000"
- 4954      74657243 
- 4954      72697469 
- 4954      63616C53 
- 4954      65637469 
- 4955              	.LASF58:
- 4956 02d6 4379496E 		.ascii	"CyIntSetPending\000"
- 4956      74536574 
- 4956      50656E64 
- 4956      696E6700 
- 4957              	.LASF44:
- 4958 02e6 43794469 		.ascii	"CyDisableInts\000"
- 4958      7361626C 
- 4958      65496E74 
- 4958      7300
- 4959              	.LASF41:
- 4960 02f4 43795379 		.ascii	"CySysGetResetReason\000"
- 4960      73476574 
- 4960      52657365 
- 4960      74526561 
- 4960      736F6E00 
- 4961              	.LASF3:
- 4962 0308 73686F72 		.ascii	"short unsigned int\000"
- 4962      7420756E 
- 4962      7369676E 
- 4962      65642069 
- 4962      6E7400
- 4963              	.LASF49:
- 4964 031b 4379496E 		.ascii	"CyIntSetVector\000"
- 4964      74536574 
- 4964      56656374 
- 4964      6F7200
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 147
+ 4945      617200
+ 4946              	.LASF5:
+ 4947 023e 6C6F6E67 		.ascii	"long unsigned int\000"
+ 4947      20756E73 
+ 4947      69676E65 
+ 4947      6420696E 
+ 4947      7400
+ 4948              	.LASF82:
+ 4949 0250 43795379 		.ascii	"CySysLvdGetInterruptSource\000"
+ 4949      734C7664 
+ 4949      47657449 
+ 4949      6E746572 
+ 4949      72757074 
+ 4950              	.LASF29:
+ 4951 026b 43795379 		.ascii	"CySysClkImoStop\000"
+ 4951      73436C6B 
+ 4951      496D6F53 
+ 4951      746F7000 
+ 4952              	.LASF100:
+ 4953 027b 4379456E 		.ascii	"CyEnterCriticalSection\000"
+ 4953      74657243 
+ 4953      72697469 
+ 4953      63616C53 
+ 4953      65637469 
+ 4954              	.LASF58:
+ 4955 0292 4379496E 		.ascii	"CyIntSetPending\000"
+ 4955      74536574 
+ 4955      50656E64 
+ 4955      696E6700 
+ 4956              	.LASF41:
+ 4957 02a2 43795379 		.ascii	"CySysGetResetReason\000"
+ 4957      73476574 
+ 4957      52657365 
+ 4957      74526561 
+ 4957      736F6E00 
+ 4958              	.LASF3:
+ 4959 02b6 73686F72 		.ascii	"short unsigned int\000"
+ 4959      7420756E 
+ 4959      7369676E 
+ 4959      65642069 
+ 4959      6E7400
+ 4960              	.LASF49:
+ 4961 02c9 4379496E 		.ascii	"CyIntSetVector\000"
+ 4961      74536574 
+ 4961      56656374 
+ 4961      6F7200
+ 4962              	.LASF24:
+ 4963 02d8 6E756D62 		.ascii	"number\000"
+ 4963      657200
+ 4964              	.LASF52:
+ 4965 02df 7072696F 		.ascii	"priority\000"
+ 4965      72697479 
+ 4965      00
+ 4966              	.LASF66:
+ 4967 02e8 43795379 		.ascii	"CySysClkWriteImoFreq\000"
+ 4967      73436C6B 
+ 4967      57726974 
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc2h8pTT.s 			page 147
 
 
- 4965              	.LASF24:
- 4966 032a 6E756D62 		.ascii	"number\000"
- 4966      657200
- 4967              	.LASF52:
- 4968 0331 7072696F 		.ascii	"priority\000"
- 4968      72697479 
- 4968      00
- 4969              	.LASF66:
- 4970 033a 43795379 		.ascii	"CySysClkWriteImoFreq\000"
- 4970      73436C6B 
- 4970      57726974 
- 4970      65496D6F 
- 4970      46726571 
- 4971              	.LASF108:
- 4972 034f 4379496E 		.ascii	"CyIntSetSysVector\000"
- 4972      74536574 
- 4972      53797356 
- 4972      6563746F 
- 4972      7200
- 4973              	.LASF33:
- 4974 0361 43795379 		.ascii	"CySysEnablePumpClock\000"
- 4974      73456E61 
- 4974      626C6550 
- 4974      756D7043 
- 4974      6C6F636B 
- 4975              	.LASF16:
- 4976 0376 72656733 		.ascii	"reg32\000"
- 4976      3200
- 4977              	.LASF80:
- 4978 037c 43795379 		.ascii	"CySysTickStart\000"
- 4978      73546963 
- 4978      6B537461 
- 4978      727400
- 4979              	.LASF43:
- 4980 038b 72657475 		.ascii	"returnStatus\000"
- 4980      726E5374 
- 4980      61747573 
- 4980      00
- 4981              	.LASF19:
- 4982 0398 73697A65 		.ascii	"sizetype\000"
- 4982      74797065 
- 4982      00
- 4983              	.LASF59:
- 4984 03a1 4379496E 		.ascii	"CyIntClearPending\000"
- 4984      74436C65 
- 4984      61725065 
- 4984      6E64696E 
- 4984      6700
- 4985              	.LASF18:
- 4986 03b3 6C6F6E67 		.ascii	"long double\000"
- 4986      20646F75 
- 4986      626C6500 
- 4987              	.LASF25:
- 4988 03bf 61646472 		.ascii	"address\000"
- 4988      65737300 
- 4989              	.LASF103:
- 4990 03c7 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 148
+ 4967      65496D6F 
+ 4967      46726571 
+ 4968              	.LASF108:
+ 4969 02fd 4379496E 		.ascii	"CyIntSetSysVector\000"
+ 4969      74536574 
+ 4969      53797356 
+ 4969      6563746F 
+ 4969      7200
+ 4970              	.LASF33:
+ 4971 030f 43795379 		.ascii	"CySysEnablePumpClock\000"
+ 4971      73456E61 
+ 4971      626C6550 
+ 4971      756D7043 
+ 4971      6C6F636B 
+ 4972              	.LASF16:
+ 4973 0324 72656733 		.ascii	"reg32\000"
+ 4973      3200
+ 4974              	.LASF80:
+ 4975 032a 43795379 		.ascii	"CySysTickStart\000"
+ 4975      73546963 
+ 4975      6B537461 
+ 4975      727400
+ 4976              	.LASF43:
+ 4977 0339 72657475 		.ascii	"returnStatus\000"
+ 4977      726E5374 
+ 4977      61747573 
+ 4977      00
+ 4978              	.LASF19:
+ 4979 0346 73697A65 		.ascii	"sizetype\000"
+ 4979      74797065 
+ 4979      00
+ 4980              	.LASF59:
+ 4981 034f 4379496E 		.ascii	"CyIntClearPending\000"
+ 4981      74436C65 
+ 4981      61725065 
+ 4981      6E64696E 
+ 4981      6700
+ 4982              	.LASF18:
+ 4983 0361 6C6F6E67 		.ascii	"long double\000"
+ 4983      20646F75 
+ 4983      626C6500 
+ 4984              	.LASF25:
+ 4985 036d 61646472 		.ascii	"address\000"
+ 4985      65737300 
+ 4986              	.LASF103:
+ 4987 0375 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 4987      43313120 
+ 4987      352E342E 
+ 4987      31203230 
+ 4987      31363036 
+ 4988 03a8 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m0 -mthumb -g -O"
+ 4988      20726576 
+ 4988      6973696F 
+ 4988      6E203233 
+ 4988      37373135 
+ 4989 03db 73202D66 		.ascii	"s -ffunction-sections -ffat-lto-objects\000"
+ 4989      66756E63 
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc2h8pTT.s 			page 148
 
 
- 4990      43313120 
- 4990      352E342E 
- 4990      31203230 
- 4990      31363036 
- 4991 03fa 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m0 -mthumb -g -O"
- 4991      20726576 
- 4991      6973696F 
- 4991      6E203233 
- 4991      37373135 
- 4992 042d 73202D66 		.ascii	"s -ffunction-sections -ffat-lto-objects\000"
- 4992      66756E63 
- 4992      74696F6E 
- 4992      2D736563 
- 4992      74696F6E 
- 4993              	.LASF69:
- 4994 0455 62675472 		.ascii	"bgTrim5\000"
- 4994      696D3500 
- 4995              	.LASF36:
- 4996 045d 73797363 		.ascii	"sysclkSource\000"
- 4996      6C6B536F 
- 4996      75726365 
- 4996      00
- 4997              	.LASF87:
- 4998 046a 66756E63 		.ascii	"function\000"
- 4998      74696F6E 
- 4998      00
- 4999              	.LASF98:
- 5000 0473 6379496D 		.ascii	"cyImoFreqMhz2Reg\000"
- 5000      6F467265 
- 5000      714D687A 
- 5000      32526567 
- 5000      00
- 5001              	.LASF84:
- 5002 0484 43795379 		.ascii	"CySysTickGetValue\000"
- 5002      73546963 
- 5002      6B476574 
- 5002      56616C75 
- 5002      6500
- 5003              	.LASF93:
- 5004 0496 63796465 		.ascii	"cydelayFreqHz\000"
- 5004      6C617946 
- 5004      72657148 
- 5004      7A00
- 5005              	.LASF51:
- 5006 04a4 4379496E 		.ascii	"CyIntSetPriority\000"
- 5006      74536574 
- 5006      5072696F 
- 5006      72697479 
- 5006      00
- 5007              	.LASF12:
- 5008 04b5 666C6F61 		.ascii	"float\000"
- 5008      7400
- 5009              	.LASF101:
- 5010 04bb 43794578 		.ascii	"CyExitCriticalSection\000"
- 5010      69744372 
- 5010      69746963 
- 5010      616C5365 
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 149
+ 4989      74696F6E 
+ 4989      2D736563 
+ 4989      74696F6E 
+ 4990              	.LASF69:
+ 4991 0403 62675472 		.ascii	"bgTrim5\000"
+ 4991      696D3500 
+ 4992              	.LASF36:
+ 4993 040b 73797363 		.ascii	"sysclkSource\000"
+ 4993      6C6B536F 
+ 4993      75726365 
+ 4993      00
+ 4994              	.LASF87:
+ 4995 0418 66756E63 		.ascii	"function\000"
+ 4995      74696F6E 
+ 4995      00
+ 4996              	.LASF98:
+ 4997 0421 6379496D 		.ascii	"cyImoFreqMhz2Reg\000"
+ 4997      6F467265 
+ 4997      714D687A 
+ 4997      32526567 
+ 4997      00
+ 4998              	.LASF84:
+ 4999 0432 43795379 		.ascii	"CySysTickGetValue\000"
+ 4999      73546963 
+ 4999      6B476574 
+ 4999      56616C75 
+ 4999      6500
+ 5000              	.LASF93:
+ 5001 0444 63796465 		.ascii	"cydelayFreqHz\000"
+ 5001      6C617946 
+ 5001      72657148 
+ 5001      7A00
+ 5002              	.LASF51:
+ 5003 0452 4379496E 		.ascii	"CyIntSetPriority\000"
+ 5003      74536574 
+ 5003      5072696F 
+ 5003      72697479 
+ 5003      00
+ 5004              	.LASF12:
+ 5005 0463 666C6F61 		.ascii	"float\000"
+ 5005      7400
+ 5006              	.LASF101:
+ 5007 0469 43794578 		.ascii	"CyExitCriticalSection\000"
+ 5007      69744372 
+ 5007      69746963 
+ 5007      616C5365 
+ 5007      6374696F 
+ 5008              	.LASF73:
+ 5009 047f 43795379 		.ascii	"CySysLvdEnable\000"
+ 5009      734C7664 
+ 5009      456E6162 
+ 5009      6C6500
+ 5010              	.LASF20:
+ 5011 048e 63795379 		.ascii	"cySysTickCallback\000"
+ 5011      73546963 
+ 5011      6B43616C 
+ 5011      6C626163 
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc2h8pTT.s 			page 149
 
 
- 5010      6374696F 
- 5011              	.LASF73:
- 5012 04d1 43795379 		.ascii	"CySysLvdEnable\000"
- 5012      734C7664 
- 5012      456E6162 
- 5012      6C6500
- 5013              	.LASF20:
- 5014 04e0 63795379 		.ascii	"cySysTickCallback\000"
- 5014      73546963 
- 5014      6B43616C 
- 5014      6C626163 
- 5014      6B00
- 5015              	.LASF50:
- 5016 04f2 4379496E 		.ascii	"CyIntGetVector\000"
- 5016      74476574 
- 5016      56656374 
- 5016      6F7200
- 5017              	.LASF63:
- 5018 0501 6D696C6C 		.ascii	"milliseconds\000"
- 5018      69736563 
- 5018      6F6E6473 
- 5018      00
- 5019              	.LASF102:
- 5020 050e 43794465 		.ascii	"CyDelayCycles\000"
- 5020      6C617943 
- 5020      79636C65 
- 5020      7300
- 5021              	.LASF15:
- 5022 051c 72656738 		.ascii	"reg8\000"
- 5022      00
- 5023              	.LASF74:
- 5024 0521 74687265 		.ascii	"threshold\000"
- 5024      73686F6C 
- 5024      6400
- 5025              	.LASF60:
- 5026 052b 43794861 		.ascii	"CyHalt\000"
- 5026      6C7400
- 5027              	.LASF1:
- 5028 0532 756E7369 		.ascii	"unsigned char\000"
- 5028      676E6564 
- 5028      20636861 
- 5028      7200
- 5029              	.LASF42:
- 5030 0540 72656173 		.ascii	"reason\000"
- 5030      6F6E00
- 5031              	.LASF2:
- 5032 0547 73686F72 		.ascii	"short int\000"
- 5032      7420696E 
- 5032      7400
- 5033              	.LASF55:
- 5034 0551 4379496E 		.ascii	"CyIntEnable\000"
- 5034      74456E61 
- 5034      626C6500 
- 5035              	.LASF48:
- 5036 055d 4379496E 		.ascii	"CyIntGetSysVector\000"
- 5036      74476574 
- 5036      53797356 
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 150
+ 5011      6B00
+ 5012              	.LASF50:
+ 5013 04a0 4379496E 		.ascii	"CyIntGetVector\000"
+ 5013      74476574 
+ 5013      56656374 
+ 5013      6F7200
+ 5014              	.LASF63:
+ 5015 04af 6D696C6C 		.ascii	"milliseconds\000"
+ 5015      69736563 
+ 5015      6F6E6473 
+ 5015      00
+ 5016              	.LASF102:
+ 5017 04bc 43794465 		.ascii	"CyDelayCycles\000"
+ 5017      6C617943 
+ 5017      79636C65 
+ 5017      7300
+ 5018              	.LASF15:
+ 5019 04ca 72656738 		.ascii	"reg8\000"
+ 5019      00
+ 5020              	.LASF74:
+ 5021 04cf 74687265 		.ascii	"threshold\000"
+ 5021      73686F6C 
+ 5021      6400
+ 5022              	.LASF60:
+ 5023 04d9 43794861 		.ascii	"CyHalt\000"
+ 5023      6C7400
+ 5024              	.LASF1:
+ 5025 04e0 756E7369 		.ascii	"unsigned char\000"
+ 5025      676E6564 
+ 5025      20636861 
+ 5025      7200
+ 5026              	.LASF42:
+ 5027 04ee 72656173 		.ascii	"reason\000"
+ 5027      6F6E00
+ 5028              	.LASF2:
+ 5029 04f5 73686F72 		.ascii	"short int\000"
+ 5029      7420696E 
+ 5029      7400
+ 5030              	.LASF55:
+ 5031 04ff 4379496E 		.ascii	"CyIntEnable\000"
+ 5031      74456E61 
+ 5031      626C6500 
+ 5032              	.LASF48:
+ 5033 050b 4379496E 		.ascii	"CyIntGetSysVector\000"
+ 5033      74476574 
+ 5033      53797356 
+ 5033      6563746F 
+ 5033      7200
+ 5034              	.LASF34:
+ 5035 051d 636C6B53 		.ascii	"clkSelect\000"
+ 5035      656C6563 
+ 5035      7400
+ 5036              	.LASF64:
+ 5037 0527 43794465 		.ascii	"CyDelayUs\000"
+ 5037      6C617955 
+ 5037      7300
+ 5038              	.LASF106:
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc2h8pTT.s 			page 150
 
 
- 5036      6563746F 
- 5036      7200
- 5037              	.LASF34:
- 5038 056f 636C6B53 		.ascii	"clkSelect\000"
- 5038      656C6563 
- 5038      7400
- 5039              	.LASF64:
- 5040 0579 43794465 		.ascii	"CyDelayUs\000"
- 5040      6C617955 
- 5040      7300
- 5041              	.LASF106:
- 5042 0583 43795379 		.ascii	"CySysTickServiceCallbacks\000"
- 5042      73546963 
- 5042      6B536572 
- 5042      76696365 
- 5042      43616C6C 
- 5043              	.LASF14:
- 5044 059d 63686172 		.ascii	"char\000"
- 5044      00
- 5045              	.LASF17:
- 5046 05a2 63796973 		.ascii	"cyisraddress\000"
- 5046      72616464 
- 5046      72657373 
- 5046      00
- 5047              	.LASF79:
- 5048 05af 43795379 		.ascii	"CySysTickEnable\000"
- 5048      73546963 
- 5048      6B456E61 
- 5048      626C6500 
- 5049              	.LASF37:
- 5050 05bf 43795379 		.ascii	"CySysClkWriteSysclkDiv\000"
- 5050      73436C6B 
- 5050      57726974 
- 5050      65537973 
- 5050      636C6B44 
- 5051              	.LASF86:
- 5052 05d6 43795379 		.ascii	"CySysTickSetCallback\000"
- 5052      73546963 
- 5052      6B536574 
- 5052      43616C6C 
- 5052      6261636B 
- 5053              	.LASF92:
- 5054 05eb 43795379 		.ascii	"CySysTickCallbacks\000"
- 5054      73546963 
- 5054      6B43616C 
- 5054      6C626163 
- 5054      6B7300
- 5055              	.LASF72:
- 5056 05fe 696D6F54 		.ascii	"imoTrim1Value\000"
- 5056      72696D31 
- 5056      56616C75 
- 5056      6500
- 5057              	.LASF91:
- 5058 060c 756E6971 		.ascii	"uniqueId\000"
- 5058      75654964 
- 5058      00
+ 5039 0531 43795379 		.ascii	"CySysTickServiceCallbacks\000"
+ 5039      73546963 
+ 5039      6B536572 
+ 5039      76696365 
+ 5039      43616C6C 
+ 5040              	.LASF14:
+ 5041 054b 63686172 		.ascii	"char\000"
+ 5041      00
+ 5042              	.LASF17:
+ 5043 0550 63796973 		.ascii	"cyisraddress\000"
+ 5043      72616464 
+ 5043      72657373 
+ 5043      00
+ 5044              	.LASF79:
+ 5045 055d 43795379 		.ascii	"CySysTickEnable\000"
+ 5045      73546963 
+ 5045      6B456E61 
+ 5045      626C6500 
+ 5046              	.LASF37:
+ 5047 056d 43795379 		.ascii	"CySysClkWriteSysclkDiv\000"
+ 5047      73436C6B 
+ 5047      57726974 
+ 5047      65537973 
+ 5047      636C6B44 
+ 5048              	.LASF86:
+ 5049 0584 43795379 		.ascii	"CySysTickSetCallback\000"
+ 5049      73546963 
+ 5049      6B536574 
+ 5049      43616C6C 
+ 5049      6261636B 
+ 5050              	.LASF92:
+ 5051 0599 43795379 		.ascii	"CySysTickCallbacks\000"
+ 5051      73546963 
+ 5051      6B43616C 
+ 5051      6C626163 
+ 5051      6B7300
+ 5052              	.LASF72:
+ 5053 05ac 696D6F54 		.ascii	"imoTrim1Value\000"
+ 5053      72696D31 
+ 5053      56616C75 
+ 5053      6500
+ 5054              	.LASF91:
+ 5055 05ba 756E6971 		.ascii	"uniqueId\000"
+ 5055      75654964 
+ 5055      00
+ 5056              	.LASF105:
+ 5057 05c3 453A5C65 		.ascii	"E:\\eCTF\\ectf-2018-techsec-submission2\\SECURITY_M"
+ 5057      4354465C 
+ 5057      65637466 
+ 5057      2D323031 
+ 5057      382D7465 
+ 5058 05f3 4F44554C 		.ascii	"ODULE.cydsn\000"
+ 5058      452E6379 
+ 5058      64736E00 
  5059              	.LASF62:
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 151
-
-
- 5060 0615 43794465 		.ascii	"CyDelay\000"
+ 5060 05ff 43794465 		.ascii	"CyDelay\000"
  5060      6C617900 
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc2h8pTT.s 			page 151
+
+
  5061              	.LASF81:
- 5062 061d 43795379 		.ascii	"CySysTickDisableInterrupt\000"
+ 5062 0607 43795379 		.ascii	"CySysTickDisableInterrupt\000"
  5062      73546963 
  5062      6B446973 
  5062      61626C65 
  5062      496E7465 
  5063              	.LASF39:
- 5064 0637 43795379 		.ascii	"CySysLvdDisable\000"
+ 5064 0621 43795379 		.ascii	"CySysLvdDisable\000"
  5064      734C7664 
  5064      44697361 
  5064      626C6500 
  5065              	.LASF95:
- 5066 0647 63796465 		.ascii	"cydelayFreqMhz\000"
+ 5066 0631 63796465 		.ascii	"cydelayFreqMhz\000"
  5066      6C617946 
  5066      7265714D 
  5066      687A00
  5067              	.LASF77:
- 5068 0656 43795379 		.ascii	"CySysTickStop\000"
+ 5068 0640 43795379 		.ascii	"CySysTickStop\000"
  5068      73546963 
  5068      6B53746F 
  5068      7000
  5069              	.LASF38:
- 5070 0664 64697669 		.ascii	"divider\000"
+ 5070 064e 64697669 		.ascii	"divider\000"
  5070      64657200 
  5071              	.LASF28:
- 5072 066c 43795379 		.ascii	"CySysClkImoStart\000"
+ 5072 0656 43795379 		.ascii	"CySysClkImoStart\000"
  5072      73436C6B 
  5072      496D6F53 
  5072      74617274 
  5072      00
  5073              	.LASF70:
- 5074 067d 6E657749 		.ascii	"newImoTrim2Value\000"
+ 5074 0667 6E657749 		.ascii	"newImoTrim2Value\000"
  5074      6D6F5472 
  5074      696D3256 
  5074      616C7565 
  5074      00
  5075              	.LASF104:
- 5076 068e 47656E65 		.ascii	"Generated_Source\\PSoC4\\CyLib.c\000"
+ 5076 0678 47656E65 		.ascii	"Generated_Source\\PSoC4\\CyLib.c\000"
  5076      72617465 
  5076      645F536F 
  5076      75726365 
  5076      5C50536F 
  5077              	.LASF65:
- 5078 06ad 6D696372 		.ascii	"microseconds\000"
+ 5078 0697 6D696372 		.ascii	"microseconds\000"
  5078      6F736563 
  5078      6F6E6473 
  5078      00
  5079              	.LASF31:
- 5080 06ba 746D7052 		.ascii	"tmpReg\000"
+ 5080 06a4 746D7052 		.ascii	"tmpReg\000"
  5080      656700
  5081              	.LASF107:
- 5082 06c1 43795379 		.ascii	"CySysTickSetReload\000"
+ 5082 06ab 43795379 		.ascii	"CySysTickSetReload\000"
  5082      73546963 
  5082      6B536574 
  5082      52656C6F 
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccg7NrEC.s 			page 152
-
-
  5082      616400
  5083              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc2h8pTT.s 			page 152
+
+

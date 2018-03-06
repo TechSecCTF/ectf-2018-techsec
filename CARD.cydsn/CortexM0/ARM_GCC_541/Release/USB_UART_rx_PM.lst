@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc9UGXRn.s 			page 1
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccOb8PyL.s 			page 1
 
 
    1              		.syntax unified
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc9UGXRn.s 			page 1
   28:Generated_Source\PSoC4/USB_UART_rx_PM.c **** *  deep-sleep/hibernate modes. This function applies only to SIO and USBIO pins.
   29:Generated_Source\PSoC4/USB_UART_rx_PM.c **** *  It should not be called for GPIO or GPIO_OVT pins.
   30:Generated_Source\PSoC4/USB_UART_rx_PM.c **** *
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc9UGXRn.s 			page 2
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccOb8PyL.s 			page 2
 
 
   31:Generated_Source\PSoC4/USB_UART_rx_PM.c **** * <b>Note</b> This function is available in PSoC 4 only.
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc9UGXRn.s 			page 1
   50              		.size	USB_UART_rx_Sleep, .-USB_UART_rx_Sleep
   51              		.section	.text.USB_UART_rx_Wakeup,"ax",%progbits
   52              		.align	1
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc9UGXRn.s 			page 3
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccOb8PyL.s 			page 3
 
 
   53              		.global	USB_UART_rx_Wakeup
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc9UGXRn.s 			page 1
   70 0004 024B     		ldr	r3, .L5+4
   71 0006 1A60     		str	r2, [r3]
   72              		.loc 1 97 0
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc9UGXRn.s 			page 4
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccOb8PyL.s 			page 4
 
 
   73 0008 7047     		bx	lr
@@ -210,48 +210,48 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc9UGXRn.s 			page 1
   97 0006 00000000 		.4byte	.Ldebug_abbrev0
   98 000a 04       		.byte	0x4
   99 000b 01       		.uleb128 0x1
- 100 000c 7E010000 		.4byte	.LASF20
+ 100 000c 4E010000 		.4byte	.LASF20
  101 0010 0C       		.byte	0xc
  102 0011 22000000 		.4byte	.LASF21
- 103 0015 E2000000 		.4byte	.LASF22
+ 103 0015 63000000 		.4byte	.LASF22
  104 0019 00000000 		.4byte	.Ldebug_ranges0+0
  105 001d 00000000 		.4byte	0
  106 0021 00000000 		.4byte	.Ldebug_line0
  107 0025 02       		.uleb128 0x2
  108 0026 01       		.byte	0x1
  109 0027 06       		.byte	0x6
- 110 0028 72010000 		.4byte	.LASF0
+ 110 0028 42010000 		.4byte	.LASF0
  111 002c 02       		.uleb128 0x2
  112 002d 01       		.byte	0x1
  113 002e 08       		.byte	0x8
- 114 002f 7D000000 		.4byte	.LASF1
+ 114 002f 94000000 		.4byte	.LASF1
  115 0033 02       		.uleb128 0x2
  116 0034 02       		.byte	0x2
  117 0035 05       		.byte	0x5
- 118 0036 45010000 		.4byte	.LASF2
+ 118 0036 15010000 		.4byte	.LASF2
  119 003a 02       		.uleb128 0x2
  120 003b 02       		.byte	0x2
  121 003c 07       		.byte	0x7
- 122 003d 9D000000 		.4byte	.LASF3
+ 122 003d B4000000 		.4byte	.LASF3
  123 0041 02       		.uleb128 0x2
  124 0042 04       		.byte	0x4
  125 0043 05       		.byte	0x5
- 126 0044 57010000 		.4byte	.LASF4
+ 126 0044 27010000 		.4byte	.LASF4
  127 0048 02       		.uleb128 0x2
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc9UGXRn.s 			page 5
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccOb8PyL.s 			page 5
 
 
  128 0049 04       		.byte	0x4
  129 004a 07       		.byte	0x7
- 130 004b 8B000000 		.4byte	.LASF5
+ 130 004b A2000000 		.4byte	.LASF5
  131 004f 02       		.uleb128 0x2
  132 0050 08       		.byte	0x8
  133 0051 05       		.byte	0x5
- 134 0052 32010000 		.4byte	.LASF6
+ 134 0052 02010000 		.4byte	.LASF6
  135 0056 02       		.uleb128 0x2
  136 0057 08       		.byte	0x8
  137 0058 07       		.byte	0x7
- 138 0059 CB000000 		.4byte	.LASF7
+ 138 0059 E2000000 		.4byte	.LASF7
  139 005d 03       		.uleb128 0x3
  140 005e 04       		.byte	0x4
  141 005f 05       		.byte	0x5
@@ -259,9 +259,9 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc9UGXRn.s 			page 1
  143 0064 02       		.uleb128 0x2
  144 0065 04       		.byte	0x4
  145 0066 07       		.byte	0x7
- 146 0067 BE000000 		.4byte	.LASF8
+ 146 0067 D5000000 		.4byte	.LASF8
  147 006b 04       		.uleb128 0x4
- 148 006c B7000000 		.4byte	.LASF12
+ 148 006c CE000000 		.4byte	.LASF12
  149 0070 02       		.byte	0x2
  150 0071 D401     		.2byte	0x1d4
  151 0073 48000000 		.4byte	0x48
@@ -272,11 +272,11 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc9UGXRn.s 			page 1
  156 007e 02       		.uleb128 0x2
  157 007f 08       		.byte	0x8
  158 0080 04       		.byte	0x4
- 159 0081 B0000000 		.4byte	.LASF10
+ 159 0081 C7000000 		.4byte	.LASF10
  160 0085 02       		.uleb128 0x2
  161 0086 01       		.byte	0x1
  162 0087 08       		.byte	0x8
- 163 0088 40010000 		.4byte	.LASF11
+ 163 0088 10010000 		.4byte	.LASF11
  164 008c 04       		.uleb128 0x4
  165 008d 13000000 		.4byte	.LASF13
  166 0091 02       		.byte	0x2
@@ -290,15 +290,15 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc9UGXRn.s 			page 1
  174 00a0 21       		.byte	0x21
  175 00a1 CA000000 		.4byte	0xca
  176 00a5 07       		.uleb128 0x7
- 177 00a6 4F010000 		.4byte	.LASF14
+ 177 00a6 1F010000 		.4byte	.LASF14
  178 00aa 03       		.byte	0x3
  179 00ab 23       		.byte	0x23
  180 00ac 6B000000 		.4byte	0x6b
  181 00b0 00       		.byte	0
  182 00b1 07       		.uleb128 0x7
- 183 00b2 29010000 		.4byte	.LASF15
+ 183 00b2 F9000000 		.4byte	.LASF15
  184 00b6 03       		.byte	0x3
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc9UGXRn.s 			page 6
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccOb8PyL.s 			page 6
 
 
  185 00b7 24       		.byte	0x24
@@ -312,12 +312,12 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc9UGXRn.s 			page 1
  193 00c8 08       		.byte	0x8
  194 00c9 00       		.byte	0
  195 00ca 08       		.uleb128 0x8
- 196 00cb 63000000 		.4byte	.LASF17
+ 196 00cb DC010000 		.4byte	.LASF17
  197 00cf 03       		.byte	0x3
  198 00d0 26       		.byte	0x26
  199 00d1 9D000000 		.4byte	0x9d
  200 00d5 09       		.uleb128 0x9
- 201 00d6 60010000 		.4byte	.LASF18
+ 201 00d6 30010000 		.4byte	.LASF18
  202 00da 01       		.byte	0x1
  203 00db 2C       		.byte	0x2c
  204 00dc 00000000 		.4byte	.LFB0
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc9UGXRn.s 			page 1
  239 000c 17       		.uleb128 0x17
  240 000d 11       		.uleb128 0x11
  241 000e 01       		.uleb128 0x1
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc9UGXRn.s 			page 7
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccOb8PyL.s 			page 7
 
 
  242 000f 10       		.uleb128 0x10
@@ -418,7 +418,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc9UGXRn.s 			page 1
  296 0045 0B       		.uleb128 0xb
  297 0046 01       		.uleb128 0x1
  298 0047 13       		.uleb128 0x13
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc9UGXRn.s 			page 8
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccOb8PyL.s 			page 8
 
 
  299 0048 00       		.byte	0
@@ -478,7 +478,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc9UGXRn.s 			page 1
  353 007f 34       		.uleb128 0x34
  354 0080 00       		.byte	0
  355 0081 03       		.uleb128 0x3
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc9UGXRn.s 			page 9
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccOb8PyL.s 			page 9
 
 
  356 0082 0E       		.uleb128 0xe
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc9UGXRn.s 			page 1
  399              	.LASF21:
  400 0022 47656E65 		.ascii	"Generated_Source\\PSoC4\\USB_UART_rx_PM.c\000"
  400      72617465 
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc9UGXRn.s 			page 10
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccOb8PyL.s 			page 10
 
 
  400      645F536F 
@@ -553,107 +553,103 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc9UGXRn.s 			page 1
  403              	.LASF9:
  404 005d 666C6F61 		.ascii	"float\000"
  404      7400
- 405              	.LASF17:
- 406 0063 5553425F 		.ascii	"USB_UART_rx_BACKUP_STRUCT\000"
- 406      55415254 
- 406      5F72785F 
- 406      4241434B 
- 406      55505F53 
- 407              	.LASF1:
- 408 007d 756E7369 		.ascii	"unsigned char\000"
- 408      676E6564 
- 408      20636861 
- 408      7200
- 409              	.LASF5:
- 410 008b 6C6F6E67 		.ascii	"long unsigned int\000"
- 410      20756E73 
- 410      69676E65 
- 410      6420696E 
- 410      7400
- 411              	.LASF3:
- 412 009d 73686F72 		.ascii	"short unsigned int\000"
- 412      7420756E 
- 412      7369676E 
- 412      65642069 
- 412      6E7400
- 413              	.LASF10:
- 414 00b0 646F7562 		.ascii	"double\000"
- 414      6C6500
- 415              	.LASF12:
- 416 00b7 75696E74 		.ascii	"uint32\000"
- 416      333200
- 417              	.LASF8:
- 418 00be 756E7369 		.ascii	"unsigned int\000"
- 418      676E6564 
- 418      20696E74 
- 418      00
- 419              	.LASF7:
- 420 00cb 6C6F6E67 		.ascii	"long long unsigned int\000"
- 420      206C6F6E 
- 420      6720756E 
- 420      7369676E 
- 420      65642069 
- 421              	.LASF22:
- 422 00e2 5C5C5642 		.ascii	"\\\\VBOXSVR\\raywang\\Dropbox (MIT)\\CTFs\\eCTF\\ec"
- 422      4F585356 
- 422      525C7261 
- 422      7977616E 
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc9UGXRn.s 			page 11
+ 405              	.LASF22:
+ 406 0063 453A5C65 		.ascii	"E:\\eCTF\\ectf-2018-techsec-submission2\\CARD.cydsn"
+ 406      4354465C 
+ 406      65637466 
+ 406      2D323031 
+ 406      382D7465 
+ 407 0093 00       		.ascii	"\000"
+ 408              	.LASF1:
+ 409 0094 756E7369 		.ascii	"unsigned char\000"
+ 409      676E6564 
+ 409      20636861 
+ 409      7200
+ 410              	.LASF5:
+ 411 00a2 6C6F6E67 		.ascii	"long unsigned int\000"
+ 411      20756E73 
+ 411      69676E65 
+ 411      6420696E 
+ 411      7400
+ 412              	.LASF3:
+ 413 00b4 73686F72 		.ascii	"short unsigned int\000"
+ 413      7420756E 
+ 413      7369676E 
+ 413      65642069 
+ 413      6E7400
+ 414              	.LASF10:
+ 415 00c7 646F7562 		.ascii	"double\000"
+ 415      6C6500
+ 416              	.LASF12:
+ 417 00ce 75696E74 		.ascii	"uint32\000"
+ 417      333200
+ 418              	.LASF8:
+ 419 00d5 756E7369 		.ascii	"unsigned int\000"
+ 419      676E6564 
+ 419      20696E74 
+ 419      00
+ 420              	.LASF7:
+ 421 00e2 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 421      206C6F6E 
+ 421      6720756E 
+ 421      7369676E 
+ 421      65642069 
+ 422              	.LASF15:
+ 423 00f9 73696F53 		.ascii	"sioState\000"
+ 423      74617465 
+ 423      00
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccOb8PyL.s 			page 11
 
 
- 422      675C4472 
- 423 010e 74662D32 		.ascii	"tf-2018-techsec\\CARD.cydsn\000"
- 423      3031382D 
- 423      74656368 
- 423      7365635C 
- 423      43415244 
- 424              	.LASF15:
- 425 0129 73696F53 		.ascii	"sioState\000"
- 425      74617465 
- 425      00
- 426              	.LASF6:
- 427 0132 6C6F6E67 		.ascii	"long long int\000"
- 427      206C6F6E 
- 427      6720696E 
- 427      7400
- 428              	.LASF11:
- 429 0140 63686172 		.ascii	"char\000"
- 429      00
- 430              	.LASF2:
- 431 0145 73686F72 		.ascii	"short int\000"
- 431      7420696E 
- 431      7400
- 432              	.LASF14:
- 433 014f 70635374 		.ascii	"pcState\000"
- 433      61746500 
- 434              	.LASF4:
- 435 0157 6C6F6E67 		.ascii	"long int\000"
- 435      20696E74 
- 435      00
- 436              	.LASF18:
- 437 0160 5553425F 		.ascii	"USB_UART_rx_Sleep\000"
- 437      55415254 
- 437      5F72785F 
- 437      536C6565 
- 437      7000
- 438              	.LASF0:
- 439 0172 7369676E 		.ascii	"signed char\000"
- 439      65642063 
- 439      68617200 
- 440              	.LASF20:
- 441 017e 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
- 441      43313120 
- 441      352E342E 
- 441      31203230 
- 441      31363036 
- 442 01b1 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m0 -mthumb -g -O"
- 442      20726576 
- 442      6973696F 
- 442      6E203233 
- 442      37373135 
- 443 01e4 73202D66 		.ascii	"s -ffunction-sections -ffat-lto-objects\000"
- 443      66756E63 
- 443      74696F6E 
- 443      2D736563 
- 443      74696F6E 
+ 424              	.LASF6:
+ 425 0102 6C6F6E67 		.ascii	"long long int\000"
+ 425      206C6F6E 
+ 425      6720696E 
+ 425      7400
+ 426              	.LASF11:
+ 427 0110 63686172 		.ascii	"char\000"
+ 427      00
+ 428              	.LASF2:
+ 429 0115 73686F72 		.ascii	"short int\000"
+ 429      7420696E 
+ 429      7400
+ 430              	.LASF14:
+ 431 011f 70635374 		.ascii	"pcState\000"
+ 431      61746500 
+ 432              	.LASF4:
+ 433 0127 6C6F6E67 		.ascii	"long int\000"
+ 433      20696E74 
+ 433      00
+ 434              	.LASF18:
+ 435 0130 5553425F 		.ascii	"USB_UART_rx_Sleep\000"
+ 435      55415254 
+ 435      5F72785F 
+ 435      536C6565 
+ 435      7000
+ 436              	.LASF0:
+ 437 0142 7369676E 		.ascii	"signed char\000"
+ 437      65642063 
+ 437      68617200 
+ 438              	.LASF20:
+ 439 014e 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 439      43313120 
+ 439      352E342E 
+ 439      31203230 
+ 439      31363036 
+ 440 0181 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m0 -mthumb -g -O"
+ 440      20726576 
+ 440      6973696F 
+ 440      6E203233 
+ 440      37373135 
+ 441 01b4 73202D66 		.ascii	"s -ffunction-sections -ffat-lto-objects\000"
+ 441      66756E63 
+ 441      74696F6E 
+ 441      2D736563 
+ 441      74696F6E 
+ 442              	.LASF17:
+ 443 01dc 5553425F 		.ascii	"USB_UART_rx_BACKUP_STRUCT\000"
+ 443      55415254 
+ 443      5F72785F 
+ 443      4241434B 
+ 443      55505F53 
  444              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

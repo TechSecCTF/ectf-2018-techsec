@@ -245,31 +245,19 @@
 </dependency_info>
 <dependency_info name="c9323d49-d323-40b8-9b59-cc008d68a989@Release@CortexM0" xml_contents_version="2">
 <CyGuid_1173175f-1b9b-4ad4-a065-754a48a27021 type_name="CyDesigner.Common.Base.CyFileDeps" version="1">
-<file name="C:\VBOXSVR\raywang\Dropbox (MIT)\CTFs\eCTF\ectf-2018-techsec\strong-arm.cylib\CortexM0\ARM_GCC_541\Release\strong-arm.a">
-<dep name="C:\VBOXSVR\raywang\Dropbox" />
-<dep name=".\(MIT)\CTFs\eCTF\ectf-2018-techsec\strong-arm.cylib\CortexM0\ARM_GCC_541\Release\utils.o" />
-<dep name="C:\VBOXSVR\raywang\Dropbox" />
-<dep name=".\(MIT)\CTFs\eCTF\ectf-2018-techsec\strong-arm.cylib\CortexM0\ARM_GCC_541\Release\strong-arm.o" />
-<dep name="C:\VBOXSVR\raywang\Dropbox" />
-<dep name=".\(MIT)\CTFs\eCTF\ectf-2018-techsec\strong-arm.cylib\CortexM0\ARM_GCC_541\Release\threefish.o" />
-<dep name="C:\VBOXSVR\raywang\Dropbox" />
-<dep name=".\(MIT)\CTFs\eCTF\ectf-2018-techsec\strong-arm.cylib\CortexM0\ARM_GCC_541\Release\sha256.o" />
-<dep name="C:\VBOXSVR\raywang\Dropbox" />
-<dep name=".\(MIT)\CTFs\eCTF\ectf-2018-techsec\strong-arm.cylib\CortexM0\ARM_GCC_541\Release\ripemd160.o" />
-<dep name="C:\VBOXSVR\raywang\Dropbox" />
-<dep name=".\(MIT)\CTFs\eCTF\ectf-2018-techsec\strong-arm.cylib\CortexM0\ARM_GCC_541\Release\util.o" />
-<dep name="C:\VBOXSVR\raywang\Dropbox" />
-<dep name=".\(MIT)\CTFs\eCTF\ectf-2018-techsec\strong-arm.cylib\CortexM0\ARM_GCC_541\Release\pbkdf2.o" />
-<dep name="C:\VBOXSVR\raywang\Dropbox" />
-<dep name=".\(MIT)\CTFs\eCTF\ectf-2018-techsec\strong-arm.cylib\CortexM0\ARM_GCC_541\Release\hmac.o" />
-<dep name="C:\VBOXSVR\raywang\Dropbox" />
-<dep name=".\(MIT)\CTFs\eCTF\ectf-2018-techsec\strong-arm.cylib\CortexM0\ARM_GCC_541\Release\ecdsa.o" />
-<dep name="C:\VBOXSVR\raywang\Dropbox" />
-<dep name=".\(MIT)\CTFs\eCTF\ectf-2018-techsec\strong-arm.cylib\CortexM0\ARM_GCC_541\Release\base58.o" />
-<dep name="C:\VBOXSVR\raywang\Dropbox" />
-<dep name=".\(MIT)\CTFs\eCTF\ectf-2018-techsec\strong-arm.cylib\CortexM0\ARM_GCC_541\Release\der.o" />
-<dep name="C:\VBOXSVR\raywang\Dropbox" />
-<dep name=".\(MIT)\CTFs\eCTF\ectf-2018-techsec\strong-arm.cylib\CortexM0\ARM_GCC_541\Release\aes256.o" />
+<file name=".\CortexM0\ARM_GCC_541\Release\strong-arm.a">
+<dep name=".\CortexM0\ARM_GCC_541\Release\utils.o" />
+<dep name=".\CortexM0\ARM_GCC_541\Release\strong-arm.o" />
+<dep name=".\CortexM0\ARM_GCC_541\Release\threefish.o" />
+<dep name=".\CortexM0\ARM_GCC_541\Release\sha256.o" />
+<dep name=".\CortexM0\ARM_GCC_541\Release\ripemd160.o" />
+<dep name=".\CortexM0\ARM_GCC_541\Release\util.o" />
+<dep name=".\CortexM0\ARM_GCC_541\Release\pbkdf2.o" />
+<dep name=".\CortexM0\ARM_GCC_541\Release\hmac.o" />
+<dep name=".\CortexM0\ARM_GCC_541\Release\ecdsa.o" />
+<dep name=".\CortexM0\ARM_GCC_541\Release\base58.o" />
+<dep name=".\CortexM0\ARM_GCC_541\Release\der.o" />
+<dep name=".\CortexM0\ARM_GCC_541\Release\aes256.o" />
 </file>
 </CyGuid_1173175f-1b9b-4ad4-a065-754a48a27021>
 </dependency_info>
@@ -309,6 +297,7 @@
 <name_val_pair name="strong-arm\src\asn1\der.c" v="-mcpu=cortex-m0 -mthumb -I.\strong-arm\include -I. -Wa,-alh=${OutputDir}/${CompileFile}.lst -g -D NDEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -Os" />
 <name_val_pair name="strong-arm\src\aes\aes256.c" v="-mcpu=cortex-m0 -mthumb -I.\strong-arm\include -I. -Wa,-alh=${OutputDir}/${CompileFile}.lst -g -D NDEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -Os" />
 <name_val_pair name="\\VBOXSVR\raywang\Dropbox (MIT)\CTFs\eCTF\ectf-2018-techsec\strong-arm.cylib\CortexM0\ARM_GCC_541\Release\strong-arm.a" v="-rs .\CortexM0\ARM_GCC_541\Release\strong-arm.a &quot;\\VBOXSVR\raywang\Dropbox (MIT)\CTFs\eCTF\ectf-2018-techsec\strong-arm.cylib\CortexM0\ARM_GCC_541\Release\utils.o&quot; &quot;\\VBOXSVR\raywang\Dropbox (MIT)\CTFs\eCTF\ectf-2018-techsec\strong-arm.cylib\CortexM0\ARM_GCC_541\Release\strong-arm.o&quot; &quot;\\VBOXSVR\raywang\Dropbox (MIT)\CTFs\eCTF\ectf-2018-techsec\strong-arm.cylib\CortexM0\ARM_GCC_541\Release\threefish.o&quot; &quot;\\VBOXSVR\raywang\Dropbox (MIT)\CTFs\eCTF\ectf-2018-techsec\strong-arm.cylib\CortexM0\ARM_GCC_541\Release\sha256.o&quot; &quot;\\VBOXSVR\raywang\Dropbox (MIT)\CTFs\eCTF\ectf-2018-techsec\strong-arm.cylib\CortexM0\ARM_GCC_541\Release\ripemd160.o&quot; &quot;\\VBOXSVR\raywang\Dropbox (MIT)\CTFs\eCTF\ectf-2018-techsec\strong-arm.cylib\CortexM0\ARM_GCC_541\Release\util.o&quot; &quot;\\VBOXSVR\raywang\Dropbox (MIT)\CTFs\eCTF\ectf-2018-techsec\strong-arm.cylib\CortexM0\ARM_GCC_541\Release\pbkdf2.o&quot; &quot;\\VBOXSVR\raywang\Dropbox (MIT)\CTFs\eCTF\ectf-2018-techsec\strong-arm.cylib\CortexM0\ARM_GCC_541\Release\hmac.o&quot; &quot;\\VBOXSVR\raywang\Dropbox (MIT)\CTFs\eCTF\ectf-2018-techsec\strong-arm.cylib\CortexM0\ARM_GCC_541\Release\ecdsa.o&quot; &quot;\\VBOXSVR\raywang\Dropbox (MIT)\CTFs\eCTF\ectf-2018-techsec\strong-arm.cylib\CortexM0\ARM_GCC_541\Release\base58.o&quot; &quot;\\VBOXSVR\raywang\Dropbox (MIT)\CTFs\eCTF\ectf-2018-techsec\strong-arm.cylib\CortexM0\ARM_GCC_541\Release\der.o&quot; &quot;\\VBOXSVR\raywang\Dropbox (MIT)\CTFs\eCTF\ectf-2018-techsec\strong-arm.cylib\CortexM0\ARM_GCC_541\Release\aes256.o&quot;" />
+<name_val_pair name="E:\eCTF\ectf-2018-techsec-submission2\strong-arm.cylib\CortexM0\ARM_GCC_541\Release\strong-arm.a" v="-rs .\CortexM0\ARM_GCC_541\Release\strong-arm.a E:\eCTF\ectf-2018-techsec-submission2\strong-arm.cylib\CortexM0\ARM_GCC_541\Release\utils.o E:\eCTF\ectf-2018-techsec-submission2\strong-arm.cylib\CortexM0\ARM_GCC_541\Release\strong-arm.o E:\eCTF\ectf-2018-techsec-submission2\strong-arm.cylib\CortexM0\ARM_GCC_541\Release\threefish.o E:\eCTF\ectf-2018-techsec-submission2\strong-arm.cylib\CortexM0\ARM_GCC_541\Release\sha256.o E:\eCTF\ectf-2018-techsec-submission2\strong-arm.cylib\CortexM0\ARM_GCC_541\Release\ripemd160.o E:\eCTF\ectf-2018-techsec-submission2\strong-arm.cylib\CortexM0\ARM_GCC_541\Release\util.o E:\eCTF\ectf-2018-techsec-submission2\strong-arm.cylib\CortexM0\ARM_GCC_541\Release\pbkdf2.o E:\eCTF\ectf-2018-techsec-submission2\strong-arm.cylib\CortexM0\ARM_GCC_541\Release\hmac.o E:\eCTF\ectf-2018-techsec-submission2\strong-arm.cylib\CortexM0\ARM_GCC_541\Release\ecdsa.o E:\eCTF\ectf-2018-techsec-submission2\strong-arm.cylib\CortexM0\ARM_GCC_541\Release\base58.o E:\eCTF\ectf-2018-techsec-submission2\strong-arm.cylib\CortexM0\ARM_GCC_541\Release\der.o E:\eCTF\ectf-2018-techsec-submission2\strong-arm.cylib\CortexM0\ARM_GCC_541\Release\aes256.o" />
 </name>
 </genericCmdLineData>
 <codeGenCmdLineTag v="" />

@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 1
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccoIUiTa.s 			page 1
 
 
    1              		.syntax unified
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 1
   28:Generated_Source\PSoC4/CARD_UART.c **** 
   29:Generated_Source\PSoC4/CARD_UART.c **** #if (CARD_UART_TX_INTERRUPT_ENABLED && CARD_UART_TX_ENABLED)
   30:Generated_Source\PSoC4/CARD_UART.c ****     volatile uint8 CARD_UART_txBuffer[CARD_UART_TX_BUFFER_SIZE];
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 2
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccoIUiTa.s 			page 2
 
 
   31:Generated_Source\PSoC4/CARD_UART.c ****     volatile uint8 CARD_UART_txBufferRead = 0u;
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 1
   85:Generated_Source\PSoC4/CARD_UART.c ****     CARD_UART_Enable();
   86:Generated_Source\PSoC4/CARD_UART.c **** }
   87:Generated_Source\PSoC4/CARD_UART.c **** 
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 3
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccoIUiTa.s 			page 3
 
 
   88:Generated_Source\PSoC4/CARD_UART.c **** 
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 1
  121:Generated_Source\PSoC4/CARD_UART.c ****         #endif /* End CARD_UART_RXHW_ADDRESS_ENABLED */
  122:Generated_Source\PSoC4/CARD_UART.c **** 
  123:Generated_Source\PSoC4/CARD_UART.c ****         /* Init Count7 period */
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 4
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccoIUiTa.s 			page 4
 
 
  124:Generated_Source\PSoC4/CARD_UART.c ****         CARD_UART_RXBITCTR_PERIOD_REG = CARD_UART_RXBITCTR_INIT;
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 1
  151:Generated_Source\PSoC4/CARD_UART.c ****         #endif /*End CARD_UART_TX_INTERRUPT_ENABLED*/
  152:Generated_Source\PSoC4/CARD_UART.c **** 
  153:Generated_Source\PSoC4/CARD_UART.c ****     #endif /* End CARD_UART_TX_ENABLED */
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 5
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccoIUiTa.s 			page 5
 
 
  154:Generated_Source\PSoC4/CARD_UART.c **** 
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 1
  169:Generated_Source\PSoC4/CARD_UART.c **** *  to call CARD_UART_Enable() because the CARD_UART_Start() API
  170:Generated_Source\PSoC4/CARD_UART.c **** *  calls this function, which is the preferred method to begin component
  171:Generated_Source\PSoC4/CARD_UART.c **** *  operation.
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 6
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccoIUiTa.s 			page 6
 
 
  172:Generated_Source\PSoC4/CARD_UART.c **** 
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 1
  197:Generated_Source\PSoC4/CARD_UART.c **** 
  198:Generated_Source\PSoC4/CARD_UART.c ****             #if (CARD_UART_RXHW_ADDRESS_ENABLED)
  199:Generated_Source\PSoC4/CARD_UART.c ****                 CARD_UART_rxAddressDetected = 0u;
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 7
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccoIUiTa.s 			page 7
 
 
  200:Generated_Source\PSoC4/CARD_UART.c ****             #endif /* (CARD_UART_RXHW_ADDRESS_ENABLED) */
@@ -418,7 +418,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 1
  158              	.LVL7:
  214:Generated_Source\PSoC4/CARD_UART.c ****         #endif /* (CARD_UART_TX_INTERRUPT_ENABLED) */
  159              		.loc 1 214 0
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 8
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccoIUiTa.s 			page 8
 
 
  160 0030 0320     		movs	r0, #3
@@ -478,7 +478,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 1
  208 0010 6370     		strb	r3, [r4, #1]
  209              	.L8:
   85:Generated_Source\PSoC4/CARD_UART.c **** }
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 9
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccoIUiTa.s 			page 9
 
 
  210              		.loc 1 85 0
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 1
  243              	.LVL14:
  244:Generated_Source\PSoC4/CARD_UART.c **** 
  245:Generated_Source\PSoC4/CARD_UART.c ****     /* Write Bit Counter Disable */
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 10
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccoIUiTa.s 			page 10
 
 
  246:Generated_Source\PSoC4/CARD_UART.c ****     #if (CARD_UART_RX_ENABLED || CARD_UART_HD_ENABLED)
@@ -598,7 +598,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 1
  261              	.LVL16:
  262:Generated_Source\PSoC4/CARD_UART.c **** 
  262              		.loc 1 262 0
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 11
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccoIUiTa.s 			page 11
 
 
  263 0018 094A     		ldr	r2, .L13+4
@@ -658,7 +658,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 1
  280:Generated_Source\PSoC4/CARD_UART.c **** 
  281:Generated_Source\PSoC4/CARD_UART.c **** /*******************************************************************************
  282:Generated_Source\PSoC4/CARD_UART.c **** * Function Name: CARD_UART_ReadControlRegister
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 12
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccoIUiTa.s 			page 12
 
 
  283:Generated_Source\PSoC4/CARD_UART.c **** ********************************************************************************
@@ -718,7 +718,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 1
  342              		.type	CARD_UART_SetRxInterruptMode, %function
  343              	CARD_UART_SetRxInterruptMode:
  344              	.LFB6:
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 13
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccoIUiTa.s 			page 13
 
 
  303:Generated_Source\PSoC4/CARD_UART.c **** 
@@ -778,7 +778,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 1
  357:Generated_Source\PSoC4/CARD_UART.c ****     *
  358:Generated_Source\PSoC4/CARD_UART.c ****     *******************************************************************************/
  359:Generated_Source\PSoC4/CARD_UART.c ****     void CARD_UART_SetRxInterruptMode(uint8 intSrc) 
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 14
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccoIUiTa.s 			page 14
 
 
  360:Generated_Source\PSoC4/CARD_UART.c ****     {
@@ -838,7 +838,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 1
  384:Generated_Source\PSoC4/CARD_UART.c ****     *     incremented after each byte has been read from buffer.
  385:Generated_Source\PSoC4/CARD_UART.c ****     *  CARD_UART_rxBufferLoopDetect - cleared if loop condition was detected
  386:Generated_Source\PSoC4/CARD_UART.c ****     *     in RX ISR.
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 15
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccoIUiTa.s 			page 15
 
 
  387:Generated_Source\PSoC4/CARD_UART.c ****     *
@@ -898,7 +898,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 1
  404              		.loc 1 407 0 is_stmt 0 discriminator 1
  405 0018 8B42     		cmp	r3, r1
  406 001a 0ED0     		beq	.L22
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 16
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccoIUiTa.s 			page 16
 
 
  407              	.L21:
@@ -958,7 +958,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 1
  427:Generated_Source\PSoC4/CARD_UART.c ****                             *  configuration set, otherwise
  428:Generated_Source\PSoC4/CARD_UART.c ****                             *  mask will be returned in LoadRxConfig() API.
  429:Generated_Source\PSoC4/CARD_UART.c ****                             */
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 17
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccoIUiTa.s 			page 17
 
 
  430:Generated_Source\PSoC4/CARD_UART.c ****                             CARD_UART_RXSTATUS_MASK_REG  |= CARD_UART_RX_STS_FIFO_NOTEMPTY;
@@ -1018,7 +1018,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 1
  471              		.type	CARD_UART_ReadRxStatus, %function
  472              	CARD_UART_ReadRxStatus:
  473              	.LFB8:
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 18
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccoIUiTa.s 			page 18
 
 
  454:Generated_Source\PSoC4/CARD_UART.c **** 
@@ -1078,7 +1078,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 1
  489 000e 03D0     		beq	.L31
  493:Generated_Source\PSoC4/CARD_UART.c ****         {
  494:Generated_Source\PSoC4/CARD_UART.c ****             status |= CARD_UART_RX_STS_SOFT_BUFF_OVER;
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 19
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccoIUiTa.s 			page 19
 
 
  490              		.loc 1 494 0
@@ -1138,7 +1138,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 1
  522:Generated_Source\PSoC4/CARD_UART.c ****     *     checked to identify new data.
  523:Generated_Source\PSoC4/CARD_UART.c ****     *  CARD_UART_rxBufferRead - cyclic index for read from rxBuffer,
  524:Generated_Source\PSoC4/CARD_UART.c ****     *     incremented after each byte has been read from buffer.
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 20
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccoIUiTa.s 			page 20
 
 
  525:Generated_Source\PSoC4/CARD_UART.c ****     *  CARD_UART_rxBufferLoopDetect - cleared if loop condition was detected
@@ -1198,7 +1198,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 1
  546 0016 002C     		cmp	r4, #0
  547 0018 01D1     		bne	.L38
  548              		.loc 1 547 0 is_stmt 0 discriminator 1
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 21
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccoIUiTa.s 			page 21
 
 
  549 001a 8B42     		cmp	r3, r1
@@ -1258,7 +1258,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 1
  565:Generated_Source\PSoC4/CARD_UART.c ****                         {   /* In Half duplex mode return RX mask only if
  566:Generated_Source\PSoC4/CARD_UART.c ****                             *  RX configuration set, otherwise
  567:Generated_Source\PSoC4/CARD_UART.c ****                             *  mask will be returned in LoadRxConfig() API.
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 22
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccoIUiTa.s 			page 22
 
 
  568:Generated_Source\PSoC4/CARD_UART.c ****                             */
@@ -1318,7 +1318,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 1
  594:Generated_Source\PSoC4/CARD_UART.c ****     #else
  595:Generated_Source\PSoC4/CARD_UART.c **** 
  596:Generated_Source\PSoC4/CARD_UART.c ****         rxStatus =CARD_UART_RXSTATUS_REG;
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 23
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccoIUiTa.s 			page 23
 
 
  597:Generated_Source\PSoC4/CARD_UART.c ****         if((rxStatus & CARD_UART_RX_STS_FIFO_NOTEMPTY) != 0u)
@@ -1378,7 +1378,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 1
  628:Generated_Source\PSoC4/CARD_UART.c ****     *  an error has occurred.
  629:Generated_Source\PSoC4/CARD_UART.c ****     *
  630:Generated_Source\PSoC4/CARD_UART.c ****     * Reentrant:
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 24
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccoIUiTa.s 			page 24
 
 
  631:Generated_Source\PSoC4/CARD_UART.c ****     *  No.
@@ -1438,7 +1438,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 1
  649:Generated_Source\PSoC4/CARD_UART.c ****     }
  669              		.loc 1 649 0
  670              		@ sp needed
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 25
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccoIUiTa.s 			page 25
 
 
  671 0020 10BD     		pop	{r4, pc}
@@ -1498,7 +1498,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 1
  689              		@ args = 0, pretend = 0, frame = 0
  690              		@ frame_needed = 0, uses_anonymous_args = 0
  691 0000 10B5     		push	{r4, lr}
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 26
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccoIUiTa.s 			page 26
 
 
  692              		.cfi_def_cfa_offset 8
@@ -1558,7 +1558,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 1
  708:Generated_Source\PSoC4/CARD_UART.c ****         else
  709:Generated_Source\PSoC4/CARD_UART.c ****         {
  710:Generated_Source\PSoC4/CARD_UART.c ****             size = (CARD_UART_RX_BUFFER_SIZE - CARD_UART_rxBufferRead) + CARD_UART_rxBufferWrite;
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 27
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccoIUiTa.s 			page 27
 
 
  724              		.loc 1 710 0
@@ -1618,7 +1618,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 1
  732:Generated_Source\PSoC4/CARD_UART.c ****     *
  733:Generated_Source\PSoC4/CARD_UART.c ****     * Parameters:
  734:Generated_Source\PSoC4/CARD_UART.c ****     *  None.
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 28
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccoIUiTa.s 			page 28
 
 
  735:Generated_Source\PSoC4/CARD_UART.c ****     *
@@ -1678,7 +1678,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 1
  775:Generated_Source\PSoC4/CARD_UART.c ****         CARD_UART_rxBufferOverflow = 0u;
  776:Generated_Source\PSoC4/CARD_UART.c **** 
  777:Generated_Source\PSoC4/CARD_UART.c ****         CARD_UART_EnableRxInt();
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 29
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccoIUiTa.s 			page 29
 
 
  778:Generated_Source\PSoC4/CARD_UART.c **** 
@@ -1738,7 +1738,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 1
  810 0038 00000000 		.word	.LANCHOR0
  811              		.cfi_endproc
  812              	.LFE12:
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 30
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccoIUiTa.s 			page 30
 
 
  813              		.size	CARD_UART_ClearRxBuffer, .-CARD_UART_ClearRxBuffer
@@ -1798,7 +1798,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 1
  810:Generated_Source\PSoC4/CARD_UART.c ****     *  CARD_UART_rxAddressDetected - set to initial state (0).
  811:Generated_Source\PSoC4/CARD_UART.c ****     *
  812:Generated_Source\PSoC4/CARD_UART.c ****     *******************************************************************************/
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 31
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccoIUiTa.s 			page 31
 
 
  813:Generated_Source\PSoC4/CARD_UART.c ****     void CARD_UART_SetRxAddressMode(uint8 addressMode)
@@ -1858,7 +1858,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 1
  846 0000 014B     		ldr	r3, .L66
  860:Generated_Source\PSoC4/CARD_UART.c ****     }
  847              		.loc 1 860 0
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 32
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccoIUiTa.s 			page 32
 
 
  848              		@ sp needed
@@ -1918,7 +1918,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 1
  880              		.loc 1 880 0
  881 0004 7047     		bx	lr
  882              	.L70:
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 33
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccoIUiTa.s 			page 33
 
 
  883 0006 C046     		.align	2
@@ -1978,7 +1978,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 1
  906              		@ sp needed
  910:Generated_Source\PSoC4/CARD_UART.c ****         CARD_UART_TXSTATUS_MASK_REG = intSrc;
  907              		.loc 1 910 0
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 34
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccoIUiTa.s 			page 34
 
 
  908 0002 1870     		strb	r0, [r3]
@@ -2038,7 +2038,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 1
  930              	.LVL74:
  931 0000 70B5     		push	{r4, r5, r6, lr}
  932              		.cfi_def_cfa_offset 16
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 35
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccoIUiTa.s 			page 35
 
 
  933              		.cfi_offset 4, -16
@@ -2098,7 +2098,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 1
  968 002a 0F2B     		cmp	r3, #15
  969 002c 01D9     		bls	.L78
  961:Generated_Source\PSoC4/CARD_UART.c ****                 {
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 36
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccoIUiTa.s 			page 36
 
 
  962:Generated_Source\PSoC4/CARD_UART.c ****                     CARD_UART_txBufferWrite = 0u;
@@ -2158,7 +2158,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 1
  1005              		.type	CARD_UART_ReadTxStatus, %function
  1006              	CARD_UART_ReadTxStatus:
  1007              	.LFB18:
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 37
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccoIUiTa.s 			page 37
 
 
  981:Generated_Source\PSoC4/CARD_UART.c **** 
@@ -2218,7 +2218,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 1
  1035              	CARD_UART_PutChar:
  1036              	.LFB19:
 1007:Generated_Source\PSoC4/CARD_UART.c **** 
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 38
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccoIUiTa.s 			page 38
 
 
 1008:Generated_Source\PSoC4/CARD_UART.c **** 
@@ -2278,7 +2278,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 1
 1051:Generated_Source\PSoC4/CARD_UART.c ****         do
 1052:Generated_Source\PSoC4/CARD_UART.c ****         { /* Block if software buffer is full, so we don't overwrite. */
 1053:Generated_Source\PSoC4/CARD_UART.c **** 
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 39
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccoIUiTa.s 			page 39
 
 
 1054:Generated_Source\PSoC4/CARD_UART.c ****         #if ((CARD_UART_TX_BUFFER_SIZE > CARD_UART_MAX_BYTE_VALUE) && (CY_PSOC3))
@@ -2338,7 +2338,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 1
  1082              		.loc 1 1071 0 discriminator 1
  1083 002a 4907     		lsls	r1, r1, #29
  1084 002c 02D4     		bmi	.L91
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 40
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccoIUiTa.s 			page 40
 
 
 1073:Generated_Source\PSoC4/CARD_UART.c ****         {
@@ -2398,7 +2398,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 1
 1101:Generated_Source\PSoC4/CARD_UART.c ****                 CARD_UART_SetPendingTxInt();
  1111              		.loc 1 1101 0
  1112 0048 0320     		movs	r0, #3
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 41
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccoIUiTa.s 			page 41
 
 
  1113              	.LVL87:
@@ -2458,7 +2458,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 1
 1131:Generated_Source\PSoC4/CARD_UART.c ****     *
 1132:Generated_Source\PSoC4/CARD_UART.c ****     * Global Variables:
 1133:Generated_Source\PSoC4/CARD_UART.c ****     *  CARD_UART_initVar - checked to identify that the component has been
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 42
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccoIUiTa.s 			page 42
 
 
 1134:Generated_Source\PSoC4/CARD_UART.c ****     *     initialized.
@@ -2518,7 +2518,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 1
  1167              		.loc 1 1155 0
  1168 0016 FFF7FEFF 		bl	CARD_UART_PutChar
  1169              	.LVL92:
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 43
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccoIUiTa.s 			page 43
 
 
  1170              		.loc 1 1156 0
@@ -2578,7 +2578,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 1
 1186:Generated_Source\PSoC4/CARD_UART.c ****     *  If there is not enough memory in the TX buffer for the entire string, this
 1187:Generated_Source\PSoC4/CARD_UART.c ****     *  function blocks until the last character of the string is loaded into the
 1188:Generated_Source\PSoC4/CARD_UART.c ****     *  TX buffer.
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 44
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccoIUiTa.s 			page 44
 
 
 1189:Generated_Source\PSoC4/CARD_UART.c ****     *
@@ -2638,7 +2638,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 1
  1232 0020 00000000 		.word	.LANCHOR0
  1233              		.cfi_endproc
  1234              	.LFE21:
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 45
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccoIUiTa.s 			page 45
 
 
  1235              		.size	CARD_UART_PutArray, .-CARD_UART_PutArray
@@ -2698,7 +2698,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 1
  1259 000a FFF7FEFF 		bl	CARD_UART_PutChar
  1260              	.LVL101:
 1236:Generated_Source\PSoC4/CARD_UART.c ****             CARD_UART_PutChar(0x0Du);
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 46
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccoIUiTa.s 			page 46
 
 
  1261              		.loc 1 1236 0
@@ -2758,7 +2758,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 1
 1264:Generated_Source\PSoC4/CARD_UART.c ****     *  CARD_UART_txBufferRead - used to calculate left space.
 1265:Generated_Source\PSoC4/CARD_UART.c ****     *
 1266:Generated_Source\PSoC4/CARD_UART.c ****     * Reentrant:
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 47
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccoIUiTa.s 			page 47
 
 
 1267:Generated_Source\PSoC4/CARD_UART.c ****     *  No.
@@ -2818,7 +2818,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 1
 1291:Generated_Source\PSoC4/CARD_UART.c ****         else
 1292:Generated_Source\PSoC4/CARD_UART.c ****         {
 1293:Generated_Source\PSoC4/CARD_UART.c ****             size = (CARD_UART_TX_BUFFER_SIZE - CARD_UART_txBufferRead) +
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 48
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccoIUiTa.s 			page 48
 
 
  1316              		.loc 1 1293 0
@@ -2878,7 +2878,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 1
  1342              		.code	16
  1343              		.thumb_func
  1344              		.type	CARD_UART_ClearTxBuffer, %function
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 49
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccoIUiTa.s 			page 49
 
 
  1345              	CARD_UART_ClearTxBuffer:
@@ -2938,7 +2938,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 1
  1360 0008 094B     		ldr	r3, .L132
 1361:Generated_Source\PSoC4/CARD_UART.c ****         CARD_UART_TXDATA_AUX_CTL_REG &= (uint8) ~CARD_UART_TX_FIFO_CLR;
 1362:Generated_Source\PSoC4/CARD_UART.c ****         CyExitCriticalSection(enableInterrupts);
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 50
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccoIUiTa.s 			page 50
 
 
 1363:Generated_Source\PSoC4/CARD_UART.c **** 
@@ -2998,7 +2998,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 1
  1392              	.L133:
  1393              		.align	2
  1394              	.L132:
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 51
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccoIUiTa.s 			page 51
 
 
  1395 0030 90000F40 		.word	1074725008
@@ -3058,7 +3058,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 1
 1418:Generated_Source\PSoC4/CARD_UART.c ****     *     operation
 1419:Generated_Source\PSoC4/CARD_UART.c ****     *     Example for this case:
 1420:Generated_Source\PSoC4/CARD_UART.c ****     *     SendBreak(0);     - initialize Break signal transmission
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 52
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccoIUiTa.s 			page 52
 
 
 1421:Generated_Source\PSoC4/CARD_UART.c ****     *         Add your code here to use CPU time
@@ -3118,7 +3118,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 1
 1459:Generated_Source\PSoC4/CARD_UART.c ****                 CARD_UART_TXDATA_REG = 0u;
 1460:Generated_Source\PSoC4/CARD_UART.c **** 
 1461:Generated_Source\PSoC4/CARD_UART.c ****                 do /* Wait until transmit starts */
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 53
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccoIUiTa.s 			page 53
 
 
 1462:Generated_Source\PSoC4/CARD_UART.c ****                 {
@@ -3178,7 +3178,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 1
 1507:Generated_Source\PSoC4/CARD_UART.c **** 
 1508:Generated_Source\PSoC4/CARD_UART.c ****                 /* Send zeros */
 1509:Generated_Source\PSoC4/CARD_UART.c ****                 CARD_UART_TXDATA_REG = 0u;
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 54
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccoIUiTa.s 			page 54
 
 
 1510:Generated_Source\PSoC4/CARD_UART.c **** 
@@ -3238,7 +3238,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 1
  1464              	.LVL115:
  1465 0038 0228     		cmp	r0, #2
  1466 003a 0CD8     		bhi	.L134
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 55
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccoIUiTa.s 			page 55
 
 
 1529:Generated_Source\PSoC4/CARD_UART.c ****                 (retMode == CARD_UART_REINIT) ||
@@ -3298,7 +3298,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 1
  1496              	.L134:
  1497              	.LBE3:
  1498              		.loc 1 1547 0
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 56
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccoIUiTa.s 			page 56
 
 
  1499              		@ sp needed
@@ -3358,7 +3358,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 1
 1576:Generated_Source\PSoC4/CARD_UART.c ****         {
 1577:Generated_Source\PSoC4/CARD_UART.c ****         #if( CARD_UART_CONTROL_REG_REMOVED == 0u )
 1578:Generated_Source\PSoC4/CARD_UART.c ****             CARD_UART_WriteControlRegister(CARD_UART_ReadControlRegister() |
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 57
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccoIUiTa.s 			page 57
 
 
 1579:Generated_Source\PSoC4/CARD_UART.c ****                                                   CARD_UART_CTRL_MARK);
@@ -3418,7 +3418,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 1
  1568              		.size	CARD_UART_txBufferRead, 1
  1569              	CARD_UART_txBufferRead:
  1570 0006 00       		.space	1
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 58
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccoIUiTa.s 			page 58
 
 
  1571              		.type	CARD_UART_txBufferWrite, %object
@@ -3441,48 +3441,48 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 1
  1588 0006 00000000 		.4byte	.Ldebug_abbrev0
  1589 000a 04       		.byte	0x4
  1590 000b 01       		.uleb128 0x1
- 1591 000c 56030000 		.4byte	.LASF81
+ 1591 000c 04030000 		.4byte	.LASF81
  1592 0010 0C       		.byte	0xc
  1593 0011 18000000 		.4byte	.LASF82
- 1594 0015 4D000000 		.4byte	.LASF83
+ 1594 0015 D1040000 		.4byte	.LASF83
  1595 0019 18000000 		.4byte	.Ldebug_ranges0+0x18
  1596 001d 00000000 		.4byte	0
  1597 0021 00000000 		.4byte	.Ldebug_line0
  1598 0025 02       		.uleb128 0x2
  1599 0026 01       		.byte	0x1
  1600 0027 06       		.byte	0x6
- 1601 0028 D9000000 		.4byte	.LASF0
+ 1601 0028 87000000 		.4byte	.LASF0
  1602 002c 02       		.uleb128 0x2
  1603 002d 01       		.byte	0x1
  1604 002e 08       		.byte	0x8
- 1605 002f 5F040000 		.4byte	.LASF1
+ 1605 002f 0D040000 		.4byte	.LASF1
  1606 0033 02       		.uleb128 0x2
  1607 0034 02       		.byte	0x2
  1608 0035 05       		.byte	0x5
- 1609 0036 99040000 		.4byte	.LASF2
+ 1609 0036 47040000 		.4byte	.LASF2
  1610 003a 02       		.uleb128 0x2
  1611 003b 02       		.byte	0x2
  1612 003c 07       		.byte	0x7
- 1613 003d BA020000 		.4byte	.LASF3
+ 1613 003d 68020000 		.4byte	.LASF3
  1614 0041 02       		.uleb128 0x2
  1615 0042 04       		.byte	0x4
  1616 0043 05       		.byte	0x5
- 1617 0044 31010000 		.4byte	.LASF4
+ 1617 0044 DF000000 		.4byte	.LASF4
  1618 0048 02       		.uleb128 0x2
  1619 0049 04       		.byte	0x4
  1620 004a 07       		.byte	0x7
- 1621 004b 3E020000 		.4byte	.LASF5
+ 1621 004b EC010000 		.4byte	.LASF5
  1622 004f 02       		.uleb128 0x2
  1623 0050 08       		.byte	0x8
  1624 0051 05       		.byte	0x5
- 1625 0052 CB000000 		.4byte	.LASF6
+ 1625 0052 79000000 		.4byte	.LASF6
  1626 0056 02       		.uleb128 0x2
  1627 0057 08       		.byte	0x8
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 59
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccoIUiTa.s 			page 59
 
 
  1628 0058 07       		.byte	0x7
- 1629 0059 B4000000 		.4byte	.LASF7
+ 1629 0059 62000000 		.4byte	.LASF7
  1630 005d 03       		.uleb128 0x3
  1631 005e 04       		.byte	0x4
  1632 005f 05       		.byte	0x5
@@ -3490,9 +3490,9 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 1
  1634 0064 02       		.uleb128 0x2
  1635 0065 04       		.byte	0x4
  1636 0066 07       		.byte	0x7
- 1637 0067 10020000 		.4byte	.LASF8
+ 1637 0067 BE010000 		.4byte	.LASF8
  1638 006b 04       		.uleb128 0x4
- 1639 006c 64010000 		.4byte	.LASF9
+ 1639 006c 12010000 		.4byte	.LASF9
  1640 0070 02       		.byte	0x2
  1641 0071 D201     		.2byte	0x1d2
  1642 0073 2C000000 		.4byte	0x2c
@@ -3504,22 +3504,22 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 1
  1648 0083 02       		.uleb128 0x2
  1649 0084 04       		.byte	0x4
  1650 0085 04       		.byte	0x4
- 1651 0086 26040000 		.4byte	.LASF11
+ 1651 0086 D4030000 		.4byte	.LASF11
  1652 008a 02       		.uleb128 0x2
  1653 008b 08       		.byte	0x8
  1654 008c 04       		.byte	0x4
- 1655 008d 94010000 		.4byte	.LASF12
+ 1655 008d 42010000 		.4byte	.LASF12
  1656 0091 04       		.uleb128 0x4
- 1657 0092 1D050000 		.4byte	.LASF13
+ 1657 0092 CB040000 		.4byte	.LASF13
  1658 0096 02       		.byte	0x2
  1659 0097 E301     		.2byte	0x1e3
  1660 0099 9D000000 		.4byte	0x9d
  1661 009d 02       		.uleb128 0x2
  1662 009e 01       		.byte	0x1
  1663 009f 08       		.byte	0x8
- 1664 00a0 18050000 		.4byte	.LASF14
+ 1664 00a0 C6040000 		.4byte	.LASF14
  1665 00a4 04       		.uleb128 0x4
- 1666 00a5 5A040000 		.4byte	.LASF15
+ 1666 00a5 08040000 		.4byte	.LASF15
  1667 00a9 02       		.byte	0x2
  1668 00aa 7C02     		.2byte	0x27c
  1669 00ac B0000000 		.4byte	0xb0
@@ -3528,17 +3528,17 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 1
  1672 00b5 02       		.uleb128 0x2
  1673 00b6 08       		.byte	0x8
  1674 00b7 04       		.byte	0x4
- 1675 00b8 42030000 		.4byte	.LASF16
+ 1675 00b8 F0020000 		.4byte	.LASF16
  1676 00bc 02       		.uleb128 0x2
  1677 00bd 04       		.byte	0x4
  1678 00be 07       		.byte	0x7
- 1679 00bf 27030000 		.4byte	.LASF17
+ 1679 00bf D5020000 		.4byte	.LASF17
  1680 00c3 06       		.uleb128 0x6
- 1681 00c4 8A040000 		.4byte	.LASF18
+ 1681 00c4 38040000 		.4byte	.LASF18
  1682 00c8 01       		.byte	0x1
  1683 00c9 6A       		.byte	0x6a
  1684 00ca 00000000 		.4byte	.LFB1
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 60
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccoIUiTa.s 			page 60
 
 
  1685 00ce 68000000 		.4byte	.LFE1-.LFB1
@@ -3598,7 +3598,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 1
  1739 012b 06       		.uleb128 0x6
  1740 012c 00000000 		.4byte	.LASF19
  1741 0130 01       		.byte	0x1
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 61
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccoIUiTa.s 			page 61
 
 
  1742 0131 B7       		.byte	0xb7
@@ -3608,7 +3608,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 1
  1746 013b 9C       		.byte	0x9c
  1747 013c AB010000 		.4byte	0x1ab
  1748 0140 0A       		.uleb128 0xa
- 1749 0141 6D050000 		.4byte	.LASF22
+ 1749 0141 57050000 		.4byte	.LASF22
  1750 0145 01       		.byte	0x1
  1751 0146 B9       		.byte	0xb9
  1752 0147 6B000000 		.4byte	0x6b
@@ -3658,13 +3658,13 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 1
  1796 01a6 02       		.uleb128 0x2
  1797 01a7 74       		.byte	0x74
  1798 01a8 00       		.sleb128 0
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 62
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccoIUiTa.s 			page 62
 
 
  1799 01a9 00       		.byte	0
  1800 01aa 00       		.byte	0
  1801 01ab 06       		.uleb128 0x6
- 1802 01ac B6010000 		.4byte	.LASF20
+ 1802 01ac 64010000 		.4byte	.LASF20
  1803 01b0 01       		.byte	0x1
  1804 01b1 4C       		.byte	0x4c
  1805 01b2 00000000 		.4byte	.LFB0
@@ -3680,7 +3680,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 1
  1815 01ce 2B010000 		.4byte	0x12b
  1816 01d2 00       		.byte	0
  1817 01d3 06       		.uleb128 0x6
- 1818 01d4 A7010000 		.4byte	.LASF21
+ 1818 01d4 55010000 		.4byte	.LASF21
  1819 01d8 01       		.byte	0x1
  1820 01d9 F0       		.byte	0xf0
  1821 01da 00000000 		.4byte	.LFB3
@@ -3689,7 +3689,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 1
  1824 01e3 9C       		.byte	0x9c
  1825 01e4 40020000 		.4byte	0x240
  1826 01e8 0A       		.uleb128 0xa
- 1827 01e9 6D050000 		.4byte	.LASF22
+ 1827 01e9 57050000 		.4byte	.LASF22
  1828 01ed 01       		.byte	0x1
  1829 01ee F2       		.byte	0xf2
  1830 01ef 6B000000 		.4byte	0x6b
@@ -3718,7 +3718,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 1
  1853 022a 01       		.uleb128 0x1
  1854 022b 50       		.byte	0x50
  1855 022c 01       		.uleb128 0x1
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 63
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccoIUiTa.s 			page 63
 
 
  1856 022d 33       		.byte	0x33
@@ -3735,7 +3735,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 1
  1867 023e 00       		.byte	0
  1868 023f 00       		.byte	0
  1869 0240 0C       		.uleb128 0xc
- 1870 0241 98050000 		.4byte	.LASF44
+ 1870 0241 82050000 		.4byte	.LASF44
  1871 0245 01       		.byte	0x1
  1872 0246 2701     		.2byte	0x127
  1873 0248 6B000000 		.4byte	0x6b
@@ -3744,7 +3744,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 1
  1876 0254 01       		.uleb128 0x1
  1877 0255 9C       		.byte	0x9c
  1878 0256 0D       		.uleb128 0xd
- 1879 0257 6D040000 		.4byte	.LASF23
+ 1879 0257 1B040000 		.4byte	.LASF23
  1880 025b 01       		.byte	0x1
  1881 025c 6701     		.2byte	0x167
  1882 025e 00000000 		.4byte	.LFB6
@@ -3753,7 +3753,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 1
  1885 0267 9C       		.byte	0x9c
  1886 0268 7B020000 		.4byte	0x27b
  1887 026c 0E       		.uleb128 0xe
- 1888 026d FD020000 		.4byte	.LASF38
+ 1888 026d AB020000 		.4byte	.LASF38
  1889 0271 01       		.byte	0x1
  1890 0272 6701     		.2byte	0x167
  1891 0274 6B000000 		.4byte	0x6b
@@ -3761,7 +3761,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 1
  1893 0279 50       		.byte	0x50
  1894 027a 00       		.byte	0
  1895 027b 0F       		.uleb128 0xf
- 1896 027c 9F000000 		.4byte	.LASF27
+ 1896 027c 4D000000 		.4byte	.LASF27
  1897 0280 01       		.byte	0x1
  1898 0281 8801     		.2byte	0x188
  1899 0283 6B000000 		.4byte	0x6b
@@ -3771,14 +3771,14 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 1
  1903 0290 9C       		.byte	0x9c
  1904 0291 E8020000 		.4byte	0x2e8
  1905 0295 10       		.uleb128 0x10
- 1906 0296 FD040000 		.4byte	.LASF24
+ 1906 0296 AB040000 		.4byte	.LASF24
  1907 029a 01       		.byte	0x1
  1908 029b 8A01     		.2byte	0x18a
  1909 029d 6B000000 		.4byte	0x6b
  1910 02a1 26000000 		.4byte	.LLST2
  1911 02a5 10       		.uleb128 0x10
- 1912 02a6 5D050000 		.4byte	.LASF25
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 64
+ 1912 02a6 47050000 		.4byte	.LASF25
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccoIUiTa.s 			page 64
 
 
  1913 02aa 01       		.byte	0x1
@@ -3786,7 +3786,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 1
  1915 02ad 6B000000 		.4byte	0x6b
  1916 02b1 44000000 		.4byte	.LLST3
  1917 02b5 10       		.uleb128 0x10
- 1918 02b6 E4030000 		.4byte	.LASF26
+ 1918 02b6 92030000 		.4byte	.LASF26
  1919 02ba 01       		.byte	0x1
  1920 02bb 8F01     		.2byte	0x18f
  1921 02bd 6B000000 		.4byte	0x6b
@@ -3812,7 +3812,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 1
  1941 02e6 00       		.byte	0
  1942 02e7 00       		.byte	0
  1943 02e8 0F       		.uleb128 0xf
- 1944 02e9 FE030000 		.4byte	.LASF28
+ 1944 02e9 AC030000 		.4byte	.LASF28
  1945 02ed 01       		.byte	0x1
  1946 02ee E501     		.2byte	0x1e5
  1947 02f0 6B000000 		.4byte	0x6b
@@ -3822,7 +3822,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 1
  1951 02fd 9C       		.byte	0x9c
  1952 02fe 11030000 		.4byte	0x311
  1953 0302 11       		.uleb128 0x11
- 1954 0303 91050000 		.4byte	.LASF29
+ 1954 0303 7B050000 		.4byte	.LASF29
  1955 0307 01       		.byte	0x1
  1956 0308 E701     		.2byte	0x1e7
  1957 030a 6B000000 		.4byte	0x6b
@@ -3830,7 +3830,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 1
  1959 030f 50       		.byte	0x50
  1960 0310 00       		.byte	0
  1961 0311 0F       		.uleb128 0xf
- 1962 0312 1D020000 		.4byte	.LASF30
+ 1962 0312 CB010000 		.4byte	.LASF30
  1963 0316 01       		.byte	0x1
  1964 0317 1402     		.2byte	0x214
  1965 0319 6B000000 		.4byte	0x6b
@@ -3838,30 +3838,30 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 1
  1967 0321 70000000 		.4byte	.LFE9-.LFB9
  1968 0325 01       		.uleb128 0x1
  1969 0326 9C       		.byte	0x9c
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 65
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccoIUiTa.s 			page 65
 
 
  1970 0327 8E030000 		.4byte	0x38e
  1971 032b 10       		.uleb128 0x10
- 1972 032c FD040000 		.4byte	.LASF24
+ 1972 032c AB040000 		.4byte	.LASF24
  1973 0330 01       		.byte	0x1
  1974 0331 1602     		.2byte	0x216
  1975 0333 6B000000 		.4byte	0x6b
  1976 0337 A7000000 		.4byte	.LLST5
  1977 033b 10       		.uleb128 0x10
- 1978 033c F5030000 		.4byte	.LASF31
+ 1978 033c A3030000 		.4byte	.LASF31
  1979 0340 01       		.byte	0x1
  1980 0341 1702     		.2byte	0x217
  1981 0343 6B000000 		.4byte	0x6b
  1982 0347 E8000000 		.4byte	.LLST6
  1983 034b 10       		.uleb128 0x10
- 1984 034c 5D050000 		.4byte	.LASF25
+ 1984 034c 47050000 		.4byte	.LASF25
  1985 0350 01       		.byte	0x1
  1986 0351 1A02     		.2byte	0x21a
  1987 0353 6B000000 		.4byte	0x6b
  1988 0357 FB000000 		.4byte	.LLST7
  1989 035b 10       		.uleb128 0x10
- 1990 035c E4030000 		.4byte	.LASF26
+ 1990 035c 92030000 		.4byte	.LASF26
  1991 0360 01       		.byte	0x1
  1992 0361 1B02     		.2byte	0x21b
  1993 0363 6B000000 		.4byte	0x6b
@@ -3887,7 +3887,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 1
  2013 038c 00       		.byte	0
  2014 038d 00       		.byte	0
  2015 038e 0F       		.uleb128 0xf
- 2016 038f 23050000 		.4byte	.LASF32
+ 2016 038f 0D050000 		.4byte	.LASF32
  2017 0393 01       		.byte	0x1
  2018 0394 7A02     		.2byte	0x27a
  2019 0396 77000000 		.4byte	0x77
@@ -3897,8 +3897,8 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 1
  2023 03a3 9C       		.byte	0x9c
  2024 03a4 E8030000 		.4byte	0x3e8
  2025 03a8 10       		.uleb128 0x10
- 2026 03a9 2F020000 		.4byte	.LASF33
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 66
+ 2026 03a9 DD010000 		.4byte	.LASF33
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccoIUiTa.s 			page 66
 
 
  2027 03ad 01       		.byte	0x1
@@ -3930,7 +3930,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 1
  2053 03e3 7B020000 		.4byte	0x27b
  2054 03e7 00       		.byte	0
  2055 03e8 0F       		.uleb128 0xf
- 2056 03e9 C6010000 		.4byte	.LASF34
+ 2056 03e9 74010000 		.4byte	.LASF34
  2057 03ed 01       		.byte	0x1
  2058 03ee AB02     		.2byte	0x2ab
  2059 03f0 6B000000 		.4byte	0x6b
@@ -3940,7 +3940,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 1
  2063 03fd 9C       		.byte	0x9c
  2064 03fe 35040000 		.4byte	0x435
  2065 0402 10       		.uleb128 0x10
- 2066 0403 B5020000 		.4byte	.LASF35
+ 2066 0403 63020000 		.4byte	.LASF35
  2067 0407 01       		.byte	0x1
  2068 0408 AE02     		.2byte	0x2ae
  2069 040a 6B000000 		.4byte	0x6b
@@ -3958,7 +3958,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 1
  2081 0425 09       		.uleb128 0x9
  2082 0426 3C000000 		.4byte	.LVL65
  2083 042a BD080000 		.4byte	0x8bd
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 67
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccoIUiTa.s 			page 67
 
 
  2084 042e 08       		.uleb128 0x8
@@ -3969,7 +3969,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 1
  2089 0433 00       		.byte	0
  2090 0434 00       		.byte	0
  2091 0435 0D       		.uleb128 0xd
- 2092 0436 F0010000 		.4byte	.LASF36
+ 2092 0436 9E010000 		.4byte	.LASF36
  2093 043a 01       		.byte	0x1
  2094 043b F502     		.2byte	0x2f5
  2095 043d 00000000 		.4byte	.LFB12
@@ -3978,7 +3978,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 1
  2098 0446 9C       		.byte	0x9c
  2099 0447 90040000 		.4byte	0x490
  2100 044b 10       		.uleb128 0x10
- 2101 044c 6D050000 		.4byte	.LASF22
+ 2101 044c 57050000 		.4byte	.LASF22
  2102 0450 01       		.byte	0x1
  2103 0451 F702     		.2byte	0x2f7
  2104 0453 6B000000 		.4byte	0x6b
@@ -4010,7 +4010,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 1
  2130 048e 00       		.byte	0
  2131 048f 00       		.byte	0
  2132 0490 0D       		.uleb128 0xd
- 2133 0491 01010000 		.4byte	.LASF37
+ 2133 0491 AF000000 		.4byte	.LASF37
  2134 0495 01       		.byte	0x1
  2135 0496 5903     		.2byte	0x359
  2136 0498 00000000 		.4byte	.LFB14
@@ -4018,11 +4018,11 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 1
  2138 04a0 01       		.uleb128 0x1
  2139 04a1 9C       		.byte	0x9c
  2140 04a2 B5040000 		.4byte	0x4b5
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 68
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccoIUiTa.s 			page 68
 
 
  2141 04a6 0E       		.uleb128 0xe
- 2142 04a7 4E030000 		.4byte	.LASF39
+ 2142 04a7 FC020000 		.4byte	.LASF39
  2143 04ab 01       		.byte	0x1
  2144 04ac 5903     		.2byte	0x359
  2145 04ae 6B000000 		.4byte	0x6b
@@ -4030,7 +4030,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 1
  2147 04b3 50       		.byte	0x50
  2148 04b4 00       		.byte	0
  2149 04b5 0D       		.uleb128 0xd
- 2150 04b6 19010000 		.4byte	.LASF40
+ 2150 04b6 C7000000 		.4byte	.LASF40
  2151 04ba 01       		.byte	0x1
  2152 04bb 6D03     		.2byte	0x36d
  2153 04bd 00000000 		.4byte	.LFB15
@@ -4039,7 +4039,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 1
  2156 04c6 9C       		.byte	0x9c
  2157 04c7 DA040000 		.4byte	0x4da
  2158 04cb 0E       		.uleb128 0xe
- 2159 04cc 4E030000 		.4byte	.LASF39
+ 2159 04cc FC020000 		.4byte	.LASF39
  2160 04d0 01       		.byte	0x1
  2161 04d1 6D03     		.2byte	0x36d
  2162 04d3 6B000000 		.4byte	0x6b
@@ -4047,7 +4047,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 1
  2164 04d8 50       		.byte	0x50
  2165 04d9 00       		.byte	0
  2166 04da 0D       		.uleb128 0xd
- 2167 04db FD050000 		.4byte	.LASF41
+ 2167 04db E7050000 		.4byte	.LASF41
  2168 04df 01       		.byte	0x1
  2169 04e0 8C03     		.2byte	0x38c
  2170 04e2 00000000 		.4byte	.LFB16
@@ -4056,7 +4056,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 1
  2173 04eb 9C       		.byte	0x9c
  2174 04ec FF040000 		.4byte	0x4ff
  2175 04f0 0E       		.uleb128 0xe
- 2176 04f1 FD020000 		.4byte	.LASF38
+ 2176 04f1 AB020000 		.4byte	.LASF38
  2177 04f5 01       		.byte	0x1
  2178 04f6 8C03     		.2byte	0x38c
  2179 04f8 6B000000 		.4byte	0x6b
@@ -4064,7 +4064,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 1
  2181 04fd 50       		.byte	0x50
  2182 04fe 00       		.byte	0
  2183 04ff 0D       		.uleb128 0xd
- 2184 0500 CF050000 		.4byte	.LASF42
+ 2184 0500 B9050000 		.4byte	.LASF42
  2185 0504 01       		.byte	0x1
  2186 0505 AE03     		.2byte	0x3ae
  2187 0507 00000000 		.4byte	.LFB17
@@ -4078,7 +4078,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 1
  2195 051b AE03     		.2byte	0x3ae
  2196 051d 6B000000 		.4byte	0x6b
  2197 0521 97010000 		.4byte	.LLST12
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 69
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccoIUiTa.s 			page 69
 
 
  2198 0525 07       		.uleb128 0x7
@@ -4102,7 +4102,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 1
  2216 0546 00       		.byte	0
  2217 0547 00       		.byte	0
  2218 0548 0C       		.uleb128 0xc
- 2219 0549 45060000 		.4byte	.LASF45
+ 2219 0549 2F060000 		.4byte	.LASF45
  2220 054d 01       		.byte	0x1
  2221 054e EB03     		.2byte	0x3eb
  2222 0550 6B000000 		.4byte	0x6b
@@ -4111,7 +4111,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 1
  2225 055c 01       		.uleb128 0x1
  2226 055d 9C       		.byte	0x9c
  2227 055e 0D       		.uleb128 0xd
- 2228 055f EB040000 		.4byte	.LASF46
+ 2228 055f 99040000 		.4byte	.LASF46
  2229 0563 01       		.byte	0x1
  2230 0564 1104     		.2byte	0x411
  2231 0566 00000000 		.4byte	.LFB19
@@ -4126,19 +4126,19 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 1
  2240 057c 6B000000 		.4byte	0x6b
  2241 0580 B8010000 		.4byte	.LLST13
  2242 0584 10       		.uleb128 0x10
- 2243 0585 50020000 		.4byte	.LASF47
+ 2243 0585 FE010000 		.4byte	.LASF47
  2244 0589 01       		.byte	0x1
  2245 058a 1804     		.2byte	0x418
  2246 058c 6B000000 		.4byte	0x6b
  2247 0590 EA010000 		.4byte	.LLST14
  2248 0594 10       		.uleb128 0x10
- 2249 0595 E0010000 		.4byte	.LASF48
+ 2249 0595 8E010000 		.4byte	.LASF48
  2250 0599 01       		.byte	0x1
  2251 059a 1904     		.2byte	0x419
  2252 059c 6B000000 		.4byte	0x6b
  2253 05a0 28020000 		.4byte	.LLST15
  2254 05a4 09       		.uleb128 0x9
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 70
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccoIUiTa.s 			page 70
 
 
  2255 05a5 4E000000 		.4byte	.LVL88
@@ -4151,7 +4151,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 1
  2262 05b2 00       		.byte	0
  2263 05b3 00       		.byte	0
  2264 05b4 0D       		.uleb128 0xd
- 2265 05b5 31060000 		.4byte	.LASF49
+ 2265 05b5 1B060000 		.4byte	.LASF49
  2266 05b9 01       		.byte	0x1
  2267 05ba 7904     		.2byte	0x479
  2268 05bc 00000000 		.4byte	.LFB20
@@ -4166,7 +4166,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 1
  2277 05d2 F4050000 		.4byte	0x5f4
  2278 05d6 3B020000 		.4byte	.LLST16
  2279 05da 10       		.uleb128 0x10
- 2280 05db DC020000 		.4byte	.LASF51
+ 2280 05db 8A020000 		.4byte	.LASF51
  2281 05df 01       		.byte	0x1
  2282 05e0 7B04     		.2byte	0x47b
  2283 05e2 77000000 		.4byte	0x77
@@ -4181,7 +4181,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 1
  2292 05fa 14       		.uleb128 0x14
  2293 05fb 91000000 		.4byte	0x91
  2294 05ff 0D       		.uleb128 0xd
- 2295 0600 6A010000 		.4byte	.LASF52
+ 2295 0600 18010000 		.4byte	.LASF52
  2296 0604 01       		.byte	0x1
  2297 0605 A704     		.2byte	0x4a7
  2298 0607 00000000 		.4byte	.LFB21
@@ -4196,16 +4196,16 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 1
  2307 061d 4F060000 		.4byte	0x64f
  2308 0621 91020000 		.4byte	.LLST18
  2309 0625 12       		.uleb128 0x12
- 2310 0626 C7040000 		.4byte	.LASF53
+ 2310 0626 75040000 		.4byte	.LASF53
  2311 062a 01       		.byte	0x1
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 71
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccoIUiTa.s 			page 71
 
 
  2312 062b A704     		.2byte	0x4a7
  2313 062d 6B000000 		.4byte	0x6b
  2314 0631 B2020000 		.4byte	.LLST19
  2315 0635 10       		.uleb128 0x10
- 2316 0636 DC020000 		.4byte	.LASF51
+ 2316 0636 8A020000 		.4byte	.LASF51
  2317 063a 01       		.byte	0x1
  2318 063b AA04     		.2byte	0x4aa
  2319 063d 6B000000 		.4byte	0x6b
@@ -4220,7 +4220,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 1
  2328 0655 14       		.uleb128 0x14
  2329 0656 6B000000 		.4byte	0x6b
  2330 065a 0D       		.uleb128 0xd
- 2331 065b 35050000 		.4byte	.LASF54
+ 2331 065b 1F050000 		.4byte	.LASF54
  2332 065f 01       		.byte	0x1
  2333 0660 CE04     		.2byte	0x4ce
  2334 0662 00000000 		.4byte	.LFB22
@@ -4258,10 +4258,10 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 1
  2366 06aa 00       		.byte	0
  2367 06ab 00       		.byte	0
  2368 06ac 0F       		.uleb128 0xf
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 72
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccoIUiTa.s 			page 72
 
 
- 2369 06ad D1040000 		.4byte	.LASF55
+ 2369 06ad 7F040000 		.4byte	.LASF55
  2370 06b1 01       		.byte	0x1
  2371 06b2 F904     		.2byte	0x4f9
  2372 06b4 6B000000 		.4byte	0x6b
@@ -4271,7 +4271,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 1
  2376 06c1 9C       		.byte	0x9c
  2377 06c2 F9060000 		.4byte	0x6f9
  2378 06c6 10       		.uleb128 0x10
- 2379 06c7 B5020000 		.4byte	.LASF35
+ 2379 06c7 63020000 		.4byte	.LASF35
  2380 06cb 01       		.byte	0x1
  2381 06cc FC04     		.2byte	0x4fc
  2382 06ce 6B000000 		.4byte	0x6b
@@ -4297,7 +4297,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 1
  2402 06f7 00       		.byte	0
  2403 06f8 00       		.byte	0
  2404 06f9 0D       		.uleb128 0xd
- 2405 06fa AF040000 		.4byte	.LASF56
+ 2405 06fa 5D040000 		.4byte	.LASF56
  2406 06fe 01       		.byte	0x1
  2407 06ff 4A05     		.2byte	0x54a
  2408 0701 00000000 		.4byte	.LFB24
@@ -4306,7 +4306,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 1
  2411 070a 9C       		.byte	0x9c
  2412 070b 54070000 		.4byte	0x754
  2413 070f 10       		.uleb128 0x10
- 2414 0710 6D050000 		.4byte	.LASF22
+ 2414 0710 57050000 		.4byte	.LASF22
  2415 0714 01       		.byte	0x1
  2416 0715 4C05     		.2byte	0x54c
  2417 0717 6B000000 		.4byte	0x6b
@@ -4318,7 +4318,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 1
  2423 0729 1A000000 		.4byte	.LVL109
  2424 072d DE080000 		.4byte	0x8de
  2425 0731 07       		.uleb128 0x7
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 73
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccoIUiTa.s 			page 73
 
 
  2426 0732 20000000 		.4byte	.LVL110
@@ -4341,7 +4341,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 1
  2443 0752 00       		.byte	0
  2444 0753 00       		.byte	0
  2445 0754 0D       		.uleb128 0xd
- 2446 0755 04050000 		.4byte	.LASF57
+ 2446 0755 B2040000 		.4byte	.LASF57
  2447 0759 01       		.byte	0x1
  2448 075a A005     		.2byte	0x5a0
  2449 075c 00000000 		.4byte	.LFB25
@@ -4350,7 +4350,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 1
  2452 0765 9C       		.byte	0x9c
  2453 0766 A3070000 		.4byte	0x7a3
  2454 076a 12       		.uleb128 0x12
- 2455 076b 08020000 		.4byte	.LASF58
+ 2455 076b B6010000 		.4byte	.LASF58
  2456 076f 01       		.byte	0x1
  2457 0770 A005     		.2byte	0x5a0
  2458 0772 6B000000 		.4byte	0x6b
@@ -4358,13 +4358,13 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 1
  2460 077a 15       		.uleb128 0x15
  2461 077b 00000000 		.4byte	.Ldebug_ranges0+0
  2462 077f 10       		.uleb128 0x10
- 2463 0780 1F030000 		.4byte	.LASF59
+ 2463 0780 CD020000 		.4byte	.LASF59
  2464 0784 01       		.byte	0x1
  2465 0785 A805     		.2byte	0x5a8
  2466 0787 6B000000 		.4byte	0x6b
  2467 078b 8C030000 		.4byte	.LLST25
  2468 078f 11       		.uleb128 0x11
- 2469 0790 E5000000 		.4byte	.LASF60
+ 2469 0790 93000000 		.4byte	.LASF60
  2470 0794 01       		.byte	0x1
  2471 0795 D005     		.2byte	0x5d0
  2472 0797 6B000000 		.4byte	0x6b
@@ -4374,16 +4374,16 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 1
  2476 07a1 00       		.byte	0
  2477 07a2 00       		.byte	0
  2478 07a3 16       		.uleb128 0x16
- 2479 07a4 61020000 		.4byte	.LASF84
+ 2479 07a4 0F020000 		.4byte	.LASF84
  2480 07a8 01       		.byte	0x1
  2481 07a9 2406     		.2byte	0x624
  2482 07ab 01       		.byte	0x1
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 74
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccoIUiTa.s 			page 74
 
 
  2483 07ac BD070000 		.4byte	0x7bd
  2484 07b0 17       		.uleb128 0x17
- 2485 07b1 9B010000 		.4byte	.LASF85
+ 2485 07b1 49010000 		.4byte	.LASF85
  2486 07b5 01       		.byte	0x1
  2487 07b6 2406     		.2byte	0x624
  2488 07b8 6B000000 		.4byte	0x6b
@@ -4401,7 +4401,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 1
  2500 07d6 50       		.byte	0x50
  2501 07d7 00       		.byte	0
  2502 07d8 1A       		.uleb128 0x1a
- 2503 07d9 A3020000 		.4byte	.LASF61
+ 2503 07d9 51020000 		.4byte	.LASF61
  2504 07dd 01       		.byte	0x1
  2505 07de 1B       		.byte	0x1b
  2506 07df 6B000000 		.4byte	0x6b
@@ -4416,7 +4416,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 1
  2515 07f7 0F       		.byte	0xf
  2516 07f8 00       		.byte	0
  2517 07f9 1A       		.uleb128 0x1a
- 2518 07fa 7E050000 		.4byte	.LASF62
+ 2518 07fa 68050000 		.4byte	.LASF62
  2519 07fe 01       		.byte	0x1
  2520 07ff 1E       		.byte	0x1e
  2521 0800 0A080000 		.4byte	0x80a
@@ -4426,7 +4426,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 1
  2525 080a 05       		.uleb128 0x5
  2526 080b E9070000 		.4byte	0x7e9
  2527 080f 1A       		.uleb128 0x1a
- 2528 0810 1A060000 		.4byte	.LASF63
+ 2528 0810 04060000 		.4byte	.LASF63
  2529 0814 01       		.byte	0x1
  2530 0815 1F       		.byte	0x1f
  2531 0816 B0000000 		.4byte	0xb0
@@ -4434,18 +4434,18 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 1
  2533 081b 03       		.byte	0x3
  2534 081c 00000000 		.4byte	CARD_UART_txBufferRead
  2535 0820 1A       		.uleb128 0x1a
- 2536 0821 E5020000 		.4byte	.LASF64
+ 2536 0821 93020000 		.4byte	.LASF64
  2537 0825 01       		.byte	0x1
  2538 0826 20       		.byte	0x20
  2539 0827 6B000000 		.4byte	0x6b
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 75
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccoIUiTa.s 			page 75
 
 
  2540 082b 05       		.uleb128 0x5
  2541 082c 03       		.byte	0x3
  2542 082d 00000000 		.4byte	CARD_UART_txBufferWrite
  2543 0831 1A       		.uleb128 0x1a
- 2544 0832 47050000 		.4byte	.LASF65
+ 2544 0832 31050000 		.4byte	.LASF65
  2545 0836 01       		.byte	0x1
  2546 0837 24       		.byte	0x24
  2547 0838 6B000000 		.4byte	0x6b
@@ -4453,7 +4453,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 1
  2549 083d 03       		.byte	0x3
  2550 083e 00000000 		.4byte	CARD_UART_errorStatus
  2551 0842 1A       		.uleb128 0x1a
- 2552 0843 EE000000 		.4byte	.LASF66
+ 2552 0843 9C000000 		.4byte	.LASF66
  2553 0847 01       		.byte	0x1
  2554 0848 25       		.byte	0x25
  2555 0849 53080000 		.4byte	0x853
@@ -4463,7 +4463,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 1
  2559 0853 05       		.uleb128 0x5
  2560 0854 E9070000 		.4byte	0x7e9
  2561 0858 1A       		.uleb128 0x1a
- 2562 0859 7D010000 		.4byte	.LASF67
+ 2562 0859 2B010000 		.4byte	.LASF67
  2563 085d 01       		.byte	0x1
  2564 085e 26       		.byte	0x26
  2565 085f B0000000 		.4byte	0xb0
@@ -4471,7 +4471,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 1
  2567 0864 03       		.byte	0x3
  2568 0865 00000000 		.4byte	CARD_UART_rxBufferRead
  2569 0869 1A       		.uleb128 0x1a
- 2570 086a 42040000 		.4byte	.LASF68
+ 2570 086a F0030000 		.4byte	.LASF68
  2571 086e 01       		.byte	0x1
  2572 086f 27       		.byte	0x27
  2573 0870 B0000000 		.4byte	0xb0
@@ -4479,7 +4479,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 1
  2575 0875 03       		.byte	0x3
  2576 0876 00000000 		.4byte	CARD_UART_rxBufferWrite
  2577 087a 1A       		.uleb128 0x1a
- 2578 087b 47010000 		.4byte	.LASF69
+ 2578 087b F5000000 		.4byte	.LASF69
  2579 087f 01       		.byte	0x1
  2580 0880 28       		.byte	0x28
  2581 0881 B0000000 		.4byte	0xb0
@@ -4487,7 +4487,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 1
  2583 0886 03       		.byte	0x3
  2584 0887 00000000 		.4byte	CARD_UART_rxBufferLoopDetect
  2585 088b 1A       		.uleb128 0x1a
- 2586 088c 04030000 		.4byte	.LASF70
+ 2586 088c B2020000 		.4byte	.LASF70
  2587 0890 01       		.byte	0x1
  2588 0891 29       		.byte	0x29
  2589 0892 B0000000 		.4byte	0xb0
@@ -4495,56 +4495,56 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 1
  2591 0897 03       		.byte	0x3
  2592 0898 00000000 		.4byte	CARD_UART_rxBufferOverflow
  2593 089c 1D       		.uleb128 0x1d
- 2594 089d CD020000 		.4byte	.LASF71
- 2595 08a1 CD020000 		.4byte	.LASF71
+ 2594 089d 7B020000 		.4byte	.LASF71
+ 2595 08a1 7B020000 		.4byte	.LASF71
  2596 08a5 03       		.byte	0x3
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 76
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccoIUiTa.s 			page 76
 
 
  2597 08a6 BD       		.byte	0xbd
  2598 08a7 1D       		.uleb128 0x1d
- 2599 08a8 15040000 		.4byte	.LASF72
- 2600 08ac 15040000 		.4byte	.LASF72
+ 2599 08a8 C3030000 		.4byte	.LASF72
+ 2600 08ac C3030000 		.4byte	.LASF72
  2601 08b0 03       		.byte	0x3
  2602 08b1 C0       		.byte	0xc0
  2603 08b2 1D       		.uleb128 0x1d
- 2604 08b3 7C020000 		.4byte	.LASF73
- 2605 08b7 7C020000 		.4byte	.LASF73
+ 2604 08b3 2A020000 		.4byte	.LASF73
+ 2605 08b7 2A020000 		.4byte	.LASF73
  2606 08bb 03       		.byte	0x3
  2607 08bc E5       		.byte	0xe5
  2608 08bd 1D       		.uleb128 0x1d
- 2609 08be A3040000 		.4byte	.LASF74
- 2610 08c2 A3040000 		.4byte	.LASF74
+ 2609 08be 51040000 		.4byte	.LASF74
+ 2610 08c2 51040000 		.4byte	.LASF74
  2611 08c6 03       		.byte	0x3
  2612 08c7 C3       		.byte	0xc3
  2613 08c8 1D       		.uleb128 0x1d
- 2614 08c9 30030000 		.4byte	.LASF75
- 2615 08cd 30030000 		.4byte	.LASF75
+ 2614 08c9 DE020000 		.4byte	.LASF75
+ 2615 08cd DE020000 		.4byte	.LASF75
  2616 08d1 03       		.byte	0x3
  2617 08d2 C8       		.byte	0xc8
  2618 08d3 1D       		.uleb128 0x1d
- 2619 08d4 B6050000 		.4byte	.LASF76
- 2620 08d8 B6050000 		.4byte	.LASF76
+ 2619 08d4 A0050000 		.4byte	.LASF76
+ 2620 08d8 A0050000 		.4byte	.LASF76
  2621 08dc 04       		.byte	0x4
  2622 08dd 23       		.byte	0x23
  2623 08de 1D       		.uleb128 0x1d
- 2624 08df 2C040000 		.4byte	.LASF77
- 2625 08e3 2C040000 		.4byte	.LASF77
+ 2624 08df DA030000 		.4byte	.LASF77
+ 2625 08e3 DA030000 		.4byte	.LASF77
  2626 08e7 03       		.byte	0x3
  2627 08e8 E6       		.byte	0xe6
  2628 08e9 1D       		.uleb128 0x1d
- 2629 08ea E5050000 		.4byte	.LASF78
- 2630 08ee E5050000 		.4byte	.LASF78
+ 2629 08ea CF050000 		.4byte	.LASF78
+ 2630 08ee CF050000 		.4byte	.LASF78
  2631 08f2 04       		.byte	0x4
  2632 08f3 27       		.byte	0x27
  2633 08f4 1D       		.uleb128 0x1d
- 2634 08f5 3A010000 		.4byte	.LASF79
- 2635 08f9 3A010000 		.4byte	.LASF79
+ 2634 08f5 E8000000 		.4byte	.LASF79
+ 2635 08f9 E8000000 		.4byte	.LASF79
  2636 08fd 03       		.byte	0x3
  2637 08fe C5       		.byte	0xc5
  2638 08ff 1D       		.uleb128 0x1d
- 2639 0900 93020000 		.4byte	.LASF80
- 2640 0904 93020000 		.4byte	.LASF80
+ 2639 0900 41020000 		.4byte	.LASF80
+ 2640 0904 41020000 		.4byte	.LASF80
  2641 0908 03       		.byte	0x3
  2642 0909 C7       		.byte	0xc7
  2643 090a 00       		.byte	0
@@ -4558,7 +4558,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 1
  2651 0005 13       		.uleb128 0x13
  2652 0006 0B       		.uleb128 0xb
  2653 0007 03       		.uleb128 0x3
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 77
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccoIUiTa.s 			page 77
 
 
  2654 0008 0E       		.uleb128 0xe
@@ -4618,7 +4618,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 1
  2708 003e 2E       		.uleb128 0x2e
  2709 003f 01       		.byte	0x1
  2710 0040 3F       		.uleb128 0x3f
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 78
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccoIUiTa.s 			page 78
 
 
  2711 0041 19       		.uleb128 0x19
@@ -4678,7 +4678,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 1
  2765 007f 0E       		.uleb128 0xe
  2766 0080 3A       		.uleb128 0x3a
  2767 0081 0B       		.uleb128 0xb
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 79
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccoIUiTa.s 			page 79
 
 
  2768 0082 3B       		.uleb128 0x3b
@@ -4738,7 +4738,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 1
  2822 00bb 19       		.uleb128 0x19
  2823 00bc 11       		.uleb128 0x11
  2824 00bd 01       		.uleb128 0x1
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 80
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccoIUiTa.s 			page 80
 
 
  2825 00be 12       		.uleb128 0x12
@@ -4798,7 +4798,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 1
  2879 00f6 00       		.byte	0
  2880 00f7 03       		.uleb128 0x3
  2881 00f8 0E       		.uleb128 0xe
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 81
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccoIUiTa.s 			page 81
 
 
  2882 00f9 3A       		.uleb128 0x3a
@@ -4858,7 +4858,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 1
  2936 012f 00       		.byte	0
  2937 0130 00       		.byte	0
  2938 0131 15       		.uleb128 0x15
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 82
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccoIUiTa.s 			page 82
 
 
  2939 0132 0B       		.uleb128 0xb
@@ -4918,7 +4918,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 1
  2993 0169 00       		.byte	0
  2994 016a 19       		.uleb128 0x19
  2995 016b 05       		.uleb128 0x5
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 83
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccoIUiTa.s 			page 83
 
 
  2996 016c 00       		.byte	0
@@ -4978,7 +4978,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 1
  3050 01a2 0B       		.uleb128 0xb
  3051 01a3 3B       		.uleb128 0x3b
  3052 01a4 0B       		.uleb128 0xb
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 84
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccoIUiTa.s 			page 84
 
 
  3053 01a5 00       		.byte	0
@@ -5038,7 +5038,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 1
  3107 0081 00000000 		.4byte	0
  3108 0085 00000000 		.4byte	0
  3109              	.LLST4:
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 85
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccoIUiTa.s 			page 85
 
 
  3110 0089 14000000 		.4byte	.LVL24
@@ -5098,7 +5098,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 1
  3164 0117 32000000 		.4byte	.LVL48
  3165 011b 0100     		.2byte	0x1
  3166 011d 53       		.byte	0x53
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 86
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccoIUiTa.s 			page 86
 
 
  3167 011e 32000000 		.4byte	.LVL48
@@ -5158,7 +5158,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 1
  3221 01af 9F       		.byte	0x9f
  3222 01b0 00000000 		.4byte	0
  3223 01b4 00000000 		.4byte	0
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 87
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccoIUiTa.s 			page 87
 
 
  3224              	.LLST13:
@@ -5218,7 +5218,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 1
  3278              	.LLST16:
  3279 023b 00000000 		.4byte	.LVL89
  3280 023f 0E000000 		.4byte	.LVL90
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 88
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccoIUiTa.s 			page 88
 
 
  3281 0243 0100     		.2byte	0x1
@@ -5278,7 +5278,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 1
  3335 02c8 01       		.uleb128 0x1
  3336 02c9 51       		.byte	0x51
  3337 02ca 9F       		.byte	0x9f
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 89
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccoIUiTa.s 			page 89
 
 
  3338 02cb 00000000 		.4byte	0
@@ -5338,7 +5338,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 1
  3392 033f 06000000 		.4byte	.LVL108
  3393 0343 19000000 		.4byte	.LVL109-1
  3394 0347 0100     		.2byte	0x1
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 90
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccoIUiTa.s 			page 90
 
 
  3395 0349 50       		.byte	0x50
@@ -5398,7 +5398,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 1
  3449 002c 48000000 		.4byte	.LFE3-.LFB3
  3450 0030 00000000 		.4byte	.LFB4
  3451 0034 04000000 		.4byte	.LFE4-.LFB4
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 91
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccoIUiTa.s 			page 91
 
 
  3452 0038 00000000 		.4byte	.LFB6
@@ -5458,7 +5458,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 1
  3506 0028 00000000 		.4byte	.LFB0
  3507 002c 1C000000 		.4byte	.LFE0
  3508 0030 00000000 		.4byte	.LFB3
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 92
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccoIUiTa.s 			page 92
 
 
  3509 0034 48000000 		.4byte	.LFE3
@@ -5518,7 +5518,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 1
  3558      5F554152 
  3558      545F456E 
  3558      61626C65 
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 93
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccoIUiTa.s 			page 93
 
 
  3558      00
@@ -5538,451 +5538,449 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 1
  3565              	.LASF50:
  3566 0046 73747269 		.ascii	"string\000"
  3566      6E6700
- 3567              	.LASF83:
- 3568 004d 5C5C5642 		.ascii	"\\\\VBOXSVR\\raywang\\Dropbox (MIT)\\CTFs\\eCTF\\ec"
- 3568      4F585356 
- 3568      525C7261 
- 3568      7977616E 
- 3568      675C4472 
- 3569 0079 74662D32 		.ascii	"tf-2018-techsec\\SECURITY_MODULE.cydsn\000"
- 3569      3031382D 
- 3569      74656368 
- 3569      7365635C 
- 3569      53454355 
- 3570              	.LASF27:
- 3571 009f 43415244 		.ascii	"CARD_UART_ReadRxData\000"
- 3571      5F554152 
- 3571      545F5265 
- 3571      61645278 
- 3571      44617461 
- 3572              	.LASF7:
- 3573 00b4 6C6F6E67 		.ascii	"long long unsigned int\000"
- 3573      206C6F6E 
- 3573      6720756E 
- 3573      7369676E 
- 3573      65642069 
- 3574              	.LASF6:
- 3575 00cb 6C6F6E67 		.ascii	"long long int\000"
- 3575      206C6F6E 
- 3575      6720696E 
- 3575      7400
- 3576              	.LASF0:
- 3577 00d9 7369676E 		.ascii	"signed char\000"
- 3577      65642063 
- 3577      68617200 
- 3578              	.LASF60:
- 3579 00e5 74785065 		.ascii	"txPeriod\000"
- 3579      72696F64 
- 3579      00
- 3580              	.LASF66:
- 3581 00ee 43415244 		.ascii	"CARD_UART_rxBuffer\000"
- 3581      5F554152 
- 3581      545F7278 
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 94
+ 3567              	.LASF27:
+ 3568 004d 43415244 		.ascii	"CARD_UART_ReadRxData\000"
+ 3568      5F554152 
+ 3568      545F5265 
+ 3568      61645278 
+ 3568      44617461 
+ 3569              	.LASF7:
+ 3570 0062 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 3570      206C6F6E 
+ 3570      6720756E 
+ 3570      7369676E 
+ 3570      65642069 
+ 3571              	.LASF6:
+ 3572 0079 6C6F6E67 		.ascii	"long long int\000"
+ 3572      206C6F6E 
+ 3572      6720696E 
+ 3572      7400
+ 3573              	.LASF0:
+ 3574 0087 7369676E 		.ascii	"signed char\000"
+ 3574      65642063 
+ 3574      68617200 
+ 3575              	.LASF60:
+ 3576 0093 74785065 		.ascii	"txPeriod\000"
+ 3576      72696F64 
+ 3576      00
+ 3577              	.LASF66:
+ 3578 009c 43415244 		.ascii	"CARD_UART_rxBuffer\000"
+ 3578      5F554152 
+ 3578      545F7278 
+ 3578      42756666 
+ 3578      657200
+ 3579              	.LASF37:
+ 3580 00af 43415244 		.ascii	"CARD_UART_SetRxAddress1\000"
+ 3580      5F554152 
+ 3580      545F5365 
+ 3580      74527841 
+ 3580      64647265 
+ 3581              	.LASF40:
+ 3582 00c7 43415244 		.ascii	"CARD_UART_SetRxAddress2\000"
+ 3582      5F554152 
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccoIUiTa.s 			page 94
 
 
- 3581      42756666 
- 3581      657200
- 3582              	.LASF37:
- 3583 0101 43415244 		.ascii	"CARD_UART_SetRxAddress1\000"
- 3583      5F554152 
- 3583      545F5365 
- 3583      74527841 
- 3583      64647265 
- 3584              	.LASF40:
- 3585 0119 43415244 		.ascii	"CARD_UART_SetRxAddress2\000"
- 3585      5F554152 
- 3585      545F5365 
- 3585      74527841 
- 3585      64647265 
- 3586              	.LASF4:
- 3587 0131 6C6F6E67 		.ascii	"long int\000"
- 3587      20696E74 
- 3587      00
- 3588              	.LASF79:
- 3589 013a 4379496E 		.ascii	"CyIntDisable\000"
- 3589      74446973 
- 3589      61626C65 
- 3589      00
- 3590              	.LASF69:
- 3591 0147 43415244 		.ascii	"CARD_UART_rxBufferLoopDetect\000"
- 3591      5F554152 
- 3591      545F7278 
- 3591      42756666 
- 3591      65724C6F 
- 3592              	.LASF9:
- 3593 0164 75696E74 		.ascii	"uint8\000"
- 3593      3800
- 3594              	.LASF52:
- 3595 016a 43415244 		.ascii	"CARD_UART_PutArray\000"
- 3595      5F554152 
- 3595      545F5075 
- 3595      74417272 
- 3595      617900
- 3596              	.LASF67:
- 3597 017d 43415244 		.ascii	"CARD_UART_rxBufferRead\000"
- 3597      5F554152 
- 3597      545F7278 
- 3597      42756666 
- 3597      65725265 
- 3598              	.LASF12:
- 3599 0194 646F7562 		.ascii	"double\000"
- 3599      6C6500
- 3600              	.LASF85:
- 3601 019b 61646472 		.ascii	"addressMode\000"
- 3601      6573734D 
- 3601      6F646500 
- 3602              	.LASF21:
- 3603 01a7 43415244 		.ascii	"CARD_UART_Stop\000"
- 3603      5F554152 
- 3603      545F5374 
- 3603      6F7000
- 3604              	.LASF20:
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 95
+ 3582      545F5365 
+ 3582      74527841 
+ 3582      64647265 
+ 3583              	.LASF4:
+ 3584 00df 6C6F6E67 		.ascii	"long int\000"
+ 3584      20696E74 
+ 3584      00
+ 3585              	.LASF79:
+ 3586 00e8 4379496E 		.ascii	"CyIntDisable\000"
+ 3586      74446973 
+ 3586      61626C65 
+ 3586      00
+ 3587              	.LASF69:
+ 3588 00f5 43415244 		.ascii	"CARD_UART_rxBufferLoopDetect\000"
+ 3588      5F554152 
+ 3588      545F7278 
+ 3588      42756666 
+ 3588      65724C6F 
+ 3589              	.LASF9:
+ 3590 0112 75696E74 		.ascii	"uint8\000"
+ 3590      3800
+ 3591              	.LASF52:
+ 3592 0118 43415244 		.ascii	"CARD_UART_PutArray\000"
+ 3592      5F554152 
+ 3592      545F5075 
+ 3592      74417272 
+ 3592      617900
+ 3593              	.LASF67:
+ 3594 012b 43415244 		.ascii	"CARD_UART_rxBufferRead\000"
+ 3594      5F554152 
+ 3594      545F7278 
+ 3594      42756666 
+ 3594      65725265 
+ 3595              	.LASF12:
+ 3596 0142 646F7562 		.ascii	"double\000"
+ 3596      6C6500
+ 3597              	.LASF85:
+ 3598 0149 61646472 		.ascii	"addressMode\000"
+ 3598      6573734D 
+ 3598      6F646500 
+ 3599              	.LASF21:
+ 3600 0155 43415244 		.ascii	"CARD_UART_Stop\000"
+ 3600      5F554152 
+ 3600      545F5374 
+ 3600      6F7000
+ 3601              	.LASF20:
+ 3602 0164 43415244 		.ascii	"CARD_UART_Start\000"
+ 3602      5F554152 
+ 3602      545F5374 
+ 3602      61727400 
+ 3603              	.LASF34:
+ 3604 0174 43415244 		.ascii	"CARD_UART_GetRxBufferSize\000"
+ 3604      5F554152 
+ 3604      545F4765 
+ 3604      74527842 
+ 3604      75666665 
+ 3605              	.LASF48:
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccoIUiTa.s 			page 95
 
 
- 3605 01b6 43415244 		.ascii	"CARD_UART_Start\000"
- 3605      5F554152 
- 3605      545F5374 
- 3605      61727400 
- 3606              	.LASF34:
- 3607 01c6 43415244 		.ascii	"CARD_UART_GetRxBufferSize\000"
- 3607      5F554152 
- 3607      545F4765 
- 3607      74527842 
- 3607      75666665 
- 3608              	.LASF48:
- 3609 01e0 6C6F6354 		.ascii	"locTxBufferRead\000"
- 3609      78427566 
- 3609      66657252 
- 3609      65616400 
- 3610              	.LASF36:
- 3611 01f0 43415244 		.ascii	"CARD_UART_ClearRxBuffer\000"
- 3611      5F554152 
- 3611      545F436C 
- 3611      65617252 
- 3611      78427566 
- 3612              	.LASF58:
- 3613 0208 7265744D 		.ascii	"retMode\000"
- 3613      6F646500 
- 3614              	.LASF8:
- 3615 0210 756E7369 		.ascii	"unsigned int\000"
- 3615      676E6564 
- 3615      20696E74 
- 3615      00
- 3616              	.LASF30:
- 3617 021d 43415244 		.ascii	"CARD_UART_GetChar\000"
- 3617      5F554152 
- 3617      545F4765 
- 3617      74436861 
- 3617      7200
- 3618              	.LASF33:
- 3619 022f 6C6F6345 		.ascii	"locErrorStatus\000"
- 3619      72726F72 
- 3619      53746174 
- 3619      757300
- 3620              	.LASF5:
- 3621 023e 6C6F6E67 		.ascii	"long unsigned int\000"
- 3621      20756E73 
- 3621      69676E65 
- 3621      6420696E 
- 3621      7400
- 3622              	.LASF47:
- 3623 0250 6C6F6354 		.ascii	"locTxBufferWrite\000"
- 3623      78427566 
- 3623      66657257 
- 3623      72697465 
- 3623      00
- 3624              	.LASF84:
- 3625 0261 43415244 		.ascii	"CARD_UART_SetTxAddressMode\000"
- 3625      5F554152 
- 3625      545F5365 
- 3625      74547841 
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 96
+ 3606 018e 6C6F6354 		.ascii	"locTxBufferRead\000"
+ 3606      78427566 
+ 3606      66657252 
+ 3606      65616400 
+ 3607              	.LASF36:
+ 3608 019e 43415244 		.ascii	"CARD_UART_ClearRxBuffer\000"
+ 3608      5F554152 
+ 3608      545F436C 
+ 3608      65617252 
+ 3608      78427566 
+ 3609              	.LASF58:
+ 3610 01b6 7265744D 		.ascii	"retMode\000"
+ 3610      6F646500 
+ 3611              	.LASF8:
+ 3612 01be 756E7369 		.ascii	"unsigned int\000"
+ 3612      676E6564 
+ 3612      20696E74 
+ 3612      00
+ 3613              	.LASF30:
+ 3614 01cb 43415244 		.ascii	"CARD_UART_GetChar\000"
+ 3614      5F554152 
+ 3614      545F4765 
+ 3614      74436861 
+ 3614      7200
+ 3615              	.LASF33:
+ 3616 01dd 6C6F6345 		.ascii	"locErrorStatus\000"
+ 3616      72726F72 
+ 3616      53746174 
+ 3616      757300
+ 3617              	.LASF5:
+ 3618 01ec 6C6F6E67 		.ascii	"long unsigned int\000"
+ 3618      20756E73 
+ 3618      69676E65 
+ 3618      6420696E 
+ 3618      7400
+ 3619              	.LASF47:
+ 3620 01fe 6C6F6354 		.ascii	"locTxBufferWrite\000"
+ 3620      78427566 
+ 3620      66657257 
+ 3620      72697465 
+ 3620      00
+ 3621              	.LASF84:
+ 3622 020f 43415244 		.ascii	"CARD_UART_SetTxAddressMode\000"
+ 3622      5F554152 
+ 3622      545F5365 
+ 3622      74547841 
+ 3622      64647265 
+ 3623              	.LASF73:
+ 3624 022a 4379456E 		.ascii	"CyEnterCriticalSection\000"
+ 3624      74657243 
+ 3624      72697469 
+ 3624      63616C53 
+ 3624      65637469 
+ 3625              	.LASF80:
+ 3626 0241 4379496E 		.ascii	"CyIntSetPending\000"
+ 3626      74536574 
+ 3626      50656E64 
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccoIUiTa.s 			page 96
 
 
- 3625      64647265 
- 3626              	.LASF73:
- 3627 027c 4379456E 		.ascii	"CyEnterCriticalSection\000"
- 3627      74657243 
- 3627      72697469 
- 3627      63616C53 
- 3627      65637469 
- 3628              	.LASF80:
- 3629 0293 4379496E 		.ascii	"CyIntSetPending\000"
- 3629      74536574 
- 3629      50656E64 
- 3629      696E6700 
- 3630              	.LASF61:
- 3631 02a3 43415244 		.ascii	"CARD_UART_initVar\000"
- 3631      5F554152 
- 3631      545F696E 
- 3631      69745661 
- 3631      7200
- 3632              	.LASF35:
- 3633 02b5 73697A65 		.ascii	"size\000"
- 3633      00
- 3634              	.LASF3:
- 3635 02ba 73686F72 		.ascii	"short unsigned int\000"
- 3635      7420756E 
- 3635      7369676E 
- 3635      65642069 
- 3635      6E7400
- 3636              	.LASF71:
- 3637 02cd 4379496E 		.ascii	"CyIntSetVector\000"
- 3637      74536574 
- 3637      56656374 
- 3637      6F7200
- 3638              	.LASF51:
- 3639 02dc 62756649 		.ascii	"bufIndex\000"
- 3639      6E646578 
- 3639      00
- 3640              	.LASF64:
- 3641 02e5 43415244 		.ascii	"CARD_UART_txBufferWrite\000"
- 3641      5F554152 
- 3641      545F7478 
- 3641      42756666 
- 3641      65725772 
- 3642              	.LASF38:
- 3643 02fd 696E7453 		.ascii	"intSrc\000"
- 3643      726300
- 3644              	.LASF70:
- 3645 0304 43415244 		.ascii	"CARD_UART_rxBufferOverflow\000"
- 3645      5F554152 
- 3645      545F7278 
- 3645      42756666 
- 3645      65724F76 
- 3646              	.LASF59:
- 3647 031f 746D7053 		.ascii	"tmpStat\000"
- 3647      74617400 
- 3648              	.LASF17:
- 3649 0327 73697A65 		.ascii	"sizetype\000"
- 3649      74797065 
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 97
+ 3626      696E6700 
+ 3627              	.LASF61:
+ 3628 0251 43415244 		.ascii	"CARD_UART_initVar\000"
+ 3628      5F554152 
+ 3628      545F696E 
+ 3628      69745661 
+ 3628      7200
+ 3629              	.LASF35:
+ 3630 0263 73697A65 		.ascii	"size\000"
+ 3630      00
+ 3631              	.LASF3:
+ 3632 0268 73686F72 		.ascii	"short unsigned int\000"
+ 3632      7420756E 
+ 3632      7369676E 
+ 3632      65642069 
+ 3632      6E7400
+ 3633              	.LASF71:
+ 3634 027b 4379496E 		.ascii	"CyIntSetVector\000"
+ 3634      74536574 
+ 3634      56656374 
+ 3634      6F7200
+ 3635              	.LASF51:
+ 3636 028a 62756649 		.ascii	"bufIndex\000"
+ 3636      6E646578 
+ 3636      00
+ 3637              	.LASF64:
+ 3638 0293 43415244 		.ascii	"CARD_UART_txBufferWrite\000"
+ 3638      5F554152 
+ 3638      545F7478 
+ 3638      42756666 
+ 3638      65725772 
+ 3639              	.LASF38:
+ 3640 02ab 696E7453 		.ascii	"intSrc\000"
+ 3640      726300
+ 3641              	.LASF70:
+ 3642 02b2 43415244 		.ascii	"CARD_UART_rxBufferOverflow\000"
+ 3642      5F554152 
+ 3642      545F7278 
+ 3642      42756666 
+ 3642      65724F76 
+ 3643              	.LASF59:
+ 3644 02cd 746D7053 		.ascii	"tmpStat\000"
+ 3644      74617400 
+ 3645              	.LASF17:
+ 3646 02d5 73697A65 		.ascii	"sizetype\000"
+ 3646      74797065 
+ 3646      00
+ 3647              	.LASF75:
+ 3648 02de 4379496E 		.ascii	"CyIntClearPending\000"
+ 3648      74436C65 
+ 3648      61725065 
+ 3648      6E64696E 
+ 3648      6700
+ 3649              	.LASF16:
+ 3650 02f0 6C6F6E67 		.ascii	"long double\000"
+ 3650      20646F75 
+ 3650      626C6500 
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccoIUiTa.s 			page 97
 
 
- 3649      00
- 3650              	.LASF75:
- 3651 0330 4379496E 		.ascii	"CyIntClearPending\000"
- 3651      74436C65 
- 3651      61725065 
- 3651      6E64696E 
- 3651      6700
- 3652              	.LASF16:
- 3653 0342 6C6F6E67 		.ascii	"long double\000"
- 3653      20646F75 
- 3653      626C6500 
- 3654              	.LASF39:
- 3655 034e 61646472 		.ascii	"address\000"
- 3655      65737300 
- 3656              	.LASF81:
- 3657 0356 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
- 3657      43313120 
- 3657      352E342E 
- 3657      31203230 
- 3657      31363036 
- 3658 0389 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m0 -mthumb -g -O"
- 3658      20726576 
- 3658      6973696F 
- 3658      6E203233 
- 3658      37373135 
- 3659 03bc 73202D66 		.ascii	"s -ffunction-sections -ffat-lto-objects\000"
- 3659      66756E63 
- 3659      74696F6E 
- 3659      2D736563 
- 3659      74696F6E 
- 3660              	.LASF26:
- 3661 03e4 6C6F6352 		.ascii	"locRxBufferWrite\000"
- 3661      78427566 
- 3661      66657257 
- 3661      72697465 
- 3661      00
- 3662              	.LASF31:
- 3663 03f5 72785374 		.ascii	"rxStatus\000"
- 3663      61747573 
- 3663      00
- 3664              	.LASF28:
- 3665 03fe 43415244 		.ascii	"CARD_UART_ReadRxStatus\000"
- 3665      5F554152 
- 3665      545F5265 
- 3665      61645278 
- 3665      53746174 
- 3666              	.LASF72:
- 3667 0415 4379496E 		.ascii	"CyIntSetPriority\000"
- 3667      74536574 
- 3667      5072696F 
- 3667      72697479 
- 3667      00
- 3668              	.LASF11:
- 3669 0426 666C6F61 		.ascii	"float\000"
- 3669      7400
- 3670              	.LASF77:
- 3671 042c 43794578 		.ascii	"CyExitCriticalSection\000"
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 98
+ 3651              	.LASF39:
+ 3652 02fc 61646472 		.ascii	"address\000"
+ 3652      65737300 
+ 3653              	.LASF81:
+ 3654 0304 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 3654      43313120 
+ 3654      352E342E 
+ 3654      31203230 
+ 3654      31363036 
+ 3655 0337 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m0 -mthumb -g -O"
+ 3655      20726576 
+ 3655      6973696F 
+ 3655      6E203233 
+ 3655      37373135 
+ 3656 036a 73202D66 		.ascii	"s -ffunction-sections -ffat-lto-objects\000"
+ 3656      66756E63 
+ 3656      74696F6E 
+ 3656      2D736563 
+ 3656      74696F6E 
+ 3657              	.LASF26:
+ 3658 0392 6C6F6352 		.ascii	"locRxBufferWrite\000"
+ 3658      78427566 
+ 3658      66657257 
+ 3658      72697465 
+ 3658      00
+ 3659              	.LASF31:
+ 3660 03a3 72785374 		.ascii	"rxStatus\000"
+ 3660      61747573 
+ 3660      00
+ 3661              	.LASF28:
+ 3662 03ac 43415244 		.ascii	"CARD_UART_ReadRxStatus\000"
+ 3662      5F554152 
+ 3662      545F5265 
+ 3662      61645278 
+ 3662      53746174 
+ 3663              	.LASF72:
+ 3664 03c3 4379496E 		.ascii	"CyIntSetPriority\000"
+ 3664      74536574 
+ 3664      5072696F 
+ 3664      72697479 
+ 3664      00
+ 3665              	.LASF11:
+ 3666 03d4 666C6F61 		.ascii	"float\000"
+ 3666      7400
+ 3667              	.LASF77:
+ 3668 03da 43794578 		.ascii	"CyExitCriticalSection\000"
+ 3668      69744372 
+ 3668      69746963 
+ 3668      616C5365 
+ 3668      6374696F 
+ 3669              	.LASF68:
+ 3670 03f0 43415244 		.ascii	"CARD_UART_rxBufferWrite\000"
+ 3670      5F554152 
+ 3670      545F7278 
+ 3670      42756666 
+ 3670      65725772 
+ 3671              	.LASF15:
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccoIUiTa.s 			page 98
 
 
- 3671      69744372 
- 3671      69746963 
- 3671      616C5365 
- 3671      6374696F 
- 3672              	.LASF68:
- 3673 0442 43415244 		.ascii	"CARD_UART_rxBufferWrite\000"
- 3673      5F554152 
- 3673      545F7278 
- 3673      42756666 
- 3673      65725772 
- 3674              	.LASF15:
- 3675 045a 72656738 		.ascii	"reg8\000"
- 3675      00
- 3676              	.LASF1:
- 3677 045f 756E7369 		.ascii	"unsigned char\000"
- 3677      676E6564 
- 3677      20636861 
- 3677      7200
- 3678              	.LASF23:
- 3679 046d 43415244 		.ascii	"CARD_UART_SetRxInterruptMode\000"
- 3679      5F554152 
- 3679      545F5365 
- 3679      74527849 
- 3679      6E746572 
- 3680              	.LASF18:
- 3681 048a 43415244 		.ascii	"CARD_UART_Init\000"
- 3681      5F554152 
- 3681      545F496E 
- 3681      697400
- 3682              	.LASF2:
- 3683 0499 73686F72 		.ascii	"short int\000"
- 3683      7420696E 
- 3683      7400
- 3684              	.LASF74:
- 3685 04a3 4379496E 		.ascii	"CyIntEnable\000"
- 3685      74456E61 
- 3685      626C6500 
- 3686              	.LASF56:
- 3687 04af 43415244 		.ascii	"CARD_UART_ClearTxBuffer\000"
- 3687      5F554152 
- 3687      545F436C 
- 3687      65617254 
- 3687      78427566 
- 3688              	.LASF53:
- 3689 04c7 62797465 		.ascii	"byteCount\000"
- 3689      436F756E 
- 3689      7400
- 3690              	.LASF55:
- 3691 04d1 43415244 		.ascii	"CARD_UART_GetTxBufferSize\000"
- 3691      5F554152 
- 3691      545F4765 
- 3691      74547842 
- 3691      75666665 
- 3692              	.LASF46:
- 3693 04eb 43415244 		.ascii	"CARD_UART_PutChar\000"
- 3693      5F554152 
- 3693      545F5075 
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 99
+ 3672 0408 72656738 		.ascii	"reg8\000"
+ 3672      00
+ 3673              	.LASF1:
+ 3674 040d 756E7369 		.ascii	"unsigned char\000"
+ 3674      676E6564 
+ 3674      20636861 
+ 3674      7200
+ 3675              	.LASF23:
+ 3676 041b 43415244 		.ascii	"CARD_UART_SetRxInterruptMode\000"
+ 3676      5F554152 
+ 3676      545F5365 
+ 3676      74527849 
+ 3676      6E746572 
+ 3677              	.LASF18:
+ 3678 0438 43415244 		.ascii	"CARD_UART_Init\000"
+ 3678      5F554152 
+ 3678      545F496E 
+ 3678      697400
+ 3679              	.LASF2:
+ 3680 0447 73686F72 		.ascii	"short int\000"
+ 3680      7420696E 
+ 3680      7400
+ 3681              	.LASF74:
+ 3682 0451 4379496E 		.ascii	"CyIntEnable\000"
+ 3682      74456E61 
+ 3682      626C6500 
+ 3683              	.LASF56:
+ 3684 045d 43415244 		.ascii	"CARD_UART_ClearTxBuffer\000"
+ 3684      5F554152 
+ 3684      545F436C 
+ 3684      65617254 
+ 3684      78427566 
+ 3685              	.LASF53:
+ 3686 0475 62797465 		.ascii	"byteCount\000"
+ 3686      436F756E 
+ 3686      7400
+ 3687              	.LASF55:
+ 3688 047f 43415244 		.ascii	"CARD_UART_GetTxBufferSize\000"
+ 3688      5F554152 
+ 3688      545F4765 
+ 3688      74547842 
+ 3688      75666665 
+ 3689              	.LASF46:
+ 3690 0499 43415244 		.ascii	"CARD_UART_PutChar\000"
+ 3690      5F554152 
+ 3690      545F5075 
+ 3690      74436861 
+ 3690      7200
+ 3691              	.LASF24:
+ 3692 04ab 72784461 		.ascii	"rxData\000"
+ 3692      746100
+ 3693              	.LASF57:
+ 3694 04b2 43415244 		.ascii	"CARD_UART_SendBreak\000"
+ 3694      5F554152 
+ 3694      545F5365 
+ 3694      6E644272 
+ 3694      65616B00 
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccoIUiTa.s 			page 99
 
 
- 3693      74436861 
- 3693      7200
- 3694              	.LASF24:
- 3695 04fd 72784461 		.ascii	"rxData\000"
- 3695      746100
- 3696              	.LASF57:
- 3697 0504 43415244 		.ascii	"CARD_UART_SendBreak\000"
- 3697      5F554152 
- 3697      545F5365 
- 3697      6E644272 
- 3697      65616B00 
- 3698              	.LASF14:
- 3699 0518 63686172 		.ascii	"char\000"
- 3699      00
- 3700              	.LASF13:
- 3701 051d 63686172 		.ascii	"char8\000"
- 3701      3800
+ 3695              	.LASF14:
+ 3696 04c6 63686172 		.ascii	"char\000"
+ 3696      00
+ 3697              	.LASF13:
+ 3698 04cb 63686172 		.ascii	"char8\000"
+ 3698      3800
+ 3699              	.LASF83:
+ 3700 04d1 453A5C65 		.ascii	"E:\\eCTF\\ectf-2018-techsec-submission2\\SECURITY_M"
+ 3700      4354465C 
+ 3700      65637466 
+ 3700      2D323031 
+ 3700      382D7465 
+ 3701 0501 4F44554C 		.ascii	"ODULE.cydsn\000"
+ 3701      452E6379 
+ 3701      64736E00 
  3702              	.LASF32:
- 3703 0523 43415244 		.ascii	"CARD_UART_GetByte\000"
+ 3703 050d 43415244 		.ascii	"CARD_UART_GetByte\000"
  3703      5F554152 
  3703      545F4765 
  3703      74427974 
  3703      6500
  3704              	.LASF54:
- 3705 0535 43415244 		.ascii	"CARD_UART_PutCRLF\000"
+ 3705 051f 43415244 		.ascii	"CARD_UART_PutCRLF\000"
  3705      5F554152 
  3705      545F5075 
  3705      7443524C 
  3705      4600
  3706              	.LASF65:
- 3707 0547 43415244 		.ascii	"CARD_UART_errorStatus\000"
+ 3707 0531 43415244 		.ascii	"CARD_UART_errorStatus\000"
  3707      5F554152 
  3707      545F6572 
  3707      726F7253 
  3707      74617475 
  3708              	.LASF25:
- 3709 055d 6C6F6352 		.ascii	"locRxBufferRead\000"
+ 3709 0547 6C6F6352 		.ascii	"locRxBufferRead\000"
  3709      78427566 
  3709      66657252 
  3709      65616400 
  3710              	.LASF22:
- 3711 056d 656E6162 		.ascii	"enableInterrupts\000"
+ 3711 0557 656E6162 		.ascii	"enableInterrupts\000"
  3711      6C65496E 
  3711      74657272 
  3711      75707473 
  3711      00
  3712              	.LASF62:
- 3713 057e 43415244 		.ascii	"CARD_UART_txBuffer\000"
+ 3713 0568 43415244 		.ascii	"CARD_UART_txBuffer\000"
  3713      5F554152 
  3713      545F7478 
  3713      42756666 
  3713      657200
  3714              	.LASF29:
- 3715 0591 73746174 		.ascii	"status\000"
+ 3715 057b 73746174 		.ascii	"status\000"
  3715      757300
  3716              	.LASF44:
- 3717 0598 43415244 		.ascii	"CARD_UART_ReadControlRegister\000"
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\cc3SOvcv.s 			page 100
-
-
+ 3717 0582 43415244 		.ascii	"CARD_UART_ReadControlRegister\000"
  3717      5F554152 
  3717      545F5265 
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccoIUiTa.s 			page 100
+
+
  3717      6164436F 
  3717      6E74726F 
  3718              	.LASF76:
- 3719 05b6 43415244 		.ascii	"CARD_UART_IntClock_Start\000"
+ 3719 05a0 43415244 		.ascii	"CARD_UART_IntClock_Start\000"
  3719      5F554152 
  3719      545F496E 
  3719      74436C6F 
  3719      636B5F53 
  3720              	.LASF42:
- 3721 05cf 43415244 		.ascii	"CARD_UART_WriteTxData\000"
+ 3721 05b9 43415244 		.ascii	"CARD_UART_WriteTxData\000"
  3721      5F554152 
  3721      545F5772 
  3721      69746554 
  3721      78446174 
  3722              	.LASF78:
- 3723 05e5 43415244 		.ascii	"CARD_UART_IntClock_Stop\000"
+ 3723 05cf 43415244 		.ascii	"CARD_UART_IntClock_Stop\000"
  3723      5F554152 
  3723      545F496E 
  3723      74436C6F 
  3723      636B5F53 
  3724              	.LASF41:
- 3725 05fd 43415244 		.ascii	"CARD_UART_SetTxInterruptMode\000"
+ 3725 05e7 43415244 		.ascii	"CARD_UART_SetTxInterruptMode\000"
  3725      5F554152 
  3725      545F5365 
  3725      74547849 
  3725      6E746572 
  3726              	.LASF63:
- 3727 061a 43415244 		.ascii	"CARD_UART_txBufferRead\000"
+ 3727 0604 43415244 		.ascii	"CARD_UART_txBufferRead\000"
  3727      5F554152 
  3727      545F7478 
  3727      42756666 
  3727      65725265 
  3728              	.LASF49:
- 3729 0631 43415244 		.ascii	"CARD_UART_PutString\000"
+ 3729 061b 43415244 		.ascii	"CARD_UART_PutString\000"
  3729      5F554152 
  3729      545F5075 
  3729      74537472 
  3729      696E6700 
  3730              	.LASF45:
- 3731 0645 43415244 		.ascii	"CARD_UART_ReadTxStatus\000"
+ 3731 062f 43415244 		.ascii	"CARD_UART_ReadTxStatus\000"
  3731      5F554152 
  3731      545F5265 
  3731      61645478 

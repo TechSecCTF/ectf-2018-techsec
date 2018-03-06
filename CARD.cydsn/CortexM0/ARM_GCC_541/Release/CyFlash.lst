@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccUyH2oi.s 			page 1
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccBRGr5p.s 			page 1
 
 
    1              		.syntax unified
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccUyH2oi.s 			page 1
   28:Generated_Source\PSoC4/CyFlash.c **** * the modified data is replaced (Flash program) with 
   29:Generated_Source\PSoC4/CyFlash.c **** * the correct (original) data.
   30:Generated_Source\PSoC4/CyFlash.c **** *******************************************************************************/
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccUyH2oi.s 			page 2
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccBRGr5p.s 			page 2
 
 
   31:Generated_Source\PSoC4/CyFlash.c **** #define CY_FLASH_CHECKSUM_WORKAROUND    (CY_PSOC4_4000 || CY_PSOC4_4100 || CY_PSOC4_4200 || CY_PSOC
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccUyH2oi.s 			page 1
   30              		@ args = 0, pretend = 0, frame = 176
   31              		@ frame_needed = 0, uses_anonymous_args = 0
   32              	.LVL0:
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccUyH2oi.s 			page 3
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccBRGr5p.s 			page 3
 
 
   33 0000 F0B5     		push	{r4, r5, r6, r7, lr}
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccUyH2oi.s 			page 1
   67              	.LVL3:
  101:Generated_Source\PSoC4/CyFlash.c **** 
  102:Generated_Source\PSoC4/CyFlash.c ****         #if (CY_FLASH_CHECKSUM_WORKAROUND)
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccUyH2oi.s 			page 4
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccBRGr5p.s 			page 4
 
 
  103:Generated_Source\PSoC4/CyFlash.c **** 
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccUyH2oi.s 			page 1
  105              		.loc 1 115 0 is_stmt 0 discriminator 1
  106 0042 002B     		cmp	r3, #0
  107 0044 00D0     		beq	.LCB90
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccUyH2oi.s 			page 5
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccBRGr5p.s 			page 5
 
 
  108 0046 93E0     		b	.L6	@long jump
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccUyH2oi.s 			page 1
  133:Generated_Source\PSoC4/CyFlash.c ****         retValue = CY_FLASH_API_RETURN;
  140              		.loc 1 133 0
  141              		.thumb
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccUyH2oi.s 			page 6
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccBRGr5p.s 			page 6
 
 
  142              		.syntax unified
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccUyH2oi.s 			page 1
  156:Generated_Source\PSoC4/CyFlash.c ****                 /* Write Row */
  157:Generated_Source\PSoC4/CyFlash.c ****                 parameters[0u]  = (uint32) (((uint32) CY_FLASH_KEY_TWO(CY_FLASH_API_OPCODE_WRITE_RO
  158:Generated_Source\PSoC4/CyFlash.c ****                 parameters[0u] |= (uint32)(rowNum << 16u);
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccUyH2oi.s 			page 7
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccBRGr5p.s 			page 7
 
 
  159:Generated_Source\PSoC4/CyFlash.c **** 
@@ -418,7 +418,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccUyH2oi.s 			page 1
  213:Generated_Source\PSoC4/CyFlash.c ****         }
  214:Generated_Source\PSoC4/CyFlash.c ****     }
  215:Generated_Source\PSoC4/CyFlash.c ****     else
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccUyH2oi.s 			page 8
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccBRGr5p.s 			page 8
 
 
  216:Generated_Source\PSoC4/CyFlash.c ****     {
@@ -478,7 +478,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccUyH2oi.s 			page 1
  270:Generated_Source\PSoC4/CyFlash.c **** 
  271:Generated_Source\PSoC4/CyFlash.c ****         /* Load Flash Bytes */
  272:Generated_Source\PSoC4/CyFlash.c ****         parameters[0u] = (uint32) (CY_FLASH_GET_MACRO_FROM_ROW(rowNum)        << CY_FLASH_PARAM_MAC
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccUyH2oi.s 			page 9
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccBRGr5p.s 			page 9
 
 
  273:Generated_Source\PSoC4/CyFlash.c ****                          (uint32) (CY_FLASH_PAGE_LATCH_START_ADDR             << CY_FLASH_PARAM_ADD
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccUyH2oi.s 			page 1
  327:Generated_Source\PSoC4/CyFlash.c **** 
  328:Generated_Source\PSoC4/CyFlash.c **** 
  329:Generated_Source\PSoC4/CyFlash.c **** /*******************************************************************************
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccUyH2oi.s 			page 10
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccBRGr5p.s 			page 10
 
 
  330:Generated_Source\PSoC4/CyFlash.c **** * Function Name: CySysFlashGetWriteRowStatus
@@ -598,7 +598,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccUyH2oi.s 			page 1
  384:Generated_Source\PSoC4/CyFlash.c **** * \return \ref group_flash_status_codes
  385:Generated_Source\PSoC4/CyFlash.c **** *
  386:Generated_Source\PSoC4/CyFlash.c **** *******************************************************************************/
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccUyH2oi.s 			page 11
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccBRGr5p.s 			page 11
 
 
  387:Generated_Source\PSoC4/CyFlash.c **** uint32 CySysFlashResumeWriteRow(void)
@@ -658,7 +658,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccUyH2oi.s 			page 1
  441:Generated_Source\PSoC4/CyFlash.c ****             if (freq <= CY_FLASH_CTL_WS_0_FREQ_MAX)
  442:Generated_Source\PSoC4/CyFlash.c ****             {
  443:Generated_Source\PSoC4/CyFlash.c ****                 CY_FLASH_CTL_REG = (CY_FLASH_CTL_REG & ~CY_FLASH_CTL_WS_MASK) | CY_FLASH_CTL_WS_0_V
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccUyH2oi.s 			page 12
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccBRGr5p.s 			page 12
 
 
  444:Generated_Source\PSoC4/CyFlash.c ****             } else
@@ -718,7 +718,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccUyH2oi.s 			page 1
  498:Generated_Source\PSoC4/CyFlash.c ****     if ((rowNum < CY_SFLASH_NUMBER_USERROWS) && (rowData != 0u))
  499:Generated_Source\PSoC4/CyFlash.c ****     {
  500:Generated_Source\PSoC4/CyFlash.c ****         /* Load Flash Bytes */
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccUyH2oi.s 			page 13
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccBRGr5p.s 			page 13
 
 
  501:Generated_Source\PSoC4/CyFlash.c ****         parameters[0u] = (uint32) (CY_FLASH_GET_MACRO_FROM_ROW(rowNum)        << CY_FLASH_PARAM_MAC
@@ -778,7 +778,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccUyH2oi.s 			page 1
  555:Generated_Source\PSoC4/CyFlash.c **** 
  556:Generated_Source\PSoC4/CyFlash.c ****     return (retValue);
  557:Generated_Source\PSoC4/CyFlash.c **** }
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccUyH2oi.s 			page 14
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccBRGr5p.s 			page 14
 
 
  558:Generated_Source\PSoC4/CyFlash.c **** #endif /* (CY_SFLASH_XTRA_ROWS) */
@@ -838,7 +838,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccUyH2oi.s 			page 1
  195 009c 002B     		cmp	r3, #0
  196 009e 16D1     		bne	.L10
  157:Generated_Source\PSoC4/CyFlash.c ****                 parameters[0u] |= (uint32)(rowNum << 16u);
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccUyH2oi.s 			page 15
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccBRGr5p.s 			page 15
 
 
  197              		.loc 1 157 0
@@ -898,7 +898,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccUyH2oi.s 			page 1
  239              		.loc 1 163 0 discriminator 8
  240 00cc 0893     		str	r3, [sp, #32]
  241              	.L10:
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccUyH2oi.s 			page 16
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccBRGr5p.s 			page 16
 
 
  168:Generated_Source\PSoC4/CyFlash.c ****                 {
@@ -958,7 +958,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccUyH2oi.s 			page 1
  183:Generated_Source\PSoC4/CyFlash.c **** 
  283              		.loc 1 183 0
  284              		.thumb
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccUyH2oi.s 			page 17
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccBRGr5p.s 			page 17
 
 
  285              		.syntax unified
@@ -1018,7 +1018,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccUyH2oi.s 			page 1
  326              		.syntax divided
  327              	@ 196 "Generated_Source\PSoC4\CyFlash.c" 1
  328 0130 C046     		NOP
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccUyH2oi.s 			page 18
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccBRGr5p.s 			page 18
 
 
  329              	
@@ -1078,7 +1078,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccUyH2oi.s 			page 1
  608:Generated_Source\PSoC4/CyFlash.c ****         *
  609:Generated_Source\PSoC4/CyFlash.c ****         * The registers not to be saved:
  610:Generated_Source\PSoC4/CyFlash.c ****         * - CY_SYS_CLK_IMO_TRIM1_REG  - No need to save. Function of frequency.
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccUyH2oi.s 			page 19
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccBRGr5p.s 			page 19
 
 
  611:Generated_Source\PSoC4/CyFlash.c ****         *                               Restored by CySysClkWriteImoFreq().
@@ -1138,7 +1138,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccUyH2oi.s 			page 1
  665:Generated_Source\PSoC4/CyFlash.c ****     /***************************************************************************
  666:Generated_Source\PSoC4/CyFlash.c ****     * Perform firmware clock settings setup for the PSOC4 4000 devices (the
  667:Generated_Source\PSoC4/CyFlash.c ****     * corresponding system call is not reliable):
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccUyH2oi.s 			page 20
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccBRGr5p.s 			page 20
 
 
  668:Generated_Source\PSoC4/CyFlash.c ****     * - The IMO frequency should be 48 MHz
@@ -1198,7 +1198,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccUyH2oi.s 			page 1
  722:Generated_Source\PSoC4/CyFlash.c **** *
  723:Generated_Source\PSoC4/CyFlash.c **** * Restores the device clock configuration.
  724:Generated_Source\PSoC4/CyFlash.c **** *
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccUyH2oi.s 			page 21
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccBRGr5p.s 			page 21
 
 
  725:Generated_Source\PSoC4/CyFlash.c **** * \return The same as \ref CySysFlashWriteRow().
@@ -1258,7 +1258,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccUyH2oi.s 			page 1
  386 016e 06E0     		b	.L9
  387              	.LVL19:
  388              	.L6:
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccUyH2oi.s 			page 22
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccBRGr5p.s 			page 22
 
 
  118:Generated_Source\PSoC4/CyFlash.c ****                 parameters[savedIndex] = 0u;
@@ -1318,7 +1318,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccUyH2oi.s 			page 1
  423:Generated_Source\PSoC4/CyFlash.c ****     uint8  interruptState;
  436              		.loc 1 423 0
  437              		.cfi_startproc
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccUyH2oi.s 			page 23
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccBRGr5p.s 			page 23
 
 
  438              		@ args = 0, pretend = 0, frame = 0
@@ -1378,7 +1378,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccUyH2oi.s 			page 1
  485              		.type	cySysFlashBackup, %object
  486              		.size	cySysFlashBackup, 4
  487              	cySysFlashBackup:
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccUyH2oi.s 			page 24
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccBRGr5p.s 			page 24
 
 
  488 0000 00000000 		.space	4
@@ -1394,25 +1394,25 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccUyH2oi.s 			page 1
  498 0006 00000000 		.4byte	.Ldebug_abbrev0
  499 000a 04       		.byte	0x4
  500 000b 01       		.uleb128 0x1
- 501 000c 7B020000 		.4byte	.LASF39
+ 501 000c 65020000 		.4byte	.LASF39
  502 0010 0C       		.byte	0xc
- 503 0011 13010000 		.4byte	.LASF40
- 504 0015 79010000 		.4byte	.LASF41
+ 503 0011 44010000 		.4byte	.LASF40
+ 504 0015 86000000 		.4byte	.LASF41
  505 0019 18000000 		.4byte	.Ldebug_ranges0+0x18
  506 001d 00000000 		.4byte	0
  507 0021 00000000 		.4byte	.Ldebug_line0
  508 0025 02       		.uleb128 0x2
  509 0026 01       		.byte	0x1
  510 0027 06       		.byte	0x6
- 511 0028 6F020000 		.4byte	.LASF0
+ 511 0028 59020000 		.4byte	.LASF0
  512 002c 02       		.uleb128 0x2
  513 002d 01       		.byte	0x1
  514 002e 08       		.byte	0x8
- 515 002f 86000000 		.4byte	.LASF1
+ 515 002f B7000000 		.4byte	.LASF1
  516 0033 02       		.uleb128 0x2
  517 0034 02       		.byte	0x2
  518 0035 05       		.byte	0x5
- 519 0036 CD000000 		.4byte	.LASF2
+ 519 0036 FE000000 		.4byte	.LASF2
  520 003a 02       		.uleb128 0x2
  521 003b 02       		.byte	0x2
  522 003c 07       		.byte	0x7
@@ -1420,42 +1420,42 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccUyH2oi.s 			page 1
  524 0041 02       		.uleb128 0x2
  525 0042 04       		.byte	0x4
  526 0043 05       		.byte	0x5
- 527 0044 3D020000 		.4byte	.LASF4
+ 527 0044 27020000 		.4byte	.LASF4
  528 0048 02       		.uleb128 0x2
  529 0049 04       		.byte	0x4
  530 004a 07       		.byte	0x7
- 531 004b A7000000 		.4byte	.LASF5
+ 531 004b D8000000 		.4byte	.LASF5
  532 004f 02       		.uleb128 0x2
  533 0050 08       		.byte	0x8
  534 0051 05       		.byte	0x5
- 535 0052 C0010000 		.4byte	.LASF6
+ 535 0052 AA010000 		.4byte	.LASF6
  536 0056 02       		.uleb128 0x2
  537 0057 08       		.byte	0x8
  538 0058 07       		.byte	0x7
- 539 0059 1C030000 		.4byte	.LASF7
+ 539 0059 06030000 		.4byte	.LASF7
  540 005d 03       		.uleb128 0x3
  541 005e 04       		.byte	0x4
  542 005f 05       		.byte	0x5
  543 0060 696E7400 		.ascii	"int\000"
  544 0064 02       		.uleb128 0x2
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccUyH2oi.s 			page 25
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccBRGr5p.s 			page 25
 
 
  545 0065 04       		.byte	0x4
  546 0066 07       		.byte	0x7
  547 0067 6A000000 		.4byte	.LASF8
  548 006b 04       		.uleb128 0x4
- 549 006c B9000000 		.4byte	.LASF9
+ 549 006c EA000000 		.4byte	.LASF9
  550 0070 02       		.byte	0x2
  551 0071 D201     		.2byte	0x1d2
  552 0073 2C000000 		.4byte	0x2c
  553 0077 04       		.uleb128 0x4
- 554 0078 EE000000 		.4byte	.LASF10
+ 554 0078 1F010000 		.4byte	.LASF10
  555 007c 02       		.byte	0x2
  556 007d D301     		.2byte	0x1d3
  557 007f 3A000000 		.4byte	0x3a
  558 0083 04       		.uleb128 0x4
- 559 0084 F5000000 		.4byte	.LASF11
+ 559 0084 26010000 		.4byte	.LASF11
  560 0088 02       		.byte	0x2
  561 0089 D401     		.2byte	0x1d4
  562 008b 48000000 		.4byte	0x48
@@ -1466,11 +1466,11 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccUyH2oi.s 			page 1
  567 0096 02       		.uleb128 0x2
  568 0097 08       		.byte	0x8
  569 0098 04       		.byte	0x4
- 570 0099 C6000000 		.4byte	.LASF13
+ 570 0099 F7000000 		.4byte	.LASF13
  571 009d 02       		.uleb128 0x2
  572 009e 01       		.byte	0x1
  573 009f 08       		.byte	0x8
- 574 00a0 46020000 		.4byte	.LASF14
+ 574 00a0 30020000 		.4byte	.LASF14
  575 00a4 04       		.uleb128 0x4
  576 00a5 00000000 		.4byte	.LASF15
  577 00a9 02       		.byte	0x2
@@ -1486,11 +1486,11 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccUyH2oi.s 			page 1
  587 00c1 02       		.uleb128 0x2
  588 00c2 08       		.byte	0x8
  589 00c3 04       		.byte	0x4
- 590 00c4 4B020000 		.4byte	.LASF17
+ 590 00c4 35020000 		.4byte	.LASF17
  591 00c8 02       		.uleb128 0x2
  592 00c9 04       		.byte	0x4
  593 00ca 07       		.byte	0x7
- 594 00cb 70010000 		.4byte	.LASF18
+ 594 00cb A1010000 		.4byte	.LASF18
  595 00cf 06       		.uleb128 0x6
  596 00d0 2A000000 		.4byte	.LASF42
  597 00d4 04       		.byte	0x4
@@ -1498,22 +1498,22 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccUyH2oi.s 			page 1
  599 00d6 D7       		.byte	0xd7
  600 00d7 E8000000 		.4byte	0xe8
  601 00db 07       		.uleb128 0x7
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccUyH2oi.s 			page 26
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccBRGr5p.s 			page 26
 
 
- 602 00dc CE010000 		.4byte	.LASF43
+ 602 00dc B8010000 		.4byte	.LASF43
  603 00e0 03       		.byte	0x3
  604 00e1 DA       		.byte	0xda
  605 00e2 83000000 		.4byte	0x83
  606 00e6 00       		.byte	0
  607 00e7 00       		.byte	0
  608 00e8 08       		.uleb128 0x8
- 609 00e9 1C020000 		.4byte	.LASF19
+ 609 00e9 06020000 		.4byte	.LASF19
  610 00ed 03       		.byte	0x3
  611 00ee ED       		.byte	0xed
  612 00ef CF000000 		.4byte	0xcf
  613 00f3 09       		.uleb128 0x9
- 614 00f4 06020000 		.4byte	.LASF20
+ 614 00f4 F0010000 		.4byte	.LASF20
  615 00f8 01       		.byte	0x1
  616 00f9 3A02     		.2byte	0x23a
  617 00fb A4000000 		.4byte	0xa4
@@ -1526,7 +1526,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccUyH2oi.s 			page 1
  624 010c A4000000 		.4byte	0xa4
  625 0110 00       		.byte	0
  626 0111 09       		.uleb128 0x9
- 627 0112 D7000000 		.4byte	.LASF21
+ 627 0112 08010000 		.4byte	.LASF21
  628 0116 01       		.byte	0x1
  629 0117 D802     		.2byte	0x2d8
  630 0119 A4000000 		.4byte	0xa4
@@ -1539,7 +1539,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccUyH2oi.s 			page 1
  637 012a A4000000 		.4byte	0xa4
  638 012e 00       		.byte	0
  639 012f 0B       		.uleb128 0xb
- 640 0130 09030000 		.4byte	.LASF44
+ 640 0130 F3020000 		.4byte	.LASF44
  641 0134 01       		.byte	0x1
  642 0135 51       		.byte	0x51
  643 0136 83000000 		.4byte	0x83
@@ -1555,10 +1555,10 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccUyH2oi.s 			page 1
  653 014f 83000000 		.4byte	0x83
  654 0153 00000000 		.4byte	.LLST0
  655 0157 0C       		.uleb128 0xc
- 656 0158 94000000 		.4byte	.LASF24
+ 656 0158 C5000000 		.4byte	.LASF24
  657 015c 01       		.byte	0x1
  658 015d 51       		.byte	0x51
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccUyH2oi.s 			page 27
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccBRGr5p.s 			page 27
 
 
  659 015e C1020000 		.4byte	0x2c1
@@ -1572,7 +1572,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccUyH2oi.s 			page 1
  667 0172 91       		.byte	0x91
  668 0173 D87E     		.sleb128 -168
  669 0175 0D       		.uleb128 0xd
- 670 0176 EC010000 		.4byte	.LASF25
+ 670 0176 D6010000 		.4byte	.LASF25
  671 017a 01       		.byte	0x1
  672 017b 54       		.byte	0x54
  673 017c BC000000 		.4byte	0xbc
@@ -1580,7 +1580,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccUyH2oi.s 			page 1
  675 0181 91       		.byte	0x91
  676 0182 DC7E     		.sleb128 -164
  677 0184 0D       		.uleb128 0xd
- 678 0185 9C000000 		.4byte	.LASF26
+ 678 0185 CD000000 		.4byte	.LASF26
  679 0189 01       		.byte	0x1
  680 018a 55       		.byte	0x55
  681 018b DC020000 		.4byte	0x2dc
@@ -1588,13 +1588,13 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccUyH2oi.s 			page 1
  683 0190 91       		.byte	0x91
  684 0191 E07E     		.sleb128 -160
  685 0193 0E       		.uleb128 0xe
- 686 0194 61010000 		.4byte	.LASF27
+ 686 0194 92010000 		.4byte	.LASF27
  687 0198 01       		.byte	0x1
  688 0199 56       		.byte	0x56
  689 019a 6B000000 		.4byte	0x6b
  690 019e 72000000 		.4byte	.LLST2
  691 01a2 0E       		.uleb128 0xe
- 692 01a3 4A010000 		.4byte	.LASF28
+ 692 01a3 7B010000 		.4byte	.LASF28
  693 01a7 01       		.byte	0x1
  694 01a8 59       		.byte	0x59
  695 01a9 83000000 		.4byte	0x83
@@ -1606,7 +1606,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccUyH2oi.s 			page 1
  701 01b8 83000000 		.4byte	0x83
  702 01bc B3000000 		.4byte	.LLST4
  703 01c0 0E       		.uleb128 0xe
- 704 01c1 FB010000 		.4byte	.LASF30
+ 704 01c1 E5010000 		.4byte	.LASF30
  705 01c5 01       		.byte	0x1
  706 01c6 5B       		.byte	0x5b
  707 01c7 83000000 		.4byte	0x83
@@ -1618,10 +1618,10 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccUyH2oi.s 			page 1
  713 01d6 83000000 		.4byte	0x83
  714 01da 3D010000 		.4byte	.LLST6
  715 01de 0E       		.uleb128 0xe
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccUyH2oi.s 			page 28
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccBRGr5p.s 			page 28
 
 
- 716 01df E2010000 		.4byte	.LASF32
+ 716 01df CC010000 		.4byte	.LASF32
  717 01e3 01       		.byte	0x1
  718 01e4 5D       		.byte	0x5d
  719 01e5 83000000 		.4byte	0x83
@@ -1678,7 +1678,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccUyH2oi.s 			page 1
  770 026a 83020000 		.4byte	0x283
  771 026e 17       		.uleb128 0x17
  772 026f 01       		.uleb128 0x1
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccUyH2oi.s 			page 29
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccBRGr5p.s 			page 29
 
 
  773 0270 50       		.byte	0x50
@@ -1738,7 +1738,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccUyH2oi.s 			page 1
  827 02be 01       		.byte	0x1
  828 02bf 00       		.byte	0
  829 02c0 00       		.byte	0
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccUyH2oi.s 			page 30
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccBRGr5p.s 			page 30
 
 
  830 02c1 1A       		.uleb128 0x1a
@@ -1756,7 +1756,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccUyH2oi.s 			page 1
  842 02dc 05       		.uleb128 0x5
  843 02dd CC020000 		.4byte	0x2cc
  844 02e1 1E       		.uleb128 0x1e
- 845 02e2 57020000 		.4byte	.LASF45
+ 845 02e2 41020000 		.4byte	.LASF45
  846 02e6 01       		.byte	0x1
  847 02e7 A601     		.2byte	0x1a6
  848 02e9 00000000 		.4byte	.LFB1
@@ -1765,13 +1765,13 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccUyH2oi.s 			page 1
  851 02f2 9C       		.byte	0x9c
  852 02f3 2A030000 		.4byte	0x32a
  853 02f7 1F       		.uleb128 0x1f
- 854 02f8 E7010000 		.4byte	.LASF33
+ 854 02f8 D1010000 		.4byte	.LASF33
  855 02fc 01       		.byte	0x1
  856 02fd A601     		.2byte	0x1a6
  857 02ff 83000000 		.4byte	0x83
  858 0303 19020000 		.4byte	.LLST12
  859 0307 20       		.uleb128 0x20
- 860 0308 61010000 		.4byte	.LASF27
+ 860 0308 92010000 		.4byte	.LASF27
  861 030c 01       		.byte	0x1
  862 030d A801     		.2byte	0x1a8
  863 030f 6B000000 		.4byte	0x6b
@@ -1792,22 +1792,22 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccUyH2oi.s 			page 1
  878 0336 03       		.byte	0x3
  879 0337 00000000 		.4byte	cySysFlashBackup
  880 033b 21       		.uleb128 0x21
- 881 033c DB010000 		.4byte	.LASF35
- 882 0340 DB010000 		.4byte	.LASF35
+ 881 033c C5010000 		.4byte	.LASF35
+ 882 0340 C5010000 		.4byte	.LASF35
  883 0344 22       		.uleb128 0x22
- 884 0345 FC000000 		.4byte	.LASF37
- 885 0349 FC000000 		.4byte	.LASF37
+ 884 0345 2D010000 		.4byte	.LASF37
+ 885 0349 2D010000 		.4byte	.LASF37
  886 034d 04       		.byte	0x4
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccUyH2oi.s 			page 31
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccBRGr5p.s 			page 31
 
 
  887 034e E5       		.byte	0xe5
  888 034f 21       		.uleb128 0x21
- 889 0350 BF000000 		.4byte	.LASF36
- 890 0354 BF000000 		.4byte	.LASF36
+ 889 0350 F0000000 		.4byte	.LASF36
+ 890 0354 F0000000 		.4byte	.LASF36
  891 0358 22       		.uleb128 0x22
- 892 0359 34010000 		.4byte	.LASF38
- 893 035d 34010000 		.4byte	.LASF38
+ 892 0359 65010000 		.4byte	.LASF38
+ 893 035d 65010000 		.4byte	.LASF38
  894 0361 04       		.byte	0x4
  895 0362 E6       		.byte	0xe6
  896 0363 00       		.byte	0
@@ -1858,7 +1858,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccUyH2oi.s 			page 1
  941 002a 16       		.uleb128 0x16
  942 002b 00       		.byte	0
  943 002c 03       		.uleb128 0x3
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccUyH2oi.s 			page 32
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccBRGr5p.s 			page 32
 
 
  944 002d 0E       		.uleb128 0xe
@@ -1918,7 +1918,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccUyH2oi.s 			page 1
  998 0063 0B       		.uleb128 0xb
  999 0064 49       		.uleb128 0x49
  1000 0065 13       		.uleb128 0x13
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccUyH2oi.s 			page 33
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccBRGr5p.s 			page 33
 
 
  1001 0066 00       		.byte	0
@@ -1978,7 +1978,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccUyH2oi.s 			page 1
  1055 009c 18       		.uleb128 0x18
  1056 009d 9742     		.uleb128 0x2117
  1057 009f 19       		.uleb128 0x19
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccUyH2oi.s 			page 34
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccBRGr5p.s 			page 34
 
 
  1058 00a0 01       		.uleb128 0x1
@@ -2038,7 +2038,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccUyH2oi.s 			page 1
  1112 00d6 3A       		.uleb128 0x3a
  1113 00d7 0B       		.uleb128 0xb
  1114 00d8 3B       		.uleb128 0x3b
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccUyH2oi.s 			page 35
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccBRGr5p.s 			page 35
 
 
  1115 00d9 0B       		.uleb128 0xb
@@ -2098,7 +2098,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccUyH2oi.s 			page 1
  1169 010f 31       		.uleb128 0x31
  1170 0110 13       		.uleb128 0x13
  1171 0111 11       		.uleb128 0x11
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccUyH2oi.s 			page 36
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccBRGr5p.s 			page 36
 
 
  1172 0112 01       		.uleb128 0x1
@@ -2158,7 +2158,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccUyH2oi.s 			page 1
  1226 0151 31       		.uleb128 0x31
  1227 0152 13       		.uleb128 0x13
  1228 0153 00       		.byte	0
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccUyH2oi.s 			page 37
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccBRGr5p.s 			page 37
 
 
  1229 0154 00       		.byte	0
@@ -2218,7 +2218,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccUyH2oi.s 			page 1
  1283 018a 9742     		.uleb128 0x2117
  1284 018c 19       		.uleb128 0x19
  1285 018d 01       		.uleb128 0x1
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccUyH2oi.s 			page 38
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccBRGr5p.s 			page 38
 
 
  1286 018e 13       		.uleb128 0x13
@@ -2278,7 +2278,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccUyH2oi.s 			page 1
  1340 01c4 0E       		.uleb128 0xe
  1341 01c5 03       		.uleb128 0x3
  1342 01c6 0E       		.uleb128 0xe
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccUyH2oi.s 			page 39
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccBRGr5p.s 			page 39
 
 
  1343 01c7 3A       		.uleb128 0x3a
@@ -2338,7 +2338,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccUyH2oi.s 			page 1
  1397 006e 00000000 		.4byte	0
  1398              	.LLST2:
  1399 0072 92000000 		.4byte	.LVL13
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccUyH2oi.s 			page 40
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccBRGr5p.s 			page 40
 
 
  1400 0076 6A010000 		.4byte	.LVL18
@@ -2398,7 +2398,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccUyH2oi.s 			page 1
  1454 00fd 00000000 		.4byte	0
  1455 0101 00000000 		.4byte	0
  1456              	.LLST5:
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccUyH2oi.s 			page 41
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccBRGr5p.s 			page 41
 
 
  1457 0105 0C000000 		.4byte	.LVL1
@@ -2458,7 +2458,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccUyH2oi.s 			page 1
  1511 0192 0200     		.2byte	0x2
  1512 0194 30       		.byte	0x30
  1513 0195 9F       		.byte	0x9f
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccUyH2oi.s 			page 42
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccBRGr5p.s 			page 42
 
 
  1514 0196 70010000 		.4byte	.LVL19
@@ -2518,7 +2518,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccUyH2oi.s 			page 1
  1568 0224 07000000 		.4byte	.LVL25-1
  1569 0228 24000000 		.4byte	.LVL27
  1570 022c 0100     		.2byte	0x1
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccUyH2oi.s 			page 43
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccBRGr5p.s 			page 43
 
 
  1571 022e 54       		.byte	0x54
@@ -2578,7 +2578,7 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccUyH2oi.s 			page 1
  1620      61747573 
  1620      00
  1621              	.LASF16:
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccUyH2oi.s 			page 44
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccBRGr5p.s 			page 44
 
 
  1622 0009 72656733 		.ascii	"reg32\000"
@@ -2624,187 +2624,183 @@ ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccUyH2oi.s 			page 1
  1640 007d 63686563 		.ascii	"checksum\000"
  1640      6B73756D 
  1640      00
- 1641              	.LASF1:
- 1642 0086 756E7369 		.ascii	"unsigned char\000"
- 1642      676E6564 
- 1642      20636861 
- 1642      7200
- 1643              	.LASF24:
- 1644 0094 726F7744 		.ascii	"rowData\000"
- 1644      61746100 
- 1645              	.LASF26:
- 1646 009c 70617261 		.ascii	"parameters\000"
- 1646      6D657465 
- 1646      727300
- 1647              	.LASF5:
- 1648 00a7 6C6F6E67 		.ascii	"long unsigned int\000"
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccUyH2oi.s 			page 45
+ 1641              	.LASF41:
+ 1642 0086 453A5C65 		.ascii	"E:\\eCTF\\ectf-2018-techsec-submission2\\CARD.cydsn"
+ 1642      4354465C 
+ 1642      65637466 
+ 1642      2D323031 
+ 1642      382D7465 
+ 1643 00b6 00       		.ascii	"\000"
+ 1644              	.LASF1:
+ 1645 00b7 756E7369 		.ascii	"unsigned char\000"
+ 1645      676E6564 
+ 1645      20636861 
+ 1645      7200
+ 1646              	.LASF24:
+ 1647 00c5 726F7744 		.ascii	"rowData\000"
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccBRGr5p.s 			page 45
 
 
- 1648      20756E73 
- 1648      69676E65 
- 1648      6420696E 
- 1648      7400
- 1649              	.LASF9:
- 1650 00b9 75696E74 		.ascii	"uint8\000"
- 1650      3800
- 1651              	.LASF36:
- 1652 00bf 6D656D73 		.ascii	"memset\000"
- 1652      657400
- 1653              	.LASF13:
- 1654 00c6 646F7562 		.ascii	"double\000"
- 1654      6C6500
- 1655              	.LASF2:
- 1656 00cd 73686F72 		.ascii	"short int\000"
- 1656      7420696E 
- 1656      7400
- 1657              	.LASF21:
- 1658 00d7 43795379 		.ascii	"CySysFlashClockRestore\000"
- 1658      73466C61 
- 1658      7368436C 
- 1658      6F636B52 
- 1658      6573746F 
- 1659              	.LASF10:
- 1660 00ee 75696E74 		.ascii	"uint16\000"
- 1660      313600
- 1661              	.LASF11:
- 1662 00f5 75696E74 		.ascii	"uint32\000"
- 1662      333200
- 1663              	.LASF37:
- 1664 00fc 4379456E 		.ascii	"CyEnterCriticalSection\000"
- 1664      74657243 
- 1664      72697469 
- 1664      63616C53 
- 1664      65637469 
- 1665              	.LASF40:
- 1666 0113 47656E65 		.ascii	"Generated_Source\\PSoC4\\CyFlash.c\000"
- 1666      72617465 
- 1666      645F536F 
- 1666      75726365 
- 1666      5C50536F 
- 1667              	.LASF38:
- 1668 0134 43794578 		.ascii	"CyExitCriticalSection\000"
- 1668      69744372 
- 1668      69746963 
- 1668      616C5365 
- 1668      6374696F 
- 1669              	.LASF28:
- 1670 014a 6E656564 		.ascii	"needChecksumWorkaround\000"
- 1670      43686563 
- 1670      6B73756D 
- 1670      576F726B 
- 1670      61726F75 
- 1671              	.LASF27:
- 1672 0161 696E7465 		.ascii	"interruptState\000"
- 1672      72727570 
- 1672      74537461 
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccUyH2oi.s 			page 46
+ 1647      61746100 
+ 1648              	.LASF26:
+ 1649 00cd 70617261 		.ascii	"parameters\000"
+ 1649      6D657465 
+ 1649      727300
+ 1650              	.LASF5:
+ 1651 00d8 6C6F6E67 		.ascii	"long unsigned int\000"
+ 1651      20756E73 
+ 1651      69676E65 
+ 1651      6420696E 
+ 1651      7400
+ 1652              	.LASF9:
+ 1653 00ea 75696E74 		.ascii	"uint8\000"
+ 1653      3800
+ 1654              	.LASF36:
+ 1655 00f0 6D656D73 		.ascii	"memset\000"
+ 1655      657400
+ 1656              	.LASF13:
+ 1657 00f7 646F7562 		.ascii	"double\000"
+ 1657      6C6500
+ 1658              	.LASF2:
+ 1659 00fe 73686F72 		.ascii	"short int\000"
+ 1659      7420696E 
+ 1659      7400
+ 1660              	.LASF21:
+ 1661 0108 43795379 		.ascii	"CySysFlashClockRestore\000"
+ 1661      73466C61 
+ 1661      7368436C 
+ 1661      6F636B52 
+ 1661      6573746F 
+ 1662              	.LASF10:
+ 1663 011f 75696E74 		.ascii	"uint16\000"
+ 1663      313600
+ 1664              	.LASF11:
+ 1665 0126 75696E74 		.ascii	"uint32\000"
+ 1665      333200
+ 1666              	.LASF37:
+ 1667 012d 4379456E 		.ascii	"CyEnterCriticalSection\000"
+ 1667      74657243 
+ 1667      72697469 
+ 1667      63616C53 
+ 1667      65637469 
+ 1668              	.LASF40:
+ 1669 0144 47656E65 		.ascii	"Generated_Source\\PSoC4\\CyFlash.c\000"
+ 1669      72617465 
+ 1669      645F536F 
+ 1669      75726365 
+ 1669      5C50536F 
+ 1670              	.LASF38:
+ 1671 0165 43794578 		.ascii	"CyExitCriticalSection\000"
+ 1671      69744372 
+ 1671      69746963 
+ 1671      616C5365 
+ 1671      6374696F 
+ 1672              	.LASF28:
+ 1673 017b 6E656564 		.ascii	"needChecksumWorkaround\000"
+ 1673      43686563 
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccBRGr5p.s 			page 46
 
 
- 1672      746500
- 1673              	.LASF18:
- 1674 0170 73697A65 		.ascii	"sizetype\000"
- 1674      74797065 
- 1674      00
- 1675              	.LASF41:
- 1676 0179 5C5C5642 		.ascii	"\\\\VBOXSVR\\raywang\\Dropbox (MIT)\\CTFs\\eCTF\\ec"
- 1676      4F585356 
- 1676      525C7261 
- 1676      7977616E 
- 1676      675C4472 
- 1677 01a5 74662D32 		.ascii	"tf-2018-techsec\\CARD.cydsn\000"
- 1677      3031382D 
- 1677      74656368 
- 1677      7365635C 
- 1677      43415244 
+ 1673      6B73756D 
+ 1673      576F726B 
+ 1673      61726F75 
+ 1674              	.LASF27:
+ 1675 0192 696E7465 		.ascii	"interruptState\000"
+ 1675      72727570 
+ 1675      74537461 
+ 1675      746500
+ 1676              	.LASF18:
+ 1677 01a1 73697A65 		.ascii	"sizetype\000"
+ 1677      74797065 
+ 1677      00
  1678              	.LASF6:
- 1679 01c0 6C6F6E67 		.ascii	"long long int\000"
+ 1679 01aa 6C6F6E67 		.ascii	"long long int\000"
  1679      206C6F6E 
  1679      6720696E 
  1679      7400
  1680              	.LASF43:
- 1681 01ce 696D6F43 		.ascii	"imoConfigReg\000"
+ 1681 01b8 696D6F43 		.ascii	"imoConfigReg\000"
  1681      6F6E6669 
  1681      67526567 
  1681      00
  1682              	.LASF35:
- 1683 01db 6D656D63 		.ascii	"memcpy\000"
+ 1683 01c5 6D656D63 		.ascii	"memcpy\000"
  1683      707900
  1684              	.LASF32:
- 1685 01e2 62697473 		.ascii	"bits\000"
+ 1685 01cc 62697473 		.ascii	"bits\000"
  1685      00
  1686              	.LASF33:
- 1687 01e7 66726571 		.ascii	"freq\000"
+ 1687 01d1 66726571 		.ascii	"freq\000"
  1687      00
  1688              	.LASF25:
- 1689 01ec 636C6B43 		.ascii	"clkCnfRetValue\000"
+ 1689 01d6 636C6B43 		.ascii	"clkCnfRetValue\000"
  1689      6E665265 
  1689      7456616C 
  1689      756500
  1690              	.LASF30:
- 1691 01fb 73617665 		.ascii	"savedValue\000"
+ 1691 01e5 73617665 		.ascii	"savedValue\000"
  1691      6456616C 
  1691      756500
  1692              	.LASF20:
- 1693 0206 43795379 		.ascii	"CySysFlashClockBackup\000"
+ 1693 01f0 43795379 		.ascii	"CySysFlashClockBackup\000"
  1693      73466C61 
  1693      7368436C 
  1693      6F636B42 
  1693      61636B75 
  1694              	.LASF19:
- 1695 021c 43595F53 		.ascii	"CY_SYS_FLASH_CLOCK_BACKUP_STRUCT\000"
+ 1695 0206 43595F53 		.ascii	"CY_SYS_FLASH_CLOCK_BACKUP_STRUCT\000"
  1695      59535F46 
  1695      4C415348 
  1695      5F434C4F 
  1695      434B5F42 
  1696              	.LASF4:
-ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccUyH2oi.s 			page 47
-
-
- 1697 023d 6C6F6E67 		.ascii	"long int\000"
+ 1697 0227 6C6F6E67 		.ascii	"long int\000"
  1697      20696E74 
  1697      00
  1698              	.LASF14:
- 1699 0246 63686172 		.ascii	"char\000"
+ARM GAS  C:\Users\Ray\AppData\Local\Temp\ccBRGr5p.s 			page 47
+
+
+ 1699 0230 63686172 		.ascii	"char\000"
  1699      00
  1700              	.LASF17:
- 1701 024b 6C6F6E67 		.ascii	"long double\000"
+ 1701 0235 6C6F6E67 		.ascii	"long double\000"
  1701      20646F75 
  1701      626C6500 
  1702              	.LASF45:
- 1703 0257 43795379 		.ascii	"CySysFlashSetWaitCycles\000"
+ 1703 0241 43795379 		.ascii	"CySysFlashSetWaitCycles\000"
  1703      73466C61 
  1703      73685365 
  1703      74576169 
  1703      74437963 
  1704              	.LASF0:
- 1705 026f 7369676E 		.ascii	"signed char\000"
+ 1705 0259 7369676E 		.ascii	"signed char\000"
  1705      65642063 
  1705      68617200 
  1706              	.LASF39:
- 1707 027b 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 1707 0265 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
  1707      43313120 
  1707      352E342E 
  1707      31203230 
  1707      31363036 
- 1708 02ae 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m0 -mthumb -g -O"
+ 1708 0298 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m0 -mthumb -g -O"
  1708      20726576 
  1708      6973696F 
  1708      6E203233 
  1708      37373135 
- 1709 02e1 73202D66 		.ascii	"s -ffunction-sections -ffat-lto-objects\000"
+ 1709 02cb 73202D66 		.ascii	"s -ffunction-sections -ffat-lto-objects\000"
  1709      66756E63 
  1709      74696F6E 
  1709      2D736563 
  1709      74696F6E 
  1710              	.LASF44:
- 1711 0309 43795379 		.ascii	"CySysFlashWriteRow\000"
+ 1711 02f3 43795379 		.ascii	"CySysFlashWriteRow\000"
  1711      73466C61 
  1711      73685772 
  1711      69746552 
  1711      6F7700
  1712              	.LASF7:
- 1713 031c 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 1713 0306 6C6F6E67 		.ascii	"long long unsigned int\000"
  1713      206C6F6E 
  1713      6720756E 
  1713      7369676E 
